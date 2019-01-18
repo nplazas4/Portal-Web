@@ -61,6 +61,26 @@
             'x' => 3,
             'y' => 2,
         ],
+        [
+            'name' => '11',
+            'x' => 3,
+            'y' => 2,
+        ],
+        [
+            'name' => '12',
+            'x' => 3,
+            'y' => 2,
+        ],
+        [
+            'name' => '13',
+            'x' => 3,
+            'y' => 4,
+        ],
+        [
+            'name' => '14',
+            'x' => 3,
+            'y' => 4,
+        ],
     ];
 ?>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -535,7 +555,7 @@
                     <ul>
                         <?php foreach ($risks as $risk): ?>
                         <li>
-                            <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                            <a href=<?='#'.$risk['name']?> class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>
@@ -1026,9 +1046,9 @@
         </ul>
     </div>
 </div>
-
+<?php foreach ($risks as $risk): ?>
 <!-- Modal detalle de riesgo -->
-<div id="detailRisk" class="modal">
+<div id=<?=$risk['name']?> class="modal">
     <div class="modal-content">
         <a class="modal-close close">
             <i class="material-icons">close</i>
@@ -1041,7 +1061,7 @@
             </tr>
             <tr>
                 <th>Nombre Riesgo</th>
-                <td>NO ENTRADA EN OPERACIÓN DEL PROYECTO EN LA FECHA PREVISTA  LO  CUAL GENERA  POSIBLES COMPENSACIONES ANTE MME</td>
+                <td><?=$risk['name']?></td>
             </tr>
             <tr>
                 <th>Probabilidad</th>
@@ -1109,3 +1129,4 @@
         <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
     </div>
 </div>
+<?php endforeach; ?>
