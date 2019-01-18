@@ -76,22 +76,42 @@
         <div class="indicators">
         	<div class="indicator accent">
         		<h2>CAPEX USD</h2>
+            <?php if (isset($indicators->CAPEX_USD)):?>
         		<h3><span>$</span><?=$indicators->CAPEX_USD?></h3>
+          <?php else :?>
+            <?php $CapexUsd = 0?>
+            <h3><span>$</span><?=$CapexUsd?></h3>
+            <?php endif;?>
         		<i class="material-icons">language</i>
         	</div>
         	<div class="indicator tertiary">
         		<h2>CAPEX COP</h2>
+            <?php if (isset($indicators->CAPEX_COP)):?>
         		<h3><span>$</span><?=$indicators->CAPEX_COP?></h3>
+          <?php else:?>
+            <?php $CapexCop = 0?>
+        		<h3><span>$</span><?=$CapexCop?></h3>
+          <?php endif;?>
         		<i class="material-icons">language</i>
         	</div>
         	<div class="indicator error">
         		<h2>RIESGOS</h2>
+            <?php if (isset($indicators->RIESGOS)):?>
         		<h3><?=$indicators->RIESGOS?></h3>
+          <?php else :?>
+            <?php $RiskVar = 0 ?>
+            <h3><?=$RiskVar?></h3>
+            <?php endif;?>
         		<i class="material-icons">report_problem</i>
         	</div>
         	<div class="indicator warning">
         		<h2>SPI EXTERNO</h2>
+            <?php if (isset($indicators->SPI_EXTERNO)):?>
         		<h3><?=$indicators->SPI_EXTERNO?></h3>
+            <?php else :?>
+            <?php $SpiVar = 0 ?>
+            <h3><?=$SpiVar?></h3>
+            <?php endif;?>
         		<i class="material-icons">show_chart</i>
         	</div>
         </div>
