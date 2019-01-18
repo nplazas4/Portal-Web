@@ -1,0 +1,214 @@
+.container {
+    margin: 0 auto;
+    width: 100%;
+    padding: 108px 0 72px;
+    min-height: 100vh;
+    display: flex;
+
+    @media (max-width: 800px) {
+        padding: 54px 0 0;
+        min-height: calc(100vh - 72px);
+    }
+}
+.col .row {
+    margin-left: (-1 * $gutter-width / 2);
+    margin-right: (-1 * $gutter-width / 2);
+}
+
+.section {
+    padding: $gutter-width;
+    width: 100%;
+
+    @media (max-width: 800px) {
+        padding: 1rem;
+    }
+
+    &.bcrumb {
+        padding-top: calc(1.5rem + 24px);
+
+        @media (max-width: 800px) {
+            padding-top: 1rem;
+        }
+    }
+
+    &.no-pad {
+        padding: 0;
+    }
+    &.no-pad-bot {
+        padding-bottom: 0;
+    }
+    &.no-pad-top {
+        padding-top: 0;
+    }
+}
+
+
+// Mixins to eliminate code repitition
+@mixin reset-offset {
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+@mixin grid-classes($size, $i, $perc) {
+    &.offset-#{$size}#{$i} {
+        margin-left: $perc;
+    }
+    &.pull-#{$size}#{$i} {
+        right: $perc;
+    }
+    &.push-#{$size}#{$i} {
+        left: $perc;
+    }
+}
+
+
+.row {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+
+    // Clear floating children
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .col {
+        float: left;
+        box-sizing: border-box;
+        padding: 0 $gutter-width / 2;
+        min-height: 1px;
+
+        &[class*="push-"],
+        &[class*="pull-"] {
+            position: relative;
+        }
+
+        $i: 1;
+        @while $i <= $num-cols {
+            $perc: unquote((100 / ($num-cols / $i)) + "%");
+            &.s#{$i} {
+                width: $perc;
+                @include reset-offset;
+            }
+            $i: $i + 1;
+        }
+
+        $i: 1;
+        @while $i <= $num-cols {
+            $perc: unquote((100 / ($num-cols / $i)) + "%");
+            @include grid-classes("s", $i, $perc);
+            $i: $i + 1;
+        }
+
+        @media #{$medium-and-up} {
+
+            $i: 1;
+            @while $i <= $num-cols {
+                $perc: unquote((100 / ($num-cols / $i)) + "%");
+                &.m#{$i} {
+                    width: $perc;
+                    @include reset-offset;
+                }
+                $i: $i + 1
+            }
+
+            $i: 1;
+            @while $i <= $num-cols {
+                $perc: unquote((100 / ($num-cols / $i)) + "%");
+                @include grid-classes("m", $i, $perc);
+                $i: $i + 1;
+            }
+        }
+
+        @media #{$large-and-up} {
+
+            $i: 1;
+            @while $i <= $num-cols {
+                $perc: unquote((100 / ($num-cols / $i)) + "%");
+                &.l#{$i} {
+                    width: $perc;
+                    @include reset-offset;
+                }
+                $i: $i + 1;
+            }
+
+            $i: 1;
+            @while $i <= $num-cols {
+                $perc: unquote((100 / ($num-cols / $i)) + "%");
+                @include grid-classes("l", $i, $perc);
+                $i: $i + 1;
+            }
+        }
+
+        @media #{$extra-large-and-up} {
+
+            $i: 1;
+            @while $i <= $num-cols {
+                $perc: unquote((100 / ($num-cols / $i)) + "%");
+                &.xl#{$i} {
+                    width: $perc;
+                    @include reset-offset;
+                }
+                $i: $i + 1;
+            }
+
+            $i: 1;
+            @while $i <= $num-cols {
+                $perc: unquote((100 / ($num-cols / $i)) + "%");
+                @include grid-classes("xl", $i, $perc);
+                $i: $i + 1;
+            }
+        }
+    }
+}
+
+// Margins & Paddings
+$spaceamounts: (0: 0, 1: .5, 2: .7, 3: 1, 4: 1.5, 5: 2, 6: 3); // Adjust this to include the pixel amounts you need.
+$sides: (top, bottom, left, right); // Leave this variable alone
+
+@each $item, $space in $spaceamounts { 
+    .ma-#{$item} {
+        margin: #{$space}rem !important;
+    }
+
+    .my-#{$item} {
+        margin-top: #{$space}rem !important;
+        margin-bottom: #{$space}rem !important;
+    }
+
+    .mx-#{$item} {
+        margin-left: #{$space}rem !important;
+        margin-right: #{$space}rem !important;
+    }
+
+    .pa-#{$item} {
+        padding: #{$space}rem !important;
+    }
+
+    .py-#{$item} {
+        padding-top: #{$space}rem !important;
+        padding-bottom: #{$space}rem !important;
+    }
+
+    .px-#{$item} {
+        padding-left: #{$space}rem !important;
+        padding-right: #{$space}rem !important;
+    }
+
+    @each $side in $sides {
+        .m#{str-slice($side, 0, 1)}-#{$item} {
+            margin-#{$side}: #{$space}rem !important;
+        }
+
+        .p#{str-slice($side, 0, 1)}-#{$item} {
+            padding-#{$side}: #{$space}rem !important;
+        }
+    }
+}
+
+
+/*
+  RUN GULP to generate the classes. Now you can use these helpers to customize spacing on HTML elements.
+*/
