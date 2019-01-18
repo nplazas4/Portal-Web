@@ -19,7 +19,7 @@
     $user = [
         'avatar' =>  $current_user['first_name'][0],
         'name' => $current_user['first_name'].' '. $current_user['last_name'],
-        'email' => $current_user['first_name'].'@geb.com.co'
+        'email' => $current_user['email']
     ];
     // $user = [
     //     'avatar' => 'M',
