@@ -55,7 +55,7 @@
 <div class="section bcrumb projects">
     <div class="breadcrumb-container">
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
+            <!-- <a href="<?//= $item[1] ?>" class="breadcrumb"><?//= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb']
