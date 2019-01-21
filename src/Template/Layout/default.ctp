@@ -114,10 +114,6 @@
                 <?php endforeach; ?>
                 <li>
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">PORTAL ALTERNO<i class="material-icons right">arrow_drop_down</i></a></li>
-                  <!-- <?//php echo $this->Html->link('PORTAL ALTERNO',
-                    // ['class'=>'dropdown-trigger'],
-                    // ['escape' => false]
-                  );?> -->
                 </li>
                <?php endif;?>
              <?php endif;?>
