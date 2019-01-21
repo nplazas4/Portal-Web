@@ -32,6 +32,8 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar EPS')),
+                      array('action' => 'add'), array('escape'=>false));?></th>
                       <th scope="col"><?= $this->Paginator->sort('id',['No.']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('EPS_ID',['ID']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('EPS_NAME',['NOMBRE']) ?></th>
@@ -49,13 +51,14 @@
                 <tbody>
                   <?php foreach ($eps as $ep): ?>
                   <tr>
+                    <td></td>
                       <td><?= $this->Number->format($ep->id) ?></td>
                       <td><?= h($ep->EPS_ID) ?></td>
                       <td><?= h($ep->EPS_NAME) ?></td>
                       <td class="actions">
                           <?= $this->Html->link(__('Editar'),['action' => 'edit', $ep->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar EPS']) ?>
                           <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
-                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$ep->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$ep->EPS_NAME.'?', $ep->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'right','data-tooltip'=>'Eliminar EPS']) ?>
+                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$ep->id], ['confirm' => __('Seguro desea eliminar la EPS '.$ep->EPS_NAME.'?', $ep->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'right','data-tooltip'=>'Eliminar EPS']) ?>
                       </td>
                   </tr>
                   <?php endforeach; ?>

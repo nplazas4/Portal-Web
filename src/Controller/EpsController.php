@@ -26,19 +26,11 @@ function index()
           if ($this->Eps->save($eps)) {
               $this->Flash->success(__('La EPS ha sido creada.'));
 
-              return $this->redirect(['action' => 'Add']);
+              return $this->redirect(['action' => 'index']);
           }
           $this->Flash->error(__('La EPS no ha sido creada. Por favor, intenta de nuevo.'));
       }
       $this->set(compact('eps'));
-    }
-    public function AddProjectCode(){
-      // put your code.
-    }
-    public function AddEPS(){
-      //$eps = $this->Eps->find('all');
-      $eps = $this->paginate($this->Eps);
-      $this->set('eps',$eps);
     }
     public function delete($id = null)
     {

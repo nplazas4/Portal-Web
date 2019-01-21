@@ -6,7 +6,6 @@
       [ 'IDM','companies','PortalProjects',''],
       [ 'Unidad de Transmisión Colombia','company','PortalProjects',''],
       [ 'Crecimiento','projects','Projects',''],
-      [ $projects->PROJECT_NAME,'project','projects',$projects->id],
     ];
 
     // Riesgos
@@ -375,12 +374,15 @@
 <div class="section bcrumb project">
     <div class="breadcrumb-container">
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1],$projects->id],
+              ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb']
             );?>
         <?php endforeach; ?>
+        <?php echo $this->Html->link($projects->PROJECT_NAME,
+          ['controller'=>'Projects', 'action'=>'project',$projects->id],
+          ['escape' => false,'class'=>'breadcrumb']
+        );?>
     </div>
     <?php
     $n = intval($projects->FASE);
@@ -507,7 +509,7 @@
             </div>
             <div class="indicator light-blue darken-2">
                 <h2>FePo</h2>
-                <h4>Enero 15, 2018</h4>
+                <h4><?=$projects->FEPO?></h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </div>
         </div>
@@ -516,21 +518,21 @@
             <h2>Indicadores de presupuesto</h2>
             <a class="indicator light-green modal-trigger" href="#detailValueExecuted">
                 <h2>AC</h2>
-                <h4>USD 39.68 M</h4>
+                <h4>USD <?=$projects->AC?> M</h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </a>
             <a class="indicator light-green darken-1 modal-trigger" href="#detailValueExecuted">
                 <h2>PV</h2>
-                <h4>USD 101 M</h4>
+                <h4>USD <?=$projects->PV?> M</h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </a>
             <a class="indicator light-green darken-2 modal-trigger" href="#detailValueExecuted">
-                <h2>AC <small>2018</small></h2>
+                <h2>AC <small>2019</small></h2>
                 <h4><small>EN CONSTRUCCIÓN</small></h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </a>
             <a class="indicator light-green darken-3 modal-trigger" href="#detailValueExecuted">
-                <h2>PV <small>2018</small></h2>
+                <h2>PV <small>2019</small></h2>
                 <h4><small>EN CONSTRUCCIÓN</small></h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </a>

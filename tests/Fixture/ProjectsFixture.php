@@ -24,6 +24,7 @@ class ProjectsFixture extends TestFixture
         'SPI' => ['type' => 'decimal', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'PLANNED' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'EXECUTED' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'ACPV' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'AC' => ['type' => 'decimal', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'PV' => ['type' => 'decimal', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'CAPEX_PLANNED' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
@@ -40,16 +41,8 @@ class ProjectsFixture extends TestFixture
         'APROBACION' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'TORRE' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'NUM_SUBESTACION' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'CODE_EPS' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'PROJECT_RISK' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        '_indexes' => [
-            'CODE_EPS' => ['type' => 'index', 'columns' => ['CODE_EPS'], 'length' => []],
-            'PROJECT_RISK' => ['type' => 'index', 'columns' => ['PROJECT_RISK'], 'length' => []],
-        ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'projects_ibfk_1' => ['type' => 'foreign', 'columns' => ['CODE_EPS'], 'references' => ['projects', 'id'], 'update' => 'noAction', 'delete' => 'cascade', 'length' => []],
-            'projects_ibfk_2' => ['type' => 'foreign', 'columns' => ['PROJECT_RISK'], 'references' => ['projects', 'id'], 'update' => 'noAction', 'delete' => 'cascade', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -74,6 +67,7 @@ class ProjectsFixture extends TestFixture
                 'SPI' => 1.5,
                 'PLANNED' => 1,
                 'EXECUTED' => 1,
+                'ACPV' => 1,
                 'AC' => 1.5,
                 'PV' => 1.5,
                 'CAPEX_PLANNED' => 1,
@@ -84,14 +78,12 @@ class ProjectsFixture extends TestFixture
                 'SOLICITUD' => 'Lorem ipsum dolor sit amet',
                 'DISTANCIA' => 1,
                 'LINEA_TRANS' => 1,
-                'FOPO' => '2019-01-17',
-                'FEPO' => '2019-01-17',
-                'ADJUDICACION' => '2019-01-17',
-                'APROBACION' => '2019-01-17',
+                'FOPO' => '2019-01-21',
+                'FEPO' => '2019-01-21',
+                'ADJUDICACION' => '2019-01-21',
+                'APROBACION' => '2019-01-21',
                 'TORRE' => 1,
-                'NUM_SUBESTACION' => 1,
-                'CODE_EPS' => 1,
-                'PROJECT_RISK' => 1
+                'NUM_SUBESTACION' => 1
             ],
         ];
         parent::init();

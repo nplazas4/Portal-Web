@@ -31,11 +31,11 @@ class ProjectsController extends AppController
       if ($this->request->is('post')) {
           $projects = $this->Projects->patchEntity($projects, $this->request->getData());
           if ($this->Projects->save($projects)) {
-              $this->Flash->success(__('El código de proyecto ha sido creada.'));
+              $this->Flash->success(__('El proyecto ha sido creada.'));
 
               return $this->redirect(['action' => 'index']);
           }
-          $this->Flash->error(__('El código de proyecto no ha sido creada. Por favor, intenta de nuevo.'));
+          $this->Flash->error(__('El proyecto no ha sido creada. Por favor, intenta de nuevo.'));
       }
       $this->set(compact('projects'));
     }

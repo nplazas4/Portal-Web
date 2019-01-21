@@ -71,13 +71,17 @@
     		<p>Es la segunda empresa en transmisión de electricidad en Colombia, con una participación en el mercado del 12.5%. Cuenta con 1.504 km de circuitos a 230 kV activos en 17 subestaciones y la disponibilidad del sistema de transmisión a 31 de diciembre del 2015 fue del 99,93%, superior a la meta fijada por la CREG</p>
     	</div>
     </sidebar>
-    <!-- <h5><?//=$eps->EPS_NAME?></h5> -->
     <div class="projects-content">
         <div class="indicators">
         	<div class="indicator accent">
+            <?php $CapexAcum = 0 ?>
+            <?php $CapexPlann = 0 ?>
+            <?php foreach ($projects as $project): ?>
+              <?php $CapexAcum+= $project->CAPEX_PLANNED;?>
+            <?php endforeach?>
         		<h2>CAPEX USD</h2>
-            <?php if (isset($indicators->CAPEX_USD)):?>
-        		<h3><span>$</span><?=$indicators->CAPEX_USD?></h3>
+            <?php if ($CapexAcum>0):?>
+        		<h3><span>$</span><?=$CapexAcum?></h3>
           <?php else :?>
             <?php $CapexUsd = 0?>
             <h3><span>$</span><?=$CapexUsd?></h3>
@@ -85,9 +89,9 @@
         		<i class="material-icons">language</i>
         	</div>
         	<div class="indicator tertiary">
-        		<h2>CAPEX COP</h2>
-            <?php if (isset($indicators->CAPEX_COP)):?>
-        		<h3><span>$</span><?=$indicators->CAPEX_COP?></h3>
+        		<h2>CAPEX USD</h2>
+            <?php if ($CapexAcum>0):?>
+        		<h3><span>$</span><?=$CapexAcum?></h3>
           <?php else:?>
             <?php $CapexCop = 0?>
         		<h3><span>$</span><?=$CapexCop?></h3>
@@ -117,6 +121,7 @@
         </div>
         <div class="divider transparent mb-3"></div>
         <!--Código nuevo -->
+        <?php $CapexAcum = 0 ?>
         <div class="layout wrap">
           <?php foreach ($projects as $project): ?>
             <?php
@@ -152,13 +157,13 @@
               $this->Html->tag('span','% Planeado'),
               array('class'=>'data-box-content')),
               array('class'=>'data-box')).
-              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h4',$project->ACPU.'%'),
+              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h4',$project->ACPV.'%'),
               array('class'=>'data-box-circle tertiary')).
               $this->Html->tag('div',$this->Html->tag('span','AC / PV'),array('class'=>'data-box-content')),
               array('class'=>'data-box')).
               $this->Html->tag('div','',array('class'=>'divider transparent')).
               $this->Html->tag('div',$this->Html->tag('h3','CAPEX Planeado (USD)').
-              $this->Html->tag('h4',$project->PLANNED.' M'),
+              $this->Html->tag('h4',$project->CAPEX_PLANNED.' M'),
               array('class'=>'data-chip accent')).
               $this->Html->tag('div',$this->Html->tag('h3','CAPEX Ejecutado (USD)').
               $this->Html->tag('h4',$project->CAPEX_EXECUTED.' M'),

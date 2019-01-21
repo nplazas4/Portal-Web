@@ -82,6 +82,11 @@ class ProjectsTable extends Table
             ->notEmpty('EXECUTED');
 
         $validator
+            ->integer('ACPV')
+            ->requirePresence('ACPV', 'create')
+            ->notEmpty('ACPV');
+
+        $validator
             ->decimal('AC')
             ->requirePresence('AC', 'create')
             ->notEmpty('AC');
@@ -162,16 +167,6 @@ class ProjectsTable extends Table
             ->integer('NUM_SUBESTACION')
             ->requirePresence('NUM_SUBESTACION', 'create')
             ->notEmpty('NUM_SUBESTACION');
-
-        $validator
-            ->integer('CODE_EPS')
-            ->requirePresence('CODE_EPS', 'create')
-            ->notEmpty('CODE_EPS');
-
-        $validator
-            ->integer('PROJECT_RISK')
-            ->requirePresence('PROJECT_RISK', 'create')
-            ->notEmpty('PROJECT_RISK');
 
         return $validator;
     }

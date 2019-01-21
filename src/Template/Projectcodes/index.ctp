@@ -30,6 +30,8 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Código')),
+                      array('action' => 'add'), array('escape'=>false));?></th>
                       <th scope="col"><?= $this->Paginator->sort('No.') ?></th>
                       <th scope="col"><?= $this->Paginator->sort('CODE_NAME',['NOMBRE']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('CODE_DESCRIPTION',['DESCRIPCIÓN']) ?></th>
@@ -39,6 +41,7 @@
                 <tbody>
                   <?php foreach ($projectcodes as $projectcode): ?>
                   <tr>
+                      <td></td>
                       <td><?= $this->Number->format($projectcode->id) ?></td>
                       <td><?= h($projectcode->CODE_NAME) ?></td>
                       <td><?= h($projectcode->CODE_DESCRIPTION) ?></td>

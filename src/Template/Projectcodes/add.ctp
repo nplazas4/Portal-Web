@@ -2,6 +2,7 @@
     // Breadcrumb
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
+        [ 'Códigos de Proyecto','index','Projectcodes'],
         [ 'Crear Códigos de Proyecto','add','Projectcodes'],
     ];
 ?>
@@ -20,6 +21,7 @@
         <div class="home-menu">
           <!-- <div class="row"> -->
           <div class="row">
+            <h5>Crear código de proyecto</h5>
             <br/>
              <!-- <form class="col s12"> -->
              <?= $this->Form->create($projectcodes,['class'=>'col s12']) ?>

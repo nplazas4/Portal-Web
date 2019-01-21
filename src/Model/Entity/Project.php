@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property float $SPI
  * @property int $PLANNED
  * @property int $EXECUTED
+ * @property int $ACPV
  * @property float $AC
  * @property float $PV
  * @property int $CAPEX_PLANNED
@@ -29,8 +30,6 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate $APROBACION
  * @property int $TORRE
  * @property int $NUM_SUBESTACION
- * @property int $CODE_EPS
- * @property int $PROJECT_RISK
  */
 class Project extends Entity
 {
@@ -51,6 +50,7 @@ class Project extends Entity
         'SPI' => true,
         'PLANNED' => true,
         'EXECUTED' => true,
+        'ACPV' => true,
         'AC' => true,
         'PV' => true,
         'CAPEX_PLANNED' => true,
@@ -66,8 +66,6 @@ class Project extends Entity
         'ADJUDICACION' => true,
         'APROBACION' => true,
         'TORRE' => true,
-        'NUM_SUBESTACION' => true,
-        'CODE_EPS' => true,
-        'PROJECT_RISK' => true
+        'NUM_SUBESTACION' => true
     ];
 }

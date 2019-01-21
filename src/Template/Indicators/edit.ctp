@@ -1,31 +1,50 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-      <div class="card card-signin my-5">
-      <div class="card-body">
-        <h5 class="card-title text-center">Editar usuario</h5>
-        <?= $this->Form->create($indicators,['novalidate']) ?>
-        <fieldset>
-          <div class="row">
-            <div class="input-field col s6">
-              <?php echo $this->Form->input('CAPEX_USD',['label'=>'','placeholder'=>'CAPEX USD','class'=>'validate','required']);?>
-            </div>
-            <div class="input-field col s6">
-              <?php echo $this->Form->input('CAPEX_COP',['label'=>'','placeholder'=>'CAPEX COP','class'=>'validate','required']);?>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <?php echo $this->Form->input('RIESGOS',['label'=>'','placeholder'=>'Riesgos','class'=>'validate','required']);?>
-            </div>
-            <div class="input-field col s6">
-              <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'','placeholder'=>'SPI Externo','class'=>'validate','required']);?>
-            </div>
-          </div>
-        </fieldset>
-        <?= $this->Form->button('Editar',['class'=>'btn btn-primary mt-2'])?>
-        <?= $this->Form->end() ?>
+<?php
+    // Breadcrumb
+    $breadcrumb = [
+        [ 'Inicio', 'home','Pages'],
+        [ 'Indicadores','index','Indicators'],
+    ];
+?>
+<div class="section bcrumb company">
+    <div class="breadcrumb-container">
+        <?php foreach ($breadcrumb as $item): ?>
+            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
+            <?php echo $this->Html->link($item[0],
+              ['controller'=>$item[2], 'action'=>$item[1]],
+              ['escape' => false,'class'=>'breadcrumb']
+            );?>
+        <?php endforeach; ?>
+        <?php echo $this->Html->link('Editar Indicador No.'.$indicators->id,
+          ['controller'=>'Indicators', 'action'=>'edit',$indicators->id],
+          ['escape' => false,'class'=>'breadcrumb']
+        );?>
     </div>
-  </div>
-</div>
+    <div class="section home">
+        <div class="home-menu">
+          <?= $this->Html->css('login')?>
+          <div class="row">
+            <h5>Editar indicador</h5>
+            <br/>
+             <!-- <form class="col s12"> -->
+             <?= $this->Form->create($indicators,['class'=>'col s12']) ?>
+               <div class="row">
+                 <fieldset>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <?php echo $this->Form->input('RIESGOS',['label'=>'Riesgos','placeholder'=>'Riesgos','class'=>'validate','required']);?>
+                     </div>
+                     <div class="input-field col s12">
+                       <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'SPI Externo','placeholder'=>'SPI Externo','class'=>'validate','required']);?>
+                     </div>
+                   </div>
+                   </fieldset>
+                   <div class="btns mb-2">
+                       <!-- <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Crear</a> -->
+                       <!-- <?//= $this->Form->button('Crear',['class'=>'btn waves-effect btn-depressed'])?> -->
+                       <?= $this->Form->button(__('Editar'),['class'=>'btn waves-effect btn-depressed'])?>
+                   </div>
+                    <?= $this->Form->end() ?>
+           </div>
+        </div>
+    </div>
 </div>

@@ -3,7 +3,6 @@
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
         [ 'Códigos de Proyecto','index','Projectcodes'],
-        [ $projectcodes->CODE_NAME,'edit','Projectcodes']
     ];
 ?>
 <?= $this->Html->css('login')?>
@@ -12,11 +11,15 @@
         <?php foreach ($breadcrumb as $item): ?>
             <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1],$projectcodes->id],
+              ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb'],
               ['escape' => false]
             );?>
         <?php endforeach; ?>
+        <?php echo $this->Html->link('Editar Indicador '.$projectcodes->CODE_NAME,
+          ['controller'=>'Projectcodes', 'action'=>'edit',$projectcodes->id],
+          ['escape' => false,'class'=>'breadcrumb']
+        );?>
     </div>
     <div class="section home">
         <div class="home-menu">

@@ -113,16 +113,46 @@
                 </li>
                 <?php endforeach; ?>
                 <li>
-                  <?php echo $this->Html->link('PORTAL ALTERNO',
-                    ['controller'=>'Projects', 'action'=>'index'],
-                    ['escape' => false]
-                  );?>
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">PORTAL ALTERNO<i class="material-icons right">arrow_drop_down</i></a></li>
+                  <!-- <?//php echo $this->Html->link('PORTAL ALTERNO',
+                    // ['class'=>'dropdown-trigger'],
+                    // ['escape' => false]
+                  );?> -->
                 </li>
                <?php endif;?>
              <?php endif;?>
                 </ul>
             </div>
         </nav>
+        <ul id="dropdown1" class="dropdown-content">
+          <li>
+            <?php echo $this->Html->link('Proyectos',
+              ['controller'=>'Projects','action'=>'index'],
+              ['escape' => false]);
+              ?>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <?php echo $this->Html->link('EPS',
+              ['controller'=>'Eps','action'=>'index'],
+              ['escape' => false]);
+              ?>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <?php echo $this->Html->link('Códigos',
+              ['controller'=>'Projectcodes','action'=>'index'],
+              ['escape' => false]);
+              ?>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <?php echo $this->Html->link('Indicadores de proyectos',
+              ['controller'=>'Indicators','action'=>'index'],
+              ['escape' => false]);
+              ?>
+          </li>
+        </ul>
     </header>
 
     <ul id="slide-out" class="sidenav">

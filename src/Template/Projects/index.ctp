@@ -2,7 +2,7 @@
     // Breadcrumb
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
-        [ 'Portal Alterno','index','Projects'],
+        [ 'Proyectos','index','Projects'],
     ];
 ?>
 <div class="section bcrumb company">
@@ -25,35 +25,26 @@
                   <label for="myInput">Buscar</label>
               </div>
             </form>
-          <!-- </div> -->
-          <!-- <div class="input-field col s12">
-         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." />
-         </div> -->
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Proyecto')),
+                      array('action' => 'add'), array('escape'=>false));?></th>
                       <th scope="col"><?= $this->Paginator->sort('id',['No.']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('ID_PROJECT',['ID']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('PROJECT_NAME',['NOMBRE']) ?></th>
                       <th>ACCIONES</th>
                     </tr>
                 </thead>
-                <!-- <tfoot>
-                    <tr>
-                      <th scope="col"><?//= $this->Paginator->sort('id') ?></th>
-                      <th scope="col"><?//= $this->Paginator->sort('ID_PROJECT') ?></th>
-                      <th scope="col"><?//= $this->Paginator->sort('PROJECT_NAME') ?></th>
-                      <th scope="col" class="actions"><?//= __('Actions') ?></th>
-                    </tr>
-                </tfoot> -->
                 <tbody>
                   <?php foreach ($projects as $project): ?>
                   <tr>
+                      <td></td>
                       <td><?= $this->Number->format($project->id) ?></td>
                       <td><?= h($project->ID_PROJECT) ?></td>
                       <td><?= h($project->PROJECT_NAME) ?></td>
                       <td class="actions">
-                          <?= $this->Html->link(__('Editar'),['action' => 'view', $project->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Proyecto']) ?>
+                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $project->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Proyecto']) ?>
                           <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
                           <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$project->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$project->PROJECT_NAME.'?', $project->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'right','data-tooltip'=>'Eliminar Proyecto']) ?>
                       </td>
@@ -77,16 +68,12 @@
                     array('escape' => false)) ?></li>
                     <!-- <li class="waves-effect"><?//= $this->Paginator->last(__('last') . ' >>') ?></li> -->
                 </ul>
-                <!-- <p><?//= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p> -->
             </div>
         </div>
     </div>
 </div>
 <script>
 
-// $(document).ready(function() {
-//     $('input#myInput').characterCounter();
-//   });
 function myFunction() {
 var searchText = document.getElementById('myInput').value;
 var targetTable = document.getElementById('myTable');
