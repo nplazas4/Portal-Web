@@ -7,7 +7,6 @@ use Cake\ORM\Entity;
  * Risk Entity
  *
  * @property int $id
- * @property string $ID_PROJECT
  * @property int $RISK_NUMBER
  * @property string $RISK_NAME
  * @property string $PROBABILITY
@@ -24,6 +23,7 @@ use Cake\ORM\Entity;
  * @property string $PLAN_THREE_S
  * @property string $PLAN_FOUR_S
  * @property string $PLAN_FIVE_S
+ * @property int $TOTAL_RISK
  */
 class Risk extends Entity
 {
@@ -38,7 +38,6 @@ class Risk extends Entity
      * @var array
      */
     protected $_accessible = [
-        'ID_PROJECT' => true,
         'RISK_NUMBER' => true,
         'RISK_NAME' => true,
         'PROBABILITY' => true,
@@ -54,6 +53,7 @@ class Risk extends Entity
         'PLAN_TWO_S' => true,
         'PLAN_THREE_S' => true,
         'PLAN_FOUR_S' => true,
-        'PLAN_FIVE_S' => true
+        'PLAN_FIVE_S' => true,
+        'TOTAL_RISK' => true
     ];
 }

@@ -18,11 +18,10 @@ class RisksFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'ID_PROJECT' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'RISK_NUMBER' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'RISK_NAME' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'PROBABILITY' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'IMPACT' => ['type' => 'string', 'length' => 20, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'PROBABILITY' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'IMPACT' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'IMPACT_RISK' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'PLAN_ONE' => ['type' => 'string', 'length' => 200, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PLAN_TWO' => ['type' => 'string', 'length' => 200, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -35,6 +34,7 @@ class RisksFixture extends TestFixture
         'PLAN_THREE_S' => ['type' => 'string', 'length' => 200, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PLAN_FOUR_S' => ['type' => 'string', 'length' => 200, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PLAN_FIVE_S' => ['type' => 'string', 'length' => 200, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'TOTAL_RISK' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -55,11 +55,10 @@ class RisksFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'ID_PROJECT' => 'Lorem ipsum dolor sit amet',
                 'RISK_NUMBER' => 1,
                 'RISK_NAME' => 'Lorem ipsum dolor sit amet',
-                'PROBABILITY' => 'Lorem ipsum dolor ',
-                'IMPACT' => 'Lorem ipsum dolor ',
+                'PROBABILITY' => 'Lorem ipsum dolor sit amet',
+                'IMPACT' => 'Lorem ipsum dolor sit amet',
                 'IMPACT_RISK' => 1,
                 'PLAN_ONE' => 'Lorem ipsum dolor sit amet',
                 'PLAN_TWO' => 'Lorem ipsum dolor sit amet',
@@ -71,7 +70,8 @@ class RisksFixture extends TestFixture
                 'PLAN_TWO_S' => 'Lorem ipsum dolor sit amet',
                 'PLAN_THREE_S' => 'Lorem ipsum dolor sit amet',
                 'PLAN_FOUR_S' => 'Lorem ipsum dolor sit amet',
-                'PLAN_FIVE_S' => 'Lorem ipsum dolor sit amet'
+                'PLAN_FIVE_S' => 'Lorem ipsum dolor sit amet',
+                'TOTAL_RISK' => 1
             ],
         ];
         parent::init();

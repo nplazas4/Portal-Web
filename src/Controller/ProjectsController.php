@@ -21,6 +21,7 @@ class ProjectsController extends AppController
       $projects = $this->paginate($this->Projects);
       $this->set('projects',$projects);
       $this->Indicators();
+      $this->Risks();
       // $this->loadModel('Eps');
       // $eps = $this->Eps->find('all');
       // $this->set('eps', $eps->first());
@@ -81,11 +82,9 @@ class ProjectsController extends AppController
         }
         $this->set(compact('projects'));
     }
-    // public function project(){
-    //   // put your code.
-    // }
     public function project($id)
     {
+        $this->index();
         $projects = $this->Projects->get($id);
         $this->set('projects', $projects);
     }
@@ -96,5 +95,11 @@ class ProjectsController extends AppController
       $this->loadModel('Indicators');
       $indicators= $this->Indicators->find('all');
       $this->set('indicators',$indicators->first());
+    }
+    public function Risks(){
+      $this->loadModel('Risks');
+      $rks= $this->Risks->find('all');
+      $this->set('rks',$rks->all());
+      // print_r($risks->all());
     }
 }

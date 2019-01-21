@@ -11,7 +11,7 @@
     // Riesgos
     $risks = [
         [
-            'name' => '1',
+            'name' => '0',
             'x' => 5,
             'y' => 2,
         ],
@@ -416,7 +416,6 @@
      $n = $n % $number;
     }
     ?>
-
     <sidebar class="project-sidebar">
         <h1><?=$projects->PROJECT_NAME?></h1>
         <div class="project-sidebar-phase orange">
@@ -555,9 +554,9 @@
             <div class="chart-risk">
                 <div class="chart-risk-list">
                     <ul>
-                        <?php foreach ($risks as $risk): ?>
+                        <?php foreach ($rks as $rk): ?>
                         <li>
-                            <a href=<?='#'.$risk['name']?> class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                            <a href=<?='#'.$rk->RISK_NUMBER?> class="modal-trigger">Riesgo <?=$rk->RISK_NUMBER?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>
@@ -568,37 +567,37 @@
                             <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
                             <th>MA</th>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 1 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 1 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 1 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="red">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 1 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="red">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 1 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
@@ -606,37 +605,37 @@
                         <tr>
                             <th>A</th>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 1 &&  $rk->PROBABILITY == 2 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                              <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 2 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 2 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 2 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="red">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 2 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
@@ -644,37 +643,37 @@
                         <tr>
                             <th>M</th>
                             <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 3 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 3 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 3 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 3 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 3 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
@@ -682,37 +681,37 @@
                         <tr>
                             <th>B</th>
                             <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 4 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 4 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 4 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 4 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 4 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
@@ -720,37 +719,37 @@
                         <tr>
                             <th>MB</th>
                             <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 5 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 5 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 5 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 5 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
+                                <?php foreach ($rks as $rk):
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 5 ) {
+                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
                                 endforeach; ?>
                             </td>
@@ -1048,9 +1047,9 @@
         </ul>
     </div>
 </div>
-<?php foreach ($risks as $risk): ?>
+<?php foreach ($rks as $rk): ?>
 <!-- Modal detalle de riesgo -->
-<div id=<?=$risk['name']?> class="modal">
+<div id=<?=$rk->RISK_NUMBER?> class="modal">
     <div class="modal-content">
         <a class="modal-close close">
             <i class="material-icons">close</i>
@@ -1058,72 +1057,72 @@
         <h2>Detalle riesgo</h2>
         <table>
             <tr>
-                <th width="20%">Risego</th>
-                <td>1</td>
+                <th width="20%">Riesgo</th>
+                <td><?=$rk->RISK_NUMBER?></td>
             </tr>
             <tr>
                 <th>Nombre Riesgo</th>
-                <td><?=$risk['name']?></td>
+                <td><?=$rk->RISK_NAME?></td>
             </tr>
             <tr>
                 <th>Probabilidad</th>
-                <td>Muy Alta</td>
+                <td><?=$rk->PROBABILITY?></td>
             </tr>
             <tr>
                 <th>Impacto</th>
-                <td>Muy Alto</td>
+                <td><?=$rk->IMPACT?></td>
             </tr>
             <tr>
                 <th>Impacto del riesgo</th>
-                <td>25</td>
+                <td><?=$rk->IMPACT_RISK?></td>
             </tr>
             <tr>
                 <th>Plan de Respuesta 01</th>
-                <td>Monitorear y controlar las diferentes actividades de las áreas de gestión del proyecto necesarias para demostrar la debida diligencia ante las autoridades</td>
+                <td><?=$rk->PLAN_ONE?></td>
             </tr>
             <tr>
                 <th>Plan de Respuesta 02</th>
-                <td>Solicitar ante el MME con todos los soportes necesarios y justificados la aprobación de prórroga de la FOPO</td>
+                <td><?=$rk->PLAN_TWO?></td>
             </tr>
             <tr>
                 <th>Plan de Respuesta 03</th>
-                <td>Gestión con la autoridad ambiental para el seguimiento del estado del trámite y la modulación de la respuesta de la misma para mitigar la posible desviación de cronograma del proyecto</td>
+                <td><?=$rk->PLAN_THREE?></td>
             </tr>
             <tr>
                 <th>Plan de Respuesta 04</th>
-                <td>En la sesión de informes quincenales y mensuales se presentará el monitoreo de redes sociales y medios de comunicación regionales y locales con el fin de valorar </td>
+                <td><?=$rk->PLAN_FOUR?></td>
             </tr>
             <tr>
                 <th>Plan de Respuesta 05</th>
-                <td>_</td>
+                <td><?=$rk->PLAN_FIVE?></td>
             </tr>
             <tr>
                 <th>Calificación de Riesgo</th>
-                <td>25</td>
+                <td><?=$rk->RISK_QUALIFICATION?></td>
             </tr>
             <tr>
                 <th>Seguimiento al plan de respuesta 01</th>
-                <td>Se llevan a cabo reuniones de seguimiento. Se diligencia ATL con compromisos actualizados. Se monitorea y realiza seguimiento a los hitos de las áreas de gestión y del proyecto</td>
+                <td><?=$rk->PLAN_ONE_S?></td>
             </tr>
             <tr>
                 <th>Seguimiento al plan de respuesta 02</th>
-                <td>A la fecha se ha ejecutado en varias ocasiones el plan de acción permitiendo obtener por parte de la UPME prórrogas sucesivas que extienden la FOPO - Fecha Oficial de Puesta en Operación del Proyecto.</td>
+                <td><?=$rk->PLAN_TWO_S?></td>
             </tr>
             <tr>
                 <th>Seguimiento al plan de respuesta 03</th>
-                <td>La Gerencia del Proyecto y la Dirección de Desarrollo Sostenible llevan a cabo reuniones de alto nivel con la autoridad ambiental con el propósito de obtener retroalimentación del proceso de licenciamiento ambiental.</td>
+                <td><?=$rk->PLAN_THREE_S?></td>
             </tr>
             <tr>
                 <th>Seguimiento al plan de respuesta 04</th>
-                <td>_</td>
+                <td><?=$rk->PLAN_FOUR_S?></td>
             </tr>
             <tr>
                 <th>Seguimiento al plan de respuesta 05</th>
-                <td>Se está ejecutando de manera periódica según lo planeado</td>
+                <td><?=$rk->PLAN_FIVE_S?></td>
             </tr>
             <tr>
                 <th>Calificación Ponderada</th>
-                <td>26</td>
+                <td><?=$rk->TOTAL_RISK?></td>
             </tr>
         </table>
     </div>

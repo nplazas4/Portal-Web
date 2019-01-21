@@ -2,7 +2,8 @@
     // Breadcrumb
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
-        [ 'Crear Códigos de Proyecto','add','Projectcodes'],
+        [ 'Riesgos de Proyectos','index','Risks'],
+        [ 'Crear Riesgo de Proyecto','add','Risks'],
     ];
 ?>
 <?= $this->Html->css('login')?>
@@ -20,18 +21,84 @@
         <div class="home-menu">
           <!-- <div class="row"> -->
           <div class="row">
+            <h5>Crear riesgo</h5>
             <br/>
              <!-- <form class="col s12"> -->
-             <?= $this->Form->create($projectcodes,['class'=>'col s12']) ?>
+             <?= $this->Form->create($risks,['class'=>'col s12']) ?>
+              <fieldset>
                <div class="row">
-                 <fieldset>
+                 <div class="input-field col s6">
+                   <?php echo $this->Form->input('RISK_NUMBER',['label'=>'','placeholder'=>'Riesgo','class'=>'validate','required']);?>
+                 </div>
+                 <div class="input-field col s6">
+                   <?php echo $this->Form->input('RISK_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s6">
+                    <?php echo $this->Form->input('PROBABILITY',['label'=>'Probabilidad','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
+                   <!-- <?//php echo $this->Form->input('PROBABILITY',['label'=>'','placeholder'=>'Probabilidad','class'=>'validate','required']);?> -->
+                 </div>
+                 <div class="input-field col s6">
+                   <?php echo $this->Form->input('IMPACT',['label'=>'Impacto','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto']]);?>
+                   <!-- <?//php echo $this->Form->input('IMPACT',['label'=>'','placeholder'=>'Impacto','class'=>'validate','required']);?> -->
+                 </div>
+               </div>
+               <div class="row">
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('CODE_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','placeholder'=>'Impacto del riesgo','class'=>'validate','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_ONE',['label'=>'','placeholder'=>'Plan de respuesta 01','class'=>'materialize-textarea','required']);?>
                  </div>
                  <div class="input-field col s12">
-                   <!-- <input id="Nombre_Proyecto" type="text" class="validate">
-                   <label for="Nombre_Proyecto">Nombre de proyecto</label> -->
-                   <?php echo $this->Form->textarea('CODE_DESCRIPTION',['label'=>'','placeholder'=>'Descripción','class'=>'materialize-textarea','required']);?>
+                   <?php echo $this->Form->textarea('PLAN_TWO',['label'=>'','placeholder'=>'Plan de respuesta 02','class'=>'materialize-textarea','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_THREE',['label'=>'','placeholder'=>'Plan de respuesta 03','class'=>'materialize-textarea','required']);?>
+                 </div>
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_FOUR',['label'=>'','placeholder'=>'Plan de respuesta 04','class'=>'materialize-textarea','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_FIVE',['label'=>'','placeholder'=>'Plan de respuesta 05','class'=>'materialize-textarea','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->input('RISK_QUALIFICATION',['label'=>'','placeholder'=>'Calificación del riesgo','class'=>'validate','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_ONE_S',['label'=>'','placeholder'=>'Seguimiento al plan de respuesta 01','class'=>'materialize-textarea','required']);?>
+                 </div>
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_TWO_S',['label'=>'','placeholder'=>'Seguimiento plan de respuesta 02','class'=>'materialize-textarea','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_THREE_S',['label'=>'','placeholder'=>'Seguimiento plan de respuesta 03','class'=>'materialize-textarea','required']);?>
+                 </div>
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_FOUR_S',['label'=>'','placeholder'=>'Seguimiento plan de respuesta 04','class'=>'materialize-textarea','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->textarea('PLAN_FIVE_S',['label'=>'','placeholder'=>'Seguimiento plan de respuesta 05','class'=>'materialize-textarea','required']);?>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->input('TOTAL_RISK',['label'=>'','placeholder'=>'Calificación ponderada','class'=>'validate','required']);?>
                  </div>
                </div>
                </fieldset>

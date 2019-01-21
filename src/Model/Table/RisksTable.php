@@ -49,12 +49,6 @@ class RisksTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('ID_PROJECT')
-            ->maxLength('ID_PROJECT', 100)
-            ->requirePresence('ID_PROJECT', 'create')
-            ->notEmpty('ID_PROJECT');
-
-        $validator
             ->integer('RISK_NUMBER')
             ->requirePresence('RISK_NUMBER', 'create')
             ->notEmpty('RISK_NUMBER');
@@ -67,13 +61,11 @@ class RisksTable extends Table
 
         $validator
             ->scalar('PROBABILITY')
-            ->maxLength('PROBABILITY', 20)
             ->requirePresence('PROBABILITY', 'create')
             ->notEmpty('PROBABILITY');
 
         $validator
             ->scalar('IMPACT')
-            ->maxLength('IMPACT', 20)
             ->requirePresence('IMPACT', 'create')
             ->notEmpty('IMPACT');
 
@@ -146,6 +138,11 @@ class RisksTable extends Table
             ->maxLength('PLAN_FIVE_S', 200)
             ->requirePresence('PLAN_FIVE_S', 'create')
             ->notEmpty('PLAN_FIVE_S');
+
+        $validator
+            ->integer('TOTAL_RISK')
+            ->requirePresence('TOTAL_RISK', 'create')
+            ->notEmpty('TOTAL_RISK');
 
         return $validator;
     }

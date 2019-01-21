@@ -53,7 +53,7 @@
                  </div>
                </div>
                <div class="row">
-                 <div class="input-field col s6">
+                 <div class="input-field col s12">
                    <?php echo $this->Form->input('ACPV',['label'=>'','placeholder'=>'AC / PV','class'=>'validate','required']);?>
                  </div>
                </div>

@@ -2,7 +2,7 @@
     // Breadcrumb
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
-        [ 'Códigos de Proyecto','index','Projectcodes'],
+        [ 'Riesgos de Proyectos','index','Risks'],
     ];
 ?>
 <?= $this->Html->css('textlength')?>
@@ -30,22 +30,25 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                      <th scope="col"><?= $this->Paginator->sort('No.') ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('CODE_NAME',['NOMBRE']) ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('CODE_DESCRIPTION',['DESCRIPCIÓN']) ?></th>
+                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Riesgo')),
+                      array('action' => 'add'), array('escape'=>false));?></th>
+                      <th scope="col"><?= $this->Paginator->sort('id',['No.']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('RISK_NUMBER',['RIESGO']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('RISK_NAME',['NOMBRE']) ?></th>
                       <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($projectcodes as $projectcode): ?>
+                  <?php foreach ($risks as $risk): ?>
                   <tr>
-                      <td><?= $this->Number->format($projectcode->id) ?></td>
-                      <td><?= h($projectcode->CODE_NAME) ?></td>
-                      <td><?= h($projectcode->CODE_DESCRIPTION) ?></td>
+                      <td></td>
+                      <td><?= $this->Number->format($risk->id) ?></td>
+                      <td><?= h($risk->RISK_NUMBER) ?></td>
+                      <td><?= h($risk->RISK_NAME) ?></td>
                       <td class="actions">
-                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $projectcode->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Código de Proyecto']) ?>
+                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $risk->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Riesgo de Proyecto']) ?>
                           <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
-                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$projectcode->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$projectcode->CODE_NAME.'?', $projectcode->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'dropdown','data-tooltip'=>'Eliminar Código de Proyecto']) ?>
+                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$risk->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$risk->RISK_NAME.'?', $risk->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'dropdown','data-tooltip'=>'Eliminar Riesgo de Proyecto']) ?>
                       </td>
                   </tr>
                   <?php endforeach; ?>

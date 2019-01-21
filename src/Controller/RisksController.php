@@ -18,21 +18,21 @@ class RisksController extends AppController
   	{
       // $users = $this->paginate($this->Users);
       // $this->set(compact('users'));
-      $projectcodes = $this->paginate($this->Projectcodes);
-      $this->set('projectcodes',$projectcodes);
+      $risks = $this->paginate($this->Risks);
+      $this->set('risks',$risks);
   	}
     public function Add(){
-      $projectcodes = $this->Projectcodes->newEntity();
+      $risks = $this->Risks->newEntity();
       if ($this->request->is('post')) {
-          $projectcodes = $this->Projectcodes->patchEntity($projectcodes, $this->request->getData());
-          if ($this->Projectcodes->save($projectcodes)) {
-              $this->Flash->success(__('El código de proyecto ha sido creada.'));
+          $risks = $this->Risks->patchEntity($risks, $this->request->getData());
+          if ($this->Risks->save($risks)) {
+              $this->Flash->success(__('El riesgo ha sido creado.'));
 
               return $this->redirect(['action' => 'index']);
           }
-          $this->Flash->error(__('El código de proyecto no ha sido creada. Por favor, intenta de nuevo.'));
+          $this->Flash->error(__('El riesgo no ha sido creado. Por favor, intenta de nuevo.'));
       }
-      $this->set(compact('projectcodes'));
+      $this->set(compact('risks'));
     }
     public function AddProjectCode(){
       // put your code.
@@ -42,8 +42,8 @@ class RisksController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $projectcodes = $this->Projectcodes->get($id);
-        if ($this->Projectcodes->delete($projectcodes)) {
+        $risks = $this->Risks->get($id);
+        if ($this->Risks->delete($risks)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
@@ -53,17 +53,17 @@ class RisksController extends AppController
     }
     public function view($id)
     {
-        $projectcodes = $this->Projectcodes->get($id);
+        $risks = $this->Risks->get($id);
 
-        $this->set('projectcodes', $projectcodes);
+        $this->set('risks', $risks);
     }
     public function edit($id = null)
     {
-        $projectcodes = $this->Projectcodes->get($id);
+        $risks = $this->Risks->get($id);
         if ($this->request->is(['patch','post','put']))
         {
-          $projectcodes = $this->Projectcodes->patchEntity($projectcodes,$this->request->data);
-          if ($this->Projectcodes->save($projectcodes))
+          $risks = $this->Risks->patchEntity($risks,$this->request->data);
+          if ($this->Risks->save($risks))
            {
              $this->Flash->success('El usuario ha sido modificado');
              return $this->redirect(['action'=>'index']);
@@ -72,6 +72,6 @@ class RisksController extends AppController
             $this->Flash->error('El usuario no pudo ser modificado');
           }
         }
-        $this->set(compact('projectcodes'));
+        $this->set(compact('risks'));
     }
 }

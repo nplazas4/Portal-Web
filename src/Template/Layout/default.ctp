@@ -148,6 +148,13 @@
               ['escape' => false]);
               ?>
           </li>
+          <li class="divider"></li>
+          <li>
+            <?php echo $this->Html->link('Riesgos',
+              ['controller'=>'Risks','action'=>'index'],
+              ['escape' => false]);
+              ?>
+          </li>
         </ul>
     </header>
 
