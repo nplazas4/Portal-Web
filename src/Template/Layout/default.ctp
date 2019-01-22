@@ -72,7 +72,7 @@
               ['escape' => false,'class'=>'header-logo']
             );?>
             <?php  if (isset($current_user)):?>
-            <?php  if($current_user['role']=='admin'):?>
+            <?php  if($current_user['role']=='admin' || $current_user['role']=='user'):?>
             <div class="header-user dropdown-trigger" data-target='dropdownUser'>
                 <div class="header-user-content">
                     <h2><?= $user['name'] ?></h2>
@@ -102,7 +102,7 @@
             <div class="nav-wrapper">
                 <ul>
                 <?php if (isset($current_user)):?>
-                <?php if($current_user['role']=='admin'):?>
+                <?php if($current_user['role']=='admin' || $current_user['role']=='user'):?>
                 <?php foreach ($menu as $item): ?>
                     <!-- <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li> -->
                 <li>
@@ -113,8 +113,10 @@
                 </li>
                 <?php endforeach; ?>
                 <li>
+                  <?php if($current_user['role']=='admin'):?>
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">PORTAL ALTERNO<i class="material-icons right">arrow_drop_down</i></a></li>
-                </li>
+                  <?php endif;?>
+              </li>
                <?php endif;?>
              <?php endif;?>
                 </ul>

@@ -9,78 +9,78 @@
     ];
 
     // Riesgos
-    $risks = [
-        [
-            'name' => '0',
-            'x' => 5,
-            'y' => 2,
-        ],
-        [
-            'name' => '2',
-            'x' => 5,
-            'y' => 2,
-        ],
-        [
-            'name' => '3',
-            'x' => 1,
-            'y' => 1,
-        ],
-        [
-            'name' => '4',
-            'x' => 1,
-            'y' => 3,
-        ],
-        [
-            'name' => '5',
-            'x' => 4,
-            'y' => 3,
-        ],
-        [
-            'name' => '6',
-            'x' => 3,
-            'y' => 3,
-        ],
-        [
-            'name' => '7',
-            'x' => 2,
-            'y' => 1,
-        ],
-        [
-            'name' => '8',
-            'x' => 3,
-            'y' => 4,
-        ],
-        [
-            'name' => '9',
-            'x' => 4,
-            'y' => 5,
-        ],
-        [
-            'name' => '10',
-            'x' => 3,
-            'y' => 2,
-        ],
-        [
-            'name' => '11',
-            'x' => 3,
-            'y' => 2,
-        ],
-        [
-            'name' => '12',
-            'x' => 3,
-            'y' => 2,
-        ],
-        [
-            'name' => '13',
-            'x' => 3,
-            'y' => 4,
-        ],
-        [
-            'name' => '14',
-            'x' => 3,
-            'y' => 4,
-        ],
-    ];
+    // $risks = [
+    //     [
+    //         'name' => '0',
+    //         'x' => 5,
+    //         'y' => 2,
+    //     ],
+    //     [
+    //         'name' => '2',
+    //         'x' => 5,
+    //         'y' => 2,
+    //     ],
+    //     [
+    //         'name' => '3',
+    //         'x' => 1,
+    //         'y' => 1,
+    //     ],
+    //     [
+    //         'name' => '4',
+    //         'x' => 1,
+    //         'y' => 3,
+    //     ],
+    //     [
+    //         'name' => '5',
+    //         'x' => 4,
+    //         'y' => 3,
+    //     ],
+    //     [
+    //         'name' => '6',
+    //         'x' => 3,
+    //         'y' => 3,
+    //     ],
+    //     [
+    //         'name' => '7',
+    //         'x' => 2,
+    //         'y' => 1,
+    //     ],
+    //     [
+    //         'name' => '8',
+    //         'x' => 3,
+    //         'y' => 4,
+    //     ],
+    //     [
+    //         'name' => '9',
+    //         'x' => 4,
+    //         'y' => 5,
+    //     ],
+    //     [
+    //         'name' => '10',
+    //         'x' => 3,
+    //         'y' => 2,
+    //     ],
+    //     [
+    //         'name' => '11',
+    //         'x' => 3,
+    //         'y' => 2,
+    //     ],
+    //     [
+    //         'name' => '12',
+    //         'x' => 3,
+    //         'y' => 2,
+    //     ],
+    //     [
+    //         'name' => '13',
+    //         'x' => 3,
+    //         'y' => 4,
+    //     ],
+    //     [
+    //         'name' => '14',
+    //         'x' => 3,
+    //         'y' => 4,
+    //     ],
+    // ];
 ?>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -1066,11 +1066,39 @@
             </tr>
             <tr>
                 <th>Probabilidad</th>
-                <td><?=$rk->PROBABILITY?></td>
+                <?php  if ($rk->PROBABILITY == 1):?>
+                <td>Muy baja</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 2):?>
+                <td>Baja</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 3):?>
+                <td>Media</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 4):?>
+                <td>Alta</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 5):?>
+                <td>Muy alta</td>
+                <?php endif;?>
             </tr>
             <tr>
                 <th>Impacto</th>
-                <td><?=$rk->IMPACT?></td>
+                <?php  if ($rk->IMPACT == 1):?>
+                <td>Muy bajo</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 2):?>
+                <td>Bajo</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 3):?>
+                <td>Medio</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 4):?>
+                <td>Alto</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 5):?>
+                <td>Muy alto</td>
+                <?php endif;?>
             </tr>
             <tr>
                 <th>Impacto del riesgo</th>
