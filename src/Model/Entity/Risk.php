@@ -24,6 +24,7 @@ use Cake\ORM\Entity;
  * @property string $PLAN_FOUR_S
  * @property string $PLAN_FIVE_S
  * @property int $TOTAL_RISK
+ * @property int $PROJECT_CODE
  */
 class Risk extends Entity
 {
@@ -54,6 +55,7 @@ class Risk extends Entity
         'PLAN_THREE_S' => true,
         'PLAN_FOUR_S' => true,
         'PLAN_FIVE_S' => true,
-        'TOTAL_RISK' => true
+        'TOTAL_RISK' => true,
+        'PROJECT_CODE' => true
     ];
 }

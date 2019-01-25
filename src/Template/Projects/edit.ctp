@@ -6,6 +6,7 @@
     ];
 ?>
 <?= $this->Html->css('login')?>
+<?= $this->Html->css('error')?>
 <div class="section bcrumb company">
     <div class="breadcrumb-container">
         <?php foreach ($breadcrumb as $item): ?>
@@ -29,6 +30,10 @@
              <!-- <form class="col s12"> -->
              <?= $this->Form->create($projects,['novalidate']) ?>
               <fieldset>
+                <div class="alert" style=<?= $error ?>>
+                  <span class="closebtn">&times;</span>
+                  No se ha podido editar el proyecto.
+                </div>
                <div class="row">
                  <div class="input-field col s6">
                    <?php echo $this->Form->input('ID_PROJECT',['label'=>'ID','placeholder'=>'ID','class'=>'validate','required']);?>
@@ -43,21 +48,11 @@
                  </div>
                </div>
                <div class="row">
-                 <div class="input-field col s12">
-                   <?php echo $this->Form->input('SPI',['label'=>'SPI','placeholder'=>'SPI','class'=>'validate','required']);?>
-                 </div>
-               </div>
-               <div class="row">
                  <div class="input-field col s6">
                    <?php echo $this->Form->input('PLANNED',['label'=>'Planeado','placeholder'=>'Planeado','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s6">
                    <?php echo $this->Form->input('EXECUTED',['label'=>'Ejecutado','placeholder'=>'Ejecutado','class'=>'validate','required']);?>
-                 </div>
-               </div>
-               <div class="row">
-                 <div class="input-field col s12">
-                   <?php echo $this->Form->input('ACPV',['label'=>'AC / PV','placeholder'=>'AC / PV','class'=>'validate','required']);?>
                  </div>
                </div>
                <div class="row">
@@ -99,7 +94,7 @@
                    <?php echo $this->Form->input('DISTANCIA',['label'=>'Distancia','placeholder'=>'Distancia','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s6">
-                   <?php echo $this->Form->input('LINEA_TRANS',['label'=>'Líneas de transmición','placeholder'=>'Líneas de transmición','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('LINEA_TRANS',['label'=>'Líneas de transmisión','placeholder'=>'Líneas de transmisión','class'=>'validate','required']);?>
                  </div>
                </div>
                <!-- <div class="row">
@@ -123,7 +118,7 @@
                    <?php echo $this->Form->input('TORRE',['label'=>'Torres','placeholder'=>'Torres','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s6">
-                   <?php echo $this->Form->input('NUM_SUBESTACION',['label'=>'Numero de estaciones','placeholder'=>'Numero de estaciones','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('NUM_SUBESTACION',['label'=>'Número de subestaciones','placeholder'=>'Número de subestaciones','class'=>'validate','required']);?>
                  </div>
                </div>
                </fieldset>

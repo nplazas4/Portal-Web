@@ -17,9 +17,10 @@
 
     // Datos de usuario
     $user = [
-        'avatar' =>  $current_user['first_name'][0],
-        'name' => $current_user['first_name'].' '. $current_user['last_name'],
-        'email' => $current_user['email']
+      'avatar' => $current_user['V_EMAIL'][0],
+      'name' => $current_user['V_FIRST_NAME'].' '.$current_user['V_LAST_NAME'],
+      // 'name' => $current_user['V_EMAIL'],
+      'email' => $current_user['V_EMAIL']
     ];
     // $user = [
     //     'avatar' => 'M',
@@ -49,11 +50,11 @@
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
-<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+<!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
 <link type="text/css" rel="stylesheet" href="jsgrid.min.css" />
-<link type="text/css" rel="stylesheet" href="jsgrid-theme.min.css" />
+<link type="text/css" rel="stylesheet" href="jsgrid-theme.min.css" /> -->
 
-<script type="text/javascript" src="jsgrid.min.js"></script>
+<!-- <script type="text/javascript" src="jsgrid.min.js"></script> -->
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
 
@@ -63,16 +64,17 @@
 </head>
 <body>
     <header class="header">
+      <?= $this->Html->css('placeholder.css') ?>
         <div class="header-wrapper">
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <!-- <a href="/home" class="header-logo"><?= $this->Html->image('logo.svg') ?></a> -->
+            <!-- <a href="/home" class="header-logo"><?//= $this->Html->image('logo.svg') ?></a> -->
             <?php echo $this->Html->link(
               $this->Html->image('logo.svg'),
               ['controller'=>'Pages', 'action'=>'home'],
               ['escape' => false,'class'=>'header-logo']
             );?>
             <?php  if (isset($current_user)):?>
-            <?php  if($current_user['role']=='admin' || $current_user['role']=='user'):?>
+            <?php  if($current_user['V_ROL']=='Administrator' || $current_user['V_ROL']=='Viewer'):?>
             <div class="header-user dropdown-trigger" data-target='dropdownUser'>
                 <div class="header-user-content">
                     <h2><?= $user['name'] ?></h2>
@@ -102,7 +104,7 @@
             <div class="nav-wrapper">
                 <ul>
                 <?php if (isset($current_user)):?>
-                <?php if($current_user['role']=='admin' || $current_user['role']=='user'):?>
+                <?php if($current_user['V_ROL']=='Administrator' || $current_user['V_ROL']=='Viewer'):?>
                 <?php foreach ($menu as $item): ?>
                     <!-- <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li> -->
                 <li>
@@ -113,7 +115,7 @@
                 </li>
                 <?php endforeach; ?>
                 <li>
-                  <?php if($current_user['role']=='admin'):?>
+                  <?php if($current_user['V_ROL']=='Administrator'):?>
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">PORTAL ALTERNO<i class="material-icons right">arrow_drop_down</i></a></li>
                   <?php endif;?>
               </li>
@@ -181,7 +183,7 @@
         <!-- <li><a class="waves-effect pl-4" href="/">INICIO</a></li> -->
         <li><?=$this->Html->link('INICIO',['controller'=>'Pages','action'=>'home'],['class'=>'waves-effect pl-4'])?></li>
         <?php foreach ($menu as $item): ?>
-            <!-- <li><a class="waves-effect pl-4" href="<?= $item[1] ?>"><?= $item[0] ?></a></li> -->
+            <!-- <li><a class="waves-effect pl-4" href="<?//= $item[1] ?>"><?//= $item[0] ?></a></li> -->
           <li>
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
@@ -227,7 +229,18 @@
             $('.dropdown-trigger').dropdown();
         });
     </script>
+    <script>
+    var close = document.getElementsByClassName("closebtn");
+    var i;
 
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function(){
+        var div = this.parentElement;
+        div.style.opacity = "0";
+        setTimeout(function(){ div.style.display = "none"; }, 600);
+      }
+    }
+    </script>
     <!-- Amcharts -->
     <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -295,163 +308,163 @@
         // );
 
         // Curva de avance físico
-        AmCharts.makeChart("caf",
-            {
-                "type": "serial",
-                "categoryField": "date",
-                "dataDateFormat": "YYYY-MM-DD",
-                "fontFamily": "'Open Sans'",
-                "theme": "default",
-                "language": "es",
-                "categoryAxis": {
-                    "equalSpacing": true,
-                    "gridPosition": "start",
-                    "minPeriod": "DD",
-                    "parseDates": true,
-                    "startOnAxis": true,
-                    "axisAlpha": 0,
-                    "gridAlpha": 0,
-                    "labelOffset": -1
-                },
-                "chartCursor": {
-                    "enabled": true,
-                    "categoryBalloonDateFormat": "DD MMM YYYY",
-                    "cursorColor": "#00A34B"
-                },
-                "chartScrollbar": {
-                    "enabled": true,
-                    "graph": "AmGraph-2",
-                    "graphType": "line",
-                    "gridCount": 7,
-                    "offset": 40,
-                    "oppositeAxis": false,
-                    "scrollbarHeight": 40
-                },
-                "trendLines": [],
-                "graphs": [
-                    {
-                        "customBullet": "",
-                        "dashLength": 7,
-                        "id": "AmGraph-1",
-                        "labelPosition": "right",
-                        "labelText": "",
-                        "lineColor": "#2CACE3",
-                        "lineThickness": 3,
-                        "minBulletSize": 3,
-                        "showAllValueLabels": true,
-                        "title": "Ejecutado",
-                        "valueField": "column-1"
-                    },
-                    {
-                        "id": "AmGraph-2",
-                        "lineColor": "#A6CE39",
-                        "lineThickness": 3,
-                        "title": "Planeado",
-                        "valueField": "column-2"
-                    }
-                ],
-                "guides": [],
-                "valueAxes": [
-                    {
-                        "id": "ValueAxis-1",
-                        "totalText": "",
-                        "unit": "%",
-                        "axisAlpha": 0,
-                        "gridAlpha": 0.06,
-                        "title": ""
-                    }
-                ],
-                "allLabels": [],
-                "balloon": {},
-                "legend": {
-                    "enabled": true,
-                    "autoMargins": false,
-                    "marginRight": 0,
-                    "markerSize": 15,
-                    "position": "top",
-                    "spacing": 16,
-                    "useGraphSettings": true
-                },
-                "titles": [],
-                "dataProvider": [
-                    {
-                        "date": "2014-01-17",
-                        "column-1": "0",
-                        "column-2": "0"
-                    },
-                    {
-                        "date": "2014-02-17",
-                        "column-1": "5",
-                        "column-2": "6"
-                    },
-                    {
-                        "date": "2014-03-17",
-                        "column-1": "10",
-                        "column-2": "12"
-                    },
-                    {
-                        "date": "2014-04-17",
-                        "column-1": "11",
-                        "column-2": "15"
-                    },
-                    {
-                        "date": "2014-05-17",
-                        "column-1": "12",
-                        "column-2": "20"
-                    },
-                    {
-                        "date": "2014-06-17",
-                        "column-1": "13",
-                        "column-2": "22"
-                    },
-                    {
-                        "date": "2014-07-17",
-                        "column-1": "15",
-                        "column-2": "30"
-                    },
-                    {
-                        "date": "2014-08-17",
-                        "column-1": "20",
-                        "column-2": "30"
-                    },
-                    {
-                        "date": "2014-09-17",
-                        "column-1": "21",
-                        "column-2": "32"
-                    },
-                    {
-                        "date": "2014-10-17",
-                        "column-1": "22",
-                        "column-2": "35"
-                    },
-                    {
-                        "date": "2014-11-17",
-                        "column-1": null,
-                        "column-2": "31"
-                    },
-                    {
-                        "date": "2014-12-17",
-                        "column-1": null,
-                        "column-2": "30"
-                    },
-                    {
-                        "date": "2015-01-17",
-                        "column-1": null,
-                        "column-2": "25"
-                    },
-                    {
-                        "date": "2015-02-17",
-                        "column-1": null,
-                        "column-2": "27"
-                    },
-                    {
-                        "date": "2015-03-17",
-                        "column-1": null,
-                        "column-2": "32"
-                    }
-                ]
-            }
-        );
+        // AmCharts.makeChart("caf",
+        //     {
+        //         "type": "serial",
+        //         "categoryField": "date",
+        //         "dataDateFormat": "YYYY-MM-DD",
+        //         "fontFamily": "'Open Sans'",
+        //         "theme": "default",
+        //         "language": "es",
+        //         "categoryAxis": {
+        //             "equalSpacing": true,
+        //             "gridPosition": "start",
+        //             "minPeriod": "DD",
+        //             "parseDates": true,
+        //             "startOnAxis": true,
+        //             "axisAlpha": 0,
+        //             "gridAlpha": 0,
+        //             "labelOffset": -1
+        //         },
+        //         "chartCursor": {
+        //             "enabled": true,
+        //             "categoryBalloonDateFormat": "DD MMM YYYY",
+        //             "cursorColor": "#00A34B"
+        //         },
+        //         "chartScrollbar": {
+        //             "enabled": true,
+        //             "graph": "AmGraph-2",
+        //             "graphType": "line",
+        //             "gridCount": 7,
+        //             "offset": 40,
+        //             "oppositeAxis": false,
+        //             "scrollbarHeight": 40
+        //         },
+        //         "trendLines": [],
+        //         "graphs": [
+        //             {
+        //                 "customBullet": "",
+        //                 "dashLength": 7,
+        //                 "id": "AmGraph-1",
+        //                 "labelPosition": "right",
+        //                 "labelText": "",
+        //                 "lineColor": "#2CACE3",
+        //                 "lineThickness": 3,
+        //                 "minBulletSize": 3,
+        //                 "showAllValueLabels": true,
+        //                 "title": "Ejecutado",
+        //                 "valueField": "column-1"
+        //             },
+        //             {
+        //                 "id": "AmGraph-2",
+        //                 "lineColor": "#A6CE39",
+        //                 "lineThickness": 3,
+        //                 "title": "Planeado",
+        //                 "valueField": "column-2"
+        //             }
+        //         ],
+        //         "guides": [],
+        //         "valueAxes": [
+        //             {
+        //                 "id": "ValueAxis-1",
+        //                 "totalText": "",
+        //                 "unit": "%",
+        //                 "axisAlpha": 0,
+        //                 "gridAlpha": 0.06,
+        //                 "title": ""
+        //             }
+        //         ],
+        //         "allLabels": [],
+        //         "balloon": {},
+        //         "legend": {
+        //             "enabled": true,
+        //             "autoMargins": false,
+        //             "marginRight": 0,
+        //             "markerSize": 15,
+        //             "position": "top",
+        //             "spacing": 16,
+        //             "useGraphSettings": true
+        //         },
+        //         "titles": [],
+        //         "dataProvider": [
+        //             {
+        //                 "date": "2014-01-17",
+        //                 "column-1": "0",
+        //                 "column-2": "0"
+        //             },
+        //             {
+        //                 "date": "2014-02-17",
+        //                 "column-1": "5",
+        //                 "column-2": "6"
+        //             },
+        //             {
+        //                 "date": "2014-03-17",
+        //                 "column-1": "10",
+        //                 "column-2": "12"
+        //             },
+        //             {
+        //                 "date": "2014-04-17",
+        //                 "column-1": "11",
+        //                 "column-2": "15"
+        //             },
+        //             {
+        //                 "date": "2014-05-17",
+        //                 "column-1": "12",
+        //                 "column-2": "20"
+        //             },
+        //             {
+        //                 "date": "2014-06-17",
+        //                 "column-1": "13",
+        //                 "column-2": "22"
+        //             },
+        //             {
+        //                 "date": "2014-07-17",
+        //                 "column-1": "15",
+        //                 "column-2": "30"
+        //             },
+        //             {
+        //                 "date": "2014-08-17",
+        //                 "column-1": "20",
+        //                 "column-2": "30"
+        //             },
+        //             {
+        //                 "date": "2014-09-17",
+        //                 "column-1": "21",
+        //                 "column-2": "32"
+        //             },
+        //             {
+        //                 "date": "2014-10-17",
+        //                 "column-1": "22",
+        //                 "column-2": "35"
+        //             },
+        //             {
+        //                 "date": "2014-11-17",
+        //                 "column-1": null,
+        //                 "column-2": "31"
+        //             },
+        //             {
+        //                 "date": "2014-12-17",
+        //                 "column-1": null,
+        //                 "column-2": "30"
+        //             },
+        //             {
+        //                 "date": "2015-01-17",
+        //                 "column-1": null,
+        //                 "column-2": "25"
+        //             },
+        //             {
+        //                 "date": "2015-02-17",
+        //                 "column-1": null,
+        //                 "column-2": "27"
+        //             },
+        //             {
+        //                 "date": "2015-03-17",
+        //                 "column-1": null,
+        //                 "column-2": "32"
+        //             }
+        //         ]
+        //     }
+        // );
 
         // Gráfica acumulado
         AmCharts.makeChart("ga",

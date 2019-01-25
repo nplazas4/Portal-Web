@@ -16,7 +16,6 @@ class CreateProjectsTable extends AbstractMigration
       $table ->addColumn('ID_PROJECT','string',array('limit' => 100))
              ->addColumn('PROJECT_NAME','string',array('limit' => 500))
              ->addColumn('DESCRIPTION','string',array('limit'=> 500))
-             ->addColumn('SPI','decimal',['precision'=>10,'scale'=>2])
              ->addColumn('PLANNED','integer')
              ->addColumn('EXECUTED','integer')
              ->addColumn('AC','decimal',['precision'=>10,'scale'=>2])
@@ -37,9 +36,9 @@ class CreateProjectsTable extends AbstractMigration
              ->addColumn('NUM_SUBESTACION','integer')
              ->create();
              // $refTable = $this->table('PROJECTS');
-             // $refTable ->addColumn('CODE_EPS','integer',array('signed'=>'disable'))
-             //           ->addForeignKey('CODE_EPS','PROJECTS','id',array('delete'=>'CASCADE','update'=>'NO_ACTION'))
-             //           ->addColumn('PROJECT_RISK','integer',array('signed'=>'disable'))
+             // // $refTable ->addColumn('CODE_EPS','integer',array('signed'=>'disable'))
+             // //           ->addForeignKey('CODE_EPS','PROJECTS','id',array('delete'=>'CASCADE','update'=>'NO_ACTION'))
+             // $refTable ->addColumn('PROJECT_RISK','integer',array('signed'=>'disable'))
              //           ->addForeignKey('PROJECT_RISK','PROJECTS','id',array('delete'=>'CASCADE','update'=>'NO_ACTION'))
              //           ->update();
     }

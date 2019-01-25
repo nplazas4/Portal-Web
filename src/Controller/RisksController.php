@@ -20,8 +20,10 @@ class RisksController extends AppController
       // $this->set(compact('users'));
       $risks = $this->paginate($this->Risks);
       $this->set('risks',$risks);
+      $this->Projects();
   	}
     public function Add(){
+      $this->index();
       $risks = $this->Risks->newEntity();
       if ($this->request->is('post')) {
           $risks = $this->Risks->patchEntity($risks, $this->request->getData());
@@ -34,9 +36,6 @@ class RisksController extends AppController
       }
       $this->set(compact('risks'));
     }
-    public function AddProjectCode(){
-      // put your code.
-    }
     public function AddEPS(){
     }
     public function delete($id = null)
@@ -44,11 +43,10 @@ class RisksController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $risks = $this->Risks->get($id);
         if ($this->Risks->delete($risks)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('El riesgo ha sido eliminado.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El riesgo no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
     public function view($id)
@@ -59,6 +57,7 @@ class RisksController extends AppController
     }
     public function edit($id = null)
     {
+        $this->index();
         $risks = $this->Risks->get($id);
         if ($this->request->is(['patch','post','put']))
         {
@@ -73,5 +72,12 @@ class RisksController extends AppController
           }
         }
         $this->set(compact('risks'));
+    }
+    public function Projects(){
+      $this->loadModel('Projects');
+      $this->set('projects',$this->Projects->find('list', [
+      'keyField' => 'id',
+      'valueField' => 'PROJECT_NAME'
+      ]));
     }
 }

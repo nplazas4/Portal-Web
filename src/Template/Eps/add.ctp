@@ -19,6 +19,7 @@
     <div class="section home">
         <div class="home-menu">
           <?= $this->Html->css('login')?>
+          <?= $this->Html->css('error')?>
           <div class="row">
             <h5>Crear EPS</h5>
             <br/>
@@ -26,6 +27,10 @@
              <?= $this->Form->create($eps,['class'=>'col s12']) ?>
                <div class="row">
                  <fieldset>
+                   <div class="alert" style=<?=$error?>>
+                     <span class="closebtn">&times;</span>
+                     No se ha podido crear la EPS.
+                   </div>
                    <div class="row">
                      <div class="input-field col s12">
                         <?php echo $this->Form->input('EPS_ID',['label'=>'','placeholder'=>'ID','class'=>'validate','required']);?>

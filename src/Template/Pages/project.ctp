@@ -115,10 +115,10 @@
                         {
                             "color": "#2CACE3",
                             "startValue": 0,
-                            "endValue": <?=$data2?>,
+                            "endValue": <?//=$data2?>,
                             "radius": "70%",
                             "innerRadius": "40%",
-                            "balloonText": "<?=$data2?>% Ejecutado",
+                            "balloonText": "<?//=$data2?>% Ejecutado",
                         },
                     ]
                 }
@@ -355,7 +355,7 @@
 <div class="section bcrumb project">
     <div class="breadcrumb-container">
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
+            <!-- <a href="<?//= $item[1] ?>" class="breadcrumb"><?//= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb']

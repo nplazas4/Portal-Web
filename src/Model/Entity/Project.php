@@ -10,10 +10,8 @@ use Cake\ORM\Entity;
  * @property string $ID_PROJECT
  * @property string $PROJECT_NAME
  * @property string $DESCRIPTION
- * @property float $SPI
  * @property int $PLANNED
  * @property int $EXECUTED
- * @property int $ACPV
  * @property float $AC
  * @property float $PV
  * @property int $CAPEX_PLANNED
@@ -47,10 +45,8 @@ class Project extends Entity
         'ID_PROJECT' => true,
         'PROJECT_NAME' => true,
         'DESCRIPTION' => true,
-        'SPI' => true,
         'PLANNED' => true,
         'EXECUTED' => true,
-        'ACPV' => true,
         'AC' => true,
         'PV' => true,
         'CAPEX_PLANNED' => true,

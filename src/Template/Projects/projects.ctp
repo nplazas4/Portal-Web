@@ -81,7 +81,7 @@
             <?php endforeach?>
         		<h2>CAPEX USD</h2>
             <?php if ($CapexAcum>0):?>
-        		<h3><span>$</span><?=$CapexAcum?></h3>
+        		<h3><span>$</span><?=$CapexAcum?><span> MM</span></h3>
           <?php else :?>
             <?php $CapexUsd = 0?>
             <h3><span>$</span><?=$CapexUsd?></h3>
@@ -91,7 +91,7 @@
         	<div class="indicator tertiary">
         		<h2>CAPEX USD</h2>
             <?php if ($CapexAcum>0):?>
-        		<h3><span>$</span><?=$CapexAcum?></h3>
+        		<h3><span>$</span><?=$CapexAcum?> MM</h3>
           <?php else:?>
             <?php $CapexCop = 0?>
         		<h3><span>$</span><?=$CapexCop?></h3>
@@ -143,9 +143,14 @@
               $this->Html->tag('div','',array('class'=>'sheet-line-item')),
               array('class'=>'sheet-line regional-text text-'.$project->REGIONAL)).
               $this->Html->tag('div',$this->Html->tag('h2',$project->PROJECT_NAME).
-              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h3',$project->SPI),
+              // $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h3',number_format($project->EXECUTED/$project->PLANNED, 2, ',','')),
+              // array('class'=>'data-box-circle '.$var)).
+              // $this->Html->tag('div',$this->Html->tag('span','Fase'),
+              // array('class'=>'data-box-content')),
+              // array('class'=>'data-box')).
+              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h3',number_format($project->EXECUTED/$project->PLANNED, 2, ',','')),
               array('class'=>'data-box-circle '.$var)).
-              $this->Html->tag('div',$this->Html->tag('span','SPI Oficial'),
+              $this->Html->tag('div',$this->Html->tag('span','SPI'),
               array('class'=>'data-box-content')),
               array('class'=>'data-box')).
               $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h4',$project->EXECUTED.'%').
@@ -157,16 +162,16 @@
               $this->Html->tag('span','% Planeado'),
               array('class'=>'data-box-content')),
               array('class'=>'data-box')).
-              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h4',$project->ACPV.'%'),
+              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h4',number_format($project->AC/$project->PV, 2, ',', ' ').'%'),
               array('class'=>'data-box-circle tertiary')).
               $this->Html->tag('div',$this->Html->tag('span','AC / PV'),array('class'=>'data-box-content')),
               array('class'=>'data-box')).
               $this->Html->tag('div','',array('class'=>'divider transparent')).
               $this->Html->tag('div',$this->Html->tag('h3','CAPEX Planeado (USD)').
-              $this->Html->tag('h4',$project->CAPEX_PLANNED.' M'),
+              $this->Html->tag('h4',$project->CAPEX_PLANNED.' MM'),
               array('class'=>'data-chip accent')).
               $this->Html->tag('div',$this->Html->tag('h3','CAPEX Ejecutado (USD)').
-              $this->Html->tag('h4',$project->CAPEX_EXECUTED.' M'),
+              $this->Html->tag('h4',$project->CAPEX_EXECUTED.' MM'),
               array('class'=>'data-chip secondary mb-0')),
               array('class'=>'sheet-content pl-5')),
               array('class' => 'sheet')),

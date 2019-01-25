@@ -25,10 +25,9 @@ function index()
           $indicators = $this->Indicators->patchEntity($indicators, $this->request->getData());
           if ($this->Indicators->save($indicators)) {
               $this->Flash->success(__('La EPS ha sido creada.'));
-
-              return $this->redirect(['action' => 'Add']);
+              return $this->redirect(['action'=>'index']);
           }
-          $this->Flash->error(__('Los indicadores no ha sido creada. Por favor, intenta de nuevo.'));
+          $this->Flash->error(__('Los indicadores non ha sido creados. Por favor, intenta de nuevo.'));
       }
       $this->set(compact('indicators'));
     }
@@ -40,11 +39,10 @@ function index()
         $this->request->allowMethod(['post', 'delete']);
         $indicators = $this->Indicators->get($id);
         if ($this->Indicators->delete($indicators)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Los indicadores han sido eliminados.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Los indicadores ha sido eliminados. Por favor, intente de nuevo.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
     public function view($id)
@@ -61,7 +59,7 @@ function index()
           $indicators = $this->Indicators->patchEntity($indicators,$this->request->data);
           if ($this->Indicators->save($indicators))
            {
-             $this->Flash->success('Los indicadires han sido modificado');
+             $this->Flash->success('Los indicadores han sido modificado');
              return $this->redirect(['action'=>'index']);
           }
           else {

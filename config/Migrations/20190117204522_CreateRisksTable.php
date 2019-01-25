@@ -13,11 +13,10 @@ class CreateRisksTable extends AbstractMigration
     public function change()
     {
       $table = $this->table('RISKS');
-      $table ->addColumn('ID_PROJECT','string',array('limit' => 100))
-             ->addColumn('RISK_NUMBER','integer')
+      $table ->addColumn('RISK_NUMBER','integer')
              ->addColumn('RISK_NAME','string',array('limit'=>100))
-             ->addColumn('PROBABILITY','string',array('limit'=>20))
-             ->addColumn('IMPACT','string',array('limit'=>20))
+             ->addColumn('PROBABILITY','enum',array('values'=>'1, 2, 3, 4, 5'))
+             ->addColumn('IMPACT','enum',array('values'=>'1, 2, 3, 4, 5'))
              ->addColumn('IMPACT_RISK','integer')
              ->addColumn('PLAN_ONE','string',array('limit'=>200))
              ->addColumn('PLAN_TWO','string',array('limit'=>200))
@@ -30,6 +29,11 @@ class CreateRisksTable extends AbstractMigration
              ->addColumn('PLAN_THREE_S','string',array('limit'=>200))
              ->addColumn('PLAN_FOUR_S','string',array('limit'=>200))
              ->addColumn('PLAN_FIVE_S','string',array('limit'=>200))
+             ->addColumn('TOTAL_RISK','integer')
              ->create();
+             $refTable = $this->table('RISKS');
+             $refTable ->addColumn('PROJECT_CODE','integer')
+                       ->addForeignKey('PROJECT_CODE','PROJECTS','id',array('delete'=>'CASCADE','update'=>'NO_ACTION'))
+                       ->update();
     }
 }

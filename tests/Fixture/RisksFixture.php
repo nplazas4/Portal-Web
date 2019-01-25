@@ -35,8 +35,13 @@ class RisksFixture extends TestFixture
         'PLAN_FOUR_S' => ['type' => 'string', 'length' => 200, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PLAN_FIVE_S' => ['type' => 'string', 'length' => 200, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'TOTAL_RISK' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'PROJECT_CODE' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        '_indexes' => [
+            'PROJECT_CODE' => ['type' => 'index', 'columns' => ['PROJECT_CODE'], 'length' => []],
+        ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'risks_ibfk_1' => ['type' => 'foreign', 'columns' => ['PROJECT_CODE'], 'references' => ['projects', 'id'], 'update' => 'noAction', 'delete' => 'cascade', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -71,7 +76,8 @@ class RisksFixture extends TestFixture
                 'PLAN_THREE_S' => 'Lorem ipsum dolor sit amet',
                 'PLAN_FOUR_S' => 'Lorem ipsum dolor sit amet',
                 'PLAN_FIVE_S' => 'Lorem ipsum dolor sit amet',
-                'TOTAL_RISK' => 1
+                'TOTAL_RISK' => 1,
+                'PROJECT_CODE' => 1
             ],
         ];
         parent::init();

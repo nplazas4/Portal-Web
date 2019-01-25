@@ -7,6 +7,7 @@
     ];
 ?>
 <?= $this->Html->css('login')?>
+<?= $this->Html->css('error')?>
 <div class="section bcrumb company">
     <div class="breadcrumb-container">
         <?php foreach ($breadcrumb as $item): ?>
@@ -27,6 +28,10 @@
              <?= $this->Form->create($projectcodes,['class'=>'col s12']) ?>
                <div class="row">
                  <fieldset>
+                 <div class="alert" style=<?=$error?>>
+                 <span class="closebtn">&times;</span>
+                    No se ha podido eliminar el código proyecto.
+                 </div>
                  <div class="input-field col s12">
                    <?php echo $this->Form->input('CODE_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
                  </div>

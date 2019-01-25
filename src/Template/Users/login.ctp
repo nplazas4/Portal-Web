@@ -1,4 +1,5 @@
 <?= $this->Html->css('login')?>
+<?= $this->Html->css('error')?>
 <div class="login">
     <figure class="login-logo">
         <?= $this->Html->image('logo-vert.svg') ?>
@@ -23,6 +24,31 @@
             <div class="btns mb-2">
                 <!-- <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Ingresar</a> -->
                 <?= $this->Form->button('Ingresar',['class'=>'btn waves-effect btn-depressed'])?>
+                <!-- <?//=$this->html->link('Registrar',['controller'=>'Users','action'=>'add'],['class'=>'btn waves-effect btn-depressed'])?> -->
+                <br>
+                <br>
+                <div class="alert" style=<?= $error ?>>
+                  <span class="closebtn">&times;</span>
+                  Usuario o contraseña incorrecta.
+                </div>
+                <div class="alert" style=<?= $errorInac ?>>
+                  <span class="closebtn">&times;</span>
+                  Usuario inactivo.
+                </div>
+                <!-- <div class="alert success">
+                  <span class="closebtn">&times;</span>
+                  <strong>Success!</strong> Indicates a successful or positive action.
+                </div>
+
+                <div class="alert info">
+                  <span class="closebtn">&times;</span>
+                  <strong>Info!</strong> Indicates a neutral informative change or action.
+                </div>
+
+                <div class="alert warning">
+                  <span class="closebtn">&times;</span>
+                  <strong>Warning!</strong> Indicates a warning that might need attention.
+                </div> -->
             </div>
             <a href="#recoverPassword" class="link modal-trigger">Recuperar contraseña</a>
             <?= $this->Form->end() ?>
@@ -49,3 +75,15 @@
         </form>
     </div>
 </div>
+<script>
+var close = document.getElementsByClassName("closebtn");
+var i;
+
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function(){
+    var div = this.parentElement;
+    div.style.opacity = "0";
+    setTimeout(function(){ div.style.display = "none"; }, 600);
+  }
+}
+</script>

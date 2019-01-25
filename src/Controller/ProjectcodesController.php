@@ -16,12 +16,18 @@ class ProjectcodesController extends AppController
      */
     public function index()
   	{
-      // $users = $this->paginate($this->Users);
-      // $this->set(compact('users'));
+      $this->alert();
       $projectcodes = $this->paginate($this->Projectcodes);
       $this->set('projectcodes',$projectcodes);
   	}
+    public function alert(){
+      $error = 'display:none';
+      $this->set('error',$error);
+      $success = 'display:none';
+      $this->set('success',$success);
+    }
     public function Add(){
+      $this->alert();
       $projectcodes = $this->Projectcodes->newEntity();
       if ($this->request->is('post')) {
           $projectcodes = $this->Projectcodes->patchEntity($projectcodes, $this->request->getData());
@@ -30,46 +36,44 @@ class ProjectcodesController extends AppController
 
               return $this->redirect(['action' => 'index']);
           }
-          $this->Flash->error(__('El código de proyecto no ha sido creada. Por favor, intenta de nuevo.'));
+          $error = '';
+          $this->set('error',$error);
       }
       $this->set(compact('projectcodes'));
-    }
-    public function AddProjectCode(){
-      // put your code.
-    }
-    public function AddEPS(){
     }
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $projectcodes = $this->Projectcodes->get($id);
         if ($this->Projectcodes->delete($projectcodes)) {
-            $this->Flash->success(__('The user has been deleted.'));
+          $success = '';
+          $this->set('success',$success);
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+          $error = '';
+          $this->set('error',$error);
         }
-
         return $this->redirect(['action' => 'index']);
     }
     public function view($id)
     {
         $projectcodes = $this->Projectcodes->get($id);
-
         $this->set('projectcodes', $projectcodes);
     }
     public function edit($id = null)
     {
+        $this->alert();
         $projectcodes = $this->Projectcodes->get($id);
         if ($this->request->is(['patch','post','put']))
         {
           $projectcodes = $this->Projectcodes->patchEntity($projectcodes,$this->request->data);
           if ($this->Projectcodes->save($projectcodes))
            {
-             $this->Flash->success('El usuario ha sido modificado');
+             $this->Flash->success('El código ha sido modificado');
              return $this->redirect(['action'=>'index']);
           }
           else {
-            $this->Flash->error('El usuario no pudo ser modificado');
+            $error = '';
+            $this->set('error',$error);
           }
         }
         $this->set(compact('projectcodes'));

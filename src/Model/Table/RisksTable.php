@@ -34,6 +34,11 @@ class RisksTable extends Table
         $this->setTable('risks');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Projects',[
+            'foreignkey' => 'PROJECT_CODE',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -143,6 +148,11 @@ class RisksTable extends Table
             ->integer('TOTAL_RISK')
             ->requirePresence('TOTAL_RISK', 'create')
             ->notEmpty('TOTAL_RISK');
+
+        $validator
+            ->integer('PROJECT_CODE')
+            ->requirePresence('PROJECT_CODE', 'create')
+            ->notEmpty('PROJECT_CODE');
 
         return $validator;
     }

@@ -34,6 +34,10 @@ class ProjectsTable extends Table
         $this->setTable('projects');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->hasMany('Risks',[
+          'foreignkey' => 'PROJECT_CODE'
+        ]);
     }
 
     /**
@@ -67,11 +71,6 @@ class ProjectsTable extends Table
             ->notEmpty('DESCRIPTION');
 
         $validator
-            ->decimal('SPI')
-            ->requirePresence('SPI', 'create')
-            ->notEmpty('SPI');
-
-        $validator
             ->integer('PLANNED')
             ->requirePresence('PLANNED', 'create')
             ->notEmpty('PLANNED');
@@ -80,11 +79,6 @@ class ProjectsTable extends Table
             ->integer('EXECUTED')
             ->requirePresence('EXECUTED', 'create')
             ->notEmpty('EXECUTED');
-
-        $validator
-            ->integer('ACPV')
-            ->requirePresence('ACPV', 'create')
-            ->notEmpty('ACPV');
 
         $validator
             ->decimal('AC')

@@ -5,6 +5,7 @@
         [ 'EPS','index','Eps'],
     ];
 ?>
+<?= $this->Html->css('error')?>
 <div class="section bcrumb company">
     <div class="breadcrumb-container">
         <?php foreach ($breadcrumb as $item): ?>
@@ -23,6 +24,14 @@
                   <i class="material-icons prefix">search</i>
                   <input id="myInput" onkeyup="myFunction()" type="text"></input>
                   <label for="myInput">Buscar</label>
+                  <div class="alert" style=<?=$error?>>
+                    <span class="closebtn">&times;</span>
+                    No se ha podido eliminar la EPS.
+                  </div>
+                  <div class="alert success" style=<?=$success?>>
+                    <span class="closebtn">&times;</span>
+                    Se ha eliminado la EPS correctamente
+                  </div>
               </div>
             </form>
           <!-- </div> -->

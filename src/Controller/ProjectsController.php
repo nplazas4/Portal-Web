@@ -26,8 +26,13 @@ class ProjectsController extends AppController
       // $eps = $this->Eps->find('all');
       // $this->set('eps', $eps->first());
   	}
+    public function alert(){
+      $error = 'display:none';
+      $this->set('error',$error);
+    }
     public function Add()
     {
+      $this->alert();
       $projects = $this->Projects->newEntity();
       if ($this->request->is('post')) {
           $projects = $this->Projects->patchEntity($projects, $this->request->getData());
@@ -36,7 +41,9 @@ class ProjectsController extends AppController
 
               return $this->redirect(['action' => 'index']);
           }
-          $this->Flash->error(__('El proyecto no ha sido creada. Por favor, intenta de nuevo.'));
+          $error = '';
+          $this->set('error',$error);
+          $this->Flash->error('El proyecto no pudo ser creado');
       }
       $this->set(compact('projects'));
     }
@@ -53,11 +60,10 @@ class ProjectsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $projects = $this->Projects->get($id);
         if ($this->Projects->delete($projects)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('El proyecto ha sido eliminado.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El proyecto no pudo ser eliminado, por favor, intente de nuevo.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
     public function view($id)
@@ -67,17 +73,20 @@ class ProjectsController extends AppController
     }
     public function edit($id = null)
     {
+        $this->alert();
         $projects = $this->Projects->get($id);
         if ($this->request->is(['patch','post','put']))
         {
           $projects = $this->Projects->patchEntity($projects,$this->request->data);
           if ($this->Projects->save($projects))
            {
-             $this->Flash->success('El usuario ha sido modificado');
+             $this->Flash->success('El proyecto ha sido modificado');
              return $this->redirect(['action'=>'index']);
           }
           else {
-            $this->Flash->error('El usuario no pudo ser modificado');
+            $error = '';
+            $this->set('error',$error);
+            $this->Flash->error('El proyecto no pudo ser modificado');
           }
         }
         $this->set(compact('projects'));
@@ -85,6 +94,7 @@ class ProjectsController extends AppController
     public function project($id)
     {
         $this->index();
+        $this->Charts();
         $projects = $this->Projects->get($id);
         $this->set('projects', $projects);
     }
@@ -100,6 +110,12 @@ class ProjectsController extends AppController
       $this->loadModel('Risks');
       $rks= $this->Risks->find('all');
       $this->set('rks',$rks->all());
+      // print_r($risks->all());
+    }
+    public function Charts(){
+      $this->loadModel('Charts');
+      $charts = $this->Charts->find('all');
+      $this->set('charts',$charts->all());
       // print_r($risks->all());
     }
 }

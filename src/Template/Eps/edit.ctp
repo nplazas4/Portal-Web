@@ -6,6 +6,7 @@
     ];
 ?>
 <?= $this->Html->css('login')?>
+<?= $this->Html->css('error')?>
 <div class="section bcrumb company">
     <div class="breadcrumb-container">
         <?php foreach ($breadcrumb as $item): ?>
@@ -32,6 +33,10 @@
                  <h5 class="card-title text-center">Editar EPS</h5>
                  <!-- <?//= $this->Form->create($eps,['novalidate']) ?> -->
                  <fieldset>
+                   <div class="alert" style=<?= $error ?>>
+                     <span class="closebtn">&times;</span>
+                     No se ha podido modificar la EPS.
+                   </div>
                  <div class="input-field col s12">
                    <?php echo $this->Form->input('EPS_ID',['label'=>'ID','class'=>'form-control','placeholder'=>'ID','class'=>'validate','required']);?>
                  </div>

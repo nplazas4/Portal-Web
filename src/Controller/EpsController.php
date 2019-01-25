@@ -16,32 +16,45 @@ class EpsController extends AppController
      */
 function index()
   	{
+      $this->alert();
       $eps = $this->paginate($this->Eps);
       $this->set('eps',$eps);
   	}
+    public function alert(){
+      $error = 'display:none';
+      $this->set('error',$error);
+      $success = 'display:none';
+      $this->set('success',$success);
+    }
     public function Add(){
+      $this->alert();
       $eps = $this->Eps->newEntity();
       if ($this->request->is('post')) {
           $eps = $this->Eps->patchEntity($eps, $this->request->getData());
           if ($this->Eps->save($eps)) {
               $this->Flash->success(__('La EPS ha sido creada.'));
-
               return $this->redirect(['action' => 'index']);
           }
-          $this->Flash->error(__('La EPS no ha sido creada. Por favor, intenta de nuevo.'));
+          $error = '';
+          $this->set('error',$error);
+          $this->Flash->error('La EPS no pudo ser creada');
       }
       $this->set(compact('eps'));
     }
     public function delete($id = null)
     {
+        $this->alert();
         $this->request->allowMethod(['post', 'delete']);
         $eps = $this->Eps->get($id);
         if ($this->Eps->delete($eps)) {
-            $this->Flash->success(__('The user has been deleted.'));
+          $this->Flash->success('La EPS ha sido eliminada');
+          $success = '';
+          $this->set('success',$success);
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $error = '';
+            $this->set('error',$error);
+            $this->Flash->error('La EPS no pudo ser eliminada. Por favor, intente de nuevo');
         }
-
         return $this->redirect(['action' => 'index']);
     }
     public function view($id)
@@ -52,17 +65,20 @@ function index()
     }
     public function edit($id = null)
     {
+        $this->alert();
         $eps = $this->Eps->get($id);
         if ($this->request->is(['patch','post','put']))
         {
           $eps = $this->Eps->patchEntity($eps,$this->request->data);
           if ($this->Eps->save($eps))
            {
-             $this->Flash->success('El usuario ha sido modificado');
+             $this->Flash->success('La EPS ha sido modificada');
              return $this->redirect(['action'=>'index']);
           }
           else {
-            $this->Flash->error('El usuario no pudo ser modificado');
+            $error = '';
+            $this->set('error',$error);
+            $this->Flash->error('La EPS no pudo ser modificada');
           }
         }
         $this->set(compact('eps'));

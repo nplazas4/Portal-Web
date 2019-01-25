@@ -147,7 +147,6 @@
             }
         }
     );
-/*
     // Curva de avance físico
     AmCharts.makeChart("caf",
         {
@@ -306,7 +305,7 @@
             ]
         }
     );
-
+/*
     // Gráfica acumulado
     AmCharts.makeChart("ga",
         {
@@ -385,6 +384,13 @@
         );?>
     </div>
     <?php
+
+    setlocale(LC_ALL,"es_ES");
+    $FoPo = strftime("%d %B, %Y",strtotime($projects->FOPO));
+    $FePo = strftime("%d %B, %Y",strtotime($projects->FEPO));
+    $Adj = strftime("%d %B, %Y",strtotime($projects->ADJUDICACION));
+    $Apr = strftime("%d %B, %Y",strtotime($projects->APROBACION));
+
     $n = intval($projects->FASE);
     $res = '';
 
@@ -463,15 +469,15 @@
                 <ul>
                     <li>
                         <i class="material-icons">event</i>
-                        <span>FoPo: <?= $projects->FOPO ?></span>
+                        <span>FoPo: <?= $FoPo ?></span>
                     </li>
                     <li>
                         <i class="material-icons">event_note</i>
-                        <span>Adjudicación: <?= $projects->ADJUDICACION ?></span>
+                        <span>Adjudicación: <?= $Adj ?></span>
                     </li>
                     <li>
                         <i class="material-icons">event_available</i>
-                        <span>Aprobación: <?= $projects->ADJUDICACION ?></span>
+                        <span>Aprobación: <?= $Apr ?></span>
                     </li>
                     <li>
                         <i class="material-icons">straighten</i>
@@ -491,11 +497,11 @@
 
         <div class="indicators">
             <h2>Indicadores de cronograma</h2>
-            <div class="indicator primary">
+            <a class="indicator primary modal-trigger" href="#detailValueExecuted">
                 <h2>SPI <small>Interno</small></h2>
-                <h3><?= $projects->SPI?></h3>
+                <h3><?=number_format($projects->EXECUTED/$projects->PLANNED, 2, ',','')?></h3>
                 <?= $this->Html->image('isotype-light.svg') ?>
-            </div>
+            </a>
             <div class="indicator light-blue darken-2">
                 <h2>PORCENTAJE <small>AVANCE PLANEADO</small></h2>
                 <h3><?= $projects->PLANNED ?>%</h3>
@@ -508,7 +514,7 @@
             </div>
             <div class="indicator light-blue darken-2">
                 <h2>FePo</h2>
-                <h4><?=$projects->FEPO?></h4>
+                <h4><?=$FePo?></h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </div>
         </div>
@@ -517,12 +523,12 @@
             <h2>Indicadores de presupuesto</h2>
             <a class="indicator light-green modal-trigger" href="#detailValueExecuted">
                 <h2>AC</h2>
-                <h4>USD <?=$projects->AC?> M</h4>
+                <h4>USD <?=$projects->AC?> MM</h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </a>
             <a class="indicator light-green darken-1 modal-trigger" href="#detailValueExecuted">
                 <h2>PV</h2>
-                <h4>USD <?=$projects->PV?> M</h4>
+                <h4>USD <?=$projects->PV?> MM</h4>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </a>
             <a class="indicator light-green darken-2 modal-trigger" href="#detailValueExecuted">
@@ -548,16 +554,17 @@
             <div class="chart-content" id="ga"></div>
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
         </div>
-
         <div class="chart">
             <h2>Riesgos</h2>
             <div class="chart-risk">
                 <div class="chart-risk-list">
                     <ul>
                         <?php foreach ($rks as $rk): ?>
+                        <?php  if ($rk->PROJECT_CODE == $projects->id):?>
                         <li>
-                            <a href=<?='#'.$rk->RISK_NUMBER?> class="modal-trigger">Riesgo <?=$rk->RISK_NUMBER?></a>
+                            <a href=<?='#'.$rk->id?> class="modal-trigger">Riesgo <?=$rk->RISK_NUMBER?></a>
                         </li>
+                        <?php endif;?>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -568,37 +575,47 @@
                             <th>MA</th>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 1 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 5 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 1 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 5 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 1 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 5 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="red">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 1 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 5 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="red">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 1 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 5 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                         </tr>
@@ -606,37 +623,47 @@
                             <th>A</th>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 1 &&  $rk->PROBABILITY == 2 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                               <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 2 ) {
+                                if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 4 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 2 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 4 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 2 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 4 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="red">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 2 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 4 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                         </tr>
@@ -644,37 +671,47 @@
                             <th>M</th>
                             <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  if($rk->PROJECT_CODE == $projects->id){
                                     if($rk->IMPACT == 1 && $rk->PROBABILITY == 3 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  if($rk->PROJECT_CODE == $projects->id){
                                     if($rk->IMPACT == 2 && $rk->PROBABILITY == 3 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  if($rk->PROJECT_CODE == $projects->id){
                                     if($rk->IMPACT == 3 && $rk->PROBABILITY == 3 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
                                 <?php foreach ($rks as $rk):
+                                  if($rk->PROJECT_CODE == $projects->id){
                                     if($rk->IMPACT == 4 && $rk->PROBABILITY == 3 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="orange">
                                 <?php foreach ($rks as $rk):
+                                  if($rk->PROJECT_CODE == $projects->id){
                                     if($rk->IMPACT == 5 && $rk->PROBABILITY == 3 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                         </tr>
@@ -682,37 +719,47 @@
                             <th>B</th>
                             <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 4 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 2 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 4 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 2 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 4 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 2 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 4 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 2 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 4 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 2 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                         </tr>
@@ -720,37 +767,47 @@
                             <th>MB</th>
                             <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 5 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 1 && $rk->PROBABILITY == 1 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 5 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 2 && $rk->PROBABILITY == 1 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 5 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 3 && $rk->PROBABILITY == 1 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 5 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 4 && $rk->PROBABILITY == 1 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
-                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 5 ) {
+                                  if($rk->PROJECT_CODE == $projects->id){
+                                    if($rk->IMPACT == 5 && $rk->PROBABILITY == 1 ) {
                                         echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                     };
+                                  };
                                 endforeach; ?>
                             </td>
                         </tr>
@@ -1049,7 +1106,7 @@
 </div>
 <?php foreach ($rks as $rk): ?>
 <!-- Modal detalle de riesgo -->
-<div id=<?=$rk->RISK_NUMBER?> class="modal">
+<div id=<?=$rk->id?> class="modal">
     <div class="modal-content">
         <a class="modal-close close">
             <i class="material-icons">close</i>

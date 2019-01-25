@@ -97,8 +97,21 @@
                  </div>
                </div>
                <div class="row">
-                 <div class="input-field col s12">
-                   <?php echo $this->Form->input('TOTAL_RISK',['label'=>'','placeholder'=>'Calificación ponderada','class'=>'validate','required']);?>
+                 <div class="input-field col s6">
+                   <?php echo $this->Form->input('TOTAL_RISK',['label'=>'Calificación ponderada','placeholder'=>'Calificación ponderada','class'=>'validate','required']);?>
+                 </div>
+                 <div class="input-field col s6">
+                   <?php echo $this->Form->input(
+                     'PROJECT_CODE',
+                     [
+                       'label' => 'Proyecto',
+                       'type' => 'select',
+                       'multiple' => false,
+                       'options' => $projects,
+                       'empty' => true
+                     ]
+                   );?>
+                     <!-- <?//php echo $this->Form->input('PROJECT_CODE',['label'=>'Proyecto','options'=>$list]);?> -->
                  </div>
                </div>
                </fieldset>
