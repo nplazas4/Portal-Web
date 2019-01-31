@@ -17,22 +17,50 @@
 
     // Datos de usuario
     $user = [
-      'avatar' => $current_user['V_EMAIL'][0],
-      'name' => $current_user['V_FIRST_NAME'].' '.$current_user['V_LAST_NAME'],
-      // 'name' => $current_user['V_EMAIL'],
-      'email' => $current_user['V_EMAIL']
+        'avatar' => $current_user['V_EMAIL'][0],
+        'name' => $current_user['V_FIRST_NAME'].' '.$current_user['V_LAST_NAME'],
+        'email' => $current_user['V_EMAIL']
     ];
-    // $user = [
-    //     'avatar' => 'M',
-    //     'name' => 'Martín Zabala',
-    //     'email' => 'mzabala@geb.com.co'
-    // ];
+
     // Menu
     $menu = [
-        [ 'PORTAL PROYECTOS', 'index','PortalProjects'],
-        [ 'RyOS', 'companies','PortalProjects'],
-        [ 'PORTAFOLIO', 'company','PortalProjects'],
-        [ 'PROYECTOS PEC', 'projects','PortalProjects'],
+        [
+            'Portal proyectos', // Texto
+            'index', // Action
+            'PortalProjects', //Controller
+            'id' => 'dropdownPortalProjects', // ID desplegable
+            // Submenu
+            'children' => [
+                [
+                    'Corporativo',
+                    'children' => []
+                ],
+                [
+                    'Distribución',
+                    'children' => [
+                        ['Calidda', 'Pages','companies'],
+                        ['Contugas', 'Pages','companies']
+                    ]
+                ],
+                [
+                    'Transmisión y Transporte',
+                    'children' => [
+                       [ 'TGI', 'Pages', 'index'],
+                       [ 'Trecsa', 'Pages', 'index'],
+                       [ 'Gebbras', 'Pages', 'index'],
+                       [ 'Contugas', 'Pages', 'index'],
+                       [ 'Unidad de Transmisión Colombia', 'Pages', 'Company']
+                    ]
+                ],
+                [
+                    'Generación',
+                    'children' => []
+                ]
+            ]
+        ],
+        [ 'RYOS', 'home','Pages','id' => '','children' => [] ],
+        [ 'Portafolio', 'home','Pages','id' => '', 'children' => [] ],
+        [ 'Documentos gestión de programas y proyectos', 'home','Pages','id' => '', 'children' => [] ],
     ];
 ?>
 <!DOCTYPE html>
@@ -45,18 +73,10 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
+
     <?= $this->Html->css('materialize.css') ?>
-      <?= $this->Html->script(['jquery-3.3.1.min.js']) ?>
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
-<!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
-<link type="text/css" rel="stylesheet" href="jsgrid.min.css" />
-<link type="text/css" rel="stylesheet" href="jsgrid-theme.min.css" /> -->
-
-<!-- <script type="text/javascript" src="jsgrid.min.js"></script> -->
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -64,15 +84,141 @@
 </head>
 <body>
     <header class="header">
+      <?= $this->Html->css('login.css') ?>
+      <?= $this->Html->css('textlength.css') ?>
       <?= $this->Html->css('placeholder.css') ?>
+      <?= $this->Html->css('error')?>
         <div class="header-wrapper">
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <!-- <a href="/home" class="header-logo"><?//= $this->Html->image('logo.svg') ?></a> -->
+            <!-- <a href="/" class="header-logo"><?//= $this->Html->image('logo.svg') ?></a> -->
             <?php echo $this->Html->link(
               $this->Html->image('logo.svg'),
               ['controller'=>'Pages', 'action'=>'home'],
               ['escape' => false,'class'=>'header-logo']
             );?>
+            <nav data-topbar role="navigation">
+                <div class="nav-wrapper">
+                    <ul>
+                      <li>
+                        <a href="" class="dropdown-hover" data-target="PortalDropDown">
+                            Portal alterno
+                        </a>
+                        <div id="PortalDropDown" class='dropdown-content sub-menu'>
+                            <div class="sub-menu-content">
+                                <h2>Portal alterno</h2>
+                                 <div class="sub-menu-column">
+                                    <h3>Proyectos</h3>
+                                    <ul>
+                                        <li>
+                                          <?php echo $this->Html->link('Lista de proyectos',
+                                            ['controller'=>'Projects','action'=>'index'],
+                                            ['escape'=>false]
+                                          );?>
+                                        </li>
+                                        <li>
+                                          <?php echo $this->Html->link('Crear proyecto',
+                                            ['controller'=>'Projects','action'=>'add'],
+                                            ['escape'=>false]
+                                          );?>
+                                        </li>
+                                        <li>
+                                          <?php echo $this->Html->link('Lista de riesgos',
+                                            ['controller'=>'Risks','action'=>'index'],
+                                            ['escape'=>false]
+                                          );?>
+                                        </li>
+                                        <li>
+                                          <?php echo $this->Html->link('Crear riesgo',
+                                            ['controller'=>'Risks','action'=>'add'],
+                                            ['escape'=>false]
+                                          );?>
+                                        </li>
+                                        <li>
+                                          <?php echo $this->Html->link('Lista de indicadores de proyectos',
+                                            ['controller'=>'Indicators','action'=>'index'],
+                                            ['escape'=>false]
+                                          );?>
+                                        </li>
+                                        <li>
+                                          <?php echo $this->Html->link('Crear indicador de proyectos',
+                                            ['controller'=>'Indicators','action'=>'add'],
+                                            ['escape'=>false]
+                                          );?>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="sub-menu-column">
+                                   <h3>Códigos</h3>
+                                   <ul>
+                                     <li>
+                                       <?php echo $this->Html->link('Lista de códigos de proyectos',
+                                         ['controller'=>'Projectcodes','action'=>'index'],
+                                         ['escape'=>false]
+                                       );?>
+                                     </li>
+                                     <li>
+                                       <?php echo $this->Html->link('Crear código de proyecto',
+                                         ['controller'=>'Projectcodes','action'=>'add'],
+                                         ['escape'=>false]
+                                       );?>
+                                     </li>
+                                   </ul>
+                               </div>
+                               <div class="sub-menu-column">
+                                  <h3>EPS</h3>
+                                  <ul>
+                                    <li>
+                                      <?php echo $this->Html->link('Lista de EPS',
+                                        ['controller'=>'Eps','action'=>'index'],
+                                        ['escape'=>false]
+                                      );?>
+                                    </li>
+                                    <li>
+                                      <?php echo $this->Html->link('Crear EPS',
+                                        ['controller'=>'Eps','action'=>'add'],
+                                        ['escape'=>false]
+                                      );?>
+                                    </li>
+                                  </ul>
+                              </div>
+                            </div>
+                        </div>
+                    <?php foreach ($menu as $item): ?>
+                        <li>
+                          <?php echo $this->Html->link($item[0],
+                            ['controller'=>$item[2],'action'=>$item[1]],
+                            ['escape'=>false,'class'=>'dropdown-hover','data-target'=>$item['id']]
+                          );?>
+                            <!-- <a href="<?//= $item[1] ?>" class="dropdown-hover" data-target="<?//= $item['id'] ?>">
+                                <?//= $item[0] ?>
+                            </a> -->
+                            <?php if ( sizeof($item['children']) ): ?>
+                            <div id="<?= $item['id'] ?>" class='dropdown-content sub-menu'>
+                                <div class="sub-menu-content">
+                                    <h2>Grupos estratégicos de negocios</h2>
+                                    <?php foreach ($item['children'] as $subitem ): ?>
+                                     <div class="sub-menu-column">
+                                        <h3><?= $subitem[0] ?></h3>
+                                        <ul>
+                                            <?php foreach ($subitem['children'] as $link ): ?>
+                                            <li>
+                                                <!-- <a href="<//?//= $link[1] ?>"><//?//= $link[0] ?></a> -->
+                                                <?php echo $this->Html->link($link[0],
+                                                  ['controller'=>$link[1],'action'=>$link[2]],
+                                                  ['escape'=>false]
+                                                );?>
+                                            </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            </nav>
             <?php  if (isset($current_user)):?>
             <?php  if($current_user['V_ROL']=='Administrator' || $current_user['V_ROL']=='Viewer'):?>
             <div class="header-user dropdown-trigger" data-target='dropdownUser'>
@@ -92,111 +238,67 @@
                         <small><?= $user['email'] ?></small>
                     </div>
                 </li>
-              <li class="divider" tabindex="-1"></li>
-                <!-- <li><a href="/login"><i class="material-icons">exit_to_app</i></a></li> -->
+                <li class="divider" tabindex="-1"></li>
+                <!-- <li><a href="/login"><i class="material-icons">exit_to_app</i>Salir</a></li> -->
                 <li><?=$this->Html->link(
                   $this->Html->tag('i','exit_to_app', array('class' => 'material-icons')).'Salir',
                   array('controller'=>'Users','action'=>'logout'),
                   array('escape' => false))?></li>
-          </ul>
+            </ul>
         </div>
-        <nav data-topbar role="navigation" class="primary">
-            <div class="nav-wrapper">
-                <ul>
-                <?php if (isset($current_user)):?>
-                <?php if($current_user['V_ROL']=='Administrator' || $current_user['V_ROL']=='Viewer'):?>
-                <?php foreach ($menu as $item): ?>
-                    <!-- <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li> -->
-                <li>
-                    <?php echo $this->Html->link($item[0],
-                      ['controller'=>$item[2], 'action'=>$item[1]],
-                      ['escape' => false]
-                    );?>
-                </li>
-                <?php endforeach; ?>
-                <li>
-                  <?php if($current_user['V_ROL']=='Administrator'):?>
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">PORTAL ALTERNO<i class="material-icons right">arrow_drop_down</i></a></li>
-                  <?php endif;?>
-              </li>
-               <?php endif;?>
-             <?php endif;?>
-                </ul>
-            </div>
-        </nav>
-        <ul id="dropdown1" class="dropdown-content">
-          <li>
-            <?php echo $this->Html->link('Proyectos',
-              ['controller'=>'Projects','action'=>'index'],
-              ['escape' => false]);
-              ?>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <?php echo $this->Html->link('EPS',
-              ['controller'=>'Eps','action'=>'index'],
-              ['escape' => false]);
-              ?>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <?php echo $this->Html->link('Códigos',
-              ['controller'=>'Projectcodes','action'=>'index'],
-              ['escape' => false]);
-              ?>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <?php echo $this->Html->link('Indicadores de proyectos',
-              ['controller'=>'Indicators','action'=>'index'],
-              ['escape' => false]);
-              ?>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <?php echo $this->Html->link('Riesgos',
-              ['controller'=>'Risks','action'=>'index'],
-              ['escape' => false]);
-              ?>
-          </li>
-        </ul>
     </header>
 
     <ul id="slide-out" class="sidenav">
         <li>
-            <div class="user-view primary ma-0 pl-4">
+            <div class="user-view primary ma-0">
                 <div class="header-user-avatar mx-0 mb-2"><?= $user['avatar'] ?></div>
                 <h2 class="white-text name"><?= $user['name'] ?></h2>
                 <span class="white-text email"><?= $user['email'] ?></span>
             </div>
         </li>
-        <li>
-          <?php echo $this->Html->link(
-          $this->Html->tag('i','exit_to_app',
-          array('class'=>'material-icons mr-2')).'Salir',
-          ['controller'=>'Users','action'=>'logout'],
-          ['escape' => false,'class'=>'pl-4']
-          );?>
-        </li>
-        <!-- <li><a class="pl-4" href="/web/users/logout"><i class="material-icons mr-2">exit_to_app</i>Salir</a></li> -->
+        <!-- <li><a href="/login"><i class="material-icons mr-2">exit_to_app</i>Salir</a></li> -->
+        <li><?=$this->Html->link(
+        $this->Html->tag('i','exit_to_app', array('class' => 'material-icons mr-2')).'Salir',
+        array('controller'=>'Users','action'=>'logout'),
+        array('escape' => false))?></li>
         <li><div class="divider ma-0"></div></li>
-        <!-- <li><a class="waves-effect pl-4" href="/">INICIO</a></li> -->
-        <li><?=$this->Html->link('INICIO',['controller'=>'Pages','action'=>'home'],['class'=>'waves-effect pl-4'])?></li>
+        <li><?php echo $this->Html->link('Inicio',
+          ['controller'=>'Pages','action'=>'home'],
+          ['escape'=>false,'class'=>'waves-effect']
+        );?></li>
+        <?php if (isset($current_user)):?>
+        <?php if($current_user['V_ROL']=='Administrator' || $current_user['V_ROL']=='Viewer'):?>
         <?php foreach ($menu as $item): ?>
-            <!-- <li><a class="waves-effect pl-4" href="<?//= $item[1] ?>"><?//= $item[0] ?></a></li> -->
-          <li>
-            <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'waves-effect pl-4']
-            );?>
-          </li>
+            <li>
+                <?php echo $this->Html->link($item[0],
+                  ['controller'=>$item[2],'action'=>$item[1]],
+                  ['escape'=>false]
+                );?>
+                <?php if ( sizeof($item['children']) ): ?>
+                <i class="material-icons success-text">keyboard_arrow_down</i>
+                <div class='submenu'>
+                    <h2>Grupos estratégicos de negocio</h2>
+                    <?php foreach ($item['children'] as $subitem ): ?>
+                    <div class="submenu-row">
+                        <h3><?= $subitem[0] ?></h3>
+                        <ul>
+                            <?php foreach ($subitem['children'] as $link ): ?>
+                            <li>
+                              <?php echo $this->Html->link($link[0],
+                                ['controller'=>$link[1],'action'=>$link[2]],
+                                ['escape'=>false]
+                              );?>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+            </li>
         <?php endforeach; ?>
-        <li>
-          <?php echo $this->Html->link('PORTAL ALTERNO',
-            ['controller'=>'Projects', 'action'=>'index'],
-            ['escape' => false,'class'=>'waves-effect pl-4']
-          );?>
-        </li>
+      <?php endif;?>
+    <?php endif;?>
     </ul>
 
     <?= $this->Flash->render() ?>
@@ -227,20 +329,12 @@
             $('.modal').modal();
             $('.collapsible').collapsible();
             $('.dropdown-trigger').dropdown();
+            $('.dropdown-hover').dropdown({
+                hover: true,
+            });
         });
     </script>
-    <script>
-    var close = document.getElementsByClassName("closebtn");
-    var i;
 
-    for (i = 0; i < close.length; i++) {
-      close[i].onclick = function(){
-        var div = this.parentElement;
-        div.style.opacity = "0";
-        setTimeout(function(){ div.style.display = "none"; }, 600);
-      }
-    }
-    </script>
     <!-- Amcharts -->
     <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -467,67 +561,382 @@
         // );
 
         // Gráfica acumulado
-        AmCharts.makeChart("ga",
-            {
-                "type": "serial",
-                "language": "es",
-                "categoryField": "category",
-                "startDuration": 1,
-                "fontFamily": "'Open Sans'",
-                "categoryAxis": {
-                    "gridPosition": "start",
-                    "axisAlpha": 0,
-                    "gridAlpha": 0
-                },
-                "trendLines": [],
-                "graphs": [
-                    {
-                        "balloonText": "[[title]] de [[category]]:[[value]]",
-                        "cornerRadiusTop": 6,
-                        "fillAlphas": 1,
-                        "id": "AmGraph-1",
-                        "lineColor": "#2CACE3",
-                        "title": "Acumulado",
-                        "type": "column",
-                        "valueField": "column-1"
-                    }
-                ],
-                "guides": [],
-                "valueAxes": [
-                    {
-                        "id": "ValueAxis-1",
-                        "unit": "$ ",
-                        "unitPosition": "left",
-                        "axisAlpha": 0,
-                        "gridAlpha": 0.09,
-                        "title": "Axis title",
-                        "titleFontSize": 0,
-                        "titleRotation": 0
-                    }
-                ],
-                "allLabels": [],
-                "balloon": {},
-                "titles": [],
-                "dataProvider": [
-                    {
-                        "category": "PPTO COP",
-                        "column-1": "22000000000"
-                    },
-                    {
-                        "category": "PPTO USD",
-                        "column-1": "500000000"
-                    },
-                    {
-                        "category": "AC COP",
-                        "column-1": "36000000000"
-                    },
-                    {
-                        "category": "AC USD",
-                        "column-1": "1000000000"
-                    }
-                ]
-            }
-        );
+        // AmCharts.makeChart("ga",
+        //     {
+        //         "type": "serial",
+        //         "language": "es",
+        //         "categoryField": "category",
+        //         "startDuration": 1,
+        //         "fontFamily": "'Open Sans'",
+        //         "categoryAxis": {
+        //             "gridPosition": "start",
+        //             "axisAlpha": 0,
+        //             "gridAlpha": 0
+        //         },
+        //         "trendLines": [],
+        //         "graphs": [
+        //             {
+        //                 "balloonText": "[[title]] de [[category]]:[[value]]",
+        //                 "cornerRadiusTop": 6,
+        //                 "fillAlphas": 1,
+        //                 "id": "AmGraph-1",
+        //                 "lineColor": "#2CACE3",
+        //                 "title": "Acumulado",
+        //                 "type": "column",
+        //                 "valueField": "column-1"
+        //             }
+        //         ],
+        //         "guides": [],
+        //         "valueAxes": [
+        //             {
+        //                 "id": "ValueAxis-1",
+        //                 "unit": "$ ",
+        //                 "unitPosition": "left",
+        //                 "axisAlpha": 0,
+        //                 "gridAlpha": 0.09,
+        //                 "title": "Axis title",
+        //                 "titleFontSize": 0,
+        //                 "titleRotation": 0
+        //             }
+        //         ],
+        //         "allLabels": [],
+        //         "balloon": {},
+        //         "titles": [],
+        //         "dataProvider": [
+        //             {
+        //                 "category": "PPTO COP",
+        //                 "column-1": "22000000000"
+        //             },
+        //             {
+        //                 "category": "PPTO USD",
+        //                 "column-1": "500000000"
+        //             },
+        //             {
+        //                 "category": "AC COP",
+        //                 "column-1": "36000000000"
+        //             },
+        //             {
+        //                 "category": "AC USD",
+        //                 "column-1": "1000000000"
+        //             }
+        //         ]
+        //     }
+        // );
+
+        // Gráfica Tres Generaciones
+        // AmCharts.makeChart("tg",
+        //     {
+        //         "type": "serial",
+        //         "categoryField": "category",
+        //         "dataDateFormat": "YYYY-MM-DD",
+        //         "sequencedAnimation": false,
+        //         "startDuration": 1,
+        //         "categoryAxis": {
+        //             "autoRotateAngle": 90,
+        //             "autoRotateCount": 12,
+        //             "equalSpacing": true,
+        //             "gridPosition": "start",
+        //             "minPeriod": "MM",
+        //             "startOnAxis": true,
+        //             "axisAlpha": 0,
+        //             "fontSize": 10,
+        //             "gridAlpha": 0,
+        //             "ignoreAxisWidth": true,
+        //             "titleBold": false
+        //         },
+        //         "chartCursor": {
+        //             "enabled": true,
+        //             "cursorColor": "#00A34B"
+        //         },
+        //         "chartScrollbar": {
+        //             "enabled": true,
+        //             "color": "#BBBBBB",
+        //             "graphType": "line",
+        //             "gridCount": 4,
+        //             "offset": 60,
+        //             "oppositeAxis": false,
+        //             "scrollbarHeight": 40
+        //         },
+        //         "trendLines": [],
+        //         "graphs": [
+        //             {
+        //                 "columnWidth": 0.67,
+        //                 "fillAlphas": 1,
+        //                 "id": "plannedAnnual",
+        //                 "lineAlpha": 0,
+        //                 "lineColor": "#2376BC",
+        //                 "lineThickness": 0,
+        //                 "title": "Planeado",
+        //                 "type": "column",
+        //                 "valueAxis": "ValueAxis-1",
+        //                 "valueField": "col-plannedAnnual",
+        //                 "xAxis": "ValueAxis-1",
+        //                 "yAxis": "ValueAxis-1"
+        //             },
+        //             {
+        //                 "columnWidth": 0.71,
+        //                 "fillAlphas": 1,
+        //                 "id": "executedAnnual",
+        //                 "lineColor": "#FF8000",
+        //                 "title": "Ejecutado",
+        //                 "type": "column",
+        //                 "valueAxis": "ValueAxis-1",
+        //                 "valueField": "col-executedAnnual",
+        //                 "xAxis": "ValueAxis-1",
+        //                 "yAxis": "ValueAxis-1"
+        //             },
+        //             {
+        //                 "customMarker": "",
+        //                 "id": "executed",
+        //                 "lineColor": "#FBB800",
+        //                 "lineThickness": 3,
+        //                 "title": "Ejecutado",
+        //                 "valueAxis": "ValueAxis-2",
+        //                 "valueField": "col-executed",
+        //                 "xAxis": "ValueAxis-2",
+        //                 "yAxis": "ValueAxis-2"
+        //             },
+        //             {
+        //                 "dashLength": 4,
+        //                 "id": "forecastReal",
+        //                 "legendAlpha": 1,
+        //                 "lineColor": "#953A12",
+        //                 "lineThickness": 3,
+        //                 "title": "Forecast real",
+        //                 "valueAxis": "ValueAxis-2",
+        //                 "valueField": "col-forecastReal"
+        //             },
+        //             {
+        //                 "dashLength": 4,
+        //                 "id": "forecast",
+        //                 "lineColor": "#4D91CE",
+        //                 "lineThickness": 3,
+        //                 "title": "Forecast",
+        //                 "valueAxis": "ValueAxis-2",
+        //                 "valueField": "col-forecast"
+        //             },
+        //             {
+        //                 "fillColors": "undefined",
+        //                 "id": "planned",
+        //                 "lineColor": "#BBBBBB",
+        //                 "lineThickness": 3,
+        //                 "title": "Planeado",
+        //                 "valueAxis": "ValueAxis-2",
+        //                 "valueField": "col-planned"
+        //             }
+        //         ],
+        //         "guides": [],
+        //         "valueAxes": [
+        //             {
+        //                 "id": "ValueAxis-1",
+        //                 "unit": "USD ",
+        //                 "unitPosition": "left",
+        //                 "axisAlpha": 0,
+        //                 "fontSize": 10,
+        //                 "gridAlpha": 0.05,
+        //                 "title": "MILLONES",
+        //                 "titleBold": false,
+        //                 "titleFontSize": 10
+        //             },
+        //             {
+        //                 "id": "ValueAxis-2",
+        //                 "position": "right",
+        //                 "unit": "USD ",
+        //                 "unitPosition": "left",
+        //                 "axisAlpha": 0,
+        //                 "fontSize": 10,
+        //                 "gridAlpha": 0,
+        //                 "title": "MILLONES",
+        //                 "titleBold": false,
+        //                 "titleFontSize": 10
+        //             }
+        //         ],
+        //         "allLabels": [],
+        //         "balloon": {},
+        //         "legend": {
+        //             "enabled": true,
+        //             "autoMargins": false,
+        //             "marginRight": 0,
+        //             "position": "top",
+        //             "spacing": 16,
+        //             "useGraphSettings": true
+        //         },
+        //         "titles": [],
+        //         "dataProvider": [
+        //             {
+        //                 "category": "2013",
+        //                 "col-plannedAnnual": "23.01",
+        //                 "col-executedAnnual": "4.74",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "null"
+        //             },
+        //             {
+        //                 "category": "2014",
+        //                 "col-plannedAnnual": "58.07",
+        //                 "col-executedAnnual": "8.40",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "null"
+        //             },
+        //             {
+        //                 "category": "2015",
+        //                 "col-plannedAnnual": "41.93",
+        //                 "col-executedAnnual": "12.85",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "null"
+        //             },
+        //             {
+        //                 "category": "2016",
+        //                 "col-plannedAnnual": "25.38",
+        //                 "col-executedAnnual": "2.16",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "null"
+        //             },
+        //             {
+        //                 "category": "2017",
+        //                 "col-plannedAnnual": "10.32",
+        //                 "col-executedAnnual": "7.64",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "null"
+        //             },
+        //             {
+        //                 "category": "2018-01",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "0.2",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "1.7"
+        //             },
+        //             {
+        //                 "category": "2018-02",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "1",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "2"
+        //             },
+        //             {
+        //                 "category": "2018-03",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "2",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "3.5"
+        //             },
+        //             {
+        //                 "category": "2018-04",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "2.2",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "3.7"
+        //             },
+        //             {
+        //                 "category": "2018-05",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "3",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "4.1"
+        //             },
+        //             {
+        //                 "category": "2018-06",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "3.1",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "4.5"
+        //             },
+        //             {
+        //                 "category": "2018-07",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "3.2",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "4.8"
+        //             },
+        //             {
+        //                 "category": "2018-08",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "3.8",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "3.8",
+        //                 "col-planned": "5.3"
+        //             },
+        //             {
+        //                 "category": "2018-09",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "4",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "4.7",
+        //                 "col-planned": "6"
+        //             },
+        //             {
+        //                 "category": "2018-10",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "4.7",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "5.2",
+        //                 "col-planned": "6.3"
+        //             },
+        //             {
+        //                 "category": "2018-11",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "5.02",
+        //                 "col-forecastReal": "5.02",
+        //                 "col-forecast": "6",
+        //                 "col-planned": "7"
+        //             },
+        //             {
+        //                 "category": "2018-12",
+        //                 "col-plannedAnnual": "null",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "6",
+        //                 "col-forecast": "7.05",
+        //                 "col-planned": "8.7"
+        //             },
+        //             {
+        //                 "category": "2019",
+        //                 "col-plannedAnnual": "8.5",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "null"
+        //             },
+        //             {
+        //                 "category": "2020",
+        //                 "col-plannedAnnual": "45.34",
+        //                 "col-executedAnnual": "null",
+        //                 "col-executed": "null",
+        //                 "col-forecastReal": "null",
+        //                 "col-forecast": "null",
+        //                 "col-planned": "null"
+        //             }
+        //         ]
+        //     }
+        // );
     </script>
 </body>
 </html>

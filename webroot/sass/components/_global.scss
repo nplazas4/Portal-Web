@@ -253,33 +253,37 @@ video.responsive-video {
 
 // Breadcrumbs
 .breadcrumb {
-    font-size: 11px;
+    font-size: 12px;
     color: color('dark', 'lighten-1');
     display: inline-flex;
     align-items: center;
     font-weight: 500;
-
-    @media(max-width: 800px) {
-        min-height: 35px;
-        padding: .4rem 0;
-    }
+    min-height: 24px;
 
     &-container {
-        background: color('light', 'base');
-        padding: 0 $gutter-width;
+        background: white;
+        padding: 1rem $gutter-width;
         display: flex;
-        position: fixed;
-        top: 108px;
-        left: 0;
-        right: 0;
-        z-index: 10;
+        flex-wrap: wrap;
+        position: relative;
+        margin: (- $gutter-width) (- $gutter-width) $gutter-width;
+        flex: 1 1 100%;
+        z-index: 1;
 
         @media(max-width: 800px) {
-            position: relative;
-            top: 0;
-            flex-wrap: wrap;
-            margin: -1rem -1rem 1rem;
-            flex: 100%;
+            padding: 1rem;
+            margin: -1rem -1rem 1rem
+        }
+    }
+
+    &-back {
+        color: color('dark', 'lighten-1');
+        display: flex;
+        align-items: center;
+        margin-right: .5rem;
+
+        &:hover {
+            color: $secondary-color;
         }
     }
 
@@ -291,25 +295,21 @@ video.responsive-video {
     }
 
     &:before {
-        content: '\E5CC';
-        color: color('secondary', 'base');
-        vertical-align: top;
+        content: '/';
+        color: color('dark', 'lighten-1');
         display: inline-block;
-        font-family: 'Material Icons';
-        font-weight: normal;
-        font-style: normal;
-        font-size: 8px;
-        line-height: 24px;
-        margin: 0 10px 0 8px;
-        -webkit-font-smoothing: antialiased;
+        font-size: 10px;
+        line-height: 1;
+        margin: 2px 10px 0 8px;
     }
 
-    &:first-child:before {
+    &:first-child:before,
+    &:nth-child(2):before {
         display: none;
     }
 
     &:last-child {
-        color: color('secondary', 'base');
+        color: color('primary', 'base');
     }
 }
 

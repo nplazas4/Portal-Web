@@ -2,53 +2,41 @@
     // Breadcrumb
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
-        [ 'Códigos de Proyecto','index','Projectcodes'],
-        [ 'Crear Códigos de Proyecto','add','Projectcodes'],
+        [ 'Códigos de proyecto','index','Projectcodes'],
+        [ 'Crear Código de proyecto','add','Projectcodes'],
     ];
 ?>
-<?= $this->Html->css('login')?>
-<?= $this->Html->css('error')?>
-<div class="section bcrumb company">
-    <div class="breadcrumb-container">
-        <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
-            <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb']
-            );?>
-        <?php endforeach; ?>
-    </div>
-    <div class="section home">
-        <div class="home-menu">
-          <!-- <div class="row"> -->
-          <div class="row">
-            <h5>Crear código de proyecto</h5>
-            <br/>
-             <!-- <form class="col s12"> -->
+<div class="section bcrumb">
+  <div class="breadcrumb-container">
+      <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
+      <?php foreach ($breadcrumb as $item): ?>
+          <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
+          <?php echo $this->Html->link($item[0],
+            ['controller'=>$item[2], 'action'=>$item[1]],
+            ['escape' => false,'class'=>'breadcrumb']
+          );?>
+      <?php endforeach; ?>
+  </div>
+    <div class="form-content">
              <?= $this->Form->create($projectcodes,['class'=>'col s12']) ?>
-               <div class="row">
+             <div class="form-content">
+               <div id="login-page" class="row">
+               <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6 ">
+                 <h5 class"centered">Crear código de proyecto</h5>
                  <fieldset>
-                 <div class="alert" style=<?=$error?>>
-                 <span class="closebtn">&times;</span>
-                    No se ha podido eliminar el código proyecto.
-                 </div>
                  <div class="input-field col s12">
                    <?php echo $this->Form->input('CODE_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s12">
-                   <!-- <input id="Nombre_Proyecto" type="text" class="validate">
-                   <label for="Nombre_Proyecto">Nombre de proyecto</label> -->
                    <?php echo $this->Form->textarea('CODE_DESCRIPTION',['label'=>'','placeholder'=>'Descripción','class'=>'materialize-textarea','required']);?>
                  </div>
-               </div>
                </fieldset>
                <div class="btns mb-2">
-                   <!-- <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Crear</a> -->
-                   <!-- <?//= $this->Form->button('Crear',['class'=>'btn waves-effect btn-depressed'])?> -->
                    <?= $this->Form->button(__('Crear'),['class'=>'btn waves-effect btn-depressed'])?>
                </div>
                 <?= $this->Form->end() ?>
-           </div>
+               </div>
+             </div>
+             </div>
         </div>
     </div>
-</div>

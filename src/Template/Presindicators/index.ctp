@@ -2,17 +2,18 @@
     // Breadcrumb
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
-        [ 'Lista de indicadores de proyectos','index','Indicators'],
+        [ 'Indicadores de presupuesto','index','Presindicators'],
     ];
 ?>
-<div class="section portal-projects">
+<?= $this->Html->css('textlength')?>
+<div class="section bcrumb company">
     <div class="breadcrumb-container">
-        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
+            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb']
+              ['escape' => false,'class'=>'breadcrumb'],
+              ['escape' => false]
             );?>
         <?php endforeach; ?>
     </div>
@@ -29,30 +30,25 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                      <?php if(count($indicators)!=0):?>
-                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped disabled','data-position'=>'dropdown','data-tooltip'=>'Ya exíste un indicador')),
-                      array('action' => ''), array('escape'=>false));?></th>
-                    <?php else:?>
-                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped disabled','data-position'=>'dropdown','data-tooltip'=>'Agregar Indicador')),
+                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar indicador de presupuesto')),
                       array('action' => 'add'), array('escape'=>false));?></th>
-                    <?php endif; ?>
-                      <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('RIESGOS',['Riesgos']) ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('SPI_EXTERNO',['SPI Externo']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('id',['No.']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('Indicator_Desc',['RIESGO']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('Monto_COP',['NOMBRE']) ?></th>
                       <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($indicators as $indicator): ?>
+                  <?php foreach ($presindicators as $presindicator): ?>
                   <tr>
-                    <td></td>
-                    <td><?= $this->Number->format($indicator->id) ?></td>
-                    <td><?= h($indicator->RIESGOS) ?></td>
-                    <td width="100"><?= h($indicator->SPI_EXTERNO) ?></td>
+                      <td></td>
+                      <td><?= $this->Number->format($presindicator->id) ?></td>
+                      <td><?= h($presindicator->Indicator_Desc) ?></td>
+                      <td><?= h($presindicator->Monto_COP) ?></td>
                       <td class="actions">
-                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $indicator->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o editar indicador']) ?>
+                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $presindicator->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar indicador de presupuesto']) ?>
                           <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
-                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$indicator->id], ['confirm' => __('Seguro desea eliminar el indicador #'.$indicator->id.'?', $indicator->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'down','data-tooltip'=>'Eliminar indicador']) ?>
+                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$presindicator->id], ['confirm' => __('Seguro desea eliminar el indicador de presupuesto '.$presindicator->Indicator_Desc.'?', $presindicator->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'dropdown','data-tooltip'=>'Eliminar indicador de presupuesto']) ?>
                       </td>
                   </tr>
                   <?php endforeach; ?>
@@ -74,12 +70,16 @@
                     array('escape' => false)) ?></li>
                     <!-- <li class="waves-effect"><?//= $this->Paginator->last(__('last') . ' >>') ?></li> -->
                 </ul>
+                <!-- <p><?//= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p> -->
             </div>
         </div>
     </div>
 </div>
 <script>
 
+// $(document).ready(function() {
+//     $('input#myInput').characterCounter();
+//   });
 function myFunction() {
 var searchText = document.getElementById('myInput').value;
 var targetTable = document.getElementById('myTable');

@@ -6,8 +6,7 @@
     margin: 0;
     transform: translateX(-100%);
     height: 100%;
-    height: calc(100% + 60px);
-    height: -moz-calc(100%); //Temporary Firefox Fix
+    height: 100vh;
     padding-bottom: 60px;
     background-color: $sidenav-bg-color;
     z-index: 999;
@@ -34,20 +33,29 @@
     li {
         float: none;
         line-height: $sidenav-line-height;
+        display: flex;
+        flex-wrap: wrap;
 
         &.active { background-color: rgba(0,0,0,.05); }
+        &:hover { 
+            .submenu {
+                display: block;
+            }
+        }
     }
 
     li > a {
         color: $sidenav-font-color;
-        display: block;
+        display: flex;
+        align-items: center;
         font-size: $sidenav-font-size;
         font-weight: 500;
-        height: $sidenav-item-height;
-        line-height: $sidenav-line-height;
-        padding: 0 ($sidenav-padding * 2);
+        height: auto;
+        line-height: 1.2;
+        padding: .7rem $sidenav-padding;
+        width: 100%;
+        min-height: 40px;
 
-        &:hover { background-color: rgba(0,0,0,.05);}
 
         &.btn, &.btn-large, &.btn-flat, &.btn-floating {
             margin: 10px 15px;
@@ -66,17 +74,32 @@
         & > [class^="mdi-"], li > a > [class*="mdi-"],
         & > i.material-icons {
             float: left;
-            height: $sidenav-item-height;
-            line-height: $sidenav-line-height;
+            height: auto;
+            line-height: 1;
             margin: 0 ($sidenav-padding * 2) 0 0;
             width: $sidenav-item-height / 2;
             color: rgba(0,0,0,.54);
+        }
+
+        + i.material-icons {
+            position: absolute;
+            right: .5rem;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &:hover {
+            background-color: rgba(0,0,0,.05);
         }
     }
 
 
     .divider {
         margin: ($sidenav-padding / 2) 0 0 0;
+        width: 100%;
     }
 
     .subheader {
@@ -94,8 +117,9 @@
 
     .user-view {
         position: relative;
-        padding: ($sidenav-padding * 2) ($sidenav-padding * 2) 0;
+        padding: $sidenav-padding $sidenav-padding 0;
         margin-bottom: $sidenav-padding / 2;
+        width: 100%;
 
         & > a {
             &:hover { background-color: transparent; }
@@ -142,6 +166,44 @@
         .email {
             padding-bottom: 16px;
             font-weight: 400;
+        }
+    }
+
+    .submenu {
+        display: none;
+
+        h2 {
+            font-size: 16px;
+            margin: 0;
+            padding: .7rem $sidenav-padding;
+            font-weight: 600;
+            color: color('primary', 'base');
+        }
+
+        &-row {
+            display: block;
+            padding-left: 1rem;
+
+            h3 {
+                font-size: 14px;
+                margin: 0;
+                padding: .7rem $sidenav-padding;
+                font-weight: 500;
+                color: color('secondary', 'base');
+            }
+
+            ul {
+                display: block;
+                padding-left: 1rem;
+
+                li {
+                    border-left: 1px solid color("dark", "lighten-2");
+
+                    a {
+                        font-weight: 100;
+                    }
+                }
+            }
         }
     }
 }

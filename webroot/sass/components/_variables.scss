@@ -42,6 +42,7 @@ $secondary-color: color("secondary", "base") !default;
 $success-color: color("green", "base") !default;
 $error-color: color("error", "base") !default;
 $link-color: color("secondary", "base") !default;
+$dark-color: color("dark", "base") !default;
 
 
 // 2. Badges
@@ -61,7 +62,7 @@ $button-font-size: 14px !default;
 $button-icon-font-size: 1.3rem !default;
 $button-height: 36px !default;
 $button-padding: 0 16px !default;
-$button-radius: 6px !default;
+$button-radius: 0px !default;
 
 // Disabled styles
 $button-disabled-background: #DFDFDF !default;
@@ -243,11 +244,11 @@ $element-bottom-margin: ($gutter-width*2)/3 !default;
 // ==========================================================================
 
 $navbar-height: 40px !default;
-$navbar-line-height: $navbar-height !default;
+$navbar-line-height: 1.2 !default;
 $navbar-height-mobile: 40px !default;
 $navbar-line-height-mobile: $navbar-height-mobile !default;
 $navbar-font-size: 1rem !default;
-$navbar-font-color: #fff !default;
+$navbar-font-color: $dark-color !default;
 $navbar-brand-font-size: 2.1rem !default;
 
 // 14. Side Navigation
@@ -303,8 +304,8 @@ $toast-action-color: #eeff41;
 // 20. Typography
 // ==========================================================================
 
-$font-stack: 'Open Sans', sans-serif !default;
-$off-black: rgba(0, 0, 0, 0.87) !default;
+$font-stack: 'Montserrat', sans-serif !default;
+$off-black: #444 !default;
 // Header Styles
 $h1-fontsize: 4.2rem !default;
 $h2-fontsize: 3.56rem !default;

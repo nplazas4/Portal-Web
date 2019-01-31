@@ -19,7 +19,6 @@
     overflow-y: auto;
     transform: translateY(-50%) scaleX(0) scaleY(0) !important;
 
-    border-radius: 10px;
     will-change: top, opacity;
 
     @media #{$medium-and-down} {

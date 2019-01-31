@@ -35,20 +35,6 @@
                   <span class="closebtn">&times;</span>
                   Usuario inactivo.
                 </div>
-                <!-- <div class="alert success">
-                  <span class="closebtn">&times;</span>
-                  <strong>Success!</strong> Indicates a successful or positive action.
-                </div>
-
-                <div class="alert info">
-                  <span class="closebtn">&times;</span>
-                  <strong>Info!</strong> Indicates a neutral informative change or action.
-                </div>
-
-                <div class="alert warning">
-                  <span class="closebtn">&times;</span>
-                  <strong>Warning!</strong> Indicates a warning that might need attention.
-                </div> -->
             </div>
             <a href="#recoverPassword" class="link modal-trigger">Recuperar contraseña</a>
             <?= $this->Form->end() ?>

@@ -1,12 +1,34 @@
 <?php
     // Breadcrumb
     $breadcrumb = [
-      [ 'Inicio', 'home','Pages'],
-      [ 'Portal Proyectos','index','PortalProjects'],
-      [ 'IDM','companies','PortalProjects'],
-      [ 'Unidad de Transmisión Colombia','company','PortalProjects' ],
-      [ 'Crecimiento','projects','PortalProjects'],
-      [ '﻿Nueva Subestación MOCOA (RENACER) 230 kV', '','PortalProjects'],
+        [ 'Inicio', '/' ],
+        [ 'Portal Proyectos', '/portal-projects' ],
+        [ 'Transmisión y Transporte', '/portal-projects/companies' ],
+        [ 'Unidad de Transmisión Colombia', '/portal-projects/company' ],
+        [ 'Crecimiento', '/portal-projects/projects' ],
+        [ '﻿UPME 03 – 2010 Norte', '' ],
+    ];
+
+    // Indicadores de cronograma
+    $scheduleIndicators = [
+        'spi' => 0.90, // SPI
+        'progressPercentagePlanned' => 63, // Porcentaje avance planeado
+        'progressPercentageExecuted' => 57, //Porcentaje avance ejecutado
+        'fepo' => 'Septiembre 30, 2020' // FEPO
+    ];
+
+    // Indicadores de presupuesto
+    $budgetIndicators = [
+        'acPpto' => 41, // AC/PPTO
+        'ac' => 41.59, // AC
+        'totalBudget' => 100.46, // Presupuesto total
+        'forecastTotal' => 89.73, // Forecast total
+
+        'cpiAnnual' => 44, // CPI Anual
+        'acAnnual' => 4.61, // AC Anual
+        'pvAnnual' => 10.57, // PV Anual
+        'annualBudget' => 26.12, // Presupuesto anual
+        'annualForecast' => 21.16, // Forecast anual
     ];
 
     // Riesgos
@@ -63,309 +85,17 @@
         ],
     ];
 ?>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
-<script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
-<script type="text/javascript">
-/*
-    // Porcentajes de avances
-    AmCharts.makeChart("advance",
-        {
-            "type": "gauge",
-            "theme": "light",
-            "language": "es",
-            "axes": [
-                {
-                    "axisAlpha": 0,
-                    "tickAlpha": 0,
-                    "labelsEnabled": false,
-                    "startValue": 0,
-                    "endValue": 100,
-                    "startAngle": 0,
-                    "endAngle": 360,
-                    "bands": [
-                        // Usuarios perdidos
-                        {
-                            "color": "#eee",
-                            "startValue": 0,
-                            "endValue": 100,
-                            "radius": "100%",
-                            "innerRadius": "70%",
-                            "balloonText": "Avance planeado",
-                        },
-                        {
-                            "color": "#A6CE39",
-                            "startValue": 0,
-                            "endValue": <?=$data1?>,
-                            "radius": "100%",
-                            "innerRadius": "70%",
-                            "balloonText": "<?=$data1?>% Avance planeado",
-                        },
-                        // Usuarios pagos
-                        {
-                            "color": "#E6E6E6",
-                            "startValue": 0,
-                            "endValue": 100,
-                            "radius": "70%",
-                            "innerRadius": "40%",
-                            "balloonText": "Ejecutado",
-                        },
-                        {
-                            "color": "#2CACE3",
-                            "startValue": 0,
-                            "endValue": <?//=$data2?>,
-                            "radius": "70%",
-                            "innerRadius": "40%",
-                            "balloonText": "<?//=$data2?>% Ejecutado",
-                        },
-                    ]
-                }
-            ],
-            "export": {
-                "enabled": false
-            }
-        }
-    );
-
-    // Curva de avance físico
-    AmCharts.makeChart("caf",
-        {
-            "type": "serial",
-            "categoryField": "date",
-            "dataDateFormat": "YYYY-MM-DD",
-            "fontFamily": "'Open Sans'",
-            "theme": "default",
-            "language": "es",
-            "categoryAxis": {
-                "equalSpacing": true,
-                "gridPosition": "start",
-                "minPeriod": "DD",
-                "parseDates": true,
-                "startOnAxis": true,
-                "axisAlpha": 0,
-                "gridAlpha": 0,
-                "labelOffset": -1
-            },
-            "chartCursor": {
-                "enabled": true,
-                "categoryBalloonDateFormat": "DD MMM YYYY",
-                "cursorColor": "#00A34B"
-            },
-            "chartScrollbar": {
-                "enabled": true,
-                "graph": "AmGraph-2",
-                "graphType": "line",
-                "gridCount": 7,
-                "offset": 40,
-                "oppositeAxis": false,
-                "scrollbarHeight": 40
-            },
-            "trendLines": [],
-            "graphs": [
-                {
-                    "customBullet": "",
-                    "dashLength": 7,
-                    "id": "AmGraph-1",
-                    "labelPosition": "right",
-                    "labelText": "",
-                    "lineColor": "#2CACE3",
-                    "lineThickness": 3,
-                    "minBulletSize": 3,
-                    "showAllValueLabels": true,
-                    "title": "Ejecutado",
-                    "valueField": "column-1"
-                },
-                {
-                    "id": "AmGraph-2",
-                    "lineColor": "#A6CE39",
-                    "lineThickness": 3,
-                    "title": "Planeado",
-                    "valueField": "column-2"
-                }
-            ],
-            "guides": [],
-            "valueAxes": [
-                {
-                    "id": "ValueAxis-1",
-                    "totalText": "",
-                    "unit": "%",
-                    "axisAlpha": 0,
-                    "gridAlpha": 0.06,
-                    "title": ""
-                }
-            ],
-            "allLabels": [],
-            "balloon": {},
-            "legend": {
-                "enabled": true,
-                "autoMargins": false,
-                "marginRight": 0,
-                "markerSize": 15,
-                "position": "top",
-                "spacing": 16,
-                "useGraphSettings": true
-            },
-            "titles": [],
-            "dataProvider": [
-                {
-                    "date": "2014-01-17",
-                    "column-1": "0",
-                    "column-2": "0"
-                },
-                {
-                    "date": "2014-02-17",
-                    "column-1": "5",
-                    "column-2": "6"
-                },
-                {
-                    "date": "2014-03-17",
-                    "column-1": "10",
-                    "column-2": "12"
-                },
-                {
-                    "date": "2014-04-17",
-                    "column-1": "11",
-                    "column-2": "15"
-                },
-                {
-                    "date": "2014-05-17",
-                    "column-1": "12",
-                    "column-2": "20"
-                },
-                {
-                    "date": "2014-06-17",
-                    "column-1": "13",
-                    "column-2": "22"
-                },
-                {
-                    "date": "2014-07-17",
-                    "column-1": "15",
-                    "column-2": "30"
-                },
-                {
-                    "date": "2014-08-17",
-                    "column-1": "20",
-                    "column-2": "30"
-                },
-                {
-                    "date": "2014-09-17",
-                    "column-1": "21",
-                    "column-2": "32"
-                },
-                {
-                    "date": "2014-10-17",
-                    "column-1": "22",
-                    "column-2": "35"
-                },
-                {
-                    "date": "2014-11-17",
-                    "column-1": null,
-                    "column-2": "31"
-                },
-                {
-                    "date": "2014-12-17",
-                    "column-1": null,
-                    "column-2": "30"
-                },
-                {
-                    "date": "2015-01-17",
-                    "column-1": null,
-                    "column-2": "25"
-                },
-                {
-                    "date": "2015-02-17",
-                    "column-1": null,
-                    "column-2": "27"
-                },
-                {
-                    "date": "2015-03-17",
-                    "column-1": null,
-                    "column-2": "32"
-                }
-            ]
-        }
-    );
-
-    // Gráfica acumulado
-    AmCharts.makeChart("ga",
-        {
-            "type": "serial",
-            "language": "es",
-            "categoryField": "category",
-            "startDuration": 1,
-            "fontFamily": "'Open Sans'",
-            "categoryAxis": {
-                "gridPosition": "start",
-                "axisAlpha": 0,
-                "gridAlpha": 0
-            },
-            "trendLines": [],
-            "graphs": [
-                {
-                    "balloonText": "[[title]] de [[category]]:[[value]]",
-                    "cornerRadiusTop": 6,
-                    "fillAlphas": 1,
-                    "id": "AmGraph-1",
-                    "lineColor": "#2CACE3",
-                    "title": "Acumulado",
-                    "type": "column",
-                    "valueField": "column-1"
-                }
-            ],
-            "guides": [],
-            "valueAxes": [
-                {
-                    "id": "ValueAxis-1",
-                    "unit": "$ ",
-                    "unitPosition": "left",
-                    "axisAlpha": 0,
-                    "gridAlpha": 0.09,
-                    "title": "Axis title",
-                    "titleFontSize": 0,
-                    "titleRotation": 0
-                }
-            ],
-            "allLabels": [],
-            "balloon": {},
-            "titles": [],
-            "dataProvider": [
-                {
-                    "category": "PPTO COP",
-                    "column-1": "22000000000"
-                },
-                {
-                    "category": "PPTO USD",
-                    "column-1": "500000000"
-                },
-                {
-                    "category": "AC COP",
-                    "column-1": "36000000000"
-                },
-                {
-                    "category": "AC USD",
-                    "column-1": "1000000000"
-                }
-            ]
-        }
-    );
-    */
-</script>
 <div class="section bcrumb project">
     <div class="breadcrumb-container">
+        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?//= $item[1] ?>" class="breadcrumb"><?//= $item[0] ?></a> -->
-            <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb']
-            );?>
+            <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a>
         <?php endforeach; ?>
     </div>
-    <!-- <<h1><?=$data1?></h1> -->
+
     <sidebar class="project-sidebar">
-        <h1>Nueva Subestación MOCOA (RENACER) 230 kV</h1>
-        <div class="project-sidebar-phase orange">
+        <h1>UPME 03 – 2010 Norte</h1>
+        <div class="project-sidebar-phase phase iii">
             <h2>Fase III</h2>
         </div>
         <div class="project-sidebar-percentages">
@@ -377,16 +107,20 @@
             </div>
         </div>
         <div class="project-sidebar-info">
+            <h2>Objetivo estratégico</h2>
+            <p>Dinamizar el crecimiento rentable de la compañía y el camino a la MEGA</p>
+        </div>
+        <div class="project-sidebar-info">
             <h2>Información general</h2>
-            <p>Es la segunda empresa en transmisión de electricidad en Colombia, con una participación en el mercado del 12.5%. Cuenta con 1.504 km de circuitos a 230 kV activos en 17 subestaciones y la disponibilidad del sistema de transmisión a 31 de diciembre del 2015 fue del 99,93%, superior a la meta fijada por la CREG.</p>
+            <p>Construcción de una línea doble circuito 230 kV con una longitud aproximada de 162 km Construcción de las nuevas subestaciones Chivor ll 230 kV (San Luis) y Norte</p>
         </div>
         <div class="project-sidebar-info">
             <h2>Alcance</h2>
-            <p>El alcance del proyecto corresponde a la puesta en servicio de la línea doble circuito a 230kV, desde la Subestación Chivor II hasta la Subestación Norte y desde la Subestación Norte hasta la Subestación Bacatá, incluyendo la modificación de las subestaciones Chivor y Bacatá y la instalación de las nuevas subestaciones Chivor II y Norte. El proyecto no incluye la administración, operación y mantenimiento durante 25 años contados desde la fecha oficial de puesta en operación de acuerdo con lo establecido en la normatividad aplicable.</p>
+            <p>Ampliación de la subestaciones Chivor y Bacatá</p>
         </div>
         <div class="project-sidebar-info">
             <h2>Solicitudes al MME modificaciones FOPO</h2>
-            <p>1. Resolución 4-1185 en la cual se otorgan 422 días de 525 solicitados, dando como Fecha de Entrada en Operación el 26 de Diciembre de 2016.2. Resolución 4-1248 en la cual se otorgan 145 días de 254 solicitados, dando como Fecha de Entrada en Operación el 20 de Mayo de 2017.3. Resolución 4-0510 en la cual se otorgan 176 días de 411 solicitados, dando como Fecha de Entrada en Operación el 25 de Noviembre de 2017.</p>
+            <p>5</p>
         </div>
     </sidebar>
 
@@ -410,78 +144,130 @@
                 <ul>
                     <li>
                         <i class="material-icons">event</i>
-                        <span>FoPo: Enero 10, 2018</span>
+                        <span>FOPO: Abril 14, 2019</span>
                     </li>
                     <li>
                         <i class="material-icons">event_note</i>
-                        <span>Adjudicación: Enero 10, 2018</span>
+                        <span>Adjudicación: Abril 16, 2013</span>
                     </li>
                     <li>
                         <i class="material-icons">event_available</i>
-                        <span>Aprobación: Enero 10, 2018</span>
+                        <span>Fecha corte: Octubre 31, 2018</span>
                     </li>
                     <li>
                         <i class="material-icons">straighten</i>
-                        <span>Longitud: 162 Km</span>
+                        <span>Longitud: 162 KM</span>
                     </li>
                     <li>
                         <i class="material-icons">place</i>
-                        <span>No. de subestaciones: 2</span>
+                        <span>No. de subestaciones: 3</span>
                     </li>
                 </ul>
             </div>
         </div>
 
         <div class="map">
-            <?= $this->Html->image('maps/mapa1.png') ?>
+            <?= $this->Html->image('maps/mapa-1.jpg') ?>
         </div>
 
-        <div class="indicators">
+        <div class="indicators row wrap">
             <h2>Indicadores de cronograma</h2>
-            <div class="indicator primary">
-                <h2>SPI <small>Interno</small></h2>
-                <h3>0.91</h3>
-                <?= $this->Html->image('isotype-light.svg') ?>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1
+                    <?php
+                        if ($scheduleIndicators['spi'] >= 0.98) {
+                            echo 'primary';
+                        } elseif ($scheduleIndicators['spi'] < 0.98 && $scheduleIndicators['spi'] >= 0.9) {
+                            echo 'secondary';
+                        } elseif ($scheduleIndicators['spi'] < 0.9 && $scheduleIndicators['spi'] >= 0.8) {
+                            echo 'warning';
+                        } elseif ($scheduleIndicators['spi'] < 0.8) {
+                            echo 'error';
+                        }
+                    ?>">
+                    <h3 class="mr-2">SPI</h3>
+                    <h3 class="ml-auto"><?= $scheduleIndicators['spi'] ?></h3>
+                </div>
             </div>
-            <div class="indicator light-blue darken-2">
-                <h2>PORCENTAJE <small>AVANCE PLANEADO</small></h2>
-                <h3>62%</h3>
-                <?= $this->Html->image('isotype-light.svg') ?>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-2">
+                    <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
+                    <h3 class="ml-auto"><?= $scheduleIndicators['progressPercentagePlanned'] ?>%</h3>
+                </div>
             </div>
-            <div class="indicator light-blue darken-3">
-                <h2>PORCENTAJE <small>EJECUTADO</small></h2>
-                <h3>57%</h3>
-                <?= $this->Html->image('isotype-light.svg') ?>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-3">
+                    <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
+                    <h3 class="ml-auto"><?= $scheduleIndicators['progressPercentageExecuted'] ?>%</h3>
+                </div>
             </div>
-            <div class="indicator light-blue darken-2">
-                <h2>FePo</h2>
-                <h4>Enero 15, 2018</h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-2">
+                    <h5 class="mr-2">FEPO</h5>
+                    <h5 class="ml-auto right-align"><?= $scheduleIndicators['fepo'] ?></h5>
+                </div>
             </div>
         </div>
 
-        <div class="indicators mb-4">
-            <h2>Indicadores de presupuesto</h2>
-            <a class="indicator light-green modal-trigger" href="#detailValueExecuted">
-                <h2>AC</h2>
-                <h4>USD 39.68 M</h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
-            <a class="indicator light-green darken-1 modal-trigger" href="#detailValueExecuted">
-                <h2>PV</h2>
-                <h4>USD 101 M</h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
-            <a class="indicator light-green darken-2 modal-trigger" href="#detailValueExecuted">
-                <h2>AC <small>2018</small></h2>
-                <h4><small>EN CONSTRUCCIÓN</small></h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
-            <a class="indicator light-green darken-3 modal-trigger" href="#detailValueExecuted">
-                <h2>PV <small>2018</small></h2>
-                <h4><small>EN CONSTRUCCIÓN</small></h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
+        <div class="indicators row wrap mb-4">
+            <h2 class="mb-2">Indicadores de presupuesto</h2>
+            <h3>Total proyecto</h3>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">AC/PPTO</h4>
+                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['acPpto'] ?>%</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">AC</h4>
+                    <h5 class="fw-600 ml-auto right-align">USD <?= $budgetIndicators['ac'] ?> MM</h5>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">PRESUPUESTO TOTAL</h5>
+                    <h4 class="fw-600 right-align">USD <?= $budgetIndicators['totalBudget'] ?> MM</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">FORECAST TOTAL</h5>
+                    <h4 class="fw-600 right-align"><?= $budgetIndicators['forecastTotal'] ?> MM</h4>
+                </a>
+            </div>
+            <h3 class="mt-3">Anual proyecto</h3>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">CPI <small>ANUAL 2018</small></h4>
+                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?>%</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">AC <small>2018</small></h4>
+                    <h5 class="fw-600 ml-auto right-align">USD <?= $budgetIndicators['acAnnual'] ?> MM</h5>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">PV <small>2018</small></h4>
+                    <h5 class="fw-600 ml-auto right-align">USD <?= $budgetIndicators['pvAnnual'] ?> MM</h5>
+                </a>
+            </div>
+            <div class="divider transparent"></div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">PRESUPUESTO 2018</h5>
+                    <h4 class="fw-600 right-align">USD <?= $budgetIndicators['annualBudget'] ?> MM</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">FORECAST 2018</h5>
+                    <h4 class="fw-600 right-align">USD <?= $budgetIndicators['annualForecast'] ?> MM</h4>
+                </a>
+            </div>
         </div>
 
         <div class="chart">
@@ -490,9 +276,15 @@
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
         </div>
 
-        <div class="chart">
+        <!-- <div class="chart">
             <h2>Gráfica acumulado (en construcción)</h2>
             <div class="chart-content" id="ga"></div>
+            <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
+        </div> -->
+
+        <div class="chart">
+            <h2>Tres Generaciones</h2>
+            <div class="chart-content" id="tg" style="min-height: 475px;"></div>
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
         </div>
 

@@ -7,80 +7,27 @@
       [ 'Unidad de Transmisión Colombia','company','PortalProjects',''],
       [ 'Crecimiento','projects','Projects',''],
     ];
-
-    // Riesgos
-    // $risks = [
-    //     [
-    //         'name' => '0',
-    //         'x' => 5,
-    //         'y' => 2,
-    //     ],
-    //     [
-    //         'name' => '2',
-    //         'x' => 5,
-    //         'y' => 2,
-    //     ],
-    //     [
-    //         'name' => '3',
-    //         'x' => 1,
-    //         'y' => 1,
-    //     ],
-    //     [
-    //         'name' => '4',
-    //         'x' => 1,
-    //         'y' => 3,
-    //     ],
-    //     [
-    //         'name' => '5',
-    //         'x' => 4,
-    //         'y' => 3,
-    //     ],
-    //     [
-    //         'name' => '6',
-    //         'x' => 3,
-    //         'y' => 3,
-    //     ],
-    //     [
-    //         'name' => '7',
-    //         'x' => 2,
-    //         'y' => 1,
-    //     ],
-    //     [
-    //         'name' => '8',
-    //         'x' => 3,
-    //         'y' => 4,
-    //     ],
-    //     [
-    //         'name' => '9',
-    //         'x' => 4,
-    //         'y' => 5,
-    //     ],
-    //     [
-    //         'name' => '10',
-    //         'x' => 3,
-    //         'y' => 2,
-    //     ],
-    //     [
-    //         'name' => '11',
-    //         'x' => 3,
-    //         'y' => 2,
-    //     ],
-    //     [
-    //         'name' => '12',
-    //         'x' => 3,
-    //         'y' => 2,
-    //     ],
-    //     [
-    //         'name' => '13',
-    //         'x' => 3,
-    //         'y' => 4,
-    //     ],
-    //     [
-    //         'name' => '14',
-    //         'x' => 3,
-    //         'y' => 4,
-    //     ],
+    // Indicadores de cronograma
+    // $scheduleIndicators = [
+    //     'spi' => 0.90, // SPI
+    //     'progressPercentagePlanned' => 63, // Porcentaje avance planeado
+    //     'progressPercentageExecuted' => 57, //Porcentaje avance ejecutado
+    //     'fepo' => 'Septiembre 30, 2020' // FEPO
     // ];
+    //
+    // // Indicadores de presupuesto
+    $budgetIndicators = [
+        'acPpto' => 41, // AC/PPTO
+        'ac' => 41.59, // AC
+        'totalBudget' => 100.46, // Presupuesto total
+        'forecastTotal' => 89.73, // Forecast total
+
+        'cpiAnnual' => 44, // CPI Anual
+        'acAnnual' => 4.61, // AC Anual
+        'pvAnnual' => 10.57, // PV Anual
+        'annualBudget' => 26.12, // Presupuesto anual
+        'annualForecast' => 21.16, // Forecast anual
+    ];
 ?>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -201,6 +148,13 @@
                     "lineThickness": 3,
                     "title": "Planeado",
                     "valueField": "column-2"
+                },
+                {
+                    "id": "AmGraph-3",
+                    "lineColor": "#A6CE39",
+                    "lineThickness": 3,
+                    "title": "Restante",
+                    "valueField": "column-3"
                 }
             ],
             "guides": [],
@@ -227,148 +181,409 @@
             },
             "titles": [],
             "dataProvider": [
+                <?php foreach ($charts as $chart):?>
                 {
-                    "date": "2014-01-17",
-                    "column-1": "0",
-                    "column-2": "0"
+                  <?php $Date = date('Y-m-d', strtotime($chart->START_DATE));?>
+                  <?php $_SESSION['chart'] = $Date?>
+                  "date": "<?=$Date?>",
+                  <?php if(is_numeric($chart->EJEC)):?>
+                  "column-1": "<?=$chart->EJEC?>",
+                  "column-2": "<?=$chart->BL_CHART?>",
+                  "column-3": null
+                  <?php endif;?>
+                  <?php if(is_numeric($chart->EAC)):?>
+                  "column-1": null,
+                  "column-2": "<?=$chart->BL_CHART?>",
+                  "column-3": "<?=$chart->EAC?>"
+                  <?php endif;?>
                 },
-                {
-                    "date": "2014-02-17",
-                    "column-1": "5",
-                    "column-2": "6"
-                },
-                {
-                    "date": "2014-03-17",
-                    "column-1": "10",
-                    "column-2": "12"
-                },
-                {
-                    "date": "2014-04-17",
-                    "column-1": "11",
-                    "column-2": "15"
-                },
-                {
-                    "date": "2014-05-17",
-                    "column-1": "12",
-                    "column-2": "20"
-                },
-                {
-                    "date": "2014-06-17",
-                    "column-1": "13",
-                    "column-2": "22"
-                },
-                {
-                    "date": "2014-07-17",
-                    "column-1": "15",
-                    "column-2": "30"
-                },
-                {
-                    "date": "2014-08-17",
-                    "column-1": "20",
-                    "column-2": "30"
-                },
-                {
-                    "date": "2014-09-17",
-                    "column-1": "21",
-                    "column-2": "32"
-                },
-                {
-                    "date": "2014-10-17",
-                    "column-1": "22",
-                    "column-2": "35"
-                },
-                {
-                    "date": "2014-11-17",
-                    "column-1": null,
-                    "column-2": "31"
-                },
-                {
-                    "date": "2014-12-17",
-                    "column-1": null,
-                    "column-2": "30"
-                },
-                {
-                    "date": "2015-01-17",
-                    "column-1": null,
-                    "column-2": "25"
-                },
-                {
-                    "date": "2015-02-17",
-                    "column-1": null,
-                    "column-2": "27"
-                },
-                {
-                    "date": "2015-03-17",
-                    "column-1": null,
-                    "column-2": "32"
-                }
+                <?php endforeach;?>
+                // {
+                //     "date": "2014-02-17",
+                //     "column-1": "5",
+                //     "column-2": "6"
+                // },
+                // {
+                //     "date": "2014-03-17",
+                //     "column-1": "10",
+                //     "column-2": "12"
+                // },
+                // {
+                //     "date": "2014-04-17",
+                //     "column-1": "11",
+                //     "column-2": "15"
+                // },
+                // {
+                //     "date": "2014-05-17",
+                //     "column-1": "12",
+                //     "column-2": "20"
+                // },
+                // {
+                //     "date": "2014-06-17",
+                //     "column-1": "13",
+                //     "column-2": "22"
+                // },
+                // {
+                //     "date": "2014-07-17",
+                //     "column-1": "15",
+                //     "column-2": "30"
+                // },
+                // {
+                //     "date": "2014-08-17",
+                //     "column-1": "20",
+                //     "column-2": "30"
+                // },
+                // {
+                //     "date": "2014-09-17",
+                //     "column-1": "21",
+                //     "column-2": "32"
+                // },
+                // {
+                //     "date": "2014-10-17",
+                //     "column-1": "22",
+                //     "column-2": "35"
+                // },
+                // {
+                //     "date": "2014-11-17",
+                //     "column-1": null,
+                //     "column-2": "31"
+                // },
+                // {
+                //     "date": "2014-12-17",
+                //     "column-1": null,
+                //     "column-2": "30"
+                // },
+                // {
+                //     "date": "2015-01-17",
+                //     "column-1": null,
+                //     "column-2": "25"
+                // },
+                // {
+                //     "date": "2015-02-17",
+                //     "column-1": null,
+                //     "column-2": "27"
+                // },
+                // {
+                //     "date": "2015-03-17",
+                //     "column-1": null,
+                //     "column-2": "32"
+                // }
             ]
         }
     );
-/*
-    // Gráfica acumulado
-    AmCharts.makeChart("ga",
+    AmCharts.makeChart("tg",
         {
             "type": "serial",
-            "language": "es",
             "categoryField": "category",
+            "dataDateFormat": "YYYY-MM-DD",
+            "sequencedAnimation": false,
             "startDuration": 1,
-            "fontFamily": "'Open Sans'",
             "categoryAxis": {
+                "autoRotateAngle": 90,
+                "autoRotateCount": 12,
+                "equalSpacing": true,
                 "gridPosition": "start",
+                "minPeriod": "MM",
+                "startOnAxis": true,
                 "axisAlpha": 0,
-                "gridAlpha": 0
+                "fontSize": 10,
+                "gridAlpha": 0,
+                "ignoreAxisWidth": true,
+                "titleBold": false
+            },
+            "chartCursor": {
+                "enabled": true,
+                "cursorColor": "#00A34B"
+            },
+            "chartScrollbar": {
+                "enabled": true,
+                "color": "#BBBBBB",
+                "graphType": "line",
+                "gridCount": 4,
+                "offset": 60,
+                "oppositeAxis": false,
+                "scrollbarHeight": 40
             },
             "trendLines": [],
             "graphs": [
                 {
-                    "balloonText": "[[title]] de [[category]]:[[value]]",
-                    "cornerRadiusTop": 6,
+                    "columnWidth": 0.67,
                     "fillAlphas": 1,
-                    "id": "AmGraph-1",
-                    "lineColor": "#2CACE3",
-                    "title": "Acumulado",
+                    "id": "plannedAnnual",
+                    "lineAlpha": 0,
+                    "lineColor": "#2376BC",
+                    "lineThickness": 0,
+                    "title": "Planeado",
                     "type": "column",
-                    "valueField": "column-1"
+                    "valueAxis": "ValueAxis-1",
+                    "valueField": "col-plannedAnnual",
+                    "xAxis": "ValueAxis-1",
+                    "yAxis": "ValueAxis-1"
+                },
+                {
+                    "columnWidth": 0.71,
+                    "fillAlphas": 1,
+                    "id": "executedAnnual",
+                    "lineColor": "#FF8000",
+                    "title": "Ejecutado",
+                    "type": "column",
+                    "valueAxis": "ValueAxis-1",
+                    "valueField": "col-executedAnnual",
+                    "xAxis": "ValueAxis-1",
+                    "yAxis": "ValueAxis-1"
+                },
+                {
+                    "customMarker": "",
+                    "id": "executed",
+                    "lineColor": "#FBB800",
+                    "lineThickness": 3,
+                    "title": "Ejecutado",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-executed",
+                    "xAxis": "ValueAxis-2",
+                    "yAxis": "ValueAxis-2"
+                },
+                {
+                    "dashLength": 4,
+                    "id": "forecastReal",
+                    "legendAlpha": 1,
+                    "lineColor": "#953A12",
+                    "lineThickness": 3,
+                    "title": "Forecast real",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-forecastReal"
+                },
+                {
+                    "dashLength": 4,
+                    "id": "forecast",
+                    "lineColor": "#4D91CE",
+                    "lineThickness": 3,
+                    "title": "Forecast",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-forecast"
+                },
+                {
+                    "fillColors": "undefined",
+                    "id": "planned",
+                    "lineColor": "#BBBBBB",
+                    "lineThickness": 3,
+                    "title": "Planeado",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-planned"
                 }
             ],
             "guides": [],
             "valueAxes": [
                 {
                     "id": "ValueAxis-1",
-                    "unit": "$ ",
+                    "unit": "USD ",
                     "unitPosition": "left",
                     "axisAlpha": 0,
-                    "gridAlpha": 0.09,
-                    "title": "Axis title",
-                    "titleFontSize": 0,
-                    "titleRotation": 0
+                    "fontSize": 10,
+                    "gridAlpha": 0.05,
+                    "title": "MILLONES",
+                    "titleBold": false,
+                    "titleFontSize": 10
+                },
+                {
+                    "id": "ValueAxis-2",
+                    "position": "right",
+                    "unit": "USD ",
+                    "unitPosition": "left",
+                    "axisAlpha": 0,
+                    "fontSize": 10,
+                    "gridAlpha": 0,
+                    "title": "MILLONES",
+                    "titleBold": false,
+                    "titleFontSize": 10
                 }
             ],
             "allLabels": [],
             "balloon": {},
+            "legend": {
+                "enabled": true,
+                "autoMargins": false,
+                "marginRight": 0,
+                "position": "top",
+                "spacing": 16,
+                "useGraphSettings": true
+            },
             "titles": [],
             "dataProvider": [
                 {
-                    "category": "PPTO COP",
-                    "column-1": "22000000000"
+                    "category": "2013",
+                    "col-plannedAnnual": "23.01",
+                    "col-executedAnnual": "4.74",
+                    "col-executed": "null",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
                 },
                 {
-                    "category": "PPTO USD",
-                    "column-1": "500000000"
+                    "category": "2014",
+                    "col-plannedAnnual": "58.07",
+                    "col-executedAnnual": "8.40",
+                    "col-executed": "null",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
                 },
                 {
-                    "category": "AC COP",
-                    "column-1": "36000000000"
+                    "category": "2015",
+                    "col-plannedAnnual": "41.93",
+                    "col-executedAnnual": "12.85",
+                    "col-executed": "null",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
                 },
                 {
-                    "category": "AC USD",
-                    "column-1": "1000000000"
+                    "category": "2016",
+                    "col-plannedAnnual": "25.38",
+                    "col-executedAnnual": "2.16",
+                    "col-executed": "null",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
+                },
+                {
+                    "category": "2017",
+                    "col-plannedAnnual": "10.32",
+                    "col-executedAnnual": "7.64",
+                    "col-executed": "null",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
+                },
+                {
+                    "category": "2018-01",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "0.2",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "1.7"
+                },
+                {
+                    "category": "2018-02",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "1",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "2"
+                },
+                {
+                    "category": "2018-03",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "2",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "3.5"
+                },
+                {
+                    "category": "2018-04",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "2.2",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "3.7"
+                },
+                {
+                    "category": "2018-05",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "3",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "4.1"
+                },
+                {
+                    "category": "2018-06",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "3.1",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "4.5"
+                },
+                {
+                    "category": "2018-07",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "3.2",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "4.8"
+                },
+                {
+                    "category": "2018-08",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "3.8",
+                    "col-forecastReal": "null",
+                    "col-forecast": "3.8",
+                    "col-planned": "5.3"
+                },
+                {
+                    "category": "2018-09",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "4",
+                    "col-forecastReal": "null",
+                    "col-forecast": "4.7",
+                    "col-planned": "6"
+                },
+                {
+                    "category": "2018-10",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "4.7",
+                    "col-forecastReal": "null",
+                    "col-forecast": "5.2",
+                    "col-planned": "6.3"
+                },
+                {
+                    "category": "2018-11",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "5.02",
+                    "col-forecastReal": "5.02",
+                    "col-forecast": "6",
+                    "col-planned": "7"
+                },
+                {
+                    "category": "2018-12",
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    "col-executed": "null",
+                    "col-forecastReal": "6",
+                    "col-forecast": "7.05",
+                    "col-planned": "8.7"
+                },
+                {
+                    "category": "2019",
+                    "col-plannedAnnual": "8.5",
+                    "col-executedAnnual": "null",
+                    "col-executed": "null",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
+                },
+                {
+                    "category": "2020",
+                    "col-plannedAnnual": "45.34",
+                    "col-executedAnnual": "null",
+                    "col-executed": "null",
+                    "col-forecastReal": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
                 }
             ]
         }
     );
-    */
 </script>
 <div class="section bcrumb project">
     <div class="breadcrumb-container">
@@ -384,7 +599,6 @@
         );?>
     </div>
     <?php
-
     setlocale(LC_ALL,"es_ES");
     $FoPo = strftime("%d %B, %Y",strtotime($projects->FOPO));
     $FePo = strftime("%d %B, %Y",strtotime($projects->FEPO));
@@ -492,68 +706,139 @@
         </div>
 
         <div class="map">
-            <?= $this->Html->image('maps/mapa1.png') ?>
+            <?= $this->Html->image('maps/mapa-1.jpg') ?>
         </div>
 
-        <div class="indicators">
+        <div class="indicators row wrap">
             <h2>Indicadores de cronograma</h2>
-            <a class="indicator primary modal-trigger" href="#detailValueExecuted">
-                <h2>SPI <small>Interno</small></h2>
-                <h3><?=number_format($projects->EXECUTED/$projects->PLANNED, 2, ',','')?></h3>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
-            <div class="indicator light-blue darken-2">
-                <h2>PORCENTAJE <small>AVANCE PLANEADO</small></h2>
-                <h3><?= $projects->PLANNED ?>%</h3>
-                <?= $this->Html->image('isotype-light.svg') ?>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2,'.','');?>
+                <div class="indicator type-1
+                    <?php
+                        if ($SPI >= 0.98) {
+                            echo 'primary';
+                        } elseif ($SPI < 0.98 && $SPI >= 0.9) {
+                            echo 'secondary';
+                        } elseif ($SPI < 0.9 && $SPI >= 0.8) {
+                            echo 'warning';
+                        } elseif ($SPI < 0.8) {
+                            echo 'error';
+                        }
+                    ?>">
+                    <h3 class="mr-2">SPI</h3>
+                    <h3 class="ml-auto"><?= $SPI ?></h3>
+                </div>
             </div>
-            <div class="indicator light-blue darken-3">
-                <h2>PORCENTAJE <small>EJECUTADO</small></h2>
-                <h3><?= $projects->EXECUTED ?>%</h3>
-                <?= $this->Html->image('isotype-light.svg') ?>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-2">
+                    <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
+                    <h3 class="ml-auto"><?= $projects->PLANNED ?>%</h3>
+                </div>
             </div>
-            <div class="indicator light-blue darken-2">
-                <h2>FePo</h2>
-                <h4><?=$FePo?></h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-3">
+                    <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
+                    <h3 class="ml-auto"><?= $projects->EXECUTED ?>%</h3>
+                </div>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-2">
+                    <h5 class="mr-2">FEPO</h5>
+                    <h5 class="ml-auto right-align"><?= $FePo ?></h5>
+                </div>
             </div>
         </div>
 
-        <div class="indicators mb-4">
-            <h2>Indicadores de presupuesto</h2>
-            <a class="indicator light-green modal-trigger" href="#detailValueExecuted">
-                <h2>AC</h2>
-                <h4>USD <?=$projects->AC?> MM</h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
-            <a class="indicator light-green darken-1 modal-trigger" href="#detailValueExecuted">
-                <h2>PV</h2>
-                <h4>USD <?=$projects->PV?> MM</h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
-            <a class="indicator light-green darken-2 modal-trigger" href="#detailValueExecuted">
-                <h2>AC <small>2019</small></h2>
-                <h4><small>EN CONSTRUCCIÓN</small></h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
-            <a class="indicator light-green darken-3 modal-trigger" href="#detailValueExecuted">
-                <h2>PV <small>2019</small></h2>
-                <h4><small>EN CONSTRUCCIÓN</small></h4>
-                <?= $this->Html->image('isotype-light.svg') ?>
-            </a>
+        <div class="indicators row wrap mb-4">
+            <h2 class="mb-2">Indicadores de presupuesto</h2>
+            <h3>Total proyecto</h3>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">AC/PPTO</h4>
+                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['acPpto'] ?>%</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">AC</h4>
+                    <h5 class="fw-600 ml-auto right-align">USD <?=$projects->AC?> MM</h5>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">PRESUPUESTO TOTAL</h5>
+                    <h4 class="fw-600 right-align">USD <?= $budgetIndicators['totalBudget'] ?> MM</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">FORECAST TOTAL</h5>
+                    <h4 class="fw-600 right-align"><?= $budgetIndicators['forecastTotal'] ?> MM</h4>
+                </a>
+            </div>
+            <h3 class="mt-3">Anual proyecto</h3>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">CPI <small>ANUAL 2018</small></h4>
+                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?>%</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">AC <small>2018</small></h4>
+                    <h5 class="fw-600 ml-auto right-align">USD <?=$projects->AC?> MM</h5>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2">PV <small>2018</small></h4>
+                    <h5 class="fw-600 ml-auto right-align">USD <?=$projects->PV?> MM</h5>
+                </a>
+            </div>
+            <div class="divider transparent"></div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">PRESUPUESTO 2018</h5>
+                    <h4 class="fw-600 right-align">USD <?= $budgetIndicators['annualBudget'] ?> MM</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">FORECAST 2018</h5>
+                    <h4 class="fw-600 right-align">USD <?= $budgetIndicators['annualForecast'] ?> MM</h4>
+                </a>
+            </div>
         </div>
-
         <div class="chart">
             <h2>Curva de Avance Físico</h2>
             <div class="chart-content" id="caf"></div>
-
+            <div class="row">
+              <div class="input-field col s12">
+                  <?= $this->Html->link(__('Día'),['action' => 'chart'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
+                    <?= $this->Html->link(__('Semana'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
+                      <?= $this->Html->link(__('Mes'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
+                        <?= $this->Html->link(__('Trimestre'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
+                          <?= $this->Html->link(__('Año'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
+                <!-- <?//php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?> -->
+              </div>
+            </div>
         </div>
 
         <div class="chart">
+          <div class="row">
+            <div class="input-field col s12">
+              <?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
+            </div>
+          </div>
+            <h2>Tres Generaciones</h2>
+            <div class="chart-content" id="tg" style="min-height: 475px;"></div>
+            <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
+        </div>
+        <!-- <div class="chart">
             <h2>Gráfica acumulado (en construcción)</h2>
             <div class="chart-content" id="ga"></div>
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
-        </div>
+        </div> -->
         <div class="chart">
             <h2>Riesgos</h2>
             <div class="chart-risk">
@@ -870,7 +1155,7 @@
                                 <ul class="collapsible-header-content">
                                     <li>
                                         <small>Código (CBS)</small>
-                                        <h3>1</h3>
+                                        <h3>2</h3>
                                     </li>
                                     <li>
                                         <small>Descripción</small>
@@ -890,193 +1175,11 @@
                                 <ul class="collapsible">
                                     <li>
                                         <div class="collapsible-header">
-                                            <!-- <i class="material-icons">keyboard_arrow_down</i> -->
+                                            <i class="material-icons">keyboard_arrow_down</i>
                                             <ul class="collapsible-header-content">
                                                 <li>
                                                     <small>Código (CBS)</small>
-                                                    <h3>1</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Descripción</small>
-                                                    <h3>Proyecto</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (COP)</small>
-                                                    <h3>$ 35,564,214,614</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (USD)</small>
-                                                    <h3>$ 1,564,214,614</h3>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="collapsible-body">
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="collapsible">
-                                    <li>
-                                        <div class="collapsible-header">
-                                            <ul class="collapsible-header-content">
-                                                <li>
-                                                    <small>Código (CBS)</small>
-                                                    <h3>1</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Descripción</small>
-                                                    <h3>Proyecto</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (COP)</small>
-                                                    <h3>$ 35,564,214,614</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (USD)</small>
-                                                    <h3>$ 1,564,214,614</h3>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="collapsible-body">
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="collapsible">
-                                    <li>
-                                        <div class="collapsible-header">
-                                            <ul class="collapsible-header-content">
-                                                <li>
-                                                    <small>Código (CBS)</small>
-                                                    <h3>1</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Descripción</small>
-                                                    <h3>Proyecto</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (COP)</small>
-                                                    <h3>$ 35,564,214,614</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (USD)</small>
-                                                    <h3>$ 1,564,214,614</h3>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="collapsible-body">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="collapsible-header">
-                    <i class="material-icons">keyboard_arrow_down</i>
-                    <ul class="collapsible-header-content">
-                        <li>
-                            <small>Código (CBS)</small>
-                            <h3>1</h3>
-                        </li>
-                        <li>
-                            <small>Descripción</small>
-                            <h3>Proyecto</h3>
-                        </li>
-                        <li>
-                            <small>Monto (COP)</small>
-                            <h3>$ 35,564,214,614</h3>
-                        </li>
-                        <li>
-                            <small>Monto (USD)</small>
-                            <h3>$ 1,564,214,614</h3>
-                        </li>
-                    </ul>
-                </div>
-                <div class="collapsible-body">
-                    <ul class="collapsible">
-                        <li>
-                            <div class="collapsible-header">
-                                <i class="material-icons">keyboard_arrow_down</i>
-                                <ul class="collapsible-header-content">
-                                    <li>
-                                        <small>Código (CBS)</small>
-                                        <h3>1</h3>
-                                    </li>
-                                    <li>
-                                        <small>Descripción</small>
-                                        <h3>Proyecto</h3>
-                                    </li>
-                                    <li>
-                                        <small>Monto (COP)</small>
-                                        <h3>$ 35,564,214,614</h3>
-                                    </li>
-                                    <li>
-                                        <small>Monto (USD)</small>
-                                        <h3>$ 1,564,214,614</h3>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="collapsible-body">
-                                <ul class="collapsible">
-                                    <li>
-                                        <div class="collapsible-header">
-                                            <ul class="collapsible-header-content">
-                                                <li>
-                                                    <small>Código (CBS)</small>
-                                                    <h3>1</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Descripción</small>
-                                                    <h3>Proyecto</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (COP)</small>
-                                                    <h3>$ 35,564,214,614</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (USD)</small>
-                                                    <h3>$ 1,564,214,614</h3>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="collapsible-body">
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="collapsible">
-                                    <li>
-                                        <div class="collapsible-header">
-                                            <ul class="collapsible-header-content">
-                                                <li>
-                                                    <small>Código (CBS)</small>
-                                                    <h3>1</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Descripción</small>
-                                                    <h3>Proyecto</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (COP)</small>
-                                                    <h3>$ 35,564,214,614</h3>
-                                                </li>
-                                                <li>
-                                                    <small>Monto (USD)</small>
-                                                    <h3>$ 1,564,214,614</h3>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="collapsible-body">
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="collapsible">
-                                    <li>
-                                        <div class="collapsible-header">
-                                            <ul class="collapsible-header-content">
-                                                <li>
-                                                    <small>Código (CBS)</small>
-                                                    <h3>1</h3>
+                                                    <h3>3</h3>
                                                 </li>
                                                 <li>
                                                     <small>Descripción</small>

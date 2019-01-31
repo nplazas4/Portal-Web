@@ -54,7 +54,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-    // $routes->connect('/', ['controller' => 'Users', 'action' => 'login']);
+
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
@@ -85,7 +85,7 @@ Router::scope('/login', function ($routes) {
 });
 
 // Rutas Portal Proyectos
-Router::scope('/Portal-Projects', function ($routes) {
+Router::scope('/portal-projects', function ($routes) {
     $routes->connect('/index', ['controller' => 'PortalProjects', 'action' => 'index']);
     $routes->connect('/companies/', ['controller' => 'PortalProjects', 'action' => 'companies']);
     $routes->connect('/company/', ['controller' => 'PortalProjects', 'action' => 'company']);

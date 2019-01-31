@@ -45,7 +45,6 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        //Login
         $this->loadComponent('Auth',[
             'authenticate'=>[
               'Form'=>[
@@ -71,30 +70,27 @@ class AppController extends Controller
             //redirigir a un usuario si no cumple requisitos
             'unauthorizedRedirect'=>$this->referer()
         ]);
-      }
+
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
-        // $this->loadComponent('Security');
-        // public function beforeFilter(Event $event)
-        // {
-        //   $this->set('current_user',$this->Auth->user());
-        // }
-        public function beforeFilter(Event $event)
-        {
-          $this->set('current_user',$this->Auth->user());
-        }
-        //autorizar vistas
-        public function isAuthorized($user)
-        {
-          if (isset($user['rol']) and $user['rol']===1)
-          {
-            return true;
-          }
-          else
-          {
-            return false;
-          }
-        }
+        //$this->loadComponent('Security');
     }
+    public function beforeFilter(Event $event)
+    {
+      $this->set('current_user',$this->Auth->user());
+    }
+    //autorizar vistas
+    public function isAuthorized($user)
+    {
+      if (isset($user['rol']) and $user['rol']===1)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+}

@@ -16,15 +16,10 @@ class ProjectsController extends AppController
      */
     public function index()
   	{
-      // $users = $this->paginate($this->Users);
-      // $this->set(compact('users'));
       $projects = $this->paginate($this->Projects);
       $this->set('projects',$projects);
       $this->Indicators();
       $this->Risks();
-      // $this->loadModel('Eps');
-      // $eps = $this->Eps->find('all');
-      // $this->set('eps', $eps->first());
   	}
     public function alert(){
       $error = 'display:none';
@@ -46,9 +41,6 @@ class ProjectsController extends AppController
           $this->Flash->error('El proyecto no pudo ser creado');
       }
       $this->set(compact('projects'));
-    }
-    public function AddProjectCode(){
-      // put your code.
     }
     public function AddEPS(){
       //$eps = $this->Eps->find('all');
@@ -95,6 +87,9 @@ class ProjectsController extends AppController
     {
         $this->index();
         $this->Charts();
+        $this->IndicatorsAC();
+        $this->IndicatorsAC2();
+        $this->IndicatorsAC3();
         $projects = $this->Projects->get($id);
         $this->set('projects', $projects);
     }
@@ -110,12 +105,28 @@ class ProjectsController extends AppController
       $this->loadModel('Risks');
       $rks= $this->Risks->find('all');
       $this->set('rks',$rks->all());
-      // print_r($risks->all());
     }
     public function Charts(){
       $this->loadModel('Charts');
       $charts = $this->Charts->find('all');
       $this->set('charts',$charts->all());
-      // print_r($risks->all());
+    }
+    public function IndicatorsAC(){
+      $this->loadModel('Presindicators');
+      $indicatorsAC = $this->Presindicators->find('all');
+      $this->set('indicatorsAC',$indicatorsAC->all());
+    }
+    public function IndicatorsAC2(){
+      $this->loadModel('Presindicators');
+      $indicatorsAC2 = $this->Presindicators->find('all');
+      $this->set('indicatorsAC2',$indicatorsAC2->all());
+    }
+    public function IndicatorsAC3(){
+      $this->loadModel('Presindicators');
+      $indicatorsAC3 = $this->Presindicators->find('all');
+      $this->set('indicatorsAC3',$indicatorsAC3->all());
+    }
+    public function chart()
+    {
     }
 }

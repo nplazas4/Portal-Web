@@ -3,7 +3,7 @@
     $breadcrumb = [
         [ 'Inicio', 'home','Pages' ],
         [ 'Portal Proyectos', 'index','PortalProjects'],
-        [ 'IDM', 'companies', 'PortalProjects'],
+        [ 'Transmisión y Transporte', 'companies', 'PortalProjects'],
     ];
 
     // Empresas
@@ -40,10 +40,11 @@
         ),
     );
 ?>
-<div class="section bcrumb companies">
+<div class="section companies">
     <div class="breadcrumb-container">
+        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?//= $item[1] ?>" class="breadcrumb"><?//= $item[0] ?></a> -->
+            <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb']
@@ -57,10 +58,10 @@
 
     <div class="companies-menu">
         <?php foreach ($companies as $item): ?>
-            <!-- <a href="<?//= $item[1] ?>" class="companies-menu-item">
-                <?//= $this->Html->image($item[2]) ?>
+            <!-- <a href="<//?= $item[1] ?>" class="companies-menu-item">
+                <//?= $this->Html->image($item[2]) ?>
                 <i class="material-icons">keyboard_arrow_right</i>
-                <span class="item-tooltip"><?//= $item[3] ?></span>
+                <span class="item-tooltip"><//?= $item[3] ?></span>
             </a> -->
             <?php echo $this->Html->link(
               $this->Html->image($item[2]).

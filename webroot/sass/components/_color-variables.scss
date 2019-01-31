@@ -336,6 +336,8 @@ $primary: (
 
 $secondary: ( 
     "base": #A6CE39,
+    "darken-1": #6EBC06,
+    "darken-2": #51A300,
 );
 
 $tertiary: ( 
@@ -350,6 +352,10 @@ $error: (
     "base": #EC5151,
 );
 
+$success: ( 
+    "base": #A6CE39,
+);
+
 $warning: ( 
     "base": #FFBB33,
 );
@@ -358,6 +364,7 @@ $dark: (
     "base": #444444,
     "lighten-1":  #888888,
     "lighten-2":  #D9D9D9,
+    "lighten-3": #ECECEC
 );
 
 $light: ( 
@@ -374,17 +381,28 @@ $regional: (
     "sur": #2DACE3,
 );
 
+// Fases
+$phase: ( 
+    "i": #FF0000,
+    "ii": #FF5E00,
+    "iii": #FFBB33,
+    "iv": #009242,
+    "v": #2376BC,
+);
+
 $colors: (
     "primary": $primary,
     "secondary": $secondary,
     "tertiary": $tertiary,
     "accent": $accent,
     "error": $error,
+    "success": $success,
     "warning": $warning,
     "dark": $dark,
     "light": $light,
 
     "regional": $regional,
+    "phase": $phase,
 
     "materialize-red": $materialize-red,
     "red": $red,

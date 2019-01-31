@@ -1,16 +1,17 @@
 <?php
     // Breadcrumb
     $breadcrumb = [
-        [ 'Inicio', 'home','Pages'],
+        [ 'Inicio', 'home','Pages' ],
         [ 'Portal Proyectos', 'index','PortalProjects'],
-        [ 'IDM','companies','PortalProjects'],
+        [ 'Transmisión y Transporte','companies','PortalProjects'],
         [ 'Unidad de Transmisión Colombia','company','PortalProjects'],
     ];
 ?>
 <div class="section bcrumb company">
     <div class="breadcrumb-container">
+        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?//= $item[1] ?>" class="breadcrumb"><?//= $item[0] ?></a> -->
+            <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb']
@@ -32,8 +33,8 @@
                 <h2>25</h2>
             </div>
         </div>
-        <!-- <a href="" class="company-content-tower increase">
-            <?//= $this->Html->image('icons/torre-crecimiento.svg') ?>
+        <!-- <a href="/portal-projects/projects" class="company-content-tower increase">
+            <//?= $this->Html->image('icons/torre-crecimiento.svg') ?>
             <div class="number">
                 <h3>15</h3>
             </div>

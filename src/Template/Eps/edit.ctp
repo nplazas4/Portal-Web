@@ -5,54 +5,41 @@
         [ 'EPS','index','eps'],
     ];
 ?>
-<?= $this->Html->css('login')?>
-<?= $this->Html->css('error')?>
-<div class="section bcrumb company">
-    <div class="breadcrumb-container">
-        <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
-            <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb'],
-              ['escape' => false]
-            );?>
-        <?php endforeach; ?>
-        <?php echo $this->Html->link('Editar EPS '.$eps->EPS_NAME,
-          ['controller'=>'Eps', 'action'=>'edit',$eps->id],
-          ['escape' => false,'class'=>'breadcrumb']
-        );?>
-    </div>
-    <div class="section home">
-        <div class="home-menu">
-          <!-- <div class="row"> -->
-          <div class="row">
-            <br/>
-             <!-- <form class="col s12"> -->
+<div class="section bcrumb">
+  <div class="breadcrumb-container">
+      <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
+      <?php foreach ($breadcrumb as $item): ?>
+          <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
+          <?php echo $this->Html->link($item[0],
+            ['controller'=>$item[2], 'action'=>$item[1]],
+            ['escape' => false,'class'=>'breadcrumb']
+          );?>
+      <?php endforeach; ?>
+      <?php echo $this->Html->link('Editar EPS '.$eps->EPS_NAME,
+        ['controller'=>'Eps', 'action'=>'edit',$eps->id],
+        ['escape' => false,'class'=>'breadcrumb']
+      );?>
+  </div>
+    <div class="form-content">
              <?= $this->Form->create($eps,['class'=>'col s12']) ?>
-               <div class="row">
-                 <h5 class="card-title text-center">Editar EPS</h5>
-                 <!-- <?//= $this->Form->create($eps,['novalidate']) ?> -->
+             <div class="form-content">
+               <div id="login-page" class="row">
+               <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6 ">
+                 <h5 class"centered">Editar EPS</h5>
                  <fieldset>
-                   <div class="alert" style=<?= $error ?>>
-                     <span class="closebtn">&times;</span>
-                     No se ha podido modificar la EPS.
-                   </div>
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('EPS_ID',['label'=>'ID','class'=>'form-control','placeholder'=>'ID','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('EPS_ID',['label'=>'','placeholder'=>'ID','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('EPS_NAME',['label'=>'Nombre','class'=>'form-control','placeholder'=>'Nombre','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('EPS_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
                  </div>
-               </div>
                </fieldset>
                <div class="btns mb-2">
-                   <!-- <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Crear</a> -->
-                   <!-- <?//= $this->Form->button('Crear',['class'=>'btn waves-effect btn-depressed'])?> -->
-                   <?= $this->Form->button('Editar',['class'=>'btn btn-primary mt-2'])?>
-                   <?= $this->Form->end() ?>
+                   <?= $this->Form->button(__('Editar'),['class'=>'btn waves-effect btn-depressed'])?>
                </div>
                 <?= $this->Form->end() ?>
-           </div>
+               </div>
+             </div>
+             </div>
         </div>
     </div>
-</div>

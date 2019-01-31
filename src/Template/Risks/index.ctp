@@ -6,14 +6,14 @@
     ];
 ?>
 <?= $this->Html->css('textlength')?>
-<div class="section bcrumb company">
+<div class="section portal-projects">
     <div class="breadcrumb-container">
+        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
+            <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb'],
-              ['escape' => false]
+              ['escape' => false,'class'=>'breadcrumb']
             );?>
         <?php endforeach; ?>
     </div>
