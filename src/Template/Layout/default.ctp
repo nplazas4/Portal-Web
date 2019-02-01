@@ -139,12 +139,6 @@
                                             ['escape'=>false]
                                           );?>
                                         </li>
-                                        <li>
-                                          <?php echo $this->Html->link('Crear indicador de proyectos',
-                                            ['controller'=>'Indicators','action'=>'add'],
-                                            ['escape'=>false]
-                                          );?>
-                                        </li>
                                     </ul>
                                 </div>
                                 <div class="sub-menu-column">

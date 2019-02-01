@@ -18,8 +18,8 @@ class IndicatorsFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'RIESGOS' => ['type' => 'decimal', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
-        'SPI_EXTERNO' => ['type' => 'decimal', 'length' => 10, 'precision' => 1, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
+        'CPI' => ['type' => 'decimal', 'length' => 10, 'precision' => 1, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
+        'SPI_EXTERNO' => ['type' => 'decimal', 'length' => 10, 'precision' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -40,7 +40,7 @@ class IndicatorsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'RIESGOS' => 1.5,
+                'CPI' => 1.5,
                 'SPI_EXTERNO' => 1.5
             ],
         ];
