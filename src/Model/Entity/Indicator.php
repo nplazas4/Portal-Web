@@ -9,6 +9,10 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property float $CPI
  * @property float $SPI_EXTERNO
+ * @property float $TOTAL_PRES
+ * @property float $TOTAL_EJEC_USD
+ * @property float $PRES_ANUAL
+ * @property float $EJECT_ANUAL
  */
 class Indicator extends Entity
 {
@@ -24,6 +28,10 @@ class Indicator extends Entity
      */
     protected $_accessible = [
         'CPI' => true,
-        'SPI_EXTERNO' => true
+        'SPI_EXTERNO' => true,
+        'TOTAL_PRES' => true,
+        'TOTAL_EJEC_USD' => true,
+        'PRES_ANUAL' => true,
+        'EJECT_ANUAL' => true
     ];
 }

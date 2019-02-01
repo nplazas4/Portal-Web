@@ -27,12 +27,24 @@
                <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6 ">
                  <h5 class"centered">Editar indicadores de proyectos</h5>
                  <fieldset>
-                 <div class="input-field col s12">
-                   <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'SPI','placeholder'=>'SPI','class'=>'validate','required']);?>
-                 </div>
-                 <div class="input-field col s12">
-                   <?php echo $this->Form->input('CPI',['label'=>'CPI','placeholder'=>'CPI','class'=>'validate','required']);?>
-                 </div>
+                   <div class="input-field col s12">
+                     <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'SPI','placeholder'=>'SPI','class'=>'validate','required']);?>
+                   </div>
+                   <div class="input-field col s12">
+                     <?php echo $this->Form->input('TOTAL_PRES',['label'=>'Presupuesto total USD','placeholder'=>'Presupuesto Total USD','class'=>'validate','required']);?>
+                   </div>
+                   <div class="input-field col s12">
+                     <?php echo $this->Form->input('TOTAL_EJEC_USD',['label'=>'Ejecutado total USD','placeholder'=>'Ejecutado Total USD','class'=>'validate','required']);?>
+                   </div>
+                   <div class="input-field col s12">
+                     <?php echo $this->Form->input('CPI',['label'=>'CPI','placeholder'=>'CPI','class'=>'validate','required']);?>
+                   </div>
+                   <div class="input-field col s12">
+                     <?php echo $this->Form->input('PRES_ANUAL',['label'=>'Presupuesto anual USD','placeholder'=>'Presupuesto Anual USD','class'=>'validate','required']);?>
+                   </div>
+                   <div class="input-field col s12">
+                     <?php echo $this->Form->input('EJECT_ANUAL',['label'=>'Ejecutado anual USD','placeholder'=>'Ejecutado Anual USD','class'=>'validate','required']);?>
+                   </div>
                </fieldset>
                <div class="btns mb-2">
                    <?= $this->Form->button(__('Editar'),['class'=>'btn waves-effect btn-depressed'])?>

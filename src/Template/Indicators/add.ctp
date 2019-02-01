@@ -22,13 +22,25 @@
              <div class="form-content">
                <div id="login-page" class="row">
                <div class="col s12 m6 offset-m3 l4 offset-l4 z-depth-6 ">
-                 <h5 class"centered">Crear indicador de proyectos</h5>
+                 <h5 class"centered">Crear indicadores de proyectos</h5>
                  <fieldset>
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'','placeholder'=>'SPI','class'=>'validate','required']);?>
+                 </div>
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->input('TOTAL_PRES',['label'=>'','placeholder'=>'Presupuesto Total USD','class'=>'validate','required']);?>
+                 </div>
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->input('TOTAL_EJEC_USD',['label'=>'','placeholder'=>'Ejecutado Total USD','class'=>'validate','required']);?>
+                 </div>
                  <div class="input-field col s12">
                    <?php echo $this->Form->input('CPI',['label'=>'','placeholder'=>'CPI','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'','placeholder'=>'SPI','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('PRES_ANUAL',['label'=>'','placeholder'=>'Presupuesto Anual USD','class'=>'validate','required']);?>
+                 </div>
+                 <div class="input-field col s12">
+                   <?php echo $this->Form->input('EJECT_ANUAL',['label'=>'','placeholder'=>'Ejecutado Anual USD','class'=>'validate','required']);?>
                  </div>
                </fieldset>
                <div class="btns mb-2">

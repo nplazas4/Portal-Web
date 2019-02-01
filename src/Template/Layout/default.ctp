@@ -90,7 +90,7 @@
       <?= $this->Html->css('error')?>
         <div class="header-wrapper">
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <!-- <a href="/" class="header-logo"><?//= $this->Html->image('logo.svg') ?></a> -->
+            <!-- <a href="/" class="header-logo"><//?//= $this->Html->image('logo.svg') ?></a> -->
             <?php echo $this->Html->link(
               $this->Html->image('logo.svg'),
               ['controller'=>'Pages', 'action'=>'home'],
@@ -136,6 +136,12 @@
                                         <li>
                                           <?php echo $this->Html->link('Lista de indicadores de proyectos',
                                             ['controller'=>'Indicators','action'=>'index'],
+                                            ['escape'=>false]
+                                          );?>
+                                        </li>
+                                        <li>
+                                          <?php echo $this->Html->link('Crear indicadores de proyectos',
+                                            ['controller'=>'Indicators','action'=>'add'],
                                             ['escape'=>false]
                                           );?>
                                         </li>
@@ -262,6 +268,88 @@
         );?></li>
         <?php if (isset($current_user)):?>
         <?php if($current_user['V_ROL']=='Administrator' || $current_user['V_ROL']=='Viewer'):?>
+          <li>
+            <a>
+                Portal alterno
+            </a>
+              <i class="material-icons success-text">keyboard_arrow_down</i>
+              <div class='submenu'>
+                  <div class="submenu-row">
+                      <h3>Proyectos</h3>
+                      <ul>
+                          <li>
+                            <?php echo $this->Html->link('Lista de proyectos',
+                              ['controller'=>'Projects','action'=>'index'],
+                              ['escape'=>false]
+                            );?>
+                          </li>
+                          <li>
+                            <?php echo $this->Html->link('Crear proyecto',
+                              ['controller'=>'Projects','action'=>'add'],
+                              ['escape'=>false]
+                            );?>
+                          </li>
+                          <li>
+                            <?php echo $this->Html->link('Lista de riesgos',
+                              ['controller'=>'Risks','action'=>'index'],
+                              ['escape'=>false]
+                            );?>
+                          </li>
+                          <li>
+                            <?php echo $this->Html->link('Crear riesgo',
+                              ['controller'=>'Risks','action'=>'add'],
+                              ['escape'=>false]
+                            );?>
+                          </li>
+                          <li>
+                            <?php echo $this->Html->link('Lista de indicadores de proyectos',
+                              ['controller'=>'Indicators','action'=>'index'],
+                              ['escape'=>false]
+                            );?>
+                          </li>
+                          <li>
+                            <?php echo $this->Html->link('Crear indicadores de proyectos',
+                              ['controller'=>'Indicators','action'=>'add'],
+                              ['escape'=>false]
+                            );?>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="submenu-row">
+                     <h3>Códigos</h3>
+                     <ul>
+                       <li>
+                         <?php echo $this->Html->link('Lista de códigos de proyectos',
+                           ['controller'=>'Projectcodes','action'=>'index'],
+                           ['escape'=>false]
+                         );?>
+                       </li>
+                       <li>
+                         <?php echo $this->Html->link('Crear código de proyecto',
+                           ['controller'=>'Projectcodes','action'=>'add'],
+                           ['escape'=>false]
+                         );?>
+                       </li>
+                     </ul>
+                 </div>
+                 <div class="submenu-row">
+                    <h3>EPS</h3>
+                    <ul>
+                      <li>
+                        <?php echo $this->Html->link('Lista de EPS',
+                          ['controller'=>'Eps','action'=>'index'],
+                          ['escape'=>false]
+                        );?>
+                      </li>
+                      <li>
+                        <?php echo $this->Html->link('Crear EPS',
+                          ['controller'=>'Eps','action'=>'add'],
+                          ['escape'=>false]
+                        );?>
+                      </li>
+                    </ul>
+                </div>
+          </li>
         <?php foreach ($menu as $item): ?>
             <li>
                 <?php echo $this->Html->link($item[0],

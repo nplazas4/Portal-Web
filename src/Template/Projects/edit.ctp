@@ -30,12 +30,12 @@
                    <span class="closebtn">&times;</span>
                    No se ha podido crear el proyecto.
                  </div>
-                 <h5 class"centered">Crear proyecto</h5>
+                 <h5 class"centered">Editar proyecto</h5>
                 <div class="row">
                   <div class="input-field col s6">
                     <?php echo $this->Form->input('ID_PROJECT',['label'=>'ID','placeholder'=>'ID','class'=>'validate','required']);?>
                   </div>
-                  <div class="input-field col s6">
+                  <div class="input-field col s12">
                     <?php echo $this->Form->input('PROJECT_NAME',['label'=>'Nombre','placeholder'=>'Nombre','class'=>'validate','required']);?>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s6">
-                    <?php echo $this->Form->input('FASE',['label'=>'Fase','placeholder'=>'Fase','class'=>'validate','required']);?>
+                    <?php echo $this->Form->input('FASE',['label'=>'Fase','options'=>['1'=>'I','2'=>'II','3'=>'III','4'=>'IV','5'=>'V']]);?>
                   </div>
                   <div class="input-field col s6">
                     <?php echo $this->Form->input('REGIONAL',['label'=>'Regional','options'=>['norte'=>'Norte','sur'=>'Sur','centro'=>'Centro','occidente'=>'Occidente']]);?>
@@ -116,6 +116,38 @@
                   </div>
                   <div class="input-field col s6">
                     <?php echo $this->Form->input('NUM_SUBESTACION',['label'=>'No. De subestaciones','placeholder'=>'No. De subestaciones','class'=>'validate','required']);?>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('CPI_ANUAL',['label'=>'CPI anual','placeholder'=>'CPI anual','class'=>'validate','required']);?>
+                  </div>
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('AC_BAC',['label'=>'AC/BAC','placeholder'=>'AC/BAC','class'=>'validate','required']);?>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('AC_PPTO',['label'=>'AC/PPTO','placeholder'=>'AC/PPTO','class'=>'validate','required']);?>
+                  </div>
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('PROJ_TOTAL_PRES',['label'=>'Presupuesto total','placeholder'=>'Presupuesto total','class'=>'validate','required']);?>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('TOTAL_FORECAST',['label'=>'Forecast total','placeholder'=>'Forecast total','class'=>'validate','required']);?>
+                  </div>
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('PROJ_AC',['label'=>'AC anual','placeholder'=>'AC anual','class'=>'validate','required']);?>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('PRES_PROJ',['label'=>'Presupuesto anual','placeholder'=>'Presupuesto anual','class'=>'validate','required']);?>
+                  </div>
+                  <div class="input-field col s6">
+                    <?php echo $this->Form->input('FORECAST_PROJ',['label'=>'Forecast anual','placeholder'=>'Forecast anual','class'=>'validate','required']);?>
                   </div>
                 </div>
                 </fieldset>

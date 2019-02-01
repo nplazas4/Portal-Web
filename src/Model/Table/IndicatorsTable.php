@@ -58,6 +58,26 @@ class IndicatorsTable extends Table
             ->requirePresence('SPI_EXTERNO', 'create')
             ->notEmpty('SPI_EXTERNO');
 
+        $validator
+            ->decimal('TOTAL_PRES')
+            ->requirePresence('TOTAL_PRES', 'create')
+            ->notEmpty('TOTAL_PRES');
+
+        $validator
+            ->decimal('TOTAL_EJEC_USD')
+            ->requirePresence('TOTAL_EJEC_USD', 'create')
+            ->notEmpty('TOTAL_EJEC_USD');
+
+        $validator
+            ->decimal('PRES_ANUAL')
+            ->requirePresence('PRES_ANUAL', 'create')
+            ->notEmpty('PRES_ANUAL');
+
+        $validator
+            ->decimal('EJECT_ANUAL')
+            ->requirePresence('EJECT_ANUAL', 'create')
+            ->notEmpty('EJECT_ANUAL');
+
         return $validator;
     }
 }

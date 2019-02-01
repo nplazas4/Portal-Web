@@ -30,7 +30,7 @@ class LoginController extends AppController
 		// Identifica si exíste algún usuario logeado en el sistema, en ser el caso retorna a la pestaña home,, sino permite el acceso
 		// a la página de login
 		if($this->Auth->user()) {
-				return $this->redirect(['controller'=>'PortalProjects','action' => 'home']);
+				return $this->redirect(['controller'=>'Pages','action' => 'home']);
 		}
 		else{
 		$this->view = '/Users/login';

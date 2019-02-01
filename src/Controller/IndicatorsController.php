@@ -20,6 +20,15 @@ function index()
       $this->set('indicators',$indicators);
   	}
     public function Add(){
+      $this->loadModel('Indicators');
+      $indicators= $this->Indicators->find('all');
+      $cont = $indicators->first();
+      if($cont != null)
+      {
+        return $this->redirect(['controller'=>'Indicators','action' => 'index']);
+      }
+      else
+      {
       $indicators = $this->Indicators->newEntity();
       if ($this->request->is('post')) {
           $indicators = $this->Indicators->patchEntity($indicators, $this->request->getData());
@@ -31,8 +40,6 @@ function index()
       }
       $this->set(compact('indicators'));
     }
-    public function AddProjectCode(){
-      // put your code.
     }
     public function delete($id = null)
     {

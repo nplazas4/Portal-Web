@@ -41,6 +41,10 @@ class UsersController extends AppController
     }
     public function login()
     {
+      if($this->Auth->user()) {
+          return $this->redirect(['controller'=>'Pages','action' => 'home']);
+      }
+      else{
       $this->index();
       $this->layout = 'blank';
       $this->token();
@@ -111,6 +115,7 @@ class UsersController extends AppController
     //           $this->set('error',$error);
     //         }
     //     }
+        }
       }
     }
      // public function login()

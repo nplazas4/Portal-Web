@@ -17,16 +17,16 @@
     //
     // // Indicadores de presupuesto
     $budgetIndicators = [
-        'acPpto' => 41, // AC/PPTO
-        'ac' => 41.59, // AC
-        'totalBudget' => 100.46, // Presupuesto total
-        'forecastTotal' => 89.73, // Forecast total
+        'acPpto' => $projects->AC_PPTO, // AC/PPTO
+        'ac' => $projects->AC, // AC
+        'totalBudget' => $projects->PROJ_TOTAL_PRES, // Presupuesto total
+        'forecastTotal' => $projects->TOTAL_FORECAST, // Forecast total
 
-        'cpiAnnual' => 44, // CPI Anual
-        'acAnnual' => 4.61, // AC Anual
-        'pvAnnual' => 10.57, // PV Anual
-        'annualBudget' => 26.12, // Presupuesto anual
-        'annualForecast' => 21.16, // Forecast anual
+        'cpiAnnual' => $projects->CPI_ANUAL, // CPI Anual
+        'acAnnual' => $projects->PROJ_AC, // AC Anual
+        'pvAnnual' => $projects->PV, // PV Anual
+        'annualBudget' => $projects->PRES_PROJ, // Presupuesto anual
+        'annualForecast' => $projects->FORECAST_PROJ, // Forecast anual
     ];
 ?>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -586,12 +586,14 @@
     );
 </script>
 <div class="section bcrumb project">
-    <div class="breadcrumb-container">
-        <?php foreach ($breadcrumb as $item): ?>
-            <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb']
-            );?>
+  <div class="breadcrumb-container">
+      <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
+      <?php foreach ($breadcrumb as $item): ?>
+          <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
+          <?php echo $this->Html->link($item[0],
+            ['controller'=>$item[2], 'action'=>$item[1]],
+            ['escape' => false,'class'=>'breadcrumb']
+          );?>
         <?php endforeach; ?>
         <?php echo $this->Html->link($projects->PROJECT_NAME,
           ['controller'=>'Projects', 'action'=>'project',$projects->id],

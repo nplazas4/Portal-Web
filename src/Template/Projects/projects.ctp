@@ -17,13 +17,13 @@
         ],
         [
             'name' => 'Presupuesto Total USD ',
-            'value' => '$ 1.225,97 MM',
+            'value' => '$ '.number_format($indicators->TOTAL_PRES, 2,",",".").' MM',
             'icon' => 'language',
             'color' => 'accent',
         ],
         [
             'name' => 'Ejecutado Total USD',
-            'value' => '$ 383,45 MM',
+            'value' => '$ '.$indicators->TOTAL_EJEC_USD.' MM',
             'icon' => 'language',
             'color' => 'tertiary',
         ],
@@ -35,13 +35,13 @@
         ],
         [
             'name' => 'Presupuesto Anual USD',
-            'value' => '$ 192,32 MM',
+            'value' => '$ '.$indicators->PRES_ANUAL.' MM',
             'icon' => 'language',
             'color' => 'primary',
         ],
         [
             'name' => 'Ejecutado Anual USD',
-            'value' => '$ 135,04 MM',
+            'value' => '$ '.$indicators->EJECT_ANUAL.' MM',
             'icon' => 'language',
             'color' => 'primary',
         ],
@@ -211,7 +211,7 @@
                         </div>
                         <div class="data-box">
                             <div class="data-box-circle error">
-                                <h5><?= $project['cpiAnnual'] ?>%</h5>
+                                <h5><?= $project->CPI_ANUAL ?>%</h5>
                             </div>
                             <div class="data-box-content">
                                 <span>CPI Anual</span>
@@ -219,7 +219,7 @@
                         </div>
                         <div class="data-box">
                             <div class="data-box-circle tertiary">
-                                <h5><?= $project['acBac'] ?>%</h5>
+                                <h5><?=$project->AC_BAC?>%</h5>
                             </div>
                             <div class="data-box-content">
                                 <span>AC/BAC</span>

@@ -34,10 +34,6 @@ class ProjectsTable extends Table
         $this->setTable('projects');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
-        $this->hasMany('Risks',[
-          'foreignkey' => 'PROJECT_CODE'
-        ]);
     }
 
     /**
@@ -71,12 +67,12 @@ class ProjectsTable extends Table
             ->notEmpty('DESCRIPTION');
 
         $validator
-            ->integer('PLANNED')
+            ->decimal('PLANNED')
             ->requirePresence('PLANNED', 'create')
             ->notEmpty('PLANNED');
 
         $validator
-            ->integer('EXECUTED')
+            ->decimal('EXECUTED')
             ->requirePresence('EXECUTED', 'create')
             ->notEmpty('EXECUTED');
 
@@ -91,17 +87,17 @@ class ProjectsTable extends Table
             ->notEmpty('PV');
 
         $validator
-            ->integer('CAPEX_PLANNED')
+            ->decimal('CAPEX_PLANNED')
             ->requirePresence('CAPEX_PLANNED', 'create')
             ->notEmpty('CAPEX_PLANNED');
 
         $validator
-            ->integer('CAPEX_EXECUTED')
+            ->decimal('CAPEX_EXECUTED')
             ->requirePresence('CAPEX_EXECUTED', 'create')
             ->notEmpty('CAPEX_EXECUTED');
 
         $validator
-            ->integer('FASE')
+            ->scalar('FASE')
             ->requirePresence('FASE', 'create')
             ->notEmpty('FASE');
 
@@ -161,6 +157,46 @@ class ProjectsTable extends Table
             ->integer('NUM_SUBESTACION')
             ->requirePresence('NUM_SUBESTACION', 'create')
             ->notEmpty('NUM_SUBESTACION');
+
+        $validator
+            ->decimal('CPI_ANUAL')
+            ->requirePresence('CPI_ANUAL', 'create')
+            ->notEmpty('CPI_ANUAL');
+
+        $validator
+            ->decimal('AC_BAC')
+            ->requirePresence('AC_BAC', 'create')
+            ->notEmpty('AC_BAC');
+
+        $validator
+            ->decimal('AC_PPTO')
+            ->requirePresence('AC_PPTO', 'create')
+            ->notEmpty('AC_PPTO');
+
+        $validator
+            ->decimal('PROJ_TOTAL_PRES')
+            ->requirePresence('PROJ_TOTAL_PRES', 'create')
+            ->notEmpty('PROJ_TOTAL_PRES');
+
+        $validator
+            ->decimal('TOTAL_FORECAST')
+            ->requirePresence('TOTAL_FORECAST', 'create')
+            ->notEmpty('TOTAL_FORECAST');
+
+        $validator
+            ->decimal('PROJ_AC')
+            ->requirePresence('PROJ_AC', 'create')
+            ->notEmpty('PROJ_AC');
+
+        $validator
+            ->decimal('PRES_PROJ')
+            ->requirePresence('PRES_PROJ', 'create')
+            ->notEmpty('PRES_PROJ');
+
+        $validator
+            ->decimal('FORECAST_PROJ')
+            ->requirePresence('FORECAST_PROJ', 'create')
+            ->notEmpty('FORECAST_PROJ');
 
         return $validator;
     }

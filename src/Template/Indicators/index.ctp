@@ -29,30 +29,35 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                      <?php if(count($indicators)!=0):?>
-                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped disabled','data-position'=>'dropdown','data-tooltip'=>'Ya exíste un indicador')),
-                      array('action' => ''), array('escape'=>false));?></th>
-                    <?php else:?>
-                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped disabled','data-position'=>'dropdown','data-tooltip'=>'Agregar Indicador')),
+                    <?php if(count($indicators)==0):?>
+                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped disabled','data-position'=>'dropdown','data-tooltip'=>'Agregar Indicadores')),
                       array('action' => 'add'), array('escape'=>false));?></th>
                     <?php endif; ?>
-                      <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                       <th scope="col"><?= $this->Paginator->sort('SPI_EXTERNO',['SPI']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('TOTAL_PRES',['Presupuesto total']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('PRES_ANUAL',['Presupuesto anual']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('CPI',['CPI']) ?></th>
+                      <!-- <th scope="col"><(/?= $this->Paginator->sort('SPI_EXTERNO',['SPI']) ?></th>
+                      <th scope="col"></?= $this->Paginator->sort('CPI',['CPI']) ?></th> -->
                       <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
                   <?php foreach ($indicators as $indicator): ?>
                   <tr>
+                    <?php if(count($indicators)==0):?>
                     <td></td>
-                    <td><?= $this->Number->format($indicator->id) ?></td>
+                    <?php endif; ?>
                     <td><?= h($indicator->SPI_EXTERNO) ?></td>
+                    <td><?= h($indicator->TOTAL_PRES) ?></td>
+                    <td><?= h($indicator->PRES_ANUAL) ?></td>
+                    <!-- <td></?= h($indicator->SPI_EXTERNO) ?></td>
+                    <td></?= h($indicator->SPI_EXTERNO) ?></td> -->
                     <td width="100"><?= h($indicator->CPI) ?></td>
                       <td class="actions">
-                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $indicator->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o editar indicador']) ?>
+                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $indicator->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o editar indicadores']) ?>
                           <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
-                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$indicator->id], ['confirm' => __('Seguro desea eliminar el indicador #'.$indicator->id.'?', $indicator->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'down','data-tooltip'=>'Eliminar indicador']) ?>
+                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$indicator->id], ['confirm' => __('Seguro desea eliminar los indicadores?'),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'down','data-tooltip'=>'Eliminar indicadores']) ?>
                       </td>
                   </tr>
                   <?php endforeach; ?>
