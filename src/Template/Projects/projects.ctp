@@ -10,8 +10,8 @@
     // Indicadores
     $indicators = [
         [
-            'name' => '﻿SPI',
-            'value' => 0.92,
+            'name' => 'SPI',
+            'value' => $indicators->SPI_EXTERNO,
             'icon' => 'show_chart',
             'color' => 'success',
         ],
@@ -29,7 +29,7 @@
         ],
         [
             'name' => 'CPI 2018',
-            'value' => '51%',
+            'value' => $indicators->CPI.'%',
             'icon' => 'show_chart',
             'color' => 'error',
         ],

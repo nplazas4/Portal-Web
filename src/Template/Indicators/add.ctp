@@ -25,10 +25,10 @@
                  <h5 class"centered">Crear indicador de proyectos</h5>
                  <fieldset>
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('RIESGOS',['label'=>'','placeholder'=>'RIESGOS','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('CPI',['label'=>'','placeholder'=>'CPI','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'','placeholder'=>'SPI EXTERNO','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'','placeholder'=>'SPI','class'=>'validate','required']);?>
                  </div>
                </fieldset>
                <div class="btns mb-2">

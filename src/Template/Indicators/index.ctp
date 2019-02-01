@@ -37,8 +37,8 @@
                       array('action' => 'add'), array('escape'=>false));?></th>
                     <?php endif; ?>
                       <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('RIESGOS',['Riesgos']) ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('SPI_EXTERNO',['SPI Externo']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('SPI_EXTERNO',['SPI']) ?></th>
+                      <th scope="col"><?= $this->Paginator->sort('CPI',['CPI']) ?></th>
                       <th>ACCIONES</th>
                     </tr>
                 </thead>
@@ -47,8 +47,8 @@
                   <tr>
                     <td></td>
                     <td><?= $this->Number->format($indicator->id) ?></td>
-                    <td><?= h($indicator->RIESGOS) ?></td>
-                    <td width="100"><?= h($indicator->SPI_EXTERNO) ?></td>
+                    <td><?= h($indicator->SPI_EXTERNO) ?></td>
+                    <td width="100"><?= h($indicator->CPI) ?></td>
                       <td class="actions">
                           <?= $this->Html->link(__('Editar'),['action' => 'edit', $indicator->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o editar indicador']) ?>
                           <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->

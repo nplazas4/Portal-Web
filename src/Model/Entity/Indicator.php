@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Indicator Entity
  *
  * @property int $id
- * @property float $RIESGOS
+ * @property float $CPI
  * @property float $SPI_EXTERNO
  */
 class Indicator extends Entity
@@ -23,7 +23,7 @@ class Indicator extends Entity
      * @var array
      */
     protected $_accessible = [
-        'RIESGOS' => true,
+        'CPI' => true,
         'SPI_EXTERNO' => true
     ];
 }

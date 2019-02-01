@@ -49,9 +49,9 @@ class IndicatorsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->decimal('RIESGOS')
-            ->requirePresence('RIESGOS', 'create')
-            ->notEmpty('RIESGOS');
+            ->decimal('CPI')
+            ->requirePresence('CPI', 'create')
+            ->notEmpty('CPI');
 
         $validator
             ->decimal('SPI_EXTERNO')

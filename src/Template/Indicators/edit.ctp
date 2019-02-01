@@ -28,10 +28,10 @@
                  <h5 class"centered">Editar indicadores de proyectos</h5>
                  <fieldset>
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('RIESGOS',['label'=>'Riesgos','placeholder'=>'RIESGOS','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'SPI','placeholder'=>'SPI','class'=>'validate','required']);?>
                  </div>
                  <div class="input-field col s12">
-                   <?php echo $this->Form->input('SPI_EXTERNO',['label'=>'SPI externo','placeholder'=>'SPI EXTERNO','class'=>'validate','required']);?>
+                   <?php echo $this->Form->input('CPI',['label'=>'CPI','placeholder'=>'CPI','class'=>'validate','required']);?>
                  </div>
                </fieldset>
                <div class="btns mb-2">

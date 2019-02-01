@@ -3,7 +3,7 @@
     $breadcrumb = [
       [ 'Inicio', 'home','Pages',''],
       [ 'Portal Proyectos','index','PortalProjects',''],
-      [ 'IDM','companies','PortalProjects',''],
+      [ 'Transmisión y transporte','companies','PortalProjects',''],
       [ 'Unidad de Transmisión Colombia','company','PortalProjects',''],
       [ 'Crecimiento','projects','Projects',''],
     ];
