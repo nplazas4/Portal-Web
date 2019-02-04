@@ -29,8 +29,10 @@
                     <div class="input-field col s6">
                       <?php echo $this->Form->input('RISK_NUMBER',['label'=>'','placeholder'=>'Riesgo','class'=>'validate','required']);?>
                     </div>
-                    <div class="input-field col s6">
-                      <?php echo $this->Form->input('RISK_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <?php echo $this->Form->textarea('RISK_NAME',['label'=>'Nombre','placeholder'=>'Nombre','class'=>'materialize-textarea','required']);?>
                     </div>
                   </div>
                   <div class="row">

@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $ID_PROJECT
  * @property string $PROJECT_NAME
+ * @property string $Proj_Obj
  * @property string $DESCRIPTION
  * @property float $PLANNED
  * @property float $EXECUTED
@@ -52,6 +53,7 @@ class Project extends Entity
     protected $_accessible = [
         'ID_PROJECT' => true,
         'PROJECT_NAME' => true,
+        'Proj_Obj' => true,
         'DESCRIPTION' => true,
         'PLANNED' => true,
         'EXECUTED' => true,

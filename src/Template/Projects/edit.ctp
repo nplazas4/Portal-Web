@@ -41,7 +41,12 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <?php echo $this->Form->textarea('DESCRIPTION',['label'=>'Descripción','placeholder'=>'Descripción','class'=>'materialize-textarea','required']);?>
+                    <?php echo $this->Form->textarea('Proj_Obj',['label'=>'Objetivo estratégico','placeholder'=>'Objetivo estratégico','class'=>'materialize-textarea','required']);?>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <?php echo $this->Form->textarea('DESCRIPTION',['label'=>'Información general','placeholder'=>'Información general','class'=>'materialize-textarea','required']);?>
                   </div>
                 </div>
                 <div class="row">
@@ -57,7 +62,7 @@
                     <?php echo $this->Form->input('AC',['label'=>'AC','placeholder'=>'AC','class'=>'validate','required']);?>
                   </div>
                   <div class="input-field col s6">
-                    <?php echo $this->Form->input('PV',['label'=>'PV','placeholder'=>'PV','class'=>'validate','required']);?>
+                    <?php echo $this->Form->input('PV',['label'=>'PV anual','placeholder'=>'PV','class'=>'validate','required']);?>
                   </div>
                 </div>
                 <div class="row">

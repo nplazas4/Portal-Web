@@ -34,11 +34,6 @@ class RisksTable extends Table
         $this->setTable('risks');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
-        $this->belongsTo('Projects',[
-            'foreignkey' => 'PROJECT_CODE',
-            'joinType' => 'INNER'
-        ]);
     }
 
     /**
@@ -60,7 +55,7 @@ class RisksTable extends Table
 
         $validator
             ->scalar('RISK_NAME')
-            ->maxLength('RISK_NAME', 100)
+            ->maxLength('RISK_NAME', 300)
             ->requirePresence('RISK_NAME', 'create')
             ->notEmpty('RISK_NAME');
 
@@ -81,31 +76,31 @@ class RisksTable extends Table
 
         $validator
             ->scalar('PLAN_ONE')
-            ->maxLength('PLAN_ONE', 200)
+            ->maxLength('PLAN_ONE', 600)
             ->requirePresence('PLAN_ONE', 'create')
             ->notEmpty('PLAN_ONE');
 
         $validator
             ->scalar('PLAN_TWO')
-            ->maxLength('PLAN_TWO', 200)
+            ->maxLength('PLAN_TWO', 600)
             ->requirePresence('PLAN_TWO', 'create')
             ->notEmpty('PLAN_TWO');
 
         $validator
             ->scalar('PLAN_THREE')
-            ->maxLength('PLAN_THREE', 200)
+            ->maxLength('PLAN_THREE', 600)
             ->requirePresence('PLAN_THREE', 'create')
             ->notEmpty('PLAN_THREE');
 
         $validator
             ->scalar('PLAN_FOUR')
-            ->maxLength('PLAN_FOUR', 200)
+            ->maxLength('PLAN_FOUR', 600)
             ->requirePresence('PLAN_FOUR', 'create')
             ->notEmpty('PLAN_FOUR');
 
         $validator
             ->scalar('PLAN_FIVE')
-            ->maxLength('PLAN_FIVE', 200)
+            ->maxLength('PLAN_FIVE', 600)
             ->requirePresence('PLAN_FIVE', 'create')
             ->notEmpty('PLAN_FIVE');
 
@@ -116,31 +111,31 @@ class RisksTable extends Table
 
         $validator
             ->scalar('PLAN_ONE_S')
-            ->maxLength('PLAN_ONE_S', 200)
+            ->maxLength('PLAN_ONE_S', 600)
             ->requirePresence('PLAN_ONE_S', 'create')
             ->notEmpty('PLAN_ONE_S');
 
         $validator
             ->scalar('PLAN_TWO_S')
-            ->maxLength('PLAN_TWO_S', 200)
+            ->maxLength('PLAN_TWO_S', 600)
             ->requirePresence('PLAN_TWO_S', 'create')
             ->notEmpty('PLAN_TWO_S');
 
         $validator
             ->scalar('PLAN_THREE_S')
-            ->maxLength('PLAN_THREE_S', 200)
+            ->maxLength('PLAN_THREE_S', 600)
             ->requirePresence('PLAN_THREE_S', 'create')
             ->notEmpty('PLAN_THREE_S');
 
         $validator
             ->scalar('PLAN_FOUR_S')
-            ->maxLength('PLAN_FOUR_S', 200)
+            ->maxLength('PLAN_FOUR_S', 600)
             ->requirePresence('PLAN_FOUR_S', 'create')
             ->notEmpty('PLAN_FOUR_S');
 
         $validator
             ->scalar('PLAN_FIVE_S')
-            ->maxLength('PLAN_FIVE_S', 200)
+            ->maxLength('PLAN_FIVE_S', 600)
             ->requirePresence('PLAN_FIVE_S', 'create')
             ->notEmpty('PLAN_FIVE_S');
 

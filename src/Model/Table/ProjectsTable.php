@@ -61,6 +61,12 @@ class ProjectsTable extends Table
             ->notEmpty('PROJECT_NAME');
 
         $validator
+            ->scalar('Proj_Obj')
+            ->maxLength('Proj_Obj', 200)
+            ->requirePresence('Proj_Obj', 'create')
+            ->notEmpty('Proj_Obj');
+
+        $validator
             ->scalar('DESCRIPTION')
             ->maxLength('DESCRIPTION', 500)
             ->requirePresence('DESCRIPTION', 'create')

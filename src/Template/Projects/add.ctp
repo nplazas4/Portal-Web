@@ -38,7 +38,12 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <?php echo $this->Form->textarea('DESCRIPTION',['label'=>'Descripción','placeholder'=>'Descripción','class'=>'materialize-textarea','required']);?>
+                    <?php echo $this->Form->textarea('Proj_Obj',['label'=>'Objetivo estratégico','placeholder'=>'Objetivo estratégico','class'=>'materialize-textarea','required']);?>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <?php echo $this->Form->textarea('DESCRIPTION',['label'=>'Información general','placeholder'=>'Información general','class'=>'materialize-textarea','required']);?>
                   </div>
                 </div>
                 <div class="row">
@@ -104,7 +109,7 @@
                     <?php echo $this->Form->input('ADJUDICACION',['label'=>'','placeholder'=>'Adjudicación','type'=>'text','class'=>'datepicker3']);?>
                   </div>
                   <div class="input-field col s6">
-                   <?php echo $this->Form->input('APROBACION',['label'=>'','placeholder'=>'Aprobación','type'=>'text','class'=>'datepicker4']);?>
+                   <?php echo $this->Form->input('APROBACION',['label'=>'','placeholder'=>'Fecha corte','type'=>'text','class'=>'datepicker4']);?>
                   </div>
                 </div>
                 <div class="row">

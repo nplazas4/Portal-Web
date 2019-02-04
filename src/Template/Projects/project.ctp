@@ -652,6 +652,10 @@
             </div>
         </div>
         <div class="project-sidebar-info">
+            <h2>Objetivo estratégico</h2>
+            <p><?= $projects->Proj_Obj ?></p>
+        </div>
+        <div class="project-sidebar-info">
             <h2>Información general</h2>
             <p><?= $projects->DESCRIPTION ?></p>
         </div>
@@ -693,7 +697,7 @@
                     </li>
                     <li>
                         <i class="material-icons">event_available</i>
-                        <span>Aprobación: <?= $Apr ?></span>
+                        <span>Fecha corte: <?= $Apr ?></span>
                     </li>
                     <li>
                         <i class="material-icons">straighten</i>
@@ -826,6 +830,7 @@
             </div>
         </div>
 
+        <?php if ($projects->PROJECT_NAME == 'UPME 03-2010 Norte'): ?>
         <div class="chart">
           <div class="row">
             <div class="input-field col s12">
@@ -836,6 +841,7 @@
             <div class="chart-content" id="tg" style="min-height: 475px;"></div>
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
         </div>
+        <?php endif; ?>
         <!-- <div class="chart">
             <h2>Gráfica acumulado (en construcción)</h2>
             <div class="chart-content" id="ga"></div>

@@ -7,41 +7,59 @@
         [ 'Unidad de Transmisión Colombia','company','PortalProjects' ],
         [ 'Crecimiento','projects','PortalProjects'],
     ];
+
+     if (isset($indicators->SPI_EXTERNO)){
+    $SPI_GLOBAL = 0 + $indicators->SPI_EXTERNO;
+    $PRES_GLOBAL = 0 + $indicators->TOTAL_PRES;
+    $EJECT_GLOBAL = 0 + $indicators->TOTAL_EJEC_USD;
+    $GLOBAL_CPI = 0 + $indicators->CPI;
+    $GLOBAL_PRES_ANUAL = 0 + $indicators->PRES_ANUAL;
+    $GLOBAL_EJECT_ANUAL = 0 + $indicators->EJECT_ANUAL;
+    }
+    else
+    {
+      $SPI_GLOBAL = 0;
+      $PRES_GLOBAL = 0;
+      $EJECT_GLOBAL = 0;
+      $GLOBAL_CPI = 0;
+      $GLOBAL_PRES_ANUAL = 0;
+      $GLOBAL_EJECT_ANUAL = 0;
+    }
     // Indicadores
     $indicators = [
         [
             'name' => 'SPI',
-            'value' => $indicators->SPI_EXTERNO,
+            'value' => $SPI_GLOBAL,
             'icon' => 'show_chart',
             'color' => 'success',
         ],
         [
             'name' => 'Presupuesto Total USD ',
-            'value' => '$ '.number_format($indicators->TOTAL_PRES, 2,",",".").' MM',
+            'value' => '$ '.number_format($PRES_GLOBAL, 2,",",".").' MM',
             'icon' => 'language',
             'color' => 'accent',
         ],
         [
             'name' => 'Ejecutado Total USD',
-            'value' => '$ '.$indicators->TOTAL_EJEC_USD.' MM',
+            'value' => '$ '.$EJECT_GLOBAL.' MM',
             'icon' => 'language',
             'color' => 'tertiary',
         ],
         [
             'name' => 'CPI 2018',
-            'value' => $indicators->CPI.'%',
+            'value' => $GLOBAL_CPI.'%',
             'icon' => 'show_chart',
             'color' => 'error',
         ],
         [
             'name' => 'Presupuesto Anual USD',
-            'value' => '$ '.$indicators->PRES_ANUAL.' MM',
+            'value' => '$ '.$GLOBAL_PRES_ANUAL.' MM',
             'icon' => 'language',
             'color' => 'primary',
         ],
         [
             'name' => 'Ejecutado Anual USD',
-            'value' => '$ '.$indicators->EJECT_ANUAL.' MM',
+            'value' => '$ '.$GLOBAL_EJECT_ANUAL.' MM',
             'icon' => 'language',
             'color' => 'primary',
         ],
