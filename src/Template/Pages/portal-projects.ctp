@@ -36,7 +36,7 @@
             <div class="title"><//?= $this->Html->image('logos/logotipo-soluciones-energeticas.png') ?></div>
         </a> -->
         <?php echo $this->Html->link($this->Html->tag('figure',$this->Html->image('logos/isotipo-soluciones-energeticas.png')).
-                  $this->Html->tag('div',$this->Html->image('logos/logotipo-soluciones-energeticas.png'),array('class'=>'title')),
+                  $this->Html->tag('h2','Distribución'),
                   array('controller'=>'PortalProjects','action'=>'index'),
                   array('escape' => false, 'class'=>'portal-projects-menu-item indigo-text text-darken-4'))?>
 
