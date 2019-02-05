@@ -59,7 +59,7 @@
             <h2>Generación de baja emisión</h2>
         </a> -->
         <?php echo $this->Html->link($this->Html->tag('figure',$this->Html->image('logos/isotipo-baja-emision.png')).
-                  $this->Html->tag('h2','Generación de baja emisión'),
+                  $this->Html->tag('h2','Generación'),
                   array('controller'=>'PortalProjects','action'=>'index'),
                   array('escape' => false, 'class'=>'portal-projects-menu-item light-green-text text-darken-1'))?>
     </div>
