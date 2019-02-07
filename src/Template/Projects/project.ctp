@@ -193,13 +193,13 @@
                      <?php $evDec = bcdiv($evJson[$i], '1', 4);?>
                      <?php $acDec = bcdiv($acJson[$i], '1', 4);?>
                      "date": "<?=$fecJson[$i]?>",
-                     "column-1": "<?=$acDec?>",
+                     "column-3": "<?=$acDec?>",
                      <?php if(is_numeric($evJson[$i])):?>
                      "column-2": "<?=$evDec?>",
                      <?php else: ?>
                      "column-2": null,
                      <?php endif;?>
-                     "column-3": "<?=$blDec?>"
+                     "column-1": "<?=$blDec?>"
 
                 },
                   <?php endfor; ?>
@@ -779,11 +779,21 @@
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
         </div>
         <?php endif; ?>
-        <!-- <div class="chart">
-            <h2>Gráfica acumulado (en construcción)</h2>
-            <div class="chart-content" id="ga"></div>
-            <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
+        <!-- <label class="wrapper" for="states">This label is stacked above the select</label>
+        <div class="button dropdown">
+          <select id="colorselector">
+             <option value="red">Red</option>
+             <option value="yellow">Yellow</option>
+             <option value="blue">Blue</option>
+          </select>
         </div> -->
+
+        <!-- <div class="">
+          <div id="red" class="colors red">“Art is the lie that enables us to realize the truth” Pablo Picasso</div>
+          <div id="yellow" class="colors yellow"> “Art is the lie that enables us to realize the truth” Pablo Picasso</div>
+          <div id="blue" class="colors blue"> “If I don't have red, I use blue” Pablo Picasso</div>
+        </div> -->
+
         <div class="chart">
             <h2>Riesgos</h2>
             <div class="chart-risk">

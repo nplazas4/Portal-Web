@@ -94,6 +94,9 @@ class ProjectsController extends AppController
         $this->IndicatorsAC3();
         $projects = $this->Projects->get($id);
         $this->set('projects', $projects);
+        $posts = $this->Projects->find();
+        $this->set(['posts' => $posts]);
+
     }
     public function projects(){
       $this->index();
@@ -156,7 +159,7 @@ class ProjectsController extends AppController
 
       curl_setopt_array($curl, array(
         CURLOPT_PORT => "7001",
-        CURLOPT_URL => "http://23.99.203.76:7001/ords/portal/graph/data/?P_PROJECT_ID=14897&P_PERIOD_TYPE=3",
+        CURLOPT_URL => "http://23.99.203.76:7001/ords/portal/graph/data/?P_PROJECT_ID=30261&P_PERIOD_TYPE=3",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -210,8 +213,5 @@ class ProjectsController extends AppController
         $longitud = count($ArrayStartDate);
         $this->set('cont',$longitud);
       }
-    }
-    public function adv($var = null){
-        print_r($var);
     }
 }
