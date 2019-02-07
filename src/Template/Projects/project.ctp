@@ -120,7 +120,7 @@
             },
             "chartScrollbar": {
                 "enabled": true,
-                "graph": "AmGraph-2",
+                "graph": "AmGraph-1",
                 "graphType": "line",
                 "gridCount": 7,
                 "offset": 40,
