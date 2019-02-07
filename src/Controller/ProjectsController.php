@@ -20,6 +20,7 @@ class ProjectsController extends AppController
       $this->set('projects',$projects);
       $this->Indicators();
       $this->Risks();
+      $this->Period();
   	}
     public function alert(){
       $error = 'display:none';
@@ -87,6 +88,7 @@ class ProjectsController extends AppController
     {
         $this->index();
         $this->Charts();
+        $this->ChartAF();
         $this->IndicatorsAC();
         $this->IndicatorsAC2();
         $this->IndicatorsAC3();
@@ -126,7 +128,90 @@ class ProjectsController extends AppController
       $indicatorsAC3 = $this->Presindicators->find('all');
       $this->set('indicatorsAC3',$indicatorsAC3->all());
     }
-    public function chart()
+    public function Period()
     {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'http://23.99.203.76:7001/ords/portal/periodtype/period');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+
+        $headers = array();
+        $headers[] = 'Authorization: Bearer hmlUoDM3XZMFM9qu82-akA..';
+        $headers[] = 'Postman-Token: 3306332e-7998-49c0-8471-d74e63e7087c';
+        $headers[] = 'Cache-Control: no-cache';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result3 = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close ($ch);
+        $_SESSION['algo'] = $result3;
+    }
+    function ChartAF()
+    {
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_PORT => "7001",
+        CURLOPT_URL => "http://23.99.203.76:7001/ords/portal/graph/data/?P_PROJECT_ID=14897&P_PERIOD_TYPE=3",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_POSTFIELDS => "",
+        CURLOPT_HTTPHEADER => array(
+          "Authorization: Bearer oYPPniqltX9X8JnYRBgo8A..",
+          "Postman-Token: fd1a5722-dd7d-414a-88d9-df5ad54d3d8a",
+          "cache-control: no-cache"
+        ),
+      ));
+
+      $response = curl_exec($curl);
+      // $_SESSION['AF'] = $response;
+      $err = curl_error($curl);
+
+      curl_close($curl);
+
+      if ($err) {
+        echo "cURL Error #:" . $err;
+      } else {
+        // echo $responses;
+        $responses = json_decode($response, true);
+        $ArrayStartDate = array();
+        $ArrayBL = array();
+        $ArrayEV = array();
+        $ArrayAC = array();
+        $var1 = array_values($responses)[0];
+        foreach($var1 as $row => $value)
+        {
+            $StartDate = $value["start_date"];
+            $BL = $value["cum_bl_lu"];
+            $EV = $value["cum_ev_lu"];
+            $AC = $value["cum_ac_lu"];
+            $StartDate2 = date("Y-m-d", strtotime($StartDate));
+            array_push($ArrayStartDate , $StartDate2);
+            array_push($ArrayBL, $BL);
+            array_push($ArrayEV, $EV);
+            array_push($ArrayAC, $AC);
+            $fecJson = json_encode($ArrayStartDate);
+            $blJson = json_encode($ArrayBL);
+            $evJson = json_encode($ArrayEV);
+            $acJson = json_encode($ArrayAC);
+            $this->set('fecJson',$ArrayStartDate);
+            $this->set('blJson',$ArrayBL);
+            $this->set('evJson',$ArrayEV);
+            $this->set('acJson',$ArrayAC);
+        }
+        $longitud = count($ArrayStartDate);
+        $this->set('cont',$longitud);
+      }
+    }
+    public function adv($var = null){
+        print_r($var);
     }
 }

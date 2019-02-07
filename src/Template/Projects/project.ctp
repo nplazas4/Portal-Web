@@ -130,31 +130,37 @@
             "trendLines": [],
             "graphs": [
                 {
-                    "customBullet": "",
-                    "dashLength": 7,
-                    "id": "AmGraph-1",
-                    "labelPosition": "right",
-                    "labelText": "",
-                    "lineColor": "#2CACE3",
-                    "lineThickness": 3,
-                    "minBulletSize": 3,
-                    "showAllValueLabels": true,
-                    "title": "Ejecutado",
-                    "valueField": "column-1"
+                  "id": "AmGraph-1",
+                  "lineColor": "#A6CE39",
+                  "lineThickness": 3,
+                  "title": "Planeado",
+                  "valueField": "column-1"
                 },
                 {
+                    // "customBullet": "",
+                    // "dashLength": 7,
                     "id": "AmGraph-2",
-                    "lineColor": "#A6CE39",
+                    // "labelPosition": "right",
+                    // "labelText": "",
+                    "lineColor": "#2CACE3",
                     "lineThickness": 3,
-                    "title": "Planeado",
+                    // "minBulletSize": 3,
+                    // "showAllValueLabels": true,
+                    "title": "Ejecutado",
                     "valueField": "column-2"
                 },
                 {
-                    "id": "AmGraph-3",
-                    "lineColor": "#A6CE39",
-                    "lineThickness": 3,
-                    "title": "Restante",
-                    "valueField": "column-3"
+                  "customBullet": "",
+                  "dashLength": 7,
+                  "id": "AmGraph-3",
+                  "labelPosition": "right",
+                  "labelText": "",
+                  "lineColor": "#fc9219",
+                  "lineThickness": 3,
+                  "minBulletSize": 3,
+                  "showAllValueLabels": true,
+                  "title": "Completar",
+                  "valueField": "column-3"
                 }
             ],
             "guides": [],
@@ -181,93 +187,27 @@
             },
             "titles": [],
             "dataProvider": [
-                <?php foreach ($charts as $chart):?>
+                <?php for ($i=0; $i<$cont; $i++): ?>
                 {
-                  <?php $Date = date('Y-m-d', strtotime($chart->START_DATE));?>
-                  <?php $_SESSION['chart'] = $Date?>
-                  "date": "<?=$Date?>",
-                  <?php if(is_numeric($chart->EJEC)):?>
-                  "column-1": "<?=$chart->EJEC?>",
-                  "column-2": "<?=$chart->BL_CHART?>",
-                  "column-3": null
-                  <?php endif;?>
-                  <?php if(is_numeric($chart->EAC)):?>
-                  "column-1": null,
-                  "column-2": "<?=$chart->BL_CHART?>",
-                  "column-3": "<?=$chart->EAC?>"
-                  <?php endif;?>
+                     <?php $blDec = bcdiv($blJson[$i], '1', 4);?>
+                     <?php $evDec = bcdiv($evJson[$i], '1', 4);?>
+                     <?php $acDec = bcdiv($acJson[$i], '1', 4);?>
+                     "date": "<?=$fecJson[$i]?>",
+                     "column-1": "<?=$acDec?>",
+                     <?php if(is_numeric($evJson[$i])):?>
+                     "column-2": "<?=$evDec?>",
+                     <?php else: ?>
+                     "column-2": null,
+                     <?php endif;?>
+                     "column-3": "<?=$blDec?>"
+
                 },
-                <?php endforeach;?>
-                // {
-                //     "date": "2014-02-17",
-                //     "column-1": "5",
-                //     "column-2": "6"
-                // },
-                // {
-                //     "date": "2014-03-17",
-                //     "column-1": "10",
-                //     "column-2": "12"
-                // },
+                  <?php endfor; ?>
                 // {
                 //     "date": "2014-04-17",
                 //     "column-1": "11",
                 //     "column-2": "15"
                 // },
-                // {
-                //     "date": "2014-05-17",
-                //     "column-1": "12",
-                //     "column-2": "20"
-                // },
-                // {
-                //     "date": "2014-06-17",
-                //     "column-1": "13",
-                //     "column-2": "22"
-                // },
-                // {
-                //     "date": "2014-07-17",
-                //     "column-1": "15",
-                //     "column-2": "30"
-                // },
-                // {
-                //     "date": "2014-08-17",
-                //     "column-1": "20",
-                //     "column-2": "30"
-                // },
-                // {
-                //     "date": "2014-09-17",
-                //     "column-1": "21",
-                //     "column-2": "32"
-                // },
-                // {
-                //     "date": "2014-10-17",
-                //     "column-1": "22",
-                //     "column-2": "35"
-                // },
-                // {
-                //     "date": "2014-11-17",
-                //     "column-1": null,
-                //     "column-2": "31"
-                // },
-                // {
-                //     "date": "2014-12-17",
-                //     "column-1": null,
-                //     "column-2": "30"
-                // },
-                // {
-                //     "date": "2015-01-17",
-                //     "column-1": null,
-                //     "column-2": "25"
-                // },
-                // {
-                //     "date": "2015-02-17",
-                //     "column-1": null,
-                //     "column-2": "27"
-                // },
-                // {
-                //     "date": "2015-03-17",
-                //     "column-1": null,
-                //     "column-2": "32"
-                // }
             ]
         }
     );
@@ -600,6 +540,27 @@
           ['escape' => false,'class'=>'breadcrumb']
         );?>
     </div>
+    <div class="button dropdown">
+  <select id="colorselector">
+     <option value="red">Red</option>
+     <option value="yellow">Yellow</option>
+     <option value="blue">Blue</option>
+  </select>
+</div>
+
+<div class="output">
+  <div id="red" class="colors red">  “Good artists copy, great artists steal” Pablo Picasso</div>
+  <div id="yellow" class="colors yellow"> “Art is the lie that enables us to realize the truth” Pablo Picasso</div>
+  <div id="blue" class="colors blue"> “If I don't have red, I use blue” Pablo Picasso</div>
+</div>
+<script>
+$(function() {
+  $('#colorselector').change(function(){
+    $('.colors').hide();
+    $('#' + $(this).val()).show();
+  });
+});
+</script>
     <?php
     setlocale(LC_ALL,"es_ES");
     $FoPo = strftime("%d %B, %Y",strtotime($projects->FOPO));
@@ -714,7 +675,6 @@
         <div class="map">
             <?= $this->Html->image('maps/mapa-1.jpg') ?>
         </div>
-
         <div class="indicators row wrap">
             <h2>Indicadores de cronograma</h2>
             <div class="d-flex col s12 m6 l4 xl3">
@@ -815,21 +775,19 @@
                 </a>
             </div>
         </div>
+
+        <!-- </?php echo $this->Form->create('Product', array('controller'=>'Projects', 'action'=>'adv','id' => 'anyFormName'));
+        echo $this->Form->input('area', array('options' => array('1' => 'Within Malaysia', '2' => 'International'), 'empty' => 'choose area',
+        'label' => 'Choose shipping area', 'onChange'=>'document.getElementById("anyFormName").submit();'));?> -->
         <div class="chart">
+          <div class="row">
+            <div class="input-field col s12">
+              <?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
+            </div>
+          </div>
             <h2>Curva de Avance Físico</h2>
             <div class="chart-content" id="caf"></div>
-            <div class="row">
-              <div class="input-field col s12">
-                  <?= $this->Html->link(__('Día'),['action' => 'chart'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
-                    <?= $this->Html->link(__('Semana'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
-                      <?= $this->Html->link(__('Mes'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
-                        <?= $this->Html->link(__('Trimestre'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
-                          <?= $this->Html->link(__('Año'),['action' => 'edit'],['class'=>'btn btn-small #bdbdbd grey lighten-1']) ?>
-                <!-- <?//php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?> -->
-              </div>
-            </div>
         </div>
-
         <?php if ($projects->PROJECT_NAME == 'UPME 03-2010 Norte'): ?>
         <div class="chart">
           <div class="row">
