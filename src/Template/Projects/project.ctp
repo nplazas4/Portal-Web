@@ -759,21 +759,21 @@
         echo $this->Form->input('area', array('options' => array('1' => 'Within Malaysia', '2' => 'International'), 'empty' => 'choose area',
         'label' => 'Choose shipping area', 'onChange'=>'document.getElementById("anyFormName").submit();'));?> -->
         <div class="chart">
-          <div class="row">
+          <!-- <div class="row">
             <div class="input-field col s12">
-              <?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
+              </?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
             </div>
-          </div>
+          </div> -->
             <h2>Curva de Avance Físico</h2>
             <div class="chart-content" id="caf"></div>
         </div>
         <?php if ($projects->PROJECT_NAME == 'UPME 03-2010 Norte'): ?>
         <div class="chart">
-          <div class="row">
+          <!-- <div class="row">
             <div class="input-field col s12">
-              <?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
+              <//?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
             </div>
-          </div>
+          </div> -->
             <h2>Tres Generaciones</h2>
             <div class="chart-content" id="tg" style="min-height: 475px;"></div>
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
