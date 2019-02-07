@@ -540,27 +540,6 @@
           ['escape' => false,'class'=>'breadcrumb']
         );?>
     </div>
-    <div class="button dropdown">
-  <select id="colorselector">
-     <option value="red">Red</option>
-     <option value="yellow">Yellow</option>
-     <option value="blue">Blue</option>
-  </select>
-</div>
-
-<div class="output">
-  <div id="red" class="colors red">  “Good artists copy, great artists steal” Pablo Picasso</div>
-  <div id="yellow" class="colors yellow"> “Art is the lie that enables us to realize the truth” Pablo Picasso</div>
-  <div id="blue" class="colors blue"> “If I don't have red, I use blue” Pablo Picasso</div>
-</div>
-<script>
-$(function() {
-  $('#colorselector').change(function(){
-    $('.colors').hide();
-    $('#' + $(this).val()).show();
-  });
-});
-</script>
     <?php
     setlocale(LC_ALL,"es_ES");
     $FoPo = strftime("%d %B, %Y",strtotime($projects->FOPO));
