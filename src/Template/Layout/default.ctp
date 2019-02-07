@@ -1019,6 +1019,503 @@
         //         ]
         //     }
         // );
+
+    </script>
+    <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
+    <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
+    <script type="text/javascript">
+
+        // Porcentajes de avances
+        AmCharts.makeChart("advance",
+            {
+                "type": "gauge",
+                "theme": "light",
+                "language": "es",
+                "axes": [
+                    {
+                        "axisAlpha": 0,
+                        "tickAlpha": 0,
+                        "labelsEnabled": false,
+                        "startValue": 0,
+                        "endValue": 100,
+                        "startAngle": 0,
+                        "endAngle": 360,
+                        "bands": [
+                            // Usuarios perdidos
+                            {
+                                "color": "#eee",
+                                "startValue": 0,
+                                "endValue": 100,
+                                "radius": "100%",
+                                "innerRadius": "70%",
+                                "balloonText": "Avance planeado",
+                            },
+                            {
+                                "color": "#A6CE39",
+                                "startValue": 0,
+                                "endValue": <?=$projects->PLANNED?>,
+                                "radius": "100%",
+                                "innerRadius": "70%",
+                                "balloonText": "<?=$projects->PLANNED?>% Avance planeado",
+                            },
+                            // Usuarios pagos
+                            {
+                                "color": "#E6E6E6",
+                                "startValue": 0,
+                                "endValue": 100,
+                                "radius": "70%",
+                                "innerRadius": "40%",
+                                "balloonText": "Ejecutado",
+                            },
+                            {
+                                "color": "#2CACE3",
+                                "startValue": 0,
+                                "endValue": <?=$projects->EXECUTED?>,
+                                "radius": "70%",
+                                "innerRadius": "40%",
+                                "balloonText": "<?=$projects->EXECUTED?>% Ejecutado",
+                            },
+                        ]
+                    }
+                ],
+                "export": {
+                    "enabled": false
+                }
+            }
+        );
+        // Curva de avance físico
+        AmCharts.makeChart("caf",
+            {
+                "type": "serial",
+                "categoryField": "date",
+                "dataDateFormat": "YYYY-MM-DD",
+                "fontFamily": "'Open Sans'",
+                "theme": "default",
+                "language": "es",
+                "categoryAxis": {
+                    "equalSpacing": true,
+                    "gridPosition": "start",
+                    "minPeriod": "DD",
+                    "parseDates": true,
+                    "startOnAxis": true,
+                    "axisAlpha": 0,
+                    "gridAlpha": 0,
+                    "labelOffset": -1
+                },
+                "chartCursor": {
+                    "enabled": true,
+                    "categoryBalloonDateFormat": "DD MMM YYYY",
+                    "cursorColor": "#00A34B"
+                },
+                "chartScrollbar": {
+                    "enabled": true,
+                    "graph": "AmGraph-2",
+                    "graphType": "line",
+                    "gridCount": 7,
+                    "offset": 40,
+                    "oppositeAxis": false,
+                    "scrollbarHeight": 40
+                },
+                "trendLines": [],
+                "graphs": [
+                    {
+                      "id": "AmGraph-1",
+                      "lineColor": "#A6CE39",
+                      "lineThickness": 3,
+                      "title": "Planeado",
+                      "valueField": "column-1"
+                    },
+                    {
+                        // "customBullet": "",
+                        // "dashLength": 7,
+                        "id": "AmGraph-2",
+                        // "labelPosition": "right",
+                        // "labelText": "",
+                        "lineColor": "#2CACE3",
+                        "lineThickness": 3,
+                        // "minBulletSize": 3,
+                        // "showAllValueLabels": true,
+                        "title": "Ejecutado",
+                        "valueField": "column-2"
+                    },
+                    {
+                      "customBullet": "",
+                      "dashLength": 7,
+                      "id": "AmGraph-3",
+                      "labelPosition": "right",
+                      "labelText": "",
+                      "lineColor": "#fc9219",
+                      "lineThickness": 3,
+                      "minBulletSize": 3,
+                      "showAllValueLabels": true,
+                      "title": "Completar",
+                      "valueField": "column-3"
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [
+                    {
+                        "id": "ValueAxis-1",
+                        "totalText": "",
+                        "unit": "%",
+                        "axisAlpha": 0,
+                        "gridAlpha": 0.06,
+                        "title": ""
+                    }
+                ],
+                "allLabels": [],
+                "balloon": {},
+                "legend": {
+                    "enabled": true,
+                    "autoMargins": false,
+                    "marginRight": 0,
+                    "markerSize": 15,
+                    "position": "top",
+                    "spacing": 16,
+                    "useGraphSettings": true
+                },
+                "titles": [],
+                "dataProvider": [
+                    <?php for ($i=0; $i<$cont; $i++): ?>
+                    {
+                         <?php $blDec = bcdiv($blJson[$i], '1', 4);?>
+                         <?php $evDec = bcdiv($evJson[$i], '1', 4);?>
+                         <?php $acDec = bcdiv($acJson[$i], '1', 4);?>
+                         "date": "<?=$fecJson[$i]?>",
+                         "column-1": "<?=$acDec?>",
+                         <?php if(is_numeric($evJson[$i])):?>
+                         "column-2": "<?=$evDec?>",
+                         <?php else: ?>
+                         "column-2": null,
+                         <?php endif;?>
+                         "column-3": "<?=$blDec?>"
+
+                    },
+                      <?php endfor; ?>
+                    // {
+                    //     "date": "2014-04-17",
+                    //     "column-1": "11",
+                    //     "column-2": "15"
+                    // },
+                ]
+            }
+        );
+        AmCharts.makeChart("tg",
+            {
+                "type": "serial",
+                "categoryField": "category",
+                "dataDateFormat": "YYYY-MM-DD",
+                "sequencedAnimation": false,
+                "startDuration": 1,
+                "categoryAxis": {
+                    "autoRotateAngle": 90,
+                    "autoRotateCount": 12,
+                    "equalSpacing": true,
+                    "gridPosition": "start",
+                    "minPeriod": "MM",
+                    "startOnAxis": true,
+                    "axisAlpha": 0,
+                    "fontSize": 10,
+                    "gridAlpha": 0,
+                    "ignoreAxisWidth": true,
+                    "titleBold": false
+                },
+                "chartCursor": {
+                    "enabled": true,
+                    "cursorColor": "#00A34B"
+                },
+                "chartScrollbar": {
+                    "enabled": true,
+                    "color": "#BBBBBB",
+                    "graphType": "line",
+                    "gridCount": 4,
+                    "offset": 60,
+                    "oppositeAxis": false,
+                    "scrollbarHeight": 40
+                },
+                "trendLines": [],
+                "graphs": [
+                    {
+                        "columnWidth": 0.67,
+                        "fillAlphas": 1,
+                        "id": "plannedAnnual",
+                        "lineAlpha": 0,
+                        "lineColor": "#2376BC",
+                        "lineThickness": 0,
+                        "title": "Planeado",
+                        "type": "column",
+                        "valueAxis": "ValueAxis-1",
+                        "valueField": "col-plannedAnnual",
+                        "xAxis": "ValueAxis-1",
+                        "yAxis": "ValueAxis-1"
+                    },
+                    {
+                        "columnWidth": 0.71,
+                        "fillAlphas": 1,
+                        "id": "executedAnnual",
+                        "lineColor": "#FF8000",
+                        "title": "Ejecutado",
+                        "type": "column",
+                        "valueAxis": "ValueAxis-1",
+                        "valueField": "col-executedAnnual",
+                        "xAxis": "ValueAxis-1",
+                        "yAxis": "ValueAxis-1"
+                    },
+                    {
+                        "customMarker": "",
+                        "id": "executed",
+                        "lineColor": "#FBB800",
+                        "lineThickness": 3,
+                        "title": "Ejecutado",
+                        "valueAxis": "ValueAxis-2",
+                        "valueField": "col-executed",
+                        "xAxis": "ValueAxis-2",
+                        "yAxis": "ValueAxis-2"
+                    },
+                    {
+                        "dashLength": 4,
+                        "id": "forecastReal",
+                        "legendAlpha": 1,
+                        "lineColor": "#953A12",
+                        "lineThickness": 3,
+                        "title": "Forecast real",
+                        "valueAxis": "ValueAxis-2",
+                        "valueField": "col-forecastReal"
+                    },
+                    {
+                        "dashLength": 4,
+                        "id": "forecast",
+                        "lineColor": "#4D91CE",
+                        "lineThickness": 3,
+                        "title": "Forecast",
+                        "valueAxis": "ValueAxis-2",
+                        "valueField": "col-forecast"
+                    },
+                    {
+                        "fillColors": "undefined",
+                        "id": "planned",
+                        "lineColor": "#BBBBBB",
+                        "lineThickness": 3,
+                        "title": "Planeado",
+                        "valueAxis": "ValueAxis-2",
+                        "valueField": "col-planned"
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [
+                    {
+                        "id": "ValueAxis-1",
+                        "unit": "USD ",
+                        "unitPosition": "left",
+                        "axisAlpha": 0,
+                        "fontSize": 10,
+                        "gridAlpha": 0.05,
+                        "title": "MILLONES",
+                        "titleBold": false,
+                        "titleFontSize": 10
+                    },
+                    {
+                        "id": "ValueAxis-2",
+                        "position": "right",
+                        "unit": "USD ",
+                        "unitPosition": "left",
+                        "axisAlpha": 0,
+                        "fontSize": 10,
+                        "gridAlpha": 0,
+                        "title": "MILLONES",
+                        "titleBold": false,
+                        "titleFontSize": 10
+                    }
+                ],
+                "allLabels": [],
+                "balloon": {},
+                "legend": {
+                    "enabled": true,
+                    "autoMargins": false,
+                    "marginRight": 0,
+                    "position": "top",
+                    "spacing": 16,
+                    "useGraphSettings": true
+                },
+                "titles": [],
+                "dataProvider": [
+                    {
+                        "category": "2013",
+                        "col-plannedAnnual": "23.01",
+                        "col-executedAnnual": "4.74",
+                        "col-executed": "null",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "null"
+                    },
+                    {
+                        "category": "2014",
+                        "col-plannedAnnual": "58.07",
+                        "col-executedAnnual": "8.40",
+                        "col-executed": "null",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "null"
+                    },
+                    {
+                        "category": "2015",
+                        "col-plannedAnnual": "41.93",
+                        "col-executedAnnual": "12.85",
+                        "col-executed": "null",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "null"
+                    },
+                    {
+                        "category": "2016",
+                        "col-plannedAnnual": "25.38",
+                        "col-executedAnnual": "2.16",
+                        "col-executed": "null",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "null"
+                    },
+                    {
+                        "category": "2017",
+                        "col-plannedAnnual": "10.32",
+                        "col-executedAnnual": "7.64",
+                        "col-executed": "null",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "null"
+                    },
+                    {
+                        "category": "2018-01",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "0.2",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "1.7"
+                    },
+                    {
+                        "category": "2018-02",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "1",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "2"
+                    },
+                    {
+                        "category": "2018-03",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "2",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "3.5"
+                    },
+                    {
+                        "category": "2018-04",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "2.2",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "3.7"
+                    },
+                    {
+                        "category": "2018-05",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "3",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "4.1"
+                    },
+                    {
+                        "category": "2018-06",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "3.1",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "4.5"
+                    },
+                    {
+                        "category": "2018-07",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "3.2",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "4.8"
+                    },
+                    {
+                        "category": "2018-08",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "3.8",
+                        "col-forecastReal": "null",
+                        "col-forecast": "3.8",
+                        "col-planned": "5.3"
+                    },
+                    {
+                        "category": "2018-09",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "4",
+                        "col-forecastReal": "null",
+                        "col-forecast": "4.7",
+                        "col-planned": "6"
+                    },
+                    {
+                        "category": "2018-10",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "4.7",
+                        "col-forecastReal": "null",
+                        "col-forecast": "5.2",
+                        "col-planned": "6.3"
+                    },
+                    {
+                        "category": "2018-11",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "5.02",
+                        "col-forecastReal": "5.02",
+                        "col-forecast": "6",
+                        "col-planned": "7"
+                    },
+                    {
+                        "category": "2018-12",
+                        "col-plannedAnnual": "null",
+                        "col-executedAnnual": "null",
+                        "col-executed": "null",
+                        "col-forecastReal": "6",
+                        "col-forecast": "7.05",
+                        "col-planned": "8.7"
+                    },
+                    {
+                        "category": "2019",
+                        "col-plannedAnnual": "8.5",
+                        "col-executedAnnual": "null",
+                        "col-executed": "null",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "null"
+                    },
+                    {
+                        "category": "2020",
+                        "col-plannedAnnual": "45.34",
+                        "col-executedAnnual": "null",
+                        "col-executed": "null",
+                        "col-forecastReal": "null",
+                        "col-forecast": "null",
+                        "col-planned": "null"
+                    }
+                ]
+            }
+        );
     </script>
 </body>
 </html>
