@@ -29,11 +29,11 @@
         array(
             'Contugas',
             '',
-            'logos/logo-contugas.png',
+            'logos/logo-contugas.svg',
             'Es la mayor transportadora de gas natural en Colombia, con 3.957 kilómetros de extensión de gasoductos, tiene una capacidad disponible de 733,8 MPCD (millones de pies cúbicos día) con los cuales atiende las zonas más pobladas del país tales como Bogotá, Medellín, Cali, el Eje Cafetero y el Piedemonte Llanero.'
         ),
         array(
-            'Unidad de Transmisión Colombia',
+            'Sucursal de Transmisión',
             '/portal-projects/company',
             'logos/logo-sucursal-transmision.svg',
             'Es la segunda empresa en transmisión de electricidad en Colombia, con una participación en el mercado del 12.5%. Cuenta con 1.504 km de circuitos a 230 kV activos en 17 subestaciones y la disponibilidad del sistema de transmisión a 31 de diciembre del 2015 fue del 99,93%, superior a la meta fijada por la CREG.'

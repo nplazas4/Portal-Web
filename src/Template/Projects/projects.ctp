@@ -4,7 +4,7 @@
         [ 'Inicio', 'home','Pages'],
         [ 'Portal Proyectos','index','PortalProjects'],
         [ 'Transmisión y Transporte','companies','PortalProjects'],
-        [ 'Unidad de Transmisión Colombia','company','PortalProjects' ],
+        [ 'Sucursal de Transmisión','company','PortalProjects' ],
         [ 'Crecimiento','projects','PortalProjects'],
     ];
 
