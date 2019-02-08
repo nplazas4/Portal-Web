@@ -30,8 +30,9 @@
         <div class="company-content-data">
             <?= $this->Html->image('logos/logo-unidad-transmision-colombia.svg') ?>
             <div class="number">
-                <h2>25</h2>
+                <h2>23</h2>
             </div>
+            <!-- <h5>Proyectos</h5> -->
         </div>
         <!-- <a href="/portal-projects/projects" class="company-content-tower increase">
             <//?= $this->Html->image('icons/torre-crecimiento.svg') ?>
@@ -42,7 +43,7 @@
         </a> -->
         <?php echo $this->Html->link(
           $this->Html->image('icons/torre-crecimiento.svg').
-          $this->Html->tag('div',$this->Html->tag('h3','15'),array('class'=>'number')).
+          $this->Html->tag('div',$this->Html->tag('h3','13'),array('class'=>'number')).
           $this->Html->tag('h2','Crecimiento'),
           array('controller'=>'Projects','action'=>'projects'),
           array('escape' => false,'class'=>'company-content-tower increase'))?>

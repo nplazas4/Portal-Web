@@ -34,6 +34,8 @@
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
 <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script type="text/javascript">
 
     // Porcentajes de avances
@@ -95,8 +97,7 @@
         }
     );
     // Curva de avance físico
-    AmCharts.makeChart("caf",
-        {
+  var chart = AmCharts.makeChart("caf",{
             "type": "serial",
             "categoryField": "date",
             "dataDateFormat": "YYYY-MM-DD",
@@ -112,6 +113,7 @@
                 "axisAlpha": 0,
                 "gridAlpha": 0,
                 "labelOffset": -1
+
             },
             "chartCursor": {
                 "enabled": true,
@@ -125,7 +127,7 @@
                 "gridCount": 7,
                 "offset": 40,
                 "oppositeAxis": false,
-                "scrollbarHeight": 40
+                "scrollbarHeight": 40,
             },
             "trendLines": [],
             "graphs": [
@@ -134,7 +136,7 @@
                   "lineColor": "#A6CE39",
                   "lineThickness": 3,
                   "title": "Planeado",
-                  "valueField": "column-1"
+                  "valueField": "column"
                 },
                 {
                     // "customBullet": "",
@@ -167,6 +169,8 @@
             "valueAxes": [
                 {
                     "id": "ValueAxis-1",
+                    "minimum": 0,
+                    "maximum": 100,
                     "totalText": "",
                     "unit": "%",
                     "axisAlpha": 0,
@@ -199,7 +203,7 @@
                      <?php else: ?>
                      "column-2": null,
                      <?php endif;?>
-                     "column-1": "<?=$blDec?>"
+                     "column": "<?=$blDec?>"
 
                 },
                   <?php endfor; ?>
@@ -208,7 +212,10 @@
                 //     "column-1": "11",
                 //     "column-2": "15"
                 // },
-            ]
+            ],
+            "export": {
+                "enabled": true
+            }
         }
     );
     AmCharts.makeChart("tg",
