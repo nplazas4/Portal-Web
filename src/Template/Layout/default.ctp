@@ -49,7 +49,7 @@
                        [ 'Trecsa', 'Pages', 'index'],
                        [ 'Gebbras', 'Pages', 'index'],
                        [ 'Contugas', 'Pages', 'index'],
-                       [ 'Unidad de Transmisión Colombia', 'Pages', 'Company']
+                       [ 'Sucursal de Transmisión', 'Pages', 'Company']
                     ]
                 ],
                 [
