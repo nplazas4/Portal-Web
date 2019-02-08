@@ -35,7 +35,7 @@
         array(
             'Unidad de Transmisión Colombia',
             '/portal-projects/company',
-            'logos/logo-unidad-transmision-colombia.svg',
+            'logos/logo-sucursal-transmision.svg',
             'Es la segunda empresa en transmisión de electricidad en Colombia, con una participación en el mercado del 12.5%. Cuenta con 1.504 km de circuitos a 230 kV activos en 17 subestaciones y la disponibilidad del sistema de transmisión a 31 de diciembre del 2015 fue del 99,93%, superior a la meta fijada por la CREG.'
         ),
     );

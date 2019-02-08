@@ -28,7 +28,7 @@
             <h2>Sostenimiento</h2>
         </a>
         <div class="company-content-data">
-            <?= $this->Html->image('logos/logo-unidad-transmision-colombia.svg') ?>
+            <?= $this->Html->image('logos/logo-sucursal-transmision.svg') ?>
             <div class="number">
                 <h2>23</h2>
             </div>
