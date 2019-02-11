@@ -617,50 +617,6 @@
     </sidebar>
 
     <div class="project-content">
-        <div class="data">
-            <div class="data-distance">
-                <?= $this->Html->image('icons/torre-blanca.svg') ?>
-                <div class="data-distance-content">
-                    <h2>Distancia</h2>
-                    <h3><?= $projects->DISTANCIA ?> Km</h3>
-                    <div class="line-distance"></div>
-                    <h4>de líneas de transmisión de</h4>
-                    <h5><?= $projects->LINEA_TRANS ?>kV</h5>
-                    <div class="divider white mt-3 mb-1"></div>
-                    <h6><?= $projects->TORRE ?> Torres</h6>
-                </div>
-                <?= $this->Html->image('icons/torre-blanca.svg') ?>
-            </div>
-
-            <div class="data-content">
-                <ul>
-                    <li>
-                        <i class="material-icons">event</i>
-                        <span>FoPo: <?= $FoPo ?></span>
-                    </li>
-                    <li>
-                        <i class="material-icons">event_note</i>
-                        <span>Adjudicación: <?= $Adj ?></span>
-                    </li>
-                    <li>
-                        <i class="material-icons">event_available</i>
-                        <span>Fecha corte: <?= $Apr ?></span>
-                    </li>
-                    <li>
-                        <i class="material-icons">straighten</i>
-                        <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
-                    </li>
-                    <li>
-                        <i class="material-icons">place</i>
-                        <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="map">
-            <?= $this->Html->image('maps/mapa-1.jpg') ?>
-        </div>
         <div class="indicators row wrap">
             <h2>Indicadores de cronograma</h2>
             <div class="d-flex col s12 m6 l4 xl3">
@@ -766,21 +722,11 @@
         echo $this->Form->input('area', array('options' => array('1' => 'Within Malaysia', '2' => 'International'), 'empty' => 'choose area',
         'label' => 'Choose shipping area', 'onChange'=>'document.getElementById("anyFormName").submit();'));?> -->
         <div class="chart">
-          <!-- <div class="row">
-            <div class="input-field col s12">
-              </?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
-            </div>
-          </div> -->
             <h2>Curva de Avance Físico</h2>
             <div class="chart-content" id="caf"></div>
         </div>
         <?php if ($projects->PROJECT_NAME == 'UPME 03-2010 Norte'): ?>
         <div class="chart">
-          <!-- <div class="row">
-            <div class="input-field col s12">
-              <//?php echo $this->Form->input('PeriodType',['label'=>'','options'=>['1'=>'Día','2'=>'Semana','3'=>'Mes','4'=>'Trimestre','5'=>'Año']]);?>
-            </div>
-          </div> -->
             <h2>Tres Generaciones</h2>
             <div class="chart-content" id="tg" style="min-height: 475px;"></div>
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
@@ -801,6 +747,50 @@
           <div id="blue" class="colors blue"> “If I don't have red, I use blue” Pablo Picasso</div>
         </div> -->
 
+      <!-- IMPORTANTE CAMBIOS SOLICITADOS -->
+        <div class="data">
+            <div class="data-distance">
+                <?= $this->Html->image('icons/torre-blanca.svg') ?>
+                <div class="data-distance-content">
+                    <h2>Distancia</h2>
+                    <h3><?= $projects->DISTANCIA ?> Km</h3>
+                    <div class="line-distance"></div>
+                    <h4>de líneas de transmisión de</h4>
+                    <h5><?= $projects->LINEA_TRANS ?>kV</h5>
+                    <div class="divider white mt-3 mb-1"></div>
+                    <h6><?= $projects->TORRE ?> Torres</h6>
+                </div>
+                <?= $this->Html->image('icons/torre-blanca.svg') ?>
+            </div>
+
+            <div class="data-content">
+                <ul>
+                    <li>
+                        <i class="material-icons">event</i>
+                        <span>FoPo: <?= $FoPo ?></span>
+                    </li>
+                    <li>
+                        <i class="material-icons">event_note</i>
+                        <span>Adjudicación: <?= $Adj ?></span>
+                    </li>
+                    <li>
+                        <i class="material-icons">event_available</i>
+                        <span>Fecha corte: <?= $Apr ?></span>
+                    </li>
+                    <li>
+                        <i class="material-icons">straighten</i>
+                        <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
+                    </li>
+                    <li>
+                        <i class="material-icons">place</i>
+                        <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="map">
+            <?= $this->Html->image('maps/mapa-1.jpg') ?>
+        </div>
         <div class="chart">
             <h2>Riesgos</h2>
             <div class="chart-risk">

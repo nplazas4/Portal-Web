@@ -158,7 +158,7 @@
 $spaceamounts: (0: 0, 1: .5, 2: .7, 3: 1, 4: 1.5, 5: 2, 6: 3); // Adjust this to include the pixel amounts you need.
 $sides: (top, bottom, left, right); // Leave this variable alone
 
-@each $item, $space in $spaceamounts { 
+@each $item, $space in $spaceamounts {
     .ma-#{$item} {
         margin: #{$space}rem !important;
     }
@@ -203,7 +203,7 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 }
 
 .mt-auto {
-    margin-top: auto !important; 
+    margin-top: auto !important;
 }
 
 .mb-auto {

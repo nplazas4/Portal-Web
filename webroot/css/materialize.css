@@ -9031,11 +9031,12 @@ input[type=range]::-ms-thumb {
   justify-content: center;
   position: relative;
 }
+/* tamaño del contenedor de los objetos de portal projects 15px de más, que la original */
 .portal-projects-menu-item {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 420px;
+  height: 435px;
   justify-content: center;
   max-width: 100%;
   overflow: hidden;
@@ -9043,7 +9044,7 @@ input[type=range]::-ms-thumb {
   position: relative;
   text-align: center;
   transition: 0.3s;
-  width: 260px;
+  width: 275px;
 }
 @media (max-width: 1200px) {
   .portal-projects-menu-item {
@@ -9591,7 +9592,7 @@ input[type=range]::-ms-thumb {
   background: grey;
   color: white;
   position: relative;
-  flex: 300px;
+  flex: 334px;
   margin: 0.5rem;
 }
 .projects-content .indicators .indicator h2 {

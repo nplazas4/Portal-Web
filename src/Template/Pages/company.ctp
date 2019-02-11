@@ -32,7 +32,7 @@
             <div class="number">
                 <h2>23</h2>
             </div>
-            <!-- <h5>Proyectos</h5> -->
+            <h5>Proyectos</h5>
         </div>
         <!-- <a href="/portal-projects/projects" class="company-content-tower increase">
             <//?= $this->Html->image('icons/torre-crecimiento.svg') ?>
