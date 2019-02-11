@@ -1169,7 +1169,7 @@
         <h2>Detalle riesgo</h2>
         <table>
             <tr>
-                <th width="20%">Riesgo</th>
+                <th width="30%">Riesgo</th>
                 <td><?=$rk->RISK_NUMBER?></td>
             </tr>
             <tr>

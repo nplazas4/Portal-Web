@@ -796,7 +796,7 @@
         <h2>Detalle riesgo</h2>
         <table>
             <tr>
-                <th width="20%">Risego</th>
+                <th width="30%">Risego</th>
                 <td>1</td>
             </tr>
             <tr>
