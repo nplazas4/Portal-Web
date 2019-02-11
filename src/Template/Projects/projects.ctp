@@ -149,7 +149,7 @@
     </sidebar>
 
     <div class="projects-content">
-        <div class="indicators">
+        <div class="indicators row wrap">
             <?php foreach ($indicators as $indicator): ?>
             <div class="indicator <?= $indicator['color'] ?>">
                 <h2><?= $indicator['name'] ?></h2>
