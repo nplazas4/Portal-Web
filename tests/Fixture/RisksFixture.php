@@ -18,7 +18,7 @@ class RisksFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'RISK_NUMBER' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'RISK_NUMBER' => ['type' => 'string', 'length' => 10, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'RISK_NAME' => ['type' => 'string', 'length' => 300, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PROBABILITY' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'IMPACT' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -60,7 +60,7 @@ class RisksFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'RISK_NUMBER' => 1,
+                'RISK_NUMBER' => 'Lorem ip',
                 'RISK_NAME' => 'Lorem ipsum dolor sit amet',
                 'PROBABILITY' => 'Lorem ipsum dolor sit amet',
                 'IMPACT' => 'Lorem ipsum dolor sit amet',

@@ -49,7 +49,8 @@ class RisksTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('RISK_NUMBER')
+            ->scalar('RISK_NUMBER')
+            ->maxLength('RISK_NUMBER', 10)
             ->requirePresence('RISK_NUMBER', 'create')
             ->notEmpty('RISK_NUMBER');
 

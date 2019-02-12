@@ -73,12 +73,12 @@ class ProjectsTable extends Table
             ->notEmpty('DESCRIPTION');
 
         $validator
-            ->decimal('PLANNED')
+            ->numeric('PLANNED')
             ->requirePresence('PLANNED', 'create')
             ->notEmpty('PLANNED');
 
         $validator
-            ->decimal('EXECUTED')
+            ->numeric('EXECUTED')
             ->requirePresence('EXECUTED', 'create')
             ->notEmpty('EXECUTED');
 
@@ -165,7 +165,7 @@ class ProjectsTable extends Table
             ->notEmpty('NUM_SUBESTACION');
 
         $validator
-            ->decimal('CPI_ANUAL')
+            ->numeric('CPI_ANUAL')
             ->requirePresence('CPI_ANUAL', 'create')
             ->notEmpty('CPI_ANUAL');
 

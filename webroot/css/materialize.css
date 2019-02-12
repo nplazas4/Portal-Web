@@ -9580,20 +9580,37 @@ input[type=range]::-ms-thumb {
   color: #888888;
 }
 .projects-content {
-  width: 100%;
-}
-.projects-content .indicators {
+  /* width: 100%; */
+  width: calc(100% + 1rem);
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   margin: -0.5rem;
 }
+.projects-content .indicators {
+  /* display: flex;
+  flex-wrap: wrap;
+  margin: -0.5rem; */
+  flex: 100%;
+  padding: 0.5rem;
+}
+.projects-content .indicators .divider {
+  flex: 100%;
+}
 .projects-content .indicators .indicator {
+  /* padding: 1rem;
+  background: grey;
+  color: white;
+  position: relative;
+  flex: 315px;
+  margin: 0.5rem; */
   padding: 1rem;
   background: grey;
   color: white;
   position: relative;
-  flex: 334px;
-  margin: 0.5rem;
+  min-height: 64px;
+  transition: 0.3s;
+  width: 100%;
 }
 .projects-content .indicators .indicator h2 {
   font-size: 14px;

@@ -151,11 +151,13 @@
     <div class="projects-content">
         <div class="indicators row wrap">
             <?php foreach ($indicators as $indicator): ?>
+            <div class="d-flex col s12 m6 l4 xl4">
             <div class="indicator <?= $indicator['color'] ?>">
                 <h2><?= $indicator['name'] ?></h2>
                 <h3><?= $indicator['value'] ?></h3>
                 <i class="material-icons"><?= $indicator['icon'] ?></i>
             </div>
+          </div>
             <?php endforeach; ?>
         </div>
         <div class="divider transparent mb-3"></div>

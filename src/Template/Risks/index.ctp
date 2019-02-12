@@ -30,10 +30,11 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Riesgo')),
+                      <th scope="col" width="10%"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Riesgo')),
                       array('action' => 'add'), array('escape'=>false));?></th>
-                      <th scope="col"><?= $this->Paginator->sort('id',['No.']) ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('RISK_NUMBER',['RIESGO']) ?></th>
+                      <th scope="col" width="10%"><?= $this->Paginator->sort('id',['No.']) ?></th>
+                      <th scope="col" width="10%"><?= $this->Paginator->sort('PROJECT_CODE',['PROYECTO']) ?></th>
+                      <th scope="col" width="10%"><?= $this->Paginator->sort('RISK_NUMBER',['RIESGO']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('RISK_NAME',['NOMBRE']) ?></th>
                       <th>ACCIONES</th>
                     </tr>
@@ -43,6 +44,7 @@
                   <tr>
                       <td></td>
                       <td><?= $this->Number->format($risk->id) ?></td>
+                      <td><?= h($risk->PROJECT_CODE) ?></td>
                       <td><?= h($risk->RISK_NUMBER) ?></td>
                       <td><?= h($risk->RISK_NAME) ?></td>
                       <td class="actions">

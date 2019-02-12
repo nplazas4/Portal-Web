@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Risk Entity
  *
  * @property int $id
- * @property int $RISK_NUMBER
+ * @property string $RISK_NUMBER
  * @property string $RISK_NAME
  * @property string $PROBABILITY
  * @property string $IMPACT

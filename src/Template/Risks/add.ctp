@@ -52,23 +52,27 @@
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_ONE',['label'=>'','placeholder'=>'Plan de respuesta 01','class'=>'materialize-textarea','required']);?>
-                    </div>
-                    <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_TWO',['label'=>'','placeholder'=>'Plan de respuesta 02','class'=>'materialize-textarea','required']);?>
+                      <?php echo $this->Form->textarea('PLAN_ONE',['label'=>'Plan de respuesta 01','placeholder'=>'Plan de respuesta 01','class'=>'materialize-textarea','required']);?>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_THREE',['label'=>'','placeholder'=>'Plan de respuesta 03','class'=>'materialize-textarea','required']);?>
+                      <?php echo $this->Form->textarea('PLAN_TWO',['label'=>'Plan de respuesta 02','placeholder'=>'Plan de respuesta 02','class'=>'materialize-textarea','required']);?>
                     </div>
+                  </div>
+                  <div class="row">
+                  <div class="input-field col s12">
+                    <?php echo $this->Form->textarea('PLAN_THREE',['label'=>'Plan de respuesta 03','placeholder'=>'Plan de respuesta 03','class'=>'materialize-textarea','required']);?>
+                  </div>
+                </div>
+                  <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_FOUR',['label'=>'','placeholder'=>'Plan de respuesta 04','class'=>'materialize-textarea','required']);?>
+                      <?php echo $this->Form->textarea('PLAN_FOUR',['label'=>'Plan de respuesta 04','placeholder'=>'Plan de respuesta 04','class'=>'materialize-textarea','required']);?>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_FIVE',['label'=>'','placeholder'=>'Plan de respuesta 05','class'=>'materialize-textarea','required']);?>
+                      <?php echo $this->Form->textarea('PLAN_FIVE',['label'=>'Plan de respuesta 05','placeholder'=>'Plan de respuesta 05','class'=>'materialize-textarea','required']);?>
                     </div>
                   </div>
                   <div class="row">

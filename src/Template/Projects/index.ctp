@@ -29,10 +29,10 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                      <th scope="col"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Proyecto')),
+                      <th scope="col" width="10%"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Proyecto')),
                       array('action' => 'add'), array('escape'=>false));?></th>
-                      <th scope="col"><?= $this->Paginator->sort('id',['No.']) ?></th>
-                      <th scope="col"><?= $this->Paginator->sort('ID_PROJECT',['ID']) ?></th>
+                      <th scope="col" width="10%"><?= $this->Paginator->sort('id',['No.']) ?></th>
+                      <th scope="col" width="20%"><?= $this->Paginator->sort('ID_PROJECT',['ID']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('PROJECT_NAME',['NOMBRE']) ?></th>
                       <th>ACCIONES</th>
                     </tr>
