@@ -732,65 +732,6 @@
             <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
         </div>
         <?php endif; ?>
-        <!-- <label class="wrapper" for="states">This label is stacked above the select</label>
-        <div class="button dropdown">
-          <select id="colorselector">
-             <option value="red">Red</option>
-             <option value="yellow">Yellow</option>
-             <option value="blue">Blue</option>
-          </select>
-        </div> -->
-
-        <!-- <div class="">
-          <div id="red" class="colors red">“Art is the lie that enables us to realize the truth” Pablo Picasso</div>
-          <div id="yellow" class="colors yellow"> “Art is the lie that enables us to realize the truth” Pablo Picasso</div>
-          <div id="blue" class="colors blue"> “If I don't have red, I use blue” Pablo Picasso</div>
-        </div> -->
-
-      <!-- IMPORTANTE CAMBIOS SOLICITADOS -->
-        <div class="data">
-            <div class="data-distance">
-                <?= $this->Html->image('icons/torre-blanca.svg') ?>
-                <div class="data-distance-content">
-                    <h2>Distancia</h2>
-                    <h3><?= $projects->DISTANCIA ?> Km</h3>
-                    <div class="line-distance"></div>
-                    <h4>de líneas de transmisión de</h4>
-                    <h5><?= $projects->LINEA_TRANS ?>kV</h5>
-                    <div class="divider white mt-3 mb-1"></div>
-                    <h6><?= $projects->TORRE ?> Torres</h6>
-                </div>
-                <?= $this->Html->image('icons/torre-blanca.svg') ?>
-            </div>
-
-            <div class="data-content">
-                <ul>
-                    <li>
-                        <i class="material-icons">event</i>
-                        <span>FoPo: <?= $FoPo ?></span>
-                    </li>
-                    <li>
-                        <i class="material-icons">event_note</i>
-                        <span>Adjudicación: <?= $Adj ?></span>
-                    </li>
-                    <li>
-                        <i class="material-icons">event_available</i>
-                        <span>Fecha corte: <?= $Apr ?></span>
-                    </li>
-                    <li>
-                        <i class="material-icons">straighten</i>
-                        <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
-                    </li>
-                    <li>
-                        <i class="material-icons">place</i>
-                        <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="map">
-            <?= $this->Html->image('maps/mapa-1.jpg') ?>
-        </div>
         <div class="chart">
             <h2>Riesgos</h2>
             <div class="chart-risk">
@@ -1066,6 +1007,51 @@
                 </div>
             </div>
         </div>
+        <!-- IMPORTANTE CAMBIOS SOLICITADOS -->
+          <div class="data">
+              <div class="data-distance">
+                  <?= $this->Html->image('icons/torre-blanca.svg') ?>
+                  <div class="data-distance-content">
+                      <h2>Distancia</h2>
+                      <h3><?= $projects->DISTANCIA ?> Km</h3>
+                      <div class="line-distance"></div>
+                      <h4>de líneas de transmisión de</h4>
+                      <h5><?= $projects->LINEA_TRANS ?>kV</h5>
+                      <div class="divider white mt-3 mb-1"></div>
+                      <h6><?= $projects->TORRE ?> Torres</h6>
+                  </div>
+                  <?= $this->Html->image('icons/torre-blanca.svg') ?>
+              </div>
+          </div>
+          <div class="map">
+              <?= $this->Html->image('maps/mapa-1.jpg') ?>
+          </div>
+          <div class="data">
+              <div class="data-content">
+                  <ul>
+                      <li>
+                          <i class="material-icons">event</i>
+                          <span>FoPo: <?= $FoPo ?></span>
+                      </li>
+                      <li>
+                          <i class="material-icons">event_note</i>
+                          <span>Adjudicación: <?= $Adj ?></span>
+                      </li>
+                      <li>
+                          <i class="material-icons">event_available</i>
+                          <span>Fecha corte: <?= $Apr ?></span>
+                      </li>
+                      <li>
+                          <i class="material-icons">straighten</i>
+                          <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
+                      </li>
+                      <li>
+                          <i class="material-icons">place</i>
+                          <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
+                      </li>
+                  </ul>
+              </div>
+          </div>
     </div>
 </div>
 
