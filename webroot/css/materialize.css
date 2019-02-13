@@ -9594,9 +9594,9 @@ input[type=range]::-ms-thumb {
   flex: 100%;
   padding: 0.5rem;
 }
-.projects-content .indicators .divider {
-  flex: 100%;
-}
+-.projects-content .indicators .divider {
+-  flex: 100%;
+-}
 .projects-content .indicators .indicator {
   /* padding: 1rem;
   background: grey;

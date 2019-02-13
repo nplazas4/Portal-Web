@@ -168,9 +168,7 @@ class ProjectsController extends AppController
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_POSTFIELDS => "",
         CURLOPT_HTTPHEADER => array(
-          "Authorization: Bearer oYPPniqltX9X8JnYRBgo8A..",
-          "Postman-Token: fd1a5722-dd7d-414a-88d9-df5ad54d3d8a",
-          "cache-control: no-cache"
+          "Authorization: Bearer ".$_SESSION["tokenP"]
         ),
       ));
 
@@ -213,5 +211,9 @@ class ProjectsController extends AppController
         $longitud = count($ArrayStartDate);
         $this->set('cont',$longitud);
       }
+    }
+    public function adv(){
+    $this->autoRender = false;
+
     }
 }
