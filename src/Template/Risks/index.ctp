@@ -41,19 +41,22 @@
                 </thead>
                 <tbody>
                   <?php foreach ($risks as $risk): ?>
-                  <tr>
-                      <td></td>
-                      <td><?= $this->Number->format($risk->id) ?></td>
-                      <td><?= h($risk->PROJECT_CODE) ?></td>
-                      <td><?= h($risk->RISK_NUMBER) ?></td>
-                      <td><?= h($risk->RISK_NAME) ?></td>
-                      <td class="actions">
-                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $risk->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Riesgo de Proyecto']) ?>
-                          <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
-                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$risk->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$risk->RISK_NAME.'?', $risk->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'dropdown','data-tooltip'=>'Eliminar Riesgo de Proyecto']) ?>
-                      </td>
-                  </tr>
+                  <?php foreach ($projectsRisks as $project): ?>
+                    <?php if ($project->id == $risk->PROJECT_CODE): ?>
+                      <tr>
+                          <td></td>
+                          <td><?= $this->Number->format($risk->id) ?></td>
+                          <td><?= h($project->PROJECT_NAME) ?></td>
+                          <td><?= h($risk->RISK_NUMBER) ?></td>
+                          <td><?= h($risk->RISK_NAME) ?></td>
+                          <td class="actions">
+                            <?= $this->Html->link(__('Editar'),['action' => 'edit', $risk->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Riesgo de Proyecto']) ?>
+                            <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$risk->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$risk->RISK_NAME.'?', $risk->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'dropdown','data-tooltip'=>'Eliminar Riesgo de Proyecto']) ?>
+                          </td>
+                      </tr>
+                    <?php endif; ?>
                   <?php endforeach; ?>
+                <?php endforeach; ?>
                 </tbody>
             </table>
             <div class="paginator">
@@ -61,18 +64,14 @@
                 <ul class="pagination">
                   <li class="waves-effect"><?= $this->Paginator->first($this->Html->tag('i','first_page',array('class'=>'material-icons')),
                   array('escape' => false)) ?></li>
-                    <!-- <?//= $this->Paginator->first('<< ' . __('first')) ?> -->
                     <li class="waves-effect"><?= $this->Paginator->prev($this->Html->tag('i','chevron_left',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->numbers(['before'=>'','after'=>'']) ?></li>
-                    <!-- <li class="waves-effect"><?//= $this->Paginator->next(__('next') . ' >') ?></li> -->
                     <li class="waves-effect"><?= $this->Paginator->next($this->Html->tag('i','chevron_right',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->last($this->Html->tag('i','last_page',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
-                    <!-- <li class="waves-effect"><?//= $this->Paginator->last(__('last') . ' >>') ?></li> -->
                 </ul>
-                <!-- <p><?//= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p> -->
             </div>
         </div>
     </div>

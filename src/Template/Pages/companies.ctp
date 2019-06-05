@@ -53,7 +53,7 @@
     </div>
 
     <div class="companies-banner">
-        <?= $this->Html->image('photos/idm.jpg') ?>
+        <?= $this->Html->image('photos/torre-company.jpg') ?>
     </div>
 
     <div class="companies-menu">
@@ -67,7 +67,7 @@
               $this->Html->image($item[2]).
               $this->Html->tag('i','keyboard_arrow_right',array('class'=>'material-icons')).
               $this->Html->tag('span',$item[3],array('class'=>'item-tooltip')),
-              array('controller'=>'PortalProjects','action'=>'company'),
+              array('controller'=>'Projects','action'=>'company'),
               array('escape' => false,'class'=>'companies-menu-item'))?>
         <?php endforeach; ?>
     </div>

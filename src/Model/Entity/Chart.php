@@ -7,12 +7,8 @@ use Cake\ORM\Entity;
  * Chart Entity
  *
  * @property int $id
- * @property int $PROJ_ID
- * @property \Cake\I18n\FrozenDate $START_DATE
- * @property \Cake\I18n\FrozenDate $FINISH_DATE
- * @property int $BL_CHART
- * @property int $EJEC
- * @property int $EAC
+ * @property string $EXCEL_CHART
+ * @property int $PROJECT_CODE
  */
 class Chart extends Entity
 {
@@ -27,11 +23,7 @@ class Chart extends Entity
      * @var array
      */
     protected $_accessible = [
-        'PROJ_ID' => true,
-        'START_DATE' => true,
-        'FINISH_DATE' => true,
-        'BL_CHART' => true,
-        'EJEC' => true,
-        'EAC' => true
+        'EXCEL_CHART' => true,
+        'PROJECT_CODE' => true
     ];
 }

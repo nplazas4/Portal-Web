@@ -9,7 +9,6 @@
     <div class="breadcrumb-container">
         <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb']
@@ -18,7 +17,6 @@
     </div>
     <div class="section home">
         <div class="home-menu">
-          <!-- <div class="row"> -->
             <form class="col s12">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">search</i>
@@ -46,7 +44,6 @@
                       <td><?= h($project->PROJECT_NAME) ?></td>
                       <td class="actions">
                           <?= $this->Html->link(__('Editar'),['action' => 'edit', $project->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Proyecto']) ?>
-                          <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
                           <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$project->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$project->PROJECT_NAME.'?', $project->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'down','data-tooltip'=>'Eliminar Proyecto']) ?>
                       </td>
                   </tr>
@@ -58,16 +55,13 @@
                 <ul class="pagination">
                   <li class="waves-effect"><?= $this->Paginator->first($this->Html->tag('i','first_page',array('class'=>'material-icons')),
                   array('escape' => false)) ?></li>
-                    <!-- <?//= $this->Paginator->first('<< ' . __('first')) ?> -->
                     <li class="waves-effect"><?= $this->Paginator->prev($this->Html->tag('i','chevron_left',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->numbers(['before'=>'','after'=>'']) ?></li>
-                    <!-- <li class="waves-effect"><?//= $this->Paginator->next(__('next') . ' >') ?></li> -->
                     <li class="waves-effect"><?= $this->Paginator->next($this->Html->tag('i','chevron_right',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->last($this->Html->tag('i','last_page',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
-                    <!-- <li class="waves-effect"><?//= $this->Paginator->last(__('last') . ' >>') ?></li> -->
                 </ul>
             </div>
         </div>

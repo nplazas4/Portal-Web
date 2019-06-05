@@ -11,19 +11,14 @@ use Cake\ORM\Entity;
  * @property string $RISK_NAME
  * @property string $PROBABILITY
  * @property string $IMPACT
- * @property int $IMPACT_RISK
+ * @property float $IMPACT_RISK
  * @property string $PLAN_ONE
  * @property string $PLAN_TWO
  * @property string $PLAN_THREE
  * @property string $PLAN_FOUR
  * @property string $PLAN_FIVE
- * @property int $RISK_QUALIFICATION
- * @property string $PLAN_ONE_S
- * @property string $PLAN_TWO_S
- * @property string $PLAN_THREE_S
- * @property string $PLAN_FOUR_S
- * @property string $PLAN_FIVE_S
- * @property int $TOTAL_RISK
+ * @property string $ACTION_STATE
+ * @property string $MATERIALIZACION
  * @property int $PROJECT_CODE
  */
 class Risk extends Entity
@@ -49,13 +44,8 @@ class Risk extends Entity
         'PLAN_THREE' => true,
         'PLAN_FOUR' => true,
         'PLAN_FIVE' => true,
-        'RISK_QUALIFICATION' => true,
-        'PLAN_ONE_S' => true,
-        'PLAN_TWO_S' => true,
-        'PLAN_THREE_S' => true,
-        'PLAN_FOUR_S' => true,
-        'PLAN_FIVE_S' => true,
-        'TOTAL_RISK' => true,
+        'ACTION_STATE' => true,
+        'MATERIALIZACION' => true,
         'PROJECT_CODE' => true
     ];
 }

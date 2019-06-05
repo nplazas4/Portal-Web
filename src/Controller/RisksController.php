@@ -3,81 +3,94 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Users Controller
- *
- *
- */
 class RisksController extends AppController
 {
-    /**
-     * Index method
-     *
-     */
+    // Función que se encargar de crear la paginación de los riesgos de proyectos.
     public function index()
-  	{
-      // $users = $this->paginate($this->Users);
-      // $this->set(compact('users'));
-      $risks = $this->paginate($this->Risks);
-      $this->set('risks',$risks);
-      $this->Projects();
-  	}
-    public function Add(){
-      $this->index();
-      $risks = $this->Risks->newEntity();
-      if ($this->request->is('post')) {
-          $risks = $this->Risks->patchEntity($risks, $this->request->getData());
-          if ($this->Risks->save($risks)) {
-              $this->Flash->success(__('El riesgo ha sido creado.'));
-
-              return $this->redirect(['action' => 'index']);
-          }
-          $this->Flash->error(__('El riesgo no ha sido creado. Por favor, intenta de nuevo.'));
-      }
-      $this->set(compact('risks'));
+    {
+        /*Sentencia que se encarga de cargar el modelo de la tabla Projects perteneciente a la BD local y find all trae todos
+        los registros encontrados en esta.*/
+        $this->loadModel('Projects');
+        $projectsRisks = $this->Projects->find('all');
+        // Envia todos los registros del modelo projects a la vista index.ctp en la carpeta Risks. con el pseudonimo de projectsRisks
+        $this->set('projectsRisks', $projectsRisks->all());
+        /*$risks se encarga de enviar un array con los elementos de la tabla array a la vista index, en cargas de 20 elementos por página,
+        de manera predeterminada.*/
+        $risks = $this->paginate($this->Risks);
+        $this->set('risks', $risks);
+        $this->Projects();
     }
-    public function AddEPS(){
+    // Función que se encarga de agregar riesgos.
+    public function Add()
+    {
+        $this->index();
+        // Instrucción propia de CakePhp que contiene el elemento nuevo que va a ser registrado.
+        $risks = $this->Risks->newEntity();
+        // Condicional que valida si el nuevo registrop es enviado mediante un método POST.
+        if ($this->request->is('post')) {
+            // Matriz que contiene los datos del registro a guardar.
+            $risks = $this->Risks->patchEntity($risks, $this->request->getData());
+            // condicional que valida si el riesgos fue guardado en la BD local.
+            if ($this->Risks->save($risks)) {
+                // Si el registro es guardado da el aviso de confirmación y redirecciona al usuario a la pestaña index(Lista de riesgos).
+                $this->Flash->success(__('El riesgo ha sido creado.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            // De ser lo contrario se mostrara el aviso error a la solicitud save.
+            $this->Flash->error(__('El riesgo no ha sido creado. Por favor, intenta de nuevo.'));
+        }
+        // Envia un arreglo de la variasble $risks.
+        $this->set(compact('risks'));
     }
+    // Función que se encarga de eliminar riesgos mediante la id de estos, su valor por default es null para evitar errores.
     public function delete($id = null)
     {
+        //Sentencia que habilita el método "delete" únicamente si es una solicitud de tipo POST.
         $this->request->allowMethod(['post', 'delete']);
+        // Obtiene el registro a eliminar mediante la variable $id.
         $risks = $this->Risks->get($id);
+        // Condicional que confirma si el registro es eliminado de la BD.
         if ($this->Risks->delete($risks)) {
             $this->Flash->success(__('El riesgo ha sido eliminado.'));
         } else {
             $this->Flash->error(__('El riesgo no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
+        // Redirecciona al usuario a la pestaña index(Lista de riesgos).
         return $this->redirect(['action' => 'index']);
-    }
-    public function view($id)
-    {
-        $risks = $this->Risks->get($id);
-
-        $this->set('risks', $risks);
     }
     public function edit($id = null)
     {
         $this->index();
+        // Obtiene el registro completo del elemento que desea editar.
         $risks = $this->Risks->get($id);
-        if ($this->request->is(['patch','post','put']))
-        {
-          $risks = $this->Risks->patchEntity($risks,$this->request->data);
-          if ($this->Risks->save($risks))
-           {
-             $this->Flash->success('El usuario ha sido modificado');
-             return $this->redirect(['action'=>'index']);
-          }
-          else {
-            $this->Flash->error('El usuario no pudo ser modificado');
-          }
+        // Condicional que comprueba si la solicitud es PATCH,POST O PUT.
+        if ($this->request->is(['patch','post','put'])) {
+            // Identifica los datos que han sido actualizados.
+            $risks = $this->Risks->patchEntity($risks, $this->request->data);
+            // Condicional que comprueba que el cambio se ha hecho efectivamente.
+            if ($this->Risks->save($risks)) {
+                //Aviso de confirmación.
+                $this->Flash->success('El usuario ha sido modificado');
+                // Redirecciona al usuario a la pestaña index.
+                return $this->redirect(['action'=>'index']);
+            } else {
+                // Aviso de error al no cumplir la condicional IF.
+                $this->Flash->error('El usuario no pudo ser modificado');
+            }
         }
+        // Arreglo del riesgo editado.
         $this->set(compact('risks'));
     }
-    public function Projects(){
-      $this->loadModel('Projects');
-      $this->set('projects',$this->Projects->find('list', [
-      'keyField' => 'id',
-      'valueField' => 'PROJECT_NAME'
-      ]));
+    public function Projects()
+    {
+        // Carga el modelo de Projects de la BD interna.
+        $this->loadModel('Projects');
+        /*Envia a la vista una lista con los id y Nombre de proyectos para ser utilizados posteriormente en un select option en
+        los formularios de edit y add dentro la carpeta Risks*/
+        $this->set('projects',$this->Projects->find('list', [
+        'keyField' => 'id',
+        'valueField' => 'PROJECT_NAME'
+       ])
+      );
     }
 }

@@ -80,39 +80,19 @@
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-                          <?php echo $this->Form->input('RISK_QUALIFICATION',['label'=>'Calificación del riesgo','placeholder'=>'Calificación del riesgo','class'=>'validate','required']);?>
+                          <?php echo $this->Form->input('ACTION_STATE',['label'=>'Estado de las acciones','options'=>['fase'=>'N/A En esta fase','ejecucion'=>'En ejecución','pendiente'=>'Pendiente','finalizado'=>'Finalizado']]);?>
                         </div>
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-                          <?php echo $this->Form->textarea('PLAN_ONE_S',['label'=>'Seguimiento al plan de respuesta 01','placeholder'=>'Seguimiento plan de respuesta 01','class'=>'materialize-textarea','required']);?>
+                          <?php echo $this->Form->input('MATERIALIZACION',['label'=>'Materialización de riesgo','options'=>['abierto'=>'Abierto','cerrado'=>'Cerrado','materializado'=>'Materializado']]);?>
                         </div>
                       </div>
                       <div class="row">
+                        <!-- <div class="input-field col s6">
+                          </?php echo $this->Form->input('TOTAL_RISK',['label'=>'Calificación ponderada','placeholder'=>'Calificación ponderada','class'=>'validate','required']);?>
+                        </div> -->
                         <div class="input-field col s12">
-                          <?php echo $this->Form->textarea('PLAN_TWO_S',['label'=>'Seguimiento al plan de respuesta 02','placeholder'=>'Seguimiento plan de respuesta 02','class'=>'materialize-textarea','required']);?>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <?php echo $this->Form->textarea('PLAN_THREE_S',['label'=>'Seguimiento al plan de respuesta 03','placeholder'=>'Seguimiento plan de respuesta 03','class'=>'materialize-textarea','required']);?>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <?php echo $this->Form->textarea('PLAN_FOUR_S',['label'=>'Seguimiento al plan de respuesta 04','placeholder'=>'Seguimiento plan de respuesta 04','class'=>'materialize-textarea','required']);?>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <?php echo $this->Form->textarea('PLAN_FIVE_S',['label'=>'Seguimiento al plan de respuesta 05','placeholder'=>'Seguimiento plan de respuesta 05','class'=>'materialize-textarea','required']);?>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s6">
-                          <?php echo $this->Form->input('TOTAL_RISK',['label'=>'Calificación ponderada','placeholder'=>'Calificación ponderada','class'=>'validate','required']);?>
-                        </div>
-                        <div class="input-field col s6">
                           <?php echo $this->Form->input(
                             'PROJECT_CODE',
                             [
@@ -125,6 +105,7 @@
                           );?>
                         </div>
                       </div>
+                      <?php echo $this->Form->input('IGR_DATE',['type'=>'hidden','value'=>date("Y-m-d")]);?>
                       </fieldset>
                    <div class="btns mb-2">
                        <?= $this->Form->button(__('Editar'),['class'=>'btn waves-effect btn-depressed'])?>

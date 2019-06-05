@@ -50,7 +50,7 @@ class RisksTable extends Table
 
         $validator
             ->scalar('RISK_NUMBER')
-            ->maxLength('RISK_NUMBER', 10)
+            ->maxLength('RISK_NUMBER', 100)
             ->requirePresence('RISK_NUMBER', 'create')
             ->notEmpty('RISK_NUMBER');
 
@@ -71,7 +71,7 @@ class RisksTable extends Table
             ->notEmpty('IMPACT');
 
         $validator
-            ->integer('IMPACT_RISK')
+            ->decimal('IMPACT_RISK')
             ->requirePresence('IMPACT_RISK', 'create')
             ->notEmpty('IMPACT_RISK');
 
@@ -106,44 +106,14 @@ class RisksTable extends Table
             ->notEmpty('PLAN_FIVE');
 
         $validator
-            ->integer('RISK_QUALIFICATION')
-            ->requirePresence('RISK_QUALIFICATION', 'create')
-            ->notEmpty('RISK_QUALIFICATION');
+            ->scalar('ACTION_STATE')
+            ->requirePresence('ACTION_STATE', 'create')
+            ->notEmpty('ACTION_STATE');
 
         $validator
-            ->scalar('PLAN_ONE_S')
-            ->maxLength('PLAN_ONE_S', 600)
-            ->requirePresence('PLAN_ONE_S', 'create')
-            ->notEmpty('PLAN_ONE_S');
-
-        $validator
-            ->scalar('PLAN_TWO_S')
-            ->maxLength('PLAN_TWO_S', 600)
-            ->requirePresence('PLAN_TWO_S', 'create')
-            ->notEmpty('PLAN_TWO_S');
-
-        $validator
-            ->scalar('PLAN_THREE_S')
-            ->maxLength('PLAN_THREE_S', 600)
-            ->requirePresence('PLAN_THREE_S', 'create')
-            ->notEmpty('PLAN_THREE_S');
-
-        $validator
-            ->scalar('PLAN_FOUR_S')
-            ->maxLength('PLAN_FOUR_S', 600)
-            ->requirePresence('PLAN_FOUR_S', 'create')
-            ->notEmpty('PLAN_FOUR_S');
-
-        $validator
-            ->scalar('PLAN_FIVE_S')
-            ->maxLength('PLAN_FIVE_S', 600)
-            ->requirePresence('PLAN_FIVE_S', 'create')
-            ->notEmpty('PLAN_FIVE_S');
-
-        $validator
-            ->integer('TOTAL_RISK')
-            ->requirePresence('TOTAL_RISK', 'create')
-            ->notEmpty('TOTAL_RISK');
+            ->scalar('MATERIALIZACION')
+            ->requirePresence('MATERIALIZACION', 'create')
+            ->notEmpty('MATERIALIZACION');
 
         $validator
             ->integer('PROJECT_CODE')

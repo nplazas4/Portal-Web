@@ -21,14 +21,14 @@ use Cake\ORM\Entity;
  * @property string $REGIONAL
  * @property string $ALCANCE
  * @property string $SOLICITUD
- * @property int $DISTANCIA
- * @property int $LINEA_TRANS
+ * @property float $DISTANCIA
+ * @property float $LINEA_TRANS
  * @property \Cake\I18n\FrozenDate $FOPO
  * @property \Cake\I18n\FrozenDate $FEPO
  * @property \Cake\I18n\FrozenDate $ADJUDICACION
  * @property \Cake\I18n\FrozenDate $APROBACION
- * @property int $TORRE
- * @property int $NUM_SUBESTACION
+ * @property float $TORRE
+ * @property float $NUM_SUBESTACION
  * @property float $CPI_ANUAL
  * @property float $AC_BAC
  * @property float $AC_PPTO
@@ -37,6 +37,14 @@ use Cake\ORM\Entity;
  * @property float $PROJ_AC
  * @property float $PRES_PROJ
  * @property float $FORECAST_PROJ
+ * @property string $CATEGORY
+ * @property int $STATUS
+ * @property $FOTO
+ * @property int $EPS_REL
+ * @property $CHART
+ * @property float $IGR
+ * @property \Cake\I18n\FrozenDate $IGR_DATE
+ * @property \Cake\I18n\FrozenDate $CPI_DATE
  */
 class Project extends Entity
 {
@@ -80,6 +88,14 @@ class Project extends Entity
         'TOTAL_FORECAST' => true,
         'PROJ_AC' => true,
         'PRES_PROJ' => true,
-        'FORECAST_PROJ' => true
+        'FORECAST_PROJ' => true,
+        'CATEGORY' => true,
+        'STATUS' => true,
+        'FOTO' => true,
+        'EPS_REL' => true,
+        'CHART' => true,
+        'IGR' => true,
+        'IGR_DATE' => true,
+        'CPI_DATE' => true
     ];
 }

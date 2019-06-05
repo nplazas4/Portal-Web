@@ -6,39 +6,33 @@
     </figure>
     <div class="login-content">
         <h1>Iniciar sesión</h1>
-        <!-- <form action=""> -->
-          <?= $this->Flash->render('auth') ?>
-          <?= $this->Form->create() ?>
+          <!--Método auth del AppController-->
+          <?= $this->Flash->render('auth');?>
+          <?= $this->Form->create();?>
+          <!--Inputs necesarios para auteticar basados en el método creado en el AppController-->
           <fieldset>
             <div class="input-field">
-                <?php echo $this->Form->input('email',['label'=>'','placeholder'=>'usuario','class'=>'validate','required']);?>
-                <!-- <input id="email" type="email" class="validate">
-                <label for="email">Email</label> -->
+                <?php echo $this->Form->input('email', ['label'=>'','placeholder'=>'usuario','class'=>'validate','required']);?>
             </div>
             <div class="input-field">
-                <?php echo $this->Form->input('password',['label'=>'','placeholder'=>'contraseña','class'=>'validate','required']);?>
-                <!-- <input id="password" type="password" class="validate">
-                <label for="password">Contraseña</label> -->
+                <?php echo $this->Form->input('password', ['label'=>'','placeholder'=>'contraseña','class'=>'validate','required']);?>
             </div>
             </fieldset>
             <div class="btns mb-2">
-                <!-- <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Ingresar</a> -->
-                <?= $this->Form->button('Ingresar',['class'=>'btn waves-effect btn-depressed'])?>
-                <!-- <?//=$this->html->link('Registrar',['controller'=>'Users','action'=>'add'],['class'=>'btn waves-effect btn-depressed'])?> -->
+                <?= $this->Form->button('Ingresar', ['class'=>'btn waves-effect btn-depressed'])?>
                 <br>
                 <br>
                 <div class="alert" style=<?= $error ?>>
                   <span class="closebtn">&times;</span>
                   Usuario o contraseña incorrecta.
                 </div>
-                <div class="alert" style=<?= $errorInac ?>>
+                <div class="alert" style=<?= $errorInactivo ?>>
                   <span class="closebtn">&times;</span>
                   Usuario inactivo.
                 </div>
             </div>
             <a href="#recoverPassword" class="link modal-trigger">Recuperar contraseña</a>
-            <?= $this->Form->end() ?>
-        <!-- </form> -->
+            <?= $this->Form->end();?>
     </div>
 </div>
 
@@ -61,6 +55,7 @@
         </form>
     </div>
 </div>
+<!--Script que se encarga de cerrar el botón error-->
 <script>
 var close = document.getElementsByClassName("closebtn");
 var i;

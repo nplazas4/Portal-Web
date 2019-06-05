@@ -45,7 +45,7 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth',[
+        $this->loadComponent('Auth', [
             'authenticate'=>[
               'Form'=>[
                 'fields'=>[
@@ -77,20 +77,85 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
+
     public function beforeFilter(Event $event)
     {
-      $this->set('current_user',$this->Auth->user());
+        //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
+        $ch = curl_init('http://192.168.0.210:8080/ords/portal/oauth/token');
+        // curl_setopt($ch, CURLOPT_HEADER, TRUE);
+        curl_setopt($ch, CURLOPT_POST, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+        curl_setopt($ch, CURLOPT_USERPWD, "eMA2D5DqyNSsgxc_tPYqTg..:i4LginH4m_75qMbN7rAsjQ..");
+        $result=curl_exec($ch);
+        curl_close($ch);
+        $result_arr = json_decode($result, true);
+        $token = array_values($result_arr)[0];
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+      CURLOPT_PORT => "8080",
+      CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_HTTPHEADER => array(
+        "Authorization: Bearer ".$token,
+        "Cache-Control: no-cache"
+      ),
+      ));
+        $responseEps = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $responsesEps = json_decode($responseEps, true);
+            $ArrayEpsId = array();
+            $ArrayParentEpsId = array();
+            $ArrayName = array();
+            $ArrayLevel = array();
+            $AllvarEps = array_values($responsesEps)[0];
+            $this->set('AllEps', $AllvarEps);
+            // Foreach que alimenta el navbar con la EPS de forma dinámica.
+            foreach ($AllvarEps as $rowEps => $valueEps) {
+                if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
+                    $AllEpsId = $valueEps["eps_id"];
+                    $ParentEpsId2 = $valueEps["parent_eps_object_id"];
+                    $AllNameEps = $valueEps["name"];
+                    if ($AllEpsId == 23305) {
+                        $titleGEB = 'Corporativo';
+                        $this->set('titleGEB', $titleGEB);
+                    } elseif ($AllEpsId == 23307) {
+                        $titleDIS = 'Distribución';
+                        $this->set('titleDIS', $titleDIS);
+                    } elseif ($AllEpsId == 23306) {
+                        $titleTRANS = 'Transmisión y transporte';
+                        $this->set('titleTRANS', $titleTRANS);
+                    } elseif ($AllEpsId == 23308) {
+                        $titleGEN = 'Generación';
+                        $this->set('titleGEN', $titleGEN);
+                    }
+                    $Level2 = $valueEps["level"];
+                    array_push($ArrayName, $AllNameEps);
+                    array_push($ArrayEpsId, $AllEpsId);
+                    $this->set('AllNameEps', $ArrayName);
+                    $this->set('AllEpsId', $ArrayEpsId);
+                }
+            }
+        }
+        $this->set('current_user', $this->Auth->user());
     }
     //autorizar vistas
     public function isAuthorized($user)
     {
-      if (isset($user['rol']) and $user['rol']===1)
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
+        if (isset($user['rol']) and $user['rol']===1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

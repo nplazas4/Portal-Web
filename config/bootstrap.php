@@ -89,7 +89,16 @@ if (Configure::read('debug')) {
     // disable router cache during development
     Configure::write('Cache._cake_routes_.duration', '+2 seconds');
 }
+//Set date de 19/03/04 a 2019-03-04
+ini_set('intl.default_locale', 'pl_PL');
 
+Cake\I18n\Date::setToStringFormat('yyyy-MM-dd');
+Cake\I18n\FrozenDate::setToStringFormat('yyyy-MM-dd');
+
+\Cake\Database\Type::build('date')
+    ->useImmutable()
+    ->useLocaleParser()
+    ->setLocaleFormat('yyyy-MM-dd');
 /*
  * Set the default server timezone. Using UTC makes time calculations / conversions easier.
  * Check http://php.net/manual/en/timezones.php for list of valid timezone strings.
