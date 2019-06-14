@@ -445,7 +445,7 @@
             $('.collapsible').collapsible();
             $('.dropdown-trigger').dropdown();
             $('.dropdown-hover').dropdown({
-                hover: true,
+                hover: true
             });
         });
     </script>

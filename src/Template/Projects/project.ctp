@@ -1,4 +1,3 @@
-<?= $this->Html->script(['dynamic-charts.js']) ?>
 <?php
     // Breadcrumb
     $breadcrumb = [
@@ -1708,3 +1707,4 @@ $("#button_caf_add").click(function(){
         <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
     </div>
 </div>
+<?= $this->Html->script(['dynamic-charts.js']) ?>

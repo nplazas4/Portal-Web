@@ -10,20 +10,27 @@ class RisksController extends AppController
     {
         /*Sentencia que se encarga de cargar el modelo de la tabla Projects perteneciente a la BD local y find all trae todos
         los registros encontrados en esta.*/
-        $this->loadModel('Projects');
-        $projectsRisks = $this->Projects->find('all');
-        // Envia todos los registros del modelo projects a la vista index.ctp en la carpeta Risks. con el pseudonimo de projectsRisks
-        $this->set('projectsRisks', $projectsRisks->all());
-        /*$risks se encarga de enviar un array con los elementos de la tabla array a la vista index, en cargas de 20 elementos por página,
-        de manera predeterminada.*/
+        $this->Projects();
+        $this->Projects_Id();
+        $this->PaginateTable();
+    }
+    public function Projects_Id(){
+      $projectsRisks = $this->Projects->find()->select(['Projects.id','Projects.PROJECT_NAME']); //Variable que busca el id y nombre del proyecto
+      // Envia todos los registros del modelo projects a la vista index.ctp en la carpeta Risks. con el pseudonimo de projectsRisks
+      $this->set('projectsRisks', $projectsRisks);
+    }
+    public function PaginateTable(){
+      if ($this->request->is('Ajax')){
+        $this->layout = false;
+      }else{
         $risks = $this->paginate($this->Risks);
         $this->set('risks', $risks);
-        $this->Projects();
+      }
     }
     // Función que se encarga de agregar riesgos.
     public function Add()
     {
-        $this->index();
+        $this->Projects();
         // Instrucción propia de CakePhp que contiene el elemento nuevo que va a ser registrado.
         $risks = $this->Risks->newEntity();
         // Condicional que valida si el nuevo registrop es enviado mediante un método POST.
@@ -60,7 +67,7 @@ class RisksController extends AppController
     }
     public function edit($id = null)
     {
-        $this->index();
+        $this->Projects();
         // Obtiene el registro completo del elemento que desea editar.
         $risks = $this->Risks->get($id);
         // Condicional que comprueba si la solicitud es PATCH,POST O PUT.

@@ -10,7 +10,6 @@
     <div class="breadcrumb-container">
         <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
               ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'breadcrumb']
@@ -23,7 +22,7 @@
             <form class="col s12">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">search</i>
-                  <input id="myInput" onkeyup="myFunction()" type="text"></input>
+                  <input id="myInput" onkeyup="Search()" type="text"></input>
                   <label for="myInput">Buscar</label>
               </div>
             </form>
@@ -63,7 +62,7 @@
               <br>
                 <ul class="pagination">
                   <li class="waves-effect"><?= $this->Paginator->first($this->Html->tag('i','first_page',array('class'=>'material-icons')),
-                  array('escape' => false)) ?></li>
+                    array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->prev($this->Html->tag('i','chevron_left',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->numbers(['before'=>'','after'=>'']) ?></li>
@@ -77,36 +76,46 @@
     </div>
 </div>
 <script>
-
-// $(document).ready(function() {
-//     $('input#myInput').characterCounter();
-//   });
-function myFunction() {
+var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+</script>
+<script>
+function Search(){
+  // var xhr = $.ajax({
+  //     headers:{
+  //       'X-CSRF-Token':csrfToken
+  //     },
+  //     method: "POST",
+  //     url: "</?php echo $this->Url->build(['action'=>'PaginateTable']);?>",
+  //       beforeSend: function(){
+  //         alert("</?php echo $this->Url->build(['action'=>'Paginate_Table']);?>");
+  //     },
+  //     complete: function(){
+  //     },
+  //     success: function(){
+  //         xhr.abort();
+  //     }
+  // });
 var searchText = document.getElementById('myInput').value;
 var targetTable = document.getElementById('myTable');
 var targetTableColCount;
-
 //Loop through table rows
 for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
     var rowData = '';
-
     //Get column count from header row
     if (rowIndex == 0) {
        targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
        continue; //do not execute further code for header row.
     }
-
     //Process data rows. (rowIndex >= 1)
     for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
         rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).textContent;
     }
-
     //If search term is not found in row data
     //then hide the row, else show
     if (rowData.indexOf(searchText) == -1)
         targetTable.rows.item(rowIndex).style.display = 'none';
     else
         targetTable.rows.item(rowIndex).style.display = 'table-row';
-}
+  }
 }
 </script>

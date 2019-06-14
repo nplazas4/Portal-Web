@@ -36,17 +36,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($projects as $project): ?>
-                  <tr>
-                      <td></td>
-                      <td><?= $this->Number->format($project->id) ?></td>
-                      <td><?= h($project->ID_PROJECT) ?></td>
-                      <td><?= h($project->PROJECT_NAME) ?></td>
-                      <td class="actions">
-                          <?= $this->Html->link(__('Editar'),['action' => 'edit', $project->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Proyecto']) ?>
-                          <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$project->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$project->PROJECT_NAME.'?', $project->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'down','data-tooltip'=>'Eliminar Proyecto']) ?>
-                      </td>
-                  </tr>
+                  <?php foreach ($projects as $project): ?> <!--foreach recorre todos los proyectos registrado-->
+                    <?php foreach ($ProjxUser as $Project_User): ?> <!--foreach recorre las id de los proyectos del usuario loggeado-->
+                      <?php if($project->ID_PROJECT == $Project_User):?><!--Comparación de los proyectos registrados y asignados al usuario-->
+                        <tr>
+                            <td></td>
+                            <td><?= $this->Number->format($project->id);?></td>
+                            <td><?= h($project->ID_PROJECT);?></td>
+                            <td><?= h($project->PROJECT_NAME);?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('Editar'),['action' => 'edit', $project->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o Editar Proyecto']) ?>
+                                <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$project->id], ['confirm' => __('Seguro desea eliminar el proyecto '.$project->PROJECT_NAME.'?', $project->id),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'down','data-tooltip'=>'Eliminar Proyecto']) ?>
+                            </td>
+                        </tr>
+                      <?php endif;?>
+                    <?php endforeach; ?>
                   <?php endforeach; ?>
                 </tbody>
             </table>

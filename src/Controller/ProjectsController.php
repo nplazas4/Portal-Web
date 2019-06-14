@@ -108,9 +108,6 @@ class ProjectsController extends AppController
         ));
         $projects = $this->paginate($this->Projects);
         $this->set('projects', $projects);
-        // $this->Indicators();
-        // $this->Risks();
-        // $this->Period();
     }
     public function alert()
     {
@@ -142,12 +139,10 @@ class ProjectsController extends AppController
     }
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
         $projects = $this->Projects->get($id);
         if ($this->Projects->delete($projects)) {
-            // $this->Flash->success(__('El proyecto ha sido eliminado.'));
         } else {
-            // $this->Flash->error(__('El proyecto no pudo ser eliminado, por favor, intente de nuevo.'));
+            $this->Flash->error(__('El proyecto no pudo ser eliminado, por favor, intente de nuevo.'));
         }
         return $this->redirect(['action' => 'index']);
     }
@@ -162,7 +157,6 @@ class ProjectsController extends AppController
         if ($this->request->is(['patch','post','put'])) {
             $projects = $this->Projects->patchEntity($projects, $this->request->data);
             if ($this->Projects->save($projects)) {
-                // $this->Flash->success('El proyecto ha sido modificado');
                 return $this->redirect(['action'=>'index']);
             } else {
                 $error = '';
@@ -176,20 +170,13 @@ class ProjectsController extends AppController
     {
         $this->index();
         $this->IndicatorColor();
-        // Nombre del proyecto.
-        $decoded_Name = base64_decode(urldecode($name));
-        // Nombre de la EPS
-        $decoded_NameEpsPrjs = base64_decode(urldecode($NameEps));
-        //Nombre de la EPS mandante
-        $decoded_titlePrjs = base64_decode(urldecode($title));
-        // Código de la EPS actual
-        $decoded_EpsPrjs = base64_decode(urldecode($ActualEps));
-        //Código de la categoría 1
-        $decoded_Ctg1Prjs = base64_decode(urldecode($Categoria1));
-        //Código de la categoría 2
-        $decoded_Ctg2Prjs = base64_decode(urldecode($Categoria2));
-        //Id de la EPS parent del proyecto seleccionado.
-        $decoded_IdEpsParent = base64_decode(urldecode($idEpsParent));
+        $decoded_Name = base64_decode(urldecode($name)); // Nombre del proyecto.
+        $decoded_NameEpsPrjs = base64_decode(urldecode($NameEps)); // Nombre de la EPS
+        $decoded_titlePrjs = base64_decode(urldecode($title)); //Nombre de la EPS mandante
+        $decoded_EpsPrjs = base64_decode(urldecode($ActualEps)); // Código de la EPS actual
+        $decoded_Ctg1Prjs = base64_decode(urldecode($Categoria1)); //Código de la categoría 1
+        $decoded_Ctg2Prjs = base64_decode(urldecode($Categoria2)); //Código de la categoría 2
+        $decoded_IdEpsParent = base64_decode(urldecode($idEpsParent)); //Id de la EPS parent del proyecto seleccionado.
         // Envía las variables a la vista de Projects.ctp.
         $this->set('idEpsParent', $decoded_IdEpsParent);
         $this->set('NameEpsPrjs', $decoded_NameEpsPrjs);
@@ -231,10 +218,20 @@ class ProjectsController extends AppController
         $this->set('NameEpsPrjs', $decoded_NameEpsPrjs);
         $this->set('titlePrjs', $decoded_titlePrjs);
         $decoded_current_user_pr = base64_decode(urldecode($current_user_pr));
+        $Codigo_Categoria = base64_decode(urldecode($Categoria1)); //Variable que Decodifica el código de la categoría.
+        $Categoria2_Decoded = base64_decode(urldecode($Categoria2));
+        $Nombre_Categoria = null; //Variable que va a almacenar el nombre de la categoría con base al código de categoría
+        if ($Codigo_Categoria == 870) {
+          $Nombre_Categoria = "Crecimiento";
+        }elseif ($Codigo_Categoria == 871) {
+          $Nombre_Categoria = "Sostenimiento";
+        }
+        $this->set('Categoria2',$Categoria2_Decoded);
+        $this->set('CategoryPrTitle',$Nombre_Categoria);
         //Variable que obtiene todos los proyectos relacionados a la EPS actual.
         $projectsCategory = $this->Projects->find(
             'all',
-            array('conditions' => array('Projects.EPS_REL' => $decoded_EpsPrjs))
+            array('conditions' => array('Projects.EPS_REL' => $decoded_EpsPrjs, 'Projects.CATEGORY' => $Nombre_Categoria ))
         );
         $this->set('projectsCategory', $projectsCategory);
         $this->set('ActualEps', $decoded_EpsPrjs);
@@ -301,21 +298,21 @@ class ProjectsController extends AppController
         $indicatorsAC3 = $this->Presindicators->find('all');
         $this->set('indicatorsAC3', $indicatorsAC3->all());
     }
-    public function Period()
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://23.99.203.76:7001/ords/portal/periodtype/period');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        $headers = array();
-        $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $result3 = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
-    }
+    // public function Period()
+    // {
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, 'http://23.99.203.76:7001/ords/portal/periodtype/period');
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+    //     $headers = array();
+    //     $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    //     $result3 = curl_exec($ch);
+    //     if (curl_errno($ch)) {
+    //         echo 'Error:' . curl_error($ch);
+    //     }
+    //     curl_close($ch);
+    // }
     public function ChartS($graph)
     {
         $data = $graph;

@@ -4,18 +4,10 @@
 en caso de ser crecimiento o sostenimiento da un código distinto para ser lo más congruente con los datos obtenidos de WS -->
 <?php $CategoryPr = 0;?>
 <?php foreach ($projectsCategory as $project): ?>
-  <?php if ($project->CATEGORY == "crecimiento"):?>
-    <?php $CategoryPr = 870;?>
-  <?php elseif ($project->CATEGORY == "sostenimiento"):?>
-    <?php $CategoryPr = 871;?>
-  <?php endif; ?>
-  <!--Si los proyectos de la fuente alterna es igual al código de proyecto que se obtiene de los WS-->
-  <?php if ($CategoryPr == $Categoria1):?>
     <!--Llena el array $ArrayProjectId con las id delos proyectos relacionados con la EPS actual.-->
     <?php array_push($ArrayProjectId, $project->ID_PROJECT);?>
-  <?php endif;?>
 <?php endforeach; ?>
-<!--resultProj albergar la cantidad de proyectos con diferente id a los WS, es decir proyectos creados 100% a partir del portal alterno-->
+<!--resultProj albergar la cantidad de proyectos con diferentes id a los WS, es decir proyectos creados 100% a partir del portal alterno-->
 <?php $resultProj = array_diff($ArrayProjectId, $ProjectCodId);?>
   <?php $ContProj = 0;?>
   <!--Condicional que evalua si el array $varProj contiene algún dato, en caso de estar vacio se le asigna el valor de 0-->
@@ -47,7 +39,7 @@ en caso de ser crecimiento o sostenimiento da un código distinto para ser lo m�
       foreach ($AllLocalDBProjects as $project) {
           if ($project->ID_PROJECT == $value["id_p_project"]) {
               $PresTotal+=$project->CAPEX_PLANNED;
-              $EjecTotal += $project->CAPEX_EXECUTED;
+              $BDLocalEjecTotal += $project->CAPEX_EXECUTED;
               $SPITotal+=$value["spi_labor_units"];
               $CPITotal += $project->CPI_ANUAL;
               $ACTotal +=$project->AC;
@@ -56,36 +48,20 @@ en caso de ser crecimiento o sostenimiento da un código distinto para ser lo m�
       }
   }
   foreach ($projectsCategory as $BDProjects) {
-    $BDLocalPresTotal+=$BDProjects->CAPEX_PLANNED;
-    $BDLocalEjecTotal += $BDProjects->CAPEX_EXECUTED;
-    $BDLocalSPITotal+=($BDProjects->EXECUTED/$BDProjects->PLANNED);
-    $BDLocalCPITotal += $BDProjects->CPI_ANUAL;
-    $BDLocalACTotal +=$BDProjects->AC;
-    $BDLocalPresupuestoAnual +=$BDProjects->PRES_PROJ;
+      $BDLocalPresTotal+=$BDProjects->CAPEX_PLANNED;
+      $BDLocalEjecTotal += $BDProjects->CAPEX_EXECUTED;
+      $BDLocalSPITotal+=($BDProjects->EXECUTED/$BDProjects->PLANNED);
+      $BDLocalCPITotal += $BDProjects->CPI_ANUAL;
+      $BDLocalACTotal +=$BDProjects->AC;
+      $BDLocalPresupuestoAnual +=$BDProjects->PRES_PROJ;
   }
-  // Condicional que busca en la BD local si exite un dato nulo, si exíste muestra el dato, sino el valor es 0 para evitar error
-  // al momento de mostrar algún indicador.
- // if (isset($indicators->SPI_EXTERNO)) {
- //     $SPI_GLOBAL = 0 + $indicators->SPI_EXTERNO;
- //     $PRES_GLOBAL = 0 + $indicators->TOTAL_PRES;
- //     $EJECT_GLOBAL = 0 + $indicators->TOTAL_EJEC_USD;
- //     $GLOBAL_CPI = 0 + $indicators->CPI;
- //     $GLOBAL_PRES_ANUAL = 0 + $indicators->PRES_ANUAL;
- //     $GLOBAL_EJECT_ANUAL = 0 + $indicators->EJECT_ANUAL;
- // } else {
- //     $SPI_GLOBAL = 0;
- //     $PRES_GLOBAL = 0;
- //     $EJECT_GLOBAL = 0;
- //     $GLOBAL_CPI = 0;
- //     $GLOBAL_PRES_ANUAL = 0;
- //     $GLOBAL_EJECT_ANUAL = 0;
- // }
-$SPITotalProj = ($SPITotal+$BDLocalSPITotal)/$TotalProj;
-$CPITotalProj = ($CPITotal + $BDLocalCPITotal)/$TotalProj;
-$SpiFormatNumber = number_format($SPITotalProj, 2, ".", ",");
-$CpiFormatNumber = number_format($CPITotalProj, 2, ".", ",");
-$SPITotalcolor = null;
-$CPITotalcolor = null;
+  $_SESSION['total'] = $BDLocalEjecTotal + $EjecTotal;
+  $SPITotalProj = ($SPITotal + $BDLocalSPITotal)/$TotalProj;
+  $CPITotalProj = ($CPITotal + $BDLocalCPITotal)/$TotalProj;
+  $SpiFormatNumber = number_format($SPITotalProj, 2, ".", ",");
+  $CpiFormatNumber = number_format($CPITotalProj, 2, ".", ",");
+  $SPITotalcolor = null;
+  $CPITotalcolor = null;
 foreach ($colorIndicator as $colorFase => $valueFase) {
     if ( $SpiFormatNumber >= $valueFase['minimun'] && $SpiFormatNumber <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI') {
         $SPITotalcolor = $valueFase['hexa_color'];
@@ -154,17 +130,6 @@ $indicators = [
     ['escape' => false,'class'=>'breadcrumb']
         );?>
     <?php endforeach; ?>
-    <!--$CategoryPrTitle variable creada para albergar el nombre de la categoria crecimiento o sostenimiento de los proyectos ingresados en el portal alterno.-->
-    <?php $CategoryPrTitle = null?>
-    <!--$Categoria2 variable creada satisfacer la segunda categoria 8996 o 8997 del Web services de proyectos y como filtro para los proyectos creados en el portal alterno. -->
-    <?php $Categoria2 = 0?>
-    <?php if ($Categoria1 == 870):?>
-      <?php $CategoryPrTitle = "Crecimiento";?>
-    <?php $Categoria2 = 8996?>
-    <?php elseif ($Categoria1 == 871):?>
-        <?php $CategoryPrTitle = "Sostenimiento";?>
-        <?php $Categoria2 = 8997?>
-    <?php endif; ?>
     <!--Breadcrumb para las EPS provenientes de la pestaña companies, diferentes a la EPS de grupo de energía de Bogotá.
     Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_encode($var)) para codificar los parametro a enviar.-->
     <?php if ($ActualEps != 23305): ?>
@@ -208,20 +173,13 @@ $indicators = [
           <p>Es la segunda empresa en transmisión de electricidad en Colombia, con una participación en el mercado del 12.5%. Cuenta con 1.504 km de circuitos a 230 kV activos en 17 subestaciones y la disponibilidad del sistema de transmisión a 31 de diciembre del 2015 fue del 99,93%, superior a la meta fijada por la CREG</p>
         <?php elseif($ActualEps == 34013):?>
         <p>
-            MEGA:
-            <br>
-            “En el año 2027 será una multilatina líder en Midstream con ingresos superiores a USD 1 billón y un ROE de digito”.
-            <br>
-            Su unidad de infraestructura compartida, a la vanguardia tecnológica, tendrá una capacidad de transporte de gas equivalente > 1.500 mpcd consolidado su presencia en al menos 4 países.
-            <br>
-            30% de los ingresos de la compañía provendrán de otros paises Latam, desarrollando como mínimo dos posiciones en nuevos mercados.
-            <br>
-            Escalará su posiciones de generadoras conectando mas de 2.000 MW activos de térmicas a su red.
-            <br>
-            Apalancando sobre su posición de mercado, desarrollaría una Unida de Negocios de “Midstream Petrolero” la cual aportará más de 10% de los ingresos de la compañía.
-            <br>
-            Construyendo sobre su negocio de Urbes, estimulará per capitas de consumo y su infraestructura servirá a mas de 25 millones de usuarios y activará la demanda de GNV para transporte masico en el menos cinco ciudades de más de 500.000 habitantes.
-            <br>
+            MEGA: <br>
+            “En el año 2027 será una multilatina líder en Midstream con ingresos superiores a USD 1 billón y un ROE de digito”. <br>
+            Su unidad de infraestructura compartida, a la vanguardia tecnológica, tendrá una capacidad de transporte de gas equivalente > 1.500 mpcd consolidado su presencia en al menos 4 países.<br>
+            30% de los ingresos de la compañía provendrán de otros paises Latam, desarrollando como mínimo dos posiciones en nuevos mercados.<br>
+            Escalará su posiciones de generadoras conectando mas de 2.000 MW activos de térmicas a su red.<br>
+            Apalancando sobre su posición de mercado, desarrollaría una Unida de Negocios de “Midstream Petrolero” la cual aportará más de 10% de los ingresos de la compañía.<br>
+            Construyendo sobre su negocio de Urbes, estimulará per capitas de consumo y su infraestructura servirá a mas de 25 millones de usuarios y activará la demanda de GNV para transporte masico en el menos cinco ciudades de más de 500.000 habitantes.<br>
             Será una compañía de mas de USD 5 billones de market cap, y trabajará con aliados estratégicos.
           </p>
       <?php endif;?>
