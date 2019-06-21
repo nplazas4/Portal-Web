@@ -30,7 +30,6 @@ class UsersController extends AppController
     // Función que controla el inicio de sesión.
     public function login()
     {
-
         $this->token();
         // Condicional que comprueba si el usuario ha sido identificado.
         if ($this->Auth->user()) {

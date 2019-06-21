@@ -169,7 +169,6 @@ $("#button_caf_add").click(function(){
         }
     );
     // Curva de avance físico
-  // window.onload = Chart_Caf;
   function Chart_Caf(Grafica,DataProvider,Max_Number,Active_Chart) {
   var chart = AmCharts.makeChart("caf",{
             "type": "serial",

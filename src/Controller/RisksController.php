@@ -20,12 +20,9 @@ class RisksController extends AppController
       $this->set('projectsRisks', $projectsRisks);
     }
     public function PaginateTable(){
-      if ($this->request->is('Ajax')){
-        $this->layout = false;
-      }else{
-        $risks = $this->paginate($this->Risks);
-        $this->set('risks', $risks);
-      }
+      // $risks = $this->paginate($this->Risks);
+      $risks = $this->Risks->find()->select(['Risks.id','Risks.RISK_NUMBER','Risks.RISK_NAME','Risks.PROJECT_CODE']);
+      $this->set('risks', $risks);
     }
     // Función que se encarga de agregar riesgos.
     public function Add()
