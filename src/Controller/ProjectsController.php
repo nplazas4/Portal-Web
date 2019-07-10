@@ -4,8 +4,21 @@ use App\Controller\AppController;
 use Cake\Datasource\ConnectionManager;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Chart\Chart;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeries;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues;
+use PhpOffice\PhpSpreadsheet\Chart\Legend;
+use PhpOffice\PhpSpreadsheet\Chart\PlotArea;
+use PhpOffice\PhpSpreadsheet\Chart\Title;
+
 class ProjectsController extends AppController
 {
+    // public function initialize()
+    // {
+    //   parent::initialize();
+    //   $this->loadComponent('RequestHandler');
+    // }
     // Función que se ejecuta antes de rederizar cualquier vista dentro la carpeta Projects.
     public function beforeFilter($event)
     {
@@ -146,11 +159,11 @@ class ProjectsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
-    public function view($id)
-    {
-        $projects = $this->Projects->get($id);
-        $this->set('projects', $projects);
-    }
+    // public function view($id)
+    // {
+    //     $projects = $this->Projects->get($id);
+    //     $this->set('projects', $projects);
+    // }
     public function edit($id = null)
     {
         $projects = $this->Projects->get($id);
@@ -166,8 +179,25 @@ class ProjectsController extends AppController
         }
         $this->set(compact('projects'));
     }
+    public function view($id = null){
+      $this->viewBuilder()->options([
+      'pdfConfig' => [
+        'orientation' => 'portrait',
+        'filename' => 'User_1.pdf'
+      ]
+      ]);
+    }
+    public function pdf(){
+      $this->viewBuilder()->options([
+      'pdfConfig' => [
+        'orientation' => 'portrait',
+        'filename' => 'User_1.pdf'
+      ]
+      ]);
+    }
     public function project($id, $current_user_pr = null,$ActualEps = null, $Categoria1=null, $Categoria2 = null, $NameEps = null, $title = null, $idEpsParent = null,$name = null, $code = null, $spi = null, $corte = null, $graph = null)
     {
+        $this->pdf();
         $this->index();
         $this->IndicatorColor();
         $decoded_Name = base64_decode(urldecode($name)); // Nombre del proyecto.
@@ -203,8 +233,233 @@ class ProjectsController extends AppController
         $this->set('corte', $corte);
         $this->set('graph', $graph);
     }
+    public function ImportExcelCaf()
+    {
+      $this->layout = false;
+      if ($this->request->is('Ajax')) { //Ajax Detection
+          $spreadsheet = new Spreadsheet();
+          $worksheet = $spreadsheet->getActiveSheet();
+          $worksheet->setCellValue('B1', $_POST["Name"]);
+          $worksheet->setCellValue('A2', 'Fecha');
+          $worksheet->setCellValue('B2', "Planeado");
+          $worksheet->setCellValue('C2', 'Ejecutado');
+          $worksheet->setCellValue('D2', 'Estimado a completar');
+          $worksheet->getRowDimension('1')->setRowHeight(25);
+          $worksheet->getColumnDimension('A')->setWidth(25);
+          $worksheet->getColumnDimension('B')->setWidth(25);
+          $worksheet->getColumnDimension('C')->setWidth(25);
+          $worksheet->getColumnDimension('D')->setWidth(25);
+          $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+          $drawing->setName('Paid');
+          $drawing->setDescription('Paid');
+          $Img_Dir = WWW_ROOT . 'img/logos/logo_GEB.png';
+          $drawing->setPath($Img_Dir); //Imagen
+          $drawing->setHeight(25);
+          $drawing->setCoordinates('A1');
+          $drawing->setOffsetX(25);
+          $drawing->setOffsetY(5);
+          $worksheet->fromArray(
+            $_POST["Info_Grafica"],
+            NULL,
+            'A3'
+          );
+          $Contador_Array = count($_POST["Info_Grafica"])+ 2;
+          $this->set("Contador",$Contador_Array);
+          $dataSeriesLabels = [
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$B$2', null, 1), // Planeado
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$C$2', null, 1), // Ejecutado
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$D$2', null, 1), // Estimado
+          ];
+          $xAxisTickValues = [
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$A$3:$A$'.$Contador_Array, null, 4), // Fechas
+          ];
+          $dataSeriesValues = [
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$B$3:$B$'.$Contador_Array, null, 4),
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$C$3:$C$'.$Contador_Array, null, 4),
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$D$3:$D$'.$Contador_Array, null, 4),
+          ];
+          $dataSeriesValues[2]->setLineWidth(20000);
+          // Build the dataseries
+          $series = new DataSeries(
+            DataSeries::TYPE_LINECHART, // plotType
+            DataSeries::GROUPING_STANDARD, // plotGrouping
+            range(0, count($dataSeriesValues) - 1), // plotOrder
+            $dataSeriesLabels, // plotLabel
+            $xAxisTickValues, // plotCategory
+            $dataSeriesValues        // plotValues
+          );
+          // Set the series in the plot area
+          $plotArea = new PlotArea(null, [$series]);
+          // Set the chart legend
+          $legend = new Legend(Legend::POSITION_BOTTOM, null, false);
+          $title = new Title('Curva de avance físico');
+          $yAxisLabel = new Title('Valores');
+          // Create the chart
+          $chart = new Chart(
+            'chart1', // name
+            $title, // title
+            $legend, // legend
+            $plotArea, // plotArea
+            true, // plotVisibleOnly
+            0, // displayBlanksAs
+            null, // xAxisLabel
+            $yAxisLabel  // yAxisLabel
+          );
+          $drawing->setWorksheet($spreadsheet->getActiveSheet());
+          // Set the position where the chart should appear in the worksheet
+          $chart->setTopLeftPosition('F7');
+          $chart->setBottomRightPosition('Q25');
+          // Add the chart to the worksheet
+          $worksheet->addChart($chart);
+          // Save Excel 2007 file
+          // $filename = $helper->getFilename(__FILE__);
+          $writer = new Xlsx($spreadsheet);
+          $writer->setIncludeCharts(true);
+          $callStartTime = microtime(true);
+          $time = time();
+          $this->set("time",$time);
+          $writer->save($_POST["Name"]."_".$time.".xlsx");
+      }
+      $this->autoRender = false;
+    }
+    public function ImportExcelTg(){
+      $this->layout = false;
+      if ($this->request->is('Ajax')) { //Ajax Detection
+        $spreadsheet = new Spreadsheet();
+        $worksheet = $spreadsheet->getActiveSheet();
+        $worksheet->setCellValue('B1', $_POST["Name"]);
+        $worksheet->setCellValue('A2', 'Fecha');
+        $worksheet->setCellValue('B2', "Planeado");
+        $worksheet->setCellValue('C2', 'Ejecutado');
+        $worksheet->setCellValue('D2', 'Proyección');
+        $worksheet->getRowDimension('1')->setRowHeight(25);
+        $worksheet->getColumnDimension('A')->setWidth(25);
+        $worksheet->getColumnDimension('B')->setWidth(25);
+        $worksheet->getColumnDimension('C')->setWidth(25);
+        $worksheet->getColumnDimension('D')->setWidth(25);
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('Logo');
+        $drawing->setDescription('Logo');
+        $Img_Dir = WWW_ROOT . 'img/logos/logo_GEB.png';
+        $drawing->setPath($Img_Dir); //Imagen
+        $drawing->setHeight(25);
+        $drawing->setCoordinates('A1');
+        $drawing->setOffsetX(25);
+        $drawing->setOffsetY(5);
+        $Contador_Array_Date = count($_POST["Info_Grafica_Date"]);
+        for ($i=1; $i <= $Contador_Array_Date; $i++) {
+          $Excel_Row = $i + 2;
+          $worksheet->setCellValue('A'.$Excel_Row, $_POST["Info_Grafica_Date"][$i]);
+          $cell_value = $worksheet->getCellByColumnAndRow(1, $i + 2)->getValue();
+         if(strlen($_POST["Info_Grafica_Date"][$i])<5){
+               if ($_POST["Info_Grafica_Planeado"][$i] != "null") {
+                 $worksheet->setCellValue('B'.$Excel_Row, $_POST["Info_Grafica_Planeado"][$i]);
+               }else{
+                 $worksheet->setCellValue('B'.$Excel_Row, "");
+               }
+               if ($_POST["Info_Grafica_Ejecutado"][$i] != "null") {
+                $worksheet->setCellValue('C'.$Excel_Row, $_POST["Info_Grafica_Ejecutado"][$i]);
+              }else{
+                $worksheet->setCellValue('C'.$Excel_Row, "");
+              }
+              if ($_POST["Info_Grafica_Proyectado"][$i] != "null") {
+                $worksheet->setCellValue('D'.$Excel_Row, $_POST["Info_Grafica_Proyectado"][$i]);
+              }else {
+                $worksheet->setCellValue('D'.$Excel_Row, "");
+              }
+         }else if(strlen($_POST["Info_Grafica_Date"][$i])>4){
+              if ($_POST["Info_Grafica_Planeado"][$i] != "null") {
+               $worksheet->setCellValue('E'.$Excel_Row, $_POST["Info_Grafica_Planeado"][$i]);
+             }else {
+               $worksheet->setCellValue('E'.$Excel_Row, "");
+             }
+             if ($_POST["Info_Grafica_Ejecutado"][$i] != "null") {
+               $worksheet->setCellValue('F'.$Excel_Row, $_POST["Info_Grafica_Ejecutado"][$i]);
+             }else {
+               $worksheet->setCellValue('F'.$Excel_Row, "");
+             }
+             if ($_POST["Info_Grafica_Proyectado"][$i] != "null") {
+               $worksheet->setCellValue('G'.$Excel_Row, $_POST["Info_Grafica_Proyectado"][$i]);
+             }else {
+               $worksheet->setCellValue('G'.$Excel_Row, "");
+             }
+         }
+        }
+        $dataSeriesLabels = [
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$B$2', null, 1), // Planeado
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$C$2', null, 1), // Ejecutado
+        ];
+        $dataSeriesLabels2 = [
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$D$2', null, 1), // Estimado
+        ];
+        $xAxisTickValues = [
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$A$3:$A$'.$Excel_Row, null, 4), // Fechas
+        ];
+        $dataSeriesValues = [
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$B$3:$B$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$C$3:$C$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$D$3:$D$'.$Excel_Row, null, 4),
+        ];
+        $dataSeriesValues2 = [
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$E$3:$E$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$F$3:$F$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$G$3:$G$'.$Excel_Row, null, 4),
+        ];
+        // $dataSeriesValues[2]->setLineWidth(20000);
+        // Build the dataseries
+        $series = new DataSeries(
+          DataSeries::TYPE_BARCHART, // plotType
+          DataSeries::GROUPING_STANDARD, // plotGrouping
+          range(0, count($dataSeriesValues) - 1), // plotOrder
+          $dataSeriesLabels, // plotLabel
+          $xAxisTickValues, // plotCategory
+          $dataSeriesValues        // plotValues
+        );
+        $series2 = new DataSeries(
+          DataSeries::TYPE_LINECHART, // plotType
+          DataSeries::GROUPING_STANDARD, // plotGrouping
+          range(0, count($dataSeriesValues2) - 1), // plotOrder
+          $dataSeriesLabels2, // plotLabel
+          $xAxisTickValues, // plotCategory
+          $dataSeriesValues2        // plotValues
+        );
+        // Set the series in the plot area
+        $plotArea = new PlotArea(null, [$series,$series2]);
+        // Set the chart legend
+        $legend = new Legend(Legend::POSITION_BOTTOM, null, false);
+        $title = new Title('Curva de tres Generaciones');
+        $yAxisLabel = new Title('Valores');
+        // Create the chart
+        $chart = new Chart(
+          'chart1', // name
+          $title, // title
+          $legend, // legend
+          $plotArea, // plotArea
+          true, // plotVisibleOnly
+          0, // displayBlanksAs
+          null, // xAxisLabel
+          $yAxisLabel  // yAxisLabel
+        );
+        $drawing->setWorksheet($spreadsheet->getActiveSheet());
+        // Set the position where the chart should appear in the worksheet
+        $chart->setTopLeftPosition('I3');
+        $chart->setBottomRightPosition('U21');
+        // Add the chart to the worksheet
+        $worksheet->addChart($chart);
+        // Save Excel 2007 file
+        // $filename = $helper->getFilename(__FILE__);
+        $writer = new Xlsx($spreadsheet);
+        $writer->setIncludeCharts(true);
+        $callStartTime = microtime(true);
+        $time = time();
+        $this->set("time",$time);
+        $writer->save($_POST["Name"]."_".$time.".xlsx");
+      }
+      $this->autoRender = false;
+    }
     public function projects($current_user_pr = null, $EPS = null, $Categoria1 = null, $Categoria2 = null, $NameEps = null, $title=null, $idEpsParent = null)
     {
+        $this->pdf();
         $this->AllProjects();
         $this->IndicatorColor();
         // Decodifica todas la variables pasadas a través de la URL.
@@ -357,8 +612,13 @@ class ProjectsController extends AppController
                     $StartDate1 = date("Y-m-d", strtotime($FinishDate));
                     $StartDate2 = date("Y-m-d", strtotime($StartDate));
                     array_push($ArrayStartDate, $StartDate2);
-                    array_push($ArrayBL, str_replace(',','.',$BL));
                     array_push($ArrayEV, str_replace(',','.',$EV));
+                    //REVISAR!!!
+                    if($EV == ""){
+                      array_push($ArrayBL, str_replace(',','.',$BL));
+                    }else {
+                      array_push($ArrayBL, null);
+                    }
                     array_push($ArrayAC, str_replace(',','.',$AC));
                     if ($BL != null) {
                       array_push($ArrayBLSnapshot, $BL * 4);
@@ -375,10 +635,6 @@ class ProjectsController extends AppController
                     } else{
                       array_push($ArrayACSnapshot, null);
                     }
-                    // $fecJson = json_encode($ArrayStartDate);
-                    // $blJson = json_encode($ArrayBL);
-                    // $evJson = json_encode($ArrayEV);
-                    // $acJson = json_encode($ArrayAC);
                     $this->set('fecJson', $ArrayStartDate);
                     $this->set('blJson', $ArrayBL);
                     $this->set('evJson', $ArrayEV);
@@ -457,6 +713,8 @@ class ProjectsController extends AppController
     }
     public function company($current_user = null, $Id_eps = null, $NameEps = null, $titleParentEps = null, $idParentEps = null)
     {
+        $Company_title_1 = null;
+        $Company_title_2 = null;
         $this->AllProjects();
         // Decodifica las variables pasadas a través de URL y las asigna a una nueva variable.
         $decoded_Id_eps = base64_decode(urldecode($Id_eps));
@@ -468,6 +726,7 @@ class ProjectsController extends AppController
         $this->set('title', $decoded_title);
         $this->set('NameEps', $decoded_NameEps);
         $this->set('idEps', $decoded_Id_eps);
+        $this->Company_Title($decoded_Id_eps);
         $this->set('idEpsParent', $decoded_IdParentEps);
         // CURL que llama a los proyectos de la EPS correspondiente a la categoría de sostenimiento.
         $curl = curl_init();
@@ -525,6 +784,19 @@ class ProjectsController extends AppController
             $this->set('SumResult', $SumResult);
             $this->set('ContadorCrecimiento', $longitudCrecimiento);
         }
+    }
+    public function Company_Title($decoded_Id_eps = null){
+      if ($decoded_Id_eps == 23305) {
+        $Company_title_1 = "PLAN DE TRABAJO";
+        $Company_title_2 = "PROYECTOS";
+        $this->set('Company_title_1',$Company_title_1);
+        $this->set('Company_title_2',$Company_title_2);
+      }else {
+        $Company_title_1 = "CRECIMIENTO";
+        $Company_title_2 = "SOSTENIMIENTO";
+        $this->set('Company_title_1',$Company_title_1);
+        $this->set('Company_title_2',$Company_title_2);
+      }
     }
     public function companyGas($current_user = null, $Id_eps = null, $NameEps = null, $titleParentEps = null, $idParentEps = null)
     {

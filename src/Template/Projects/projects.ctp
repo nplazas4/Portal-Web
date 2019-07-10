@@ -1,3 +1,22 @@
+<script>
+  $(document).ready(function(){
+    $('input[type=text]').on('keydown', function(e) {
+      if (e.which == 13) {
+          e.preventDefault();
+      }
+  });
+ $('#Input_Search').keyup(function(){
+  // Search text
+  var text = $(this).val();
+  // Hide all content class element
+  $('.Search').hide();
+
+  // Search and show
+  $('.Search:contains("'+text+'")').show();
+
+ });
+});
+</script>
 <!-- Array que almacena las id de los proyectos de portal alterno relacionadas con la EPS seleccionada-->
 <?php $ArrayProjectId = array();?>
 <!--Foreach que recorre el arreglo $projectsCategory(Proyectos portal alterno) y evalua que categoria es,
@@ -50,7 +69,9 @@ en caso de ser crecimiento o sostenimiento da un cÃ³digo distinto para ser lo mÃ
   foreach ($projectsCategory as $BDProjects) {
       $BDLocalPresTotal+=$BDProjects->CAPEX_PLANNED;
       $BDLocalEjecTotal += $BDProjects->CAPEX_EXECUTED;
-      $BDLocalSPITotal+=($BDProjects->EXECUTED/$BDProjects->PLANNED);
+      if($BDProjects->PLANNED != 0){
+        $BDLocalSPITotal+=($BDProjects->EXECUTED/$BDProjects->PLANNED);
+      }
       $BDLocalCPITotal += $BDProjects->CPI_ANUAL;
       $BDLocalACTotal +=$BDProjects->AC;
       $BDLocalPresupuestoAnual +=$BDProjects->PRES_PROJ;
@@ -80,6 +101,7 @@ $indicators = [
         'icon' => 'show_chart',
         'color' => '',
         'colorBackground' => $SPITotalcolor,
+        'tooltip' => 'Suma de todos los SPI dividido por la cantidad de proyectos',
     ],
     [
         'name' => 'Presupuesto Total USD ',
@@ -87,6 +109,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'accent',
         'colorBackground' => '',
+        'tooltip' => 'Presupuesto Total USD Info',
     ],
     [
         'name' => 'Ejecutado Total USD',
@@ -94,6 +117,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'tertiary',
         'colorBackground' => '',
+        'tooltip' => 'Ejecutado Total USD Info',
     ],
     [
         'name' => 'CPI',
@@ -101,6 +125,7 @@ $indicators = [
         'icon' => 'show_chart',
         'color' => '',
         'colorBackground' =>$CPITotalcolor,
+        'tooltip' => 'CPI Info',
     ],
     [
         'name' => 'Presupuesto Anual USD',
@@ -108,6 +133,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
+        'tooltip' => 'Presupuesto Anual Info',
     ],
     [
         'name' => 'Ejecutado Anual USD',
@@ -115,6 +141,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
+        'tooltip' => 'Ejecutado Anual Info',
     ],
 ];
 ?>
@@ -184,17 +211,12 @@ $indicators = [
           </p>
       <?php endif;?>
     </div>
-    <!-- <div class="projects-sidebar-info">
-        <h2>Fecha corte:</h2>
-        <p>31 Octubre 2018</p>
-    </div> -->
 </sidebar>
-<!--Div que contiene los indicadores generales de todos los proyectos se maneja con una clase distinta a los proyectos individuales para mantener el aspecto.-->
 <div class="projects-content">
     <div class="indicators row wrap">
       <?php foreach ($indicators as $indicator): ?>
         <div class="d-flex col s12 m6 l4 xl4">
-          <div class="indicator <?=$indicator['color']?>" style="background-color:<?=$indicator['colorBackground']?>">
+          <div class="indicator <?=$indicator['color']?> tooltipped" data-position="bottom" data-tooltip="<?=$indicator['tooltip']?>" style="background-color:<?=$indicator['colorBackground']?>">
               <h2><?= $indicator['name'] ?></h2>
               <h3><?= $indicator['value'] ?></h3>
               <i class="material-icons"><?= $indicator['icon'] ?></i>
@@ -202,6 +224,22 @@ $indicators = [
         </div>
       <?php endforeach; ?>
     </div>
+  </div>
+  <div class="section home ml-auto mr-auto" style="margin-top: 2%; width: 98%">
+      <div class="home-menu">
+          <form class="col s12">
+              <div class="input-field col s12">
+                <!-- <i class="material-icons prefix">search</i> -->
+                <input id="Input_Search" type="text"></input>
+                <label for="Input_Search">Buscar</label>
+                <?php echo $this->Html->link(
+                  $this->Html->tag('i','picture_as_pdf',['class'=>'material-icons tooltipped', 'data-position'=>'right','data-tooltip'=>'Descargar PDF']),
+                  ['action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)), '_ext' => 'pdf'],
+                  ['escape' => false]
+                );?>
+            </div>
+          </form>
+      </diV>
   </div>
   <!--Div que contiene la estructura de los proyectos individuales y mediante un foreach plasma cada proyecto-->
   <div class="projects-content2">
@@ -220,7 +258,7 @@ $indicators = [
         <?php endif; ?>
           <?php if (!in_array($projects->ID_PROJECT, $ProjectCodId)):?>
             <?php if ($Category == $Categoria1):?>
-              <div class = "d-flex col s12 m6 l4 xl3">
+              <div class = "Search d-flex col s12 m6 l4 xl3">
                 <?php if ($projects->PLANNED != null || $projects->EXECUTED != null): ?>
                   <?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2, '.', '');?>
                 <?php else:?>
@@ -248,7 +286,7 @@ $indicators = [
                                   } elseif ($projects->FASE == 5) {
                                       echo 'v';
                                   }
-                              ?>">
+                              ?> tooltipped" data-position="bottom" data-tooltip="Fase Info">
                               <h3>
                                   <?php
                                       if ($projects->FASE == 1) {
@@ -281,7 +319,7 @@ $indicators = [
                                   } elseif ($SPI < 0.8) {
                                       echo 'error';
                                   }
-                              ?>">
+                              ?> tooltipped" data-tooltip="SPI Info">
                               <h4><?=$SPI?></h4>
                           </div>
                           <div class="data-box-content">
@@ -289,7 +327,7 @@ $indicators = [
                           </div>
                       </div>
                       <div class="data-box">
-                          <div class="data-box-circle error">
+                          <div class="data-box-circle error tooltipped" data-tooltip="CPI Anual info">
                               <h5><?= $projects->CPI_ANUAL ?></h5>
                           </div>
                           <div class="data-box-content">
@@ -297,7 +335,7 @@ $indicators = [
                           </div>
                       </div>
                       <div class="data-box">
-                          <div class="data-box-circle tertiary">
+                          <div class="data-box-circle tertiary tooltipped" data-tooltip="AC/BAC info">
                               <h5><?=$projects->AC_BAC?>%</h5>
                           </div>
                           <div class="data-box-content">
@@ -305,11 +343,11 @@ $indicators = [
                           </div>
                       </div>
                       <div class="divider transparent"></div>
-                      <div class="data-chip accent">
+                      <div class="data-chip accent tooltipped" data-tooltip="Presupuesto planeado info">
                           <h3>Presupuesto Planeado (USD)</h3>
                           <h4><?=number_format($projects->CAPEX_PLANNED, 2, ",", ".")?> MM</h4>
                       </div>
-                      <div class="data-chip secondary mb-0">
+                      <div class="data-chip secondary mb-0 tooltipped" data-tooltip="Presupuesto ejecutado info">
                           <h3>Presupuesto Ejecutado (USD)</h3>
                           <h4><?=number_format($projects->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
                       </div>
@@ -322,7 +360,7 @@ $indicators = [
         <?php foreach ($ProjectsWS as $row => $value):?>
           <?php foreach ($AllLocalDBProjects as $project): ?>
             <?php if ($project->ID_PROJECT == $value["id_p_project"]): ?>
-              <div class="d-flex col s12 m6 l4 xl3">
+              <div class="Search d-flex col s12 m6 l4 xl3">
                 <?php if ($value["spi_labor_units"] == null && $project->PLANNED != null): ?>
                   <?php $SPI_WS = number_format($project->EXECUTED/$project->PLANNED, 2, '.', '');?>
                 <?php elseif ($value["spi_labor_units"] != null): ?>

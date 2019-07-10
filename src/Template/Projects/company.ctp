@@ -77,7 +77,7 @@
         <?php echo $this->Html->link(
           $this->Html->image('icons/torre-sostenimiento.svg').
           $this->Html->tag('div',$this->Html->tag('h3',$TotalSostenimiento),array('class'=>'number')).
-          $this->Html->tag('h2','Sostenimiento'),
+          $this->Html->tag('h2',$Company_title_1),
           array('controller'=>'Projects','action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($idEps)),urlencode(base64_encode($CategoriaCr1)),urlencode(base64_encode($CategoriaCr2)),urlencode(base64_encode($NameEps)),urlencode(base64_encode($title)),urlencode(base64_encode($idEpsParent))),
           array('escape' => false,'class'=>'company-content-tower sustenance'))?>
 
@@ -91,7 +91,7 @@
         <?php echo $this->Html->link(
           $this->Html->image('icons/torre-crecimiento.svg').
           $this->Html->tag('div',$this->Html->tag('h3',$TotalCrecimiento),array('class'=>'number')).
-          $this->Html->tag('h2','Crecimiento'),
+          $this->Html->tag('h2',$Company_title_2),
           array('controller'=>'Projects','action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($idEps)),urlencode(base64_encode($CategoriaSt1)),urlencode(base64_encode($CategoriaSt2)),urlencode(base64_encode($NameEps)),urlencode(base64_encode($title)),urlencode(base64_encode($idEpsParent))),
           array('escape' => false,'class'=>'company-content-tower increase'))?>
     </div>

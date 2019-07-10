@@ -80,6 +80,11 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
+        if (!in_array('ob_gzhandler', ob_list_handlers())) {
+          ob_start('ob_gzhandler');
+        } else {
+          ob_start();
+        }
         //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
         $ch = curl_init('http://192.168.0.210:8080/ords/portal/oauth/token');
         // curl_setopt($ch, CURLOPT_HEADER, TRUE);

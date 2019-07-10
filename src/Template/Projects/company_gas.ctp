@@ -73,14 +73,6 @@
         $TotalSostenimiento = $longitudSostenimientoBD + $ContadorSostenimiento;
         $SumCategory = $TotalCrecimiento + $TotalSostenimiento;
       ?>
-
-        <!-- <a href="/portal-projects/projects" class="company2-content-valve increase">
-            </?= $this->Html->image('icons/valvula-crecimiento.svg') ?>
-            <div class="number">
-                <h3>15</h3>
-            </div>
-            <h2>Crecimiento</h2>
-        </a> -->
         <?php echo $this->Html->link(
           $this->Html->image('icons/valvula-crecimiento.svg').
           $this->Html->tag('div',$this->Html->tag('h3',$TotalCrecimiento),array('class'=>'number')).
@@ -104,12 +96,5 @@
           $this->Html->tag('h2','Sostenimiento'),
           array('controller'=>'Projects','action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($idEps)),urlencode(base64_encode($CategoriaCr1)),urlencode(base64_encode($CategoriaCr2)),urlencode(base64_encode($NameEps)),urlencode(base64_encode($title)),urlencode(base64_encode($idEpsParent))),
           array('escape' => false,'class'=>'company2-content-valve sustenance'))?>
-        <!-- <a href="" class="company2-content-valve sustenance">
-            </?= $this->Html->image('icons/valvula-sostenimiento.svg') ?>
-            <div class="number">
-                <h3>10</h3>
-            </div>
-            <h2>Sostenimiento</h2>
-        </a> -->
     </div>
 </div>

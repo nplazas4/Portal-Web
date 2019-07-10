@@ -169,7 +169,7 @@ $("#button_caf_add").click(function(){
         }
     );
     // Curva de avance físico
-  function Chart_Caf(Grafica,DataProvider,Max_Number,Active_Chart) {
+ function Chart_Caf(Grafica,DataProvider,Max_Number,Active_Chart) {
   var chart = AmCharts.makeChart("caf",{
             "type": "serial",
             "categoryField": "date",
@@ -205,41 +205,6 @@ $("#button_caf_add").click(function(){
             },
             "trendLines": [],
             "graphs":Grafica,
-            //   [
-            //     {
-            //       "id": "AmGraph-1",
-            //       "lineColor": "#A6CE39",
-            //       "lineThickness": 3,
-            //       "title": "Planeado",
-            //       "valueField": "column"
-            //     },
-            //     {
-            //         // "customBullet": "",
-            //         // "dashLength": 7,
-            //         "id": "AmGraph-2",
-            //         // "labelPosition": "right",
-            //         // "labelText": "",
-            //         "lineColor": "#2CACE3",
-            //         "lineThickness": 3,
-            //         // "minBulletSize": 3,
-            //         // "showAllValueLabels": true,
-            //         "title": "Ejecutado",
-            //         "valueField": "column-2"
-            //     },
-            //     {
-            //       "customBullet": "",
-            //       "dashLength": 7,
-            //       "id": "AmGraph-3",
-            //       "labelPosition": "right",
-            //       "labelText": "",
-            //       "lineColor": "#fc9219",
-            //       "lineThickness": 3,
-            //       "minBulletSize": 3,
-            //       "showAllValueLabels": true,
-            //       "title": "Estimado a completar",
-            //       "valueField": "column-3"
-            //     },
-            // ],
             "guides": [],
             "valueAxes": [
                 {
@@ -284,10 +249,11 @@ $("#button_caf_add").click(function(){
             //     },
             //       </?php endfor; ?>
             // ],
-            // "export": {
-            //     "enabled": true,
-            //     'position': 'absolute'
-            // }
+            "export": {
+                "enabled": true,
+                "exportTitles": true,
+                "fileName": "<?=$name?>"
+            }
         }
     );
   };
@@ -451,7 +417,12 @@ $("#button_caf_add").click(function(){
                   <?php endif;?>
                 },
                 <?php endfor; ?>
-              ]
+              ],
+              "export": {
+                  "enabled": true,
+                  "exportTitles": true,
+                  "fileName": "<?=$name?>"
+              }
           }
       );
     }
@@ -592,6 +563,7 @@ $("#button_caf_add").click(function(){
 
     <div class="project-content">
         <div class="indicators row wrap">
+          <?= $this->Html->link($this->Html->tag('i','picture_as_pdf',['class'=>'material-icons tooltipped', 'data-position'=>'right','data-tooltip'=>'Descargar PDF']), ['action' => 'project', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph , '_ext' => 'pdf'],['escape' => false, 'style'=>'margin-left:1%']); ?>
             <h2>Indicadores de cronograma</h2>
             <div class="d-flex col s12 m6 l4 xl3">
                 <div class="indicator type-1" style="background-color:
@@ -742,6 +714,7 @@ $("#button_caf_add").click(function(){
             <div class="input-field col s8 m6 l4 xl3">
               <a id="button_caf"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
               <a id="button_caf_edit"><i class="material-icons tooltipped modal-trigger" href="#EditChart" data-position="right" data-tooltip="Editar" onclick="return false;">edit</i></a>
+              <a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
             </div>
         </div>
       <?php endif;?>
@@ -795,7 +768,10 @@ $("#button_caf_add").click(function(){
                 <input type="color" id="Id_Color_TG_Column5" value="#BBBBBB">
               </div>
             </div>
-            <a id="button_tg"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
+              <div class="input-field col s8 m6 l4 xl3">
+                <a id="button_tg"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
+                <a id="Tg_Button_Excel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
+              </div>
           </div>
           <div class="chart" id="div-gif-tg" style="display:none">
             <div class="data-box ml-auto mr-auto">
@@ -861,7 +837,6 @@ $("#button_caf_add").click(function(){
                     $('#idchart').show();
                   },
                   success: function(data){
-                      console.log(data);
                       $("#idchart").html(data);
                       xhr.abort();
                   }
@@ -902,7 +877,6 @@ $("#button_caf_add").click(function(){
               $('#idchart').show();
             },
             success: function(data){
-                console.log(data);
                 $("#idchart").html(data);
             }
           });
@@ -955,7 +929,6 @@ $("#button_caf_add").click(function(){
                 Column3_TG_Color: Column3_TG_color,
                 Column4_TG_Color: Column4_TG_color,
                 Column5_TG_Color: Column5_TG_color
-
           },
               beforeSend: function() {
                 $('#div-gif-tg').show();
@@ -967,59 +940,63 @@ $("#button_caf_add").click(function(){
               $('#idchart-tg').show();
             },
             success: function(data){
-                console.log(data);
                 $("#idchart-tg").html(data);
             }
           });
         });
       });
-    //   chart.addListener("rendered", function(event) {
-    //
-    //   /**
-    //    * ChartCursor and its value line must be enabled for this to work
-    //    */
-    //   if (chart.chartCursor === undefined ||
-    //       chart.chartCursor.valueLineAxis === undefined)
-    //     return;
-    //
-    //   /**
-    //    * Add generic mouse events
-    //    */
-    //   chart.mouseIsDown = false;
-    //   chart.mouseTimeout;
-    //   document.body.onmousedown = function() {
-    //     chart.mouseIsDown = true;
-    //   }
-    //   document.body.onmouseup = function() {
-    //     chart.mouseIsDown = false;
-    //   }
-    //   document.body.onmousemove = function() {
-    //     if (!chart.mouseIsDown)
-    //       return;
-    //     if (chart.mouseTimeout)
-    //       clearTimeout(chart.mouseTimeout);
-    //     chart.mouseTimeout = setTimeout(function() {
-    //       updatePosition();
-    //     }, 1);
-    //   }
-    //   /**
-    //    * Add click event for plot area
-    //    */
-    //   function updatePosition() {
-    //     // click outside plot area
-    //     if (chart.chartCursor.index === undefined)
-    //       return;
-    //     // get index of the category clicked
-    //     var index = chart.chartCursor.index;
-    //     // get value clicked
-    //     var value = chart.chartCursor.valueLineAxis.coordinateToValue(chart.chartCursor.vLine.y);
-    //     // round the value
-    //     value = Math.round(value);
-    //     // update data
-    //     chart.dataProvider[index][chart.graphs[2].valueField] = value;
-    //     chart.validateData();
-    //   };
-    // });
+      function Import_Caf_Excel(Grafica){
+        $('#Caf_Button_Excel').click(function() {
+          // event.preventDefault();
+            var xhr2 = $.ajax({
+                headers:{
+                  'X-CSRF-Token':csrfToken
+                },
+                method: "POST",
+                url: "<?php echo $this->Url->build(['action'=>'ImportExcelCaf']);?>",
+                async: false,
+                data: {
+                    Info_Grafica: Grafica,
+                    Name: "<?=$name?>",
+                    Id: "<?=$code?>"
+                },
+                //   beforeSend: function() {
+                // },
+                // complete: function(){
+                // },
+                success: function(data){
+                    xhr2.abort();
+                }
+            });
+        }).delay(400);
+      };
+      $(document).ready(function(){
+          $('#Tg_Button_Excel').click(function() {
+            // event.preventDefault();
+              var xhr2 = $.ajax({
+                  headers:{
+                    'X-CSRF-Token':csrfToken
+                  },
+                  method: "POST",
+                  url: "<?php echo $this->Url->build(['action'=>'ImportExcelTg']);?>",
+                  data: {
+                      Info_Grafica_Date: <?= json_encode($excelDate)?>,
+                      Info_Grafica_Proyectado: <?= json_encode($excelProyectado)?>,
+                      Info_Grafica_Planeado: <?= json_encode($excelPlaneado)?>,
+                      Info_Grafica_Ejecutado: <?= json_encode($excelEjecutado)?>,
+                      Name: "<?=$name?>",
+                      Id: "<?=$code?>"
+                  },
+                  //   beforeSend: function() {
+                  // },
+                  // complete: function(){
+                  // },
+                  success: function(data){
+                      xhr2.abort();
+                  }
+              });
+          }).delay(400);
+      });
       </script>
         <div class="chart">
             <h2>Riesgos</h2>

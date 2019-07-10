@@ -162,6 +162,7 @@ class ComposerStaticInit66aa84199d86b87f3ac3f9d2f0c616f4
             'Cake\\Composer\\' => 14,
             'Cake\\Chronos\\' => 13,
             'Cake\\' => 5,
+            'CakePdf\\' => 8,
             'CakePHP\\' => 8,
         ),
         'B' => 
@@ -357,6 +358,10 @@ class ComposerStaticInit66aa84199d86b87f3ac3f9d2f0c616f4
         'Cake\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/cakephp/src',
+        ),
+        'CakePdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofcake/cakepdf/src',
         ),
         'CakePHP\\' => 
         array (

@@ -173,26 +173,30 @@ window.onload = test22;
             var Lower_Span_Title_Text = Span_Title_Text.toLowerCase(); // Variable que contiene el texto de la variable Span_Title_Text en minúscula-
             var Line_Color = null; //Variable que va a contener el color de la línea que se vaya a agregar.
             var Dash_Length = null; //Variable que contiene el espacio en blanco para la líneas punteadas en los estimados a completar.
+            var Line_Thickness = null;//Variable que va a almacenar el ancho de cada una de las líneas.
         // Condicional que evalúa el texto de cada span (Título de cada columna) y busca similitudes con las palabras planeado, ejecutado y estimado, para así excluir las fechas como una columna.
         if(Lower_Span_Title_Text.indexOf("planeado") > -1 || Lower_Span_Title_Text.indexOf("ejecutado") > -1 || Lower_Span_Title_Text.indexOf("estimado") > -1){
             if(Lower_Span_Title_Text.indexOf("planeado") > -1){
               Line_Color = "#A6CE39";
+              Line_Thickness = 5;
             }
             if (Lower_Span_Title_Text.indexOf("ejecutado") > -1) {
               Line_Color = "#2CACE3";
+              Line_Thickness = 5;
             }
             if (Lower_Span_Title_Text.indexOf("estimado") > -1) {
               Line_Color = "#fc9219";
               Dash_Length = 7;
+              Line_Thickness = 5;
             }
-            if (Lower_Span_Title_Text.indexOf("ejecutado") > -1 == false) {
+            if (Lower_Span_Title_Text.indexOf("planeado") > -1 == true) {
               Active_Chart = "AmGraph-"+i;
             }
             // Añade elementos al array Grafica con base a la cantidad de columnas de la tabla id_table_caf, necesario para crear líneas y administra la parte visual, título y id de cada línea de forma individual.
             Grafica.push({
               "id": "AmGraph-"+i, //Id de la gráfica.
               "lineColor": Line_Color, //Color de la línea.
-              "lineThickness": 3, //Ancho de línea.
+              "lineThickness": Line_Thickness, //Ancho de línea.
               'title': Span_Title_Text, //Título de línea.
               "dashLength": Dash_Length, //Línea punteada.
               "valueField": "column-"+i}); //Columna a la que hace referencía.
@@ -200,11 +204,11 @@ window.onload = test22;
         };
       };
     Chart_Caf(Grafica, DataProvider, Max_Number, Active_Chart);
+    Import_Caf_Excel(DataProvider);
   };
   $(document).ready(function(){
   $("#button_caf_create").click(function(){
         var rowCount2 = $('#id_table_caf th').length;
-        console.log(rowCount2);
         var element = document.createElement("div");
         var elements = [];
         var select = [];
@@ -234,6 +238,6 @@ window.onload = test22;
           input_color[w].type = "color";
           document.getElementById(elements[w].id).appendChild(input_color[w]);
         }
-      } 
+      }
   });
 });
