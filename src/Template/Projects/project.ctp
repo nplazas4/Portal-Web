@@ -711,10 +711,12 @@ $("#button_caf_add").click(function(){
               <input type="color" id="Id_Color_Column3" value="#fc9219">
             </div>
           </div>
-            <div class="input-field col s8 m6 l4 xl3">
+            <div class="tt input-field col s8 m6 l4 xl3">
               <a id="button_caf"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
               <a id="button_caf_edit"><i class="material-icons tooltipped modal-trigger" href="#EditChart" data-position="right" data-tooltip="Editar" onclick="return false;">edit</i></a>
               <a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
+              <?php echo $this->Html->link($this->Html->tag('i','file_download', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Descargar archivo')),
+              '/TRASLADO TRAMPA BOQUEMONTE_1562886154.xlsx',array('escape'=>false, 'id'=>'Download_Caf_Btn'));?>
             </div>
         </div>
       <?php endif;?>
@@ -965,7 +967,8 @@ $("#button_caf_add").click(function(){
                 // complete: function(){
                 // },
                 success: function(data){
-                    xhr2.abort();
+                    // xhr2.abort();
+                    window.location.href = "/Portal-Web/TRASLADO TRAMPA BOQUEMONTE_1562886154.xlsx";
                 }
             });
         }).delay(400);
@@ -992,7 +995,8 @@ $("#button_caf_add").click(function(){
                   // complete: function(){
                   // },
                   success: function(data){
-                      xhr2.abort();
+                    window.open("<?php echo $this->Url->build(['action'=>'ImportExcelTg']);?>",'_blank' );
+                      // xhr2.abort();
                   }
               });
           }).delay(400);

@@ -19,6 +19,7 @@ class ProjectsController extends AppController
     //   parent::initialize();
     //   $this->loadComponent('RequestHandler');
     // }
+    private $Excel_Autor_Name;
     // Función que se ejecuta antes de rederizar cualquier vista dentro la carpeta Projects.
     public function beforeFilter($event)
     {
@@ -159,11 +160,6 @@ class ProjectsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
-    // public function view($id)
-    // {
-    //     $projects = $this->Projects->get($id);
-    //     $this->set('projects', $projects);
-    // }
     public function edit($id = null)
     {
         $projects = $this->Projects->get($id);
@@ -237,8 +233,19 @@ class ProjectsController extends AppController
     {
       $this->layout = false;
       if ($this->request->is('Ajax')) { //Ajax Detection
+          $this->ExcelAutor();
           $spreadsheet = new Spreadsheet();
+          $spreadsheet->getProperties()
+          ->setCreator($this->Excel_Autor_Name)
+          ->setLastModifiedBy($this->Excel_Autor_Name)
+          ->setTitle("Curva de avance físico del proyecto ".$_POST["Name"])
+          ->setDescription(
+              "Curva de avance físico del proyecto ".$_POST["Name"]."."
+          )
+          ->setKeywords("Curva S")
+          ->setCategory("Curva S");
           $worksheet = $spreadsheet->getActiveSheet();
+          $worksheet->setTitle("Curva_S");
           $worksheet->setCellValue('B1', $_POST["Name"]);
           $worksheet->setCellValue('A2', 'Fecha');
           $worksheet->setCellValue('B2', "Planeado");
@@ -250,8 +257,8 @@ class ProjectsController extends AppController
           $worksheet->getColumnDimension('C')->setWidth(25);
           $worksheet->getColumnDimension('D')->setWidth(25);
           $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-          $drawing->setName('Paid');
-          $drawing->setDescription('Paid');
+          $drawing->setName('Logo');
+          $drawing->setDescription('Logo');
           $Img_Dir = WWW_ROOT . 'img/logos/logo_GEB.png';
           $drawing->setPath($Img_Dir); //Imagen
           $drawing->setHeight(25);
@@ -266,17 +273,17 @@ class ProjectsController extends AppController
           $Contador_Array = count($_POST["Info_Grafica"])+ 2;
           $this->set("Contador",$Contador_Array);
           $dataSeriesLabels = [
-            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$B$2', null, 1), // Planeado
-            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$C$2', null, 1), // Ejecutado
-            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$D$2', null, 1), // Estimado
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_S!$B$2', null, 1), // Planeado
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_S!$C$2', null, 1), // Ejecutado
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_S!$D$2', null, 1), // Estimado
           ];
           $xAxisTickValues = [
-            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$A$3:$A$'.$Contador_Array, null, 4), // Fechas
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_S!$A$3:$A$'.$Contador_Array, null, 4), // Fechas
           ];
           $dataSeriesValues = [
-            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$B$3:$B$'.$Contador_Array, null, 4),
-            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$C$3:$C$'.$Contador_Array, null, 4),
-            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$D$3:$D$'.$Contador_Array, null, 4),
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_S!$B$3:$B$'.$Contador_Array, null, 4),
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_S!$C$3:$C$'.$Contador_Array, null, 4),
+            new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_S!$D$3:$D$'.$Contador_Array, null, 4),
           ];
           $dataSeriesValues[2]->setLineWidth(20000);
           // Build the dataseries
@@ -319,24 +326,52 @@ class ProjectsController extends AppController
           $time = time();
           $this->set("time",$time);
           $writer->save($_POST["Name"]."_".$time.".xlsx");
+          $filename = '.htaccess';
+          // $response = $this->response->withFile(
+          //     WWW_ROOT . $filename,
+          //     ['download' => true, 'name' => $filename]
+          // );
+          $this->response->file(
+               WWW_ROOT . $filename,
+              ['download' => true, 'name' => '.htaccess']
+          );
       }
       $this->autoRender = false;
+      // $this->response->file(
+      //      WWW_ROOT . $filename,
+      //     ['download' => true, 'name' => '.htaccess']
+      // );
     }
     public function ImportExcelTg(){
       $this->layout = false;
+      $this->autoRender = false;
       if ($this->request->is('Ajax')) { //Ajax Detection
         $spreadsheet = new Spreadsheet();
+        $this->ExcelAutor();
+        $spreadsheet->getProperties()
+        ->setCreator($this->Excel_Autor_Name)
+        ->setLastModifiedBy($this->Excel_Autor_Name)
+        ->setTitle("Curva de tres generaciones del proyecto ".$_POST["Name"])
+        ->setDescription(
+            "Curva de tres generaciones del proyecto ".$_POST["Name"]."."
+        )
+        ->setKeywords("Curva TG")
+        ->setCategory("Curva TG");
         $worksheet = $spreadsheet->getActiveSheet();
+        $worksheet->setTitle("Curva_TG");
         $worksheet->setCellValue('B1', $_POST["Name"]);
         $worksheet->setCellValue('A2', 'Fecha');
         $worksheet->setCellValue('B2', "Planeado");
         $worksheet->setCellValue('C2', 'Ejecutado');
-        $worksheet->setCellValue('D2', 'Proyección');
+        $worksheet->setCellValue('D2', "Planeado");
+        $worksheet->setCellValue('E2', 'Ejecutado');
+        $worksheet->setCellValue('F2', 'Proyectado');
         $worksheet->getRowDimension('1')->setRowHeight(25);
         $worksheet->getColumnDimension('A')->setWidth(25);
         $worksheet->getColumnDimension('B')->setWidth(25);
         $worksheet->getColumnDimension('C')->setWidth(25);
         $worksheet->getColumnDimension('D')->setWidth(25);
+        $worksheet->getColumnDimension('E')->setWidth(25);
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('Logo');
         $drawing->setDescription('Logo');
@@ -362,48 +397,44 @@ class ProjectsController extends AppController
               }else{
                 $worksheet->setCellValue('C'.$Excel_Row, "");
               }
-              if ($_POST["Info_Grafica_Proyectado"][$i] != "null") {
-                $worksheet->setCellValue('D'.$Excel_Row, $_POST["Info_Grafica_Proyectado"][$i]);
-              }else {
-                $worksheet->setCellValue('D'.$Excel_Row, "");
-              }
          }else if(strlen($_POST["Info_Grafica_Date"][$i])>4){
               if ($_POST["Info_Grafica_Planeado"][$i] != "null") {
-               $worksheet->setCellValue('E'.$Excel_Row, $_POST["Info_Grafica_Planeado"][$i]);
+               $worksheet->setCellValue('D'.$Excel_Row, $_POST["Info_Grafica_Planeado"][$i]);
+             }else {
+               $worksheet->setCellValue('D'.$Excel_Row, "");
+             }
+             if ($_POST["Info_Grafica_Ejecutado"][$i] != "null") {
+               $worksheet->setCellValue('E'.$Excel_Row, $_POST["Info_Grafica_Ejecutado"][$i]);
              }else {
                $worksheet->setCellValue('E'.$Excel_Row, "");
              }
-             if ($_POST["Info_Grafica_Ejecutado"][$i] != "null") {
-               $worksheet->setCellValue('F'.$Excel_Row, $_POST["Info_Grafica_Ejecutado"][$i]);
+             if ($_POST["Info_Grafica_Proyectado"][$i] != "null") {
+               $worksheet->setCellValue('F'.$Excel_Row, $_POST["Info_Grafica_Proyectado"][$i]);
              }else {
                $worksheet->setCellValue('F'.$Excel_Row, "");
-             }
-             if ($_POST["Info_Grafica_Proyectado"][$i] != "null") {
-               $worksheet->setCellValue('G'.$Excel_Row, $_POST["Info_Grafica_Proyectado"][$i]);
-             }else {
-               $worksheet->setCellValue('G'.$Excel_Row, "");
              }
          }
         }
         $dataSeriesLabels = [
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$B$2', null, 1), // Planeado
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$C$2', null, 1), // Ejecutado
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_TG!$B$2', null, 1), // Planeado
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_TG!$C$2', null, 1), // Ejecutado
         ];
         $dataSeriesLabels2 = [
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$D$2', null, 1), // Estimado
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_TG!$D$2', null, 1), // Planeado
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_TG!$E$2', null, 1), // Ejecutado
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_TG!$F$2', null, 1), // Estimado
         ];
         $xAxisTickValues = [
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Worksheet!$A$3:$A$'.$Excel_Row, null, 4), // Fechas
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_TG!$A$3:$A$'.$Excel_Row, null, 4), // Fechas
         ];
         $dataSeriesValues = [
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$B$3:$B$'.$Excel_Row, null, 4),
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$C$3:$C$'.$Excel_Row, null, 4),
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$D$3:$D$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_TG!$B$3:$B$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_TG!$C$3:$C$'.$Excel_Row, null, 4),
         ];
         $dataSeriesValues2 = [
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$E$3:$E$'.$Excel_Row, null, 4),
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$F$3:$F$'.$Excel_Row, null, 4),
-          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Worksheet!$G$3:$G$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_TG!$D$3:$D$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_TG!$E$3:$E$'.$Excel_Row, null, 4),
+          new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_NUMBER, 'Curva_TG!$F$3:$F$'.$Excel_Row, null, 4),
         ];
         // $dataSeriesValues[2]->setLineWidth(20000);
         // Build the dataseries
@@ -443,7 +474,7 @@ class ProjectsController extends AppController
         $drawing->setWorksheet($spreadsheet->getActiveSheet());
         // Set the position where the chart should appear in the worksheet
         $chart->setTopLeftPosition('I3');
-        $chart->setBottomRightPosition('U21');
+        $chart->setBottomRightPosition('X21');
         // Add the chart to the worksheet
         $worksheet->addChart($chart);
         // Save Excel 2007 file
@@ -453,7 +484,23 @@ class ProjectsController extends AppController
         $callStartTime = microtime(true);
         $time = time();
         $this->set("time",$time);
-        $writer->save($_POST["Name"]."_".$time.".xlsx");
+        $Excel_File_Name = $_POST["Name"]."_".$time.".xlsx";
+        $_SESSION["Ajax"] = $Excel_File_Name;
+        $writer->save($Excel_File_Name);
+      }
+      $filename = 'TRASLADO TRAMPA BOQUEMONTE_1562886154.xlsx';
+      echo $_SESSION["Ajax"];
+      $response = $this->response->file(
+          WWW_ROOT . $filename,
+          ['download' => true, 'name' => $filename]
+      );
+      return $response;
+    }
+    public function ExcelAutor(){
+      $this->layout = false;
+      foreach ($_SESSION["Auth"] as $ProjArray => $valueArray) {
+          $User_Excel_Name = $valueArray["V_FIRST_NAME"]." ".$valueArray["V_LAST_NAME"];
+          $this->Excel_Autor_Name = $User_Excel_Name;
       }
       $this->autoRender = false;
     }
