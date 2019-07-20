@@ -163,9 +163,9 @@ $("#button_caf_add").click(function(){
                     ]
                 }
             ],
-            "export": {
-                "enabled": false
-            }
+            // "export": {
+            //     "enabled": false
+            // }
         }
     );
     // Curva de avance físico
@@ -565,7 +565,7 @@ $("#button_caf_add").click(function(){
         <div class="indicators row wrap">
           <?= $this->Html->link($this->Html->tag('i','picture_as_pdf',['class'=>'material-icons tooltipped', 'data-position'=>'right','data-tooltip'=>'Descargar PDF']), ['action' => 'project', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph , '_ext' => 'pdf'],['escape' => false, 'style'=>'margin-left:1%']); ?>
             <h2>Indicadores de cronograma</h2>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha">
                 <div class="indicator type-1" style="background-color:
                     <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                       <?php if ($SPI >= $valueFase['minimun'] && $SPI <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
@@ -576,7 +576,7 @@ $("#button_caf_add").click(function(){
                     <h3 class="ml-auto"><?= $SPI ?></h3>
                 </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance planeado del proyecto.">
               <div class="indicator type-1 light-blue darken-2">
                   <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
                   <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
@@ -586,7 +586,7 @@ $("#button_caf_add").click(function(){
                 <?php endif;?>
               </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance ejecutado del proyecto.">
               <div class="indicator type-1 light-blue darken-3">
                   <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
                   <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
@@ -605,17 +605,16 @@ $("#button_caf_add").click(function(){
                 </div>
             </div>
         </div>
-
         <div class="indicators row wrap mb-4">
             <h2 class="mb-2">Indicadores de presupuesto</h2>
             <h3>Total proyecto</h3>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Es la división entre el AC y el PPTO (AC/PPTO).">
                 <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC/PPTO</h4>
                     <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['acPpto'] ?></h4>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el valor de dinero gastado, con base a la planeación.">
                 <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC</h4>
                     <?php if($projects->AC != null):?>
@@ -623,7 +622,7 @@ $("#button_caf_add").click(function(){
                     <?php endif;?>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="índice que representa en dinero el presupuesto total del proyecto.">
                 <a class="indicator type-2 secondary modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">PRESUPUESTO TOTAL</h5>
                     <?php if($budgetIndicators['totalBudget'] != null):?>
@@ -633,20 +632,20 @@ $("#button_caf_add").click(function(){
                     <?php endif;?>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado presupuestal.">
                 <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">FORECAST TOTAL</h5>
                     <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
                 </a>
             </div>
             <h3 class="mt-3">Anual proyecto</h3>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Resultado del cociente del Valor Ganado dividido para el Costo Incurrido.">
                 <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">CPI <small>ANUAL 2019</small></h4>
                     <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?></h4>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el valor de dinero gastado anualmente, con base a la planeación.">
                 <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC <small>2019</small></h4>
                     <?php if($projects->PROJ_AC != null):?>
@@ -654,7 +653,7 @@ $("#button_caf_add").click(function(){
                     <?php endif;?>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
                 <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">PV <small>2019</small></h4>
                     <?php if($projects->PV != null):?>
@@ -663,13 +662,13 @@ $("#button_caf_add").click(function(){
                 </a>
             </div>
             <div class="divider transparent"></div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Presupuesto anual del proyecto.">
                 <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">PRESUPUESTO 2019</h5>
                     <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'],2,",",".") ?> MM</h4>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado de tiempo / costo en un tiempo determinado.">
                 <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">FORECAST 2019</h5>
                     <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualForecast'],2,",",".") ?> MM</h4>
@@ -715,15 +714,14 @@ $("#button_caf_add").click(function(){
               <a id="button_caf"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
               <a id="button_caf_edit"><i class="material-icons tooltipped modal-trigger" href="#EditChart" data-position="right" data-tooltip="Editar" onclick="return false;">edit</i></a>
               <a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
-              <?php echo $this->Html->link($this->Html->tag('i','file_download', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Descargar archivo')),
-              '/TRASLADO TRAMPA BOQUEMONTE_1562886154.xlsx',array('escape'=>false, 'id'=>'Download_Caf_Btn'));?>
+              <?php echo $this->Html->image('gif/download_excel.gif')?>
             </div>
         </div>
       <?php endif;?>
         <?php if ($cont != 0): ?>
         <div class="chart" id="div-gif" style="display:none">
           <div class="data-box ml-auto mr-auto">
-              <?php echo $this->Html->image('logos/load4.gif',array('id'=>'img-id'))?>
+              <?php echo $this->Html->image('gif/load.gif',array('id'=>'img-id'))?>
           </div>
         </div>
           <div id="idchart" class="chart">
@@ -773,11 +771,12 @@ $("#button_caf_add").click(function(){
               <div class="input-field col s8 m6 l4 xl3">
                 <a id="button_tg"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
                 <a id="Tg_Button_Excel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
+                <?php echo $this->Html->image('gif/download_excel.gif')?>
               </div>
           </div>
           <div class="chart" id="div-gif-tg" style="display:none">
             <div class="data-box ml-auto mr-auto">
-                <?php echo $this->Html->image('logos/load4.gif',array('id'=>'img-id'))?>
+                <?php echo $this->Html->image('gif/load.gif',array('id'=>'img-id'))?>
             </div>
           </div>
           <div id="idchart-tg" class="chart">
@@ -968,9 +967,22 @@ $("#button_caf_add").click(function(){
                 // },
                 success: function(data){
                     // xhr2.abort();
-                    window.location.href = "/Portal-Web/TRASLADO TRAMPA BOQUEMONTE_1562886154.xlsx";
+                    window.location.href = "/Portal-Web/<?=$name?>_Curva_S.xlsx";
                 }
             });
+            xhr_delete = $.ajax({
+            headers:{
+              'X-CSRF-Token':csrfToken
+            },
+            url: "<?php echo $this->Url->build(['action'=>'DeleteExcelFile']);?>",
+            method: "POST",
+            data: {Name: "<?=$name?>_Curva_S.xlsx"},
+            dataType: 'json',
+            success: function (data) {
+               // alert("Eliminado");
+            }
+          });
+          xhr_delete.abort();
         }).delay(400);
       };
       $(document).ready(function(){
@@ -995,12 +1007,28 @@ $("#button_caf_add").click(function(){
                   // complete: function(){
                   // },
                   success: function(data){
-                    window.open("<?php echo $this->Url->build(['action'=>'ImportExcelTg']);?>",'_blank' );
                       // xhr2.abort();
+                      window.location.href = "/Portal-Web/<?=$name?>_Curva_Tg.xlsx";
                   }
               });
+              delete_TG();
           }).delay(400);
       });
+      function delete_TG(){
+        xhr_delete_tg = $.ajax({
+        url: "<?php echo $this->Url->build(['action'=>'DeleteExcelFile']);?>",
+        headers:{
+          'X-CSRF-Token':csrfToken
+        },
+        method: "POST",
+        data: {Name: "<?=$name?>_Curva_Tg.xlsx"},
+        dataType: 'json',
+        success: function (data) {
+           // alert("Eliminado");
+        }
+      });
+      xhr_delete_tg.abort();
+      }
       </script>
         <div class="chart">
             <h2>Riesgos</h2>

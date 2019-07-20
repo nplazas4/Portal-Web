@@ -101,7 +101,7 @@ $indicators = [
         'icon' => 'show_chart',
         'color' => '',
         'colorBackground' => $SPITotalcolor,
-        'tooltip' => 'Suma de todos los SPI dividido por la cantidad de proyectos',
+        'tooltip' => 'Suma de todos los SPI dividido por la cantidad de proyectos.',
     ],
     [
         'name' => 'Presupuesto Total USD ',
@@ -109,7 +109,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'accent',
         'colorBackground' => '',
-        'tooltip' => 'Presupuesto Total USD Info',
+        'tooltip' => 'Suma de todos los presupuestos planeados.',
     ],
     [
         'name' => 'Ejecutado Total USD',
@@ -117,7 +117,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'tertiary',
         'colorBackground' => '',
-        'tooltip' => 'Ejecutado Total USD Info',
+        'tooltip' => 'Suma de todos los presupuestos ejecutados.',
     ],
     [
         'name' => 'CPI',
@@ -125,7 +125,7 @@ $indicators = [
         'icon' => 'show_chart',
         'color' => '',
         'colorBackground' =>$CPITotalcolor,
-        'tooltip' => 'CPI Info',
+        'tooltip' => 'Suma de todos los CPI dividido por la cantidad de proyectos.',
     ],
     [
         'name' => 'Presupuesto Anual USD',
@@ -133,7 +133,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
-        'tooltip' => 'Presupuesto Anual Info',
+        'tooltip' => 'Suma de todos los presupuestos anuales.',
     ],
     [
         'name' => 'Ejecutado Anual USD',
@@ -141,7 +141,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
-        'tooltip' => 'Ejecutado Anual Info',
+        'tooltip' => 'Suma de todos los ejecutados anuales.',
     ],
 ];
 ?>
@@ -212,10 +212,11 @@ $indicators = [
       <?php endif;?>
     </div>
 </sidebar>
-<div class="projects-content">
-    <div class="indicators row wrap">
+<div class="projects-content" style="margin-bottom: 15%;">
+    <div class="indicators row wrap" style="display: flex;
+      flex-direction: row;">
       <?php foreach ($indicators as $indicator): ?>
-        <div class="d-flex col s12 m6 l4 xl4">
+        <div class="d-flex col s6 m6 l4 xl4">
           <div class="indicator <?=$indicator['color']?> tooltipped" data-position="bottom" data-tooltip="<?=$indicator['tooltip']?>" style="background-color:<?=$indicator['colorBackground']?>">
               <h2><?= $indicator['name'] ?></h2>
               <h3><?= $indicator['value'] ?></h3>
@@ -344,7 +345,7 @@ $indicators = [
         <?php foreach ($ProjectsWS as $row => $value):?>
           <?php foreach ($AllLocalDBProjects as $project): ?>
             <?php if ($project->ID_PROJECT == $value["id_p_project"]): ?>
-              <div class="Search d-flex col s12 m6 l4 xl3">
+              <div class="Search d-flex col s6 m6 l4 xl3" style="display: inline-block; margin-bottom: -20px;">
                 <?php if ($value["spi_labor_units"] == null && $project->PLANNED != null): ?>
                   <?php $SPI_WS = number_format($project->EXECUTED/$project->PLANNED, 2, '.', '');?>
                 <?php elseif ($value["spi_labor_units"] != null): ?>
@@ -360,15 +361,15 @@ $indicators = [
                     <div class="sheet-line-item"></div>
                 </div>
                 <div class="sheet-content pl-5">
-                    <h2>﻿<?=$value["name"]?></h2>
-                    <div class="data-box mt-auto">
-                        <div class="data-box-circle phase" style="background-color:
+                    <h2 style="font-size: 20px !important;">﻿<?=$value["name"]?></h2>
+                    <div class="data-box mt-auto" style="display: -webkit-box">
+                        <div class="data-box-circle phase" style="width: 50px !important; height: 50px !important; background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->FASE == $valueFase['minimun'] && $valueFase['indicator_name'] == 'FASE'):?>
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
-                            <h3>
+                            <h3 style="padding-top:20% !important">
                                 <?php
                                     if ($project->FASE == 1) {
                                         echo 'I';
@@ -385,56 +386,56 @@ $indicators = [
                             </h3>
                         </div>
                         <div class="data-box-content">
-                            <span>Fase</span>
+                            <span style="font-Size: 14px !important;">Fase</span>
                         </div>
                     </div>
                     <div class="data-box">
-                      <div class="data-box-circle phase" style="background-color:
+                      <div class="data-box-circle phase" style="width: 50px !important; height: 50px !important;background-color:
                           <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                             <?php if ($SPI_WS >= $valueFase['minimun'] && $SPI_WS <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
                                 <?php echo $valueFase['hexa_color'];?>
                             <?php endif;?>
                           <?php endforeach; ?>">
-                            <h4><?=$SPI_WS?></h4>
+                            <h4 style="padding-top:30% !important"><?=$SPI_WS?></h4>
                         </div>
                         <div class="data-box-content">
-                            <span>SPI</span>
+                            <span style="font-Size: 14px !important;">SPI</span>
                         </div>
                     </div>
                     <div class="data-box">
-                        <div class="data-box-circle" style="background-color:
+                        <div class="data-box-circle" style="width: 50px !important; height: 50px !important; background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->CPI_ANUAL >= $valueFase['minimun'] && $project->CPI_ANUAL <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
-                            <h5><?= number_format($project->CPI_ANUAL, 2, '.', '') ?></h5>
+                            <h5 style="padding-top:30% !important"><?= number_format($project->CPI_ANUAL, 2, '.', '') ?></h5>
                         </div>
                         <div class="data-box-content">
-                            <span>CPI Anual</span>
+                            <span style="font-Size: 14px !important;">CPI Anual</span>
                         </div>
                     </div>
                     <div class="data-box">
-                        <div class="data-box-circle" style="background-color:
+                        <div class="data-box-circle" style="width: 50px !important; height: 50px !important; background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->AC_BAC >= $valueFase['minimun'] && $project->AC_BAC <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'AC/BAC'):?>
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
-                          <h5><?=$project->AC_BAC?>%</h5>
+                          <h5 style="padding-top:30% !important;"><?=$project->AC_BAC?>%</h5>
                         </div>
                         <div class="data-box-content">
-                            <span>AC/BAC</span>
+                            <span style="font-Size: 14px !important;">AC/BAC</span>
                         </div>
                     </div>
                     <div class="divider transparent"></div>
-                    <div class="data-chip accent">
-                        <h3>Presupuesto Planeado (USD)</h3>
-                        <h4><?=number_format($project->CAPEX_PLANNED, 2, ",", ".")?> MM</h4>
+                    <div class="data-chip accent" style="height: 50px !important;">
+                        <h3 style="font-size: 14px !important;">Presupuesto Planeado (USD)</h3>
+                        <h4 style="font-size: 18px !important;"><?=number_format($project->CAPEX_PLANNED, 2, ",", ".")?> MM</h4>
                     </div>
-                    <div class="data-chip secondary mb-0">
-                        <h3>Presupuesto Ejecutado (USD)</h3>
-                          <h4><?=number_format($project->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
+                    <div class="data-chip secondary mb-0" style="height: 50px !important;">
+                        <h3 style="font-size: 14px !important;">Presupuesto Ejecutado (USD)</h3>
+                        <h4 style="font-size: 18px !important;"><?=number_format($project->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
                     </div>
                   </div>
                 </div>

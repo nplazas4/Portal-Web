@@ -101,7 +101,7 @@ $indicators = [
         'icon' => 'show_chart',
         'color' => '',
         'colorBackground' => $SPITotalcolor,
-        'tooltip' => 'Suma de todos los SPI dividido por la cantidad de proyectos',
+        'tooltip' => 'Suma de todos los SPI dividido por la cantidad de proyectos.',
     ],
     [
         'name' => 'Presupuesto Total USD ',
@@ -109,7 +109,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'accent',
         'colorBackground' => '',
-        'tooltip' => 'Presupuesto Total USD Info',
+        'tooltip' => 'Suma de todos los presupuestos planeados.',
     ],
     [
         'name' => 'Ejecutado Total USD',
@@ -117,7 +117,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'tertiary',
         'colorBackground' => '',
-        'tooltip' => 'Ejecutado Total USD Info',
+        'tooltip' => 'Suma de todos los presupuestos ejecutados.',
     ],
     [
         'name' => 'CPI',
@@ -125,7 +125,7 @@ $indicators = [
         'icon' => 'show_chart',
         'color' => '',
         'colorBackground' =>$CPITotalcolor,
-        'tooltip' => 'CPI Info',
+        'tooltip' => 'Suma de todos los CPI dividido por la cantidad de proyectos.',
     ],
     [
         'name' => 'Presupuesto Anual USD',
@@ -133,7 +133,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
-        'tooltip' => 'Presupuesto Anual Info',
+        'tooltip' => 'Suma de todos los presupuestos anuales.',
     ],
     [
         'name' => 'Ejecutado Anual USD',
@@ -141,7 +141,7 @@ $indicators = [
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
-        'tooltip' => 'Ejecutado Anual Info',
+        'tooltip' => 'Suma de todos los ejecutados anuales.',
     ],
 ];
 ?>
@@ -273,7 +273,7 @@ $indicators = [
                   <div class="sheet-content pl-5">
                       <h2>﻿<?=$projects->PROJECT_NAME?></h2>
                         <div class="data-box mt-auto">
-                          <div class="data-box-circle phase
+                          <div class="data-box-circle tooltipped phase
                               <?php
                                   if ($projects->FASE == 1) {
                                       echo 'i';
@@ -286,7 +286,7 @@ $indicators = [
                                   } elseif ($projects->FASE == 5) {
                                       echo 'v';
                                   }
-                              ?> tooltipped" data-position="bottom" data-tooltip="Fase Info">
+                              ?>" data-position="bottom" data-tooltip="Fase Info">
                               <h3>
                                   <?php
                                       if ($projects->FASE == 1) {
@@ -319,7 +319,7 @@ $indicators = [
                                   } elseif ($SPI < 0.8) {
                                       echo 'error';
                                   }
-                              ?> tooltipped" data-tooltip="SPI Info">
+                              ?> tooltipped" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha.">
                               <h4><?=$SPI?></h4>
                           </div>
                           <div class="data-box-content">
@@ -327,7 +327,7 @@ $indicators = [
                           </div>
                       </div>
                       <div class="data-box">
-                          <div class="data-box-circle error tooltipped" data-tooltip="CPI Anual info">
+                          <div class="data-box-circle error tooltipped" data-tooltip="Resultado del cociente del Valor Ganado dividido para el Costo Incurrido.">
                               <h5><?= $projects->CPI_ANUAL ?></h5>
                           </div>
                           <div class="data-box-content">
@@ -343,11 +343,11 @@ $indicators = [
                           </div>
                       </div>
                       <div class="divider transparent"></div>
-                      <div class="data-chip accent tooltipped" data-tooltip="Presupuesto planeado info">
+                      <div class="data-chip accent tooltipped" data-tooltip="Presupuesto planeado individual.">
                           <h3>Presupuesto Planeado (USD)</h3>
                           <h4><?=number_format($projects->CAPEX_PLANNED, 2, ",", ".")?> MM</h4>
                       </div>
-                      <div class="data-chip secondary mb-0 tooltipped" data-tooltip="Presupuesto ejecutado info">
+                      <div class="data-chip secondary mb-0 tooltipped" data-tooltip="Presupuesto ejecutado individual.">
                           <h3>Presupuesto Ejecutado (USD)</h3>
                           <h4><?=number_format($projects->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
                       </div>
@@ -405,7 +405,7 @@ $indicators = [
                         </div>
                     </div>
                     <div class="data-box">
-                      <div class="data-box-circle phase" style="background-color:
+                      <div class="data-box-circle phase tooltipped" data-position="bottom" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha" style="background-color:
                           <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                             <?php if ($SPI_WS >= $valueFase['minimun'] && $SPI_WS <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
                                 <?php echo $valueFase['hexa_color'];?>
@@ -418,7 +418,7 @@ $indicators = [
                         </div>
                     </div>
                     <div class="data-box">
-                        <div class="data-box-circle" style="background-color:
+                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="Resultado del cociente del Valor Ganado dividido para el Costo Incurrido." style="background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->CPI_ANUAL >= $valueFase['minimun'] && $project->CPI_ANUAL <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
                                   <?php echo $valueFase['hexa_color'];?>
@@ -431,7 +431,7 @@ $indicators = [
                         </div>
                     </div>
                     <div class="data-box">
-                        <div class="data-box-circle" style="background-color:
+                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="Es la división entre el AC y el PPTO (AC/PPTO)" style="background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->AC_BAC >= $valueFase['minimun'] && $project->AC_BAC <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'AC/BAC'):?>
                                   <?php echo $valueFase['hexa_color'];?>
@@ -444,11 +444,11 @@ $indicators = [
                         </div>
                     </div>
                     <div class="divider transparent"></div>
-                    <div class="data-chip accent">
+                    <div class="data-chip accent tooltipped" data-position="bottom" data-tooltip="Presupuesto planeado individual.">
                         <h3>Presupuesto Planeado (USD)</h3>
                         <h4><?=number_format($project->CAPEX_PLANNED, 2, ",", ".")?> MM</h4>
                     </div>
-                    <div class="data-chip secondary mb-0">
+                    <div class="data-chip secondary mb-0 tooltipped" data-position="bottom" data-tooltip="Presupuesto ejecutado individual.">
                         <h3>Presupuesto Ejecutado (USD)</h3>
                           <h4><?=number_format($project->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
                     </div>

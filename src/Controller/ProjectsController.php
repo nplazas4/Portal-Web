@@ -175,25 +175,16 @@ class ProjectsController extends AppController
         }
         $this->set(compact('projects'));
     }
-    public function view($id = null){
+    public function pdf($Pdf_Title = null){
       $this->viewBuilder()->options([
       'pdfConfig' => [
         'orientation' => 'portrait',
-        'filename' => 'User_1.pdf'
-      ]
-      ]);
-    }
-    public function pdf(){
-      $this->viewBuilder()->options([
-      'pdfConfig' => [
-        'orientation' => 'portrait',
-        'filename' => 'User_1.pdf'
+        'filename' => $Pdf_Title.'.pdf'
       ]
       ]);
     }
     public function project($id, $current_user_pr = null,$ActualEps = null, $Categoria1=null, $Categoria2 = null, $NameEps = null, $title = null, $idEpsParent = null,$name = null, $code = null, $spi = null, $corte = null, $graph = null)
     {
-        $this->pdf();
         $this->index();
         $this->IndicatorColor();
         $decoded_Name = base64_decode(urldecode($name)); // Nombre del proyecto.
@@ -203,6 +194,7 @@ class ProjectsController extends AppController
         $decoded_Ctg1Prjs = base64_decode(urldecode($Categoria1)); //Código de la categoría 1
         $decoded_Ctg2Prjs = base64_decode(urldecode($Categoria2)); //Código de la categoría 2
         $decoded_IdEpsParent = base64_decode(urldecode($idEpsParent)); //Id de la EPS parent del proyecto seleccionado.
+        $this->pdf($decoded_Name);
         // Envía las variables a la vista de Projects.ctp.
         $this->set('idEpsParent', $decoded_IdEpsParent);
         $this->set('NameEpsPrjs', $decoded_NameEpsPrjs);
@@ -323,28 +315,13 @@ class ProjectsController extends AppController
           $writer = new Xlsx($spreadsheet);
           $writer->setIncludeCharts(true);
           $callStartTime = microtime(true);
-          $time = time();
-          $this->set("time",$time);
-          $writer->save($_POST["Name"]."_".$time.".xlsx");
-          $filename = '.htaccess';
-          // $response = $this->response->withFile(
-          //     WWW_ROOT . $filename,
-          //     ['download' => true, 'name' => $filename]
-          // );
-          $this->response->file(
-               WWW_ROOT . $filename,
-              ['download' => true, 'name' => '.htaccess']
-          );
+          $Excel_File_Name = $_POST["Name"]."_Curva_S.xlsx";
+          $writer->save($Excel_File_Name);
       }
       $this->autoRender = false;
-      // $this->response->file(
-      //      WWW_ROOT . $filename,
-      //     ['download' => true, 'name' => '.htaccess']
-      // );
     }
     public function ImportExcelTg(){
       $this->layout = false;
-      $this->autoRender = false;
       if ($this->request->is('Ajax')) { //Ajax Detection
         $spreadsheet = new Spreadsheet();
         $this->ExcelAutor();
@@ -482,19 +459,13 @@ class ProjectsController extends AppController
         $writer = new Xlsx($spreadsheet);
         $writer->setIncludeCharts(true);
         $callStartTime = microtime(true);
-        $time = time();
-        $this->set("time",$time);
-        $Excel_File_Name = $_POST["Name"]."_".$time.".xlsx";
-        $_SESSION["Ajax"] = $Excel_File_Name;
+        $Excel_File_Name = $_POST["Name"]."_Curva_Tg.xlsx";
         $writer->save($Excel_File_Name);
       }
-      $filename = 'TRASLADO TRAMPA BOQUEMONTE_1562886154.xlsx';
-      echo $_SESSION["Ajax"];
-      $response = $this->response->file(
-          WWW_ROOT . $filename,
-          ['download' => true, 'name' => $filename]
-      );
-      return $response;
+      $this->autoRender = false;
+    }
+    public function DeleteExcelFile(){
+      unlink(WWW_ROOT .$_POST["Name"]);
     }
     public function ExcelAutor(){
       $this->layout = false;
@@ -506,12 +477,12 @@ class ProjectsController extends AppController
     }
     public function projects($current_user_pr = null, $EPS = null, $Categoria1 = null, $Categoria2 = null, $NameEps = null, $title=null, $idEpsParent = null)
     {
-        $this->pdf();
         $this->AllProjects();
         $this->IndicatorColor();
         // Decodifica todas la variables pasadas a través de la URL.
         $decoded_NameEpsPrjs = base64_decode(urldecode($NameEps));
         $decoded_titlePrjs = base64_decode(urldecode($title));
+        $this->pdf($decoded_NameEpsPrjs);
         $decoded_EpsPrjs = base64_decode(urldecode($EPS));
         $decoded_Ctg1Prjs = base64_decode(urldecode($Categoria1));
         $decoded_Ctg2Prjs = base64_decode(urldecode($Categoria2));

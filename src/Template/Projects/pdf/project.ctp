@@ -17,48 +17,13 @@
         'annualForecast' => $projects->FORECAST_PROJ, // Forecast anual
     ];
 ?>
-<script type="text/javascript">
-$(document).ready(function(){
-$("#button_caf_add").click(function(){
-  var Column_Select_Caf_Value = $(".Select-Option-Column_Caf").children(":selected").attr("value");
-  if ($(".Select-Option-Column_Caf").children(":selected").attr("value") != 0 && $(".Select-Option-Date_Caf").children(":selected").attr("value") != 0) {
-      var Column_Select_Caf = $(".Select-Option-Column_Caf").children(":selected").html();
-    if (!document.getElementsByClassName('ThCheckboxDinamicTitle'+Column_Select_Caf).length) {
-      $('#id_table_caf thead tr').append('<th class="ThCheckboxDinamicTitle'+Column_Select_Caf+'"></th>');
-      $('#id_table_caf thead tr>th:last').append('<label><input id="CheckboxDinamicTitle'+Column_Select_Caf+'" type="checkbox" onclick="load_Checkbox_Id(this);" class="filled-in" checked="checked" /><span style="font-size:11px">'+Column_Select_Caf+'</span></label>');
-      // Columnas dinámicas - Revisar lógica para consumir WS
-      <?php for ($i=0; $i<$cont; $i++): ?>
-      $('#id_table_caf tbody tr:eq(<?=$i?>)').append('<td id="Dynamic-Td-Id-<?=$i?>" class="ThCheckboxDinamicTitle'+Column_Select_Caf+'"></td>');
-        if(Column_Select_Caf_Value == 1){
-          $('#id_table_caf tbody tr:eq(<?=$i?>)').each(function(){$(this).children('td:last').append('<input type="text" id="Dynamic-Input-Planeado-Id-<?=$i?>"  value="<?=$acJsonSnapshot[$i]?>"  class="CheckboxDinamicTitle'+Column_Select_Caf+'">')});
-        }
-        else if (Column_Select_Caf_Value == 2) {
-          $('#id_table_caf tbody tr:eq(<?=$i?>)').each(function(){$(this).children('td:last').append('<input type="text" id="Dynamic-Input-Actual-Id-<?=$i?>"  value="<?=$evJsonSnapshot[$i]?>"  class="CheckboxDinamicTitle'+Column_Select_Caf+'">')});
-        }
-        else if (Column_Select_Caf_Value == 3) {
-          $('#id_table_caf tbody tr:eq(<?=$i?>)').each(function(){$(this).children('td:last').append('<input type="text" id="Dynamic-Estimado-Input-Id-<?=$i?>"  value="<?=$blJsonSnapshot[$i]?>"  class="CheckboxDinamicTitle'+Column_Select_Caf+'">')});
-        }
-      <?php endfor;?>
-    }
-    else {
-      document.getElementById("CheckboxDinamicTitle"+Column_Select_Caf).checked = true;
-      $('.CheckboxDinamicTitle'+Column_Select_Caf).attr("disabled", false).show();
-      $('.ThCheckboxDinamicTitle'+Column_Select_Caf).show();
-    }
-  }
-  else {
-    alert("Campo vacío.");
-   }
-  });
-});
-</script>
 <?= $this->Html->script('https://www.amcharts.com/lib/3/amcharts.js',['fullBase' => true]) ?>
 <?= $this->Html->script('https://www.amcharts.com/lib/3/serial.js',['fullBase' => true]) ?>
 <?= $this->Html->script('https://www.amcharts.com/lib/3/pie.js',['fullBase' => true]) ?>
 <?= $this->Html->script('https://www.amcharts.com/lib/3/gauge.js',['fullBase' => true]) ?>
 <?= $this->Html->script('https://www.amcharts.com/lib/3/lang/es.js',['fullBase' => true]) ?>
-<?= $this->Html->script('https://www.amcharts.com/lib/3/plugins/export/export.min.js',['fullBase' => true]) ?>
-<?= $this->Html->css('https://www.amcharts.com/lib/3/plugins/export/export.css',['fullBase' => true]) ?>
+<!-- </?= $this->Html->script('https://www.amcharts.com/lib/3/plugins/export/export.min.js',['fullBase' => true]) ?> -->
+<!-- </?= $this->Html->css('https://www.amcharts.com/lib/3/plugins/export/export.css',['fullBase' => true]) ?> -->
 <!-- <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script> -->
 <!-- <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script> -->
 <!-- <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
@@ -67,34 +32,6 @@ $("#button_caf_add").click(function(){
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" /> -->
 <script type="text/javascript">
-// AmCharts.makeChart("advance",
-//     {
-//       "type": "pie",
-//       "balloonText": "",
-//       "labelText": "",
-//       "titleField": "category",
-//       "valueField": "column-1",
-//       "minRadius": 80,
-//       "autoResize": false,
-//       "allLabels": [],
-//       "balloon": {},
-//       "titles": [],
-//       "dataProvider": [
-//         {
-//           "category": "category 1",
-//           "column-1": 8
-//         },
-//         {
-//           "category": "category 2",
-//           "column-1": 6
-//         },
-//         {
-//           "category": "category 3",
-//           "column-1": 2
-//         }
-//       ]
-//     }
-//   );
     // Porcentajes de avances
     AmCharts.makeChart("advance",
         {
@@ -170,9 +107,9 @@ $("#button_caf_add").click(function(){
                     ]
                 }
             ],
-            "export": {
-                "enabled": false
-            }
+            // "export": {
+            //     "enabled": false
+            // }
         }
     );
     // Curva de avance físico
@@ -191,7 +128,7 @@ $("#button_caf_add").click(function(){
               "startOnAxis": true,
               "axisAlpha": 0,
               "gridAlpha": 0,
-              "labelOffset": -1
+              "labelOffset": -1,
 
           },
           "chartCursor": {
@@ -201,7 +138,7 @@ $("#button_caf_add").click(function(){
           },
           "chartScrollbar": {
               "enabled": true,
-              "graph": "AmGraph-1",
+              "graph": "AmGraph-3",
               "graphType": "line",
               "gridCount": 7,
               "offset": 40,
@@ -218,15 +155,9 @@ $("#button_caf_add").click(function(){
                 "valueField": "column"
               },
               {
-                  // "customBullet": "",
-                  // "dashLength": 7,
                   "id": "AmGraph-2",
-                  // "labelPosition": "right",
-                  // "labelText": "",
                   "lineColor": "#2CACE3",
                   "lineThickness": 3,
-                  // "minBulletSize": 3,
-                  // "showAllValueLabels": true,
                   "title": "Ejecutado",
                   "valueField": "column-2"
               },
@@ -288,7 +219,6 @@ $("#button_caf_add").click(function(){
                    <?php else: ?>
                    "column": null,
                    <?php endif;?>
-
               },
                 <?php endfor; ?>
           ],
@@ -300,15 +230,12 @@ $("#button_caf_add").click(function(){
               "type": "serial",
               "categoryField": "category",
               "dataDateFormat": "YYYY-MM-DD",
-              // "sequencedAnimation": false,
-              // "startDuration": 1,
               "categoryAxis": {
                   "autoRotateAngle": 90,
                   "autoRotateCount": 12,
                   "equalSpacing": true,
                   "gridPosition": "start",
                   "minPeriod": "MM",
-                  // "startOnAxis": true,
                   "axisAlpha": 0,
                   "fontSize": 10,
                   "gridAlpha": 0,
@@ -466,56 +393,6 @@ $("#button_caf_add").click(function(){
 <?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2, '.', '');?>
 <?php endif;?>
 <div class="section bcrumb project">
-  <div class="breadcrumb-container">
-      <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
-      <?php foreach ($breadcrumb as $item): ?>
-          <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
-          <?php echo $this->Html->link(
-    $item[0],
-    ['controller'=>$item[2], 'action'=>$item[1]],
-    ['escape' => false,'class'=>'breadcrumb']
-          );?>
-        <?php endforeach; ?>
-        <?php $Category = null;?>
-        <?php $Categoria2 = 0;?>
-          <?php if ($Categoria1 == 870):?>
-          <?php $Category = "crecimiento";?>
-          <?php $Categoria2 = 8996 ?>
-        <?php elseif ($Categoria1 == 871):?>
-          <?php $Category = "sostenimiento";?>
-          <?php $Categoria2 = 8997 ?>
-          <?php endif; ?>
-          <?php if ($ActualEps != 23305): ?>
-            <?php echo $this->Html->link(
-              $titlePrjs,
-              ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($titlePrjs))],
-              ['escape' => false,'class'=>'breadcrumb']
-            );?>
-          <?php endif;?>
-          <?php if ($ActualEps != 34013 && $ActualEps != 34021 && $ActualEps != 34015 && $ActualEps != 34017): ?>
-          <?php echo $this->Html->link(
-                $NameEpsPrjs,
-                ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-                ['escape' => false,'class'=>'breadcrumb']
-          );?>
-        <?php else:?>
-          <?php echo $this->Html->link(
-                $NameEpsPrjs,
-                ['controller'=>'Projects', 'action'=>'companyGas',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-                ['escape' => false,'class'=>'breadcrumb']
-          );?>
-        <?php endif;?>
-        <?php echo $this->Html->link(
-              $Category,
-              ['controller'=>'Projects', 'action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-              ['escape' => false,'class'=>'breadcrumb']
-        );?>
-        <?php echo $this->Html->link(
-            $projects->PROJECT_NAME,
-            ['controller'=>'Projects', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph],
-            ['escape' => false,'class'=>'breadcrumb']
-        );?>
-    </div>
     <?php
     setlocale(LC_ALL, "es_ES");
     $FoPo = strftime("%d %B, %Y", strtotime($projects->FOPO));
@@ -563,7 +440,7 @@ $("#button_caf_add").click(function(){
             <h2>Fase <?=$res?></h2>
         </div>
         <div class="project-sidebar-percentages">
-            <div class="chart" id="advance"></div>
+            <div class="chart" id="advance" style="width:800px;height:200;"></div>
             <div class="legend">
               <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
                 <h3 class="secondary-text"><?= $PlanDec ?>% Avance planeado</h3>
@@ -576,163 +453,204 @@ $("#button_caf_add").click(function(){
         </div>
         <div class="project-sidebar-info">
             <h2>Objetivo estratégico</h2>
-            <p><?= $projects->Proj_Obj ?></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="project-sidebar-info">
             <h2>Información general</h2>
-            <p><?= $projects->DESCRIPTION ?></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="project-sidebar-info">
             <h2>Alcance</h2>
-            <p><?= $projects->ALCANCE ?></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div class="project-sidebar-info">
             <h2>Controles de cambio</h2>
-            <p><?= $projects->SOLICITUD ?></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
     </sidebar>
 
     <div class="project-content">
-        <div class="indicators row wrap">
-          <?= $this->Html->link(__('Export to PDF'), ['action' => 'project', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph , '_ext' => 'pdf']); ?>
-            <h2>Indicadores de cronograma</h2>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1" style="background-color:
+     <div class="indicators row wrap mb-4" style="margin: 0 !important">
+      <h2 class="mb-2">Indicadores de cronograma</h2>
+     </div>
+        <div class="indicators row wrap" style="display: -webkit-box">
+            <div class="d-flex col s6 m6 l4 xl3">
+                <div class="indicator type-2" style="background-color:
                     <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                       <?php if ($SPI >= $valueFase['minimun'] && $SPI <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
                           <?php echo $valueFase['hexa_color'];?>
                       <?php endif;?>
                     <?php endforeach; ?>">
-                    <h3 class="mr-2">SPI</h3>
-                    <h3 class="ml-auto"><?= $SPI ?></h3>
+                    <h3 class="mr-2">SPI <span style="margin-left: 69%"><?= $SPI ?></span></h3>
+                    <!-- <h4 class="ml-auto"></?= $SPI ?></h4> -->
                 </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-              <div class="indicator type-1 light-blue darken-2">
-                  <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
-                  <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                    <h3 class="ml-auto"><?= $PlanDec ?>%</h3>
-                  <?php else:?>
-                  <h3 class="ml-auto"><?= $projects->PLANNED ?>%</h3>
-                <?php endif;?>
-              </div>
+            <div class="d-flex col s6 m6 l4 xl3">
+                <div class="indicator type-2 light-blue darken-2">
+                    <h4 class="mr-2" style="margin-top: 2%">PORCENTAJE <small>AVANCE PLANEADO</small><span style="margin-left: 4%">
+                        <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
+                          <?= $PlanDec ?>%
+                        <?php else:?>
+                          <?= $projects->PLANNED ?>%
+                        <?php endif;?>
+                      </span>
+                    </h4>
+                </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-              <div class="indicator type-1 light-blue darken-3">
-                  <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
-                  <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                    <h3 class="ml-auto"><?= $EjecDec ?>%</h3>
-                  <?php else:?>
-                  <h3 class="ml-auto"><?= $projects->EXECUTED ?>%</h3>
-                <?php endif;?>
-              </div>
+          </div>
+          <div class="indicators row wrap" style="display: -webkit-box">
+            <div class="d-flex col s6 m6 l4 xl3">
+                <div class="indicator type-2 light-blue darken-3">
+                    <h4 class="mr-2" style="margin-top: 2%">PORCENTAJE <small>AVANCE EJECUTADO</small><span style="margin-left: 8px">
+                        <?php if ($code == $projects->ID_PROJECT && $Ejec != 0): ?>
+                          <?= $EjecDec ?>%
+                        <?php else:?>
+                          <?= $projects->EXECUTED ?>%
+                        <?php endif;?>
+                      </span>
+                    </h4>
+                </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 light-blue darken-2">
-                    <h5 class="mr-2">FEPO</h5>
-                    <?php if($projects->FEPO != null):?>
-                      <h5 class="ml-auto right-align"><?= $FePo ?></h5>
-                    <?php endif;?>
+            <div class="d-flex col s6 m6 l4 xl3">
+                <div class="indicator type-2 light-blue darken-3">
+                    <h4 class="mr-2" style="margin-top: 2%">FEPO<span style="margin-left: 45%">
+                        <?php if($projects->FEPO != null):?>
+                          <?= $FePo ?>
+                        <?php endif;?>
+                      </span>
+                    </h4>
                 </div>
             </div>
         </div>
-
-        <div class="indicators row wrap mb-4">
-            <h2 class="mb-2">Indicadores de presupuesto</h2>
-            <h3>Total proyecto</h3>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 secondary">
-                    <h4 class="fw-600 mr-2">AC/PPTO</h4>
-                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['acPpto'] ?></h4>
+      <div class="indicators row wrap mb-4" style="margin: 0 !important">
+        <h2 class="mb-2">Indicadores de presupuesto</h2>
+        <h3>Total proyecto</h3>
+      </div>
+        <div class="indicators row wrap" style="display: -webkit-box">
+          <div class="d-flex col s6 m6 l4 xl3">
+              <div class="indicator type-2 secondary">
+                  <h4 class="fw-600 mr-2" style="margin-top: 2%">AC/PPTO <span style="margin-left: 60%"><?= $budgetIndicators['acPpto'] ?></span></h4>
+              </div>
+          </div>
+            <div class="d-flex col s6 m6 l4 xl3">
+                <div class="indicator type-2 secondary modal-trigger" href="#detailValueExecuted">
+                    <h4 class="fw-600 mr-2" style="margin-top:2%">AC
+                        <?php if($projects->AC != null):?>
+                          <span style="margin-left: 47%">USD $ <?=number_format($projects->AC,2,",",".")?> MM</span>
+                        <?php endif;?>
+                    </h4>
                 </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
-                    <h4 class="fw-600 mr-2">AC</h4>
-                    <?php if($projects->AC != null):?>
-                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->AC,2,",",".")?> MM</h5>
-                    <?php endif;?>
-                </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+          </div>
+          <div class="indicators row wrap mb-4" style="display: -webkit-box">
+            <div class="d-flex col s6 m6 l4 xl3">
                 <div class="indicator type-2 secondary modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">PRESUPUESTO TOTAL</h5>
                     <?php if($budgetIndicators['totalBudget'] != null):?>
-                      <h4 class="fw-600 right-align">USD $ <?= $budgetIndicators['totalBudget'] ?> MM</h4>
+                      <h4 class="fw-600 right-align" style="margin-right: 3%">USD $ <?= $budgetIndicators['totalBudget'] ?> MM</h4>
                     <?php else:?>
                       <h4 class="fw-600 right-align"></h4>
                     <?php endif;?>
                 </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s6 m6 l4 xl3">
                 <div class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">FORECAST TOTAL</h5>
-                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
+                    <h4 class="fw-600 right-align" style="margin-right: 3%"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
                 </div>
             </div>
+          </div>
+          <div class="indicators row wrap mb-4">
             <h3 class="mt-3">Anual proyecto</h3>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
-                    <h4 class="fw-600 mr-2">CPI <small>ANUAL 2019</small></h4>
-                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?></h4>
+          </div>
+           <div class="indicators row wrap" style="display: -webkit-box">
+             <div class="d-flex col s6 m6 l4 xl3">
+                 <div class="indicator type-2 secondary darken-1 modal-trigger">
+                     <h4 class="mr-2" style="margin-top: 2%">CPI <small>ANUAL 2019</small><span style="margin-left: 59%"><?= $budgetIndicators['cpiAnnual'] ?></span></h4>
+                 </div>
+             </div>
+               <div class="d-flex col s6 m6 l4 xl3">
+                   <div class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                      <h4 class="fw-600 mr-2" style="margin-top:2%">AC <small>2019</small><span style="margin-left: 37%">USD $ <?=number_format($projects->PROJ_AC,2,",",".")?> MM</span></h4>
+                   </div>
+               </div>
+             <!-- <div class="d-flex col s6 m6 l4 xl3">
+                <div class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                  <h4 class="mr-2">CPI <small>ANUAL 2019 <span style="margin-left: 48%"></?= $budgetIndicators['cpiAnnual'] ?></span></small></h4>
                 </div>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+            <div class="d-flex col s6 m6 l4 xl3">
+                <div class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC <small>2019</small></h4>
-                    <?php if($projects->PROJ_AC != null):?>
-                        <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PROJ_AC,2,",",".")?> MM</h5>
-                    <?php endif;?>
+                    </?php if($projects->PROJ_AC != null):?>
+                        <h5 class="fw-600 ml-auto right-align">USD $ </?=number_format($projects->PROJ_AC,2,",",".")?> MM</h5>
+                    </?php endif;?>
                 </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                    <h4 class="fw-600 mr-2">PV <small>2019</small></h4>
+            </div> -->
+          </div>
+        <div class="indicators row wrap" style="display: -webkit-box">
+          <div class="d-flex col s6 m6 l4 xl3">
+              <div class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                  <h5 class="fw-600">PV 2019</h5>
+                  <h4 class="fw-600 right-align" style="margin-right: 3%">
                     <?php if($projects->PV != null):?>
-                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PV,2,",",".")?> MM</h5>
+                      USD $ <?=number_format($projects->PV,2,",",".")?> MM
                     <?php endif;?>
-                </div>
-            </div>
+                  </h4>
+              </div>
+          </div>
+          <div class="d-flex col s6 m6 l4 xl3">
+              <div class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                  <h5 class="fw-600">PRESUPUESTO 2019</h5>
+                  <h4 class="fw-600 right-align" style="margin-right: 3%">USD $ <?= number_format($budgetIndicators['annualBudget'],2,",",".") ?> MM</h4>
+              </div>
+          </div>
+          <!-- <div class="d-flex col s6 m6 l4 xl3">
+              <div class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                <h4 class="fw-600 mr-2">PV <small>2019</small></h4>
+                  </?php if($projects->PV != null):?>
+                    <h5 class="fw-600 ml-auto right-align">USD $ </?=number_format($projects->PV,2,",",".")?> MM</h5>
+                  </?php endif;?>
+              </div>
+          </div>
             <div class="divider transparent"></div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            <div class="d-flex col s6 m6 l4 xl3">
                 <div class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">PRESUPUESTO 2019</h5>
-                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'],2,",",".") ?> MM</h4>
+                    <h4 class="fw-600 right-align">USD $ </?= number_format($budgetIndicators['annualBudget'],2,",",".") ?> MM</h4>
                 </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3">
+            </div> -->
+            <!-- <div class="d-flex col s6 m6 l4 xl3">
                 <div class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">FORECAST 2019</h5>
-                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualForecast'],2,",",".") ?> MM</h4>
+                    <h4 class="fw-600 right-align">USD $ </?= number_format($budgetIndicators['annualForecast'],2,",",".") ?> MM</h4>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <?php if ($cont != 0): ?>
-        <div class="chart" id="div-gif" style="display:none">
-          <div class="data-box ml-auto mr-auto">
-              <?php echo $this->Html->image('logos/load4.gif',array('id'=>'img-id', ['fullBase' => true]))?>
+        <div class="indicators row wrap mb-4" style="display: -webkit-box">
+          <div class="d-flex col s6 m6 l4 xl3">
+              <div class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                  <h5 class="fw-600">FORECAST 2019</h5>
+                  <h4 class="fw-600 right-align" style="margin-right: 3%">USD $ <?= number_format($budgetIndicators['annualForecast'],2,",",".") ?> MM</h4>
+              </div>
           </div>
         </div>
-          <div id="idchart" class="chart">
+        <?php if ($cont != 0): ?>
+          <div id="idchart" class="chart" style="width:800px;height:200;">
               <h2>Curva de Avance Físico</h2>
-              <div class="chart-content" id="caf"></div>
+              <div class="chart-content" id="caf" style="width:800px;height:200;"></div>
           </div>
         <?php endif;?>
         <?php if ($longitudArrayDate != 0):?>
-          <div class="chart" id="div-gif-tg" style="display:none">
-            <div class="data-box ml-auto mr-auto">
-                <?php echo $this->Html->image('logos/load4.gif',array('id'=>'img-id', ['fullBase' => true]))?>
-            </div>
-          </div>
-          <div id="idchart-tg" class="chart">
+          <div id="idchart-tg" class="chart" style="width:800px;height:200; display: inline-block; margin-bottom: -100px;">
               <h2>Tres Generaciones</h2>
-              <div class="chart-content" id="tg" style="min-height: 475px;"></div>
+              <div class="chart-content" id="tg" style="width:800px;height:200;"></div>
           </div>
       <?php endif;?>
       <script>
       var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
       </script>
-        <div class="chart">
+        <div class="chart" style="margin-top: 10%">
             <h2>Riesgos</h2>
             <div class="chart-risk">
               <?php if($ActualEps == 34013 || $projects->EPS_REL == 34013 || $ActualEps == 34021 || $projects->EPS_REL == 34021
@@ -741,29 +659,18 @@ $("#button_caf_add").click(function(){
                   <div class="col s12 m12 l12 xl6">
                       <div class="indicator type-1 secondary">
                         <?php if($projects->IGR != null):?>
-                          <h4 class="fw-600 ml-auto mr-auto">IGR <?= $projects->IGR ?>%</h4>
+                          <h4 class="fw-600" style="margin-left: 42%">IGR <?= $projects->IGR ?>%</h4>
                         <?php else:?>
-                          <h4 class="fw-600 ml-auto mr-auto">IGR</h4>
+                          <h4 class="fw-600 ml-auto mr-auto" style="margin-left:50%; padding-left:50%">IGR</h4>
                         <?php endif;?>
                       </div>
                   </div>
                 </div>
               <?php endif;?>
-                <div class="chart-risk-list">
-                    <ul>
-                        <?php foreach ($rks as $rk): ?>
-                          <?php  if ($rk->PROJECT_CODE == $projects->id):?>
-                            <li>
-                               <div href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></div>
-                            </li>
-                          <?php endif;?>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <div class="heatmap">
+                <div class="heatmap" style="padding-left: 8%; margin-top: 10%; margin-bottom: 4%; display: inline-block; margin-bottom: -20px;">
                     <table>
                         <tr>
-                            <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
+                            <th class="title" rowspan="5"><h3 class="vert" style="-webkit-transform: rotate(270deg); -webkit-backface-visibility: hidden;">Probabilidad</h3></th>
                             <th>MA</th>
                             <td class="yellow">
                                 <?php foreach ($rks as $rk):
@@ -1019,6 +926,17 @@ $("#button_caf_add").click(function(){
                         </tr>
                     </table>
                 </div>
+                <!-- <div class="chart-risk-list">
+                    <ul>
+                        </?php foreach ($rks as $rk): ?>
+                          </?php  if ($rk->PROJECT_CODE == $projects->id):?>
+                            <li>
+                               <div href=</?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="</?=$rk->RISK_NAME?>">Riesgo </?=$rk->RISK_NUMBER?></div>
+                            </li>
+                          </?php endif;?>
+                        </?php endforeach; ?>
+                    </ul>
+                </div> -->
             </div>
         </div>
         <!-- IMPORTANTE CAMBIOS SOLICITADOS -->
@@ -1039,8 +957,8 @@ $("#button_caf_add").click(function(){
                   <?= $this->Html->image('icons/torre-blanca.svg', ['fullBase' => true]) ?>
               </div>
             <?php else:?>
-              <div class="data-distance">
-                  <figure class="data-distance-valve start">
+              <div class="data-distance" style="display: -webkit-box;">
+                  <figure class="data-distance-valve start" style="height: 200px">
                       <?= $this->Html->image('icons/valvula-izq.svg', ['fullBase' => true]) ?>
                   </figure>
                   <div class="data-distance-content">
@@ -1052,7 +970,7 @@ $("#button_caf_add").click(function(){
                     <div class="divider white mt-3 mb-1"></div>
                     <h6><?= $projects->TORRE ?> Facilidades</h6>
                   </div>
-                  <figure class="data-distance-valve end">
+                  <figure class="data-distance-valve end" style="height: 200px">
                       <?= $this->Html->image('icons/valvula-der.svg', ['fullBase' => true]) ?>
                   </figure>
               </div>
@@ -1063,7 +981,7 @@ $("#button_caf_add").click(function(){
           </div>
           <div class="data">
               <div class="data-content">
-                  <ul>
+                  <ul style="display: -webkit-box;">
                       <li>
                           <i class="material-icons">event</i>
                           <?php if($projects->FOPO != null):?>
@@ -1109,17 +1027,19 @@ $("#button_caf_add").click(function(){
                           <?php endif;?>
                         <?php endif;?>
                       </li>
+                    </ul>
+                    <ul style="display: -webkit-box;">
                       <li>
                         <?php if($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
                           && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
                           <i class="material-icons">place</i>
                             <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
                         <?php else:?>
-                          <i class="material-icons">event</i>
+                            <i class="material-icons">event</i>
                           <?php if ($projects->IGR_DATE != null): ?>
                             <span>Fecha IGR: <?=strftime("%d %B, %Y", strtotime($projects->IGR_DATE))?></span>
-                            <?php else: ?>
-                              <span>Fecha IGR:</span>
+                          <?php else: ?>
+                            <span>Fecha IGR:</span>
                           <?php endif; ?>
                         <?php endif;?>
                       </li>
