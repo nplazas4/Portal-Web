@@ -217,10 +217,17 @@ try {
         'options' => [
             'print-media-type' => false,
             'outline' => true,
-            'dpi' => 96
+            'dpi' => 300,
+            // 'javascript-delay' => 500,
         ],
     ],
-    // 'download' => true
+    'margin' => [
+            'bottom' => 10,
+            'left' => 15,
+            'right' => 15,
+            'top' => 10
+    ],
+    'download' => true
 ]);
 } catch (\Exception $e) {
   exit($e->getMessage() . "\n");

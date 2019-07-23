@@ -3217,7 +3217,10 @@ table span.badge {
 
 .row {
   margin: -0.5rem;
-  display: flex;
+  /* display: flex; */
+  -webkit-flex: 1; /* Safari 6.1+ */
+  -ms-flex: 1; /* IE 10 */
+  flex: 1;
 }
 .row .col {
   box-sizing: border-box;
@@ -3253,7 +3256,7 @@ table span.badge {
   right: auto;
 }
 .row .col.s6 {
-  width: 50%;
+  width: 49.555555555%;
   left: auto;
   right: auto;
 }
@@ -4360,7 +4363,10 @@ table span.badge {
   RUN GULP to generate the classes. Now you can use these helpers to customize spacing on HTML elements.
 */
 .d-flex {
-  display: flex;
+  /* display: flex; */
+  -webkit-flex: 1; /* Safari 6.1+ */
+  -ms-flex: 1; /* IE 10 */
+  flex: 1;
 }
 
 nav {
@@ -10278,6 +10284,7 @@ input[type=range]::-ms-thumb {
   margin-left: auto;
   margin-right: auto;
 }
+
 /*CSS PROJECT GAS*/
 .project-content .data-distance {
   background: #A6CE39;
@@ -10393,7 +10400,7 @@ input[type=range]::-ms-thumb {
 .project-content .data-distance-content {
   padding: 2.5rem 1.5rem 0;
   text-align: center;
-  width: 100%;
+  width: 89%;
 }
 .project-content .data-distance-content h2 {
   font-size: 22px;
@@ -10401,8 +10408,8 @@ input[type=range]::-ms-thumb {
   margin: 0;
 }
 .project-content .data-distance-content h3 {
-  font-size: 46px;
-  font-weight: 700;
+  font-size: 26px;
+  font-weight: 600;
   margin: 0;
 }
 .project-content .data-distance-content h4 {
@@ -10416,7 +10423,7 @@ input[type=range]::-ms-thumb {
   margin: 0;
 }
 .project-content .data-distance-content h6 {
-  font-size: 31px;
+  font-size: 21px;
   font-weight: 700;
   margin: 0;
 }
@@ -11033,14 +11040,6 @@ input[type=range]::-ms-thumb {
   border: 2px solid #ccc;
   /* IMPORTANTE */
   text-align: center;
-}
-.Scroll-button{
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 80px;
-  right: 10px;
 }
 
 /*# sourceMappingURL=materialize.css.map */

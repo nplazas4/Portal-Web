@@ -241,3 +241,19 @@ window.onload = test22;
       }
   });
 });
+$(document).ready(function(){
+  $('input[type=text]').on('keydown', function(e) {
+    if (e.which == 13) {
+        e.preventDefault();
+    }
+});
+$('#Input_Search').keyup(function(){
+// Search text
+var text = $(this).val();
+// Hide all content class element
+$('.Search').hide();
+
+// Search and show
+$('.Search:contains("'+text+'")').show();
+});
+});

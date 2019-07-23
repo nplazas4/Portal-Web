@@ -94,7 +94,7 @@ foreach ($colorIndicator as $colorFase => $valueFase) {
       }
   }
 // Indicadores
-$indicators = [
+$indicators1 = [
     [
         'name' => 'SPI',
         'value' => $SpiFormatNumber,
@@ -111,6 +111,8 @@ $indicators = [
         'colorBackground' => '',
         'tooltip' => 'Suma de todos los presupuestos planeados.',
     ],
+];
+$indicators2 = [
     [
         'name' => 'Ejecutado Total USD',
         'value' => '$ '.number_format($EjecTotal + $BDLocalEjecTotal, 2, ",", ".").' MM',
@@ -127,6 +129,8 @@ $indicators = [
         'colorBackground' =>$CPITotalcolor,
         'tooltip' => 'Suma de todos los CPI dividido por la cantidad de proyectos.',
     ],
+];
+$indicators3 = [
     [
         'name' => 'Presupuesto Anual USD',
         'value' => '$ '.number_format($PresupuestoAnual + $BDLocalPresupuestoAnual, 2, ",", ".").' MM',
@@ -146,46 +150,6 @@ $indicators = [
 ];
 ?>
 <div class="section projects">
-<!--Div que contien los breadcrumb de la pestaña de proyectos y controla el comportamiento y responsive de la página -->
-<div class="breadcrumb-container">
-    <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
-    <!--Estructurea del breadcrumb en lenguaje cakephp que consume mediante un foreach el array "Breadcrumb"-->
-    <?php foreach ($breadcrumb as $item): ?>
-        <?php echo $this->Html->link(
-    $item[0],
-    ['controller'=>$item[2], 'action'=>$item[1]],
-    ['escape' => false,'class'=>'breadcrumb']
-        );?>
-    <?php endforeach; ?>
-    <!--Breadcrumb para las EPS provenientes de la pestaña companies, diferentes a la EPS de grupo de energía de Bogotá.
-    Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_encode($var)) para codificar los parametro a enviar.-->
-    <?php if ($ActualEps != 23305): ?>
-      <?php echo $this->Html->link(
-            $titlePrjs,
-            ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($titlePrjs))],
-            ['escape' => false,'class'=>'breadcrumb']
-      );?>
-    <?php endif;?>
-    <?php if ($ActualEps != 34013 && $ActualEps != 34021 && $ActualEps != 34015 && $ActualEps != 34017): ?>
-      <?php echo $this->Html->link(
-            $NameEpsPrjs,
-            ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-            ['escape' => false,'class'=>'breadcrumb']
-      );?>
-    <?php else:?>
-      <?php echo $this->Html->link(
-            $NameEpsPrjs,
-            ['controller'=>'Projects', 'action'=>'companyGas',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-            ['escape' => false,'class'=>'breadcrumb']
-      );?>
-    <?php endif;?>
-      <?php echo $this->Html->link(
-        $CategoryPrTitle,
-        ['controller'=>'Projects', 'action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-        ['escape' => false,'class'=>'breadcrumb']
-      );?>
-</div>
-
 <sidebar class="projects-sidebar">
     <div class="projects-sidebar-img">
         <?= $this->Html->image('photos/energia.jpg', ['fullBase' => true]) ?>
@@ -213,9 +177,30 @@ $indicators = [
     </div>
 </sidebar>
 <div class="projects-content" style="margin-bottom: 15%;">
-    <div class="indicators row wrap" style="display: flex;
-      flex-direction: row;">
-      <?php foreach ($indicators as $indicator): ?>
+    <div class="indicators row wrap" style="display: -webkit-box;">
+      <?php foreach ($indicators1 as $indicator): ?>
+        <div class="d-flex col s6 m6 l4 xl4">
+          <div class="indicator <?=$indicator['color']?> tooltipped" data-position="bottom" data-tooltip="<?=$indicator['tooltip']?>" style="background-color:<?=$indicator['colorBackground']?>">
+              <h2><?= $indicator['name'] ?></h2>
+              <h3><?= $indicator['value'] ?></h3>
+              <i class="material-icons"><?= $indicator['icon'] ?></i>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+    <div class="indicators row wrap" style="display: -webkit-box">
+      <?php foreach ($indicators2 as $indicator): ?>
+        <div class="d-flex col s6 m6 l4 xl4">
+          <div class="indicator <?=$indicator['color']?> tooltipped" data-position="bottom" data-tooltip="<?=$indicator['tooltip']?>" style="background-color:<?=$indicator['colorBackground']?>">
+              <h2><?= $indicator['name'] ?></h2>
+              <h3><?= $indicator['value'] ?></h3>
+              <i class="material-icons"><?= $indicator['icon'] ?></i>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+    <div class="indicators row wrap" style="display: -webkit-box">
+      <?php foreach ($indicators3 as $indicator): ?>
         <div class="d-flex col s6 m6 l4 xl4">
           <div class="indicator <?=$indicator['color']?> tooltipped" data-position="bottom" data-tooltip="<?=$indicator['tooltip']?>" style="background-color:<?=$indicator['colorBackground']?>">
               <h2><?= $indicator['name'] ?></h2>
@@ -243,7 +228,7 @@ $indicators = [
         <?php endif; ?>
           <?php if (!in_array($projects->ID_PROJECT, $ProjectCodId)):?>
             <?php if ($Category == $Categoria1):?>
-              <div class = "Search d-flex col s12 m6 l4 xl3">
+              <div class = "Search d-flex col s6 m6 l4 xl3">
                 <?php if ($projects->PLANNED != null || $projects->EXECUTED != null): ?>
                   <?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2, '.', '');?>
                 <?php else:?>
@@ -369,7 +354,7 @@ $indicators = [
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
-                            <h3 style="padding-top:20% !important">
+                            <h3 style="padding-top:23% !important; margin-left: 9%">
                                 <?php
                                     if ($project->FASE == 1) {
                                         echo 'I';
@@ -385,46 +370,46 @@ $indicators = [
                                 ?>
                             </h3>
                         </div>
-                        <div class="data-box-content">
+                        <div class="data-box-content" style="margin-top: 4%">
                             <span style="font-Size: 14px !important;">Fase</span>
                         </div>
                     </div>
-                    <div class="data-box">
+                    <div class="data-box" style="display: -webkit-box">
                       <div class="data-box-circle phase" style="width: 50px !important; height: 50px !important;background-color:
                           <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                             <?php if ($SPI_WS >= $valueFase['minimun'] && $SPI_WS <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
                                 <?php echo $valueFase['hexa_color'];?>
                             <?php endif;?>
                           <?php endforeach; ?>">
-                            <h4 style="padding-top:30% !important"><?=$SPI_WS?></h4>
+                            <h4 style="padding-top:32% !important"><?=$SPI_WS?></h4>
                         </div>
-                        <div class="data-box-content">
+                        <div class="data-box-content" style="margin-top: 4%">
                             <span style="font-Size: 14px !important;">SPI</span>
                         </div>
                     </div>
-                    <div class="data-box">
+                    <div class="data-box" style="display: -webkit-box">
                         <div class="data-box-circle" style="width: 50px !important; height: 50px !important; background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->CPI_ANUAL >= $valueFase['minimun'] && $project->CPI_ANUAL <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
-                            <h5 style="padding-top:30% !important"><?= number_format($project->CPI_ANUAL, 2, '.', '') ?></h5>
+                            <h5 style="padding-top:33% !important;"><?= number_format($project->CPI_ANUAL, 2, '.', '') ?></h5>
                         </div>
-                        <div class="data-box-content">
+                        <div class="data-box-content" style="margin-top: 4%">
                             <span style="font-Size: 14px !important;">CPI Anual</span>
                         </div>
                     </div>
-                    <div class="data-box">
+                    <div class="data-box" style="display: -webkit-box">
                         <div class="data-box-circle" style="width: 50px !important; height: 50px !important; background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->AC_BAC >= $valueFase['minimun'] && $project->AC_BAC <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'AC/BAC'):?>
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
-                          <h5 style="padding-top:30% !important;"><?=$project->AC_BAC?>%</h5>
+                          <h5 style="padding-top:33% !important;"><?=$project->AC_BAC?>%</h5>
                         </div>
-                        <div class="data-box-content">
+                        <div class="data-box-content" style="margin-top: 4%">
                             <span style="font-Size: 14px !important;">AC/BAC</span>
                         </div>
                     </div>

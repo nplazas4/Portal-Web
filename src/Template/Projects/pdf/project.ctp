@@ -481,13 +481,12 @@
                           <?php echo $valueFase['hexa_color'];?>
                       <?php endif;?>
                     <?php endforeach; ?>">
-                    <h3 class="mr-2">SPI <span style="margin-left: 69%"><?= $SPI ?></span></h3>
-                    <!-- <h4 class="ml-auto"></?= $SPI ?></h4> -->
+                    <h3 class="mr-2;" style="margin-top: 1%">SPI <span style="margin-left: 69%;"><?= $SPI ?></span></h3>
                 </div>
             </div>
             <div class="d-flex col s6 m6 l4 xl3">
                 <div class="indicator type-2 light-blue darken-2">
-                    <h4 class="mr-2" style="margin-top: 2%">PORCENTAJE <small>AVANCE PLANEADO</small><span style="margin-left: 4%">
+                    <h4 class="mr-2" style="margin-top: 2%">PORCENTAJE <small>AVANCE PLANEADO</small><span style="margin-left: 3.6%">
                         <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
                           <?= $PlanDec ?>%
                         <?php else:?>
@@ -501,7 +500,7 @@
           <div class="indicators row wrap" style="display: -webkit-box">
             <div class="d-flex col s6 m6 l4 xl3">
                 <div class="indicator type-2 light-blue darken-3">
-                    <h4 class="mr-2" style="margin-top: 2%">PORCENTAJE <small>AVANCE EJECUTADO</small><span style="margin-left: 8px">
+                    <h4 class="mr-2" style="margin-top: 2%">PORCENTAJE <small>AVANCE EJECUTADO</small><span style="margin-left: 4px">
                         <?php if ($code == $projects->ID_PROJECT && $Ejec != 0): ?>
                           <?= $EjecDec ?>%
                         <?php else:?>
@@ -667,7 +666,7 @@
                   </div>
                 </div>
               <?php endif;?>
-                <div class="heatmap" style="padding-left: 8%; margin-top: 10%; margin-bottom: 4%; display: inline-block; margin-bottom: -20px;">
+                <div class="heatmap" style="padding-left: 8%; margin-top: 8%; margin-bottom: 4%; display: inline-block; margin-bottom: -20px;">
                     <table>
                         <tr>
                             <th class="title" rowspan="5"><h3 class="vert" style="-webkit-transform: rotate(270deg); -webkit-backface-visibility: hidden;">Probabilidad</h3></th>

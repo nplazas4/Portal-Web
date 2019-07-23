@@ -13,7 +13,6 @@
 
   // Search and show
   $('.Search:contains("'+text+'")').show();
-
  });
 });
 </script>
@@ -209,6 +208,24 @@ $indicators = [
             Construyendo sobre su negocio de Urbes, estimulará per capitas de consumo y su infraestructura servirá a mas de 25 millones de usuarios y activará la demanda de GNV para transporte masico en el menos cinco ciudades de más de 500.000 habitantes.<br>
             Será una compañía de mas de USD 5 billones de market cap, y trabajará con aliados estratégicos.
           </p>
+          <script>
+          $(document).ready(function(){
+              // $('#return-to-top').hide();
+              // ===== Scroll to Top ====
+            $(window).scroll(function() {
+                if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                    $('#return-to-top').fadeIn(200);    // Fade in the arrow
+                } else {
+                    $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+                }
+            });
+            $('#return-to-top').click(function() {      // When arrow is clicked
+                $('body,html').animate({
+                    scrollTop : 0                       // Scroll to top of body
+                }, 500);
+            });
+          });
+          </script>
       <?php endif;?>
     </div>
 </sidebar>
@@ -450,7 +467,7 @@ $indicators = [
                     </div>
                     <div class="data-chip secondary mb-0 tooltipped" data-position="bottom" data-tooltip="Presupuesto ejecutado individual.">
                         <h3>Presupuesto Ejecutado (USD)</h3>
-                          <h4><?=number_format($project->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
+                        <h4><?=number_format($project->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
                     </div>
                   </div>
                 </div>
@@ -459,5 +476,6 @@ $indicators = [
           <?php endforeach;?>
         <?php endforeach; ?>
       </div>
+    <a href="javascript:" class="btn-floating waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
   </div>
 </div>

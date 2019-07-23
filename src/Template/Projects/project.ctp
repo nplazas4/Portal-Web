@@ -1424,9 +1424,9 @@ $("#button_caf_add").click(function(){
                   </ul>
               </div>
           </div>
+        <a href="javascript:" class="btn-floating waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
     </div>
 </div>
-
 <!-- Modal detalle valor ejecutado -->
 <div id="detailValueExecuted" class="modal">
     <div class="modal-content">
