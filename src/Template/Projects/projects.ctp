@@ -1,19 +1,36 @@
 <script>
   $(document).ready(function(){
     $('input[type=text]').on('keydown', function(e) {
-      if (e.which == 13) {
-          e.preventDefault();
+    if (e.which == 13) {
+      e.preventDefault();
+    }
+  });
+    $('#Input_Search').keyup(function(){
+    // Search text
+    var text = $(this).val();
+    // Hide all content class element
+    $('.Search').hide();
+    // Search and show
+    $('.Search:contains("'+text+'")').show();
+  });
+});
+$(document).ready(function(){
+  if($(this).scrollTop() == 0){
+    $('#return-to-top').hide();
+  }
+    // ===== Scroll to Top ====
+  $(window).scroll(function() {
+      if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+          $('#return-to-top').fadeIn(200);    // Fade in the arrow
+      } else {
+          $('#return-to-top').fadeOut(200);   // Else fade out the arrow
       }
   });
- $('#Input_Search').keyup(function(){
-  // Search text
-  var text = $(this).val();
-  // Hide all content class element
-  $('.Search').hide();
-
-  // Search and show
-  $('.Search:contains("'+text+'")').show();
- });
+  $('#return-to-top').click(function() {      // When arrow is clicked
+      $('body,html').animate({
+          scrollTop : 0                       // Scroll to top of body
+      }, 500);
+  });
 });
 </script>
 <!-- Array que almacena las id de los proyectos de portal alterno relacionadas con la EPS seleccionada-->
@@ -208,24 +225,6 @@ $indicators = [
             Construyendo sobre su negocio de Urbes, estimulará per capitas de consumo y su infraestructura servirá a mas de 25 millones de usuarios y activará la demanda de GNV para transporte masico en el menos cinco ciudades de más de 500.000 habitantes.<br>
             Será una compañía de mas de USD 5 billones de market cap, y trabajará con aliados estratégicos.
           </p>
-          <script>
-          $(document).ready(function(){
-              // $('#return-to-top').hide();
-              // ===== Scroll to Top ====
-            $(window).scroll(function() {
-                if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
-                    $('#return-to-top').fadeIn(200);    // Fade in the arrow
-                } else {
-                    $('#return-to-top').fadeOut(200);   // Else fade out the arrow
-                }
-            });
-            $('#return-to-top').click(function() {      // When arrow is clicked
-                $('body,html').animate({
-                    scrollTop : 0                       // Scroll to top of body
-                }, 500);
-            });
-          });
-          </script>
       <?php endif;?>
     </div>
 </sidebar>
@@ -476,6 +475,6 @@ $indicators = [
           <?php endforeach;?>
         <?php endforeach; ?>
       </div>
-    <a href="javascript:" class="btn-floating waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
+    <a href="Scroll:" class="btn-floating waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
   </div>
 </div>

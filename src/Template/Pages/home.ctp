@@ -3,26 +3,25 @@
     <?php echo $this->Html->tag(
     'section',
     $this->Html->link('', array('controller'=>'Projects','action'=>'PortalProjects'), array('class'=>'tooltipped','data-position'=>'right','data-tooltip'=>'Visualice información presupuestal y de avance de los Proyectos de GEB.','data-background-color'=>'red lighten-3')).
-              $this->Html->tag(
-                  'div',
-                  $this->Html->tag('h2', 'Portal proyectos'),
-                  array('class'=>'home-item-title')
-              ).
+        $this->Html->tag(
+            'div',
+            $this->Html->tag('h2', 'Portal proyectos'),
+            array('class'=>'home-item-title')
+        ).
               $this->Html->tag('figure', $this->Html->image('icons/portal-proyectos.svg')).
-              $this->Html->tag(
-                  'div',
-                  $this->Html->image('photos/Foto_Transmisión.png'),
-                  array('class'=>'home-item-banner')
-              ).
-              $this->Html->tag('div', '', array('class'=>'home-item-overlay accent')),
+                $this->Html->tag(
+                    'div',
+                    $this->Html->image('photos/portal-proyectos.png'),
+                    array('class'=>'home-item-banner')
+                ).
+                $this->Html->tag('div', '', array('class'=>'home-item-overlay accent')),
     array('class'=>'home-item'),
     array('escape' => false)
-)?>
+);?>
 <!--Estructura en lenguaje cakePHP del RYOS-->
 <?php echo $this->Html->tag(
-                  'section',
-                  $this->Html->link('', array('controller'=>'Projects','action'=>'PortalProjects'), array('class'=>'tooltipped','data-position'=>'left','data-tooltip'=>'Queremos conocer tus ideas.
-')).
+    'section',
+    $this->Html->link('', array('controller'=>'Ryos','action'=>'index'), array('class'=>'tooltipped','data-position'=>'left','data-tooltip'=>'Queremos conocer tus ideas.')).
           $this->Html->tag(
               'div',
               $this->Html->tag('h2', 'RYOS'),
@@ -31,18 +30,21 @@
           $this->Html->tag('figure', $this->Html->image('icons/ryos.svg')).
           $this->Html->tag(
               'div',
-              $this->Html->image('photos/foto_IDM.png'),
+              $this->Html->image('photos/RYOS.png'),
               array('class'=>'home-item-banner')
           ).
           $this->Html->tag('div', '', array('class'=>'home-item-overlay tertiary')),
-                  array('class'=>'home-item'),
-                  array('escape' => false)
+                              array('class'=>'home-item'),
+                              array('escape' => false)
               )?>
     <!--Estructura en lenguaje cakePHP del Portafolio-->
     <?php echo $this->Html->tag(
-              'section',
-              $this->Html->link('', array('controller'=>'Projects','action'=>'PortalProjects'),
-              array('class'=>'tooltipped','data-position'=>'right','data-tooltip'=>'Información del Portafolio de GEB y sus filiales.')).
+                  'section',
+                  $this->Html->link(
+                  '',
+                  array('controller'=>'Projects','action'=>'PortalProjects'),
+                  array('class'=>'tooltipped','data-position'=>'right','data-tooltip'=>'Información del Portafolio de GEB y sus filiales.')
+              ).
               $this->Html->tag(
                   'div',
                   $this->Html->tag('h2', 'Portafolio'),
@@ -51,18 +53,21 @@
               $this->Html->tag('figure', $this->Html->image('icons/portafolio.svg')).
               $this->Html->tag(
                   'div',
-                  $this->Html->image('photos/fondo7.jpg'),
+                  $this->Html->image('photos/portafolio.jpg'),
                   array('class'=>'home-item-banner')
               ).
               $this->Html->tag('div', '', array('class'=>'home-item-overlay primary')),
-              array('class'=>'home-item'),
-              array('escape' => false)
+                  array('class'=>'home-item'),
+                  array('escape' => false)
           )?>
     <!--Estructura en lenguaje cakePHP del Documentación-->
     <?php echo $this->Html->tag(
-                  'section',
-                  $this->Html->link('', array('controller'=>'Projects','action'=>'PortalProjects'),
-                  array('class'=>'tooltipped','data-position'=>'left','data-tooltip'=>'Información a la mano de Programas y Proyectos en GEB.')).
+              'section',
+              $this->Html->link(
+                      '',
+                      array('controller'=>'Projects','action'=>'PortalProjects'),
+                      array('class'=>'tooltipped','data-position'=>'left','data-tooltip'=>'Información a la mano de Programas y Proyectos en GEB.')
+                  ).
               $this->Html->tag(
                   'div',
                   $this->Html->tag('h2', 'Documentos gestión de programas y proyectos'),
@@ -71,11 +76,11 @@
               $this->Html->tag('figure', $this->Html->image('icons/documentos-gestion.svg')).
               $this->Html->tag(
                   'div',
-                  $this->Html->image('photos/fondo8.jpg'),
+                  $this->Html->image('photos/documentos.jpg'),
                   array('class'=>'home-item-banner')
               ).
               $this->Html->tag('div', '', array('class'=>'home-item-overlay secondary')),
-                  array('class'=>'home-item'),
-                  array('escape' => false)
+              array('class'=>'home-item'),
+              array('escape' => false)
               )?>
 </div>

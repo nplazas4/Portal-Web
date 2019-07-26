@@ -1,4 +1,9 @@
 <?php
+    if (!in_array('ob_gzhandler', ob_list_handlers())) {
+      ob_start('ob_gzhandler');
+    } else {
+      ob_start();
+    }
     $cakeDescription = 'Grupo Energía Bogotá';
     // Datos de usuario
     $user = [
@@ -58,7 +63,7 @@
     </title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->script(['jquery-3.3.1.min.js']) ?>
-    <?= $this->Html->css('materialize.min.css') ?>
+    <?= $this->Html->css('materialize.css') ?>
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
     <?= $this->fetch('meta') ?>

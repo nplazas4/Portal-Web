@@ -80,44 +80,79 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        if (!in_array('ob_gzhandler', ob_list_handlers())) {
-          ob_start('ob_gzhandler');
-        } else {
-          ob_start();
+        try {
+            $this->gzip();
+            //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
+            $this->Token();
+            $this->set('current_user', $this->Auth->user());
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
         }
-        //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
-        $ch = curl_init('http://192.168.0.210:8080/ords/portal/oauth/token');
-        // curl_setopt($ch, CURLOPT_HEADER, TRUE);
-        curl_setopt($ch, CURLOPT_POST, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-        curl_setopt($ch, CURLOPT_USERPWD, "eMA2D5DqyNSsgxc_tPYqTg..:i4LginH4m_75qMbN7rAsjQ..");
-        $result=curl_exec($ch);
-        curl_close($ch);
-        $result_arr = json_decode($result, true);
-        $token = array_values($result_arr)[0];
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-        CURLOPT_PORT => "8080",
-        CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-          "Authorization: Bearer ".$token,
-          "Cache-Control: no-cache"
-        ),
-        ));
-        $responseEps = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        if ($err) {
-            echo "cURL Error #:" . $err;
+    }
+    private function gzip()
+    {
+        try {
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+        if (!in_array('ob_gzhandler', ob_list_handlers())) {
+            ob_start('ob_gzhandler');
         } else {
+            ob_start();
+        }
+    }
+    private function Token()
+    {
+        try {
+            $ch = curl_init('http://192.168.0.210:8080/ords/portal/oauth/token');
+            curl_setopt($ch, CURLOPT_POST, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+            curl_setopt($ch, CURLOPT_USERPWD, "eMA2D5DqyNSsgxc_tPYqTg..:i4LginH4m_75qMbN7rAsjQ..");
+            $result=curl_exec($ch);
+            curl_close($ch);
+            $result_arr = json_decode($result, true);
+            $token = array_values($result_arr)[0];
+            $_SESSION["PortalToken"] = $token;
+            $this->Nav_Portal_Projects($token);
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+    }
+    private function Nav_Portal_Projects($token = null)
+    {
+        try {
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+            CURLOPT_PORT => "8080",
+            CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+              "Authorization: Bearer ".$token,
+              "Cache-Control: no-cache"
+            ),
+        ));
+            $responseEps = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            if ($err) {
+                echo "cURL Error #:" . $err;
+            } else {
+                $this->Logic_Nav_Portal_Projects($responseEps);
+            }
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+    }
+    private function Logic_Nav_Portal_Projects($responseEps = null)
+    {
+        try {
             $responsesEps = json_decode($responseEps, true);
             $ArrayEpsId = array();
             $ArrayParentEpsId = array();
@@ -144,15 +179,11 @@ class AppController extends Controller
                         $titleGEN = 'Generación';
                         $this->set('titleGEN', $titleGEN);
                     }
-                    $Level2 = $valueEps["level"];
-                    array_push($ArrayName, $AllNameEps);
-                    array_push($ArrayEpsId, $AllEpsId);
-                    $this->set('AllNameEps', $ArrayName);
-                    $this->set('AllEpsId', $ArrayEpsId);
                 }
             }
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
         }
-        $this->set('current_user', $this->Auth->user());
     }
     //autorizar vistas
     public function isAuthorized($user)

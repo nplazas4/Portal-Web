@@ -54,40 +54,11 @@ $("#button_caf_add").click(function(){
 </script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
 <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script type="text/javascript">
-// AmCharts.makeChart("advance",
-//     {
-//       "type": "pie",
-//       "balloonText": "",
-//       "labelText": "",
-//       "titleField": "category",
-//       "valueField": "column-1",
-//       "minRadius": 80,
-//       "autoResize": false,
-//       "allLabels": [],
-//       "balloon": {},
-//       "titles": [],
-//       "dataProvider": [
-//         {
-//           "category": "category 1",
-//           "column-1": 8
-//         },
-//         {
-//           "category": "category 2",
-//           "column-1": 6
-//         },
-//         {
-//           "category": "category 3",
-//           "column-1": 2
-//         }
-//       ]
-//     }
-//   );
     // Porcentajes de avances
     AmCharts.makeChart("advance",
         {
@@ -104,7 +75,6 @@ $("#button_caf_add").click(function(){
                     "startAngle": 0,
                     "endAngle": 360,
                     "bands": [
-                        // Usuarios perdidos
                         {
                             "color": "#eee",
                             "startValue": 0,
@@ -134,7 +104,6 @@ $("#button_caf_add").click(function(){
                             "balloonText": "<?=$projects->PLANNED?>% Avance planeado",
                             <?php endif;?>
                         },
-                        // Usuarios pagos
                         {
                             "color": "#E6E6E6",
                             "startValue": 0,
@@ -163,9 +132,6 @@ $("#button_caf_add").click(function(){
                     ]
                 }
             ],
-            // "export": {
-            //     "enabled": false
-            // }
         }
     );
     // Curva de avance físico
@@ -176,8 +142,6 @@ $("#button_caf_add").click(function(){
             "dataDateFormat": "YYYY-MM-DD",
             "fontFamily": "'Open Sans'",
             "theme": "default",
-            // "sequencedAnimation": true,
-            // "startDuration": 1,
             "language": "es",
             "categoryAxis": {
                 "equalSpacing": true,
@@ -232,23 +196,6 @@ $("#button_caf_add").click(function(){
             },
             "titles": [],
             "dataProvider": DataProvider,
-            // [
-            //     </?php for ($i=0; $i<$cont; $i++): ?>
-            //     {
-            //          </?php $blDec = bcdiv($blJson[$i], '1', 4);?>
-            //          </?php $evDec = bcdiv($evJson[$i], '1', 4);?>
-            //          </?php $acDec = bcdiv($acJson[$i], '1', 4);?>
-            //          "date": "</?=$fecJson[$i]?>",
-            //          "column-3": "</?=$acDec?>",
-            //          </?php if (is_numeric($evJson[$i])):?>
-            //          "column-2": "</?=$evDec?>",
-            //          </?php else: ?>
-            //          "column-2": null,
-            //          </?php endif;?>
-            //          "column": "</?=$blDec?>"
-            //     },
-            //       </?php endfor; ?>
-            // ],
             "export": {
                 "enabled": true,
                 "exportTitles": true,
@@ -257,8 +204,7 @@ $("#button_caf_add").click(function(){
         }
     );
   };
-
-    if (<?=$longitudArrayDate?> != 0) {
+  if (<?=$longitudArrayDate?> != 0) {
       AmCharts.makeChart("tg",
           {
               "type": "serial",
@@ -437,24 +383,20 @@ $("#button_caf_add").click(function(){
 <div class="section bcrumb project">
   <div class="breadcrumb-container">
       <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
-      <?php foreach ($breadcrumb as $item): ?>
-          <!-- <a href="<//?= $item[1] ?>" class="breadcrumb"><//?= $item[0] ?></a> -->
-          <?php echo $this->Html->link(
-    $item[0],
-    ['controller'=>$item[2], 'action'=>$item[1]],
-    ['escape' => false,'class'=>'breadcrumb']
-          );?>
+        <?php foreach ($breadcrumb as $item): ?>
+          <?php echo $this->Html->link($item[0],['controller'=>$item[2], 'action'=>$item[1]],
+          ['escape' => false,'class'=>'breadcrumb']);?>
         <?php endforeach; ?>
-        <?php $Category = null;?>
-        <?php $Categoria2 = 0;?>
-          <?php if ($Categoria1 == 870):?>
+          <?php $Category = null;?>
+          <?php $Categoria2 = 0;?>
+        <?php if ($Categoria1 == 870):?>
           <?php $Category = "crecimiento";?>
           <?php $Categoria2 = 8996 ?>
         <?php elseif ($Categoria1 == 871):?>
           <?php $Category = "sostenimiento";?>
           <?php $Categoria2 = 8997 ?>
-          <?php endif; ?>
-          <?php if ($ActualEps != 23305): ?>
+        <?php endif; ?>
+      <?php if ($ActualEps != 23305): ?>
             <?php echo $this->Html->link(
               $titlePrjs,
               ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($titlePrjs))],
@@ -494,20 +436,6 @@ $("#button_caf_add").click(function(){
     $n = intval($projects->FASE);
     $res = '';
     /*** Array con los numeros romanos  ***/
-    $roman_numerals = array(
-       'M'  => 1000,
-       'CM' => 900,
-       'D'  => 500,
-       'CD' => 400,
-       'C'  => 100,
-       'XC' => 90,
-       'L'  => 50,
-       'XL' => 40,
-       'X'  => 10,
-       'IX' => 9,
-       'V'  => 5,
-       'IV' => 4,
-       'I'  => 1);
     foreach ($roman_numerals as $roman => $number) {
         /*** Dividir para encontrar resultados en array ***/
         $matches = intval($n / $number);
@@ -713,8 +641,8 @@ $("#button_caf_add").click(function(){
             <div class="tt input-field col s8 m6 l4 xl3">
               <a id="button_caf"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
               <a id="button_caf_edit"><i class="material-icons tooltipped modal-trigger" href="#EditChart" data-position="right" data-tooltip="Editar" onclick="return false;">edit</i></a>
-              <a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
-              <?php echo $this->Html->image('gif/download_excel.gif')?>
+              <a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
+              <?php echo $this->Html->image('gif/download_excel.gif',['id'=>'Excel_Caf_Gif', 'style'=>'display:none'])?>
             </div>
         </div>
       <?php endif;?>
@@ -770,8 +698,8 @@ $("#button_caf_add").click(function(){
             </div>
               <div class="input-field col s8 m6 l4 xl3">
                 <a id="button_tg"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
-                <a id="Tg_Button_Excel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
-                <?php echo $this->Html->image('gif/download_excel.gif')?>
+                <a id="Tg_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
+                <?php echo $this->Html->image('gif/download_excel.gif',['id'=>'Excel_Tg_Gif', 'style'=>'display:none'])?>
               </div>
           </div>
           <div class="chart" id="div-gif-tg" style="display:none">
@@ -959,12 +887,14 @@ $("#button_caf_add").click(function(){
                 data: {
                     Info_Grafica: Grafica,
                     Name: "<?=$name?>",
-                    Id: "<?=$code?>"
+                    Id: "<?=$ActualEps?>"
                 },
-                //   beforeSend: function() {
-                // },
-                // complete: function(){
-                // },
+                beforeSend: function() {
+                  $("#Excel_Caf_Gif").show();
+                },
+                complete: function(){
+                  $('#Excel_Caf_Gif').hide();
+                },
                 success: function(data){
                     // xhr2.abort();
                     window.location.href = "/Portal-Web/<?=$name?>_Curva_S.xlsx";
@@ -979,7 +909,7 @@ $("#button_caf_add").click(function(){
             data: {Name: "<?=$name?>_Curva_S.xlsx"},
             dataType: 'json',
             success: function (data) {
-               // alert("Eliminado");
+
             }
           });
           xhr_delete.abort();
@@ -1000,12 +930,14 @@ $("#button_caf_add").click(function(){
                       Info_Grafica_Planeado: <?= json_encode($excelPlaneado)?>,
                       Info_Grafica_Ejecutado: <?= json_encode($excelEjecutado)?>,
                       Name: "<?=$name?>",
-                      Id: "<?=$code?>"
+                      Id: "<?=$ActualEps?>"
                   },
-                  //   beforeSend: function() {
-                  // },
-                  // complete: function(){
-                  // },
+                  beforeSend: function() {
+                    $('#Excel_Tg_Gif').show();
+                  },
+                  complete: function(){
+                    $('#Excel_Tg_Gif').hide();
+                  },
                   success: function(data){
                       // xhr2.abort();
                       window.location.href = "/Portal-Web/<?=$name?>_Curva_Tg.xlsx";

@@ -19,7 +19,7 @@
     </div>
     <div class="portal-projects-menu">
         <?= $title = null ?>
-        <?php foreach ($ArrayEps as $row => $value):?>
+        <?php foreach ($AllEps as $row => $value):?>
           <?php if ($value["eps_id"] == 23305): ?>
             <?php $title = 'Grupo Energía Bogotá'?>
             <?php echo $this->Html->link(
@@ -27,9 +27,8 @@
                 $this->Html->tag('h2', 'Grupo Energía Bogotá'),
                 array('controller'=>'Projects','action'=>'company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($value["eps_id"])),urlencode(base64_encode($title))),
                 array('escape' => false, 'class'=>'portal-projects-menu-item secondary-text')
-            )?>
-          <?php endif; ?>
-          <?php if ($value["eps_id"] == 23307):?>
+            );?>
+          <?php elseif ($value["eps_id"] == 23307):?>
             <?php $title = 'Distribución'?>
             <?php echo $this->Html->link(
                            $this->Html->tag('figure', $this->Html->image('logos/isotipo-soluciones-energeticas.png')).
@@ -37,10 +36,7 @@
                            array('controller'=>'Projects','action'=>'companies',urlencode(base64_encode($value["eps_id"])),urlencode(base64_encode($title))),
                            array('escape' => false, 'class'=>'portal-projects-menu-item indigo-text text-darken-4')
                        )?>
-          <?php endif;?>
-        <?php endforeach; ?>
-        <?php foreach ($ArrayEps as $row => $value):?>
-          <?php if ($value["eps_id"] == 23306):?>
+          <?php elseif ($value["eps_id"] == 23306):?>
             <?php $title = 'Transmisión y transporte'?>
             <?php echo $this->Html->link(
                           $this->Html->tag('figure', $this->Html->image('logos/isotipo-interconexion.png')).
@@ -48,8 +44,7 @@
                           array('controller'=>'Projects','action'=>'companies',urlencode(base64_encode($value["eps_id"])),urlencode(base64_encode($title))),
                           array('escape' => false, 'class'=>'portal-projects-menu-item orange-text')
                       )?>
-          <?php endif;?>
-          <?php if ($value["eps_id"] == 23308):?>
+          <?php elseif ($value["eps_id"] == 23308):?>
             <?php $title = 'Generación'?>
             <?php echo $this->Html->link(
                           $this->Html->tag('figure', $this->Html->image('logos/isotipo-baja-emision.png')).

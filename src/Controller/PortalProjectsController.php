@@ -9,24 +9,12 @@ use App\Controller\AppController;
  */
 class PortalProjectsController extends AppController
 {
-	public function index()
+	private function index()
 	{
-		$this->view = '/Pages/portal-projects';
-	}
-	public function companies()
-	{
-		$this->view = '/Pages/companies';
-	}
-	public function company()
-	{
-		$this->view = '/Pages/company';
-	}
-	public function projects()
-	{
-		$this->view = '/Pages/projects';
-	}
-	public function project()
-	{
-		$this->view = '/Pages/project';
+		try {
+			$this->view = '/Pages/portal-projects';
+		} catch (\Exception $e) {
+			exit($e->getMessage() . "\n");
+		}
 	}
 }

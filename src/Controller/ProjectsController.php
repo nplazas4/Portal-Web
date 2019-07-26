@@ -14,11 +14,6 @@ use PhpOffice\PhpSpreadsheet\Chart\Title;
 
 class ProjectsController extends AppController
 {
-    // public function initialize()
-    // {
-    //   parent::initialize();
-    //   $this->loadComponent('RequestHandler');
-    // }
     private $Excel_Autor_Name;
     // Función que se ejecuta antes de rederizar cualquier vista dentro la carpeta Projects.
     public function beforeFilter($event)
@@ -66,11 +61,11 @@ class ProjectsController extends AppController
                 $log->PROJECT_NAME  = $ProjectCodName.' ('.$ProjectIdP6.')';
                 $log->STATUS  = $ProjectCodStatus;
                 $logsTable->save($log);
-                $this->set('ProjectCodId', $ArrayProjectCodId);
+                $this->set('ProjectCodId', $ArrayProjectCodId);//RV
             }
             $ArrayProjDelete = array();
             $AllProjForDelete = $this->Projects->find('all');
-            // Fpreach que obtiene todos los projectos que provienen de Web services y se encuentra deshabilitados o eliminados.
+            // Foreach que obtiene todos los projectos que provienen de Web services y se encuentra deshabilitados o eliminados.
             foreach ($AllProjForDelete as $ProjDelete) {
                 if (!in_array($ProjDelete->ID_PROJECT, $ArrayProjectCodId) && $ProjDelete->STATUS == 1) {
                     array_push($ArrayProjDelete, $ProjDelete->id);
@@ -187,6 +182,7 @@ class ProjectsController extends AppController
     {
         $this->index();
         $this->IndicatorColor();
+        $this->RomanNumbers();
         $decoded_Name = base64_decode(urldecode($name)); // Nombre del proyecto.
         $decoded_NameEpsPrjs = base64_decode(urldecode($NameEps)); // Nombre de la EPS
         $decoded_titlePrjs = base64_decode(urldecode($title)); //Nombre de la EPS mandante
@@ -243,7 +239,7 @@ class ProjectsController extends AppController
           $worksheet->setCellValue('B2', "Planeado");
           $worksheet->setCellValue('C2', 'Ejecutado');
           $worksheet->setCellValue('D2', 'Estimado a completar');
-          $worksheet->getRowDimension('1')->setRowHeight(25);
+          $worksheet->getRowDimension('1')->setRowHeight(80);
           $worksheet->getColumnDimension('A')->setWidth(25);
           $worksheet->getColumnDimension('B')->setWidth(25);
           $worksheet->getColumnDimension('C')->setWidth(25);
@@ -251,12 +247,16 @@ class ProjectsController extends AppController
           $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
           $drawing->setName('Logo');
           $drawing->setDescription('Logo');
-          $Img_Dir = WWW_ROOT . 'img/logos/logo_GEB.png';
+          if ($_POST["Id"] != 34012 && $_POST["Id"] != 34013 && $_POST["Id"] != 34015 && $_POST["Id"] != 34016 && $_POST["Id"] != 34018) {
+            $Img_Dir = WWW_ROOT . 'img/logos/excel/logo.png';
+          }else {
+            $Img_Dir = WWW_ROOT . 'img/logos/excel/'.$_POST["Id"].'.png';
+          }
           $drawing->setPath($Img_Dir); //Imagen
-          $drawing->setHeight(25);
+          $drawing->setHeight(70);
           $drawing->setCoordinates('A1');
-          $drawing->setOffsetX(25);
-          $drawing->setOffsetY(5);
+          $drawing->setOffsetX(13);
+          $drawing->setOffsetY(15);
           $worksheet->fromArray(
             $_POST["Info_Grafica"],
             NULL,
@@ -311,7 +311,6 @@ class ProjectsController extends AppController
           // Add the chart to the worksheet
           $worksheet->addChart($chart);
           // Save Excel 2007 file
-          // $filename = $helper->getFilename(__FILE__);
           $writer = new Xlsx($spreadsheet);
           $writer->setIncludeCharts(true);
           $callStartTime = microtime(true);
@@ -343,7 +342,7 @@ class ProjectsController extends AppController
         $worksheet->setCellValue('D2', "Planeado");
         $worksheet->setCellValue('E2', 'Ejecutado');
         $worksheet->setCellValue('F2', 'Proyectado');
-        $worksheet->getRowDimension('1')->setRowHeight(25);
+        $worksheet->getRowDimension('1')->setRowHeight(80);
         $worksheet->getColumnDimension('A')->setWidth(25);
         $worksheet->getColumnDimension('B')->setWidth(25);
         $worksheet->getColumnDimension('C')->setWidth(25);
@@ -352,12 +351,16 @@ class ProjectsController extends AppController
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('Logo');
         $drawing->setDescription('Logo');
-        $Img_Dir = WWW_ROOT . 'img/logos/logo_GEB.png';
+        if ($_POST["Id"] != 34012 && $_POST["Id"] != 34013 && $_POST["Id"] != 34015 && $_POST["Id"] != 34016 && $_POST["Id"] != 34018) {
+          $Img_Dir = WWW_ROOT . 'img/logos/excel/logo.png';
+        }else {
+          $Img_Dir = WWW_ROOT . 'img/logos/excel/'.$_POST["Id"].'.png';
+        }
         $drawing->setPath($Img_Dir); //Imagen
-        $drawing->setHeight(25);
+        $drawing->setHeight(70);
         $drawing->setCoordinates('A1');
-        $drawing->setOffsetX(25);
-        $drawing->setOffsetY(5);
+        $drawing->setOffsetX(13);
+        $drawing->setOffsetY(15);
         $Contador_Array_Date = count($_POST["Info_Grafica_Date"]);
         for ($i=1; $i <= $Contador_Array_Date; $i++) {
           $Excel_Row = $i + 2;
@@ -479,6 +482,7 @@ class ProjectsController extends AppController
     {
         $this->AllProjects();
         $this->IndicatorColor();
+        $this->RomanNumbers();
         // Decodifica todas la variables pasadas a través de la URL.
         $decoded_NameEpsPrjs = base64_decode(urldecode($NameEps));
         $decoded_titlePrjs = base64_decode(urldecode($title));
@@ -538,6 +542,15 @@ class ProjectsController extends AppController
             $this->set('ProjectsWS', $ProjectsWS);
         }
     }
+    private function RomanNumbers(){ //Función que almacena los números romanos necesarios para dar lógica a la fase mediante un arreglo
+      try{
+          $roman_numerals = array('M'  => 1000, 'CM' => 900, 'D'  => 500, 'CD' => 400, 'C'  => 100, 'XC' => 90, 'L'  => 50,
+                                'XL' => 40, 'X'  => 10, 'IX' => 9, 'V'  => 5, 'IV' => 4, 'I'  => 1);
+          $this->set('roman_numerals',$roman_numerals);
+      }catch (\Exception $e) {
+          exit($e->getMessage() . "\n");
+      }
+    }
     public function Indicators()
     {
         $this->loadModel('Indicators');
@@ -571,21 +584,6 @@ class ProjectsController extends AppController
         $indicatorsAC3 = $this->Presindicators->find('all');
         $this->set('indicatorsAC3', $indicatorsAC3->all());
     }
-    // public function Period()
-    // {
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, 'http://23.99.203.76:7001/ords/portal/periodtype/period');
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-    //     $headers = array();
-    //     $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    //     $result3 = curl_exec($ch);
-    //     if (curl_errno($ch)) {
-    //         echo 'Error:' . curl_error($ch);
-    //     }
-    //     curl_close($ch);
-    // }
     public function ChartS($graph)
     {
         $data = $graph;
@@ -721,6 +719,7 @@ class ProjectsController extends AppController
     }
     public function companies($idEps = null, $title = null)
     {
+      try {
         //Llamar la función portalProjects para obtener las Eps.
         $this->portalProjects();
         //Variables que albergan el id y el título de la EPS mandante
@@ -728,6 +727,9 @@ class ProjectsController extends AppController
         $decoded_title = base64_decode(urldecode($title));
         $this->set('idEps', $decoded_Eps);
         $this->set('title', $decoded_title);
+      } catch (\Exception $e) {
+        exit($e->getMessage() . "\n");
+      }
     }
     public function company($current_user = null, $Id_eps = null, $NameEps = null, $titleParentEps = null, $idParentEps = null)
     {
@@ -828,52 +830,57 @@ class ProjectsController extends AppController
     // Función que se encarga la pestaña de Portal proyectos
     public function portalProjects()
     {
-      $curl = curl_init();
-      curl_setopt_array($curl, array(
-      CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_CUSTOMREQUEST => "GET",
-      CURLOPT_HTTPHEADER => array(
-        "Authorization: Bearer ".$_SESSION["PortalToken"],
-        "Cache-Control: no-cache"
-      ),
-      ));
-        $responseEps = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            $responsesEps = json_decode($responseEps, true);
-            $ArrayEpsId = array();
-            $ArrayParentEpsId = array();
-            $ArrayName = array();
-            $ArrayLevel = array();
-            $ArrayEps = array_values($responsesEps)[0];
-            $this->set('ArrayEps', $ArrayEps);
-            foreach ($ArrayEps as $rowEps => $valueEps) {
-                if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
-                    $EpsIdNumber = $valueEps["eps_id"];
-                    $ParentEpsIdNumber = $valueEps["parent_eps_object_id"];
-                    $NameEPS = $valueEps["name"];
-                    $LevelEPS = $valueEps["level"];
-                    // Registra las EPS obtenidas del web services en la BD local.
-                    $logsTableEps = \Cake\ORM\TableRegistry::get('Eps', array('table' => 'eps'));
-                    $logEps = $logsTableEps->newEntity();
-                    $logEps->EPS_ID  = $EpsIdNumber;
-                    $logEps->EPS_NAME  = $NameEPS;
-                    $logsTableEps->save($logEps);
-                    $this->loadModel('Eps');
-                    $this->set('eps', $this->Eps->find('list', [
-                    'keyField' => 'EPS_ID',
-                    'valueField' => 'EPS_NAME'
-                    ]));
-                }
+      try {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_CUSTOMREQUEST => "GET",
+          CURLOPT_HTTPHEADER => array(
+            "Authorization: Bearer ".$_SESSION["PortalToken"],
+            "Cache-Control: no-cache")));
+          $responseEps = curl_exec($curl);
+          $err = curl_error($curl);
+          curl_close($curl);
+          if ($err) {
+              echo "cURL Error #:" . $err;
+          } else {
+            $this->PortalProjectsLogic($responseEps);
+          }
+      } catch (\Exception $e) {
+          exit($e->getMessage() . "\n");
+      }
+    }
+    //Función que se encarga
+    private function PortalProjectsLogic($responseEps = null){
+      try {
+        $responsesEps = json_decode($responseEps, true);
+        $ArrayEps = array_values($responsesEps)[0];
+        foreach ($ArrayEps as $rowEps => $valueEps) {
+            if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
+                $EpsIdNumber = $valueEps["eps_id"];
+                // $ParentEpsIdNumber = $valueEps["parent_eps_object_id"]; RV
+                $NameEPS = $valueEps["name"];
+                $LevelEPS = $valueEps["level"];
+                $this->Save_WS_Info_Eps_Table($EpsIdNumber, $NameEPS);
             }
-        }
+         }
+      } catch (\Exception $e) {
+        exit($e->getMessage() . "\n");
+      }
+    }
+    // Función que guarda el id y nombre de la EPS en la tabla de EPS de la bd interna (necesario para las tareas de asignación de proyectos provenientes de la fuente alterna y para la asignación de riesgos).
+    private function Save_WS_Info_Eps_Table($EpsIdNumber = null, $NameEPS = null){
+      // Obtención de la tabla
+      $logsTableEps = \Cake\ORM\TableRegistry::get('Eps', array('table' => 'eps'));
+      $logEps = $logsTableEps->newEntity();
+      // Columna y dato a almacenar
+      $logEps->EPS_ID  = $EpsIdNumber;
+      $logEps->EPS_NAME  = $NameEPS;
+      $logsTableEps->save($logEps); //Finalizar proceso
     }
     // Función que crea una Curva S en base al tipo de periodo en project.ctp a través de una solicitud ajax.
     public function ajaxchart()
