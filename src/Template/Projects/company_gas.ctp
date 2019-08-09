@@ -25,6 +25,16 @@
           ['escape' => false,'class'=>'breadcrumb']
         );?>
     </div>
+    <div class="company2-content" style="min-height: 0px;">
+        <a href="/portal-projects/projects" class="company2-content-valve increase">
+            <h2>Crecimiento</h2>
+        </a>
+        <div class="company-content-data">
+        </div>
+        <a href="" class="company2-content-valve sustenance">
+            <h2>Sostenimiento</h2>
+        </a>
+    </div>
     <div class="company2-content">
       <?php $Img = null ?>
       <?php if ($idEps == 23305): ?>
@@ -48,7 +58,6 @@
       <?php if ($idEps == 34018): ?>
         <?php $Img = 'logos/logo-gebbras.svg' ?>
       <?php endif;?>
-
       <?php
         $CategoriaSt1 = 870;
         $CategoriaSt2 = 8996;

@@ -5,7 +5,7 @@
       [ 'Portal Proyectos','portalProjects','Projects','']
     ];
     $budgetIndicators = [
-        'acPpto' => $projects->AC_PPTO, // AC/PPTO
+        'cpi' => $projects->AC_PPTO, // AC/PPTO
         'ac' => $projects->AC, // AC
         'totalBudget' => $projects->PROJ_TOTAL_PRES, // Presupuesto total
         'forecastTotal' => $projects->TOTAL_FORECAST, // Forecast total
@@ -451,12 +451,7 @@ $("#button_caf_add").click(function(){
         <?php else: ?>
           <h1><?=$projects->PROJECT_NAME?></h1>
         <?php endif; ?>
-        <div class="project-sidebar-phase phase" style="background-color:
-            <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-              <?php if ($projects->FASE == $valueFase['minimun'] && $valueFase['indicator_name'] == 'FASE'):?>
-                  <?php echo $valueFase['hexa_color'];?>
-              <?php endif;?>
-            <?php endforeach; ?>">
+        <div class="project-sidebar-phase phase primary">
             <h2>Fase <?=$res?></h2>
         </div>
         <div class="project-sidebar-percentages">
@@ -491,9 +486,74 @@ $("#button_caf_add").click(function(){
 
     <div class="project-content">
         <div class="indicators row wrap">
+          <div class="data">
+              <div class="data-content">
+                  <ul>
+                      <li>
+                          <i class="material-icons">event</i>
+                          <?php if($projects->FOPO != null):?>
+                            <span>FoPo: <?= $FoPo ?></span>
+                          <?php else:?>
+                            <span>FoPo:</span>
+                          <?php endif;?>
+                      </li>
+                      <?php if ($projects->ADJUDICACION != null):?>
+                      <li>
+                          <i class="material-icons">event_note</i>
+                          <span>Adjudicación: <?= $Adj ?></span>
+                      </li>
+                    <?php else:?>
+                      <li>
+                          <i class="material-icons">event_note</i>
+                          <span>Adjudicación: No aplica</span>
+                      </li>
+                    <?php endif;?>
+                      <li>
+                          <i class="material-icons">event_available</i>
+                          <?php if ($code == $projects->ID_PROJECT && $ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
+                            && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017): ?>
+                            <span>Fecha corte: <?= strftime("%d %B, %Y", strtotime($corte));?></span>
+                          <?php elseif($code == null && $ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
+                            && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
+                            <span>Fecha corte: <?= $Apr ?></span>
+                          <?php else:?>
+                            <span>Fecha SPI: <?= strftime("%d %B, %Y", strtotime($corte));?></span>
+                          <?php endif;?>
+                      </li>
+                      <li>
+                        <?php if($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
+                          && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
+                          <i class="material-icons">straighten</i>
+                          <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
+                        <?php else:?>
+                          <i class="material-icons">date_range</i>
+                          <?php if ($projects->CPI_DATE != null): ?>
+                          <span>Fecha CPI: <?= strftime("%d %B, %Y", strtotime($projects->CPI_DATE));?></span>
+                          <?php else:?>
+                            <span>Fecha CPI:</span>
+                          <?php endif;?>
+                        <?php endif;?>
+                      </li>
+                      <li>
+                        <?php if($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
+                          && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
+                          <i class="material-icons">place</i>
+                            <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
+                        <?php else:?>
+                          <i class="material-icons">event</i>
+                          <?php if ($projects->IGR_DATE != null): ?>
+                            <span>Fecha IGR: <?=strftime("%d %B, %Y", strtotime($projects->IGR_DATE))?></span>
+                            <?php else: ?>
+                              <span>Fecha IGR:</span>
+                          <?php endif; ?>
+                        <?php endif;?>
+                      </li>
+                  </ul>
+              </div>
+          </div>
           <?= $this->Html->link($this->Html->tag('i','picture_as_pdf',['class'=>'material-icons tooltipped', 'data-position'=>'right','data-tooltip'=>'Descargar PDF']), ['action' => 'project', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph , '_ext' => 'pdf'],['escape' => false, 'style'=>'margin-left:1%']); ?>
             <h2>Indicadores de cronograma</h2>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="División entre el valor ganado y presupuestado hasta la fecha">
                 <div class="indicator type-1" style="background-color:
                     <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                       <?php if ($SPI >= $valueFase['minimun'] && $SPI <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
@@ -537,9 +597,14 @@ $("#button_caf_add").click(function(){
             <h2 class="mb-2">Indicadores de presupuesto</h2>
             <h3>Total proyecto</h3>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Es la división entre el AC y el PPTO (AC/PPTO).">
-                <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
-                    <h4 class="fw-600 mr-2">AC/PPTO</h4>
-                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['acPpto'] ?></h4>
+                <a class="indicator type-1 modal-trigger" href="#detailValueExecuted" style="background-color:
+                    <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                      <?php if ($budgetIndicators['cpi'] >= $valueFase['minimun'] && $budgetIndicators['cpi'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
+                          <?php echo $valueFase['hexa_color'];?>
+                      <?php endif;?>
+                    <?php endforeach; ?>">
+                    <h4 class="fw-600 mr-2">CPI</h4>
+                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpi'] ?></h4>
                 </a>
             </div>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el valor de dinero gastado, con base a la planeación.">
@@ -566,6 +631,24 @@ $("#button_caf_add").click(function(){
                     <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
                 </a>
             </div>
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado presupuestal.">
+                <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">DESFASE EN $</h5>
+                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado presupuestal.">
+                <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">COSTO EN PORCENTAJES</h5>
+                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped ml-auto" data-position="bottom" data-tooltip="Estimado presupuestal.">
+                <a class="indicator type-2 secondary darken-1 modal-trigger">
+                    <h5 class="fw-600">FORECAST TOTAL</h5>
+                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
+                </a>
+            </div>
             <h3 class="mt-3">Anual proyecto</h3>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Resultado del cociente del Valor Ganado dividido para el Costo Incurrido.">
                 <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
@@ -573,7 +656,7 @@ $("#button_caf_add").click(function(){
                     <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?></h4>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el valor de dinero gastado anualmente, con base a la planeación.">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el dinero gastado anualmente, con base a la planeación.">
                 <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC <small>2019</small></h4>
                     <?php if($projects->PROJ_AC != null):?>
@@ -604,7 +687,7 @@ $("#button_caf_add").click(function(){
             </div>
         </div>
         <?php if ($cont != 0): ?>
-        <div class="chart" id="Input_Container">
+        <div class="color-chart" id="Input_Container">
           <div class="row" id="Container_Type_Color">
             <div class="input-field col s8 m6 l4 xl3">
               <select id="select-work" class="work-select">
@@ -638,27 +721,24 @@ $("#button_caf_add").click(function(){
               <input type="color" id="Id_Color_Column3" value="#fc9219">
             </div>
           </div>
-            <div class="tt input-field col s8 m6 l4 xl3">
+            <div class="tt input-field col s8 m6 l4 xl3 mt-auto mb-auto mr-auto">
               <a id="button_caf"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
               <a id="button_caf_edit"><i class="material-icons tooltipped modal-trigger" href="#EditChart" data-position="right" data-tooltip="Editar" onclick="return false;">edit</i></a>
-              <a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
               <?php echo $this->Html->image('gif/download_excel.gif',['id'=>'Excel_Caf_Gif', 'style'=>'display:none'])?>
             </div>
         </div>
-      <?php endif;?>
-        <?php if ($cont != 0): ?>
         <div class="chart" id="div-gif" style="display:none">
           <div class="data-box ml-auto mr-auto">
               <?php echo $this->Html->image('gif/load.gif',array('id'=>'img-id'))?>
           </div>
         </div>
           <div id="idchart" class="chart">
-              <h2>Curva de Avance Físico</h2>
+              <h2>Curva de Avance Físico <span class="icon-download"><a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a></span></h2>
               <div class="chart-content" id="caf"></div>
           </div>
         <?php endif;?>
         <?php if ($longitudArrayDate != 0):?>
-          <div class="chart">
+          <div class="color-chart">
             <div class="row">
               <div class="input-field col s8 m6 l4 xl3">
                 <select id="select-work-TG-column1" class="work-select-TG-column1">
@@ -696,9 +776,8 @@ $("#button_caf_add").click(function(){
                 <input type="color" id="Id_Color_TG_Column5" value="#BBBBBB">
               </div>
             </div>
-              <div class="input-field col s8 m6 l4 xl3">
+              <div class="input-field col s8 m6 l4 xl3 mt-auto mb-auto mr-auto">
                 <a id="button_tg"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
-                <a id="Tg_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a>
                 <?php echo $this->Html->image('gif/download_excel.gif',['id'=>'Excel_Tg_Gif', 'style'=>'display:none'])?>
               </div>
           </div>
@@ -708,7 +787,7 @@ $("#button_caf_add").click(function(){
             </div>
           </div>
           <div id="idchart-tg" class="chart">
-              <h2>Tres Generaciones</h2>
+              <h2>Tres Generaciones <span class="icon-download"><a id="Tg_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a></span></h2>
               <div class="chart-content" id="tg" style="min-height: 475px;"></div>
           </div>
       <?php endif;?>
@@ -885,7 +964,10 @@ $("#button_caf_add").click(function(){
                 url: "<?php echo $this->Url->build(['action'=>'ImportExcelCaf']);?>",
                 async: false,
                 data: {
-                    Info_Grafica: Grafica,
+                    Curva_Date: <?= json_encode($fecJson)?>,
+                    Curva_Plan: <?= json_encode($acJson)?>,
+                    Curva_Ejec: <?= json_encode($evJson)?>,
+                    Curva_Estimado: <?= json_encode($blJson)?>,
                     Name: "<?=$name?>",
                     Id: "<?=$ActualEps?>"
                 },
@@ -982,11 +1064,9 @@ $("#button_caf_add").click(function(){
                 <div class="chart-risk-list">
                     <ul>
                         <?php foreach ($rks as $rk): ?>
-                          <?php  if ($rk->PROJECT_CODE == $projects->id):?>
-                            <li>
-                               <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
-                            </li>
-                          <?php endif;?>
+                          <li>
+                            <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
+                          </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -996,242 +1076,192 @@ $("#button_caf_add").click(function(){
                             <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
                             <th>MA</th>
                             <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
-                            </td>
-                            <td class="orange">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
-                            </td>
-                            <td class="red">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
-                            </td>
-                            <td class="red">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>A</th>
-                            <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="yellow">
                               <?php foreach ($rks as $rk):
-                                if ($rk->PROJECT_CODE == $projects->id) {
-                                    if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
-                                        echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                    };
+                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
                                 };
-                                endforeach; ?>
+                              endforeach;?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
-                            </td>
-                            <td class="orange">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach;?>
                             </td>
                             <td class="red">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach;?>
+                            </td>
+                            <td class="red">
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
+                            </td>
+                          </tr>
+                         <tr>
+                          <th>A</th>
+                            <td class="yellow">
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
+                            </td>
+                            <td class="yellow">
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
+                            </td>
+                            <td class="orange">
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
+                            </td>
+                            <td class="orange">
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
+                            </td>
+                            <td class="red">
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                         </tr>
                         <tr>
                             <th>M</th>
                             <td class="lime accent-4">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="orange">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                         </tr>
                         <tr>
                             <th>B</th>
                             <td class="lime accent-4">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                         </tr>
                         <tr>
-                            <th>MB</th>
+                          <th>MB</th>
                             <td class="lime accent-4">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
                             </td>
-                            <td class="yellow">
-                                <?php foreach ($rks as $rk):
-                                  if ($rk->PROJECT_CODE == $projects->id) {
-                                      if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
-                                          echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                      };
-                                  };
-                                endforeach; ?>
-                            </td>
+                           <td class="yellow">
+                              <?php foreach ($rks as $rk):
+                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
+                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
+                                };
+                              endforeach; ?>
+                           </td>
                         </tr>
                         <tr>
                             <th class="title" colspan="2"></th>
@@ -1290,71 +1320,6 @@ $("#button_caf_add").click(function(){
           </div>
           <div class="map">
               <?= $this->Html->image('maps/'.$projects->ID_PROJECT.'/'.$projects->FOTO) ?>
-          </div>
-          <div class="data">
-              <div class="data-content">
-                  <ul>
-                      <li>
-                          <i class="material-icons">event</i>
-                          <?php if($projects->FOPO != null):?>
-                            <span>FoPo: <?= $FoPo ?></span>
-                          <?php else:?>
-                            <span>FoPo:</span>
-                          <?php endif;?>
-                      </li>
-                      <?php if ($projects->ADJUDICACION != null):?>
-                      <li>
-                          <i class="material-icons">event_note</i>
-                          <span>Adjudicación: <?= $Adj ?></span>
-                      </li>
-                    <?php else:?>
-                      <li>
-                          <i class="material-icons">event_note</i>
-                          <span>Adjudicación: No aplica</span>
-                      </li>
-                    <?php endif;?>
-                      <li>
-                          <i class="material-icons">event_available</i>
-                          <?php if ($code == $projects->ID_PROJECT && $ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                            && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017): ?>
-                            <span>Fecha corte: <?= strftime("%d %B, %Y", strtotime($corte));?></span>
-                          <?php elseif($code == null && $ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                            && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
-                            <span>Fecha corte: <?= $Apr ?></span>
-                          <?php else:?>
-                            <span>Fecha SPI: <?= strftime("%d %B, %Y", strtotime($corte));?></span>
-                          <?php endif;?>
-                      </li>
-                      <li>
-                        <?php if($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                          && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
-                          <i class="material-icons">straighten</i>
-                          <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
-                        <?php else:?>
-                          <i class="material-icons">date_range</i>
-                          <?php if ($projects->CPI_DATE != null): ?>
-                          <span>Fecha CPI: <?= strftime("%d %B, %Y", strtotime($projects->CPI_DATE));?></span>
-                          <?php else:?>
-                            <span>Fecha CPI:</span>
-                          <?php endif;?>
-                        <?php endif;?>
-                      </li>
-                      <li>
-                        <?php if($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                          && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
-                          <i class="material-icons">place</i>
-                            <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
-                        <?php else:?>
-                          <i class="material-icons">event</i>
-                          <?php if ($projects->IGR_DATE != null): ?>
-                            <span>Fecha IGR: <?=strftime("%d %B, %Y", strtotime($projects->IGR_DATE))?></span>
-                            <?php else: ?>
-                              <span>Fecha IGR:</span>
-                          <?php endif; ?>
-                        <?php endif;?>
-                      </li>
-                  </ul>
-              </div>
           </div>
         <a href="javascript:" class="btn-floating waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
     </div>

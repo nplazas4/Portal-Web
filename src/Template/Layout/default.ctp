@@ -47,7 +47,7 @@
                 ]
             ]
         ],
-        [ 'RYOS', 'home','Pages','id' => '','children' => [] ],
+        [ 'RYOS', 'index','Ryos','id' => '','children' => [] ],
         [ 'Portafolio', 'home','Pages','id' => '', 'children' => [] ],
         [ 'Documentos gestión de programas y proyectos', 'home','Pages','id' => '', 'children' => [] ],
     ];
@@ -62,7 +62,8 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->script(['jquery-3.3.1.min.js']) ?>
+    <?= $this->Html->script('jquery-3.3.1.min.js',['async']) ?>
+    <!-- </?= $this->Html->script(['jquery-3.3.1.min.js']) ?> -->
     <?= $this->Html->css('materialize.css') ?>
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">

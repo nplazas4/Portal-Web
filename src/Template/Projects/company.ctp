@@ -25,7 +25,14 @@
           ['escape' => false,'class'=>'breadcrumb']
         );?>
     </div>
-
+    <div class="d-flex ml-auto mr-auto">
+      <a href="/portal-projects/projects" class="company2-content-valve sustenance">
+          <h2>Elemento 1</h2>
+      </a>
+      <a href="/portal-projects/projects" class="company2-content-valve increase" style="margin-left:630px;">
+          <h2>Elemento 2</h2>
+      </a>
+    </div>
     <div class="company-content">
         <?php $Img = null ?>
         <?php if ($idEps == 23305): ?>

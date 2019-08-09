@@ -200,7 +200,7 @@ class ProjectsController extends AppController
         $this->set('current_user_pr', $decoded_current_user_pr);
         $this->set('ActualEps', $decoded_EpsPrjs);
         $this->set('Categoria1', $decoded_Ctg1Prjs);
-        $this->Risks();
+        $this->Risks($id);
         $this->ChartS($graph);
         $this->Donut($graph);
         $this->IndicatorsAC();
@@ -257,13 +257,14 @@ class ProjectsController extends AppController
           $drawing->setCoordinates('A1');
           $drawing->setOffsetX(13);
           $drawing->setOffsetY(15);
-          $worksheet->fromArray(
-            $_POST["Info_Grafica"],
-            NULL,
-            'A3'
-          );
-          $Contador_Array = count($_POST["Info_Grafica"])+ 2;
-          $this->set("Contador",$Contador_Array);
+          $Contador_Array = count($_POST["Curva_Date"]);
+          for ($i=0; $i < $Contador_Array; $i++) {
+            $Excel_Row = $i + 3;
+            $worksheet->setCellValue('A'.$Excel_Row, $_POST["Curva_Date"][$i]);
+            $worksheet->setCellValue('B'.$Excel_Row, $_POST["Curva_Plan"][$i]);
+            $worksheet->setCellValue('C'.$Excel_Row, $_POST["Curva_Ejec"][$i]);
+            $worksheet->setCellValue('D'.$Excel_Row, $_POST["Curva_Estimado"][$i]);
+          }
           $dataSeriesLabels = [
             new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_S!$B$2', null, 1), // Planeado
             new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_S!$C$2', null, 1), // Ejecutado
@@ -393,7 +394,7 @@ class ProjectsController extends AppController
              }else {
                $worksheet->setCellValue('F'.$Excel_Row, "");
              }
-         }
+           }
         }
         $dataSeriesLabels = [
           new DataSeriesValues(DataSeriesValues::DATASERIES_TYPE_STRING, 'Curva_TG!$B$2', null, 1), // Planeado
@@ -557,14 +558,15 @@ class ProjectsController extends AppController
         $indicators= $this->Indicators->find('all');
         $this->set('indicators', $indicators->first());
     }
-    public function Risks()
+    public function Risks($Project_Code = null)
     {
         // Carga el modelo del Risks.
         $this->loadModel('Risks');
         // Obtiene todos los elementos de la tabla Risks
-        $rks= $this->Risks->find('all',array())
+        $rks= $this->Risks->find('all',
+        array('conditions' => array('Risks.PROJECT_CODE'=> $Project_Code)))
         ->order(['RISK_NUMBER' => 'ASC']);
-        $this->set('rks', $rks->all());
+        $this->set('rks', $rks);
     }
     public function IndicatorsAC()
     {

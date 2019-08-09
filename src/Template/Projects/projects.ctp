@@ -31,6 +31,11 @@ $(document).ready(function(){
           scrollTop : 0                       // Scroll to top of body
       }, 500);
   });
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton({
+      hoverEnabled: false
+    });
+  });
 });
 </script>
 <!-- Array que almacena las id de los proyectos de portal alterno relacionadas con la EPS seleccionada-->
@@ -58,18 +63,9 @@ en caso de ser crecimiento o sostenimiento da un código distinto para ser lo m�
       [ 'Inicio', 'home','Pages'],
       [ 'Portal Proyectos','portalProjects','Projects'],
   ];
-  $PresTotal = 0;
-  $BDLocalPresTotal = 0;
-  $EjecTotal = 0;
-  $BDLocalEjecTotal = 0;
-  $SPITotal = 0;
-  $BDLocalSPITotal = 0;
-  $CPITotal = 0;
-  $BDLocalCPITotal = 0;
-  $ACTotal = 0;
-  $BDLocalACTotal = 0;
-  $PresupuestoAnual = 0;
-  $BDLocalPresupuestoAnual = 0;
+  $PresTotal = 0; $BDLocalPresTotal = 0; $EjecTotal = 0; $BDLocalEjecTotal = 0;
+  $SPITotal = 0; $BDLocalSPITotal = 0; $CPITotal = 0; $BDLocalCPITotal = 0;
+  $ACTotal = 0; $BDLocalACTotal = 0; $PresupuestoAnual = 0; $BDLocalPresupuestoAnual = 0;
   foreach ($ProjectsWS as $row => $value) {
       foreach ($AllLocalDBProjects as $project) {
           if ($project->ID_PROJECT == $value["id_p_project"]) {
@@ -254,9 +250,19 @@ $indicators = [
                   ['escape' => false]
                 );?>
             </div>
-          </form>
-      </diV>
+            <div class="fixed-action-btn">
+    <a class="btn-floating btn-medium red">
+      <i class="large material-icons">search</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating primary">A</a></li>
+      <li><a class="btn-floating secondary">B</a></li>
+      <li><a class="btn-floating tertiary">E</a></li>
+    </ul>
   </div>
+</form>
+</div>
+</div>
   <!--Div que contiene la estructura de los proyectos individuales y mediante un foreach plasma cada proyecto-->
   <div class="projects-content2">
     <div class="divider transparent mb-3"></div>
@@ -289,20 +295,7 @@ $indicators = [
                   <div class="sheet-content pl-5">
                       <h2>﻿<?=$projects->PROJECT_NAME?></h2>
                         <div class="data-box mt-auto">
-                          <div class="data-box-circle tooltipped phase
-                              <?php
-                                  if ($projects->FASE == 1) {
-                                      echo 'i';
-                                  } elseif ($projects->FASE == 2) {
-                                      echo 'ii';
-                                  } elseif ($projects->FASE == 3) {
-                                      echo 'iii';
-                                  } elseif ($projects->FASE == 4) {
-                                      echo 'iv';
-                                  } elseif ($projects->FASE == 5) {
-                                      echo 'v';
-                                  }
-                              ?>" data-position="bottom" data-tooltip="Fase Info">
+                          <div class="data-box-circle tooltipped phase" data-position="bottom" data-tooltip="Fase Info">
                               <h3>
                                   <?php
                                       if ($projects->FASE == 1) {
@@ -394,12 +387,7 @@ $indicators = [
                 <div class="sheet-content pl-5">
                     <h2>﻿<?=$value["name"]?></h2>
                     <div class="data-box mt-auto">
-                        <div class="data-box-circle phase" style="background-color:
-                            <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                              <?php if ($project->FASE == $valueFase['minimun'] && $valueFase['indicator_name'] == 'FASE'):?>
-                                  <?php echo $valueFase['hexa_color'];?>
-                              <?php endif;?>
-                            <?php endforeach; ?>">
+                        <div class="data-box-circle phase iv">
                             <h3>
                                 <?php
                                     if ($project->FASE == 1) {
@@ -417,9 +405,24 @@ $indicators = [
                             </h3>
                         </div>
                         <div class="data-box-content">
-                            <span>Fase</span>
+                            <span>
+                              <?php
+                                  if ($project->FASE == 1) {
+                                      echo 'Estructuración';
+                                  } elseif ($project->FASE == 2) {
+                                      echo 'Selección';
+                                  } elseif ($project->FASE == 3) {
+                                      echo 'Planeación';
+                                  } elseif ($project->FASE == 4) {
+                                      echo 'Ejecución';
+                                  } elseif ($project->FASE == 5) {
+                                      echo 'Cierre y transparencia';
+                                  }
+                              ?>
+                            </span>
                         </div>
                     </div>
+
                     <div class="data-box">
                       <div class="data-box-circle phase tooltipped" data-position="bottom" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha" style="background-color:
                           <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
@@ -434,7 +437,7 @@ $indicators = [
                         </div>
                     </div>
                     <div class="data-box">
-                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="Resultado del cociente del Valor Ganado dividido para el Costo Incurrido." style="background-color:
+                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="Resultado Valor Ganado dividido por el Costo Incurrido." style="background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->CPI_ANUAL >= $valueFase['minimun'] && $project->CPI_ANUAL <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
                                   <?php echo $valueFase['hexa_color'];?>
@@ -447,7 +450,7 @@ $indicators = [
                         </div>
                     </div>
                     <div class="data-box">
-                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="Es la división entre el AC y el PPTO (AC/PPTO)" style="background-color:
+                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="División entre AC y el PPTO (AC/PPTO)" style="background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                               <?php if ($project->AC_BAC >= $valueFase['minimun'] && $project->AC_BAC <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'AC/BAC'):?>
                                   <?php echo $valueFase['hexa_color'];?>
