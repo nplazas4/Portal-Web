@@ -114,6 +114,8 @@ class UsersController extends AppController
     // Función que cierra la sesión actual.
     public function logout()
     {
-        $this->redirect($this->Auth->logout());
+      $this->layout = false;
+      return $this->redirect($this->Auth->logout());
+      $this->autoRender = false;
     }
 }

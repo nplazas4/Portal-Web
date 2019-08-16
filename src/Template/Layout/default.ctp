@@ -62,8 +62,8 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->script('jquery-3.3.1.min.js',['async']) ?>
-    <!-- </?= $this->Html->script(['jquery-3.3.1.min.js']) ?> -->
+    <?= $this->Html->script(['jquery-3.3.1.min.js']) ?>
+    <!-- </?= $this->Html->script('jquery-3.3.1.min.js',['async']) ?> -->
     <?= $this->Html->css('materialize.css') ?>
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
@@ -440,9 +440,9 @@
         </div>
     </footer>
     <!-- Compiled and minified JavaScript -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script async>
         $(document).ready(function(){
             $('.sidenav').sidenav();
             $('select').formSelect();

@@ -1,5 +1,6 @@
 <script>
   $(document).ready(function(){
+    $('#div_filter_phase').hide();
     $('input[type=text]').on('keydown', function(e) {
     if (e.which == 13) {
       e.preventDefault();
@@ -8,11 +9,31 @@
     $('#Input_Search').keyup(function(){
     // Search text
     var text = $(this).val();
+    logic_search(text);
+  });
+  function logic_search(text){
     // Hide all content class element
     $('.Search').hide();
     // Search and show
     $('.Search:contains("'+text+'")').show();
+  }
+  $('#btn_main_filter').click(function() {
+    $('#div_filter_phase').show();
   });
+  $('.btn-filter-phase').click(function() {
+    var text_btn = $(this).attr('value');
+    logic_search_phase(text_btn);
+  });
+  $( "#btn_main_filter" ).dblclick(function() {
+    $('.Search').show();
+    $('#div_filter_phase').hide();
+  });
+  function logic_search_phase(text_btn){
+    // Hide all content class element
+    $('.Search').hide();
+    // Search and show
+    $('.Search:contains("'+text_btn+'")').show();
+  }
 });
 $(document).ready(function(){
   if($(this).scrollTop() == 0){
@@ -33,7 +54,8 @@ $(document).ready(function(){
   });
   $(document).ready(function(){
     $('.fixed-action-btn').floatingActionButton({
-      hoverEnabled: false
+      hoverEnabled: false,
+      direction: 'left'
     });
   });
 });
@@ -197,7 +219,6 @@ $indicators = [
         ['escape' => false,'class'=>'breadcrumb']
       );?>
 </div>
-
 <sidebar class="projects-sidebar">
     <div class="projects-sidebar-img">
         <?= $this->Html->image('photos/energia.jpg') ?>
@@ -224,6 +245,7 @@ $indicators = [
       <?php endif;?>
     </div>
 </sidebar>
+<!--Div que contiene los indicadores generales de todos los proyectos se maneja con una clase distinta a los proyectos individuales para mantener el aspecto.-->
 <div class="projects-content">
     <div class="indicators row wrap">
       <?php foreach ($indicators as $indicator): ?>
@@ -250,19 +272,59 @@ $indicators = [
                   ['escape' => false]
                 );?>
             </div>
-            <div class="fixed-action-btn">
-    <a class="btn-floating btn-medium red">
-      <i class="large material-icons">search</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating primary">A</a></li>
-      <li><a class="btn-floating secondary">B</a></li>
-      <li><a class="btn-floating tertiary">E</a></li>
-    </ul>
-  </div>
-</form>
-</div>
-</div>
+          <div class="fixed-action-btn">
+            <a class="btn-floating btn-large waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
+          </div>
+          <div class="fixed-action-btn" style="margin-bottom: 120px">
+            <a class="btn-floating btn-large red">
+              <i class="large material-icons" id="btn_main_filter">search</i>
+            </a>
+          </div>
+          <div class="fixed-action-btn" style="margin-bottom: 178px" id="div_filter_phase">
+            <a class="btn-floating btn-large  blue">
+              Area
+            </a>
+            <ul style="right: -20px !important;">
+              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
+              <li><a class="btn-floating tertiary">P</a></li>
+              <li><a class="btn-floating tertiary">V</a></li>
+            </ul>
+          </div>
+          <div class="fixed-action-btn" style="margin-bottom: 236px">
+            <a class="btn-floating btn-large  blue">
+              EST
+            </a>
+            <ul style="right: -20px !important;">
+              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
+              <li><a class="btn-floating tertiary">MEC</a></li>
+              <li><a class="btn-floating tertiary">NO</a></li>
+            </ul>
+          </div>
+          <div class="fixed-action-btn" style="margin-bottom: 294px">
+            <a class="btn-floating btn-large yellow">
+              Ctg
+            </a>
+            <ul style="right: 10px;">
+              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
+              <li><a class="btn-floating tertiary">E</a></li>
+              <li><a class="btn-floating tertiary">My</a></li>
+              <li><a class="btn-floating primary">Mn</a></li>
+            </ul>
+          </div>
+          <div class="fixed-action-btn" style="margin-bottom: 355px">
+            <a class="btn-floating btn-large red">Fase</a>
+            <ul>
+              <!-- <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li> -->
+              <li class="btn-filter-phase" value="Cierre y transparencia"><a class="btn-floating tertiary">V</a></li>
+              <li class="btn-filter-phase" value="Ejecución"><a class="btn-floating tertiary">IV</a></li>
+              <li class="btn-filter-phase" value="Planeación"><a class="btn-floating primary">III</a></li>
+              <li class="btn-filter-phase" value="Selección"><a class="btn-floating warning">II</a></li>
+              <li class="btn-filter-phase" value="Estructuración"><a class="btn-floating warning">I</a></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
   <!--Div que contiene la estructura de los proyectos individuales y mediante un foreach plasma cada proyecto-->
   <div class="projects-content2">
     <div class="divider transparent mb-3"></div>
@@ -280,7 +342,7 @@ $indicators = [
         <?php endif; ?>
           <?php if (!in_array($projects->ID_PROJECT, $ProjectCodId)):?>
             <?php if ($Category == $Categoria1):?>
-              <div class = "Search d-flex col s12 m6 l4 xl3">
+              <div class = "d-flex col s12 m6 l4 xl3">
                 <?php if ($projects->PLANNED != null || $projects->EXECUTED != null): ?>
                   <?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2, '.', '');?>
                 <?php else:?>
@@ -366,108 +428,107 @@ $indicators = [
           <?php endif;?>
         <?php endif;?>
       <?php endforeach; ?>
-        <?php foreach ($ProjectsWS as $row => $value):?>
-          <?php foreach ($AllLocalDBProjects as $project): ?>
-            <?php if ($project->ID_PROJECT == $value["id_p_project"]): ?>
-              <div class="Search d-flex col s12 m6 l4 xl3">
-                <?php if ($value["spi_labor_units"] == null && $project->PLANNED != null): ?>
-                  <?php $SPI_WS = number_format($project->EXECUTED/$project->PLANNED, 2, '.', '');?>
-                <?php elseif ($value["spi_labor_units"] != null): ?>
-                  <?php $SPI_WS = number_format($value["spi_labor_units"], 2, '.', '');?>
-                <?php else:?>
-                  <?php $SPI_WS = 0;?>
-                <?php endif; ?>
-            <div class="sheet pointer" onclick="location.href='/Portal-Web/projects/project/<?=$project->id?>/<?=$current_user['V_ID_P_USER']?>/<?=urlencode(base64_encode($ActualEps))?>/<?=urlencode(base64_encode($Categoria1))?>/<?=urlencode(base64_encode($Categoria2))?>/<?=urlencode(base64_encode($NameEpsPrjs))?>/<?=urlencode(base64_encode($titlePrjs))?>
-              /<?=urlencode(base64_encode($idEpsParent))?>/<?=urlencode(base64_encode($value["name"]))?>/<?=$value["id_p_project"]?>/<?=$SPI_WS?>/<?=$value["data_date"]?>/<?=$value["project_id_p6"]?>'">
-                <div class="sheet-line regional-text text-<?=$project->REGIONAL?>">
-                    <div class="sheet-line-item"></div>
-                    <div class="sheet-line-item"></div>
-                    <div class="sheet-line-item"></div>
-                </div>
-                <div class="sheet-content pl-5">
-                    <h2>﻿<?=$value["name"]?></h2>
-                    <div class="data-box mt-auto">
-                        <div class="data-box-circle phase iv">
-                            <h3>
+      <?php foreach ($ProjectsWS as $row => $value):?>
+        <?php foreach ($AllLocalDBProjects as $project): ?>
+          <?php if ($project->ID_PROJECT == $value["id_p_project"]): ?>
+            <div class="Search d-flex col s12 m6 l4 xl3">
+              <?php if ($value["spi_labor_units"] == null && $project->PLANNED != null): ?>
+                <?php $SPI_WS = number_format($project->EXECUTED/$project->PLANNED, 2, '.', '');?>
+              <?php elseif ($value["spi_labor_units"] != null): ?>
+                <?php $SPI_WS = number_format($value["spi_labor_units"], 2, '.', '');?>
+              <?php else:?>
+                <?php $SPI_WS = 0;?>
+              <?php endif; ?>
+              <div class="sheet pointer" onclick="location.href='/Portal-Web/projects/project/<?=$project->id?>/<?=$current_user['V_ID_P_USER']?>/<?=urlencode(base64_encode($ActualEps))?>/<?=urlencode(base64_encode($Categoria1))?>/<?=urlencode(base64_encode($Categoria2))?>/<?=urlencode(base64_encode($NameEpsPrjs))?>/<?=urlencode(base64_encode($titlePrjs))?>
+                /<?=urlencode(base64_encode($idEpsParent))?>/<?=urlencode(base64_encode($value["name"]))?>/<?=$value["id_p_project"]?>/<?=$SPI_WS?>/<?=$value["data_date"]?>/<?=$value["project_id_p6"]?>'">
+                  <div class="sheet-line regional-text text-<?=$project->REGIONAL?>">
+                      <div class="sheet-line-item"></div>
+                      <div class="sheet-line-item"></div>
+                      <div class="sheet-line-item"></div>
+                  </div>
+                  <div class="sheet-content pl-5">
+                      <h2>﻿<?=$value["name"]?></h2>
+                      <div class="data-box mt-auto">
+                          <div class="data-box-circle phase iv">
+                              <h3>
+                                  <?php
+                                      if ($project->FASE == 1) {
+                                          echo 'I';
+                                      } elseif ($project->FASE == 2) {
+                                          echo 'II';
+                                      } elseif ($project->FASE == 3) {
+                                          echo 'III';
+                                      } elseif ($project->FASE == 4) {
+                                          echo 'IV';
+                                      } elseif ($project->FASE == 5) {
+                                          echo 'V';
+                                      }
+                                  ?>
+                              </h3>
+                          </div>
+                          <div class="data-box-content">
+                              <span>
                                 <?php
                                     if ($project->FASE == 1) {
-                                        echo 'I';
+                                        echo 'Estructuración';
                                     } elseif ($project->FASE == 2) {
-                                        echo 'II';
+                                        echo 'Selección';
                                     } elseif ($project->FASE == 3) {
-                                        echo 'III';
+                                        echo 'Planeación';
                                     } elseif ($project->FASE == 4) {
-                                        echo 'IV';
+                                        echo 'Ejecución';
                                     } elseif ($project->FASE == 5) {
-                                        echo 'V';
+                                        echo 'Cierre y transparencia';
                                     }
                                 ?>
-                            </h3>
-                        </div>
-                        <div class="data-box-content">
-                            <span>
-                              <?php
-                                  if ($project->FASE == 1) {
-                                      echo 'Estructuración';
-                                  } elseif ($project->FASE == 2) {
-                                      echo 'Selección';
-                                  } elseif ($project->FASE == 3) {
-                                      echo 'Planeación';
-                                  } elseif ($project->FASE == 4) {
-                                      echo 'Ejecución';
-                                  } elseif ($project->FASE == 5) {
-                                      echo 'Cierre y transparencia';
-                                  }
-                              ?>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="data-box">
-                      <div class="data-box-circle phase tooltipped" data-position="bottom" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha" style="background-color:
-                          <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                            <?php if ($SPI_WS >= $valueFase['minimun'] && $SPI_WS <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
-                                <?php echo $valueFase['hexa_color'];?>
-                            <?php endif;?>
-                          <?php endforeach; ?>">
-                            <h4><?=$SPI_WS?></h4>
-                        </div>
-                        <div class="data-box-content">
-                            <span>SPI</span>
-                        </div>
-                    </div>
-                    <div class="data-box">
-                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="Resultado Valor Ganado dividido por el Costo Incurrido." style="background-color:
+                              </span>
+                          </div>
+                      </div>
+                      <div class="data-box">
+                        <div class="data-box-circle phase tooltipped" data-position="bottom" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha" style="background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                              <?php if ($project->CPI_ANUAL >= $valueFase['minimun'] && $project->CPI_ANUAL <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
+                              <?php if ($SPI_WS >= $valueFase['minimun'] && $SPI_WS <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
-                            <h5><?= number_format($project->CPI_ANUAL, 2, '.', '') ?></h5>
-                        </div>
-                        <div class="data-box-content">
-                            <span>CPI Anual</span>
-                        </div>
-                    </div>
-                    <div class="data-box">
-                        <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="División entre AC y el PPTO (AC/PPTO)" style="background-color:
-                            <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                              <?php if ($project->AC_BAC >= $valueFase['minimun'] && $project->AC_BAC <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'AC/BAC'):?>
-                                  <?php echo $valueFase['hexa_color'];?>
-                              <?php endif;?>
-                            <?php endforeach; ?>">
-                          <h5><?=$project->AC_BAC?>%</h5>
-                        </div>
-                        <div class="data-box-content">
-                            <span>AC/BAC</span>
-                        </div>
-                    </div>
+                              <h4><?=$SPI_WS?></h4>
+                          </div>
+                          <div class="data-box-content">
+                              <span>SPI</span>
+                          </div>
+                      </div>
+                      <div class="data-box">
+                          <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="Resultado Valor Ganado dividido por el Costo Incurrido." style="background-color:
+                              <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                                <?php if ($project->CPI_ANUAL >= $valueFase['minimun'] && $project->CPI_ANUAL <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
+                                    <?php echo $valueFase['hexa_color'];?>
+                                <?php endif;?>
+                              <?php endforeach; ?>">
+                              <h5><?= number_format($project->CPI_ANUAL, 2, '.', '') ?></h5>
+                          </div>
+                          <div class="data-box-content">
+                              <span>CPI Anual</span>
+                          </div>
+                      </div>
+                      <div class="data-box">
+                          <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="División entre AC y el PPTO (AC/PPTO)" style="background-color:
+                              <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                                <?php if ($project->AC_BAC >= $valueFase['minimun'] && $project->AC_BAC <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'AC/BAC'):?>
+                                    <?php echo $valueFase['hexa_color'];?>
+                                <?php endif;?>
+                              <?php endforeach; ?>">
+                            <h5><?=$project->AC_BAC?>%</h5>
+                          </div>
+                          <div class="data-box-content">
+                              <span>AC/BAC</span>
+                          </div>
+                      </div>
                     <div class="divider transparent"></div>
-                    <div class="data-chip accent tooltipped" data-position="bottom" data-tooltip="Presupuesto planeado individual.">
+                    <div class="data-chip accent">
                         <h3>Presupuesto Planeado (USD)</h3>
                         <h4><?=number_format($project->CAPEX_PLANNED, 2, ",", ".")?> MM</h4>
                     </div>
-                    <div class="data-chip secondary mb-0 tooltipped" data-position="bottom" data-tooltip="Presupuesto ejecutado individual.">
+                    <div class="data-chip secondary mb-0">
                         <h3>Presupuesto Ejecutado (USD)</h3>
                         <h4><?=number_format($project->CAPEX_EXECUTED, 2, ",", ".")?> MM</h4>
                     </div>
@@ -478,6 +539,5 @@ $indicators = [
           <?php endforeach;?>
         <?php endforeach; ?>
       </div>
-    <a href="Scroll:" class="btn-floating waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
   </div>
 </div>
