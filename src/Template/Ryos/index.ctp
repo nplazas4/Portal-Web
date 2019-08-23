@@ -5,6 +5,33 @@
         [ 'RYOS','index','Ryos'],
     ];
 ?>
+<style>
+.input-icons i {
+    position: absolute;
+  }
+
+  .input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .icon {
+    padding: 10px;
+    color: green;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+  }
+
+  h2 {
+    color: green;
+  }
+</style>
 <div class="section portal-projects">
     <div class="breadcrumb-container">
         <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
@@ -19,7 +46,7 @@
         <div class="home-menu">
           <div class="container-contact100">
   <a class="btn-floating Scroll-button" style="margin-right:5%; margin-bottom:8%" id="next"><i class="material-icons">arrow_upward</i></a>
-  <a class="btn-floating Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
+  <a class="return btn-floating Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
   <div class="wrap-contact100">
     <form class="contact100-form validate-form active" id="Form-1">
       <span class="contact100-form-title">
@@ -43,10 +70,10 @@
         <span class="label-input100">Grupo Estratégico de Negocio (GEN)</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="GEN a la cual pertenece el RYOS" onclick="return false;">help_outline</i></span>
         <select id="select-grupo-est">
-           <option class="work-option" id="option-elect">Distribución</option>
-           <option class="work-option" id="option-gas">Transmisión y transporte</option>
-           <option class="work-option" id="option-elect">Generación</option>
-           <option class="work-option" id="option-gas">Corporativo</option>
+           <option class="work-option">Distribución</option>
+           <option class="work-option">Transmisión y transporte</option>
+           <option class="work-option">Generación</option>
+           <option class="work-option">Corporativo</option>
         </select>
       </div>
 
@@ -96,18 +123,18 @@
         <input class="input100" type="text" name="email" placeholder="Ingrese la Vicepresidencia / dirección">
       </div>
 
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+      <div class="wrap-input100 rs1-wrap-input100 validate-input">
         <span class="label-input100">Gerencia</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Gerencia a la cual pertenece el RYOS" onclick="return false;">help_outline</i></span>
         <input class="input100" type="text" name="email" placeholder="Ingrese la gerencia">
       </div>
 
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+      <div class="wrap-input100 rs1-wrap-input100 validate-input">
         <span class="label-input100">¿Proyecto de origen Mandatorio?</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Indicar el listado desplegable si el RYOS es o no de origen mandatorio" onclick="return false;">help_outline</i></span>
-        <select id="select-work">
-          <option class="work-option" id="option-gas">SI</option>
-          <option class="work-option" id="option-gas">NO</option>
+        <select id="select-origen">
+          <option class="option-origen">SI</option>
+          <option class="option-origen">NO</option>
         </select>
       </div>
 
@@ -115,8 +142,8 @@
         <span class="label-input100">Tipo de proyecto</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccionar el tipo de proyecto" onclick="return false;">help_outline</i></span>
         <select id="select-tipo-proyecto">
-           <option class="work-option">Crecimiento</option>
-           <option class="work-option">Sostenimiento</option>
+           <option class="tp-option">Crecimiento</option>
+           <option class="tp-option">Sostenimiento</option>
         </select>
       </div>
 
@@ -126,11 +153,11 @@
         <div id="div-select-subcategoria-crec">
           <select class="select-subcategoria" id="select-subcategoria-crec">
              <option class="option-subc-crec" value="CREC">Convocatorias</option>
-             <option class="work-subc-crec" value="CREC">Crecimiento orgánico</option>
+             <option class="option-subc-crec" value="CREC">Crecimiento orgánico</option>
           </select>
         </div>
         <div id="div-select-subcategoria-sost" style="display:none">
-          <select class="select-subcategoria" id="select-subcategoria-sost" disabled>
+          <select class="select-subcategoria active" id="select-subcategoria-sost" disabled>
              <option class="option-subc-sost" value="CO">Continuidad operacional</option>
              <option class="option-subc-sost" value="TI">Tecnología de Información</option>
              <option class="option-subc-sost" value="AC">Administrativos corporativos</option>
@@ -141,7 +168,7 @@
       <div class="wrap-input100 validate-input" data-validate = "Message is required">
         <span class="label-input100">Fechas tentativas (DD/MM/AAAA)</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Fechas tentativas" onclick="return false;">help_outline</i></span>
-        <table class="display highlight centered">
+        <table class="display highlight centered" id="id-table-dates">
         <thead>
           <tr>
               <th></th>
@@ -152,28 +179,28 @@
         <tbody>
           <tr>
             <td>Fase I</td>
-            <td><input class="input100 datepicker" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
-            <td><input class="input100 datepicker2" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
+            <td><input class="table-date input100 datepicker" readonly type="text"></td>
+            <td><input class="table-date input100 datepicker2" readonly type="text"></td>
           </tr>
           <tr>
             <td>Fase II</td>
-            <td><input class="input100 datepicker3" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
-            <td><input class="input100 datepicker4" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
+            <td><input class="table-date input100 datepicker3" readonly type="text"></td>
+            <td><input class="table-date input100 datepicker4" readonly type="text"></td>
           </tr>
           <tr>
             <td>Fase III</td>
-            <td><input class="input100 datepicker5" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
-            <td><input class="input100 datepicker6" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
+            <td><input class="table-date input100 datepicker5" readonly type="text"></td>
+            <td><input class="table-date input100 datepicker6" readonly type="text"></td>
           </tr>
           <tr>
             <td>Fase IV</td>
-            <td><input class="input100 datepicker7" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
-            <td><input class="input100 datepicker8" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
+            <td><input class="table-date input100 datepicker7" readonly type="text"></td>
+            <td><input class="table-date input100 datepicker8" readonly type="text"></td>
           </tr>
           <tr>
             <td>Fase V</td>
-            <td><input class="input100 datepicker9" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
-            <td><input class="input100 datepicker10" readonly type="text" name="email" placeholder="Ingrese la gerencia"></td>
+            <td><input class="table-date input100 datepicker9" readonly type="text"></td>
+            <td><input class="table-date input100 datepicker10" readonly type="text"></td>
           </tr>
         </tbody>
       </table>
@@ -313,273 +340,285 @@
               <span class="label-input100">¿Está en el MEC?</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="¿Está en el MEC?" onclick="return false;">help_outline</i></span>
               <select id="select-mec">
-                <option class="mec-option" id="option-elect">SI</option>
-                <option class="mec-option" id="option-elect">NO</option>
+                <option class="mec-option">SI</option>
+                <option class="mec-option">NO</option>
               </select>
             </div>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input">
-              <span class="label-input100">Justificación</span>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-mec-info">
+              <span class="label-input100" id="title-mec-info"></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="">
             </div>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-peti" style="display:none">
               <span class="label-input100">¿Está en el PETI (Plan estratégico de TI)?</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="¿Está en el PETI?" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                <option class="work-option" id="option-elect">SI</option>
-                <option class="work-option" id="option-elect">NO</option>
+              <select id="select-peti">
+                <option class="option-peti">SI</option>
+                <option class="option-peti">NO</option>
               </select>
             </div>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-just-peti" style="display:none">
               <span class="label-input100">Justificación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="" id="input-just-peti" placeholder="Ingrese la justificación">
             </div>
             <span class="crec-flags contact100-form-sub-title">
               Alineamiento Estratégico (Fit Estratégico)
-              <span class="icon-download"><i class="material-icons error-text">flag</i></span>
+              <span class="icon-download"><i class="material-icons error-text" id="main_flag">flag</i></span>
             </span>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox tema-dominante">
               <span class="label-input100">1. Tema Dominante</span>
-              <span class="icon-download"><i class="material-icons error-text">flag</i></span>
+              <span class="icon-download"><i class="material-icons error-text" id="first_flag">flag</i></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="first_checkbox"/>
                   <span>En la cadena energética de baja emisión</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="first_checkbox" />
                   <span>Empresa top 1 o 2 en cada mercado o potencializa la entrada a nuevas regiones</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="first_checkbox" />
                   <span>Enmarcada bajo las premisas clave de cada GEN (focos, regiones y destrezas)</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="first_checkbox" />
                   <span>Perspectiva de rentabilidad de largo plazo</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="first_checkbox" />
                   <span>No aplica</span>
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <span class="label-input100">Justificación</span>
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox tesis-inversion">
               <span class="label-input100">2. Tesis de Inversión</span>
-              <span class="icon-download"><i class="material-icons error-text">flag</i></span>
+              <span class="icon-download"><i class="material-icons error-text" id="second_flag">flag</i></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="second_checkbox" />
                   <span>Perspectiva de dividendos creciente</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="second_checkbox" />
                   <span>Barreras de entrada vía altas inversiones de capital</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="second_checkbox" />
                   <span>Mercados regulados</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="second_checkbox" />
                   <span>Bajo niveles relativos de riesgo</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="second_checkbox" />
                   <span>No aplica</span>
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <span class="label-input100">Justificación</span>
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox posicion-mercado">
               <span class="label-input100">3. Posición de Mercado</span>
-              <span class="icon-download"><i class="material-icons error-text">flag</i></span>
+              <span class="icon-download"><i class="material-icons error-text" id="third_flag">flag</i></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="third_checkbox" />
                   <span>Exposición a buenas perspectivas demográficas de largo plazo</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="third_checkbox" />
                   <span>Institucionalidad regulatoria y jurídica confiable</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="third_checkbox" />
                   <span>Geografías en expansión y desarrollo</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="third_checkbox" />
                   <span>No aplica</span>
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <span class="label-input100">Justificación</span>
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox modelo-intervencion">
               <span class="label-input100">4. Modelo de Intervención</span>
-              <span class="icon-download"><i class="material-icons error-text">flag</i></span>
+              <span class="icon-download"><i class="material-icons error-text" id="fourth_flag">flag</i></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fourth_checkbox" />
                   <span>Capacidad de intervenir proactivamente en la agenda de crecimiento</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fourth_checkbox" />
                   <span>Compartir estándares de sostenibilidad, inversión social y valor compartido</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fourth_checkbox" />
                   <span>Relacionamiento con comunidades y grupos de interés, generando valor compartido</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fourth_checkbox" />
                   <span>No aplica</span>
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <span class="label-input100">Justificación</span>
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox capacidades">
               <span class="label-input100">5. Capacidades Técnicas, Financieras y de Gestión de Riesgos Clave</span>
-              <span class="icon-download"><i class="material-icons error-text">flag</i></span>
+              <span class="icon-download"><i class="material-icons error-text" id="fifth_flag">flag</i></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fifth_checkbox" />
                   <span>Experiencia en regiones comparables</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fifth_checkbox" />
                   <span>Acceso a tecnología y mejores prácticas gerenciales</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fifth_checkbox" />
                   <span>Capacidad financiera alineada con la inversión y acceso a capital</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fifth_checkbox" />
                   <span>Acceso a mercados y reputación superior</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="fifth_checkbox" />
                   <span>No aplica</span>
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <span class="label-input100">Justificación</span>
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox gobierno-corporativo">
               <span class="label-input100">6. Gobierno Corporativo</span>
-              <span class="icon-download"><i class="material-icons error-text">flag</i></span>
+              <span class="icon-download"><i class="material-icons error-text" id="sixth_flag">flag</i></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="sixth_checkbox" />
                   <span>Socios: Acuerdos de accionistas alineados en intereses de largo plazo del Grupo</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="sixth_checkbox" />
                   <span>Aliados: Acuerdos de niveles de servicio, aspectos técnicos o de gestión de a través de relaciones contractuales a mediano y largo plazo</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="sixth_checkbox" />
                   <span>Estándares de transparencia y reputación del más alto nivel</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="sixth_checkbox" />
                   <span>Identificación y manejo de conflictos de interés con otras compañías del grupo</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="sixth_checkbox" />
                   <span>Relación simétrica y colaborativa</span>
                 </label>
               </p>
               <p style="margin-top: 12px">
                 <label>
-                  <input type="checkbox" />
+                  <input type="checkbox" name="sixth_checkbox" />
                   <span>No aplica</span>
                 </label>
               </p>
             </div>
             <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-              <span class="label-input100">Justificación</span>
+              <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la justificación">
+              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-socio-est">
               <span class="label-input100">Visualización de un socio estratégico</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Visualización de un socio estratégico" onclick="return false;">help_outline</i></span>
               <select id="select-socio-est">
-                <option class="socio-est-option">SI</option>
-                <option class="socio-est-option">NO</option>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option>SI</option>
+                <option>NO</option>
               </select>
+            </div>
+            <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+              <span class="label-input100">¿Cuál? (opcional)</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
+              <input class="input100" type="text" name="" placeholder="">
+            </div>
+            <span class="socio-est contact100-form-sub-title" style="display:none">Porcentaje de un socio estratégico</span>
+            <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+              <span class="label-input100">Valor tentativo</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
+              <input class="input100" type="number" name="" placeholder="">
             </div>
           </form>
       <form class="contact100-form validate-form" id="Form-4">
@@ -587,7 +626,7 @@
             VIABILIDAD FINANCIERA
           </span>
           <!-- CRECIMIENTO -->
-          <div class="wrap-input100 validate-input" data-validate = "Message is required">
+          <div class="crec-info-finaciera wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Estimativo de ingresos anuales</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Estimado de ingresos anuales" onclick="return false;">help_outline</i></span>
             <table class="display highlight centered">
@@ -601,43 +640,46 @@
             <tbody>
               <tr>
                 <td>Millones COP</td>
-                <td><span>$</span> 3.013,11</td>
-                <td><input class="input100 anual-estimate" type="text" name="" placeholder="Ingrese la justificación"></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100" id="input-anual-default-1" type="number" min="0.00" max="10000.00" step="0.01" value="3013.11" style="text-align:center"></div></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100 anual-estimate" id="input-cop-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
               <tr>
                 <td>Millones USD</td>
-                <td><span>$</span> 1,00</td>
-                <td><input class="input100 anual-estimate" type="text" name="" placeholder="Ingrese la justificación"></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100" id="input-anual-default-2" type="number" min="0.00" max="10000.00" step="0.01" value="1.00" style="text-align:center"></div></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100 anual-estimate" id="input-usd-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
               <tr>
                 <td>Millones EUR</td>
-                <td><span>$</span> 0,85</td>
-                <td><input class="input100 anual-estimate" type="text" name="" placeholder="Ingrese la justificación"></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100" id="input-anual-default-3" type="number" min="0.00" max="10000.00" step="0.01" value="0.85" style="text-align:center"></div></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100 anual-estimate" id="input-eur-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
               <tr>
                 <td>Millones GTQ</td>
-                <td><span>$</span> 7,18</td>
-                <td><input class="input100 anual-estimate" type="text" name="" placeholder="Ingrese la justificación"></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100" id="input-anual-default-4" type="number" min="0.00" max="10000.00" step="0.01" value="7.18" style="text-align:center"></div></td>
+                <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
+        				<input class="input100 anual-estimate" id="input-gtq-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
             </tbody>
           </table>
           </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Ingresos anuales</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Ingresos anuales" onclick="return false;">help_outline</i></span>
             <input class="input100" id="ingresos-anuales" type="number" readonly name="name" placeholder="Ingresos anuales">
           </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">EBITDA</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="EBITDA" onclick="return false;">help_outline</i></span>
             <input class="input100" type="number" name="name" placeholder="EBITDA">
           </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
-            <span class="label-input100">Aporte a la MEGA</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="MEGA" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="number" name="name" placeholder="MEGA">
-          </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Aporte a la MEGA</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="MEGA" onclick="return false;">help_outline</i></span>
             <select id="select-work">
@@ -646,7 +688,7 @@
                <option class="work-option">Alta</option>
             </select>
           </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Estabilidad de ingresos</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="MEGA" onclick="return false;">help_outline</i></span>
             <select id="select-work">
@@ -655,7 +697,7 @@
                <option class="work-option">Alta</option>
             </select>
           </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Vía de ingresos</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="MEGA" onclick="return false;">help_outline</i></span>
             <select id="select-work">
@@ -664,7 +706,7 @@
                <option class="work-option">Alta</option>
             </select>
           </div>
-          <div class="wrap-input100 validate-input" data-validate = "Message is required">
+          <div class="wrap-input100 validate-input">
             <span class="label-input100">Beneficios tangibles e intangibles</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Beneficios e intangibles" onclick="return false;">help_outline</i></span>
             <table class="display highlight centered">
@@ -678,50 +720,40 @@
             </thead>
             <tbody>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
+                <td><input class="input100" type="text"></td>
               </tr>
             </tbody>
           </table>
@@ -729,33 +761,28 @@
           <div class="wrap-input100 validate-input" data-validate = "Message is required">
             <span class="label-input100">Estimado de costos de inversión</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Estimado de costos de inversión" onclick="return false;">help_outline</i></span>
-            <table class="display highlight centered">
+            <table class="display highlight centered" id="table-inversion">
             <thead>
-              <tr>
-                  <th>Moneda</th>
-                  <th>2019</th>
-                  <th></th>
+              <tr id="tr-head">
+                  <th id="first_th">Moneda</th>
+                  <th id="last_th"></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Millones COP</td>
-                <td></td>
+                <td id="tr_1">Millones COP</td>
                 <td>Millones COP</td>
               </tr>
               <tr>
-                <td>Millones USD</td>
-                <td></td>
+                <td id="tr_2">Millones USD</td>
                 <td>Millones USD</td>
               </tr>
               <tr>
-                <td>Millones EUR</td>
-                <td></td>
+                <td id="tr_3">Millones EUR</td>
                 <td>Millones EUR</td>
               </tr>
               <tr>
-                <td>Millones GTQ</td>
-                <td></td>
+                <td id="tr_4">Millones GTQ</td>
                 <td>Millones GTQ</td>
               </tr>
             </tbody>
@@ -764,8 +791,7 @@
           <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
             <span class="label-input100">Presupuesto total</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="text" name="name" readonly placeholder="Ingrese el presupuesto">
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
+            <input class="input100" id="Pres-total" type="text" name="name" placeholder="Ingrese el presupuesto">
           </div>
           <!-- <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
             <span class="label-input100">Análisis Beneficio / Costo</span>
@@ -777,15 +803,15 @@
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Ciclo de vida de la tecnología (años)" onclick="return false;">help_outline</i></span>
             <input class="input100" type="text" name="name" placeholder="Ingrese el ciclo de vida">
           </div>
-          <span class="contact100-form-sub-title">
+          <span class="origen-mandatorio contact100-form-sub-title">
             PROYECTOS DE ORIGEN MANDATORIO
           </span>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input">
             <span class="label-input100">Costos por no ejecución</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Costos por no ejecución" onclick="return false;">help_outline</i></span>
             <input class="input100" type="text" name="name" placeholder="Ingrese los costos">
           </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input">
             <span class="label-input100">Consecuencia sin RYOS</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Consecuencia sin RYO" onclick="return false;">help_outline</i></span>
             <input class="input100" type="text" name="name" placeholder="Ingrese las consecuencias">
@@ -795,8 +821,212 @@
               <span class="contact100-form-sub-title">
                 ATRACTIVIDAD TÉCNICA
               </span>
+              <!-- CO -->
+              <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Criticidad en la operación</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">No afecta la continuidad operacional</option>
+                   <option class="work-option">Afectación menor a la continuidad operacional</option>
+                   <option class="work-option">Afectación mayor a la continuidad operacional</option>
+                </select>
+              </div>
+              <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Cambio tecnológico</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">No hay cambio de tecnología en el activo o sus componentes</option>
+                   <option class="work-option">Uno o más componentes / activo cambia a conocida en GEB</option>
+                   <option class="work-option">Uno o más componentes cambia a conocida en GEB</option>
+                   <option class="work-option">Uno o más componentes cambia a desconocida en GEB</option>
+                   <option class="work-option">Uno o más componentes / activo cambia a desconocida en GEB</option>
+                </select>
+              </div>
+              <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Disponibilidad de los activos</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">No hay cambio en la disponibilidad en el activo o sus componentes</option>
+                   <option class="work-option">Reduce frecuencia de paradas no programadas sin modificar tiempo de paradas programadas</option>
+                   <option class="work-option">Reduce tiempo de paradas programadas pero no modifica frecuencia de paradas no programadas</option>
+                   <option class="work-option">Reduce tiempo de paradas programadas y frecuencia de paradas no programadas</option>
+                </select>
+              </div>
+              <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Vida útil del activo</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">No hay cambio en la vida útil del activo o sus componentes</option>
+                   <option class="work-option">No aumenta la vida útil del activo pero si de sus componentes</option>
+                   <option class="work-option">Aumenta la vida útil del activo y de sus componentes</option>
+                </select>
+              </div>
+              <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Esquema de mantenimiento</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">No hay cambio en el esquema de mantenimiento del activo o sus componentes</option>
+                   <option class="work-option">Reduce frecuencia de paradas programadas sin modificar tiempo de intervención</option>
+                   <option class="work-option">Reduce tiempo de paradas programadas sin modificar su frecuencia</option>
+                   <option class="work-option">La intervención permite reducir el tiempo de las paradas programadas y su frecuencia</option>
+                </select>
+              </div>
+              <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">No hay cambio en el esquema de mantenimiento del activo o sus componentes</option>
+                   <option class="work-option">Reduce frecuencia de paradas programadas sin modificar tiempo de intervención</option>
+                   <option class="work-option">Reduce tiempo de paradas programadas sin modificar su frecuencia</option>
+                   <option class="work-option">La intervención permite reducir el tiempo de las paradas programadas y su frecuencia</option>
+                </select>
+              </div>
+              <!-- TI -->
+              <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Tipo de proyecto de TI</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">Soluciones tecnológicas</option>
+                   <option class="work-option">Servicios de arquitectura e innovación en TI</option>
+                </select>
+              </div>
+              <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Criticidad en la operación</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">No afecta la continuidad operacional</option>
+                   <option class="work-option">Afectación menor a la continuidad operacional</option>
+                   <option class="work-option">Afectación mayor a la continuidad operacional</option>
+                </select>
+              </div>
+              <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">¿Se instalará tecnología?</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">SI</option>
+                   <option class="work-option">NO</option>
+                </select>
+              </div>
+              <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Cuadrante de Gartner</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">Retadores - Challengers</option>
+                   <option class="work-option">Líderes - Leaders</option>
+                   <option class="work-option">Jugadores de Nicho - Niche players</option>
+                   <option class="work-option">Visionarios - Visionaries</option>
+                </select>
+              </div>
+              <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                <span class="label-input100">Estado de la tecnología</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <select id="select-work">
+                   <option class="work-option">Conocida en el mundo y empleada en GEB</option>
+                   <option class="work-option">Conocida en el mundo, nueva en GEB</option>
+                   <option class="work-option">Nueva en el mundo</option>
+                </select>
+              </div>
+            <!-- </div> -->
+            <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">SI</option>
+                 <option class="work-option">NO</option>
+              </select>
+            </div>
+            <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Complejidad del proyecto</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">Alta</option>
+                 <option class="work-option">Media</option>
+                 <option class="work-option">Baja</option>
+              </select>
+            </div>
+            <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Impacto sobre la empresa</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">Muy positivo. Genera un beneficio por encima de lo previsto</option>
+                 <option class="work-option">Positivo. Genera el beneficio previsto</option>
+                 <option class="work-option">Neutral. No genera ningún beneficio</option>
+              </select>
+            </div>
+            <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Impacto sobre GEB</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">Muy positivo. Genera un beneficio por encima de lo previsto</option>
+                 <option class="work-option">Positivo. Genera el beneficio previsto</option>
+                 <option class="work-option">Neutral. No genera ningún beneficio</option>
+              </select>
+            </div>
+            <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Resistencia al cambio</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">Alta</option>
+                 <option class="work-option">Media</option>
+                 <option class="work-option">Baja</option>
+              </select>
+            </div>
+            <!-- AC -->
+            <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Restricciones regulatorias</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">No se requieren trámites</option>
+                 <option class="work-option">Se requieren algunos trámites</option>
+                 <option class="work-option">Se requieren trámites</option>
+              </select>
+            </div>
+            <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Criticidad en la operación</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">No afecta la continuidad operacional</option>
+                 <option class="work-option">Afectación menor a la continuidad operacional</option>
+                 <option class="work-option">Afectación mayor a la continuidad operacional</option>
+              </select>
+            </div>
+            <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Disponibilidad de los recursos</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">Alta</option>
+                 <option class="work-option">Media</option>
+                 <option class="work-option">Baja</option>
+              </select>
+            </div>
+            <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">SI</option>
+                 <option class="work-option">NO</option>
+              </select>
+            </div>
+            <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Impacto en SST</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">Alto</option>
+                 <option class="work-option">Medio</option>
+                 <option class="work-option">Bajo</option>
+              </select>
+            </div>
+            <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+              <span class="label-input100">Sinergia con estrategias de gestión humana</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+              <select id="select-work">
+                 <option class="work-option">Alta</option>
+                 <option class="work-option">Media</option>
+                 <option class="work-option">Baja</option>
+              </select>
+            </div>
               <!-- CRECIMIENTO -->
-              <div class="crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                 <span class="label-input100">Interconexión (Mercados entre)</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
@@ -805,7 +1035,7 @@
                    <option class="work-option">Fuentes energéticas y ciudades pequeñas</option>
                 </select>
               </div>
-              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                 <span class="label-input100">Tecnología a instalar</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tecnología a instalar" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
@@ -814,7 +1044,7 @@
                    <option class="work-option">Nueva en el mundo</option>
                 </select>
               </div>
-              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                 <span class="label-input100">Complejidad del proyecto</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
@@ -823,26 +1053,26 @@
                    <option class="work-option">Baja</option>
                 </select>
               </div>
-              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Gestión social</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Criticidad en la operación" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Gestión social" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Bajo</option>
                    <option class="work-option">Medio</option>
                    <option class="work-option">Alto</option>
                 </select>
               </div>
-              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Gestión ambiental</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Criticidad en la operación" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Gestión ambiental" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Bajo</option>
                    <option class="work-option">Medio</option>
                    <option class="work-option">Alto</option>
                 </select>
               </div>
-              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                <span class="label-input100">Sinergía con otrol proyectos o activos propiOS</span>
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                <span class="label-input100">Sinergia con otros proyectos o activos propios</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Alta</option>
@@ -853,118 +1083,118 @@
             </form>
       <form class="contact100-form validate-form" id="Form-6">
                     <!-- CO -->
-                    <span class="contact100-form-sub-title">
+                    <span class="comp-co contact100-form-sub-title">
                       ASPECTOS COMPLEMENTARIOS
                     </span>
-                    <span class="contact100-form-sub-title">
+                    <span class="comp-co contact100-form-sub-title">
                       <small>AMBIENTAL</small>
                     </span>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                       <span class="label-input100">Componente</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre la empresa" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Componente" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                       <span class="label-input100">Interacción</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre GEB" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Interacción" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <span class="contact100-form-sub-title">
+                    <span class="comp-co contact100-form-sub-title">
                       <small>SOCIAL</small>
                     </span>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                       <span class="label-input100">Componente</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre la empresa" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Componente" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                       <span class="label-input100">Interacción</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre GEB" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Interacción" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <span class="contact100-form-sub-title">
+                    <span class="comp-co contact100-form-sub-title">
                       <small>SST</small>
                     </span>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                       <span class="label-input100">Componente</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre la empresa" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Componente" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                       <span class="label-input100">Interacción</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre GEB" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Interacción" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <span class="contact100-form-sub-title">
+                    <span class="comp-co contact100-form-sub-title">
                       <small>DE SEGURIDAD FÍSICA</small>
                     </span>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                       <span class="label-input100">Componente</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre la empresa" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Componente" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                       <span class="label-input100">Interacción</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre GEB" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Interacción" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                          <option class="work-option" id="option-elect">SI</option>
                          <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <span class="contact100-form-sub-title">
+                    <span class="comp-co contact100-form-sub-title">
                       <small>TIERRAS / PREDIAL</small>
                     </span>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                       <span class="label-input100">Componente</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre la empresa" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Componente" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                       <span class="label-input100">Interacción</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre GEB" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Interacción" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <span class="contact100-form-sub-title">
+                    <span class="comp-co contact100-form-sub-title">
                       <small>JURÍDICA Y REGULATORIA</small>
                     </span>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                       <span class="label-input100">Componente</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre la empresa" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Componente" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
                       </select>
                     </div>
-                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                       <span class="label-input100">Interacción</span>
-                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Impacto sobre GEB" onclick="return false;">help_outline</i></span>
+                      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Interacción" onclick="return false;">help_outline</i></span>
                       <select id="select-work">
                         <option class="work-option" id="option-elect">SI</option>
                         <option class="work-option" id="option-gas">NO</option>
@@ -978,8 +1208,8 @@
                    <div class="heatmap">
                        <table>
                            <tr>
-                               <th><span><a class="btn-floating btn-large title red">R1</a></span></th>
-                               <th><span><a class="btn-floating btn-large title red">R2</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-1" href="#detailBtnRisks1" draggable="true">R1</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" href="#detailBtnRisks2" id="btn-2" draggable="true">R2</a></span></th>
                                <th></th>
                                <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
                                <th>MA</th>
@@ -995,8 +1225,8 @@
                                </td>
                            </tr>
                            <tr>
-                               <th><span><a class="btn-floating btn-large red">R3</a></span></th>
-                               <th><span><a class="btn-floating btn-large waves-effect waves-light red">R4</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-3" href="#detailBtnRisks3"  draggable="true">R3</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-4" href="#detailBtnRisks4" draggable="true">R4</a></span></th>
                                <th></th>
                                <th>A</th>
                                <td class="yellow">
@@ -1011,8 +1241,8 @@
                                </td>
                            </tr>
                            <tr>
-                               <th><span><a class="btn-floating btn-large waves-effect waves-light red">R5</a></span></th>
-                               <th><span><a class="btn-floating btn-large waves-effect waves-light red">R6</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-5" href="#detailBtnRisks5" draggable="true">R5</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-6" href="#detailBtnRisks6" draggable="true">R6</a></span></th>
                                <th></th>
                                <th>M</th>
                                <td class="lime accent-4">
@@ -1027,8 +1257,8 @@
                                </td>
                            </tr>
                            <tr>
-                               <th><span><a class="btn-floating btn-large title red">R7</a></span></th>
-                               <th><span><a class="btn-floating btn-large title red">R8</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-7" href="#detailBtnRisks7" draggable="true">R7</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-8" href="#detailBtnRisks8" draggable="true">R8</a></span></th>
                                <th></th>
                                <th>B</th>
                                <td class="lime accent-4">
@@ -1043,7 +1273,7 @@
                                </td>
                            </tr>
                            <tr>
-                               <th><span><a class="btn-floating btn-large title red">R9</a></span></th>
+                               <th><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-9" href="#detailBtnRisks9" draggable="true">R9</a></span></th>
                                <th></th>
                                <th></th>
                                <th>MB</th>
@@ -1096,7 +1326,25 @@
        </div>
       </div>
      </div>
-    </div>
+  </div>
+<?php for ($i= 1; $i < 10; $i++):?>
+  <div id="detailBtnRisks<?=$i?>" class="modal">
+   <div class="modal-content">
+     <a class="modal-close close">
+       <i class="material-icons">close</i>
+     </a>
+     <h2>RIESGOS ESPECÍFICOS RELEVANTES IDENTIFICADOS POR EL GESTOR DEL RYOS</h2>
+       <span class="label-input100">RIESGO</span>
+       <div class="input100">
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+       </div>
+      </div>
+      <div class="modal-footer">
+          <a class="modal-close waves-effect error btn btn-depressed">Cancelar</a>
+          <a class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
+      </div>
+     </div>
+<?php endfor;?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
      var Calendar = document.querySelector('.datepicker');
@@ -1330,19 +1578,62 @@ function Dynamic_Country(){
     var selected_option_tp = document.getElementById(this.id).value;
     if (selected_option_tp == "Crecimiento") {
       $("#div-select-subcategoria-sost *").attr("disabled", "disabled").off('click');
-      $('#div-select-subcategoria-sost').hide();
-      $('#div-select-subcategoria-crec').show();
+      $("#div-select-subcategoria-sost").hide();
+      $("#div-select-subcategoria-crec").show();
       $("#div-select-subcategoria-crec *").attr("disabled", false).off('click');
     } else {
       $("#div-select-subcategoria-crec *").attr("disabled", "disabled").off('click');
-      $('#div-select-subcategoria-crec').hide();
-      $('#div-select-subcategoria-sost').show();
+      $("#div-select-subcategoria-crec").hide();
+      $("#div-select-subcategoria-sost").show();
       $("#div-select-subcategoria-sost *").attr("disabled", false).off('click');
     }
   });
-  $('.select-subcategoria').change(function() {
+  $(document).ready(function(){
+  $("#return").click(function(){
+    test();
+    var select_option_gr = document.getElementById("select-grupo-est").value,
+        select_subcategoria_sost = $('#div-select-subcategoria-sost').find(":selected").val(),
+        select_tipo_proyecto = document.getElementById("select-tipo-proyecto").value,
+        select_subcategoria_crec = $('#div-select-subcategoria-crec').find(":selected").val(),
+        value_subcategoria = $('.select-subcategoria').val();
+    if (select_tipo_proyecto == "Sostenimiento") {
+        $('#form-title').text(select_subcategoria_sost + ' - ' + 'Información Detallada');
+        mec_inputs(select_subcategoria_sost);
+    }else {
+        $('#form-title').text(select_option_gr + ' - ' + 'Información Detallada');
+        mec_inputs(select_subcategoria_crec);
+    }
+  });
+  function test(){
+    var Table_Dates = new Array();
+    var Validate_Table_Dates = new Array();
+    $('.table-date').each(function(){
+      if ($(this).val() != "") {
+        var date = new Date($(this).val());
+        year = date.getFullYear();
+        if ($("."+year).hasClass(year) == false) {
+          Table_Dates.push(year);
+        }
+      }
+    });
+    loop_estimate(Table_Dates.sort());
+  };
+  function loop_estimate(Table_Dates){
+    var length_thead = document.getElementById("tr-head").childElementCount;
+    for (var i = 0; i < Table_Dates.length; i++) {
+      console.log(Table_Dates[i]);
+      // if (length_thead > 2) {
+          if ($("."+Table_Dates[i]).hasClass(Table_Dates[i]) == false) {
+          $('#last_th').before("<th id="+[i]+" class="+Table_Dates[i]+">"+Table_Dates[i]+"</th>");
+          for (var j = 1; j < 5; j++) {
+            $('#tr_'+[j]).after('<td><div class="input-icons"><i class="material-icons icon">attach_money</i><input class="input100 inv-estimate '+[j]+'" type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>');
+          }
+        }
+    }
+  }
+  $('#select-subcategoria-sost').change(function() {
     var value_subcategoria = document.getElementById(this.id).value;
-    crec_flags(value_subcategoria);
+    mec_inputs(value_subcategoria);
     if (value_subcategoria == 'TI') {
       gen_valor_ti(value_subcategoria);
       $('#div-socio-est').hide();
@@ -1350,48 +1641,235 @@ function Dynamic_Country(){
       $('#div-socio-est').show();
     }
   });
-  function crec_flags(value_subcategoria){
-    if(value_subcategoria == 'CREC'){
-      $('.crec-flags *').show();
+  function mec_inputs(value_subcategoria){
+    crec_flags(value_subcategoria);
+    gen_valor_ti(value_subcategoria);
+    atractividad_tecn(value_subcategoria);
+    if(value_subcategoria == 'TI'){
+      $('#div-MEC').show();
+      $('#div-mec-info').show();
+      $('#title-mec-info').text('Justificación');
+    }else if(value_subcategoria == 'CREC'){
+      $('#div-mec-info').show();
+      $('#title-mec-info').text('n');
     }else{
-      $('.crec-flags').hide();
+      $('#div-mec-info').hide();
+      $('#div-MEC').hide();
     }
   }
-  function gen_valor_ti(value_subcategoria){
-    alert(value_subcategoria);
-    if(value_subcategoria == 'TI'){
-      // $('.div-gen-valor').hide();
-      // $('.div-gen-valor-ti').show();
+  function crec_flags(value_subcategoria){
+    if(value_subcategoria == 'CREC'){
+      $('.crec-flags').show();
+      $('.crec-info-finaciera').show();
     }else{
-      // $('.div-gen-valor').show();
-      // $('.div-gen-valor-ti').hide();
+      $('.crec-flags').hide();
+      $('.crec-info-finaciera').hide();
     }
   }
   function gen_valor_ti(value_subcategoria){
     if(value_subcategoria == 'TI'){
       $('.div-gen-valor').hide();
       $('.div-gen-valor-ti').show();
+      $("#div-peti").show();
+      $('#div-just-peti').show();
     }else{
       $('.div-gen-valor').show();
       $('.div-gen-valor-ti').hide();
+      $('#div-peti').hide();
+      $('#div-just-peti').hide();
     }
   }
-  $("#return").click(function(){
-    var select_option_gr = document.getElementById("select-grupo-est").value,
-        select_subcategoria_sost = $('#div-select-subcategoria-sost').find(":selected").val(),
-        select_tipo_proyecto = document.getElementById("select-tipo-proyecto").value,
-        value_subcategoria = $('.select-subcategoria').val();
-        crec_flags(value_subcategoria);
-        gen_valor_ti(value_subcategoria);
-    if (select_tipo_proyecto == "Sostenimiento") {
-        $('#form-title').text(select_subcategoria_sost + ' - ' + 'Información Detallada');
+  function atractividad_tecn(value_subcategoria){
+    if(value_subcategoria == 'CREC'){
+      $('.comp-crec').show();
+      $('.comp-co').hide();
+      $('.comp-ti').hide();
+      $('.comp-ac').hide();
+    }else if(value_subcategoria == 'CO'){
+      $('.comp-co').show();
+      $('.comp-crec').hide();
+      $('.comp-ti').hide();
+      $('.comp-ac').hide();
+    }else if(value_subcategoria == 'TI'){
+      $('.comp-ti').show();
+      $('.comp-co').hide();
+      $('.comp-crec').hide();
+      $('.comp-ac').hide();
+    }else if(value_subcategoria == 'AC'){
+      $('.comp-ac').show();
+      $('.comp-co').hide();
+      $('.comp-crec').hide();
+      $('.comp-ti').hide();
+    }
+  }
+  $('#select-socio-est').change(function(){
+    var value_socio_est = document.getElementById(this.id).value;
+    if (value_socio_est == 'SI') {
+      $('.socio-est').show();
     }else {
-        $('#form-title').text(select_option_gr + ' - ' + 'Información Detallada');
+      $('.socio-est').hide();
     }
   });
+  $('#select-origen').change(function(){
+    var value_origen = document.getElementById(this.id).value;
+    if (value_origen == 'SI') {
+      $('.origen-mandatorio').show();
+    }else {
+      $('.origen-mandatorio').hide();
+    }
+  });
+  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox').change(function(){
+    var count_checkbox = $('input:checkbox:checked').length;
+    if (count_checkbox >= 0 && count_checkbox <= 7) {
+      if ($('#main_flag').hasClass("error-text") == false) {
+          $('#main_flag').removeClass('warning-text');
+          $('#main_flag').addClass('error-text');
+      }
+    }else if (count_checkbox >= 8 && count_checkbox <= 14) {
+      $('#main_flag').removeClass('error-text');
+      $('#main_flag').addClass('warning-text');
+    }else if (count_checkbox >= 15 && count_checkbox <= 29) {
+      $('#main_flag').removeClass('warning-text');
+      $('#main_flag').addClass('primary-text');
+    }
+  });
+  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.tema-dominante').change(function(){
+    var count_individual_checkbox = $('input[name="first_checkbox"]:checked').length;
+    if (count_individual_checkbox == 0) {
+      if ($('#first_flag').hasClass("error-text") == false) {
+          $('#first_flag').removeClass('warning-text');
+          $('#first_flag').addClass('error-text');
+      }
+    }else if (count_individual_checkbox == 1) {
+      $('#first_flag').removeClass('error-text');
+      $('#first_flag').addClass('warning-text');
+    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+      $('#first_flag').removeClass('warning-text');
+      $('#first_flag').addClass('primary-text');
+    }
+  });
+  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.tesis-inversion').change(function(){
+    var count_individual_checkbox = $('input[name="second_checkbox"]:checked').length;
+    if (count_individual_checkbox == 0) {
+      if ($('#second_flag').hasClass("error-text") == false) {
+          $('#second_flag').removeClass('warning-text');
+          $('#second_flag').addClass('error-text');
+      }
+    }else if (count_individual_checkbox == 1) {
+      $('#second_flag').removeClass('error-text');
+      $('#second_flag').addClass('warning-text');
+    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+      $('#second_flag').removeClass('warning-text');
+      $('#second_flag').addClass('primary-text');
+    }
+  });
+  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.posicion-mercado').change(function(){
+    var count_individual_checkbox = $('input[name="third_checkbox"]:checked').length;
+    if (count_individual_checkbox == 0) {
+      if ($('#third_flag').hasClass("error-text") == false) {
+          $('#third_flag').removeClass('warning-text');
+          $('#third_flag').addClass('error-text');
+      }
+    }else if (count_individual_checkbox == 1) {
+      $('#third_flag').removeClass('error-text');
+      $('#third_flag').addClass('warning-text');
+    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+      $('#third_flag').removeClass('warning-text');
+      $('#third_flag').addClass('primary-text');
+    }
+  });
+  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.modelo-intervencion').change(function(){
+    var count_individual_checkbox = $('input[name="fourth_checkbox"]:checked').length;
+    if (count_individual_checkbox == 0) {
+      if ($('#fourth_flag').hasClass("error-text") == false) {
+          $('#fourth_flag').removeClass('warning-text');
+          $('#fourth_flag').addClass('error-text');
+      }
+    }else if (count_individual_checkbox == 1) {
+      $('#fourth_flag').removeClass('error-text');
+      $('#fourth_flag').addClass('warning-text');
+    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+      $('#fourth_flag').removeClass('warning-text');
+      $('#fourth_flag').addClass('primary-text');
+    }
+  });
+  // QUINTO
+  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.capacidades').change(function(){
+    var count_individual_checkbox = $('input[name="fifth_checkbox"]:checked').length;
+    if (count_individual_checkbox == 0) {
+      if ($('#fifth_flag').hasClass("error-text") == false) {
+          $('#fifth_flag').removeClass('warning-text');
+          $('#fifth_flag').addClass('error-text');
+      }
+    }else if (count_individual_checkbox == 1) {
+      $('#fifth_flag').removeClass('error-text');
+      $('#fifth_flag').addClass('warning-text');
+    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+      $('#fifth_flag').removeClass('warning-text');
+      $('#fifth_flag').addClass('primary-text');
+    }
+  });
+  });
+  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-corporativo').change(function(){
+    var count_individual_checkbox = $('input[name="sixth_checkbox"]:checked').length;
+    if (count_individual_checkbox >= 0 && count_individual_checkbox <= 1) {
+      if ($('#sixth_flag').hasClass("error-text") == false) {
+          $('#sixth_flag').removeClass('warning-text');
+          $('#sixth_flag').addClass('error-text');
+      }
+    }else if (count_individual_checkbox == 2) {
+      $('#sixth_flag').removeClass('error-text');
+      $('#sixth_flag').addClass('warning-text');
+    }else if (count_individual_checkbox >= 3 && count_individual_checkbox <= 5) {
+      $('#sixth_flag').removeClass('warning-text');
+      $('#sixth_flag').addClass('primary-text');
+    }
+  });
+$(document).ready(function(){
+		$('.event').on("dragstart", function (event) {
+			  var dt = event.originalEvent.dataTransfer;
+			  dt.setData('Text', $(this).attr('id'));
+			});
+	    $('table td').on("dragenter dragover drop", function (event) {
+		   event.preventDefault();
+		   if (event.type === 'drop') {
+			  var data = event.originalEvent.dataTransfer.getData('Text',$(this).attr('id'));
+			  de=$('#'+data).detach();
+			  de.appendTo($(this));
+		   };
+	   });
+   });
   $(document).ready(function(){
-    $('.input100 .anual-estimate').change(function() {
+    $('.input100.anual-estimate').change(function() {
       // $('#ingresos-anuales').attr('value');
+      var count = 0;
+      var result = 0;
+      $('.input100.anual-estimate').each(function(){
+        count += + 1;
+        result += +$(this).val() / $('#input-anual-default-' + count).val();
+      })
+      $('#ingresos-anuales').val(result);
+    });
+    $(document).on('change', '.input100.inv-estimate', function() {
+      var count = 0;
+      var result_1 = 0;
+      var result_2 = 0;
+      var result_3 = 0;
+      var result_4 = 0;
+      $('.input100.inv-estimate.1').each(function(){
+        count = 1;
+        result_1 += +$(this).val() / $('#input-anual-default-' + 1).val();
+      });
+      $('.input100.inv-estimate.2').each(function(){
+        result_2 += +$(this).val() / $('#input-anual-default-' + 2).val();
+      });
+      $('.input100.inv-estimate.3').each(function(){
+        result_3 += +$(this).val() / $('#input-anual-default-' + 3).val();
+      });
+      $('.input100.inv-estimate.4').each(function(){
+        result_4 += +$(this).val() / $('#input-anual-default-' + 4).val();
+      });
+      $('#Pres-total').val(result_1 + result_2 + result_3 + result_4);
     });
   });
 </script>

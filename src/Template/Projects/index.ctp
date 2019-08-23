@@ -37,6 +37,7 @@
                 </thead>
                 <tbody>
                   <?php foreach ($projects as $project): ?> <!--foreach recorre todos los proyectos registrado-->
+                   <?php if(!empty($ProjxUser)):?>
                     <?php foreach ($ProjxUser as $Project_User): ?> <!--foreach recorre las id de los proyectos del usuario loggeado-->
                       <?php if($project->ID_PROJECT == $Project_User):?><!--Comparación de los proyectos registrados y asignados al usuario-->
                         <tr>
@@ -51,8 +52,9 @@
                         </tr>
                       <?php endif;?>
                     <?php endforeach; ?>
-                  <?php endforeach; ?>
-                </tbody>
+                  <?php endif;?>
+                <?php endforeach; ?>
+              </tbody>
             </table>
             <div class="paginator">
               <br>
