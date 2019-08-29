@@ -22,8 +22,15 @@
         );?>
     </div>
 
-    <div class="companies-banner">
-        <?= $this->Html->image('photos/companies.jpg') ?>
+    <div class="companies-banner" id="slider">
+      <ul class="slides">
+      <li class="slide"><?= $this->Html->image('photos/companies_8.jpg') ?></li>
+      <li class="slide"><?= $this->Html->image('photos/companies_2.jpg') ?></li>
+      <li class="slide"><?= $this->Html->image('photos/companies_3.jpg') ?></li>
+      <li class="slide"><?= $this->Html->image('photos/companies_4.jpg') ?></li>
+      <li class="slide"><?= $this->Html->image('photos/companies_5.jpg') ?></li>
+      <li class="slide active"><?= $this->Html->image('photos/companies_7.jpg') ?></li>
+    </ul>
     </div>
     <?php $Img = null ?>
     <?php $Desc = null?>
@@ -88,3 +95,54 @@
           <?php endforeach; ?>
     </div>
 </div>
+<script>
+$(document).ready(function () {
+  //save boolean
+  var pause = false;
+  //save blocks
+  var block=  $('.slide');
+  block.hide();
+  $('.slide.active').show();
+  //variable for counter
+  var k =0;
+
+
+   // interval function works only when pause is false
+    setInterval(function () {
+        if (!pause) {
+          var $this = block.eq(k);
+          // if (block.hasClass('active'))  {
+          //   block.removeClass('active');
+          // };
+           block.removeClass('active').fadeOut(3000).eq(k).addClass('active').fadeIn(3000);
+            $this.addClass('active');
+            k++;
+          //if k more then number of blocks on page
+            if (k >= block.length ) {
+              //rewrite variable to start over
+                k = 0;
+            }
+        }
+      //every 1.5 sec
+    }, 5000);
+
+
+  // item.hover(function () {
+  //   //remove active class from all except this
+  //       console.log(this);
+  //       $(this).siblings().removeClass("active");
+  //      $(this).addClass('active');
+  //     //remove active class from all
+  //     block.removeClass('active');
+  //   //add active class to block item which is accounted as index cliked item
+  //     block.eq($(this).index()).addClass('active');
+  //   //on hover stop interval function
+  //       pause = true;
+  //   }, function () {
+  //
+  //   //when hover event ends, start interval function
+  //       pause = false;
+  //   });
+
+});
+</script>

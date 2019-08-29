@@ -178,7 +178,8 @@ class ProjectsController extends AppController
       ]
       ]);
     }
-    public function project($id, $current_user_pr = null,$ActualEps = null, $Categoria1=null, $Categoria2 = null, $NameEps = null, $title = null, $idEpsParent = null,$name = null, $code = null, $spi = null, $corte = null, $graph = null)
+    public function project($id, $current_user_pr = null,$ActualEps = null, $Categoria1=null, $Categoria2 = null, $NameEps = null, $title = null, $idEpsParent = null,$name = null, $code = null, $spi = null, $corte = null,
+     $graph = null, $fepo = null, $da = null, $pi = null, $od = null)
     {
         $this->index();
         $this->IndicatorColor();
@@ -216,6 +217,11 @@ class ProjectsController extends AppController
         $this->set('spi', $spi);
         $this->set('corte', $corte);
         $this->set('graph', $graph);
+        $this->set('da', $da);
+        $this->set('pi', $pi);
+        $this->set('od', $od);
+        setlocale(LC_ALL, "es_ES");
+        $this->set('fepo', strftime("%d %B, %Y", strtotime($fepo)));
     }
     public function ImportExcelCaf()
     {
@@ -479,8 +485,80 @@ class ProjectsController extends AppController
       }
       $this->autoRender = false;
     }
+    private function ProjectCodeCategory(){
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodecategory/list/');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      $headers = array();
+      $headers[] = 'Accept: */*';
+      $headers[] = 'Accept-Encoding: gzip, deflate';
+      $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+      $headers[] = 'Cache-Control: no-cache';
+      $headers[] = 'Connection: keep-alive';
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $result = curl_exec($ch);
+      if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+      }
+      else {
+        $results = json_decode($result, true);
+        $var1 = array_values($results)[0];
+        $this->set('category', $var1);
+      }
+      curl_close($ch);
+    }
+    private function ProjectCodeMec(){
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodemec/list/');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      $headers = array();
+      $headers[] = 'Accept: */*';
+      $headers[] = 'Accept-Encoding: gzip, deflate';
+      $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+      $headers[] = 'Cache-Control: no-cache';
+      $headers[] = 'Connection: keep-alive';
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $result = curl_exec($ch);
+      if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+      }
+      else {
+        $results = json_decode($result, true);
+        $var1 = array_values($results)[0];
+        $this->set('mec', $var1);
+      }
+      curl_close($ch);
+    }
+    private function ProjectCodeArea(){
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodearea/list/');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      $headers = array();
+      $headers[] = 'Accept: */*';
+      $headers[] = 'Accept-Encoding: gzip, deflate';
+      $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+      $headers[] = 'Cache-Control: no-cache';
+      $headers[] = 'Connection: keep-alive';
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $result = curl_exec($ch);
+      if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+      }
+      else {
+        $results = json_decode($result, true);
+        $var1 = array_values($results)[0];
+        $this->set('area', $var1);
+      }
+      curl_close($ch);
+    }
     public function projects($current_user_pr = null, $EPS = null, $Categoria1 = null, $Categoria2 = null, $NameEps = null, $title=null, $idEpsParent = null)
     {
+        $this->ProjectCodeArea();
+        $this->ProjectCodeCategory();
+        $this->ProjectCodeMec();
         $this->AllProjects();
         $this->IndicatorColor();
         $this->RomanNumbers();

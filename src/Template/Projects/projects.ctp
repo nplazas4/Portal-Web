@@ -20,20 +20,62 @@
   $('#btn_main_filter').click(function() {
     $('#div_filter_phase').show();
   });
-  $('.btn-filter-phase').click(function() {
-    var text_btn = $(this).attr('value');
-    logic_search_phase(text_btn);
-  });
+  // $('.btn-filter-phase').click(function() {
+  //   var array_filters_phase = new Array();
+  //   var li_selected = $(this).find('a:first');
+  //   if ($('#'+li_selected.attr('id')).hasClass('dark lighten-1')) {
+  //     li_selected.removeClass('dark lighten-1').addClass('tertiary active-phase');
+  //   } else {
+  //     li_selected.addClass('dark lighten-1');
+  //   }
+  //   $('.btn-floating.tertiary.active-phase').each(function(){
+  //     array_filters_phase.push($(this).parent().attr('value'));
+  //   });
+  //   logic_search_phase(array_filters_phase);
+  // });
   $( "#btn_main_filter" ).dblclick(function() {
     $('.Search').show();
     $('#div_filter_phase').hide();
   });
-  function logic_search_phase(text_btn){
-    // Hide all content class element
-    $('.Search').hide();
-    // Search and show
-    $('.Search:contains("'+text_btn+'")').show();
-  }
+  // function logic_search_phase(array_filters_phase){
+  //   $('.Search').hide();
+  //   console.log($('.btn-floating.tertiary.active-phase').length);
+  //   for (var i = 0; i < array_filters_phase.length; i++) {
+  //     // if ($('.btn-floating.tertiary.active-phase').length == 1) {
+  //       $('.Search:contains("'+array_filters_phase[i]+'")').removeClass('hide').addClass('show').show();
+  //     // }
+  //     // if (true) {
+  //       $('.Search.d-flex.col.s12.m6.l4.xl3.show:contains("'+array_filters_phase[i]+'")').show();
+  //     // }
+  //   }
+  // }
+  $('.btn-filter-phase').click(function() {
+    var array_filters_phase = new Array();
+    var li_selected = $(this).find('a:first');
+    if ($('#'+li_selected.attr('id')).hasClass('dark lighten-1')) {
+      li_selected.removeClass('dark lighten-1').addClass('tertiary active');
+      $(this).addClass('active');
+    } else {
+      li_selected.addClass('dark lighten-1');
+      $(this).removeClass('active');
+    }
+    var $stats = $('.btn-filter-phase.active');
+    var $items = $('.Search.list');
+
+    $items.show();
+    if ($stats.length == 0)
+      return;
+
+    var $vstats = $.map($stats, function(o) {return $(o).data('id'); });
+    console.log($vstats);
+    $stats.each(function() {
+
+      var $stat = $(this);
+      $items.filter(function() {
+        return $vstats.indexOf($(this).data($stat.data('type'))) < 0;
+      }).hide();
+    })
+  });
 });
 $(document).ready(function(){
   if($(this).scrollTop() == 0){
@@ -139,7 +181,7 @@ $indicators = [
     ],
     [
         'name' => 'Presupuesto Total USD ',
-        'value' => '$ '.number_format($PresTotal + $BDLocalPresTotal, 2, ",", ".").' MM',
+        'value' => '$ '.number_format($PresTotal + $BDLocalPresTotal, 2, ".", ",").' MM',
         'icon' => 'language',
         'color' => 'accent',
         'colorBackground' => '',
@@ -147,7 +189,7 @@ $indicators = [
     ],
     [
         'name' => 'Ejecutado Total USD',
-        'value' => '$ '.number_format($EjecTotal + $BDLocalEjecTotal, 2, ",", ".").' MM',
+        'value' => '$ '.number_format($EjecTotal + $BDLocalEjecTotal, 2, ".", ",").' MM',
         'icon' => 'language',
         'color' => 'tertiary',
         'colorBackground' => '',
@@ -163,7 +205,7 @@ $indicators = [
     ],
     [
         'name' => 'Presupuesto Anual USD',
-        'value' => '$ '.number_format($PresupuestoAnual + $BDLocalPresupuestoAnual, 2, ",", ".").' MM',
+        'value' => '$ '.number_format($PresupuestoAnual + $BDLocalPresupuestoAnual, 2, ".", ",").' MM',
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
@@ -171,7 +213,7 @@ $indicators = [
     ],
     [
         'name' => 'Ejecutado Anual USD',
-        'value' => '$ '.number_format($ACTotal + $BDLocalACTotal, 2, ",", ".").' MM',
+        'value' => '$ '.number_format($ACTotal + $BDLocalACTotal, 2, ".", ",").' MM',
         'icon' => 'language',
         'color' => 'primary',
         'colorBackground' => '',
@@ -276,50 +318,52 @@ $indicators = [
             <a class="btn-floating btn-large waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
           </div>
           <div class="fixed-action-btn" style="margin-bottom: 120px">
-            <a class="btn-floating btn-large red">
-              <i class="large material-icons" id="btn_main_filter">search</i>
+            <a class="btn-floating btn-large error noselect">
+              <i class="large material-icons noselect" id="btn_main_filter">search</i>
             </a>
           </div>
           <div class="fixed-action-btn" style="margin-bottom: 178px" id="div_filter_phase">
-            <a class="btn-floating btn-large  blue">
-              Area
+            <a class="btn-floating btn-large phase ii noselect">
+              Área
             </a>
-            <ul style="right: -20px !important;">
+            <ul style="right: 40px !important;">
               <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
-              <li><a class="btn-floating tertiary">P</a></li>
-              <li><a class="btn-floating tertiary">V</a></li>
+              <?php foreach ($area as $ws_area => $area_value):?>
+                <li class="btn-filter-phase" data-id="<?=$area_value['code_type_id']?>" data-type="area"  value="<?=$area_value['code_type_id']?>"><a id="<?=$area_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($area_value['description'],0,3).'.'?></a></li>
+              <?php endforeach;?>
             </ul>
           </div>
           <div class="fixed-action-btn" style="margin-bottom: 236px">
-            <a class="btn-floating btn-large  blue">
-              EST
+            <a class="btn-floating btn-large phase iii noselect">
+              MEC
             </a>
             <ul style="right: -20px !important;">
               <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
-              <li><a class="btn-floating tertiary">MEC</a></li>
-              <li><a class="btn-floating tertiary">NO</a></li>
+              <?php foreach ($mec as $ws_mec => $mec_value):?>
+                <li class="btn-filter-phase" data-id="<?=$mec_value['code_type_id']?>" data-type="mec"  value="<?=$mec_value['code_type_id']?>"><a id="<?=$mec_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($mec_value['description'],0,3)?></a></li>
+              <?php endforeach;?>
             </ul>
           </div>
           <div class="fixed-action-btn" style="margin-bottom: 294px">
-            <a class="btn-floating btn-large yellow">
+            <a class="btn-floating btn-large phase iv noselect">
               Ctg
             </a>
             <ul style="right: 10px;">
               <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
-              <li><a class="btn-floating tertiary">E</a></li>
-              <li><a class="btn-floating tertiary">My</a></li>
-              <li><a class="btn-floating primary">Mn</a></li>
+              <?php foreach ($category as $ws_category => $category_value):?>
+                <li class="btn-filter-phase" data-id="<?=$category_value['code_type_id']?>" data-type="category" value="<?=$category_value['code_type_id']?>"><a id="<?=$category_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($category_value['description'],0,3).'.'?></a></li>
+              <?php endforeach;?>
             </ul>
           </div>
-          <div class="fixed-action-btn" style="margin-bottom: 355px">
-            <a class="btn-floating btn-large red">Fase</a>
-            <ul>
-              <!-- <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li> -->
-              <li class="btn-filter-phase" value="Cierre y transparencia"><a class="btn-floating tertiary">V</a></li>
-              <li class="btn-filter-phase" value="Ejecución"><a class="btn-floating tertiary">IV</a></li>
-              <li class="btn-filter-phase" value="Planeación"><a class="btn-floating primary">III</a></li>
-              <li class="btn-filter-phase" value="Selección"><a class="btn-floating warning">II</a></li>
-              <li class="btn-filter-phase" value="Estructuración"><a class="btn-floating warning">I</a></li>
+          <div class="fixed-action-btn" style="margin-bottom: 351px">
+            <a class="btn-floating btn-large phase v noselect">Fase</a>
+            <ul style="right: 92px;">
+              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter" style="right: 5px">cancel</i></a></li>
+              <li class="btn-filter-phase" data-id="5" data-type="fase" value="Cierre y transparencia"><a id="phase-v" class="btn-floating dark lighten-1" style="right: 5px">V</a></li>
+              <li class="btn-filter-phase" data-id="4" data-type="fase" value="Ejecución"><a id="phase-iv" class="btn-floating dark lighten-1" style="right: 5px">IV</a></li>
+              <li class="btn-filter-phase" data-id="3" data-type="fase" value="Planeación"><a id="phase-iii" class="btn-floating dark lighten-1" style="right: 5px">III</a></li>
+              <li class="btn-filter-phase" data-id="2" data-type="fase" value="Selección"><a id="phase-ii" class="btn-floating dark lighten-1" style="right: 5px">II</a></li>
+              <li class="btn-filter-phase" data-id="1" data-type="fase" value="Estructuración"><a id="phase-i" class="btn-floating dark lighten-1" style="bottom: 47px; left: 170px">I</a></li>
             </ul>
           </div>
         </form>
@@ -413,6 +457,14 @@ $indicators = [
                               <span>AC/BAC</span>
                           </div>
                       </div>
+                      <div class="data-box">
+                          <div class="data-box-circle tertiary tooltipped" data-tooltip="AC/BAC info">
+                              <h5><?=$projects->AC_BAC?>%</h5>
+                          </div>
+                          <div class="data-box-content">
+                              <span>AC/BAC</span>
+                          </div>
+                      </div>
                       <div class="divider transparent"></div>
                       <div class="data-chip accent tooltipped" data-tooltip="Presupuesto planeado individual.">
                           <h3>Presupuesto Planeado (USD)</h3>
@@ -431,7 +483,7 @@ $indicators = [
       <?php foreach ($ProjectsWS as $row => $value):?>
         <?php foreach ($AllLocalDBProjects as $project): ?>
           <?php if ($project->ID_PROJECT == $value["id_p_project"]): ?>
-            <div class="Search d-flex col s12 m6 l4 xl3">
+            <div data-fase="<?=$project->FASE;?>" data-category="<?=$value["code_category"];?>" data-mec="<?=$value["code_pec"];?>" data-area="<?=$value["code_area"];?>" class="Search list d-flex col s12 m6 l4 xl3">
               <?php if ($value["spi_labor_units"] == null && $project->PLANNED != null): ?>
                 <?php $SPI_WS = number_format($project->EXECUTED/$project->PLANNED, 2, '.', '');?>
               <?php elseif ($value["spi_labor_units"] != null): ?>
@@ -440,7 +492,7 @@ $indicators = [
                 <?php $SPI_WS = 0;?>
               <?php endif; ?>
               <div class="sheet pointer" onclick="location.href='/Portal-Web/projects/project/<?=$project->id?>/<?=$current_user['V_ID_P_USER']?>/<?=urlencode(base64_encode($ActualEps))?>/<?=urlencode(base64_encode($Categoria1))?>/<?=urlencode(base64_encode($Categoria2))?>/<?=urlencode(base64_encode($NameEpsPrjs))?>/<?=urlencode(base64_encode($titlePrjs))?>
-                /<?=urlencode(base64_encode($idEpsParent))?>/<?=urlencode(base64_encode($value["name"]))?>/<?=$value["id_p_project"]?>/<?=$SPI_WS?>/<?=$value["data_date"]?>/<?=$value["project_id_p6"]?>'">
+                /<?=urlencode(base64_encode($idEpsParent))?>/<?=urlencode(base64_encode($value["name"]))?>/<?=$value["id_p_project"]?>/<?=$SPI_WS?>/<?=$value["data_date"]?>/<?=$value["project_id_p6"]?>/<?=$value["fepo"]?>/<?=$value["da"]?>/<?=$value["pi"]?>/<?=$value["od"]?>'">
                   <div class="sheet-line regional-text text-<?=$project->REGIONAL?>">
                       <div class="sheet-line-item"></div>
                       <div class="sheet-line-item"></div>
@@ -450,7 +502,7 @@ $indicators = [
                       <h2>﻿<?=$value["name"]?></h2>
                       <div class="data-box mt-auto">
                           <div class="data-box-circle phase iv">
-                              <h3>
+                              <h3 data-filter="<?=$project->FASE?>">
                                   <?php
                                       if ($project->FASE == 1) {
                                           echo 'I';
@@ -520,9 +572,22 @@ $indicators = [
                             <h5><?=$project->AC_BAC?>%</h5>
                           </div>
                           <div class="data-box-content">
-                              <span>AC/BAC</span>
+                              <span>CPI Total</span>
                           </div>
                       </div>
+                      <div class="data-box">
+                          <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="División entre AC y el PPTO (AC/PPTO)" style="background-color:
+                              <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                                <?php if ($project->IGR >= $valueFase['minimun'] && $project->IGR <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'IGR'):?>
+                                    <?php echo $valueFase['hexa_color'];?>
+                                <?php endif;?>
+                              <?php endforeach; ?>">
+                            <h5><?=$project->IGR?>%</h5>
+                          </div>
+                          <div class="data-box-content">
+                              <span>IGR</span>
+                          </div>
+                     </div>
                     <div class="divider transparent"></div>
                     <div class="data-chip accent">
                         <h3>Presupuesto Planeado (USD)</h3>

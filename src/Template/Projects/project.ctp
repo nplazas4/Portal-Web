@@ -378,7 +378,7 @@ $("#button_caf_add").click(function(){
 <?php elseif ($projects->EXECUTED == null || $projects->PLANNED == null):?>
   <?php $SPI = 0?>
 <?php else:?>
-<?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2, '.', '');?>
+<?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2);?>
 <?php endif;?>
 <div class="section bcrumb project">
   <div class="breadcrumb-container">
@@ -587,8 +587,8 @@ $("#button_caf_add").click(function(){
             <div class="d-flex col s12 m6 l4 xl3">
                 <div class="indicator type-1 light-blue darken-2">
                     <h5 class="mr-2">FEPO</h5>
-                    <?php if($projects->FEPO != null):?>
-                      <h5 class="ml-auto right-align"><?= $FePo ?></h5>
+                    <?php if($fepo != null):?>
+                      <h5 class="ml-auto right-align"><?= $fepo ?></h5>
                     <?php endif;?>
                 </div>
             </div>
@@ -608,59 +608,66 @@ $("#button_caf_add").click(function(){
                 </a>
             </div>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el valor de dinero gastado, con base a la planeación.">
-                <a class="indicator type-1 secondary modal-trigger" href="#detailValueExecuted">
+                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC</h4>
                     <?php if($projects->AC != null):?>
-                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->AC,2,",",".")?> MM</h5>
+                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->AC,2)?> MM</h5>
                     <?php endif;?>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="índice que representa en dinero el presupuesto total del proyecto.">
-                <a class="indicator type-2 secondary modal-trigger" href="#detailValueExecuted">
-                    <h5 class="fw-600">PRESUPUESTO TOTAL</h5>
-                    <?php if($budgetIndicators['totalBudget'] != null):?>
-                      <h4 class="fw-600 right-align">USD $ <?= $budgetIndicators['totalBudget'] ?> MM</h4>
-                    <?php else:?>
-                      <h4 class="fw-600 right-align"></h4>
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Total presupuesto aprobado al proyecto">
+              <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                  <h5 class="fw-600">PRESUPUESTO</h5>
+                  <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['totalBudget'],2) ?> MM</h4>
+              </a>
+          </div>
+          <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Proyección del presupuesto anual para invertir en el proyecto">
+              <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                  <h5 class="fw-600">PROYECCIÓN PROYECTO</h5>
+                  <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['forecastTotal'],2) ?> MM</h4>
+              </a>
+          </div>
+          <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
+              <a class="indicator type-2 modal-trigger" href="#detailValueExecuted" style="background-color:
+                  <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                    <?php if ($budgetIndicators['cpi'] >= $valueFase['minimun'] && $budgetIndicators['cpi'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
+                        <?php echo $valueFase['hexa_color'];?>
                     <?php endif;?>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado presupuestal.">
-                <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
-                    <h5 class="fw-600">FORECAST TOTAL</h5>
-                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado presupuestal.">
-                <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
-                    <h5 class="fw-600">DESFASE EN $</h5>
-                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado presupuestal.">
-                <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
-                    <h5 class="fw-600">COSTO EN PORCENTAJES</h5>
-                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped ml-auto" data-position="bottom" data-tooltip="Estimado presupuestal.">
-                <a class="indicator type-2 secondary darken-1 modal-trigger">
-                    <h5 class="fw-600">FORECAST TOTAL</h5>
-                    <h4 class="fw-600 right-align"><?= number_format($budgetIndicators['forecastTotal'],2,",",".") ?> MM</h4>
-                </a>
-            </div>
+                  <?php endforeach; ?>">
+                  <h5 class="fw-600"><small>DESVIACIÓN PRESUPUESTAL</small></h5>
+                  <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['totalBudget'] - $budgetIndicators['forecastTotal'],2)?> MM</h4>
+              </a>
+          </div>
+          <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Desviación presupuestal / presupuesto">
+              <a class="indicator type-2 modal-trigger" href="#detailValueExecuted" style="background-color:
+                  <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                    <?php if ($budgetIndicators['cpi'] >= $valueFase['minimun'] && $budgetIndicators['cpi'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
+                        <?php echo $valueFase['hexa_color'];?>
+                    <?php endif;?>
+                  <?php endforeach; ?>">
+                  <h5 class="fw-600"><small>% DESVIACIÓN PRESUPUESTAL</small></h5>
+                  <?php if ( $budgetIndicators['totalBudget'] != 0): ?>
+                    <h4 class="fw-600 right-align"><?= number_format(($budgetIndicators['totalBudget'] - $budgetIndicators['forecastTotal']) / $budgetIndicators['totalBudget'],2)?>%</h4>
+                  <?php endif; ?>
+              </a>
+          </div>
             <h3 class="mt-3">Anual proyecto</h3>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Resultado del cociente del Valor Ganado dividido para el Costo Incurrido.">
-                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="AC anual  / Presupuesto anual">
+                <a class="indicator type-1 modal-trigger" href="#detailValueExecuted" style="background-color:
+                    <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                      <?php if ($budgetIndicators['cpiAnnual'] >= $valueFase['minimun'] && $budgetIndicators['cpiAnnual'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
+                          <?php echo $valueFase['hexa_color'];?>
+                      <?php endif;?>
+                    <?php endforeach; ?>">
                     <h4 class="fw-600 mr-2">CPI <small>ANUAL 2019</small></h4>
                     <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?></h4>
                 </a>
             </div>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el dinero gastado anualmente, con base a la planeación.">
-                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC <small>2019</small></h4>
                     <?php if($projects->PROJ_AC != null):?>
-                        <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PROJ_AC,2,",",".")?> MM</h5>
+                        <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PROJ_AC,2)?> MM</h5>
                     <?php endif;?>
                 </a>
             </div>
@@ -668,7 +675,7 @@ $("#button_caf_add").click(function(){
                 <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">PV <small>2019</small></h4>
                     <?php if($projects->PV != null):?>
-                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PV,2,",",".")?> MM</h5>
+                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PV,2)?> MM</h5>
                     <?php endif;?>
                 </a>
             </div>
@@ -676,13 +683,13 @@ $("#button_caf_add").click(function(){
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Presupuesto anual del proyecto.">
                 <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">PRESUPUESTO 2019</h5>
-                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'],2,",",".") ?> MM</h4>
+                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'],2) ?> MM</h4>
                 </a>
             </div>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado de tiempo / costo en un tiempo determinado.">
                 <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">FORECAST 2019</h5>
-                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualForecast'],2,",",".") ?> MM</h4>
+                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualForecast'],2) ?> MM</h4>
                 </a>
             </div>
         </div>
@@ -911,6 +918,7 @@ $("#button_caf_add").click(function(){
         Column5_TG_color = this.value;
       };
       // Botón carga de gráfica de tres Generaciones.
+      <?php if($projects->CHART != null):?>
       $(document).ready(function(){
         $("#button_tg").click(function(){
           var Column1_TG_type = $(".work-select-TG-column1").children(":selected").attr("value");
@@ -953,6 +961,7 @@ $("#button_caf_add").click(function(){
           });
         });
       });
+      <?php endif;?>
       function Import_Caf_Excel(Grafica){
         $('#Caf_Button_Excel').click(function() {
           // event.preventDefault();
@@ -997,6 +1006,7 @@ $("#button_caf_add").click(function(){
           xhr_delete.abort();
         }).delay(400);
       };
+      <?php if ($longitudArrayDate != 0):?>
       $(document).ready(function(){
           $('#Tg_Button_Excel').click(function() {
             // event.preventDefault();
@@ -1043,6 +1053,7 @@ $("#button_caf_add").click(function(){
       });
       xhr_delete_tg.abort();
       }
+      <?php endif;?>
       </script>
         <div class="chart">
             <h2>Riesgos</h2>
@@ -1051,7 +1062,12 @@ $("#button_caf_add").click(function(){
               || $ActualEps == 34015 || $projects->EPS_REL == 34015 || $ActualEps == 34017 || $projects->EPS_REL == 34017):?>
               <div class="indicators row">
                   <div class="ml-3 col s12 m12 l12 xl6">
-                      <a class="indicator type-1 secondary">
+                      <a class="indicator type-1" style="background-color:
+                        <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                          <?php if ($projects->IGR >= $valueFase['minimun'] && $projects->IGR <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'IGR'):?>
+                            <?php echo $valueFase['hexa_color'];?>
+                          <?php endif;?>
+                         <?php endforeach; ?>">
                         <?php if($projects->IGR != null):?>
                           <h4 class="fw-600 ml-auto mr-auto">IGR <?= $projects->IGR ?>%</h4>
                         <?php else:?>

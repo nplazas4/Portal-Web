@@ -31,6 +31,48 @@
   h2 {
     color: green;
   }
+  .bubble
+{
+position: relative;
+width: 250px;
+height: 120px;
+padding: 10px;
+background: #fff;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: #EC5151 solid 3px;
+}
+
+.bubble:after
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 10px 15px;
+border-color: #FFFACD transparent;
+display: block;
+width: 0;
+z-index: 10;
+margin-left: -10px;
+top: -15px;
+left: 25%;
+}
+
+.bubble:before
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 0 12px 17px;
+border-color: #FF0000 transparent;
+display: block;
+width: 0;
+z-index: 0;
+margin-left: -12px;
+top: -20px;
+left: 25%;
+}
 </style>
 <div class="section portal-projects">
     <div class="breadcrumb-container">
@@ -615,10 +657,10 @@
               <input class="input100" type="text" name="" placeholder="">
             </div>
             <span class="socio-est contact100-form-sub-title" style="display:none">Porcentaje de un socio estratégico</span>
-            <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+            <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="Div-valor">
               <span class="label-input100">Valor tentativo</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="number" name="" placeholder="">
+              <input class="input100" type="number" id="valor-tentativo" autocomplete="off" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
             </div>
           </form>
       <form class="contact100-form validate-form" id="Form-4">
@@ -677,38 +719,38 @@
           <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">EBITDA</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="EBITDA" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="number" name="name" placeholder="EBITDA">
+            <input class="input100" type="number" name="name" placeholder="EBITDA" autocomplete="off">
           </div>
           <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Aporte a la MEGA</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="MEGA" onclick="return false;">help_outline</i></span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione las características que mejor definan al RYOS que está registrando" onclick="return false;">help_outline</i></span>
             <select id="select-work">
-               <option class="work-option">Baja</option>
-               <option class="work-option">Media</option>
-               <option class="work-option">Alta</option>
+               <option class="work-option">Baja - Aporte menor al 2% de la MEGA</option>
+               <option class="work-option">Media - Aporte entre el 2% y el 5% de la MEGA</option>
+               <option class="work-option">Alta - Aporte mayor al 5% de la MEGA</option>
             </select>
           </div>
           <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Estabilidad de ingresos</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="MEGA" onclick="return false;">help_outline</i></span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione las características que mejor definan el RYOS que está registrando" onclick="return false;">help_outline</i></span>
             <select id="select-work">
-               <option class="work-option">Baja</option>
-               <option class="work-option">Media</option>
-               <option class="work-option">Alta</option>
+               <option class="work-option">Baja - Ingresos por otros mecanismos</option>
+               <option class="work-option">Media - Ingreso por vía modificación base de activos USO (Ampliaciones y compra activos USO)</option>
+               <option class="work-option">Alta - Ingreso por vía de convocatorias o contratos en firme</option>
             </select>
           </div>
           <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Vía de ingresos</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="MEGA" onclick="return false;">help_outline</i></span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione las características que mejor definan el RYOS que está registrando" onclick="return false;">help_outline</i></span>
             <select id="select-work">
-               <option class="work-option">Baja</option>
-               <option class="work-option">Media</option>
-               <option class="work-option">Alta</option>
+               <option class="work-option">Ingreso por vía de convocatorias o contratos en firme</option>
+               <option class="work-option">Ingreso por vía de demandas existentes en el mercado o mezcla de ingreso por contrato</option>
+               <option class="work-option">Ingreso por posible demanda asociada al crecimiento del mercado</option>
             </select>
           </div>
           <div class="wrap-input100 validate-input">
             <span class="label-input100">Beneficios tangibles e intangibles</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Beneficios e intangibles" onclick="return false;">help_outline</i></span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione el beneficio junto a su respectiva descripción" onclick="return false;">help_outline</i></span>
             <table class="display highlight centered">
             <thead>
               <tr>
@@ -720,47 +762,77 @@
             </thead>
             <tbody>
               <tr>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
+                <td>
+                  <select id="select-work">
+                   <option class="work-option">Tangible</option>
+                   <option class="work-option">Intangible</option>
+                  </select>
+                </td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
+                <td>
+                  <select id="select-work">
+                   <option class="work-option">Tangible</option>
+                   <option class="work-option">Intangible</option>
+                  </select>
+                </td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
+                <td>
+                  <select id="select-work">
+                   <option class="work-option">Tangible</option>
+                   <option class="work-option">Intangible</option>
+                  </select>
+                </td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
+                <td>
+                  <select id="select-work">
+                   <option class="work-option">Tangible</option>
+                   <option class="work-option">Intangible</option>
+                  </select>
+                </td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
+                <td>
+                  <select id="select-work">
+                   <option class="work-option">Tangible</option>
+                   <option class="work-option">Intangible</option>
+                  </select>
+                </td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
-                <td><input class="input100" type="text"></td>
+                <td>
+                  <select id="select-work">
+                   <option class="work-option">Tangible</option>
+                   <option class="work-option">Intangible</option>
+                  </select>
+                </td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
               </tr>
             </tbody>
           </table>
           </div>
           <div class="wrap-input100 validate-input" data-validate = "Message is required">
             <span class="label-input100">Estimado de costos de inversión</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Estimado de costos de inversión" onclick="return false;">help_outline</i></span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Relacione el presupuesto requerido año a año, en la respectiva moneda" onclick="return false;">help_outline</i></span>
             <table class="display highlight centered" id="table-inversion">
             <thead>
               <tr id="tr-head">
@@ -790,31 +862,26 @@
           </div>
           <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
             <span class="label-input100">Presupuesto total</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
             <input class="input100" id="Pres-total" type="text" name="name" placeholder="Ingrese el presupuesto">
           </div>
-          <!-- <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
-            <span class="label-input100">Análisis Beneficio / Costo</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Análisis Beneficio / Costo" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="text" name="name" placeholder="Ingrese el Análisis">
-          </div> -->
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="wrap-input100 rs1-wrap-input100 validate-input" id="ciclo-div">
             <span class="label-input100">Ciclo de vida del producto (años)</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Ciclo de vida de la tecnología (años)" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="text" name="name" placeholder="Ingrese el ciclo de vida">
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el tiempo que operará el producto que se genera por la implementación de su RYOS" onclick="return false;">help_outline</i></span>
+            <input class="input100" type="number" id="ciclo" autocomplete="off" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px" placeholder="Ingrese el ciclo de vida">
           </div>
           <span class="origen-mandatorio contact100-form-sub-title">
             PROYECTOS DE ORIGEN MANDATORIO
           </span>
-          <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input">
+          <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input" id="costos-div">
             <span class="label-input100">Costos por no ejecución</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Costos por no ejecución" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="text" name="name" placeholder="Ingrese los costos">
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Estime e incluya el monto económico que estima GEB tendría que desembolsar por concepto de multas, penalidades y otros, en caso de no implementar esta RYOS" onclick="return false;">help_outline</i></span>
+            <input class="input100" type="number" name="name" id="costos" placeholder="Ingrese los costos" autocomplete="off" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
           </div>
           <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input">
             <span class="label-input100">Consecuencia sin RYOS</span>
-            <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Consecuencia sin RYO" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="text" name="name" placeholder="Ingrese las consecuencias">
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Relacione todas las consecuencias identificadas en las cuales incurriría GEB en caso de no ejecutar el RYOS" onclick="return false;">help_outline</i></span>
+            <textarea class="materialize-textarea" placeholder="Ingrese la consecuencia" style="margin-top: 1px"></textarea>
           </div>
         </form>
       <form class="contact100-form validate-form" id="Form-5">
@@ -824,7 +891,7 @@
               <!-- CO -->
               <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Criticidad en la operación</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">No afecta la continuidad operacional</option>
                    <option class="work-option">Afectación menor a la continuidad operacional</option>
@@ -833,7 +900,7 @@
               </div>
               <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Cambio tecnológico</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">No hay cambio de tecnología en el activo o sus componentes</option>
                    <option class="work-option">Uno o más componentes / activo cambia a conocida en GEB</option>
@@ -844,7 +911,7 @@
               </div>
               <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Disponibilidad de los activos</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">No hay cambio en la disponibilidad en el activo o sus componentes</option>
                    <option class="work-option">Reduce frecuencia de paradas no programadas sin modificar tiempo de paradas programadas</option>
@@ -854,7 +921,7 @@
               </div>
               <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Vida útil del activo</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">No hay cambio en la vida útil del activo o sus componentes</option>
                    <option class="work-option">No aumenta la vida útil del activo pero si de sus componentes</option>
@@ -1026,27 +1093,27 @@
               </select>
             </div>
               <!-- CRECIMIENTO -->
-              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Interconexión (Mercados entre)</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione la interconexión" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Fuentes energéticas</option>
                    <option class="work-option">Fuentes energéticas y grandes usuarios</option>
                    <option class="work-option">Fuentes energéticas y ciudades pequeñas</option>
                 </select>
               </div>
-              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Tecnología a instalar</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tecnología a instalar" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija en el desplegable el nivel de conocimiento en el mundo y GEB de la tecnología vinculada con el RYOS en registro" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Conocida en el mundo y empleada en GEB</option>
                    <option class="work-option">Conocida en el mundo, nueva en GEB</option>
                    <option class="work-option">Nueva en el mundo</option>
                 </select>
               </div>
-              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Complejidad del proyecto</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Alta</option>
                    <option class="work-option">Media</option>
@@ -1055,7 +1122,7 @@
               </div>
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Gestión social</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Gestión social" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Bajo</option>
                    <option class="work-option">Medio</option>
@@ -1064,7 +1131,7 @@
               </div>
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Gestión ambiental</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Gestión ambiental" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Bajo</option>
                    <option class="work-option">Medio</option>
@@ -1073,7 +1140,7 @@
               </div>
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                 <span class="label-input100">Sinergia con otros proyectos o activos propios</span>
-                <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
                 <select id="select-work">
                    <option class="work-option">Alta</option>
                    <option class="work-option">Media</option>
@@ -1606,7 +1673,6 @@ function Dynamic_Country(){
   });
   function test(){
     var Table_Dates = new Array();
-    var Validate_Table_Dates = new Array();
     $('.table-date').each(function(){
       if ($(this).val() != "") {
         var date = new Date($(this).val());
@@ -1872,4 +1938,21 @@ $(document).ready(function(){
       $('#Pres-total').val(result_1 + result_2 + result_3 + result_4);
     });
   });
+  function validarNumero(numero){
+    var Div_Id = $('#'+numero.id).parent().attr('id');
+    count_alert = $('#'+Div_Id).find('.bubble.z-depth-2');
+    if (numero.value == "" && count_alert.length == 0) {
+        $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Campo vacío</span>');
+    } else if (numero.value < 0){
+        if (count_alert.length == 0) {
+          $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
+        } else {
+          $(count_alert).remove();
+          $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
+        }
+    }
+    else {
+        $(count_alert).remove();
+    }
+  }
 </script>
