@@ -100,13 +100,13 @@
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="parent-div-num-sub">
               <span class="label-input100">No. De subestaciones</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el número de subestaciones del proyecto">help_outline</i></span>
-              <?php echo $this->Form->input('NUM_SUBESTACION',['placeholder'=>'No. De subestaciones','id' => 'input-subestaciones','onChange'=>'validarNumero(this);','class'=>'validate','required','div' => false, 'label' => false]);?>
+              <?php echo $this->Form->input('NUM_SUBESTACION',['placeholder'=>'No. De subestaciones','id' => 'input-subestaciones','class'=>'validate','required','div' => false, 'label' => false]);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="parent-div-igr-value">
               <span class="label-input100">Valor IGR</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el valor del riesgo IGR">help_outline</i></span>
-              <?php echo $this->Form->input('IGR',['placeholder'=>'Riesgo IGR','id' => 'input-valor-igr','onChange'=>'validarNumero(this);','class'=>'validate','required','div' => false, 'label' => false]);?>
+              <?php echo $this->Form->input('IGR',['placeholder'=>'Riesgo IGR','id' => 'input-valor-igr','class'=>'validate','required','div' => false, 'label' => false]);?>
             </div>
           </div>
           <div class="contact100-form validate-form" id="Form-2">
@@ -194,21 +194,6 @@
         <span class="contact100-form-title">
           EDITAR PROYECTO
         </span>
-        <span class="contact100-form-sub-title">
-          INDICADORES DE CRONOGRAMA
-        </span>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">Porcentaje de avance planeado</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el porcentaje de avance planeado del protecto">help_outline</i></span>
-          <?php echo $this->Form->input('PLANNED',['placeholder'=>'Planeado','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">Porcentaje de avance ejecutado</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el porcentaje de avance ejecutado del proyecto">help_outline</i></span>
-          <?php echo $this->Form->input('EXECUTED',['placeholder'=>'Ejecutado','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
         <span class="contact100-form-sub-title">
           INDICADORES DE PRESUPUESTO
         </span>
@@ -393,6 +378,8 @@ function validarNumero(numero){
     if (!document.getElementById(Div_Id).getElementsByClassName("error-text")[0]) {
       $('#'+Div_Id).append('<span class="error-text">Dato invalido</span>');
     }
+  }else {
+    // document.getElementById(Div_Id).getElementsByClassName("error-text")[0].remove();
   }
 }
 </script>

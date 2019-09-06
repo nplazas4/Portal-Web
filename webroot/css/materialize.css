@@ -5617,7 +5617,7 @@ body.keyboard-focused .dropdown-content li:focus {
   background-color: white;
   padding: 0;
   max-height: 90%;
-  width: 968px;
+  width: 1468px;
   max-width: 100%;
   margin: auto;
   overflow-y: auto;
@@ -11465,13 +11465,122 @@ animation: beatbtn 0.9s ease-in-out infinite;
   top: 6px;
   left: 5px;
 }
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+
+/* Triangulo ryos */
+@font-face {
+    font-family: 'Calibri';
+    src: url('fonts/Calibri-Bold.woff2') format('woff2'),
+        url('font/Calibri-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
 }
+
+html, body{ margin:0; padding: 0}
+
+.main-font{ font-family: 'Calibri', sans-serif}
+
+.container-triangule{
+    position: relative;
+    width: 570px;
+    height: 400px;
+    margin: 12% 30%;
+}
+
+.container-triangule .sec1{
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 285px 150px 285px;
+    border-color: transparent transparent #7bb43e transparent;
+}
+
+.container-triangule .sec2{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 400px 0 0 285px;
+    border-color: transparent transparent transparent #a5c041;
+}
+
+.container-triangule .sec3{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 400px 285px;
+    border-color: transparent transparent #81c539 transparent;
+}
+
+.container-triangule .hollow{
+    z-index: 5;
+    position: absolute;
+    margin: 0 auto;
+    top: 0.7em;
+    left: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 271px 382px 271px;
+    border-color: transparent transparent #fff transparent;
+
+}
+
+.inner-cont{
+    z-index: 5;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 4.4em;
+    text-align: center;
+    font-size: 29pt;
+    line-height: 1;
+}
+
+.container-triangule .title1{
+    color: #00b050;
+    width: 400px;
+    position: absolute;
+    top: 230px;
+    right: -129px;
+    font-size: 22pt;
+    transform: rotate(54deg);
+}
+
+.container-triangule .title2{
+    color: #00b050;
+    width: 240px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: -50px;
+    font-size: 22pt;
+
+}
+
+.container-triangule .title3{
+    color: #00b050;
+    width: 400px;
+    position: absolute;
+    top: 147px;
+    left: -71px;
+    font-size: 22pt;
+    transform: rotate(-54deg);
+}
+
+
 /*# sourceMappingURL=materialize.css.map */

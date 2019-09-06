@@ -6,6 +6,594 @@
     ];
 ?>
 <style>
+/* @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro"); */
+@-webkit-keyframes fade-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slide-show {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+@keyframes slide-show {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+/* h1 {
+  color: #fff;
+  font-size: 55px;
+} */
+
+p {
+  line-height: 1.5;
+}
+
+/* nav {
+  margin-top: 50px;
+} */
+
+.button {
+  padding: 15px 20px;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+}
+.button:hover, .button.is-active {
+  color: #be93c5;
+  background-color: white;
+}
+
+.top-left {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  line-height: 1.3;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+  max-width: 350px;
+  margin: 20px;
+  margin-top: 80px;
+  top: 0;
+  left: 0;
+  -webkit-transform: translateX(-420px);
+          transform: translateX(-420px);
+}
+@-webkit-keyframes slide-in-left {
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+@keyframes slide-in-left {
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+.top-left.do-show {
+  animation: slide-in-left 1s ease-in-out forwards, slide-in-left 1s ease-in-out reverse forwards 5s;
+}
+.top-left[data-notification-status="notice"] {
+  background-color: #29b6f6;
+}
+.top-left[data-notification-status="notice"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23077CB2'/%3E%3Cpath d='M11.016,6.984V9h1.968V6.984H11.016z M11.016,17.016h1.968v-6h-1.968V17.016z' fill='%23077CB2'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-left[data-notification-status="warning"] {
+  background-color: #ffca28;
+}
+.top-left[data-notification-status="warning"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C19100'/%3E%3Cpath d='M11.016,17.016h1.968V15h-1.968V17.016z M11.016,6.983v6.001h1.968V6.983H11.016z' fill='%23C19100'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-left[data-notification-status="error"] {
+  background-color: #ef5350;
+}
+.top-left[data-notification-status="error"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C71612'/%3E%3Cpath d='M13.406,12l2.578,2.578l-1.406,1.406L12,13.406l-2.578,2.578l-1.406-1.406L10.594,12L8.016,9.421l1.406-1.405L12,10.593 l2.578-2.577l1.406,1.405L13.406,12z' fill='%23C71612'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-left[data-notification-status="success"] {
+  background-color: #66bb6a;
+}
+.top-left[data-notification-status="success"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%233A813D'/%3E%3Cpath d='M10.477,13.136l5.085-5.085l1.406,1.406l-6.492,6.492l-3.446-3.445l1.406-1.406L10.477,13.136z' fill='%233A813D'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-left[data-notification-status="question"] {
+  background-color: #8d6e63;
+}
+.top-left[data-notification-status="question"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23513F39'/%3E%3Cpath d='M12.001,6.314h-0.002c-1.996,0-3.609,1.614-3.609,3.609h1.784c0-0.977,0.85-1.784,1.826-1.784  c0.977,0,1.827,0.807,1.827,1.784c0,1.826-2.718,1.614-2.718,4.544h1.784c0-2.038,2.717-2.294,2.717-4.544  C15.609,7.928,13.997,6.314,12.001,6.314z M11.109,17.186h1.784v-1.826h-1.784V17.186z' fill='%23513F39'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-left[data-notification-status="plain"] {
+  background-color: #333;
+}
+
+.top-right {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  line-height: 1.3;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+  visibility: hidden;
+  opacity: 0;
+  max-width: 350px;
+  margin: 20px;
+  margin-top: 70px;
+  top: 0;
+  right: 0;
+}
+.top-right.do-show {
+  animation: fade-in 1s ease-in-out forwards, fade-in 1s ease-in-out reverse forwards 3s;
+}
+.top-right[data-notification-status="notice"] {
+  background-color: #29b6f6;
+}
+.top-right[data-notification-status="notice"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23077CB2'/%3E%3Cpath d='M11.016,6.984V9h1.968V6.984H11.016z M11.016,17.016h1.968v-6h-1.968V17.016z' fill='%23077CB2'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-right[data-notification-status="warning"] {
+  background-color: #ffca28;
+}
+.top-right[data-notification-status="warning"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C19100'/%3E%3Cpath d='M11.016,17.016h1.968V15h-1.968V17.016z M11.016,6.983v6.001h1.968V6.983H11.016z' fill='%23C19100'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-right[data-notification-status="error"] {
+  background-color: #ef5350;
+}
+.top-right[data-notification-status="error"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C71612'/%3E%3Cpath d='M13.406,12l2.578,2.578l-1.406,1.406L12,13.406l-2.578,2.578l-1.406-1.406L10.594,12L8.016,9.421l1.406-1.405L12,10.593 l2.578-2.577l1.406,1.405L13.406,12z' fill='%23C71612'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-right[data-notification-status="success"] {
+  background-color: #66bb6a;
+}
+.top-right[data-notification-status="success"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%233A813D'/%3E%3Cpath d='M10.477,13.136l5.085-5.085l1.406,1.406l-6.492,6.492l-3.446-3.445l1.406-1.406L10.477,13.136z' fill='%233A813D'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-right[data-notification-status="question"] {
+  background-color: #8d6e63;
+}
+.top-right[data-notification-status="question"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23513F39'/%3E%3Cpath d='M12.001,6.314h-0.002c-1.996,0-3.609,1.614-3.609,3.609h1.784c0-0.977,0.85-1.784,1.826-1.784  c0.977,0,1.827,0.807,1.827,1.784c0,1.826-2.718,1.614-2.718,4.544h1.784c0-2.038,2.717-2.294,2.717-4.544  C15.609,7.928,13.997,6.314,12.001,6.314z M11.109,17.186h1.784v-1.826h-1.784V17.186z' fill='%23513F39'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.top-right[data-notification-status="plain"] {
+  background-color: #333;
+}
+
+.bottom-right {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  line-height: 1.3;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+  max-width: 350px;
+  margin: 20px;
+  margin-bottom: 500px !important;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translateX(420px);
+          transform: translateX(420px);
+}
+@-webkit-keyframes slide-in-right {
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+@keyframes slide-in-right {
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+.bottom-right.do-show {
+  animation: slide-in-right 1s ease-in-out forwards, slide-in-right 1s ease-in-out reverse forwards 3s;
+}
+.bottom-right[data-notification-status="notice"] {
+  background-color: #29b6f6;
+}
+.bottom-right[data-notification-status="notice"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23077CB2'/%3E%3Cpath d='M11.016,6.984V9h1.968V6.984H11.016z M11.016,17.016h1.968v-6h-1.968V17.016z' fill='%23077CB2'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bottom-right[data-notification-status="warning"] {
+  background-color: #ffca28;
+}
+/* .bottom-right[data-notification-status="warning"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C19100'/%3E%3Cpath d='M11.016,17.016h1.968V15h-1.968V17.016z M11.016,6.983v6.001h1.968V6.983H11.016z' fill='%23C19100'/%3E%3C/svg%3E"), center/cover no-repeat;
+} */
+.bottom-right[data-notification-status="error"] {
+  background-color: #ef5350;
+}
+/* .bottom-right[data-notification-status="error"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C71612'/%3E%3Cpath d='M13.406,12l2.578,2.578l-1.406,1.406L12,13.406l-2.578,2.578l-1.406-1.406L10.594,12L8.016,9.421l1.406-1.405L12,10.593 l2.578-2.577l1.406,1.405L13.406,12z' fill='%23C71612'/%3E%3C/svg%3E"), center/cover no-repeat;
+} */
+.bottom-right[data-notification-status="success"] {
+  background-color: #66bb6a;
+}
+/* .bottom-right[data-notification-status="success"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%233A813D'/%3E%3Cpath d='M10.477,13.136l5.085-5.085l1.406,1.406l-6.492,6.492l-3.446-3.445l1.406-1.406L10.477,13.136z' fill='%233A813D'/%3E%3C/svg%3E"), center/cover no-repeat;
+} */
+.bottom-right[data-notification-status="question"] {
+  background-color: #8d6e63;
+}
+/* .bottom-right[data-notification-status="question"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23513F39'/%3E%3Cpath d='M12.001,6.314h-0.002c-1.996,0-3.609,1.614-3.609,3.609h1.784c0-0.977,0.85-1.784,1.826-1.784  c0.977,0,1.827,0.807,1.827,1.784c0,1.826-2.718,1.614-2.718,4.544h1.784c0-2.038,2.717-2.294,2.717-4.544  C15.609,7.928,13.997,6.314,12.001,6.314z M11.109,17.186h1.784v-1.826h-1.784V17.186z' fill='%23513F39'/%3E%3C/svg%3E"), center/cover no-repeat;
+} */
+.bottom-right[data-notification-status="plain"] {
+  background-color: #333;
+}
+
+.bottom-left {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  line-height: 1.3;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+  visibility: hidden;
+  opacity: 0;
+  max-width: 350px;
+  margin: 20px;
+  margin-bottom: 80px;
+  bottom: 0;
+  left: 0;
+}
+.bottom-left.do-show {
+  animation: fade-in 1s ease-in-out forwards, fade-in 1s ease-in-out reverse forwards 3s;
+}
+.bottom-left[data-notification-status="notice"] {
+  background-color: #29b6f6;
+}
+.bottom-left[data-notification-status="notice"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23077CB2'/%3E%3Cpath d='M11.016,6.984V9h1.968V6.984H11.016z M11.016,17.016h1.968v-6h-1.968V17.016z' fill='%23077CB2'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bottom-left[data-notification-status="warning"] {
+  background-color: #ffca28;
+}
+.bottom-left[data-notification-status="warning"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C19100'/%3E%3Cpath d='M11.016,17.016h1.968V15h-1.968V17.016z M11.016,6.983v6.001h1.968V6.983H11.016z' fill='%23C19100'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bottom-left[data-notification-status="error"] {
+  background-color: #ef5350;
+}
+.bottom-left[data-notification-status="error"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C71612'/%3E%3Cpath d='M13.406,12l2.578,2.578l-1.406,1.406L12,13.406l-2.578,2.578l-1.406-1.406L10.594,12L8.016,9.421l1.406-1.405L12,10.593 l2.578-2.577l1.406,1.405L13.406,12z' fill='%23C71612'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bottom-left[data-notification-status="success"] {
+  background-color: #66bb6a;
+}
+.bottom-left[data-notification-status="success"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%233A813D'/%3E%3Cpath d='M10.477,13.136l5.085-5.085l1.406,1.406l-6.492,6.492l-3.446-3.445l1.406-1.406L10.477,13.136z' fill='%233A813D'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bottom-left[data-notification-status="question"] {
+  background-color: #8d6e63;
+}
+.bottom-left[data-notification-status="question"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23513F39'/%3E%3Cpath d='M12.001,6.314h-0.002c-1.996,0-3.609,1.614-3.609,3.609h1.784c0-0.977,0.85-1.784,1.826-1.784  c0.977,0,1.827,0.807,1.827,1.784c0,1.826-2.718,1.614-2.718,4.544h1.784c0-2.038,2.717-2.294,2.717-4.544  C15.609,7.928,13.997,6.314,12.001,6.314z M11.109,17.186h1.784v-1.826h-1.784V17.186z' fill='%23513F39'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bottom-left[data-notification-status="plain"] {
+  background-color: #333;
+}
+
+.bar-top {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  line-height: 1.3;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+.bar-top.do-show {
+  animation: slide-show 1s forwards, slide-show 1s reverse forwards 3s;
+}
+.bar-top[data-notification-status="notice"] {
+  background-color: #29b6f6;
+}
+.bar-top[data-notification-status="notice"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23077CB2'/%3E%3Cpath d='M11.016,6.984V9h1.968V6.984H11.016z M11.016,17.016h1.968v-6h-1.968V17.016z' fill='%23077CB2'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-top[data-notification-status="warning"] {
+  background-color: #ffca28;
+}
+.bar-top[data-notification-status="warning"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C19100'/%3E%3Cpath d='M11.016,17.016h1.968V15h-1.968V17.016z M11.016,6.983v6.001h1.968V6.983H11.016z' fill='%23C19100'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-top[data-notification-status="error"] {
+  background-color: #ef5350;
+}
+.bar-top[data-notification-status="error"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C71612'/%3E%3Cpath d='M13.406,12l2.578,2.578l-1.406,1.406L12,13.406l-2.578,2.578l-1.406-1.406L10.594,12L8.016,9.421l1.406-1.405L12,10.593 l2.578-2.577l1.406,1.405L13.406,12z' fill='%23C71612'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-top[data-notification-status="success"] {
+  background-color: #66bb6a;
+}
+.bar-top[data-notification-status="success"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%233A813D'/%3E%3Cpath d='M10.477,13.136l5.085-5.085l1.406,1.406l-6.492,6.492l-3.446-3.445l1.406-1.406L10.477,13.136z' fill='%233A813D'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-top[data-notification-status="question"] {
+  background-color: #8d6e63;
+}
+.bar-top[data-notification-status="question"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23513F39'/%3E%3Cpath d='M12.001,6.314h-0.002c-1.996,0-3.609,1.614-3.609,3.609h1.784c0-0.977,0.85-1.784,1.826-1.784  c0.977,0,1.827,0.807,1.827,1.784c0,1.826-2.718,1.614-2.718,4.544h1.784c0-2.038,2.717-2.294,2.717-4.544  C15.609,7.928,13.997,6.314,12.001,6.314z M11.109,17.186h1.784v-1.826h-1.784V17.186z' fill='%23513F39'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-top[data-notification-status="plain"] {
+  background-color: #333;
+}
+
+/* .bar-bottom {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  line-height: 1.3;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.35);
+  visibility: hidden;
+  opacity: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+}
+.bar-bottom.do-show {
+  animation: fade-in 1s ease-in-out forwards, fade-in 1s ease-in-out reverse forwards 3s;
+}
+.bar-bottom[data-notification-status="notice"] {
+  background-color: #29b6f6;
+}
+.bar-bottom[data-notification-status="notice"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23077CB2'/%3E%3Cpath d='M11.016,6.984V9h1.968V6.984H11.016z M11.016,17.016h1.968v-6h-1.968V17.016z' fill='%23077CB2'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-bottom[data-notification-status="warning"] {
+  background-color: #ffca28;
+}
+.bar-bottom[data-notification-status="warning"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C19100'/%3E%3Cpath d='M11.016,17.016h1.968V15h-1.968V17.016z M11.016,6.983v6.001h1.968V6.983H11.016z' fill='%23C19100'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-bottom[data-notification-status="error"] {
+  background-color: #ef5350;
+}
+.bar-bottom[data-notification-status="error"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23C71612'/%3E%3Cpath d='M13.406,12l2.578,2.578l-1.406,1.406L12,13.406l-2.578,2.578l-1.406-1.406L10.594,12L8.016,9.421l1.406-1.405L12,10.593 l2.578-2.577l1.406,1.405L13.406,12z' fill='%23C71612'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-bottom[data-notification-status="success"] {
+  background-color: #66bb6a;
+}
+.bar-bottom[data-notification-status="success"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%233A813D'/%3E%3Cpath d='M10.477,13.136l5.085-5.085l1.406,1.406l-6.492,6.492l-3.446-3.445l1.406-1.406L10.477,13.136z' fill='%233A813D'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-bottom[data-notification-status="question"] {
+  background-color: #8d6e63;
+}
+.bar-bottom[data-notification-status="question"]:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  margin-right: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.984c4.407 0 8.016 3.609 8.016 8.016 0 4.406-3.608 8.016-8.016 8.016S3.984 16.407 3.984 12 7.593 3.984 12 3.984m0-2C6.478 1.984 1.984 6.477 1.984 12c0 5.521 4.493 10.016 10.016 10.016S22.016 17.522 22.016 12c0-5.523-4.495-10.016-10.016-10.016zm0 2c4.407 0 8.016 3.609 8.016' fill='%23513F39'/%3E%3Cpath d='M12.001,6.314h-0.002c-1.996,0-3.609,1.614-3.609,3.609h1.784c0-0.977,0.85-1.784,1.826-1.784  c0.977,0,1.827,0.807,1.827,1.784c0,1.826-2.718,1.614-2.718,4.544h1.784c0-2.038,2.717-2.294,2.717-4.544  C15.609,7.928,13.997,6.314,12.001,6.314z M11.109,17.186h1.784v-1.826h-1.784V17.186z' fill='%23513F39'/%3E%3C/svg%3E"), center/cover no-repeat;
+}
+.bar-bottom[data-notification-status="plain"] {
+  background-color: #333;
+} */
+
 .input-icons i {
     position: absolute;
   }
@@ -75,106 +663,117 @@ left: 25%;
 }
 </style>
 <div class="section portal-projects">
-    <div class="breadcrumb-container">
-        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
-        <?php foreach ($breadcrumb as $item): ?>
-            <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb']
-            );?>
-        <?php endforeach; ?>
+  <div class="breadcrumb-container">
+    <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
+      <?php foreach ($breadcrumb as $item): ?>
+        <?php echo $this->Html->link(
+          $item[0],
+          ['controller'=>$item[2], 'action'=>$item[1]],
+          ['escape' => false,'class'=>'breadcrumb']
+        );?>
+      <?php endforeach; ?>
     </div>
-    <div class="section home">
-        <div class="home-menu">
-          <div class="container-contact100">
-  <a class="btn-floating Scroll-button" style="margin-right:5%; margin-bottom:8%" id="next"><i class="material-icons">arrow_upward</i></a>
-  <a class="return btn-floating Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
-  <div class="wrap-contact100">
-    <form class="contact100-form validate-form active" id="Form-1">
+  <div class="section home">
+    <div class="home-menu">
+      <div class="container-contact100">
+        <a class="btn-floating btn-large Scroll-button" style="margin-right:5%; margin-bottom:8%" id="next"><i class="material-icons">arrow_upward</i></a>
+        <a class="return btn-floating btn-large Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
+      <div class="notify bar-top" id="div-notify" data-notification-status="success"><i id="icon-notify" class="material-icons mr-2">cancel</i> Por favor revisar, campos vacíos.</div>
+        <main style="display:none">
+          <div class="wrapper">
+            <nav>
+                <!-- <a href="#" class="button" data-type="top-left" data-status="success">Top Left</a>
+                <a href="#" class="button" data-type="top-right" data-status="warning">Top Right</a> -->
+                <a href="#" class="button" id="btn-error" data-type="bottom-right" data-status="error">Bottom Right</a>
+                <a href="#" class="button" id="btn-error2" data-type="bottom-right" data-status="success">Bottom Right</a>
+                <!-- <a href="#" class="button" id="btn-error-2" data-type="bottom-left" data-status="error">Bottom Left</a> -->
+                <!-- <a href="#" class="button" id="btn-error-2" data-type="bottom-left" data-status="notice">Bottom Left</a> -->
+                <!-- <a href="#" class="button" data-type="bar-top" data-status="plain">Top bar</a>
+                <a href="#" class="button" data-type="bar-bottom" data-status="plain">Bottom bar</a> -->
+              </nav>
+            </div>
+          </main>
+        <div class="wrap-contact100">
+    <form class="contact100-form validate-form active" id="Form-1" style="padding-bottom: 0 !important">
       <span class="contact100-form-title">
         IDENTIFICACIÓN DE REQUERIMIENTOS Y OPORTUNIDADES (RYOS)
       </span>
       <span class="contact100-form-sub-title">
         ENTRADA
       </span>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+      <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-name">
         <span class="label-input100">Nombre Requerimiento u Oportunidad - RYOS</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Requerimientos y oportunidades que tienen potencial para desarrollarse como iniciativa y posteriormente como proyecto en el GEB." onclick="return false;">help_outline</i></span>
-        <input class="input100" type="text" name="name" placeholder="Ingrese el nombre del requerimiento u oportunidad">
+        <input class="input100 entrada" id="ryos-name" autocomplete="off" type="text" name="nombre" onkeyup="validarTexto(this);" placeholder="Ingrese el nombre del requerimiento u oportunidad">
       </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+      <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-gestor">
         <span class="label-input100">Gestor RYOS</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Responsable de RYOS" onclick="return false;">help_outline</i></span>
-        <input class="input100" type="text" name="email" placeholder="Ingrese el gestor">
+        <input class="input100 entrada" id="ryos-gestor" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="gestor" placeholder="Ingrese el gestor">
       </div>
-
-      <div class="wrap-input100 rs1-wrap-input100" data-validate = "Valid email is required: ex@abc.xyz">
+      <div class="wrap-input100 rs1-wrap-input100">
         <span class="label-input100">Grupo Estratégico de Negocio (GEN)</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="GEN a la cual pertenece el RYOS" onclick="return false;">help_outline</i></span>
-        <select id="select-grupo-est">
+        <select id="select-grupo-est" name="select-entrada" >
            <option class="work-option">Distribución</option>
            <option class="work-option">Transmisión y transporte</option>
            <option class="work-option">Generación</option>
            <option class="work-option">Corporativo</option>
         </select>
       </div>
-
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+      <div class="wrap-input100 rs1-wrap-input100 validate-input">
         <span class="label-input100">País</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="País donde se llevaría a cabo el proyecto" onclick="return false;">help_outline</i></span>
-        <select id="select-country" onchange="Dynamic_Country();">
+        <select id="select-country" name="select-entrada" onchange="Dynamic_Country();">
            <option class="work-country" value="CO">Colombia</option>
            <option class="work-country" value="PE">Perú</option>
            <option class="work-country" value="GT">Guatemala</option>
            <option class="work-country" value="other">Otro</option>
         </select>
       </div>
-
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">Filial</span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Filial que pertenece el RYOS" onclick="return false;">help_outline</i></span>
+    <div class="wrap-input100 rs1-wrap-input100 validate-input">
+      <span class="label-input100">Filial</span>
+      <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Filial que pertenece el RYOS" onclick="return false;">help_outline</i></span>
         <div id="select-filial-col">
-        <select>
-          <option class="option-col">GEB</option>
-          <option class="option-col">SUCURSAL</option>
-          <option class="option-col">TGI</option>
-        </select>
-      </div>
+          <select name="select-entrada">
+            <option class="option-col">GEB</option>
+            <option class="option-col">SUCURSAL</option>
+            <option class="option-col">TGI</option>
+          </select>
+        </div>
       <div id="select-filial-pe">
-        <select>
+        <select name="select-entrada">
           <option class="option-pe">CONTUGAS</option>
           <option class="option-pe">CÁLIDDA</option>
           <option class="option-pe">CÁLIDDA ENERGÍA</option>
         </select>
       </div>
       <div id="select-filial-gt">
-        <select>
+        <select name="select-entrada">
           <option class="option-gt">EEBIS</option>
           <option class="option-gt">TRECSA</option>
         </select>
       </div>
       <div id="input_other_filial">
-        <input class="input100" type="text" name="email" placeholder="¿Cuál?">
-        <span class="error-text">Campo vacío</span>
+        <input class="input100" id="ryos-cual" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="email" placeholder="¿Cuál?">
       </div>
-      </div>
-
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+    </div>
+    <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-vice">
         <span class="label-input100">Vicepresidencia / Dirección</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Vicepresidencia o dirección a la cual pertenece el RYOS" onclick="return false;">help_outline</i></span>
-        <input class="input100" type="text" name="email" placeholder="Ingrese la Vicepresidencia / dirección">
+        <input class="input100 entrada" id="ryos-vice" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="email" placeholder="Ingrese la Vicepresidencia / dirección">
       </div>
 
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
+      <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-ger">
         <span class="label-input100">Gerencia</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Gerencia a la cual pertenece el RYOS" onclick="return false;">help_outline</i></span>
-        <input class="input100" type="text" name="email" placeholder="Ingrese la gerencia">
+        <input class="input100 entrada" id="ryos-ger" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="email" placeholder="Ingrese la gerencia">
       </div>
 
       <div class="wrap-input100 rs1-wrap-input100 validate-input">
         <span class="label-input100">¿Proyecto de origen Mandatorio?</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Indicar el listado desplegable si el RYOS es o no de origen mandatorio" onclick="return false;">help_outline</i></span>
-        <select id="select-origen">
+        <select id="select-origen" name="select-entrada">
           <option class="option-origen">SI</option>
           <option class="option-origen">NO</option>
         </select>
@@ -183,7 +782,7 @@ left: 25%;
       <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
         <span class="label-input100">Tipo de proyecto</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccionar el tipo de proyecto" onclick="return false;">help_outline</i></span>
-        <select id="select-tipo-proyecto">
+        <select id="select-tipo-proyecto" name="select-entrada">
            <option class="tp-option">Crecimiento</option>
            <option class="tp-option">Sostenimiento</option>
         </select>
@@ -192,14 +791,14 @@ left: 25%;
       <div class="wrap-input100 rs1-wrap-input100 validate-input">
         <span class="label-input100">Subcategoria</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccionar la subcategoría" onclick="return false;">help_outline</i></span>
-        <div id="div-select-subcategoria-crec">
-          <select class="select-subcategoria" id="select-subcategoria-crec">
+        <div id="div-select-subcategoria-crec" name="select-entrada">
+          <select class="select-subcategoria" id="select-subcategoria-crec" name="select-entrada">
              <option class="option-subc-crec" value="CREC">Convocatorias</option>
              <option class="option-subc-crec" value="CREC">Crecimiento orgánico</option>
           </select>
         </div>
         <div id="div-select-subcategoria-sost" style="display:none">
-          <select class="select-subcategoria active" id="select-subcategoria-sost" disabled>
+          <select class="select-subcategoria active" id="select-subcategoria-sost" name="select-entrada" disabled>
              <option class="option-subc-sost" value="CO">Continuidad operacional</option>
              <option class="option-subc-sost" value="TI">Tecnología de Información</option>
              <option class="option-subc-sost" value="AC">Administrativos corporativos</option>
@@ -219,80 +818,79 @@ left: 25%;
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="wrap-input100 rs1-wrap-input100 validate-input entrada">
             <td>Fase I</td>
-            <td><input class="table-date input100 datepicker" readonly type="text"></td>
-            <td><input class="table-date input100 datepicker2" readonly type="text"></td>
+            <td><input class="input100 entrada table-date datepicker" readonly type="text" style="text-align:center"></td>
+            <td><input class="input100 entrada table-date datepicker2" readonly type="text" style="text-align:center"></td>
           </tr>
-          <tr>
+          <tr class="wrap-input100 rs1-wrap-input100 validate-input entrada">
             <td>Fase II</td>
-            <td><input class="table-date input100 datepicker3" readonly type="text"></td>
-            <td><input class="table-date input100 datepicker4" readonly type="text"></td>
+            <td><input class="input100 entrada table-date datepicker3" readonly type="text" style="text-align:center"></td>
+            <td><input class="input100 entrada table-date datepicker4" readonly type="text" style="text-align:center"></td>
           </tr>
-          <tr>
+          <tr class="wrap-input100 rs1-wrap-input100 validate-input entrada">
             <td>Fase III</td>
-            <td><input class="table-date input100 datepicker5" readonly type="text"></td>
-            <td><input class="table-date input100 datepicker6" readonly type="text"></td>
+            <td><input class="input100 entrada table-date datepicker5" readonly type="text" style="text-align:center"></td>
+            <td><input class="input100 entrada table-date datepicker6" readonly type="text" style="text-align:center"></td>
           </tr>
-          <tr>
+          <tr class="wrap-input100 rs1-wrap-input100 validate-input entrada">
             <td>Fase IV</td>
-            <td><input class="table-date input100 datepicker7" readonly type="text"></td>
-            <td><input class="table-date input100 datepicker8" readonly type="text"></td>
+            <td><input class="input100 entrada table-date datepicker7" readonly type="text" style="text-align:center"></td>
+            <td><input class="input100 entrada table-date datepicker8" readonly type="text" style="text-align:center"></td>
           </tr>
-          <tr>
+          <tr class="wrap-input100 rs1-wrap-input100 validate-input entrada">
             <td>Fase V</td>
-            <td><input class="table-date input100 datepicker9" readonly type="text"></td>
-            <td><input class="table-date input100 datepicker10" readonly type="text"></td>
+            <td><input class="input100 entrada table-date datepicker9" readonly type="text" style="text-align:center"></td>
+            <td><input class="input100 entrada table-date datepicker10" readonly type="text" style="text-align:center"></td>
           </tr>
         </tbody>
       </table>
       </div>
 
-      <div class="container-contact100-form-btn">
+      <!-- <div class="container-contact100-form-btn">
         <button class="contact100-form-btn" type="button" id="Main-Btn">
           <span>
             Enviar
             <i class="material-icons right" aria-hidden="true">send</i>
           </span>
         </button>
-      </div>
+      </div> -->
     </form>
-      <form class="contact100-form validate-form" id="Form-2">
+      <form class="contact100-form validate-form" id="Form-2" style="padding-bottom: 0 !important">
         <span class="contact100-form-title" id="form-title"></span>
         <span class="contact100-form-sub-title">
           INFORMACIÓN GENERAL
         </span>
-
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
+        <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-necesidad">
           <span class="label-input100">Necesidad a resolver</span>
           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Necesidad a resolver" onclick="return false;">help_outline</i></span>
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="ryos-necesidad" onkeyup="validarTexto(this);" class="materialize-textarea"></textarea>
         </div>
 
-        <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+        <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-just">
           <span class="label-input100">Justificación del valor</span>
           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación del valor" onclick="return false;">help_outline</i></span>
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="ryos-just" onkeyup="validarTexto(this);" class="input200 materialize-textarea"></textarea>
         </div>
 
-        <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+        <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-alcance">
           <span class="label-input100">Alcance</span>
           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Alcance" onclick="return false;">help_outline</i></span>
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="ryos-alcance" onkeyup="validarTexto(this);" class="input200 materialize-textarea"></textarea>
         </div>
 
-        <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+        <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-rest">
           <span class="label-input100">Restricciones y exclusiones</span>
           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Restricciones y exclusiones" onclick="return false;">help_outline</i></span>
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="ryos-rest" onkeyup="validarTexto(this);" class="input200 materialize-textarea"></textarea>
         </div>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+        <div class="wrap-input100 rs1-wrap-input100 validate-input"id="div-sup">
           <span class="label-input100">Supuestos</span>
           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Supuestos" onclick="return false;">help_outline</i></span>
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="ryos-sup" onkeyup="validarTexto(this);" class="input200 materialize-textarea"></textarea>
         </div>
       </form>
-      <form class="contact100-form validate-form" id="Form-3">
+      <form class="contact100-form validate-form" id="Form-3" style="padding-bottom: 0 !important">
             <span class="contact100-form-sub-title">
               ALINEAMIENTO ESTRATÉGICO
             </span>
@@ -313,16 +911,16 @@ left: 25%;
                    <option class="obj-<?=$i?>-option">10. Transformar la organización con tecnologías de información y procesos de innovación del negocio</option>
                 </select>
               </div>
-              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-app<?=$i?>">
                 <span class="label-input100">Aplicación</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Aplicación" onclick="return false;">help_outline</i></span>
-                <input class="input100" id="input-<?=$i?>" type="text" name="" placeholder="Ingrese la aplicación">
+                <input class="input100 form3" autocomplete="off" onkeyup="validarTexto(this);" id="input-<?=$i?>" type="text" name="" placeholder="Ingrese la aplicación">
               </div>
             <?php endfor;?>
             <span class="contact100-form-sub-title" id="gen-valor">
               Generación de Valor
             </span>
-            <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100" style="color:#fff">text</span>
               <select id="select-gen-valor">
                 <option class="gen-valor-option">Maximización de dividendos de largo plazo para los accionistas</option>
@@ -331,9 +929,9 @@ left: 25%;
                 <option class="gen-valor-option">Ninguna</option>
               </select>
             </div>
-            <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input">
+            <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input" id="div-app22">
               <span class="label-input100">Aplicación</span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti" value="-" id="app22" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <!--TI-->
             <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input">
@@ -346,9 +944,9 @@ left: 25%;
                 <option class="work-option">Gestión de la innovación</option>
               </select>
             </div>
-            <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input" id="div-app333">
               <span class="label-input100">Aplicación</span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti-exclusive" value="-" id="app333" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100" style="color:#fff">text</span>
@@ -360,9 +958,9 @@ left: 25%;
                 <option class="work-option">Gestión de la innovación</option>
               </select>
             </div>
-            <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input" id="div-app33">
               <span class="label-input100">Aplicación</span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti-exclusive" id="app33" value="-" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100" style="color:#fff">text</span>
@@ -374,11 +972,11 @@ left: 25%;
                 <option class="work-option">Gestión de la innovación</option>
               </select>
             </div>
-            <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input" id="div-app4">
               <span class="label-input100">Aplicación</span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti-exclusive" value="-" id="app4" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
-            <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-MEC" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-MEC">
               <span class="label-input100">¿Está en el MEC?</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="¿Está en el MEC?" onclick="return false;">help_outline</i></span>
               <select id="select-mec">
@@ -389,7 +987,7 @@ left: 25%;
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-mec-info">
               <span class="label-input100" id="title-mec-info"></span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="">
+              <input class="input100 ti" value="-" id="info-mec" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="">
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-peti" style="display:none">
               <span class="label-input100">¿Está en el PETI (Plan estratégico de TI)?</span>
@@ -402,7 +1000,7 @@ left: 25%;
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-just-peti" style="display:none">
               <span class="label-input100">Justificación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" id="input-just-peti" placeholder="Ingrese la justificación">
+              <input class="input100" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" id="input-just-peti" placeholder="Ingrese la justificación">
             </div>
             <span class="crec-flags contact100-form-sub-title">
               Alineamiento Estratégico (Fit Estratégico)
@@ -443,10 +1041,10 @@ left: 25%;
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app5">
               <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti" value="-" id="app5" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox tesis-inversion">
               <span class="label-input100">2. Tesis de Inversión</span>
@@ -483,10 +1081,10 @@ left: 25%;
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app6">
               <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti" value="-" id="app6" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox posicion-mercado">
               <span class="label-input100">3. Posición de Mercado</span>
@@ -517,10 +1115,10 @@ left: 25%;
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app7">
               <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti" value="-" id="app7" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox modelo-intervencion">
               <span class="label-input100">4. Modelo de Intervención</span>
@@ -551,10 +1149,10 @@ left: 25%;
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app8">
               <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti" value="-" id="app8" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox capacidades">
               <span class="label-input100">5. Capacidades Técnicas, Financieras y de Gestión de Riesgos Clave</span>
@@ -591,10 +1189,10 @@ left: 25%;
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app9">
               <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti" value="-" id="app9" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox gobierno-corporativo">
               <span class="label-input100">6. Gobierno Corporativo</span>
@@ -637,10 +1235,10 @@ left: 25%;
                 </label>
               </p>
             </div>
-            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+            <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app10">
               <span class="label-input100">Aplicación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="Ingrese la aplicación">
+              <input class="input100 ti" value="-" id="app10" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="Ingrese la aplicación">
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-socio-est">
               <span class="label-input100">Visualización de un socio estratégico</span>
@@ -651,19 +1249,19 @@ left: 25%;
                 <option>NO</option>
               </select>
             </div>
-            <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+            <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="div-cual2">
               <span class="label-input100">¿Cuál? (opcional)</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="text" name="" placeholder="">
+              <input class="input100 form3" value="-" id="cual2" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
             </div>
             <span class="socio-est contact100-form-sub-title" style="display:none">Porcentaje de un socio estratégico</span>
             <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="Div-valor">
               <span class="label-input100">Valor tentativo</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" type="number" id="valor-tentativo" autocomplete="off" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
+              <input class="input100 form3" autocomplete="off" type="number" value="0" id="valor-tentativo" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
             </div>
           </form>
-      <form class="contact100-form validate-form" id="Form-4">
+      <form class="contact100-form validate-form" id="Form-4" style="padding-bottom: 0 !important">
           <span class="contact100-form-sub-title">
             VIABILIDAD FINANCIERA
           </span>
@@ -683,30 +1281,30 @@ left: 25%;
               <tr>
                 <td>Millones COP</td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100" id="input-anual-default-1" type="number" min="0.00" max="10000.00" step="0.01" value="3013.11" style="text-align:center"></div></td>
+        				<input class="input100 financiera" id="input-anual-default-1" autocomplete="off" type="number" readonly onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="3013.11" style="text-align:center"></div></td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100 anual-estimate" id="input-cop-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
+        				<input class="input100 financiera anual-estimate" id="input-cop-anual" autocomplete="off" onkeydown="return event.keyCode !== 69"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
               <tr>
                 <td>Millones USD</td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100" id="input-anual-default-2" type="number" min="0.00" max="10000.00" step="0.01" value="1.00" style="text-align:center"></div></td>
+        				<input class="input100" id="input-anual-default-2" readonly autocomplete="off" onkeydown="return event.keyCode !== 69" type="number" min="0.00" max="10000.00" step="0.01" value="1.00" style="text-align:center"></div></td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100 anual-estimate" id="input-usd-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
+        				<input class="input100 financiera anual-estimate" id="input-usd-anual" autocomplete="off" onkeydown="return event.keyCode !== 69"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
               <tr>
                 <td>Millones EUR</td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100" id="input-anual-default-3" type="number" min="0.00" max="10000.00" step="0.01" value="0.85" style="text-align:center"></div></td>
+        				<input class="input100 financiera" id="input-anual-default-3" readonly autocomplete="off" type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.85" style="text-align:center"></div></td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100 anual-estimate" id="input-eur-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
+        				<input class="input100 financiera anual-estimate" id="input-eur-anual" autocomplete="off"  type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
               <tr>
                 <td>Millones GTQ</td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100" id="input-anual-default-4" type="number" min="0.00" max="10000.00" step="0.01" value="7.18" style="text-align:center"></div></td>
+        				<input class="input100 financiera" id="input-anual-default-4" readonly autocomplete="off" type="number" min="0.00" max="10000.00" step="0.01" value="7.18" style="text-align:center"></div></td>
                 <td><div class="input-icons"><i class="material-icons icon">attach_money</i>
-        				<input class="input100 anual-estimate" id="input-gtq-anual"  type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
+        				<input class="input100 financiera anual-estimate" id="input-gtq-anual" autocomplete="off"  type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>
               </tr>
             </tbody>
           </table>
@@ -714,12 +1312,12 @@ left: 25%;
           <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Ingresos anuales</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Ingresos anuales" onclick="return false;">help_outline</i></span>
-            <input class="input100" id="ingresos-anuales" type="number" readonly name="name" placeholder="Ingresos anuales">
+            <input class="input100 financiera" id="ingresos-anuales" autocomplete="off" type="number" readonly name="name" value="0" placeholder="Ingresos anuales">
           </div>
           <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">EBITDA</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="EBITDA" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="number" name="name" placeholder="EBITDA" autocomplete="off">
+            <input class="input100 financiera" type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0" name="name" placeholder="EBITDA" autocomplete="off">
           </div>
           <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
             <span class="label-input100">Aporte a la MEGA</span>
@@ -768,9 +1366,9 @@ left: 25%;
                    <option class="work-option">Intangible</option>
                   </select>
                 </td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt1"><textarea class="input300 financiera materialize-textarea" id="txt1" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt2"><textarea class="input300 financiera materialize-textarea" id="txt2" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt3"><textarea class="input300 financiera materialize-textarea" id="txt3" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
                 <td>
@@ -779,9 +1377,9 @@ left: 25%;
                    <option class="work-option">Intangible</option>
                   </select>
                 </td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt4"><textarea class="input300 financiera materialize-textarea" id="txt4" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt5"><textarea class="input300 financiera materialize-textarea" id="txt5" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt6"><textarea class="input300 financiera materialize-textarea" id="txt6" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
                 <td>
@@ -790,9 +1388,9 @@ left: 25%;
                    <option class="work-option">Intangible</option>
                   </select>
                 </td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt7"><textarea class="input300 financiera materialize-textarea" id="txt7" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt8"><textarea class="input300 financiera materialize-textarea" id="txt8" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt9"><textarea class="input300 financiera materialize-textarea" id="txt9" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
                 <td>
@@ -801,9 +1399,9 @@ left: 25%;
                    <option class="work-option">Intangible</option>
                   </select>
                 </td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt10"><textarea class="input300 financiera materialize-textarea" id="txt10" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt11"><textarea class="input300 financiera materialize-textarea" id="txt11" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt12"><textarea class="input300 financiera materialize-textarea" id="txt12" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
                 <td>
@@ -812,9 +1410,9 @@ left: 25%;
                    <option class="work-option">Intangible</option>
                   </select>
                 </td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt13"><textarea class="input300 financiera materialize-textarea" id="txt13" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt14"><textarea class="input300 financiera materialize-textarea" id="txt14" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt15"><textarea class="input300 financiera materialize-textarea" id="txt15" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
               </tr>
               <tr>
                 <td>
@@ -823,9 +1421,9 @@ left: 25%;
                    <option class="work-option">Intangible</option>
                   </select>
                 </td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
-                <td><textarea class="materialize-textarea" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt16"><textarea class="input300 financiera materialize-textarea" id="txt16" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt17"><textarea class="input300 financiera materialize-textarea" id="txt17" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
+                <td id="parent-txt18"><textarea class="input300 financiera materialize-textarea" id="txt18" value="-" onkeyup="validarTexto(this);" style="margin-top: 6.5px"></textarea></td>
               </tr>
             </tbody>
           </table>
@@ -860,15 +1458,15 @@ left: 25%;
             </tbody>
           </table>
           </div>
-          <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
+          <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-pres-total">
             <span class="label-input100">Presupuesto total</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
-            <input class="input100" id="Pres-total" type="text" name="name" placeholder="Ingrese el presupuesto">
+            <input class="input100 financiera" id="Pres-total" autocomplete="off" type="text" name="name" value="0" readonly placeholder="Ingrese el presupuesto">
           </div>
           <div class="wrap-input100 rs1-wrap-input100 validate-input" id="ciclo-div">
             <span class="label-input100">Ciclo de vida del producto (años)</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el tiempo que operará el producto que se genera por la implementación de su RYOS" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="number" id="ciclo" autocomplete="off" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px" placeholder="Ingrese el ciclo de vida">
+            <input class="input100 financiera" type="number" id="ciclo" autocomplete="off" onkeyup="validarNumero(this);" value="0" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px" placeholder="Ingrese el ciclo de vida">
           </div>
           <span class="origen-mandatorio contact100-form-sub-title">
             PROYECTOS DE ORIGEN MANDATORIO
@@ -876,15 +1474,15 @@ left: 25%;
           <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input" id="costos-div">
             <span class="label-input100">Costos por no ejecución</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Estime e incluya el monto económico que estima GEB tendría que desembolsar por concepto de multas, penalidades y otros, en caso de no implementar esta RYOS" onclick="return false;">help_outline</i></span>
-            <input class="input100" type="number" name="name" id="costos" placeholder="Ingrese los costos" autocomplete="off" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
+            <input class="input100 financiera" type="number" name="name" id="costos" placeholder="Ingrese los costos" value="0" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" autocomplete="off" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
           </div>
-          <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input">
+          <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input" id="parent-txt19">
             <span class="label-input100">Consecuencia sin RYOS</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Relacione todas las consecuencias identificadas en las cuales incurriría GEB en caso de no ejecutar el RYOS" onclick="return false;">help_outline</i></span>
-            <textarea class="materialize-textarea" placeholder="Ingrese la consecuencia" style="margin-top: 1px"></textarea>
+            <textarea class="input300 financiera materialize-textarea" id="cons-ryos" value="-" onkeyup="validarTexto(this);" placeholder="Ingrese la consecuencia" style="margin-top: 1px"></textarea>
           </div>
         </form>
-      <form class="contact100-form validate-form" id="Form-5">
+      <form class="contact100-form validate-form" id="Form-5" style="padding-bottom: 0 !important">
               <span class="contact100-form-sub-title">
                 ATRACTIVIDAD TÉCNICA
               </span>
@@ -1148,7 +1746,7 @@ left: 25%;
                 </select>
               </div>
             </form>
-      <form class="contact100-form validate-form" id="Form-6">
+      <form class="contact100-form validate-form" id="Form-6" style="padding-bottom: 0 !important">
                     <!-- CO -->
                     <span class="comp-co contact100-form-sub-title">
                       ASPECTOS COMPLEMENTARIOS
@@ -1389,6 +1987,22 @@ left: 25%;
            </div>
           </form>
          <!-- DIVS Estructurales -->
+         <section class="container-triangule" style="margin:auto !important; margin-bottom: 50px !important;">
+            <div class="sec1" id="triangule-sec1" style="border-color: transparent transparent #EC5151 transparent"></div>
+            <div class="sec2" id="triangule-sec2" style="border-color: transparent transparent transparent #EC5151"></div>
+            <div class="sec3" id="triangule-sec3" style="border-color: transparent transparent #EC5151 transparent;"></div>
+            <div class="hollow"></div>
+
+            <div class="title1 main-font error-text" id="title-sec2">ATRACTIVIDAD TÉCNICA</div>
+            <div class="title2 main-font error-text" id="title-sec1">NIVEL DE RIESGO</div>
+            <div class="title3 main-font error-text" id="title-sec3">VIABILIDAD FINANCIERA</div>
+
+            <div class="inner-cont" id="triangule-text" style="color: #EC5151;">
+                <div class="main-font">Alineación Estratégica</div>
+                <!-- <img src="img/logo-geb.svg" width="160px" style='margin-top: 0.5em'> -->
+                <?= $this->Html->image('logos/logo-geb.svg', ['width'=>'160px']) ?>
+            </div>
+        </section>
         </div>
        </div>
       </div>
@@ -1403,7 +2017,7 @@ left: 25%;
      <h2>RIESGOS ESPECÍFICOS RELEVANTES IDENTIFICADOS POR EL GESTOR DEL RYOS</h2>
        <span class="label-input100">RIESGO</span>
        <div class="input100">
-        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <textarea id="textarea1" class="risks-input materialize-textarea"></textarea>
        </div>
       </div>
       <div class="modal-footer">
@@ -1566,315 +2180,451 @@ left: 25%;
      });
     </script>
 <script type="text/javascript">
-$(document).ready(function(){
-  $('#select-filial-pe').hide();
-  $('#select-filial-gt').hide();
-  $('#input_other_filial').hide();
-  $('#next').hide();
-  $('#Form-2').hide();
-  $('#Form-3').hide();
-  $('#Form-4').hide();
-  $('#Form-5').hide();
-  $('#Form-6').hide();
-  var Form_Numbers = null;
-$("#next").click(function(){
-Form_Numbers = $('.contact100-form.validate-form.active').index();
-BtnNextHide(Form_Numbers);
- if ($('.contact100-form.validate-form.active').index() > 0) {
-      $('.contact100-form.validate-form').hide();
-      $('.contact100-form.validate-form.active').removeClass("active").prev().addClass("active").show();
- }
- $('body,html').animate({
-     scrollTop : 0
- }, 500);
-});
-$("#return").click(function(){
-Form_Numbers = $('.contact100-form.validate-form.active').index();
-BtnReturnHide(Form_Numbers);
- if ($('.contact100-form.validate-form.active').index() < $(".contact100-form.validate-form").length-1) {
-      $('.contact100-form.validate-form.active').hide();
-      $('.contact100-form.validate-form.active').removeClass("active").next().show().addClass("active");
- }
- $('#next').show();
- $('body,html').animate({
-     scrollTop : 0
- }, 500);
-});
-function BtnNextHide(Form_Numbers){
-  if(Form_Numbers == 1){
-    $("#next").hide();
-  }else{
-    $("#return").show();
-    $("#next").show();
-  }
-}
-function BtnReturnHide(Form_Numbers){
-  if (Form_Numbers == 4) {
-    $("#return").hide();
-  }else{
-    $("#return").show();
-    $("#next").show();
-  }
-}
-});
-function Dynamic_Country(){
-    var selected_option = document.getElementById("select-country").value;
-    if (selected_option == "CO") {
-      $('#select-filial-col').show();
-      $('#select-filial-pe').hide();
-      $('#select-filial-gt').hide();
-      $('#input_other_filial').hide();
-    } else if(selected_option == "PE"){
-      $('#select-filial-pe').show();
-      $('#select-filial-col').hide();
-      $('#select-filial-gt').hide();
-      $('#input_other_filial').hide();
-    }else if(selected_option == "GT"){
-      $('#select-filial-gt').show();
-      $('#select-filial-pe').hide();
-      $('#select-filial-col').hide();
-      $('#input_other_filial').hide();
-    }else if (selected_option == "other"){
-      $('#select-filial-col').hide();
-      $('#select-filial-pe').hide();
-      $('#select-filial-gt').hide();
-      $('#input_other_filial').show();
-    }
-  }
-  $('#select-tipo-proyecto').change(function() {
-    var selected_option_tp = document.getElementById(this.id).value;
-    if (selected_option_tp == "Crecimiento") {
-      $("#div-select-subcategoria-sost *").attr("disabled", "disabled").off('click');
-      $("#div-select-subcategoria-sost").hide();
-      $("#div-select-subcategoria-crec").show();
-      $("#div-select-subcategoria-crec *").attr("disabled", false).off('click');
-    } else {
-      $("#div-select-subcategoria-crec *").attr("disabled", "disabled").off('click');
-      $("#div-select-subcategoria-crec").hide();
-      $("#div-select-subcategoria-sost").show();
-      $("#div-select-subcategoria-sost *").attr("disabled", false).off('click');
-    }
-  });
   $(document).ready(function(){
-  $("#return").click(function(){
-    test();
-    var select_option_gr = document.getElementById("select-grupo-est").value,
-        select_subcategoria_sost = $('#div-select-subcategoria-sost').find(":selected").val(),
-        select_tipo_proyecto = document.getElementById("select-tipo-proyecto").value,
-        select_subcategoria_crec = $('#div-select-subcategoria-crec').find(":selected").val(),
-        value_subcategoria = $('.select-subcategoria').val();
-    if (select_tipo_proyecto == "Sostenimiento") {
-        $('#form-title').text(select_subcategoria_sost + ' - ' + 'Información Detallada');
-        mec_inputs(select_subcategoria_sost);
-    }else {
-        $('#form-title').text(select_option_gr + ' - ' + 'Información Detallada');
-        mec_inputs(select_subcategoria_crec);
+    $('.button').on('click', function(event){
+      var type = $(this).data('type');
+      var status = $(this).data('status');
+      $('.button').removeClass('is-active');
+      $(this).addClass('is-active');
+    $('.notify')
+      .removeClass()
+      .attr('data-notification-status', status)
+      .addClass(type + ' notify')
+      .addClass('do-show');
+      // event.preventDefault();
+    })
+    $('#select-filial-pe').hide()
+    $('#select-filial-pe *').attr("disabled", "disabled");
+    $('#select-filial-gt').hide();
+    $('#select-filial-gt *').attr("disabled", "disabled");
+    $('#input_other_filial').hide();
+    $('#input_other_filial *').attr("disabled", "disabled");
+    $('#next').hide();
+    $('#Form-2').hide();
+    $('#Form-3').hide();
+    $('#Form-4').hide();
+    $('#Form-5').hide();
+    $('#Form-6').hide();
+    var Form_Numbers = null;
+    $("#next").click(function(){
+      Form_Numbers = $('.contact100-form.validate-form.active').index();
+      BtnNextHide(Form_Numbers);
+      if ($('.contact100-form.validate-form.active').index() > 0) {
+        $('.contact100-form.validate-form').hide();
+        $('.contact100-form.validate-form.active').removeClass("active").prev().addClass("active").show();
+      }
+      $('body,html').animate({
+        scrollTop : 0
+      }, 500);
+    });
+    $("#Main-Btn").click(function(){
+      if ($('#Form-6').is(":visible")) {
+        var empty_inputs = $('.risks-input.materialize-textarea').filter(function(){return !$(this).val()}).length;
+          if (empty_inputs == 0) {
+            $('#triangule-sec1').removeAttr('style');
+            $('#title-sec1').removeClass('error-text');
+          } else {
+            $('#triangule-sec1').css("border-color", "transparent transparent #EC5151 transparent");
+            $('#title-sec1').addClass('error-text');
+          }
+          if (empty_inputs == 0) {
+            if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
+              $('#btn-error2').click();
+              $('#icon-notify').text("check_circle");
+              var str = document.getElementById('div-notify').innerHTML;
+              var res = str.replace("Por favor revisar, campos vacíos.", "El RYOS ha sido enviado correctamente.");
+              document.getElementById("div-notify").innerHTML = res;
+              setTimeout(function(){$('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')}, 4000);
+            }
+          } else {
+            if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
+              $('#btn-error').click();
+              $('#icon-notify').text("cancel");
+              var str = document.getElementById('div-notify').innerHTML;
+              var res = str.replace("El RYOS ha sido enviado correctamente.", "Por favor revisar, campos vacíos.");
+              document.getElementById("div-notify").innerHTML = res;
+              setTimeout(function(){$('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')}, 4000);
+            }
+          }
+        }
+      });
+      $("#return").click(function(){
+        var array_form = {};
+        $('.input100.entrada').each(function(){
+          array_form[$(this).val()] = $(this).val();
+        });
+        $('select[name="select-entrada"]').each(function(){
+          $(this).children(":selected").each(function(){
+            array_form[$(this).html()] = $(this).html();
+          });
+        });
+        if ($('#Form-1').is(":visible")) {
+          var empty_inputs = $('.input100.entrada').filter(function(){return !$(this).val()}).length;
+        }
+        if ($('#Form-2').is(":visible")) {
+          var empty_inputs = $('.input200').filter(function(){return !$(this).val()}).length;
+        }
+        if ($('#Form-3').is(":visible")) {
+          var empty_inputs1 = $('.input100.ti').filter(function(){return !$(this).val()}).length;
+          var empty_inputs2 = $('.input100.form3').filter(function(){return !$(this).val()}).length;
+          var empty_inputs3 = $('.input100.ti-exclusive').filter(function(){return !$(this).val()}).length;
+          var empty_inputs = empty_inputs1 + empty_inputs2 + empty_inputs3;
+          if (empty_inputs == 0) {
+            $('#triangule-text').removeAttr('style');
+          } else {
+            $('#triangule-text').css("color", "#EC5151");
+          }
+        }
+        if ($('#Form-4').is(":visible")) {
+          var empty_inputs1 = $('.input100.financiera').filter(function(){return !$(this).val()}).length;
+          var empty_inputs2 = $('.input300.financiera').filter(function(){return !$(this).val()}).length;
+          var empty_inputs = empty_inputs1 + empty_inputs2;
+          if (empty_inputs == 0) {
+            $('#triangule-sec3').removeAttr('style');
+            $('#title-sec3').removeClass('error-text');
+          } else {
+            $('#triangule-sec3').css("border-color", "transparent transparent #EC5151 transparent");
+            $('#title-sec3').addClass('error-text');
+          }
+        }
+        if ($('#Form-5').is(":visible")) {
+          $('#triangule-sec2').removeAttr('style');
+          $('#title-sec2').removeClass('error-text');
+          empty_inputs = 0;
+        }
+        if ($('#Form-6').is(":visible")) {
+          var empty_inputs = $('.risks-input.materialize-textarea').filter(function(){return !$(this).val()}).length;
+          if (empty_inputs == 0) {
+            $('#triangule-sec1').removeAttr('style');
+            $('#title-sec1').removeClass('error-text');
+          } else {
+            $('#triangule-sec1').css("border-color", "transparent transparent #EC5151 transparent");
+            $('#title-sec1').addClass('error-text');
+          }
+        }
+        console.log(empty_inputs1+" "+empty_inputs2);
+        if (empty_inputs == 0) {
+        Form_Numbers = $('.contact100-form.validate-form.active').index();
+        BtnReturnHide(Form_Numbers);
+        if ($('.contact100-form.validate-form.active').index() < $(".contact100-form.validate-form").length-1) {
+            $('.contact100-form.validate-form.active').hide();
+            $('.contact100-form.validate-form.active').removeClass("active").next().show().addClass("active");
+        }
+        $('#next').show();
+        $('body,html').animate({
+          scrollTop : 0
+        }, 500);
+        } else {
+        if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
+        $('#btn-error').click();
+        setTimeout(function(){$('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')}, 4000);
+        }
+        }
+        });
+    function inputs_vacios(){
+      $('.input100.entrada').filter(function(){return !$(this).val()}).after('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
     }
-  });
-  function test(){
-    var Table_Dates = new Array();
-    $('.table-date').each(function(){
-      if ($(this).val() != "") {
-        var date = new Date($(this).val());
-        year = date.getFullYear();
-        if ($("."+year).hasClass(year) == false) {
-          Table_Dates.push(year);
+    function delete_span(test){
+     test.remove();
+    }
+    function BtnNextHide(Form_Numbers){
+      if(Form_Numbers == 1){
+        $("#next").hide();
+      }else{
+        $("#return").show();
+        $("#next").show();
+      }
+    }
+    function BtnReturnHide(Form_Numbers){
+      if (Form_Numbers == 4) {
+          $("#return").hide();
+      }else{
+          $("#return").show();
+          $("#next").show();
         }
       }
     });
-    loop_estimate(Table_Dates.sort());
-  };
-  function loop_estimate(Table_Dates){
-    var length_thead = document.getElementById("tr-head").childElementCount;
-    for (var i = 0; i < Table_Dates.length; i++) {
-      console.log(Table_Dates[i]);
-      // if (length_thead > 2) {
-          if ($("."+Table_Dates[i]).hasClass(Table_Dates[i]) == false) {
-          $('#last_th').before("<th id="+[i]+" class="+Table_Dates[i]+">"+Table_Dates[i]+"</th>");
-          for (var j = 1; j < 5; j++) {
-            $('#tr_'+[j]).after('<td><div class="input-icons"><i class="material-icons icon">attach_money</i><input class="input100 inv-estimate '+[j]+'" type="number" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>');
+    function Dynamic_Country(){
+      var selected_option = document.getElementById("select-country").value;
+        if (selected_option == "CO") {
+            $('#select-filial-col').show();
+            $('#select-filial-col *').attr("disabled", false).off('click');
+            $('#select-filial-pe').hide();
+            $('#select-filial-pe *').attr("disabled", "disabled");
+            $('#select-filial-gt').hide();
+            $('#select-filial-gt *').attr("disabled", "disabled");
+            $('#input_other_filial').hide();
+            $('#input_other_filial input').removeClass('entrada');
+            $('#input_other_filial *').attr("disabled", "disabled");
+        } else if(selected_option == "PE"){
+            $('#select-filial-pe').show();
+            $('#select-filial-pe *').attr("disabled", false).off('click');
+            $('#select-filial-col').hide();
+            $('#select-filial-col *').attr("disabled", "disabled");
+            $('#select-filial-gt').hide();
+            $('#select-filial-gt *').attr("disabled", "disabled");
+            $('#input_other_filial').hide();
+            $('#input_other_filial input').removeClass('entrada');
+            $('#input_other_filial *').attr("disabled", "disabled");
+        }else if(selected_option == "GT"){
+            $('#select-filial-gt').show();
+            $('#select-filial-gt *').attr("disabled", false).off('click');
+            $('#select-filial-pe').hide();
+            $('#select-filial-pe *').attr("disabled", "disabled");
+            $('#select-filial-col').hide();
+            $('#select-filial-col *').attr("disabled", "disabled");
+            $('#input_other_filial').hide();
+            $('#input_other_filial input').removeClass('entrada');
+            $('#input_other_filial *').attr("disabled", "disabled");
+        }else if (selected_option == "other"){
+            $('#select-filial-col').hide();
+            $('#select-filial-col *').attr("disabled", "disabled");
+            $('#select-filial-pe').hide();
+            $('#select-filial-pe *').attr("disabled", "disabled");
+            $('#select-filial-gt').hide();
+            $('#select-filial-gt *').attr("disabled", "disabled");
+            $('#input_other_filial').show();
+            $('#input_other_filial input').addClass('entrada');
+            $('#input_other_filial *').attr("disabled", false).off('click');
           }
         }
+    $('#select-tipo-proyecto').change(function() {
+      var selected_option_tp = document.getElementById(this.id).value;
+        if (selected_option_tp == "Crecimiento") {
+          $("#div-select-subcategoria-sost *").attr("disabled", "disabled").off('click');
+          $("#div-select-subcategoria-sost").hide();
+          $("#div-select-subcategoria-crec").show();
+          $("#div-select-subcategoria-crec *").attr("disabled", false).off('click');
+        } else {
+          $("#div-select-subcategoria-crec *").attr("disabled", "disabled").off('click');
+          $("#div-select-subcategoria-crec").hide();
+          $("#div-select-subcategoria-sost").show();
+          $("#div-select-subcategoria-sost *").attr("disabled", false).off('click');
+        }
+      });
+    $(document).ready(function(){
+      $("#return").click(function(){
+        test();
+        var select_option_gr = document.getElementById("select-grupo-est").value,
+            select_subcategoria_sost = $('#div-select-subcategoria-sost').find(":selected").val(),
+            select_tipo_proyecto = document.getElementById("select-tipo-proyecto").value,
+            select_subcategoria_crec = $('#div-select-subcategoria-crec').find(":selected").val(),
+            value_subcategoria = $('.select-subcategoria').val();
+          if (select_tipo_proyecto == "Sostenimiento") {
+            $('#form-title').text(select_subcategoria_sost + ' - ' + 'Información Detallada');
+            mec_inputs(select_subcategoria_sost);
+          }else {
+            $('#form-title').text(select_option_gr + ' - ' + 'Información Detallada');
+            mec_inputs(select_subcategoria_crec);
+          }
+        });
+      function test(){
+        var Table_Dates = new Array();
+          $('.input100.entrada.table-date').each(function(){
+            if ($(this).val() != "") {
+              var date = new Date($(this).val());
+              year = date.getFullYear();
+              if ($("."+year).hasClass(year) == false) {
+                Table_Dates.push(year);
+              }
+            }
+          });
+          loop_estimate(Table_Dates.sort());
+        };
+        function loop_estimate(Table_Dates){
+          var length_thead = document.getElementById("tr-head").childElementCount;
+          for (var i = 0; i < Table_Dates.length; i++) {
+            // if (length_thead > 2) {
+            if ($("."+Table_Dates[i]).hasClass(Table_Dates[i]) == false) {
+          $('#last_th').before("<th id="+[i]+" class="+Table_Dates[i]+">"+Table_Dates[i]+"</th>");
+            for (var j = 1; j < 5; j++) {
+              $('#tr_'+[j]).after('<td><div class="input-icons"><i class="material-icons icon">attach_money</i><input class="input100 financiera inv-estimate '+[j]+'" type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>');
+            }
+          }
+        }
+      }
+      $('#select-subcategoria-sost').change(function() {
+        var value_subcategoria = document.getElementById(this.id).value;
+        mec_inputs(value_subcategoria);
+        if (value_subcategoria == 'TI') {
+          gen_valor_ti(value_subcategoria);
+          $('#div-socio-est').hide();
+          $('#Div-valor input').removeClass('form3');
+          $('#div-cual2 input').removeClass('form3');
+        } else {
+          $('#div-socio-est').show();
+          $('#Div-valor input').addClass('form3');
+          $('#div-cual2 input').addClass('form3');
+        }
+      });
+      function mec_inputs(value_subcategoria){
+        crec_flags(value_subcategoria);
+        gen_valor_ti(value_subcategoria);
+        atractividad_tecn(value_subcategoria);
+      if(value_subcategoria == 'TI'){
+        $('#div-MEC').show();
+        $('#div-mec-info').show();
+        $('#title-mec-info').text('Justificación');
+      }else if(value_subcategoria == 'CREC'){
+        $('#div-mec-info').show();
+        $('#title-mec-info').text('n');
+      }else{
+        $('#div-mec-info').hide();
+        $('#div-MEC').hide();
+      }
     }
-  }
-  $('#select-subcategoria-sost').change(function() {
-    var value_subcategoria = document.getElementById(this.id).value;
-    mec_inputs(value_subcategoria);
-    if (value_subcategoria == 'TI') {
-      gen_valor_ti(value_subcategoria);
-      $('#div-socio-est').hide();
-    } else {
-      $('#div-socio-est').show();
+    function crec_flags(value_subcategoria){
+      if(value_subcategoria == 'CREC'){
+        $('.crec-flags').show();
+        $('.crec-info-finaciera').show();
+      }else{
+        $('.crec-flags').hide();
+        $('.crec-info-finaciera').hide();
+      }
     }
-  });
-  function mec_inputs(value_subcategoria){
-    crec_flags(value_subcategoria);
-    gen_valor_ti(value_subcategoria);
-    atractividad_tecn(value_subcategoria);
-    if(value_subcategoria == 'TI'){
-      $('#div-MEC').show();
-      $('#div-mec-info').show();
-      $('#title-mec-info').text('Justificación');
-    }else if(value_subcategoria == 'CREC'){
-      $('#div-mec-info').show();
-      $('#title-mec-info').text('n');
-    }else{
-      $('#div-mec-info').hide();
-      $('#div-MEC').hide();
+    function gen_valor_ti(value_subcategoria){
+      if(value_subcategoria == 'TI'){
+        $('.div-gen-valor').hide();
+        $('.div-gen-valor-ti').show();
+        $("#div-peti").show();
+        $('#div-just-peti').show();
+      }else{
+        $('.div-gen-valor').show();
+        $('.div-gen-valor-ti').hide();
+        $('#div-peti').hide();
+        $('#div-just-peti').hide();
+      }
     }
-  }
-  function crec_flags(value_subcategoria){
-    if(value_subcategoria == 'CREC'){
-      $('.crec-flags').show();
-      $('.crec-info-finaciera').show();
-    }else{
-      $('.crec-flags').hide();
-      $('.crec-info-finaciera').hide();
+    function atractividad_tecn(value_subcategoria){
+      if(value_subcategoria == 'CREC'){
+        $('.comp-crec').show();
+        $('.comp-co').hide();
+        $('.comp-ti').hide();
+        $('.comp-ac').hide();
+      }else if(value_subcategoria == 'CO'){
+        $('.comp-co').show();
+        $('.comp-crec').hide();
+        $('.comp-ti').hide();
+        $('.comp-ac').hide();
+      }else if(value_subcategoria == 'TI'){
+        $('.comp-ti').show();
+        $('.comp-co').hide();
+        $('.comp-crec').hide();
+        $('.comp-ac').hide();
+      }else if(value_subcategoria == 'AC'){
+        $('.comp-ac').show();
+        $('.comp-co').hide();
+        $('.comp-crec').hide();
+        $('.comp-ti').hide();
+      }
     }
-  }
-  function gen_valor_ti(value_subcategoria){
-    if(value_subcategoria == 'TI'){
-      $('.div-gen-valor').hide();
-      $('.div-gen-valor-ti').show();
-      $("#div-peti").show();
-      $('#div-just-peti').show();
-    }else{
-      $('.div-gen-valor').show();
-      $('.div-gen-valor-ti').hide();
-      $('#div-peti').hide();
-      $('#div-just-peti').hide();
-    }
-  }
-  function atractividad_tecn(value_subcategoria){
-    if(value_subcategoria == 'CREC'){
-      $('.comp-crec').show();
-      $('.comp-co').hide();
-      $('.comp-ti').hide();
-      $('.comp-ac').hide();
-    }else if(value_subcategoria == 'CO'){
-      $('.comp-co').show();
-      $('.comp-crec').hide();
-      $('.comp-ti').hide();
-      $('.comp-ac').hide();
-    }else if(value_subcategoria == 'TI'){
-      $('.comp-ti').show();
-      $('.comp-co').hide();
-      $('.comp-crec').hide();
-      $('.comp-ac').hide();
-    }else if(value_subcategoria == 'AC'){
-      $('.comp-ac').show();
-      $('.comp-co').hide();
-      $('.comp-crec').hide();
-      $('.comp-ti').hide();
-    }
-  }
-  $('#select-socio-est').change(function(){
-    var value_socio_est = document.getElementById(this.id).value;
-    if (value_socio_est == 'SI') {
-      $('.socio-est').show();
-    }else {
-      $('.socio-est').hide();
-    }
-  });
-  $('#select-origen').change(function(){
-    var value_origen = document.getElementById(this.id).value;
-    if (value_origen == 'SI') {
-      $('.origen-mandatorio').show();
-    }else {
-      $('.origen-mandatorio').hide();
-    }
-  });
-  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox').change(function(){
-    var count_checkbox = $('input:checkbox:checked').length;
-    if (count_checkbox >= 0 && count_checkbox <= 7) {
-      if ($('#main_flag').hasClass("error-text") == false) {
+    $('#select-socio-est').change(function(){
+      var value_socio_est = document.getElementById(this.id).value;
+      if (value_socio_est == 'SI') {
+        $('.socio-est').show();
+      }else {
+        $('.socio-est').hide();
+      }
+    });
+    $('#select-origen').change(function(){
+      var value_origen = document.getElementById(this.id).value;
+      if (value_origen == 'SI') {
+        $('.origen-mandatorio').show();
+      }else {
+        $('.origen-mandatorio').hide();
+      }
+    });
+    $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox').change(function(){
+      var count_checkbox = $('input:checkbox:checked').length;
+      if (count_checkbox >= 0 && count_checkbox <= 7) {
+        if ($('#main_flag').hasClass("error-text") == false) {
           $('#main_flag').removeClass('warning-text');
           $('#main_flag').addClass('error-text');
+        }
+      }else if (count_checkbox >= 8 && count_checkbox <= 14) {
+        $('#main_flag').removeClass('error-text');
+        $('#main_flag').addClass('warning-text');
+      }else if (count_checkbox >= 15 && count_checkbox <= 29) {
+        $('#main_flag').removeClass('warning-text');
+        $('#main_flag').addClass('primary-text');
       }
-    }else if (count_checkbox >= 8 && count_checkbox <= 14) {
-      $('#main_flag').removeClass('error-text');
-      $('#main_flag').addClass('warning-text');
-    }else if (count_checkbox >= 15 && count_checkbox <= 29) {
-      $('#main_flag').removeClass('warning-text');
-      $('#main_flag').addClass('primary-text');
-    }
-  });
-  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.tema-dominante').change(function(){
-    var count_individual_checkbox = $('input[name="first_checkbox"]:checked').length;
-    if (count_individual_checkbox == 0) {
-      if ($('#first_flag').hasClass("error-text") == false) {
-          $('#first_flag').removeClass('warning-text');
-          $('#first_flag').addClass('error-text');
+    });
+    $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.tema-dominante').change(function(){
+      var count_individual_checkbox = $('input[name="first_checkbox"]:checked').length;
+      if (count_individual_checkbox == 0) {
+        if ($('#first_flag').hasClass("error-text") == false) {
+            $('#first_flag').removeClass('warning-text');
+            $('#first_flag').addClass('error-text');
+        }
+      }else if (count_individual_checkbox == 1) {
+        $('#first_flag').removeClass('error-text');
+        $('#first_flag').addClass('warning-text');
+      }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+        $('#first_flag').removeClass('warning-text');
+        $('#first_flag').addClass('primary-text');
       }
-    }else if (count_individual_checkbox == 1) {
-      $('#first_flag').removeClass('error-text');
-      $('#first_flag').addClass('warning-text');
-    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
-      $('#first_flag').removeClass('warning-text');
-      $('#first_flag').addClass('primary-text');
-    }
-  });
-  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.tesis-inversion').change(function(){
-    var count_individual_checkbox = $('input[name="second_checkbox"]:checked').length;
-    if (count_individual_checkbox == 0) {
-      if ($('#second_flag').hasClass("error-text") == false) {
-          $('#second_flag').removeClass('warning-text');
-          $('#second_flag').addClass('error-text');
+    });
+    $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.tesis-inversion').change(function(){
+      var count_individual_checkbox = $('input[name="second_checkbox"]:checked').length;
+      if (count_individual_checkbox == 0) {
+        if ($('#second_flag').hasClass("error-text") == false) {
+            $('#second_flag').removeClass('warning-text');
+            $('#second_flag').addClass('error-text');
+        }
+      }else if (count_individual_checkbox == 1) {
+        $('#second_flag').removeClass('error-text');
+        $('#second_flag').addClass('warning-text');
+      }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+        $('#second_flag').removeClass('warning-text');
+        $('#second_flag').addClass('primary-text');
       }
-    }else if (count_individual_checkbox == 1) {
-      $('#second_flag').removeClass('error-text');
-      $('#second_flag').addClass('warning-text');
-    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
-      $('#second_flag').removeClass('warning-text');
-      $('#second_flag').addClass('primary-text');
-    }
-  });
-  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.posicion-mercado').change(function(){
-    var count_individual_checkbox = $('input[name="third_checkbox"]:checked').length;
-    if (count_individual_checkbox == 0) {
-      if ($('#third_flag').hasClass("error-text") == false) {
+    });
+    $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.posicion-mercado').change(function(){
+      var count_individual_checkbox = $('input[name="third_checkbox"]:checked').length;
+      if (count_individual_checkbox == 0) {
+        if ($('#third_flag').hasClass("error-text") == false) {
           $('#third_flag').removeClass('warning-text');
           $('#third_flag').addClass('error-text');
+        }
+      }else if (count_individual_checkbox == 1) {
+        $('#third_flag').removeClass('error-text');
+        $('#third_flag').addClass('warning-text');
+      }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+        $('#third_flag').removeClass('warning-text');
+        $('#third_flag').addClass('primary-text');
       }
-    }else if (count_individual_checkbox == 1) {
-      $('#third_flag').removeClass('error-text');
-      $('#third_flag').addClass('warning-text');
-    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
-      $('#third_flag').removeClass('warning-text');
-      $('#third_flag').addClass('primary-text');
-    }
-  });
-  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.modelo-intervencion').change(function(){
-    var count_individual_checkbox = $('input[name="fourth_checkbox"]:checked').length;
-    if (count_individual_checkbox == 0) {
-      if ($('#fourth_flag').hasClass("error-text") == false) {
-          $('#fourth_flag').removeClass('warning-text');
-          $('#fourth_flag').addClass('error-text');
+    });
+    $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.modelo-intervencion').change(function(){
+      var count_individual_checkbox = $('input[name="fourth_checkbox"]:checked').length;
+      if (count_individual_checkbox == 0) {
+        if ($('#fourth_flag').hasClass("error-text") == false) {
+            $('#fourth_flag').removeClass('warning-text');
+            $('#fourth_flag').addClass('error-text');
+        }
+      }else if (count_individual_checkbox == 1) {
+        $('#fourth_flag').removeClass('error-text');
+        $('#fourth_flag').addClass('warning-text');
+      }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+        $('#fourth_flag').removeClass('warning-text');
+        $('#fourth_flag').addClass('primary-text');
       }
-    }else if (count_individual_checkbox == 1) {
-      $('#fourth_flag').removeClass('error-text');
-      $('#fourth_flag').addClass('warning-text');
-    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
-      $('#fourth_flag').removeClass('warning-text');
-      $('#fourth_flag').addClass('primary-text');
-    }
-  });
-  // QUINTO
-  $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.capacidades').change(function(){
-    var count_individual_checkbox = $('input[name="fifth_checkbox"]:checked').length;
-    if (count_individual_checkbox == 0) {
-      if ($('#fifth_flag').hasClass("error-text") == false) {
-          $('#fifth_flag').removeClass('warning-text');
-          $('#fifth_flag').addClass('error-text');
+    });
+    // QUINTO
+    $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.capacidades').change(function(){
+      var count_individual_checkbox = $('input[name="fifth_checkbox"]:checked').length;
+      if (count_individual_checkbox == 0) {
+        if ($('#fifth_flag').hasClass("error-text") == false) {
+            $('#fifth_flag').removeClass('warning-text');
+            $('#fifth_flag').addClass('error-text');
+        }
+      }else if (count_individual_checkbox == 1) {
+        $('#fifth_flag').removeClass('error-text');
+        $('#fifth_flag').addClass('warning-text');
+      }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
+        $('#fifth_flag').removeClass('warning-text');
+        $('#fifth_flag').addClass('primary-text');
       }
-    }else if (count_individual_checkbox == 1) {
-      $('#fifth_flag').removeClass('error-text');
-      $('#fifth_flag').addClass('warning-text');
-    }else if (count_individual_checkbox >= 2 && count_individual_checkbox <= 5) {
-      $('#fifth_flag').removeClass('warning-text');
-      $('#fifth_flag').addClass('primary-text');
-    }
-  });
+    });
   });
   $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-corporativo').change(function(){
     var count_individual_checkbox = $('input[name="sixth_checkbox"]:checked').length;
@@ -1891,48 +2641,48 @@ function Dynamic_Country(){
       $('#sixth_flag').addClass('primary-text');
     }
   });
-$(document).ready(function(){
-		$('.event').on("dragstart", function (event) {
-			  var dt = event.originalEvent.dataTransfer;
-			  dt.setData('Text', $(this).attr('id'));
-			});
-	    $('table td').on("dragenter dragover drop", function (event) {
+  $(document).ready(function(){
+	   $('.event').on("dragstart", function (event) {
+		     var dt = event.originalEvent.dataTransfer;
+			   dt.setData('Text', $(this).attr('id'));
+		 });
+	   $('table td').on("dragenter dragover drop", function (event) {
 		   event.preventDefault();
 		   if (event.type === 'drop') {
-			  var data = event.originalEvent.dataTransfer.getData('Text',$(this).attr('id'));
-			  de=$('#'+data).detach();
-			  de.appendTo($(this));
+			   var data = event.originalEvent.dataTransfer.getData('Text',$(this).attr('id'));
+			   de=$('#'+data).detach();
+			   de.appendTo($(this));
 		   };
-	   });
-   });
-  $(document).ready(function(){
-    $('.input100.anual-estimate').change(function() {
-      // $('#ingresos-anuales').attr('value');
-      var count = 0;
-      var result = 0;
-      $('.input100.anual-estimate').each(function(){
-        count += + 1;
-        result += +$(this).val() / $('#input-anual-default-' + count).val();
-      })
+	    });
+    });
+    $(document).ready(function(){
+      $('.input100.financiera.anual-estimate').change(function() {
+        // $('#ingresos-anuales').attr('value');
+        var count = 0;
+        var result = 0;
+        $('.input100.financiera.anual-estimate').each(function(){
+          count += + 1;
+          result += +$(this).val() / $('#input-anual-default-' + count).val();
+        })
       $('#ingresos-anuales').val(result);
     });
-    $(document).on('change', '.input100.inv-estimate', function() {
+    $(document).on('change', '.input100.financiera.inv-estimate', function() {
       var count = 0;
       var result_1 = 0;
       var result_2 = 0;
       var result_3 = 0;
       var result_4 = 0;
-      $('.input100.inv-estimate.1').each(function(){
+      $('.input100.financiera.inv-estimate.1').each(function(){
         count = 1;
         result_1 += +$(this).val() / $('#input-anual-default-' + 1).val();
       });
-      $('.input100.inv-estimate.2').each(function(){
+      $('.input100.financiera.inv-estimate.2').each(function(){
         result_2 += +$(this).val() / $('#input-anual-default-' + 2).val();
       });
-      $('.input100.inv-estimate.3').each(function(){
+      $('.input100.financiera.inv-estimate.3').each(function(){
         result_3 += +$(this).val() / $('#input-anual-default-' + 3).val();
       });
-      $('.input100.inv-estimate.4').each(function(){
+      $('.input100.financiera.inv-estimate.4').each(function(){
         result_4 += +$(this).val() / $('#input-anual-default-' + 4).val();
       });
       $('#Pres-total').val(result_1 + result_2 + result_3 + result_4);
@@ -1942,17 +2692,26 @@ $(document).ready(function(){
     var Div_Id = $('#'+numero.id).parent().attr('id');
     count_alert = $('#'+Div_Id).find('.bubble.z-depth-2');
     if (numero.value == "" && count_alert.length == 0) {
-        $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Campo vacío</span>');
+      $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Campo vacío</span>');
     } else if (numero.value < 0){
-        if (count_alert.length == 0) {
-          $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
-        } else {
-          $(count_alert).remove();
-          $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
-        }
+      if (count_alert.length == 0) {
+        $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
+      } else {
+        $(count_alert).remove();
+        $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
+      }
     }
     else {
         $(count_alert).remove();
+    }
+  }
+  function validarTexto(texto){
+    var Div_Id = $('#'+texto.id).parent().attr('id');
+    count_alert = $('#'+Div_Id).find('.bubble.z-depth-2');
+    if (texto.value == "" && count_alert.length == 0) {
+      $('#'+Div_Id).append('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Campo vacío</span>');
+    } else {
+      $(count_alert).remove();
     }
   }
 </script>

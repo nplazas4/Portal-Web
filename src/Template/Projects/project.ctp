@@ -553,7 +553,7 @@ $("#button_caf_add").click(function(){
           </div>
           <?= $this->Html->link($this->Html->tag('i','picture_as_pdf',['class'=>'material-icons tooltipped', 'data-position'=>'right','data-tooltip'=>'Descargar PDF']), ['action' => 'project', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph , '_ext' => 'pdf'],['escape' => false, 'style'=>'margin-left:1%']); ?>
             <h2>Indicadores de cronograma</h2>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="División entre el valor ganado y presupuestado hasta la fecha">
+            <div class="d-flex col s12 m6 l4 xl3 tooltipped modal-trigger" href="#SpiWBS" data-position="bottom" data-tooltip="División entre el valor ganado y presupuestado hasta la fecha">
                 <div class="indicator type-1" style="background-color:
                     <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                       <?php if ($SPI >= $valueFase['minimun'] && $SPI <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
@@ -592,6 +592,30 @@ $("#button_caf_add").click(function(){
                     <?php endif;?>
                 </div>
             </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-2">
+                    <h5 class="mr-2">Duración total</h5>
+                    <?php if($od != null):?>
+                      <h5 class="ml-auto right-align"><?= $od ?></h5>
+                    <?php endif;?>
+                </div>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-2">
+                    <h5 class="mr-2">Días de atraso</h5>
+                    <?php if($da != null):?>
+                      <h5 class="ml-auto right-align"><?= $da ?></h5>
+                    <?php endif;?>
+                </div>
+            </div>
+            <div class="d-flex col s12 m6 l4 xl3">
+                <div class="indicator type-1 light-blue darken-2">
+                    <h5 class="mr-2">Porcentaje de impacto</h5>
+                    <?php if($pi != null):?>
+                      <h5 class="ml-auto right-align"><?= $pi ?>%</h5>
+                    <?php endif;?>
+                </div>
+            </div>
         </div>
         <div class="indicators row wrap mb-4">
             <h2 class="mb-2">Indicadores de presupuesto</h2>
@@ -608,7 +632,7 @@ $("#button_caf_add").click(function(){
                 </a>
             </div>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el valor de dinero gastado, con base a la planeación.">
-                <a class="indicator type-1 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+                <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC</h4>
                     <?php if($projects->AC != null):?>
                       <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->AC,2)?> MM</h5>
@@ -616,24 +640,19 @@ $("#button_caf_add").click(function(){
                 </a>
             </div>
             <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Total presupuesto aprobado al proyecto">
-              <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+              <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                   <h5 class="fw-600">PRESUPUESTO</h5>
                   <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['totalBudget'],2) ?> MM</h4>
               </a>
           </div>
           <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Proyección del presupuesto anual para invertir en el proyecto">
-              <a class="indicator type-2 secondary darken-1 modal-trigger" href="#detailValueExecuted">
+              <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                   <h5 class="fw-600">PROYECCIÓN PROYECTO</h5>
                   <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['forecastTotal'],2) ?> MM</h4>
               </a>
           </div>
           <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
-              <a class="indicator type-2 modal-trigger" href="#detailValueExecuted" style="background-color:
-                  <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                    <?php if ($budgetIndicators['cpi'] >= $valueFase['minimun'] && $budgetIndicators['cpi'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
-                        <?php echo $valueFase['hexa_color'];?>
-                    <?php endif;?>
-                  <?php endforeach; ?>">
+              <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                   <h5 class="fw-600"><small>DESVIACIÓN PRESUPUESTAL</small></h5>
                   <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['totalBudget'] - $budgetIndicators['forecastTotal'],2)?> MM</h4>
               </a>
@@ -652,7 +671,7 @@ $("#button_caf_add").click(function(){
               </a>
           </div>
             <h3 class="mt-3">Anual proyecto</h3>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="AC anual  / Presupuesto anual">
+            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="AC anual  / Presupuesto anual">
                 <a class="indicator type-1 modal-trigger" href="#detailValueExecuted" style="background-color:
                     <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
                       <?php if ($budgetIndicators['cpiAnnual'] >= $valueFase['minimun'] && $budgetIndicators['cpiAnnual'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
@@ -663,7 +682,7 @@ $("#button_caf_add").click(function(){
                     <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?></h4>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el dinero gastado anualmente, con base a la planeación.">
+            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el dinero gastado anualmente, con base a la planeación.">
                 <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">AC <small>2019</small></h4>
                     <?php if($projects->PROJ_AC != null):?>
@@ -671,7 +690,7 @@ $("#button_caf_add").click(function(){
                     <?php endif;?>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
+            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
                 <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h4 class="fw-600 mr-2">PV <small>2019</small></h4>
                     <?php if($projects->PV != null):?>
@@ -680,18 +699,41 @@ $("#button_caf_add").click(function(){
                 </a>
             </div>
             <div class="divider transparent"></div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Presupuesto anual del proyecto.">
+            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Presupuesto anual del proyecto.">
                 <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">PRESUPUESTO 2019</h5>
                     <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'],2) ?> MM</h4>
                 </a>
             </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado de tiempo / costo en un tiempo determinado.">
+            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado de tiempo / costo en un tiempo determinado.">
                 <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                     <h5 class="fw-600">FORECAST 2019</h5>
                     <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualForecast'],2) ?> MM</h4>
                 </a>
             </div>
+            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
+                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                    <h5 class="fw-600">VARIACIÓN PROYECTADA 2019</h5>
+                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'] - $budgetIndicators['annualForecast'],2)?> MM</h4>
+                </a>
+            </div>
+            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="(Desviación presupuestal / presupuesto) * 100">
+              <a class="indicator type-2 modal-trigger" href="#detailValueExecuted" style="background-color:
+               <?php $operationAnnual =  null;?>
+                <?php if ($budgetIndicators['annualBudget'] != 0): ?>
+                  <?php $operationAnnual = number_format(($budgetIndicators['annualBudget'] - $budgetIndicators['annualForecast']) / $budgetIndicators['annualBudget'],2)?>
+                  <?php endif;?>
+                    <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
+                      <?php if ($operationAnnual >= $valueFase['minimun'] && $operationAnnual <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'Porcentaje de Impacto'):?>
+                        <?php echo $valueFase['hexa_color'];?>
+                      <?php endif;?>
+                    <?php endforeach; ?>">
+                      <h5 class="fw-600">% VARIACIÓN PROYECTADA 2019</h5>
+                      <?php if ($budgetIndicators['annualBudget'] != 0): ?>
+                        <h4 class="fw-600 right-align"><?= number_format($operationAnnual * 100)?>%</h4>
+                      <?php endif;?>
+                  </a>
+              </div>
         </div>
         <?php if ($cont != 0): ?>
         <div class="color-chart" id="Input_Container">
@@ -1419,6 +1461,31 @@ $("#button_caf_add").click(function(){
                                             </ul>
                                         </div>
                                         <div class="collapsible-body">
+                                          <ul class="collapsible">
+                                              <li>
+                                                  <div class="collapsible-header">
+                                                      <i class="material-icons">keyboard_arrow_down</i>
+                                                      <ul class="collapsible-header-content">
+                                                          <li>
+                                                              <small>Código (CBS)</small>
+                                                              <h3>4</h3>
+                                                          </li>
+                                                          <li>
+                                                              <small>Descripción</small>
+                                                              <h3>Proyecto</h3>
+                                                          </li>
+                                                          <li>
+                                                              <small>Monto (COP)</small>
+                                                              <h3>$ 35,564,214,614</h3>
+                                                          </li>
+                                                          <li>
+                                                              <small>Monto (USD)</small>
+                                                              <h3>$ 1,564,214,614</h3>
+                                                          </li>
+                                                      </ul>
+                                                  </div>
+                                              </li>
+                                          </ul>
                                         </div>
                                     </li>
                                 </ul>
@@ -1430,6 +1497,60 @@ $("#button_caf_add").click(function(){
         </ul>
     </div>
 </div>
+<!-- Modal SPI -->
+<div id="SpiWBS" class="modal" style="max-weight: 100% !important">
+    <div class="modal-content">
+        <a class="modal-close close">
+            <i class="material-icons">close</i>
+        </a>
+        <h2>Estructuta de WBS</h2>
+        <ul class="collapsible collapsible-data">
+          <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
+            <?php if ($EstructureLevel1["level"] == 1): ?>
+            <li>
+                <div class="collapsible-header" id="div-<?=$EstructureLevel1["wbs_id"]?>">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                    <ul class="collapsible-header-content">
+                          <li>
+                              <small>Nombre</small>
+                              <h3 id="name-level-1"><?=$EstructureLevel1["name"]?></h3>
+                          </li>
+                          <li>
+                              <small>Duración original</small>
+                              <h3 id="duration-level-1"><?=$EstructureLevel1["original duration"]?></h3>
+                          </li>
+                          <li>
+                              <small>Schedule % Complete</small>
+                              <h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3>
+                          </li>
+                          <li>
+                              <small>BL Fecha Inicio</small>
+                              <h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3>
+                          </li>
+                          <li>
+                              <small>BL Fecha Fin</small>
+                              <h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3>
+                          </li>
+                          <li>
+                              <small>Inicio</small>
+                              <h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3>
+                          </li>
+                          <li>
+                              <small>Fin</small>
+                              <h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3>
+                          </li>
+                          <li>
+                              <small>SPI</small>
+                              <h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3>
+                          </li>
+                      </ul>
+                </div>
+            </li>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
 <?php foreach ($rks as $rk): ?>
 <!-- Modal detalle de riesgo -->
 <div id=<?=$rk->id?> class="modal">
@@ -1629,3 +1750,16 @@ $("#button_caf_add").click(function(){
     </div>
 </div>
 <?= $this->Html->script(['dynamic-charts.js']) ?>
+<script type="text/javascript">
+$(document).ready(function(){
+  <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
+    <?php if ($EstructureLevel1["level"] != 1): ?>
+      $( "#div-"+<?=$EstructureLevel1["wbs_parent_id"]?>).after('<div class="collapsible-body"><ul class="collapsible"><li><div class="collapsible-header" id="div-'+<?=$EstructureLevel1["wbs_id"]?>+'"><i id="i-'+<?=$EstructureLevel1["wbs_id"]?>+'" class="material-icons">keyboard_arrow_down</i><ul class="collapsible-header-content"><li><small>Nombre</small><h3><?=$EstructureLevel1["name"]?></h3></li><li><small>Duración original</small><h3 id="duration-level-1"><?=$EstructureLevel1["original duration"]?></h3></li><li><small>Schedule % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3></li><li><small>BL Fecha Inicio</small><h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3></li><li><small>BL Fecha Fin</small><h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3></li><li><small>Inicio</small><h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3></li><li><small>Fin</small><h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3></li><li style="max-width: 50px"><small>SPI</small><h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3></li></ul></div></div></li></ul></div>');
+    <?php if($EstructureLevel1["connect_by_isleaf"] != 0):?>
+      $("#div-"+<?=$EstructureLevel1["wbs_id"]?>).click(false);
+      $("#i-"+<?=$EstructureLevel1["wbs_id"]?>).empty();
+    <?php endif; ?>
+    <?php endif; ?>
+  <?php endforeach; ?>
+});
+</script>

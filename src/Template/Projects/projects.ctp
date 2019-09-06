@@ -1,6 +1,6 @@
 <script>
   $(document).ready(function(){
-    $('#div_filter_phase').hide();
+    $('.fixed-action-btn.filters').hide();
     $('input[type=text]').on('keydown', function(e) {
     if (e.which == 13) {
       e.preventDefault();
@@ -18,37 +18,12 @@
     $('.Search:contains("'+text+'")').show();
   }
   $('#btn_main_filter').click(function() {
-    $('#div_filter_phase').show();
+    $('.fixed-action-btn.filters').show();
   });
-  // $('.btn-filter-phase').click(function() {
-  //   var array_filters_phase = new Array();
-  //   var li_selected = $(this).find('a:first');
-  //   if ($('#'+li_selected.attr('id')).hasClass('dark lighten-1')) {
-  //     li_selected.removeClass('dark lighten-1').addClass('tertiary active-phase');
-  //   } else {
-  //     li_selected.addClass('dark lighten-1');
-  //   }
-  //   $('.btn-floating.tertiary.active-phase').each(function(){
-  //     array_filters_phase.push($(this).parent().attr('value'));
-  //   });
-  //   logic_search_phase(array_filters_phase);
-  // });
   $( "#btn_main_filter" ).dblclick(function() {
     $('.Search').show();
-    $('#div_filter_phase').hide();
+    $('.fixed-action-btn.filters').hide();
   });
-  // function logic_search_phase(array_filters_phase){
-  //   $('.Search').hide();
-  //   console.log($('.btn-floating.tertiary.active-phase').length);
-  //   for (var i = 0; i < array_filters_phase.length; i++) {
-  //     // if ($('.btn-floating.tertiary.active-phase').length == 1) {
-  //       $('.Search:contains("'+array_filters_phase[i]+'")').removeClass('hide').addClass('show').show();
-  //     // }
-  //     // if (true) {
-  //       $('.Search.d-flex.col.s12.m6.l4.xl3.show:contains("'+array_filters_phase[i]+'")').show();
-  //     // }
-  //   }
-  // }
   $('.btn-filter-phase').click(function() {
     var array_filters_phase = new Array();
     var li_selected = $(this).find('a:first');
@@ -61,21 +36,118 @@
     }
     var $stats = $('.btn-filter-phase.active');
     var $items = $('.Search.list');
-
     $items.show();
     if ($stats.length == 0)
       return;
-
     var $vstats = $.map($stats, function(o) {return $(o).data('id'); });
-    console.log($vstats);
     $stats.each(function() {
-
       var $stat = $(this);
       $items.filter(function() {
         return $vstats.indexOf($(this).data($stat.data('type'))) < 0;
       }).hide();
     })
   });
+    $('#cancel_fase').click(function() {
+      var li_selected = $('.btn-filter-phase.active');
+      if ($('#'+li_selected.attr('id')).hasClass('active')) {
+        var selected = $('.btn-filter-phase.active').val();
+        console.log(selected);
+       if (selected == '1' || selected == '2' || selected == '3' || selected == '4' || selected == '5') {
+        li_selected.addClass('dark lighten-1').removeClass('tertiary active');
+        li_selected.parent().removeClass('active');
+        var $stats = $('.btn-filter-phase.active');
+        var $items = $('.Search.list');
+        $items.show();
+        if ($stats.length == 0)
+          return;
+        var $vstats = $.map($stats, function(o) {return $(o).data('id'); });
+        $stats.each(function() {
+
+          var $stat = $(this);
+          $items.filter(function() {
+            return $vstats.indexOf($(this).data($stat.data('type'))) < 0;
+          }).hide();
+        })
+      }
+      }
+    });
+    $('#cancel_ctg').click(function() {
+      var li_selected = $('.btn-filter-phase.active').find('a:first');
+      console.log();
+      if ($('#'+li_selected.attr('id')).hasClass('active')) {
+        var selected = $('.btn-filter-phase.active').val();
+       if (selected == '1888' || selected == '1887' || selected == '1886') {
+        li_selected.addClass('dark lighten-1').removeClass('tertiary active');
+        li_selected.parent().removeClass('active');
+        var $stats = $('.btn-filter-phase.active');
+        var $items = $('.Search.list');
+        $items.show();
+        if ($stats.length == 0)
+          return;
+        var $vstats = $.map($stats, function(o) {return $(o).data('id'); });
+        $stats.each(function() {
+          var $stat = $(this);
+          $items.filter(function() {
+            return $vstats.indexOf($(this).data($stat.data('type'))) < 0;
+          }).hide();
+        })
+      }
+      }
+    });
+    $('#cancel_area').click(function() {
+      var li_selected = $('.btn-filter-phase.active').find('a:first');
+      // console.log(li_selected);
+      if ($('#'+li_selected.attr('id')).hasClass('active')) {
+        li_selected.addClass('dark lighten-1').removeClass('tertiary active');
+        li_selected.parent().removeClass('active');
+        var $stats = $('.btn-filter-phase.active');
+        var $items = $('.Search.list');
+        $items.show();
+        if ($stats.length == 0)
+          return;
+        var $vstats = $.map($stats, function(o) {return $(o).data('id'); });
+        $stats.each(function() {
+          var $stat = $(this);
+          $items.filter(function() {
+            return $vstats.indexOf($(this).data($stat.data('type'))) < 0;
+          }).hide();
+        })
+      }
+    });
+    $('#cancel_mec').click(function() {
+      var li_selected = $('.btn-filter-phase.active').find('a:first');
+      // console.log(li_selected);
+      if ($('#'+li_selected.attr('id')).hasClass('active')) {
+        li_selected.addClass('dark lighten-1').removeClass('tertiary active');
+        li_selected.parent().removeClass('active');
+        var $stats = $('.btn-filter-phase.active');
+        var $items = $('.Search.list');
+        $items.show();
+        if ($stats.length == 0)
+          return;
+        var $vstats = $.map($stats, function(o) {return $(o).data('id'); });
+        $stats.each(function() {
+          var $stat = $(this);
+          $items.filter(function() {
+            return $vstats.indexOf($(this).data($stat.data('type'))) < 0;
+          }).hide();
+        })
+      }
+    });
+    function cancel_logic(){
+      var $stats = $('.btn-filter-phase.active');
+      var $items = $('.Search.list');
+      $items.show();
+      if ($stats.length == 0)
+        return;
+      var $vstats = $.map($stats, function(o) {return $(o).data('id'); });
+      $stats.each(function() {
+        var $stat = $(this);
+        $items.filter(function() {
+          return $vstats.indexOf($(this).data($stat.data('type'))) < 0;
+        }).hide();
+      })
+    }
 });
 $(document).ready(function(){
   if($(this).scrollTop() == 0){
@@ -263,7 +335,11 @@ $indicators = [
 </div>
 <sidebar class="projects-sidebar">
     <div class="projects-sidebar-img">
+      <?php if ($ActualEps != 34013 && $ActualEps != 34021 && $ActualEps != 34015 && $ActualEps != 34017): ?>
         <?= $this->Html->image('photos/energia.jpg') ?>
+      <?php else:?>
+        <?= $this->Html->image('photos/gas.jpg') ?>
+      <?php endif;?>
     </div>
     <div class="projects-sidebar-total">
         <!--Variable que reflejara el resultado total de proyectos tanto Ws como fuente alterna.-->
@@ -322,48 +398,58 @@ $indicators = [
               <i class="large material-icons noselect" id="btn_main_filter">search</i>
             </a>
           </div>
-          <div class="fixed-action-btn" style="margin-bottom: 178px" id="div_filter_phase">
+          <div class="fixed-action-btn filters" style="margin-bottom: 178px">
             <a class="btn-floating btn-large phase ii noselect">
               Área
             </a>
-            <ul style="right: 40px !important;">
-              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
+            <ul style="right: 40px !important;" id="ul-area">
+              <li><a class="btn-floating warning"><i id="cancel_area" class="large material-icons">cancel</i></a></li>
               <?php foreach ($area as $ws_area => $area_value):?>
-                <li class="btn-filter-phase" data-id="<?=$area_value['code_type_id']?>" data-type="area"  value="<?=$area_value['code_type_id']?>"><a id="<?=$area_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($area_value['description'],0,3).'.'?></a></li>
+                <?php if ($area_value['code_type_id'] == "457"): ?>
+                  <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$area_value['description']?>" data-id="<?=$area_value['code_type_id']?>" data-type="area"  value="<?=$area_value['code_type_id']?>"><a id="<?=$area_value['code_type_id']?>" class="btn-floating dark lighten-1">TI</a></li>
+                <?php elseif ($area_value['code_type_id'] == "230"): ?>
+                    <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$area_value['description']?>" data-id="<?=$area_value['code_type_id']?>" data-type="area"  value="<?=$area_value['code_type_id']?>"><a id="<?=$area_value['code_type_id']?>" class="btn-floating dark lighten-1">DGH</a></li>
+                <?php elseif ($area_value['code_type_id'] == "456"): ?>
+                    <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$area_value['description']?>" data-id="<?=$area_value['code_type_id']?>" data-type="area"  value="<?=$area_value['code_type_id']?>"><a id="<?=$area_value['code_type_id']?>" class="btn-floating dark lighten-1">SA</a></li>
+                <?php elseif ($area_value['code_type_id'] == "233"): ?>
+                    <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$area_value['description']?>" data-id="<?=$area_value['code_type_id']?>" data-type="area"  value="<?=$area_value['code_type_id']?>"><a id="<?=$area_value['code_type_id']?>" class="btn-floating dark lighten-1">GH</a></li>
+                  <?php elseif ($area_value['code_type_id'] == "463"): ?>
+                    <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$area_value['description']?>" data-id="<?=$area_value['code_type_id']?>" data-type="area"  value="<?=$area_value['code_type_id']?>"><a id="<?=$area_value['code_type_id']?>" class="btn-floating dark lighten-1">GP</a></li>
+                <?php endif;?>
               <?php endforeach;?>
             </ul>
           </div>
-          <div class="fixed-action-btn" style="margin-bottom: 236px">
+          <div class="fixed-action-btn filters" style="margin-bottom: 236px">
             <a class="btn-floating btn-large phase iii noselect">
               MEC
             </a>
-            <ul style="right: -20px !important;">
-              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
+            <ul style="right: -20px !important;" id="ul-mec">
+              <li><a class="btn-floating warning"><i id="cancel_mec" class="large material-icons" id="btn_main_filter">cancel</i></a></li>
               <?php foreach ($mec as $ws_mec => $mec_value):?>
-                <li class="btn-filter-phase" data-id="<?=$mec_value['code_type_id']?>" data-type="mec"  value="<?=$mec_value['code_type_id']?>"><a id="<?=$mec_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($mec_value['description'],0,3)?></a></li>
+                <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$mec_value['description']?>" data-id="<?=$mec_value['code_type_id']?>" data-type="mec"  value="<?=$mec_value['code_type_id']?>"><a id="<?=$mec_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($mec_value['description'],0,3)?></a></li>
               <?php endforeach;?>
             </ul>
           </div>
-          <div class="fixed-action-btn" style="margin-bottom: 294px">
+          <div class="fixed-action-btn filters" style="margin-bottom: 294px">
             <a class="btn-floating btn-large phase iv noselect">
               Ctg
             </a>
-            <ul style="right: 10px;">
-              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter">cancel</i></a></li>
+            <ul style="right: 10px;" id="ul-ctg">
+              <li><a class="btn-floating warning"><i class="large material-icons" id="cancel_ctg">cancel</i></a></li>
               <?php foreach ($category as $ws_category => $category_value):?>
-                <li class="btn-filter-phase" data-id="<?=$category_value['code_type_id']?>" data-type="category" value="<?=$category_value['code_type_id']?>"><a id="<?=$category_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($category_value['description'],0,3).'.'?></a></li>
+                <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$category_value['description']?>" data-id="<?=$category_value['code_type_id']?>" data-type="category" value="<?=$category_value['code_type_id']?>"><a id="<?=$category_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($category_value['description'],0,3).'.'?></a></li>
               <?php endforeach;?>
             </ul>
           </div>
-          <div class="fixed-action-btn" style="margin-bottom: 351px">
+          <div class="fixed-action-btn filters" style="margin-bottom: 351px">
             <a class="btn-floating btn-large phase v noselect">Fase</a>
-            <ul style="right: 92px;">
-              <li><a class="btn-floating warning"><i class="large material-icons" id="btn_main_filter" style="right: 5px">cancel</i></a></li>
-              <li class="btn-filter-phase" data-id="5" data-type="fase" value="Cierre y transparencia"><a id="phase-v" class="btn-floating dark lighten-1" style="right: 5px">V</a></li>
-              <li class="btn-filter-phase" data-id="4" data-type="fase" value="Ejecución"><a id="phase-iv" class="btn-floating dark lighten-1" style="right: 5px">IV</a></li>
-              <li class="btn-filter-phase" data-id="3" data-type="fase" value="Planeación"><a id="phase-iii" class="btn-floating dark lighten-1" style="right: 5px">III</a></li>
-              <li class="btn-filter-phase" data-id="2" data-type="fase" value="Selección"><a id="phase-ii" class="btn-floating dark lighten-1" style="right: 5px">II</a></li>
-              <li class="btn-filter-phase" data-id="1" data-type="fase" value="Estructuración"><a id="phase-i" class="btn-floating dark lighten-1" style="bottom: 47px; left: 170px">I</a></li>
+            <ul style="right: 92px;" id="ul-fase">
+              <li><a class="btn-floating warning"><i class="large material-icons" id="cancel_fase" style="right: 5px">cancel</i></a></li>
+              <li class="btn-filter-phase"  data-id="5" data-type="fase" value="5"><a id="phase-v" class="btn-floating dark lighten-1" style="right: 5px">V</a></li>
+              <li class="btn-filter-phase" data-id="4" data-type="fase" value="4"><a id="phase-iv" class="btn-floating dark lighten-1" style="right: 5px">IV</a></li>
+              <li class="btn-filter-phase" data-id="3" data-type="fase" value="3"><a id="phase-iii" class="btn-floating dark lighten-1" style="right: 5px">III</a></li>
+              <li class="btn-filter-phase" data-id="2" data-type="fase" value="2"><a id="phase-ii" class="btn-floating dark lighten-1" style="right: 5px">II</a></li>
+              <li class="btn-filter-phase" data-id="1" data-type="fase" value="1"><a id="phase-i" class="btn-floating dark lighten-1" style="bottom: 47px; left: 170px">I</a></li>
             </ul>
           </div>
         </form>
@@ -491,8 +577,7 @@ $indicators = [
               <?php else:?>
                 <?php $SPI_WS = 0;?>
               <?php endif; ?>
-              <div class="sheet pointer" onclick="location.href='/Portal-Web/projects/project/<?=$project->id?>/<?=$current_user['V_ID_P_USER']?>/<?=urlencode(base64_encode($ActualEps))?>/<?=urlencode(base64_encode($Categoria1))?>/<?=urlencode(base64_encode($Categoria2))?>/<?=urlencode(base64_encode($NameEpsPrjs))?>/<?=urlencode(base64_encode($titlePrjs))?>
-                /<?=urlencode(base64_encode($idEpsParent))?>/<?=urlencode(base64_encode($value["name"]))?>/<?=$value["id_p_project"]?>/<?=$SPI_WS?>/<?=$value["data_date"]?>/<?=$value["project_id_p6"]?>/<?=$value["fepo"]?>/<?=$value["da"]?>/<?=$value["pi"]?>/<?=$value["od"]?>'">
+              <div class="sheet pointer" onclick="location.href='/Portal-Web/projects/project/<?=$project->id?>/<?=$current_user['V_ID_P_USER']?>/<?=urlencode(base64_encode($ActualEps))?>/<?=urlencode(base64_encode($Categoria1))?>/<?=urlencode(base64_encode($Categoria2))?>/<?=urlencode(base64_encode($NameEpsPrjs))?>/<?=urlencode(base64_encode($titlePrjs))?>/<?=urlencode(base64_encode($idEpsParent))?>/<?=urlencode(base64_encode($value["name"]))?>/<?=$value["id_p_project"]?>/<?=$SPI_WS?>/<?=$value["data_date"]?>/<?=$value["project_id_p6"]?>/<?=$value["fepo"]?>/<?=$value["da"]?>/<?=$value["pi"]?>/<?=$value["od"]?>'">
                   <div class="sheet-line regional-text text-<?=$project->REGIONAL?>">
                       <div class="sheet-line-item"></div>
                       <div class="sheet-line-item"></div>
@@ -539,7 +624,7 @@ $indicators = [
                       <div class="data-box">
                         <div class="data-box-circle phase tooltipped" data-position="bottom" data-tooltip="Resultado del cociente de Valor Ganado dividido para el Valor Presupuestado hasta la fecha" style="background-color:
                             <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                              <?php if ($SPI_WS >= $valueFase['minimun'] && $SPI_WS <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
+                              <?php if ($SPI_WS > $valueFase['minimun'] && $SPI_WS <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
                                   <?php echo $valueFase['hexa_color'];?>
                               <?php endif;?>
                             <?php endforeach; ?>">
@@ -565,11 +650,11 @@ $indicators = [
                       <div class="data-box">
                           <div class="data-box-circle tooltipped" data-position="bottom" data-tooltip="División entre AC y el PPTO (AC/PPTO)" style="background-color:
                               <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                                <?php if ($project->AC_BAC >= $valueFase['minimun'] && $project->AC_BAC <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'AC/BAC'):?>
+                                <?php if ($project->AC_PPTO  >= $valueFase['minimun'] && $project->AC_PPTO <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI TOTAL'):?>
                                     <?php echo $valueFase['hexa_color'];?>
                                 <?php endif;?>
                               <?php endforeach; ?>">
-                            <h5><?=$project->AC_BAC?>%</h5>
+                            <h5><?=$project->AC_PPTO?></h5>
                           </div>
                           <div class="data-box-content">
                               <span>CPI Total</span>
@@ -582,7 +667,11 @@ $indicators = [
                                     <?php echo $valueFase['hexa_color'];?>
                                 <?php endif;?>
                               <?php endforeach; ?>">
-                            <h5><?=$project->IGR?>%</h5>
+                            <?php if($project->IGR != null && $project->IGR != 100):?>
+                               <h5><?= number_format($project->IGR,1)?>%</h5>
+                            <?php elseif($project->IGR == 100):?>
+                              <h5><?=$project->IGR?>%</h5>
+                            <?php endif;?>
                           </div>
                           <div class="data-box-content">
                               <span>IGR</span>

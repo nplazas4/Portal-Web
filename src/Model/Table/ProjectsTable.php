@@ -75,7 +75,6 @@ class ProjectsTable extends Table
 
         $validator
             ->scalar('DESCRIPTION')
-            ->maxLength('DESCRIPTION', 500)
             ->allowEmpty('DESCRIPTION');
 
         $validator

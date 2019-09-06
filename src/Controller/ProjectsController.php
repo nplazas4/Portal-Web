@@ -178,9 +178,33 @@ class ProjectsController extends AppController
       ]
       ]);
     }
+    private function ProjectWbs($graph = null){
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/wbs/list/?v_project='.$graph);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      $headers = array();
+      $headers[] = 'Accept: */*';
+      $headers[] = 'Accept-Encoding: gzip, deflate';
+      $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+      $headers[] = 'Cache-Control: no-cache';
+      $headers[] = 'Connection: keep-alive';
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $result = curl_exec($ch);
+      if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+      }
+      else {
+        $results = json_decode($result, true);
+        $var1 = array_values($results)[0];
+        $this->set('wbsEstructure', $var1);
+      }
+      curl_close($ch);
+    }
     public function project($id, $current_user_pr = null,$ActualEps = null, $Categoria1=null, $Categoria2 = null, $NameEps = null, $title = null, $idEpsParent = null,$name = null, $code = null, $spi = null, $corte = null,
      $graph = null, $fepo = null, $da = null, $pi = null, $od = null)
     {
+        $this->ProjectWbs($graph);
         $this->index();
         $this->IndicatorColor();
         $this->RomanNumbers();
