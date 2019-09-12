@@ -430,29 +430,23 @@ $("#button_caf_add").click(function(){
     <?php
     setlocale(LC_ALL, "es_ES");
     $FoPo = strftime("%d %B, %Y", strtotime($projects->FOPO));
-    $FePo = strftime("%d %B, %Y", strtotime($projects->FEPO));
     $Adj = strftime("%d %B, %Y", strtotime($projects->ADJUDICACION));
     $Apr = strftime("%d %B, %Y", strtotime($projects->APROBACION));
-    $n = intval($projects->FASE);
-    $res = '';
-    /*** Array con los numeros romanos  ***/
-    foreach ($roman_numerals as $roman => $number) {
-        /*** Dividir para encontrar resultados en array ***/
-        $matches = intval($n / $number);
-        /*** Asignar el numero romano al resultado ***/
-        $res .= str_repeat($roman, $matches);
-        /*** Descontar el numero romano al total ***/
-        $n = $n % $number;
-    }
     ?>
     <sidebar class="project-sidebar">
         <?php if ($code == $projects->ID_PROJECT): ?>
-          <h1><?=$name?></h1>
+          <h1><?=$ws_project["name"]?></h1>
         <?php else: ?>
           <h1><?=$projects->PROJECT_NAME?></h1>
         <?php endif; ?>
         <div class="project-sidebar-phase phase primary">
-            <h2>Fase <?=$res?></h2>
+            <h2>
+              <?php foreach ($fase as $ws_fase => $fase_value):?>
+                <?php if ($fase_value['code_type_id'] == $ws_project["code_fase"]): ?>
+                  <?=$fase_value['description']?>
+                <?php endif;?>
+              <?php endforeach;?>
+            </h2>
         </div>
         <div class="project-sidebar-percentages">
             <div class="chart" id="advance"></div>
@@ -587,32 +581,32 @@ $("#button_caf_add").click(function(){
             <div class="d-flex col s12 m6 l4 xl3">
                 <div class="indicator type-1 light-blue darken-2">
                     <h5 class="mr-2">FEPO</h5>
-                    <?php if($fepo != null):?>
-                      <h5 class="ml-auto right-align"><?= $fepo ?></h5>
+                    <?php if($ws_project["fepo"] != null):?>
+                      <h5 class="ml-auto right-align"><?= strftime("%d %B, %Y", strtotime($ws_project["fepo"])) ?></h5>
                     <?php endif;?>
                 </div>
             </div>
             <div class="d-flex col s12 m6 l4 xl3">
                 <div class="indicator type-1 light-blue darken-2">
                     <h5 class="mr-2">Duración total</h5>
-                    <?php if($od != null):?>
-                      <h5 class="ml-auto right-align"><?= $od ?></h5>
+                    <?php if($ws_project["od"] != null):?>
+                      <h5 class="ml-auto right-align"><?= $ws_project["od"] ?></h5>
                     <?php endif;?>
                 </div>
             </div>
             <div class="d-flex col s12 m6 l4 xl3">
                 <div class="indicator type-1 light-blue darken-2">
                     <h5 class="mr-2">Días de atraso</h5>
-                    <?php if($da != null):?>
-                      <h5 class="ml-auto right-align"><?= $da ?></h5>
+                    <?php if($ws_project["da"] != null):?>
+                      <h5 class="ml-auto right-align"><?= $ws_project["da"] ?></h5>
                     <?php endif;?>
                 </div>
             </div>
             <div class="d-flex col s12 m6 l4 xl3">
                 <div class="indicator type-1 light-blue darken-2">
                     <h5 class="mr-2">Porcentaje de impacto</h5>
-                    <?php if($pi != null):?>
-                      <h5 class="ml-auto right-align"><?= $pi ?>%</h5>
+                    <?php if($ws_project["pi"] != null):?>
+                      <h5 class="ml-auto right-align"><?= $ws_project["pi"] ?>%</h5>
                     <?php endif;?>
                 </div>
             </div>
@@ -1524,11 +1518,15 @@ $("#button_caf_add").click(function(){
                               <h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3>
                           </li>
                           <li>
-                              <small>BL Fecha Inicio</small>
+                              <small>NL Units % Complete</small>
+                              <h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3>
+                          </li>
+                          <li>
+                              <small>BL Inicio</small>
                               <h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3>
                           </li>
                           <li>
-                              <small>BL Fecha Fin</small>
+                              <small>BL Fin</small>
                               <h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3>
                           </li>
                           <li>
@@ -1754,7 +1752,7 @@ $("#button_caf_add").click(function(){
 $(document).ready(function(){
   <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
     <?php if ($EstructureLevel1["level"] != 1): ?>
-      $( "#div-"+<?=$EstructureLevel1["wbs_parent_id"]?>).after('<div class="collapsible-body"><ul class="collapsible"><li><div class="collapsible-header" id="div-'+<?=$EstructureLevel1["wbs_id"]?>+'"><i id="i-'+<?=$EstructureLevel1["wbs_id"]?>+'" class="material-icons">keyboard_arrow_down</i><ul class="collapsible-header-content"><li><small>Nombre</small><h3><?=$EstructureLevel1["name"]?></h3></li><li><small>Duración original</small><h3 id="duration-level-1"><?=$EstructureLevel1["original duration"]?></h3></li><li><small>Schedule % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3></li><li><small>BL Fecha Inicio</small><h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3></li><li><small>BL Fecha Fin</small><h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3></li><li><small>Inicio</small><h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3></li><li><small>Fin</small><h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3></li><li style="max-width: 50px"><small>SPI</small><h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3></li></ul></div></div></li></ul></div>');
+      $( "#div-"+<?=$EstructureLevel1["wbs_parent_id"]?>).after('<div class="collapsible-body"><ul class="collapsible"><li><div class="collapsible-header" id="div-'+<?=$EstructureLevel1["wbs_id"]?>+'"><i id="i-'+<?=$EstructureLevel1["wbs_id"]?>+'" class="material-icons">keyboard_arrow_down</i><ul class="collapsible-header-content"><li><small>Nombre</small><h3><?=$EstructureLevel1["name"]?></h3></li><li><small>Duración original</small><h3 id="duration-level-1"><?=$EstructureLevel1["original duration"]?></h3></li><li><small>Schedule % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3></li><li><small>NL Units % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3></li><li><small>BL Inicio</small><h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3></li><li><small>BL Fin</small><h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3></li><li><small>Inicio</small><h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3></li><li><small>Fin</small><h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3></li><li><small>SPI</small><h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3></li></ul></div></div></li></ul></div>');
     <?php if($EstructureLevel1["connect_by_isleaf"] != 0):?>
       $("#div-"+<?=$EstructureLevel1["wbs_id"]?>).click(false);
       $("#i-"+<?=$EstructureLevel1["wbs_id"]?>).empty();

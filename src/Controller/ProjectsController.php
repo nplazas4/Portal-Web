@@ -201,9 +201,59 @@ class ProjectsController extends AppController
       }
       curl_close($ch);
     }
+    private function ProjectsFase(){
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodefase/list/');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      $headers = array();
+      $headers[] = 'Accept: */*';
+      $headers[] = 'Accept-Encoding: gzip, deflate';
+      $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+      $headers[] = 'Cache-Control: no-cache';
+      $headers[] = 'Connection: keep-alive';
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $result = curl_exec($ch);
+      if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+      }
+      else {
+        $results = json_decode($result, true);
+        $var1 = array_values($results)[0];
+        $this->set('fase', $var1);
+      }
+      curl_close($ch);
+    }
+    Private function ProjectProfile($id_project = null){
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projects/projectid/'.$id_project);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      $headers = array();
+      $headers[] = 'Accept: */*';
+      $headers[] = 'Accept-Encoding: gzip, deflate';
+      $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+      $headers[] = 'Cache-Control: no-cache';
+      $headers[] = 'Connection: keep-alive';
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $result = curl_exec($ch);
+      if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+      }
+      else {
+        $results = json_decode($result, true);
+        $var1 = array_values($results)[0];
+        foreach ($var1 as $ws_project => $project_value) {
+          $this->set('ws_project', $project_value);
+        }
+      }
+      curl_close($ch);
+    }
     public function project($id, $current_user_pr = null,$ActualEps = null, $Categoria1=null, $Categoria2 = null, $NameEps = null, $title = null, $idEpsParent = null,$name = null, $code = null, $spi = null, $corte = null,
-     $graph = null, $fepo = null, $da = null, $pi = null, $od = null)
+     $graph = null)
     {
+        $this->ProjectsFase();
+        $this->ProjectProfile($graph);
         $this->ProjectWbs($graph);
         $this->index();
         $this->IndicatorColor();
@@ -241,11 +291,11 @@ class ProjectsController extends AppController
         $this->set('spi', $spi);
         $this->set('corte', $corte);
         $this->set('graph', $graph);
-        $this->set('da', $da);
-        $this->set('pi', $pi);
-        $this->set('od', $od);
-        setlocale(LC_ALL, "es_ES");
-        $this->set('fepo', strftime("%d %B, %Y", strtotime($fepo)));
+        // $this->set('da', $da);
+        // $this->set('pi', $pi);
+        // $this->set('od', $od);
+        // setlocale(LC_ALL, "es_ES");
+        // $this->set('fepo', strftime("%d %B, %Y", strtotime($fepo)));
     }
     public function ImportExcelCaf()
     {
@@ -580,6 +630,7 @@ class ProjectsController extends AppController
     }
     public function projects($current_user_pr = null, $EPS = null, $Categoria1 = null, $Categoria2 = null, $NameEps = null, $title=null, $idEpsParent = null)
     {
+        $this->ProjectsFase();
         $this->ProjectCodeArea();
         $this->ProjectCodeCategory();
         $this->ProjectCodeMec();
@@ -926,7 +977,7 @@ class ProjectsController extends AppController
     {
       $this->company($current_user, $Id_eps, $NameEps, $titleParentEps, $idParentEps);
     }
-    // Función que obtiene todos los proyectos registros en la BD local.
+    // Función que obtiene todos los proyectos registros en la BD local. QUITAR
     public function AllProjects(){
       $AllLocalDBProjects = $this->Projects->find('all');
       $this->set('AllLocalDBProjects', $AllLocalDBProjects->all());

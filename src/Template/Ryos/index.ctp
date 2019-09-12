@@ -676,8 +676,10 @@ left: 25%;
   <div class="section home">
     <div class="home-menu">
       <div class="container-contact100">
-        <a class="btn-floating btn-large Scroll-button" style="margin-right:5%; margin-bottom:8%" id="next"><i class="material-icons">arrow_upward</i></a>
-        <a class="return btn-floating btn-large Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
+        <div class="fixed-action-btn">
+          <a class="btn-floating btn-large Scroll-button" style="margin-right:5%; margin-bottom:10%" id="next"><i class="material-icons">arrow_upward</i></a>
+          <a class="return btn-floating btn-large Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
+        </div>
       <div class="notify bar-top" id="div-notify" data-notification-status="success"><i id="icon-notify" class="material-icons mr-2">cancel</i> Por favor revisar, campos vacíos.</div>
         <main style="display:none">
           <div class="wrapper">
@@ -693,34 +695,34 @@ left: 25%;
               </nav>
             </div>
           </main>
-        <div class="wrap-contact100">
-    <form class="contact100-form validate-form active" id="Form-1" style="padding-bottom: 0 !important">
-      <span class="contact100-form-title">
-        IDENTIFICACIÓN DE REQUERIMIENTOS Y OPORTUNIDADES (RYOS)
-      </span>
-      <span class="contact100-form-sub-title">
-        ENTRADA
-      </span>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-name">
-        <span class="label-input100">Nombre Requerimiento u Oportunidad - RYOS</span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Requerimientos y oportunidades que tienen potencial para desarrollarse como iniciativa y posteriormente como proyecto en el GEB." onclick="return false;">help_outline</i></span>
-        <input class="input100 entrada" id="ryos-name" autocomplete="off" type="text" name="nombre" onkeyup="validarTexto(this);" placeholder="Ingrese el nombre del requerimiento u oportunidad">
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-gestor">
-        <span class="label-input100">Gestor RYOS</span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Responsable de RYOS" onclick="return false;">help_outline</i></span>
-        <input class="input100 entrada" id="ryos-gestor" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="gestor" placeholder="Ingrese el gestor">
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100">
-        <span class="label-input100">Grupo Estratégico de Negocio (GEN)</span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="GEN a la cual pertenece el RYOS" onclick="return false;">help_outline</i></span>
-        <select id="select-grupo-est" name="select-entrada" >
-           <option class="work-option">Distribución</option>
-           <option class="work-option">Transmisión y transporte</option>
-           <option class="work-option">Generación</option>
-           <option class="work-option">Corporativo</option>
-        </select>
-      </div>
+    <div class="wrap-contact100">
+      <form class="contact100-form validate-form active" id="Form-1" style="padding-bottom: 0 !important">
+        <span class="contact100-form-title">
+          IDENTIFICACIÓN DE REQUERIMIENTOS Y OPORTUNIDADES (RYOS)
+        </span>
+        <span class="contact100-form-sub-title">
+          ENTRADA
+        </span>
+        <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-name">
+          <span class="label-input100">Nombre Requerimiento u Oportunidad - RYOS</span>
+          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Requerimientos y oportunidades que tienen potencial para desarrollarse como iniciativa y posteriormente como proyecto en el GEB." onclick="return false;">help_outline</i></span>
+          <input class="input100 entrada" id="ryos-name" autocomplete="off" type="text" name="nombre" onkeyup="validarTexto(this);" placeholder="Ingrese el nombre del requerimiento u oportunidad">
+        </div>
+        <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-gestor">
+          <span class="label-input100">Gestor RYOS</span>
+          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Responsable de RYOS" onclick="return false;">help_outline</i></span>
+          <input class="input100 entrada" id="ryos-gestor" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="gestor" placeholder="Ingrese el gestor">
+        </div>
+        <div class="wrap-input100 rs1-wrap-input100">
+          <span class="label-input100">Grupo Estratégico de Negocio (GEN)</span>
+          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="GEN a la cual pertenece el RYOS" onclick="return false;">help_outline</i></span>
+          <select id="select-grupo-est" name="select-entrada" >
+            <option class="work-option">Distribución</option>
+            <option class="work-option">Transmisión y transporte</option>
+            <option class="work-option">Generación</option>
+            <option class="work-option">Corporativo</option>
+         </select>
+       </div>
       <div class="wrap-input100 rs1-wrap-input100 validate-input">
         <span class="label-input100">País</span>
         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="País donde se llevaría a cabo el proyecto" onclick="return false;">help_outline</i></span>
@@ -755,7 +757,7 @@ left: 25%;
         </select>
       </div>
       <div id="input_other_filial">
-        <input class="input100" id="ryos-cual" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="email" placeholder="¿Cuál?">
+        <input class="input100" id="ryos-cual" onkeyup="validarTexto(this);" autocomplete="off" type="text" placeholder="¿Cuál?">
       </div>
     </div>
     <div class="wrap-input100 rs1-wrap-input100 validate-input entrada" id="div-vice">
@@ -1000,7 +1002,7 @@ left: 25%;
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-just-peti" style="display:none">
               <span class="label-input100">Justificación</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-              <input class="input100" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" id="input-just-peti" placeholder="Ingrese la justificación">
+              <input class="input100 ti-exclusive" value="-" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" id="input-just-peti" placeholder="Ingrese la justificación">
             </div>
             <span class="crec-flags contact100-form-sub-title">
               Alineamiento Estratégico (Fit Estratégico)
@@ -1251,7 +1253,7 @@ left: 25%;
             </div>
             <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="div-cual2">
               <span class="label-input100">¿Cuál? (opcional)</span>
-              <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál? (opcional)" onclick="return false;">help_outline</i></span>
               <input class="input100 form3" value="-" id="cual2" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
             </div>
             <span class="socio-est contact100-form-sub-title" style="display:none">Porcentaje de un socio estratégico</span>
@@ -1490,10 +1492,10 @@ left: 25%;
               <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Criticidad en la operación</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-                <select id="select-work">
-                   <option class="work-option">No afecta la continuidad operacional</option>
-                   <option class="work-option">Afectación menor a la continuidad operacional</option>
-                   <option class="work-option">Afectación mayor a la continuidad operacional</option>
+                <select id="select-crit-co">
+                   <option class="crit-co-option">No afecta la continuidad operacional</option>
+                   <option class="crit-co-option">Afectación menor a la continuidad operacional</option>
+                   <option class="crit-co-option">Afectación mayor a la continuidad operacional</option>
                 </select>
               </div>
               <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
@@ -1539,12 +1541,15 @@ left: 25%;
               <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-                <select id="select-work">
-                   <option class="work-option">No hay cambio en el esquema de mantenimiento del activo o sus componentes</option>
-                   <option class="work-option">Reduce frecuencia de paradas programadas sin modificar tiempo de intervención</option>
-                   <option class="work-option">Reduce tiempo de paradas programadas sin modificar su frecuencia</option>
-                   <option class="work-option">La intervención permite reducir el tiempo de las paradas programadas y su frecuencia</option>
+                <select id="select-sinergia-co">
+                  <option class="sinergia-co-option">NO</option>
+                   <option class="sinergia-co-option">SI</option>
                 </select>
+              </div>
+              <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-cual-co" style="display:none">
+                <span class="label-input100">¿Cuál (es)?</span>
+                <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál (es)?" onclick="return false;">help_outline</i></span>
+                <input class="input100 form5" value="-" id="cual-co" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
               </div>
               <!-- TI -->
               <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
@@ -1591,23 +1596,28 @@ left: 25%;
                    <option class="work-option">Nueva en el mundo</option>
                 </select>
               </div>
-            <!-- </div> -->
             <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">SI</option>
-                 <option class="work-option">NO</option>
+              <select id="select-sinergia-ti">
+                <option class="sinergia-ti-option">NO</option>
+                 <option class="sinergia-ti-option">SI</option>
               </select>
+            </div>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="div-cual-ti">
+              <span class="label-input100">¿Cuál (es)?</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál (es)?" onclick="return false;">help_outline</i></span>
+              <input class="input100 form5" value="-" id="cual-ti" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
             </div>
             <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Complejidad del proyecto</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">Alta</option>
-                 <option class="work-option">Media</option>
-                 <option class="work-option">Baja</option>
+              <select id="select-complejidad-ti">
+                 <option class="complejidad-ti-option">Alta</option>
+                 <option class="complejidad-ti-option">Media</option>
+                 <option class="complejidad-ti-option">Baja</option>
               </select>
+              <span id="complejidad-ti-span">Duración ejecución proyecto mayor a 8 meses, participación de más de 3 áreas de la empresa y un equipo de proyecto mayor a 5 personas.</span>
             </div>
             <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Impacto sobre la empresa</span>
@@ -1630,21 +1640,23 @@ left: 25%;
             <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Resistencia al cambio</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">Alta</option>
-                 <option class="work-option">Media</option>
-                 <option class="work-option">Baja</option>
+              <select id="select-resistencia-ti">
+                 <option class="resistencia-ti-option">Alta</option>
+                 <option class="resistencia-ti-option">Media</option>
+                 <option class="resistencia-ti-option">Baja</option>
               </select>
+              <span id="span-resistencia-ti">No es un cambio necesario y en la compañía se ve como una carga adicional en las tareas.</span>
             </div>
             <!-- AC -->
             <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Restricciones regulatorias</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">No se requieren trámites</option>
-                 <option class="work-option">Se requieren algunos trámites</option>
-                 <option class="work-option">Se requieren trámites</option>
+              <select id="select-restricciones-reg">
+                 <option class="restricciones-reg-option" value="no">No se requieren trámites</option>
+                 <option class="restricciones-reg-option" value="algunos">Se requieren algunos trámites</option>
+                 <option class="restricciones-reg-option" value="si">Se requieren trámites</option>
               </select>
+              <span id="span-restricciones-reg">Para implementarlo no se requieren trámites (p.e. Licencias o permisos) que pongan en riesgo la ejecución o la retrasen.</span>
             </div>
             <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Criticidad en la operación</span>
@@ -1658,47 +1670,56 @@ left: 25%;
             <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Disponibilidad de los recursos</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">Alta</option>
-                 <option class="work-option">Media</option>
-                 <option class="work-option">Baja</option>
+              <select id="select-disponibilidad">
+                 <option class="disponibilidad-option">Alta</option>
+                 <option class="disponibilidad-option">Media</option>
+                 <option class="disponibilidad-option">Baja</option>
               </select>
+              <span id="disponibilidad-span">GEB cuenta con recursos competentes suficientes para implementarlo.</span>
             </div>
             <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">SI</option>
+              <select id="select-sinergia-ac">
                  <option class="work-option">NO</option>
+                 <option class="work-option">SI</option>
               </select>
+            </div>
+            <div class="wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="div-cual-ac">
+              <span class="label-input100">¿Cuál (es)?</span>
+              <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál (es)?" onclick="return false;">help_outline</i></span>
+              <input class="input100 form5" value="-" id="cual-ac" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
             </div>
             <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Impacto en SST</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">Alto</option>
-                 <option class="work-option">Medio</option>
-                 <option class="work-option">Bajo</option>
+              <select id="select-impacto-sst">
+                 <option class="impacto-sst-option">Alto</option>
+                 <option class="impacto-sst-option">Medio</option>
+                 <option class="impacto-sst-option">Bajo</option>
               </select>
+              <span id="impacto-sst-info-span">Reduce la probabilidad de accidentes, incidentes y enfermedades laborales.</span>
             </div>
             <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Sinergia con estrategias de gestión humana</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
-              <select id="select-work">
-                 <option class="work-option">Alta</option>
-                 <option class="work-option">Media</option>
-                 <option class="work-option">Baja</option>
+              <select id="select-sinergia">
+                 <option class="sinergia-option">Alta</option>
+                 <option class="sinergia-option">Media</option>
+                 <option class="sinergia-option">Baja</option>
               </select>
+              <span id="sinergia-span">Permite apalancar las estrategias de gestión humana y calidad de vida.</span>
             </div>
               <!-- CRECIMIENTO -->
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Interconexión (Mercados entre)</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione la interconexión" onclick="return false;">help_outline</i></span>
-                <select id="select-work">
-                   <option class="work-option">Fuentes energéticas</option>
-                   <option class="work-option">Fuentes energéticas y grandes usuarios</option>
-                   <option class="work-option">Fuentes energéticas y ciudades pequeñas</option>
+                <select id="select-interconexion">
+                   <option class="interconexion-option" value="FE">Fuentes energéticas</option>
+                   <option class="interconexion-option" value="FE-GU">Fuentes energéticas y grandes usuarios</option>
+                   <option class="interconexion-option" value="FE-CP">Fuentes energéticas y ciudades pequeñas</option>
                 </select>
+                <span id="interconexion-span">Baja emisión y grandes usuarios industriales/comerciales o ciudades de más de 4 Millones de habitantes.</span><br />
               </div>
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Tecnología a instalar</span>
@@ -1712,38 +1733,45 @@ left: 25%;
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Complejidad del proyecto</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
-                <select id="select-work">
-                   <option class="work-option">Alta</option>
-                   <option class="work-option">Media</option>
-                   <option class="work-option">Baja</option>
+                <select id="select-complejidad-crec">
+                   <option class="complejidad-crec-option">Alta</option>
+                   <option class="complejidad-crec-option">Media</option>
+                   <option class="complejidad-crec-option">Baja</option>
                 </select>
+                <span id="complejidad-crec-span-1">- Más de tres activos para construir o línea de más de 100 km.</span><br/>
+                <span id="complejidad-crec-span-2">- CAPEX mayor de MUSD 100.</span><br/>
+                <span id="complejidad-crec-span-3">- Requiere expertos senior.</span><br/>
+                <span id="complejidad-crec-span-4">- Gran esfuerzo de ingeniería.</span>
               </div>
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Gestión social</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
-                <select id="select-work">
-                   <option class="work-option">Bajo</option>
-                   <option class="work-option">Medio</option>
-                   <option class="work-option">Alto</option>
+                <select id="select-social">
+                   <option class="social-option">Bajo</option>
+                   <option class="social-option">Medio</option>
+                   <option class="social-option">Alto</option>
                 </select>
+                <span id="social-span">Sin presencia de comunidades o grupos étnicos / zonas con antecedentes de negociaciones exitosas para proyectos lineales.</span>
               </div>
               <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Gestión ambiental</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
-                <select id="select-work">
-                   <option class="work-option">Bajo</option>
-                   <option class="work-option">Medio</option>
-                   <option class="work-option">Alto</option>
+                <select id="select-gestion-ambiental">
+                   <option class="gestion-ambiental-option">Bajo</option>
+                   <option class="gestion-ambiental-option">Medio</option>
+                   <option class="gestion-ambiental-option">Alto</option>
                 </select>
+                <span id="gestion-ambiental-span">Cambio menor de licencia ambiental.</span>
               </div>
-              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+              <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
                 <span class="label-input100">Sinergia con otros proyectos o activos propios</span>
                 <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando" onclick="return false;">help_outline</i></span>
-                <select id="select-work">
-                   <option class="work-option">Alta</option>
-                   <option class="work-option">Media</option>
-                   <option class="work-option">Baja</option>
+                <select id="select-sinergia-crec">
+                   <option class="sinergia-crec-option">Alta</option>
+                   <option class="sinergia-crec-option">Media</option>
+                   <option class="sinergia-crec-option">Baja</option>
                 </select>
+                <span id="sinergia-crec-span">En sinergia con otras empresas, activos o proyectos del GEB o Proyectos futuros.</span>
               </div>
             </form>
       <form class="contact100-form validate-form" id="Form-6" style="padding-bottom: 0 !important">
@@ -2269,6 +2297,7 @@ left: 25%;
           var empty_inputs2 = $('.input100.form3').filter(function(){return !$(this).val()}).length;
           var empty_inputs3 = $('.input100.ti-exclusive').filter(function(){return !$(this).val()}).length;
           var empty_inputs = empty_inputs1 + empty_inputs2 + empty_inputs3;
+          console.log(empty_inputs1+" "+empty_inputs2+ " "+empty_inputs3);
           if (empty_inputs == 0) {
             $('#triangule-text').removeAttr('style');
           } else {
@@ -2302,25 +2331,25 @@ left: 25%;
             $('#title-sec1').addClass('error-text');
           }
         }
-        console.log(empty_inputs1+" "+empty_inputs2);
+        // console.log(empty_inputs1+" "+empty_inputs2);
         if (empty_inputs == 0) {
-        Form_Numbers = $('.contact100-form.validate-form.active').index();
-        BtnReturnHide(Form_Numbers);
+          Form_Numbers = $('.contact100-form.validate-form.active').index();
+          BtnReturnHide(Form_Numbers);
         if ($('.contact100-form.validate-form.active').index() < $(".contact100-form.validate-form").length-1) {
             $('.contact100-form.validate-form.active').hide();
             $('.contact100-form.validate-form.active').removeClass("active").next().show().addClass("active");
         }
-        $('#next').show();
-        $('body,html').animate({
-          scrollTop : 0
-        }, 500);
+          $('#next').show();
+          $('body,html').animate({
+            scrollTop : 0
+          }, 500);
         } else {
-        if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
-        $('#btn-error').click();
-        setTimeout(function(){$('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')}, 4000);
+          if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
+            $('#btn-error').click();
+            setTimeout(function(){$('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')}, 4000);
+          }
         }
-        }
-        });
+      });
     function inputs_vacios(){
       $('.input100.entrada').filter(function(){return !$(this).val()}).after('<span class="bubble z-depth-2" style="font-size: small; color:red; margin-top: 10%">Número negativo</span>');
     }
@@ -2456,6 +2485,9 @@ left: 25%;
           $('#Div-valor input').addClass('form3');
           $('#div-cual2 input').addClass('form3');
         }
+        $('#div-cual-ti').hide();
+        $('#div-cual-co').hide();
+        $('#div-cual-ac').hide();
       });
       function mec_inputs(value_subcategoria){
         crec_flags(value_subcategoria);
@@ -2688,6 +2720,7 @@ left: 25%;
       $('#Pres-total').val(result_1 + result_2 + result_3 + result_4);
     });
   });
+  // Inicio funciones para validar campos (inputs).
   function validarNumero(numero){
     var Div_Id = $('#'+numero.id).parent().attr('id');
     count_alert = $('#'+Div_Id).find('.bubble.z-depth-2');
@@ -2714,4 +2747,184 @@ left: 25%;
       $(count_alert).remove();
     }
   }
+  /* Fin, funciones para validar Campos
+      Inicio, Javascript/Jquery Atractividad Técnicas
+    * Información reflejada en el span resistencia-info-span
+    * Crecimiento
+  */
+  $(document).ready(function(){
+    // CRECIMIENTO AT
+    // Interconexión
+    $('#select-interconexion').change(function(){
+      var value_rest = document.getElementById(this.id).value;
+      if (value_rest == 'FE') {
+        $('#interconexion-span').text("Baja emisión y grandes usuarios industriales/comerciales o ciudades de más de 4 Millones de habitantes.");
+      }else if (value_rest == 'FE-GU') {
+        $('#interconexion-span').text("Sector petroquímico, Clúster o ciudades entre 3 y 4 Millones de habitantes.");
+      }else if (value_rest == 'FE-CP') {
+        $('#interconexion-span').text("Ciudades con menos de 3 Millones de habitantes.");
+      }
+     });
+     // Complejidad del proyecto
+     $('#select-complejidad-crec').change(function(){
+       var value_rest = document.getElementById(this.id).value;
+       if (value_rest == 'Alta') {
+         $('#complejidad-crec-span-1').text("- Más de tres activos para construir o línea de más de 100 km.");
+         $('#complejidad-crec-span-2').text("- CAPEX mayor de MUSD 100.");
+         $('#complejidad-crec-span-3').text("- Requiere expertos senior.");
+         $('#complejidad-crec-span-4').text("- Gran esfuerzo de ingeniería.");
+       }else if (value_rest == 'Media') {
+         $('#complejidad-crec-span-1').text("- Dos a tres activos para construir o línea entre 50 y 100 km.");
+         $('#complejidad-crec-span-2').text("- CAPEX entre MUSD 20 y 100.");
+         $('#complejidad-crec-span-3').text("- Requiere pocos expertos senior.");
+         $('#complejidad-crec-span-4').text("- Esfuerzo mayor de ingeniería.");
+       }else if (value_rest == 'Baja') {
+         $('#complejidad-crec-span-1').text("- Un activo para construir.");
+         $('#complejidad-crec-span-2').text("- CAPEX menor a MUSD 20.");
+         $('#complejidad-crec-span-3').text("- No requiere recursos de expertos senior.");
+         $('#complejidad-crec-span-4').text("- Esfuerzo normal de ingeniería.");
+       }
+      });
+      // Gestión social
+      $('#select-social').change(function(){
+        var value_rest = document.getElementById(this.id).value;
+        if (value_rest == 'Bajo') {
+          $('#social-span').text("Sin presencia de comunidades o grupos étnicos / zonas con antecedentes de negociaciones exitosas para proyectos lineales.");
+        }else if (value_rest == 'Medio') {
+          $('#social-span').text("Presencia de comunidades o grupos étnicos sin antecedentes de oposición.");
+        }else if (value_rest == 'Alto') {
+          $('#social-span').text("Presencia de comunidades y grupos étnicos con antecedentes de oposición.");
+        }
+       });
+       // Gestión ambiental
+       $('#select-gestion-ambiental').change(function(){
+         var value_rest = document.getElementById(this.id).value;
+         if (value_rest == 'Bajo') {
+           $('#gestion-ambiental-span').text("Cambio menor de licencia ambiental.");
+         }else if (value_rest == 'Medio') {
+           $('#gestion-ambiental-span').text("Licenciamiento ambiental ante corporaciones.");
+         }else if (value_rest == 'Alto') {
+           $('#gestion-ambiental-span').text("Licenciamiento ambiental ante ANLA.");
+         }
+        });
+        // Sinergia con otros poryectos o activos propios
+        $('#select-sinergia-crec').change(function(){
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'Alta') {
+            $('#sinergia-crec-span').text("En sinergia con otras empresas, activos o proyectos del GEB o Proyectos futuros.");
+          }else if (value_rest == 'Media') {
+            $('#sinergia-crec-span').text("Cercano a proyectos o activos actuales del GEB.");
+          }else if (value_rest == 'Baja') {
+            $('#sinergia-crec-span').text("Sin conectividad o cercanía con proyectos o activos actuales del GEB.");
+          }
+        });
+    });
+    // Fin, atractividad técnica - crecimiento
+    // CO AT
+    $(document).ready(function(){
+      $('#select-sinergia-co').change(function(){
+        var value_rest = document.getElementById(this.id).value;
+        if (value_rest == 'SI') {
+          $('#div-cual-co').show();
+        }else{
+          $('#div-cual-co').hide();
+          $('#div-cual-ac').hide();
+          $('#div-cual-ti').hide();
+        }
+      });
+    });
+    // TI AT
+    $(document).ready(function(){
+      // Complejidad del proyecto
+      $('#select-complejidad-ti').change(function(){
+        var value_rest = document.getElementById(this.id).value;
+        if (value_rest == 'Alta') {
+          $('#complejidad-ti-span').text("Duración ejecución proyecto mayor a 8 meses, participación de más de 3 áreas de la empresa y un equipo de proyecto mayor a 5 personas.");
+        }else if (value_rest == 'Media') {
+          $('#complejidad-ti-span').text("Duración ejecución proyecto entre 4 y  8 meses, participación de 2 áreas diferentes a TI y un equipo de proyecto en promedio de 3 o 4 personas.");
+        }else if (value_rest == 'Baja') {
+          $('#complejidad-ti-span').text("Duración ejecución proyecto menor a 4 meses, participación de 1 o ninguna área diferente a TI y un equipo de proyecto de hasta 3 personas.");
+        }
+      });
+      // Resistencia al cambio
+      $('#select-resistencia-ti').change(function(){
+        var value_rest = document.getElementById(this.id).value;
+        if (value_rest == 'Alta') {
+          $('#span-resistencia-ti').text("No es un cambio necesario y en la compañía se ve como una carga adicional en las tareas.");
+        }else if (value_rest == 'Media') {
+          $('#span-resistencia-ti').text("Es un cambio necesario y en la compañía no se ve un cambio en el nivel de esfuerzo al realizar las tareas.");
+        }else if (value_rest == 'Baja') {
+          $('#span-resistencia-ti').text("Es un cambio necesario y en la compañía se ve como un alivio en las tareas.");
+        }
+      });
+      $('#select-sinergia-ti').change(function(){
+        var value_rest = document.getElementById(this.id).value;
+        if (value_rest == 'SI') {
+          $('#div-cual-ti').show();
+        }else{
+          $('#div-cual-ti').hide();
+          $('#div-cual-co').hide();
+          $('#div-cual-ac').hide();
+        }
+      });
+    });
+    // AC AT
+    $(document).ready(function(){
+      // Restricciones regulatorias
+      $('#select-restricciones-reg').change(function(){
+        var value_rest = document.getElementById(this.id).value;
+        if (value_rest == 'no') {
+          $('#span-restricciones-reg').text("Para implementarlo no se requieren trámites (p.e. licencias o permisos) que pongan en riesgo la ejecución o la retrasen.");
+        }else if (value_rest == 'algunos') {
+          $('#span-restricciones-reg').text("Para implementarlo se requieren algunos trámites (p.e. licencias o permisos) que podrían retrasar la ejecución.");
+        }else if (value_rest == 'si') {
+          $('#span-restricciones-reg').text("Para implementarlo se requieren  trámites (p.e. licencias o permisos) que ponen en riesgo la ejecución o la retrasan.");
+        }
+      });
+      // Disponibilidad de los recursos
+      $('#select-disponibilidad').change(function(){
+        var value_disponibilidad = document.getElementById(this.id).value;
+        if (value_disponibilidad == 'Alta') {
+          $('#disponibilidad-span').text("GEB cuenta con recursos competentes suficientes para implementarlo.");
+        }else if (value_disponibilidad == 'Media') {
+          $('#disponibilidad-span').text("GEB debe contratar algunos recursos nuevos para implementarlo.");
+        }else if (value_disponibilidad == 'Baja') {
+          $('#disponibilidad-span').text("GEB debe contratar todos los recursos para implementarlo.");
+        }
+      });
+      // Impacto en SST
+      $('#select-impacto-sst').change(function(){
+        var value_sst = document.getElementById(this.id).value;
+        if (value_sst == 'Bajo') {
+          $('#impacto-sst-info-span').text("No reducen la probebilidad de accidentes, incidentes y enfermedades laborales.");
+        }else if (value_sst == 'Medio') {
+          $('#impacto-sst-info-span').text("Se evidencia mejoras potenciales en al menos uno de los aspectos (salud o seguridad en el trabajo).");
+        }else if (value_sst == 'Alto') {
+          $('#impacto-sst-info-span').text("Reduce la probabilidad de accidentes, incidentes y enfermedades laborales.");
+        }
+      });
+      // Sinergia con estrategias de gestión humana
+      $('#select-sinergia').change(function(){
+        var value_sinergia = document.getElementById(this.id).value;
+        // console.log(value_sinergia);
+        if (value_sinergia == 'Alta') {
+          $('#sinergia-span').text("Permite apalancar las estrategias de gestión humana y calidad de vida.");
+        }else if (value_sinergia == 'Media') {
+          $('#sinergia-span').text("Apalanca alguna de las estrategias de gestión humana y calidad de vida.");
+        }else if (value_sinergia == 'Baja') {
+          $('#sinergia-span').text("No apalanca las estrategias de gestión humana y calidad de vida.");
+        }
+      });
+      $('#select-sinergia-ac').change(function(){
+        var value_rest = document.getElementById(this.id).value;
+        if (value_rest == 'SI') {
+          $('#div-cual-ac').show();
+        }else{
+          $('#div-cual-ac').hide();
+          $('#div-cual-co').hide();
+          $('#div-cual-ti').hide();
+        }
+      });
+    });
+  // Fin Javascript/Jquery Atractividad Técnicas
 </script>

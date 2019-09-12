@@ -5294,13 +5294,14 @@ button.btn-floating {
 }
 .fixed-action-btn.direction-left ul, .fixed-action-btn.direction-right ul {
   text-align: center;
-  right: 40px;
+  right: 14px;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   height: 100%;
   left: auto;
   /*width 100% only goes to width of button container */
-  width: 300px;
+  width: 500px;
 }
 .fixed-action-btn.direction-left ul li, .fixed-action-btn.direction-right ul li {
   display: inline-block;
@@ -11094,7 +11095,7 @@ width: 100%;
 margin-bottom: auto;
 background: #fff;
 border-radius: 10px;
-padding: 82px 180px 33px 180px;
+padding: 62px 160px 13px 160px; /*Cambiar*/
 position: relative;
 /* display: none; */
 }
@@ -11112,7 +11113,7 @@ display: -ms-flexbox;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
-padding-bottom: 68px;
+/* padding-bottom: 68px; Cambiar */
 }
 
 .contact100-form-title {
@@ -11130,7 +11131,6 @@ padding-bottom: 44px;
 display: block;
 width: 100%;
 font-weight: bold;
-/* font-family: Poppins-Bold; */
 font-size: 20px;
 color: #333333;
 line-height: 1.2;
@@ -11582,5 +11582,7 @@ html, body{ margin:0; padding: 0}
     transform: rotate(-54deg);
 }
 
-
+.no-visible{
+  display: none;
+}
 /*# sourceMappingURL=materialize.css.map */

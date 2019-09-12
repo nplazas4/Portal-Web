@@ -18,38 +18,13 @@
             'portalProjects', // Action
             'Projects', //Controller
             'id' => 'dropdownPortalProjects', // ID desplegable
+            'class' => 'dropdown-hover',
             // Submenu
-            'children' => [
-                [
-                    'Corporativo',
-                    'children' => []
-                ],
-                [
-                    'Distribución',
-                    'children' => [
-                        ['Calidda', 'Pages','companies'],
-                        ['Contugas', 'Pages','companies']
-                    ]
-                ],
-                [
-                    'Transmisión y Transporte',
-                    'children' => [
-                       [ 'TGI', 'Pages', 'index'],
-                       [ 'Trecsa', 'Pages', 'index'],
-                       [ 'Gebbras', 'Pages', 'index'],
-                       [ 'Contugas', 'Pages', 'index'],
-                       [ 'Sucursal de Transmisión', 'Pages', 'Company']
-                    ]
-                ],
-                [
-                    'Generación',
-                    'children' => [],
-                ]
-            ]
+            'children' => []
         ],
-        [ 'RYOS', 'index','Ryos','id' => '','children' => [] ],
-        [ 'Portafolio', 'home','Pages','id' => '', 'children' => [] ],
-        [ 'Documentos gestión de programas y proyectos', 'home','Pages','id' => '', 'children' => [] ],
+        [ 'RYOS', 'index','Ryos','id' => '','class' => '','children' => [] ],
+        [ 'Portafolio', 'home','Pages','id' => '','class' => '', 'children' => [] ],
+        [ 'Documentos gestión de programas y proyectos', 'home','Pages','id' => '','class' => '', 'children' => [] ],
     ];
 ?>
 <!DOCTYPE html>
@@ -90,7 +65,7 @@
                       <li>
                         <?php if (isset($current_user)):?>
                         <?php if($current_user['V_ROL']!='Viewer'):?>
-                        <a href="" class="dropdown-hover" data-target="PortalDropDown">
+                        <a href="#" class="dropdown-hover" data-target="PortalDropDown">
                             Portal alterno
                         </a>
                         <div id="PortalDropDown" class='dropdown-content sub-menu'>
@@ -161,71 +136,32 @@
                         <li>
                           <?php echo $this->Html->link($item[0],
                             ['controller'=>$item[2],'action'=>$item[1]],
-                            ['escape'=>false,'class'=>'dropdown-hover','data-target'=>$item['id']]
+                            ['escape'=>false,'class'=>$item['class'],'data-target'=>$item['id']]
                           );?>
-                            <?php if ( sizeof($item['children']) ): ?>
                             <div id="<?= $item['id'] ?>" class='dropdown-content sub-menu'>
                                 <div class="sub-menu-content">
                                     <h2>Grupos estratégicos de negocios</h2>
                                      <div class="sub-menu-column">
-                                           <h3><?=$titleGEB?></h3>
+                                        <h3 id="h3-corp">Corporativo</h3>
                                     </div>
                                     <div class="sub-menu-column">
-                                        <h3><?=$titleDIS?></h3>
-                                        <ul>
-                                            <?php foreach($AllEps as $row => $valueAllEps):?>
-                                              <?php if ($valueAllEps["parent_eps_object_id"]== 23307): ?>
-                                                <li>
-                                                    <?php echo $this->Html->link($valueAllEps["name"],
-                                                      ['controller'=>'Projects','action'=>'Company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleDIS)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                                      ['escape'=>false]
-                                                    );?>
-                                                </li>
-                                              <?php endif; ?>
-                                            <?php endforeach; ?>
+                                        <h3 id="h3-dist">Distribución</h3>
+                                        <ul class="ul-dist">
                                         </ul>
                                    </div>
                                    <div class="sub-menu-column">
-                                       <h3><?=$titleTRANS?></h3>
-                                       <ul>
-                                           <?php foreach($AllEps as $row => $valueAllEps):?>
-                                             <?php if ($valueAllEps["parent_eps_object_id"]== 23306): ?>
-                                               <li>
-                                                 <?php if($valueAllEps["eps_id"] != 34013 && $valueAllEps["eps_id"] != 34021 && $valueAllEps["eps_id"] != 34015 && $valueAllEps["eps_id"] != 34017):?>
-                                                   <?php echo $this->Html->link($valueAllEps["name"],
-                                                     ['controller'=>'Projects','action'=>'Company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleTRANS)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                                     ['escape'=>false]
-                                                   );?>
-                                                 <?php else:?>
-                                                   <?php echo $this->Html->link($valueAllEps["name"],
-                                                     ['controller'=>'Projects','action'=>'companyGas',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleTRANS)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                                     ['escape'=>false]
-                                                   );?>
-                                                 <?php endif;?>
-                                               </li>
-                                             <?php endif; ?>
-                                           <?php endforeach; ?>
+                                       <h3 id="h3-trans">Transmisión y Transporte</h3>
+                                       <ul class = "ul-trans">
                                        </ul>
                                   </div>
                                   <div class="sub-menu-column">
-                                      <h3><?=$titleGEN?></h3>
-                                      <ul>
-                                          <?php foreach($AllEps as $row => $valueAllEps):?>
-                                            <?php if ($valueAllEps["parent_eps_object_id"]== 23308): ?>
-                                              <li>
-                                                  <?php echo $this->Html->link($valueAllEps["name"],
-                                                    ['controller'=>'Projects','action'=>'Company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleGEN)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                                    ['escape'=>false]
-                                                  );?>
-                                              </li>
-                                            <?php endif; ?>
-                                          <?php endforeach; ?>
+                                      <h3 id="h3-gen">Generación</h3>
+                                      <ul class = "ul-gen">
                                       </ul>
                                     </div>
                                 </div>
                             </div>
-                            <?php endif; ?>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </nav>
@@ -249,7 +185,6 @@
                     </div>
                 </li>
                 <li class="divider" tabindex="-1"></li>
-                <!-- <li><a href="/login"><i class="material-icons">exit_to_app</i>Salir</a></li> -->
                 <li><?=$this->Html->link(
                   $this->Html->tag('i','exit_to_app', array('class' => 'material-icons')).'Salir',
                   array('controller'=>'Users','action'=>'logout'),
@@ -366,61 +301,22 @@
                   ['controller'=>$item[2],'action'=>$item[1]],
                   ['escape'=>false]
                 );?>
-                <?php if ( sizeof($item['children']) ): ?>
                 <i class="material-icons success-text">keyboard_arrow_down</i>
                   <div class='submenu'>
                     <h2>Grupos estratégicos de negocio</h2>
                       <div class="submenu-row">
-                        <h3><?=$titleGEB?></h3>
-                        <h3><?=$titleDIS?></h3>
-                          <ul>
-                            <?php foreach($AllEps as $row => $valueAllEps):?>
-                              <?php if ($valueAllEps["parent_eps_object_id"]== 23307): ?>
-                                <li>
-                                  <?php echo $this->Html->link($valueAllEps["name"],
-                                    ['controller'=>'Projects','action'=>'Company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleDIS)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                    ['escape'=>false]
-                                  );?>
-                                </li>
-                              <?php endif; ?>
-                            <?php endforeach; ?>
+                        <h3>Corporativo</h3>
+                        <h3>Distribución</h3>
+                          <ul class = "ul-dist">
                           </ul>
-                          <h3><?=$titleTRANS?></h3>
-                          <ul>
-                              <?php foreach($AllEps as $row => $valueAllEps):?>
-                                <?php if ($valueAllEps["parent_eps_object_id"]== 23306): ?>
-                                  <li>
-                                    <?php if($valueAllEps["eps_id"] != 34013 && $valueAllEps["eps_id"] != 34021 && $valueAllEps["eps_id"] != 34015 && $valueAllEps["eps_id"] != 34017):?>
-                                      <?php echo $this->Html->link($valueAllEps["name"],
-                                        ['controller'=>'Projects','action'=>'Company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleTRANS)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                        ['escape'=>false]
-                                      );?>
-                                    <?php else:?>
-                                      <?php echo $this->Html->link($valueAllEps["name"],
-                                        ['controller'=>'Projects','action'=>'companyGas',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleTRANS)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                        ['escape'=>false]
-                                      );?>
-                                    <?php endif;?>
-                                  </li>
-                                <?php endif; ?>
-                              <?php endforeach; ?>
+                          <h3>Transmisión y Transporte</h3>
+                          <ul class = "ul-trans">
                           </ul>
-                          <h3><?=$titleGEN?></h3>
-                          <ul>
-                              <?php foreach($AllEps as $row => $valueAllEps):?>
-                                <?php if ($valueAllEps["parent_eps_object_id"]== 23308): ?>
-                                  <li>
-                                      <?php echo $this->Html->link($valueAllEps["name"],
-                                        ['controller'=>'Projects','action'=>'Company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($valueAllEps["eps_id"])),urlencode(base64_encode($valueAllEps["name"])),urlencode(base64_encode($titleGEN)),urlencode(base64_encode($valueAllEps["parent_eps_object_id"]))],
-                                        ['escape'=>false]
-                                      );?>
-                                  </li>
-                                <?php endif; ?>
-                              <?php endforeach; ?>
+                          <h3>Generación</h3>
+                          <ul class = "ul-gen">
                           </ul>
                         </div>
                       </div>
-                    <?php endif; ?>
                   </li>
                 <?php endforeach; ?>
               </ul>
@@ -453,6 +349,38 @@
             $('.dropdown-hover').dropdown({
                 hover: true
             });
+        });
+        //Ajax que se encarga de cargar las eps del nav bar
+        $(document).ready(function(){
+          var eps_lvl1_titles = "";
+          var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+          var xhr2 = $.ajax({
+            headers:{
+              'X-CSRF-Token':csrfToken
+            },
+            method: "GET",
+            url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'NavPortalProjects']);?>",
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            },
+            success: function(response){
+              $.each(response, function() {
+                if (this.parent_eps_id == 23307) {
+                    eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-dist').text())));
+                    selected_eps = btoa(unescape(encodeURIComponent(this.name)));
+                    $('.ul-dist').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(<?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
+                } else if (this.parent_eps_id == 23306) {
+                    eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-trans').text())));
+                    selected_eps = btoa(unescape(encodeURIComponent(this.name)));
+                    $('.ul-trans').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(<?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+btoa(this.parent_eps_id)+'">'+this.name+'</a></li>');
+                } else if (this.parent_eps_id == 23308) {
+                    eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-gen').text())));
+                    selected_eps = btoa(unescape(encodeURIComponent(this.name)));
+                    $('.ul-gen').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(<?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
+                }
+              });
+            }
+          });
         });
     </script>
 </body>

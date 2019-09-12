@@ -9,6 +9,7 @@ class LoginController extends AppController
     {
         /*Identifica si exíste algún usuario logeado en el sistema, en ser el caso redirecciona a la pestaña home, sino permite el acceso
         a la página de login*/
+        // var_dump($this->Auth->user());
         if ($this->Auth->user()) {
             return $this->redirect(['controller'=>'Pages','action' => 'home']);
         } else {

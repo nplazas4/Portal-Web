@@ -224,18 +224,21 @@ en caso de ser crecimiento o sostenimiento da un código distinto para ser lo m�
       $BDLocalACTotal +=$BDProjects->AC;
       $BDLocalPresupuestoAnual +=$BDProjects->PRES_PROJ;
   }
-  $_SESSION['total'] = $BDLocalEjecTotal + $EjecTotal;
-  $SPITotalProj = ($SPITotal + $BDLocalSPITotal)/$TotalProj;
-  $CPITotalProj = ($CPITotal + $BDLocalCPITotal)/$TotalProj;
+  $SPITotalProj = null;
+  $CPITotalProj =  null;
+  if ($TotalProj != 0) {
+    $SPITotalProj = ($SPITotal + $BDLocalSPITotal)/$TotalProj;
+    $CPITotalProj = ($CPITotal + $BDLocalCPITotal)/$TotalProj;
+  }
   $SpiFormatNumber = number_format($SPITotalProj, 2, ".", ",");
   $CpiFormatNumber = number_format($CPITotalProj, 2, ".", ",");
   $SPITotalcolor = null;
   $CPITotalcolor = null;
-foreach ($colorIndicator as $colorFase => $valueFase) {
-    if ( $SpiFormatNumber >= $valueFase['minimun'] && $SpiFormatNumber <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI') {
-        $SPITotalcolor = $valueFase['hexa_color'];
-    }
-}
+  foreach ($colorIndicator as $colorFase => $valueFase) {
+      if ( $SpiFormatNumber >= $valueFase['minimun'] && $SpiFormatNumber <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI') {
+          $SPITotalcolor = $valueFase['hexa_color'];
+      }
+  }
   foreach ($colorIndicator as $colorFase => $valueFase) {
       if ($CpiFormatNumber >= $valueFase['minimun'] && $CpiFormatNumber <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI') {
           $CPITotalcolor = $valueFase['hexa_color'];
@@ -402,7 +405,7 @@ $indicators = [
             <a class="btn-floating btn-large phase ii noselect">
               Área
             </a>
-            <ul style="right: 40px !important;" id="ul-area">
+            <ul style="right: -75px !important;" id="ul-area">
               <li><a class="btn-floating warning"><i id="cancel_area" class="large material-icons">cancel</i></a></li>
               <?php foreach ($area as $ws_area => $area_value):?>
                 <?php if ($area_value['code_type_id'] == "457"): ?>
@@ -423,7 +426,7 @@ $indicators = [
             <a class="btn-floating btn-large phase iii noselect">
               MEC
             </a>
-            <ul style="right: -20px !important;" id="ul-mec">
+            <ul style="right: -105px !important;" id="ul-mec">
               <li><a class="btn-floating warning"><i id="cancel_mec" class="large material-icons" id="btn_main_filter">cancel</i></a></li>
               <?php foreach ($mec as $ws_mec => $mec_value):?>
                 <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$mec_value['description']?>" data-id="<?=$mec_value['code_type_id']?>" data-type="mec"  value="<?=$mec_value['code_type_id']?>"><a id="<?=$mec_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($mec_value['description'],0,3)?></a></li>
@@ -434,7 +437,7 @@ $indicators = [
             <a class="btn-floating btn-large phase iv noselect">
               Ctg
             </a>
-            <ul style="right: 10px;" id="ul-ctg">
+            <ul style="right: -75px;" id="ul-ctg">
               <li><a class="btn-floating warning"><i class="large material-icons" id="cancel_ctg">cancel</i></a></li>
               <?php foreach ($category as $ws_category => $category_value):?>
                 <li class="btn-filter-phase tooltipped" data-position="bottom" data-tooltip="<?=$category_value['description']?>" data-id="<?=$category_value['code_type_id']?>" data-type="category" value="<?=$category_value['code_type_id']?>"><a id="<?=$category_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($category_value['description'],0,3).'.'?></a></li>
@@ -443,13 +446,23 @@ $indicators = [
           </div>
           <div class="fixed-action-btn filters" style="margin-bottom: 351px">
             <a class="btn-floating btn-large phase v noselect">Fase</a>
-            <ul style="right: 92px;" id="ul-fase">
-              <li><a class="btn-floating warning"><i class="large material-icons" id="cancel_fase" style="right: 5px">cancel</i></a></li>
-              <li class="btn-filter-phase"  data-id="5" data-type="fase" value="5"><a id="phase-v" class="btn-floating dark lighten-1" style="right: 5px">V</a></li>
-              <li class="btn-filter-phase" data-id="4" data-type="fase" value="4"><a id="phase-iv" class="btn-floating dark lighten-1" style="right: 5px">IV</a></li>
-              <li class="btn-filter-phase" data-id="3" data-type="fase" value="3"><a id="phase-iii" class="btn-floating dark lighten-1" style="right: 5px">III</a></li>
-              <li class="btn-filter-phase" data-id="2" data-type="fase" value="2"><a id="phase-ii" class="btn-floating dark lighten-1" style="right: 5px">II</a></li>
-              <li class="btn-filter-phase" data-id="1" data-type="fase" value="1"><a id="phase-i" class="btn-floating dark lighten-1" style="bottom: 47px; left: 170px">I</a></li>
+            <ul id="ul-fase">
+              <li><a class="btn-floating warning"><i class="large material-icons" id="cancel_fase">cancel</i></a></li>
+              <?php foreach (array_reverse($fase) as $ws_fase => $fase_value):?>
+                <?php if ($fase_value['code_type_id'] == "1910"): ?>
+                  <li class="btn-filter-phase"  data-id="<?=$fase_value['code_type_id']?>" data-type="fase" value="<?=$fase_value['code_type_id']?>"><a id="<?=$fase_value['code_type_id']?>" class="btn-floating dark lighten-1">C</a></li>
+                <?php elseif ($fase_value['code_type_id'] == "420"): ?>
+                  <li class="btn-filter-phase"  data-id="<?=$fase_value['code_type_id']?>" data-type="fase" value="<?=$fase_value['code_type_id']?>"><a id="<?=$fase_value['code_type_id']?>" class="btn-floating dark lighten-1">V</a></li>
+                <?php elseif ($fase_value['code_type_id'] == "212"): ?>
+                  <li class="btn-filter-phase" data-id="<?=$fase_value['code_type_id']?>" data-type="fase" value="<?=$fase_value['code_type_id']?>"><a id="<?=$fase_value['code_type_id']?>" class="btn-floating dark lighten-1">IV</a></li>
+                <?php elseif ($fase_value['code_type_id'] == "211"): ?>
+                  <li class="btn-filter-phase" data-id="<?=$fase_value['code_type_id']?>" data-type="fase" value="<?=$fase_value['code_type_id']?>"><a id="<?=$fase_value['code_type_id']?>" class="btn-floating dark lighten-1">III</a></li>
+                <?php elseif ($fase_value['code_type_id'] == "210"): ?>
+                  <li class="btn-filter-phase" data-id="<?=$fase_value['code_type_id']?>" data-type="fase" value="<?=$fase_value['code_type_id']?>"><a id="<?=$fase_value['code_type_id']?>" class="btn-floating dark lighten-1">II</a></li>
+                <?php elseif ($fase_value['code_type_id'] == "209"): ?>
+                  <li class="btn-filter-phase" data-id="<?=$fase_value['code_type_id']?>" data-type="fase" value="<?=$fase_value['code_type_id']?>"><a id="<?=$fase_value['code_type_id']?>" class="btn-floating dark lighten-1">I</a></li>
+                <?php endif;?>
+              <?php endforeach;?>
             </ul>
           </div>
         </form>
@@ -569,7 +582,7 @@ $indicators = [
       <?php foreach ($ProjectsWS as $row => $value):?>
         <?php foreach ($AllLocalDBProjects as $project): ?>
           <?php if ($project->ID_PROJECT == $value["id_p_project"]): ?>
-            <div data-fase="<?=$project->FASE;?>" data-category="<?=$value["code_category"];?>" data-mec="<?=$value["code_pec"];?>" data-area="<?=$value["code_area"];?>" class="Search list d-flex col s12 m6 l4 xl3">
+            <div data-fase="<?=$value["code_fase"];?>" data-category="<?=$value["code_category"];?>" data-mec="<?=$value["code_pec"];?>" data-area="<?=$value["code_area"];?>" class="Search list d-flex col s12 m6 l4 xl3">
               <?php if ($value["spi_labor_units"] == null && $project->PLANNED != null): ?>
                 <?php $SPI_WS = number_format($project->EXECUTED/$project->PLANNED, 2, '.', '');?>
               <?php elseif ($value["spi_labor_units"] != null): ?>
@@ -586,19 +599,21 @@ $indicators = [
                   <div class="sheet-content pl-5">
                       <h2>﻿<?=$value["name"]?></h2>
                       <div class="data-box mt-auto">
-                          <div class="data-box-circle phase iv">
-                              <h3 data-filter="<?=$project->FASE?>">
+                          <div class="data-box-circle">
+                              <h3>
                                   <?php
-                                      if ($project->FASE == 1) {
+                                      if ($value["code_fase"] == '209') {
                                           echo 'I';
-                                      } elseif ($project->FASE == 2) {
+                                      } elseif ($value["code_fase"] == '210') {
                                           echo 'II';
-                                      } elseif ($project->FASE == 3) {
+                                      } elseif ($value["code_fase"] == '211') {
                                           echo 'III';
-                                      } elseif ($project->FASE == 4) {
+                                      } elseif ($value["code_fase"] == '212') {
                                           echo 'IV';
-                                      } elseif ($project->FASE == 5) {
+                                      } elseif ($value["code_fase"] == '420') {
                                           echo 'V';
+                                      }elseif ($value["code_fase"] == '1910') {
+                                          echo 'C';
                                       }
                                   ?>
                               </h3>
@@ -606,16 +621,18 @@ $indicators = [
                           <div class="data-box-content">
                               <span>
                                 <?php
-                                    if ($project->FASE == 1) {
+                                    if ($value["code_fase"] == '209') {
                                         echo 'Estructuración';
-                                    } elseif ($project->FASE == 2) {
+                                    } elseif ($value["code_fase"] == '210') {
                                         echo 'Selección';
-                                    } elseif ($project->FASE == 3) {
+                                    } elseif ($value["code_fase"] == '211') {
                                         echo 'Planeación';
-                                    } elseif ($project->FASE == 4) {
+                                    } elseif ($value["code_fase"] == '212') {
                                         echo 'Ejecución';
-                                    } elseif ($project->FASE == 5) {
-                                        echo 'Cierre y transparencia';
+                                    } elseif ($value["code_fase"] == '420') {
+                                        echo 'Cierre y transferencia';
+                                    } elseif ($value["code_fase"] == '1910') {
+                                        echo 'Cerrado';
                                     }
                                 ?>
                               </span>

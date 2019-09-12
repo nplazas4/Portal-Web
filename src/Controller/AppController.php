@@ -40,7 +40,6 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
@@ -83,7 +82,7 @@ class AppController extends Controller
         try {
             $this->gzip();
             //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
-            $this->Token();
+            // $this->Token();
             $this->set('current_user', $this->Auth->user());
         } catch (\Exception $e) {
             exit($e->getMessage() . "\n");
@@ -154,33 +153,24 @@ class AppController extends Controller
     {
         try {
             $responsesEps = json_decode($responseEps, true);
-            $ArrayEpsId = array();
-            $ArrayParentEpsId = array();
-            $ArrayName = array();
-            $ArrayLevel = array();
             $AllvarEps = array_values($responsesEps)[0];
-            $this->set('AllEps', $AllvarEps);
+            // $this->set('AllEps', $AllvarEps);
             // Foreach que alimenta el navbar con la EPS de forma dinámica.
+            $eps_level_1 = array();
+            $eps_childrens = array();
             foreach ($AllvarEps as $rowEps => $valueEps) {
                 if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
-                    $AllEpsId = $valueEps["eps_id"];
-                    $ParentEpsId2 = $valueEps["parent_eps_object_id"];
-                    $AllNameEps = $valueEps["name"];
-                    if ($AllEpsId == 23305) {
-                        $titleGEB = 'Corporativo';
-                        $this->set('titleGEB', $titleGEB);
-                    } elseif ($AllEpsId == 23307) {
-                        $titleDIS = 'Distribución';
-                        $this->set('titleDIS', $titleDIS);
-                    } elseif ($AllEpsId == 23306) {
-                        $titleTRANS = 'Transmisión y transporte';
-                        $this->set('titleTRANS', $titleTRANS);
-                    } elseif ($AllEpsId == 23308) {
-                        $titleGEN = 'Generación';
-                        $this->set('titleGEN', $titleGEN);
+                    $AllEpsId = $valueEps["parent_eps_object_id"];
+                    if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
+                        array_push($eps_childrens, array("name" => $valueEps["name"], "eps_id" => $valueEps["eps_id"], "parent_eps_id" => $valueEps["parent_eps_object_id"]));
                     }
+                    // $ParentEpsId2 = $valueEps["parent_eps_object_id"];
+                    // if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
+                    //     array_push($eps_level_1, array("name" => $valueEps["name"], "id" => $valueEps["eps_id"]));
+                    // }
                 }
             }
+            $this->set('eps_childrens', $eps_childrens);
         } catch (\Exception $e) {
             exit($e->getMessage() . "\n");
         }
