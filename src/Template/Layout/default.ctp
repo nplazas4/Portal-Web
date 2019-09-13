@@ -37,7 +37,7 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->script(['jquery-3.3.1.min.js']) ?>
+    <?= $this->Html->script(['jquery-3.3.1.min.js','alert.js']) ?>
     <!-- </?= $this->Html->script('jquery-3.3.1.min.js',['async']) ?> -->
     <?= $this->Html->css('materialize.css') ?>
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -351,37 +351,38 @@
             });
         });
         //Ajax que se encarga de cargar las eps del nav bar
-        $(document).ready(function(){
-          var eps_lvl1_titles = "";
-          var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
-          var xhr2 = $.ajax({
-            headers:{
-              'X-CSRF-Token':csrfToken
-            },
-            method: "GET",
-            url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'NavPortalProjects']);?>",
-            beforeSend: function(xhr) {
-              xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            },
-            success: function(response){
-              $.each(response, function() {
-                if (this.parent_eps_id == 23307) {
-                    eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-dist').text())));
-                    selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-                    $('.ul-dist').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(<?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
-                } else if (this.parent_eps_id == 23306) {
-                    eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-trans').text())));
-                    selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-                    $('.ul-trans').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(<?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+btoa(this.parent_eps_id)+'">'+this.name+'</a></li>');
-                } else if (this.parent_eps_id == 23308) {
-                    eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-gen').text())));
-                    selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-                    $('.ul-gen').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(<?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
-                }
-              });
-            }
-          });
-        });
+        // $(document).ready(function(){
+        //   var eps_lvl1_titles = "";
+        //   var csrfToken = </?= json_encode($this->request->getParam('_csrfToken')) ?>;
+        //   var xhr2 = $.ajax({
+        //     headers:{
+        //       'X-CSRF-Token':csrfToken
+        //     },
+        //     method: "GET",
+        //     url: "</?php echo $this->Url->build(['controller'=>'Navbar','action'=>'NavPortalProjects']);?>",
+        //     cache: true,
+        //     beforeSend: function(xhr) {
+        //       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //     },
+        //     success: function(response){
+        //       $.each(response, function() {
+        //         if (this.parent_eps_id == 23307) {
+        //             eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-dist').text())));
+        //             selected_eps = btoa(unescape(encodeURIComponent(this.name)));
+        //             $('.ul-dist').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(</?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
+        //         } else if (this.parent_eps_id == 23306) {
+        //             eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-trans').text())));
+        //             selected_eps = btoa(unescape(encodeURIComponent(this.name)));
+        //             $('.ul-trans').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(</?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+btoa(this.parent_eps_id)+'">'+this.name+'</a></li>');
+        //         } else if (this.parent_eps_id == 23308) {
+        //             eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-gen').text())));
+        //             selected_eps = btoa(unescape(encodeURIComponent(this.name)));
+        //             $('.ul-gen').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(</?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
+        //         }
+        //       });
+        //     }
+        //   });
+        // });
     </script>
 </body>
 </html>

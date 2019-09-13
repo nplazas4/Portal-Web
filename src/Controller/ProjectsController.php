@@ -19,63 +19,63 @@ class ProjectsController extends AppController
     public function beforeFilter($event)
     {
         parent::beforeFilter($event);
-        $this->token();
-        $this->portalProjects();
-        // CURL  que obtiene todos los proyectos publicados en el portal administrativo.
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/publicprojects/list/",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-        "Authorization: Bearer ".$_SESSION["PortalToken"],
-        "Cache-Control: no-cache"
-      ),
-    ));
-        $Proj_response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            $Proj_responses = json_decode($Proj_response, true);
-            $ArrayProjectCodId = array();
-            $ArrayProjectCodName = array();
-            $All_Proj = array_values($Proj_responses)[0];
-            $this->set('All_Proj', $All_Proj);
-            foreach ($All_Proj as $row => $value3) {
-              //Asigna por separado los valores del array de All_Proj
-                $ProjectCodId = $value3["id_p_project"];
-                $ProjectCodStatus = $value3["is_enabled"];
-                array_push($ArrayProjectCodId, $ProjectCodId);
-                $ProjectCodName = $value3["name"];
-                $ProjectIdP6 = $value3["code_p6"];
-                $ProjectCodId = $value3["id_p_project"];
-                // Registra el proyecto en la BD local
-                $logsTable = \Cake\ORM\TableRegistry::get('Projects', array('table' => 'projects'));
-                $log = $logsTable->newEntity();
-                $log->ID_PROJECT  = $ProjectCodId;
-                $log->PROJECT_NAME  = $ProjectCodName.' ('.$ProjectIdP6.')';
-                $log->STATUS  = $ProjectCodStatus;
-                $logsTable->save($log);
-                $this->set('ProjectCodId', $ArrayProjectCodId);//RV
-            }
-            $ArrayProjDelete = array();
-            $AllProjForDelete = $this->Projects->find('all');
-            // Foreach que obtiene todos los projectos que provienen de Web services y se encuentra deshabilitados o eliminados.
-            foreach ($AllProjForDelete as $ProjDelete) {
-                if (!in_array($ProjDelete->ID_PROJECT, $ArrayProjectCodId) && $ProjDelete->STATUS == 1) {
-                    array_push($ArrayProjDelete, $ProjDelete->id);
-                }
-            }
-            // Foreach que elimina que no existen en el WS de la base de datos local.
-            foreach ($ArrayProjDelete as $ProjxDelete) {
-                $this->delete($ProjxDelete);
-            }
-        }
+    //     $this->token();
+    //     $this->portalProjects();
+    //     // CURL  que obtiene todos los proyectos publicados en el portal administrativo.
+    //     $curl = curl_init();
+    //     curl_setopt_array($curl, array(
+    //     CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/publicprojects/list/",
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => "",
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 30,
+    //     CURLOPT_CUSTOMREQUEST => "GET",
+    //     CURLOPT_HTTPHEADER => array(
+    //     "Authorization: Bearer ".$_SESSION["PortalToken"],
+    //     "Cache-Control: no-cache"
+    //   ),
+    // ));
+    //     $Proj_response = curl_exec($curl);
+    //     $err = curl_error($curl);
+    //     curl_close($curl);
+    //     if ($err) {
+    //         echo "cURL Error #:" . $err;
+    //     } else {
+    //         $Proj_responses = json_decode($Proj_response, true);
+    //         $ArrayProjectCodId = array();
+    //         $ArrayProjectCodName = array();
+    //         $All_Proj = array_values($Proj_responses)[0];
+    //         $this->set('All_Proj', $All_Proj);
+    //         foreach ($All_Proj as $row => $value3) {
+    //           //Asigna por separado los valores del array de All_Proj
+    //             $ProjectCodId = $value3["id_p_project"];
+    //             $ProjectCodStatus = $value3["is_enabled"];
+    //             array_push($ArrayProjectCodId, $ProjectCodId);
+    //             $ProjectCodName = $value3["name"];
+    //             $ProjectIdP6 = $value3["code_p6"];
+    //             $ProjectCodId = $value3["id_p_project"];
+    //             // Registra el proyecto en la BD local
+    //             $logsTable = \Cake\ORM\TableRegistry::get('Projects', array('table' => 'projects'));
+    //             $log = $logsTable->newEntity();
+    //             $log->ID_PROJECT  = $ProjectCodId;
+    //             $log->PROJECT_NAME  = $ProjectCodName.' ('.$ProjectIdP6.')';
+    //             $log->STATUS  = $ProjectCodStatus;
+    //             $logsTable->save($log);
+    //             // $this->set('ProjectCodId', $ArrayProjectCodId);//RV
+    //         }
+    //         $ArrayProjDelete = array();
+    //         $AllProjForDelete = $this->Projects->find('all');
+    //         // Foreach que obtiene todos los projectos que provienen de Web services y se encuentra deshabilitados o eliminados.
+    //         foreach ($AllProjForDelete as $ProjDelete) {
+    //             if (!in_array($ProjDelete->ID_PROJECT, $ArrayProjectCodId) && $ProjDelete->STATUS == 1) {
+    //                 array_push($ArrayProjDelete, $ProjDelete->id);
+    //             }
+    //         }
+    //         // Foreach que elimina que no existen en el WS de la base de datos local.
+    //         foreach ($ArrayProjDelete as $ProjxDelete) {
+    //             $this->delete($ProjxDelete);
+    //         }
+    //     }
     }
     public function index()
     {
@@ -696,15 +696,6 @@ class ProjectsController extends AppController
             $this->set('ProjectsWS', $ProjectsWS);
         }
     }
-    private function RomanNumbers(){ //Función que almacena los números romanos necesarios para dar lógica a la fase mediante un arreglo
-      try{
-          $roman_numerals = array('M'  => 1000, 'CM' => 900, 'D'  => 500, 'CD' => 400, 'C'  => 100, 'XC' => 90, 'L'  => 50,
-                                'XL' => 40, 'X'  => 10, 'IX' => 9, 'V'  => 5, 'IV' => 4, 'I'  => 1);
-          $this->set('roman_numerals',$roman_numerals);
-      }catch (\Exception $e) {
-          exit($e->getMessage() . "\n");
-      }
-    }
     public function Indicators()
     {
         $this->loadModel('Indicators');
@@ -872,21 +863,21 @@ class ProjectsController extends AppController
             }
         }
     }
-    public function companies($idEps = null, $title = null)
+    public function companies($json_parent_eps = null)
     {
       try {
         //Llamar la función portalProjects para obtener las Eps.
-        $this->portalProjects();
+        // $this->portalProjects();
         //Variables que albergan el id y el título de la EPS mandante
-        $decoded_Eps = base64_decode(urldecode($idEps));
-        $decoded_title = base64_decode(urldecode($title));
-        $this->set('idEps', $decoded_Eps);
-        $this->set('title', $decoded_title);
+        $json_parents_eps = base64_decode(urldecode($json_parent_eps));
+        // $decoded_title = base64_decode(urldecode($title));
+        $this->set('$json_parents_eps', $json_parents_eps);
+        // $this->set('title', $decoded_title);
       } catch (\Exception $e) {
         exit($e->getMessage() . "\n");
       }
     }
-    public function company($current_user = null, $Id_eps = null, $NameEps = null, $titleParentEps = null, $idParentEps = null)
+    public function company($Id_eps = null, $NameEps = null, $titleParentEps = null, $idParentEps = null)
     {
         $Company_title_1 = null;
         $Company_title_2 = null;
@@ -896,7 +887,8 @@ class ProjectsController extends AppController
         $decoded_NameEps = base64_decode(urldecode($NameEps));
         $decoded_title = base64_decode(urldecode($titleParentEps));
         $decoded_IdParentEps = base64_decode(urldecode($idParentEps));
-        $decoded_current_user = base64_decode(urldecode($current_user));
+        // $decoded_current_user = base64_decode(urldecode($current_user));
+        $decoded_current_user = 121;
         // Envia las variables a la vista de company.ctp.
         $this->set('title', $decoded_title);
         $this->set('NameEps', $decoded_NameEps);
@@ -982,29 +974,29 @@ class ProjectsController extends AppController
       $AllLocalDBProjects = $this->Projects->find('all');
       $this->set('AllLocalDBProjects', $AllLocalDBProjects->all());
     }
-    // Función que se encarga la pestaña de Portal proyectos
+    // Función que se encarga la pestaña de Portal proyectos REVISAR - RV !
     public function portalProjects()
     {
       try {
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => "",
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 30,
-          CURLOPT_CUSTOMREQUEST => "GET",
-          CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer ".$_SESSION["PortalToken"],
-            "Cache-Control: no-cache")));
-          $responseEps = curl_exec($curl);
-          $err = curl_error($curl);
-          curl_close($curl);
-          if ($err) {
-              echo "cURL Error #:" . $err;
-          } else {
-            $this->PortalProjectsLogic($responseEps);
-          }
+        // $curl = curl_init();
+        // curl_setopt_array($curl, array(
+        //   CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
+        //   CURLOPT_RETURNTRANSFER => true,
+        //   CURLOPT_ENCODING => "",
+        //   CURLOPT_MAXREDIRS => 10,
+        //   CURLOPT_TIMEOUT => 30,
+        //   CURLOPT_CUSTOMREQUEST => "GET",
+        //   CURLOPT_HTTPHEADER => array(
+        //     "Authorization: Bearer ".$_SESSION["PortalToken"],
+        //     "Cache-Control: no-cache")));
+        //   $responseEps = curl_exec($curl);
+        //   $err = curl_error($curl);
+        //   curl_close($curl);
+        //   if ($err) {
+        //       echo "cURL Error #:" . $err;
+        //   } else {
+        //     $this->PortalProjectsLogic($responseEps);
+        //   }
       } catch (\Exception $e) {
           exit($e->getMessage() . "\n");
       }
@@ -1012,17 +1004,17 @@ class ProjectsController extends AppController
     //Función que se encarga
     private function PortalProjectsLogic($responseEps = null){
       try {
-        $responsesEps = json_decode($responseEps, true);
-        $ArrayEps = array_values($responsesEps)[0];
-        foreach ($ArrayEps as $rowEps => $valueEps) {
-            if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
-                $EpsIdNumber = $valueEps["eps_id"];
-                // $ParentEpsIdNumber = $valueEps["parent_eps_object_id"]; RV
-                $NameEPS = $valueEps["name"];
-                $LevelEPS = $valueEps["level"];
-                $this->Save_WS_Info_Eps_Table($EpsIdNumber, $NameEPS);
-            }
-         }
+        // $responsesEps = json_decode($responseEps, true);
+        // $ArrayEps = array_values($responsesEps)[0];
+        // foreach ($ArrayEps as $rowEps => $valueEps) {
+        //     if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
+        //         $EpsIdNumber = $valueEps["eps_id"];
+        //         // $ParentEpsIdNumber = $valueEps["parent_eps_object_id"]; RV
+        //         $NameEPS = $valueEps["name"];
+        //         $LevelEPS = $valueEps["level"];
+        //         $this->Save_WS_Info_Eps_Table($EpsIdNumber, $NameEPS);
+        //     }
+        //  }
       } catch (\Exception $e) {
         exit($e->getMessage() . "\n");
       }

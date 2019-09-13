@@ -9,41 +9,67 @@
 <div class="section portal-projects">
     <div class="breadcrumb-container">
         <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
-        <?php foreach ($breadcrumb as $item): ?>
-            <?php echo $this->Html->link(
-    $item[0],
-    ['controller'=>$item[2], 'action'=>$item[1]],
-    ['escape' => false,'class'=>'breadcrumb']
+          <?php foreach ($breadcrumb as $item): ?>
+            <?php echo $this->Html->link($item[0],
+              ['controller'=>$item[2], 'action'=>$item[1]],
+              ['escape' => false,'class'=>'breadcrumb']
             );?>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
     </div>
     <div class="portal-projects-menu">
-        <?= $title = null ?>
-        <?php foreach ($AllEps as $row => $value):?>
-          <?php if ($value["eps_id"] == 23305): ?>
-            <?php $title = 'Grupo Energía Bogotá'?>
-            <?php echo $this->Html->link(
-                $this->Html->tag('figure', $this->Html->image('logo-vert.svg')).
-                $this->Html->tag('h2', 'Grupo Energía Bogotá'),
-                array('controller'=>'Projects','action'=>'company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($value["eps_id"])),urlencode(base64_encode($title))),
-                array('escape' => false, 'class'=>'portal-projects-menu-item secondary-text')
-            );?>
-          <?php elseif ($value["eps_id"] == 23306 || $value["eps_id"] == 23307 || $value["eps_id"] == 23308):?>
-            <?php if ($value["eps_id"] == 23306): ?>
-              <?php $Color = 'orange-text'; ?>
-            <?php elseif($value["eps_id"] == 23307):?>
-              <?php $Color = 'indigo-text text-darken-4';?>
-            <?php elseif($value["eps_id"] == 23308):?>
-              <?php $Color = 'light-green-text text-darken-1';?>
-            <?php endif; ?>
-            <?php $title = $value["name"]?>
-            <?php echo $this->Html->link(
-                           $this->Html->tag('figure', $this->Html->image('logos/'.$value["eps_id"].'.png')).
-                           $this->Html->tag('h2', $title),
-                           array('controller'=>'Projects','action'=>'companies',urlencode(base64_encode($value["eps_id"])),urlencode(base64_encode($title))),
-                           array('escape' => false, 'class'=>'portal-projects-menu-item '.$Color)
-                       )?>
-          <?php endif;?>
-        <?php endforeach; ?>
+        <a class="portal-projects-menu-item secondary-text" id="a-corp">
+            <figure>
+                <?= $this->Html->image('logo-vert.svg') ?>
+            </figure>
+            <h2>Grupo Energía Bogotá</h2>
+        </a>
+        <a class="portal-projects-menu-item indigo-text text-darken-4" id="a-dist">
+            <figure>
+                <?= $this->Html->image('logos/23307.png') ?>
+            </figure>
+            <h2>Distribución</h2>
+        </a>
+        <a class="portal-projects-menu-item orange-text" id="a-trans">
+            <figure>
+                <?= $this->Html->image('logos/23306.png') ?>
+            </figure>
+            <h2>Transmisión y transporte</h2>
+        </a>
+        <a class="portal-projects-menu-item light-green-text text-darken-1" id="a-gen">
+            <figure>
+                <?= $this->Html->image('logos/23308.png') ?>
+            </figure>
+            <h2>Generación</h2>
+        </a>
     </div>
 </div>
+<script>
+    //Ajax que se encarga de cargar portal projects (EPS LVL 1)
+    $(document).ready(function(){
+      var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+      var xhr2 = $.ajax({
+        headers:{
+          'X-CSRF-Token':csrfToken
+        },
+        method: "GET",
+        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'portalProjects']);?>",
+        cache: true,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        },
+        success: function(response){
+          $.each(response, function() {
+            if (this.eps_id == 23305) {
+                $('#a-corp').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+            } else if (this.eps_id == 23306) {
+                $('#a-trans').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+            } else if (this.eps_id == 23307) {
+                $('#a-dist').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+            } else if (this.eps_id == 23308) {
+                $('#a-gen').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+            }
+          });
+        }
+      });
+    });
+</script>
