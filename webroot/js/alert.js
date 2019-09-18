@@ -8,14 +8,19 @@ for (i = 0; i < close.length; i++) {
     setTimeout(function(){ div.style.display = "none"; }, 600);
   }
 }
-$(document).ready(function(){
-  var eps_lvl1_titles = "";
-  var csrfToken = $('[name="_csrfToken"]').val();
-  var xhr2 = $.ajax({
+// $(document).ready(function(){
+    var eps_lvl1_titles = "";
+    var csrfToken = $('[name="_csrfToken"]').val();
+    var xhr2;
+    if(xhr2 && xhr2.readyState != 4){
+        xhr2.abort();
+    }
+    xhr2 = $.ajax({
     headers:{
       'X-CSRF-Token':csrfToken
     },
     method: "GET",
+    dataType: "json",
     url: "/Portal-Web/navbar/nav-portal-projects",
     cache: true,
     beforeSend: function(xhr) {
@@ -23,20 +28,14 @@ $(document).ready(function(){
     },
     success: function(response){
       $.each(response, function() {
-        if (this.parent_eps_id == 23307) {
-            eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-dist').text())));
-            selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-            $('.ul-dist').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
-        } else if (this.parent_eps_id == 23306) {
-            eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-trans').text())));
-            selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-            $('.ul-trans').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+btoa(this.parent_eps_id)+'">'+this.name+'</a></li>');
-        } else if (this.parent_eps_id == 23308) {
-            eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-gen').text())));
-            selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-            $('.ul-gen').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
+        if (this.eps_id == 23307) {
+            $('.ul-dist').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'">'+this.child_name+'</a></li>');
+        } else if (this.eps_id == 23306) {
+            $('.ul-trans').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'">'+this.child_name+'</a></li>');
+        } else if (this.eps_id == 23308) {
+            $('.ul-gen').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'">'+this.child_name+'</a></li>');
         }
       });
     }
   });
-});
+// });

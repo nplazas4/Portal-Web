@@ -45,13 +45,14 @@
 </div>
 <script>
     //Ajax que se encarga de cargar portal projects (EPS LVL 1)
-    $(document).ready(function(){
+    // $(document).ready(function(){
       var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
       var xhr2 = $.ajax({
         headers:{
           'X-CSRF-Token':csrfToken
         },
         method: "GET",
+        dataType: "json",
         url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'portalProjects']);?>",
         cache: true,
         beforeSend: function(xhr) {
@@ -59,8 +60,9 @@
         },
         success: function(response){
           $.each(response, function() {
+            // console.log(this);
             if (this.eps_id == 23305) {
-                $('#a-corp').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+                $('#a-corp').attr("href", "/Portal-Web/projects/company/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
             } else if (this.eps_id == 23306) {
                 $('#a-trans').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
             } else if (this.eps_id == 23307) {
@@ -71,5 +73,5 @@
           });
         }
       });
-    });
+    // });
 </script>

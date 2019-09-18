@@ -4,102 +4,188 @@
         [ 'Inicio', 'home','Pages' ],
         [ 'Portal Proyectos', 'portalProjects','Projects']
     ];
+    $eps_id = null;
+    if (isset($array_company["child_eps_id"])) {
+      $eps_id = $array_company["child_eps_id"];
+    } elseif ($array_company["eps_id"] == 23305) {
+      $eps_id = 23305;
+    }
+    else {
+      $eps_id = 0;
+    }
 ?>
 <div class="section bcrumb company">
-    <div class="breadcrumb-container">
-        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
-        <?php foreach ($breadcrumb as $item): ?>
-            <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
-              ['escape' => false,'class'=>'breadcrumb']
-            );?>
-        <?php endforeach; ?>
-        <?php if ($idEps != 23305): ?>
-          <?php echo $this->Html->link($title,
-            ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($title))],
+  <div class="breadcrumb-container">
+      <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
+      <?php foreach ($breadcrumb as $item): ?>
+          <?php echo $this->Html->link($item[0],
+            ['controller'=>$item[2], 'action'=>$item[1]],
             ['escape' => false,'class'=>'breadcrumb']
           );?>
-        <?php endif; ?>
-        <?php echo $this->Html->link($NameEps,
-          ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($idEps)),urlencode(base64_encode($NameEps)),urlencode(base64_encode($title)),urlencode(base64_encode($idEpsParent))],
+      <?php endforeach; ?>
+      <?php if ($array_company["eps_id"] != 23305): ?>
+        <?php echo $this->Html->link($array_company["name"],
+          ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($json_company))],
           ['escape' => false,'class'=>'breadcrumb']
         );?>
-    </div>
-    <div class="d-flex ml-auto mr-auto">
-      <a href="/portal-projects/projects" class="company2-content-valve sustenance">
-          <h2>Elemento 1</h2>
-      </a>
-      <a href="/portal-projects/projects" class="company2-content-valve increase" style="margin-left:630px;">
-          <h2>Elemento 2</h2>
-      </a>
-    </div>
-    <div class="company-content">
-        <?php $Img = null ?>
-        <?php if ($idEps == 23305): ?>
-          <?php $Img = 'logo-vert.svg' ?>
-        <?php endif;?>
-        <?php if ($idEps == 34012): ?>
-          <?php $Img = 'logos/logo-sucursal-transmision.svg' ?>
-        <?php endif;?>
-        <?php if ($idEps == 34013): ?>
-          <?php $Img = 'logos/logo-tgi.svg' ?>
-        <?php endif;?>
-        <?php if ($idEps == 34015): ?>
-          <?php $Img = 'logos/logo-contugas.svg' ?>
-        <?php endif;?>
-        <?php if ($idEps == 34016): ?>
-          <?php $Img = 'logos/logo-trecsa.svg' ?>
-        <?php endif;?>
-        <?php if ($idEps == 34017): ?>
-          <?php $Img = 'logos/logo-trecsa.svg' ?>
-        <?php endif;?>
-        <?php if ($idEps == 34018): ?>
-          <?php $Img = 'logos/logo-gebbras.svg' ?>
-        <?php endif;?>
-
-        <?php
-          $CategoriaSt1 = 870;
-          $CategoriaSt2 = 8996;
-          $CategoriaCr1 = 871;
-          $CategoriaCr2 = 8997;
-        ?>
-        <?php
-          $categoryCrecimiento = array();
-          $categorySostenimiento = array();
-          foreach ($AllLocalDBProjects as $PrjCode)
-          {
-            if ($PrjCode->CATEGORY == "crecimiento" && $PrjCode->EPS_REL == $idEps) {
-              array_push($categoryCrecimiento, $PrjCode->PROJECT_NAME);
-            }
-            if ($PrjCode->CATEGORY == "sostenimiento" && $PrjCode->EPS_REL == $idEps) {
-              array_push($categorySostenimiento, $PrjCode->PROJECT_NAME);
-            }
-          }
-          $longitudCrecimientoBD = count($categoryCrecimiento);
-          $longitudSostenimientoBD = count($categorySostenimiento);
-          $TotalCrecimiento = $longitudCrecimientoBD + $ContadorCrecimiento;
-          $TotalSostenimiento = $longitudSostenimientoBD + $ContadorSostenimiento;
-          $SumCategory = $TotalCrecimiento + $TotalSostenimiento;
-        ?>
-        <?php echo $this->Html->link(
-          $this->Html->image('icons/torre-sostenimiento.svg').
-          $this->Html->tag('div',$this->Html->tag('h3',$TotalSostenimiento),array('class'=>'number')).
-          $this->Html->tag('h2',$Company_title_1),
-          array('controller'=>'Projects','action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($idEps)),urlencode(base64_encode($CategoriaCr1)),urlencode(base64_encode($CategoriaCr2)),urlencode(base64_encode($NameEps)),urlencode(base64_encode($title)),urlencode(base64_encode($idEpsParent))),
-          array('escape' => false,'class'=>'company-content-tower sustenance'))?>
-
-        <div class="company-content-data">
-            <?= $this->Html->image($Img) ?>
+        <?php echo $this->Html->link($array_company["child_name"],
+          ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_company))],
+          ['escape' => false,'class'=>'breadcrumb']
+        );?>
+      <?php else:?>
+        <?php echo $this->Html->link($array_company["name"],
+          ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_company))],
+          ['escape' => false,'class'=>'breadcrumb']
+        );?>
+      <?php endif; ?>
+  </div>
+  <?php if($eps_id != 34013 && $eps_id != 34021 && $eps_id != 34015 && $eps_id != 34017):?>
+    <div class="company-towers-content">
+        <div class="company-towers-content-data">
+              <?= $this->Html->image('logos/'.$eps_id.'.svg') ?>
             <div class="number">
-                <h2><?=$SumCategory?></h2>
+                <h2 class="total-number"></h2>
             </div>
-            <h5>Proyectos</h5>
+            <span>Proyectos</span>
         </div>
-        <?php echo $this->Html->link(
-          $this->Html->image('icons/torre-crecimiento.svg').
-          $this->Html->tag('div',$this->Html->tag('h3',$TotalCrecimiento),array('class'=>'number')).
-          $this->Html->tag('h2',$Company_title_2),
-          array('controller'=>'Projects','action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($idEps)),urlencode(base64_encode($CategoriaSt1)),urlencode(base64_encode($CategoriaSt2)),urlencode(base64_encode($NameEps)),urlencode(base64_encode($title)),urlencode(base64_encode($idEpsParent))),
-          array('escape' => false,'class'=>'company-content-tower increase'))?>
+        <a class="category company-towers-content-tower sustenance">
+            <?= $this->Html->image('icons/torre-sostenimiento.svg') ?>
+            <div class="number">
+                <h3 class="sost-number"></h3>
+            </div>
+            <h2>Sostenimiento</h2>
+        </a>
+        <a class="category company-towers-content-tower pec">
+            <!-- <?= $this->Html->image('icons/torre-crecimiento.svg') ?> -->
+            <div class="number">
+                <h3 class="mec-number"></h3>
+            </div>
+            <h2>MEC</h2>
+        </a>
+        <a class="category company-towers-content-tower increase">
+            <?= $this->Html->image('icons/torre-crecimiento.svg') ?>
+            <div class="number">
+                <h3 class="crec-number"></h3>
+            </div>
+            <h2>Crecimiento</h2>
+        </a>
     </div>
+  <?php else: ?>
+    <div class="company-content">
+        <figure class="company-content-logo">
+            <?= $this->Html->image('logos/'.$eps_id.'.svg') ?>
+        </figure>
+        <div class="company-content-data">
+            <figure class="company-content-data-station">
+                <?= $this->Html->image('icons/estacion-compresion.svg') ?>
+            </figure>
+            <div class="number">
+                <h2 class="total-number"></h2>
+            </div>
+        </div>
+        <a class="category company-content-valve increase">
+            <?= $this->Html->image('icons/valvula-crecimiento.svg') ?>
+            <div class="number">
+                <h3 class="crec-number"></h3>
+            </div>
+            <h2>Crecimiento</h2>
+        </a>
+        <a class="category company-content-valve pec">
+            <?= $this->Html->image('icons/valvula-pec.svg') ?>
+            <h2>MEC</h2>
+            <div class="number">
+                <h3 class="mec-number"></h3>
+            </div>
+        </a>
+        <a class="category company-content-valve sustenance">
+            <?= $this->Html->image('icons/valvula-sostenimiento.svg') ?>
+            <div class="number">
+                <h3 class="sost-number"></h3>
+            </div>
+            <h2>Sostenimiento</h2>
+        </a>
+    </div>
+  <?php endif;?>
 </div>
+<script>
+  // $(document).ready(function(){
+    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+    var xhr3, xhr4, xhr5;
+    var crec_number = 0, sost_number = 0, mec_number = 0;
+    if(xhr3 && xhr3.readyState != 4){
+        xhr3.abort();
+    }
+      xhr3 = $.ajax({
+      headers:{
+        'X-CSRF-Token':csrfToken
+      },
+      method: "GET",
+      dataType: "json",
+      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-crec']);?>",
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "eps_id" : "<?=$eps_id?>"},
+      cache: true,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      },
+      success: function(response){
+        $.each(response, function() {
+          crec_number = this.crec_number;
+          $('.crec-number').text(crec_number);
+          total_projects();
+        });
+      }
+    });
+    if(xhr4 && xhr4.readyState != 4){
+        xhr4.abort();
+    }
+      xhr4 = $.ajax({
+      headers:{
+        'X-CSRF-Token':csrfToken
+      },
+      method: "GET",
+      dataType: "json",
+      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-sost']);?>",
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "eps_id" : "<?=$eps_id?>"},
+      cache: true,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      },
+      success: function(response){
+        $.each(response, function() {
+          sost_number = this.sost_number;
+          $('.sost-number').text(sost_number);
+          total_projects();
+        });
+      }
+    });
+    if(xhr5 && xhr5.readyState != 4){
+        xhr5.abort();
+    }
+      xhr5 = $.ajax({
+      headers:{
+        'X-CSRF-Token':csrfToken
+      },
+      method: "GET",
+      dataType: "json",
+      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-mec']);?>",
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "eps_id" : "<?=$eps_id?>"},
+      cache: true,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      },
+      success: function(response){
+        $.each(response, function() {
+          mec_number = this.mec_number;
+          $('.mec-number').text(mec_number);
+          total_projects();
+        });
+      }
+    });
+    function total_projects(){
+      $('.total-number').text(mec_number + sost_number + crec_number);
+    }
+  // });
+  // $(document).ready(function(){
+  //   $('.total-number').text(mec_number + sost_number + crec_number);
+  // });
+</script>
