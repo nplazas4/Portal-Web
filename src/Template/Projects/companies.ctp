@@ -79,11 +79,11 @@ $(document).ready(function () {
   }).done(function(response){
     $.each(response, function() {
       if (this.child_eps_id == 34015 || this.child_eps_id == 34021) {
-        $('#div-companies').append($('<a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'" class="companies-menu-item"><img src="/Portal-Web/img/logos/34015.svg" alt=""><i class="material-icons">keyboard_arrow_right</i><span class="item-tooltip">'+this.child_name+'</span></a>').hide().fadeIn(400));
+        $('#div-companies').append($('<a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'" class="companies-menu-item"><img src="/Portal-Web/img/logos/34015.svg" alt=""><i class="material-icons">keyboard_arrow_right</i><span class="item-tooltip">'+this.description+'</span></a>').hide().fadeIn(400));
       } else if (this.child_eps_id != 34015 && this.child_eps_id != 34017 && this.child_eps_id != 34020 && this.child_eps_id != 34021) {
-        $('#div-companies').append($('<a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'" class="companies-menu-item"><img src="/Portal-Web/img/logos/'+this.child_eps_id+'.svg" alt=""><i class="material-icons">keyboard_arrow_right</i><span class="item-tooltip">'+this.child_name+'</span></a>').hide().fadeIn(400));
+        $('#div-companies').append($('<a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'" class="companies-menu-item"><img src="/Portal-Web/img/logos/'+this.child_eps_id+'.svg" alt=""><i class="material-icons">keyboard_arrow_right</i><span class="item-tooltip">'+this.description+'</span></a>').hide().fadeIn(400));
       } else {
-        $('#div-companies').append($('<a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'" class="companies-menu-item"><img src="/Portal-Web/img/logos/34016.svg" alt=""><i class="material-icons">keyboard_arrow_right</i><span class="item-tooltip">'+this.child_name+'</span></a>').hide().fadeIn(400));
+        $('#div-companies').append($('<a href="/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))+'" class="companies-menu-item"><img src="/Portal-Web/img/logos/34016.svg" alt=""><i class="material-icons">keyboard_arrow_right</i><span class="item-tooltip">'+this.description+'</span></a>').hide().fadeIn(400));
       }
     });
   });

@@ -4,14 +4,16 @@
         [ 'Inicio', 'home','Pages' ],
         [ 'Portal Proyectos', 'portalProjects','Projects']
     ];
-    $eps_id = null;
+    $child_eps_id = null;
+    $child_eps_name = null;
     if (isset($array_company["child_eps_id"])) {
-      $eps_id = $array_company["child_eps_id"];
+      $child_eps_id = $array_company["child_eps_id"];
+      $child_eps_name = $array_company["child_name"];
     } elseif ($array_company["eps_id"] == 23305) {
-      $eps_id = 23305;
+      $child_eps_id = 23305;
     }
     else {
-      $eps_id = 0;
+      $child_eps_id = 0;
     }
 ?>
 <div class="section bcrumb company">
@@ -39,30 +41,30 @@
         );?>
       <?php endif; ?>
   </div>
-  <?php if($eps_id != 34013 && $eps_id != 34021 && $eps_id != 34015 && $eps_id != 34017):?>
+  <?php if($child_eps_id != 34013 && $child_eps_id != 34021 && $child_eps_id != 34015 && $child_eps_id != 34017):?>
     <div class="company-towers-content">
         <div class="company-towers-content-data">
-              <?= $this->Html->image('logos/'.$eps_id.'.svg') ?>
+              <?= $this->Html->image('logos/'.$child_eps_id.'.svg') ?>
             <div class="number">
                 <h2 class="total-number"></h2>
             </div>
             <span>Proyectos</span>
         </div>
-        <a class="category company-towers-content-tower sustenance">
+        <a href="" class="sost-url company-towers-content-tower sustenance">
             <?= $this->Html->image('icons/torre-sostenimiento.svg') ?>
             <div class="number">
                 <h3 class="sost-number"></h3>
             </div>
             <h2>Sostenimiento</h2>
         </a>
-        <a class="category company-towers-content-tower pec">
+        <a class="mec-url company-towers-content-tower pec">
             <!-- <?= $this->Html->image('icons/torre-crecimiento.svg') ?> -->
             <div class="number">
                 <h3 class="mec-number"></h3>
             </div>
             <h2>MEC</h2>
         </a>
-        <a class="category company-towers-content-tower increase">
+        <a class="crec-url company-towers-content-tower increase">
             <?= $this->Html->image('icons/torre-crecimiento.svg') ?>
             <div class="number">
                 <h3 class="crec-number"></h3>
@@ -73,7 +75,7 @@
   <?php else: ?>
     <div class="company-content">
         <figure class="company-content-logo">
-            <?= $this->Html->image('logos/'.$eps_id.'.svg') ?>
+            <?= $this->Html->image('logos/'.$child_eps_id.'.svg') ?>
         </figure>
         <div class="company-content-data">
             <figure class="company-content-data-station">
@@ -83,21 +85,21 @@
                 <h2 class="total-number"></h2>
             </div>
         </div>
-        <a class="category company-content-valve increase">
+        <a class="crec-url company-content-valve increase">
             <?= $this->Html->image('icons/valvula-crecimiento.svg') ?>
             <div class="number">
                 <h3 class="crec-number"></h3>
             </div>
             <h2>Crecimiento</h2>
         </a>
-        <a class="category company-content-valve pec">
+        <a class="mec-url company-content-valve pec">
             <?= $this->Html->image('icons/valvula-pec.svg') ?>
             <h2>MEC</h2>
             <div class="number">
                 <h3 class="mec-number"></h3>
             </div>
         </a>
-        <a class="category company-content-valve sustenance">
+        <a class="sost-url company-content-valve sustenance">
             <?= $this->Html->image('icons/valvula-sostenimiento.svg') ?>
             <div class="number">
                 <h3 class="sost-number"></h3>
@@ -122,14 +124,15 @@
       method: "GET",
       dataType: "json",
       url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-crec']);?>",
-      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "eps_id" : "<?=$eps_id?>"},
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>", "description" : "<?=$array_company["description"]?>"},
       cache: true,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       },
       success: function(response){
         $.each(response, function() {
-          crec_number = this.crec_number;
+          $('.crec-url').attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          crec_number = this.proj_number;
           $('.crec-number').text(crec_number);
           total_projects();
         });
@@ -145,14 +148,15 @@
       method: "GET",
       dataType: "json",
       url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-sost']);?>",
-      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "eps_id" : "<?=$eps_id?>"},
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>", "description" : "<?=$array_company["description"]?>"},
       cache: true,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       },
       success: function(response){
         $.each(response, function() {
-          sost_number = this.sost_number;
+          $('.sost-url').attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          sost_number = this.proj_number;
           $('.sost-number').text(sost_number);
           total_projects();
         });
@@ -168,14 +172,15 @@
       method: "GET",
       dataType: "json",
       url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-mec']);?>",
-      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "eps_id" : "<?=$eps_id?>"},
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>", "description" : "<?=$array_company["description"]?>"},
       cache: true,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       },
       success: function(response){
         $.each(response, function() {
-          mec_number = this.mec_number;
+          $('.mec-url').attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          mec_number = this.proj_number;
           $('.mec-number').text(mec_number);
           total_projects();
         });
@@ -184,8 +189,4 @@
     function total_projects(){
       $('.total-number').text(mec_number + sost_number + crec_number);
     }
-  // });
-  // $(document).ready(function(){
-  //   $('.total-number').text(mec_number + sost_number + crec_number);
-  // });
 </script>

@@ -1,1124 +1,584 @@
 <?php
     // Breadcrumb
     $breadcrumb = [
-      [ 'Inicio', 'home','Pages',''],
-      [ 'Portal Proyectos','portalProjects','Projects','']
+        [ 'Inicio', '/' ],
+        [ 'Portal Proyectos', '/portal-projects' ],
+        [ 'Transmisión y Transporte', '/portal-projects/companies' ],
+        [ 'Unidad de Transmisión Colombia', '/portal-projects/company' ],
+        [ 'Crecimiento', '/portal-projects/projects' ],
+        [ '﻿UPME 03 – 2010 Norte', '' ],
     ];
-    $budgetIndicators = [
-        'cpi' => $projects->AC_PPTO, // AC/PPTO
-        'ac' => $projects->AC, // AC
-        'totalBudget' => $projects->PROJ_TOTAL_PRES, // Presupuesto total
-        'forecastTotal' => $projects->TOTAL_FORECAST, // Forecast total
 
-        'cpiAnnual' => $projects->CPI_ANUAL, // CPI Anual
-        'acAnnual' => $projects->PROJ_AC, // AC Anual
-        'pvAnnual' => $projects->PV, // PV Anual
-        'annualBudget' => $projects->PRES_PROJ, // Presupuesto anual
-        'annualForecast' => $projects->FORECAST_PROJ, // Forecast anual
+    // Riesgos
+    $risks = [
+        [
+            'name' => '1',
+            'x' => 5,
+            'y' => 2,
+        ],
+        [
+            'name' => '2',
+            'x' => 5,
+            'y' => 2,
+        ],
+        [
+            'name' => '3',
+            'x' => 1,
+            'y' => 1,
+        ],
+        [
+            'name' => '4',
+            'x' => 1,
+            'y' => 3,
+        ],
+        [
+            'name' => '5',
+            'x' => 4,
+            'y' => 3,
+        ],
+        [
+            'name' => '6',
+            'x' => 3,
+            'y' => 3,
+        ],
+        [
+            'name' => '7',
+            'x' => 2,
+            'y' => 1,
+        ],
+        [
+            'name' => '8',
+            'x' => 3,
+            'y' => 4,
+        ],
+        [
+            'name' => '9',
+            'x' => 4,
+            'y' => 5,
+        ],
+        [
+            'name' => '10',
+            'x' => 3,
+            'y' => 2,
+        ],
     ];
 ?>
-<script type="text/javascript">
-$(document).ready(function(){
-$("#button_caf_add").click(function(){
-  var Column_Select_Caf_Value = $(".Select-Option-Column_Caf").children(":selected").attr("value");
-  if ($(".Select-Option-Column_Caf").children(":selected").attr("value") != 0 && $(".Select-Option-Date_Caf").children(":selected").attr("value") != 0) {
-      var Column_Select_Caf = $(".Select-Option-Column_Caf").children(":selected").html();
-    if (!document.getElementsByClassName('ThCheckboxDinamicTitle'+Column_Select_Caf).length) {
-      $('#id_table_caf thead tr').append('<th class="ThCheckboxDinamicTitle'+Column_Select_Caf+'"></th>');
-      $('#id_table_caf thead tr>th:last').append('<label><input id="CheckboxDinamicTitle'+Column_Select_Caf+'" type="checkbox" onclick="load_Checkbox_Id(this);" class="filled-in" checked="checked" /><span style="font-size:11px">'+Column_Select_Caf+'</span></label>');
-      // Columnas dinámicas - Revisar lógica para consumir WS
-      <?php for ($i=0; $i<$cont; $i++): ?>
-      $('#id_table_caf tbody tr:eq(<?=$i?>)').append('<td id="Dynamic-Td-Id-<?=$i?>" class="ThCheckboxDinamicTitle'+Column_Select_Caf+'"></td>');
-        if(Column_Select_Caf_Value == 1){
-          $('#id_table_caf tbody tr:eq(<?=$i?>)').each(function(){$(this).children('td:last').append('<input type="text" id="Dynamic-Input-Planeado-Id-<?=$i?>"  value="<?=$acJsonSnapshot[$i]?>"  class="CheckboxDinamicTitle'+Column_Select_Caf+'">')});
-        }
-        else if (Column_Select_Caf_Value == 2) {
-          $('#id_table_caf tbody tr:eq(<?=$i?>)').each(function(){$(this).children('td:last').append('<input type="text" id="Dynamic-Input-Actual-Id-<?=$i?>"  value="<?=$evJsonSnapshot[$i]?>"  class="CheckboxDinamicTitle'+Column_Select_Caf+'">')});
-        }
-        else if (Column_Select_Caf_Value == 3) {
-          $('#id_table_caf tbody tr:eq(<?=$i?>)').each(function(){$(this).children('td:last').append('<input type="text" id="Dynamic-Estimado-Input-Id-<?=$i?>"  value="<?=$blJsonSnapshot[$i]?>"  class="CheckboxDinamicTitle'+Column_Select_Caf+'">')});
-        }
-      <?php endfor;?>
-    }
-    else {
-      document.getElementById("CheckboxDinamicTitle"+Column_Select_Caf).checked = true;
-      $('.CheckboxDinamicTitle'+Column_Select_Caf).attr("disabled", false).show();
-      $('.ThCheckboxDinamicTitle'+Column_Select_Caf).show();
-    }
-  }
-  else {
-    alert("Campo vacío.");
-   }
-  });
-});
-</script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
-<script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-<script type="text/javascript">
-    // Porcentajes de avances
-    AmCharts.makeChart("advance",
-        {
-            "type": "gauge",
-            "theme": "light",
-            "language": "es",
-            "axes": [
-                {
-                    "axisAlpha": 0,
-                    "tickAlpha": 0,
-                    "labelsEnabled": false,
-                    "startValue": 0,
-                    "endValue": 100,
-                    "startAngle": 0,
-                    "endAngle": 360,
-                    "bands": [
-                        {
-                            "color": "#eee",
-                            "startValue": 0,
-                            "endValue": 100,
-                            "radius": "100%",
-                            "innerRadius": "70%",
-                            "balloonText": "Avance planeado",
-                        },
-                        {
-                            <?php if ($Plan == 100): ?>
-                            <?php $PlanDec = $Plan ?>
-                            <?php else: ?>
-                            <?php $PlanDec = bcdiv($Plan, '1', 2);?>
-                            <?php endif;?>
-                            "color": "#A6CE39",
-                            "startValue": 0,
-                            <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                            "endValue": <?=$PlanDec?>,
-                            <?php else:?>
-                            "endValue": <?=$projects->PLANNED?>,
-                            <?php endif;?>
-                            "radius": "100%",
-                            "innerRadius": "70%",
-                            <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                            "balloonText": "<?=$PlanDec?>% Avance planeado",
-                            <?php else:?>
-                            "balloonText": "<?=$projects->PLANNED?>% Avance planeado",
-                            <?php endif;?>
-                        },
-                        {
-                            "color": "#E6E6E6",
-                            "startValue": 0,
-                            "endValue": 100,
-                            "radius": "70%",
-                            "innerRadius": "40%",
-                            "balloonText": "Ejecutado",
-                        },
-                        {
-                            <?php $EjecDec = bcdiv($Ejec, '1', 2);?>
-                            "color": "#2CACE3",
-                            "startValue": 0,
-                            <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                            "endValue": <?=$EjecDec?>,
-                            <?php else:?>
-                            "endValue": <?=$projects->EXECUTED?>,
-                            <?php endif;?>
-                            "radius": "70%",
-                            "innerRadius": "40%",
-                            <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                            "balloonText": "<?=$EjecDec?>% Ejecutado",
-                            <?php else:?>
-                            "balloonText": "<?=$projects->EXECUTED?>% Ejecutado",
-                            <?php endif;?>
-                        },
-                    ]
-                }
-            ],
-        }
-    );
-    // Curva de avance físico
- function Chart_Caf(Grafica,DataProvider,Max_Number,Active_Chart) {
-  var chart = AmCharts.makeChart("caf",{
-            "type": "serial",
-            "categoryField": "date",
-            "dataDateFormat": "YYYY-MM-DD",
-            "fontFamily": "'Open Sans'",
-            "theme": "default",
-            "language": "es",
-            "categoryAxis": {
-                "equalSpacing": true,
-                "gridPosition": "start",
-                "minPeriod": "DD",
-                "parseDates": true,
-                "startOnAxis": true,
-                "axisAlpha": 0,
-                "gridAlpha": 0,
-                "labelOffset": -1
-            },
-            "chartCursor": {
-                "enabled": true,
-                "categoryBalloonDateFormat": "DD MMM YYYY",
-                "cursorColor": "#00A34B"
-            },
-            "chartScrollbar": {
-                "enabled": true,
-                "graph": Active_Chart,
-                "graphType": "line",
-                "gridCount": 7,
-                "offset": 40,
-                "oppositeAxis": false,
-                "scrollbarHeight": 40,
-            },
-            "trendLines": [],
-            "graphs":Grafica,
-            "guides": [],
-            "valueAxes": [
-                {
-                    "id": "ValueAxis-1",
-                    "minimum": 0,
-                    "maximum": Max_Number,
-                    "totalText": "",
-                    "unit": "%",
-                    "axisAlpha": 0,
-                    "gridAlpha": 0.06,
-                    "title": ""
-                }
-            ],
-            "allLabels": [],
-            "balloon": {},
-            "legend": {
-                "enabled": true,
-                "autoMargins": false,
-                "marginRight": 0,
-                "markerSize": 15,
-                "fontSize": 13,
-                "position": "top",
-                "spacing": 16,
-                "useGraphSettings": true
-            },
-            "titles": [],
-            "dataProvider": DataProvider,
-            "export": {
-                "enabled": true,
-                "exportTitles": true,
-                "fileName": "<?=$name?>"
-            }
-        }
-    );
-  };
-  if (<?=$longitudArrayDate?> != 0) {
-      AmCharts.makeChart("tg",
-          {
-              "type": "serial",
-              "categoryField": "category",
-              "dataDateFormat": "YYYY-MM-DD",
-              "sequencedAnimation": false,
-              "startDuration": 1,
-              "categoryAxis": {
-                  "autoRotateAngle": 90,
-                  "autoRotateCount": 12,
-                  "equalSpacing": true,
-                  "gridPosition": "start",
-                  "minPeriod": "MM",
-                  // "startOnAxis": true,
-                  "axisAlpha": 0,
-                  "fontSize": 10,
-                  "gridAlpha": 0,
-                  "ignoreAxisWidth": true,
-                  "titleBold": false
-              },
-              "chartCursor": {
-                  "enabled": true,
-                  "cursorColor": "#00A34B"
-              },
-              "chartScrollbar": {
-                  "enabled": true,
-                  "color": "#BBBBBB",
-                  "graphType": "line",
-                  "gridCount": 4,
-                  "offset": 60,
-                  "oppositeAxis": false,
-                  "scrollbarHeight": 40
-              },
-              "trendLines": [],
-              "graphs": [
-                  {
-                      "columnWidth": 0.67,
-                      "fillAlphas": 1,
-                      "id": "plannedAnnual",
-                      "lineAlpha": 0,
-                      "lineColor": "#2376BC",
-                      "lineThickness": 0,
-                      "title": "Planeado",
-                      "type": "column",
-                      "valueAxis": "ValueAxis-1",
-                      "valueField": "col-plannedAnnual",
-                      "xAxis": "ValueAxis-1",
-                      "yAxis": "ValueAxis-1"
-                  },
-                  {
-                      "columnWidth": 0.71,
-                      "fillAlphas": 1,
-                      "id": "executedAnnual",
-                      "lineColor": "#FF8000",
-                      "title": "Ejecutado",
-                      "type": "column",
-                      "valueAxis": "ValueAxis-1",
-                      "valueField": "col-executedAnnual",
-                      "xAxis": "ValueAxis-1",
-                      "yAxis": "ValueAxis-1"
-                  },
-                  {
-                      "customMarker": "",
-                      "id": "executed",
-                      "lineColor": "#FBB800",
-                      "lineThickness": 3,
-                      "title": "Ejecutado",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-executed",
-                      "xAxis": "ValueAxis-2",
-                      "yAxis": "ValueAxis-2"
-                  },
-                  {
-                      "dashLength": 4,
-                      "id": "forecast",
-                      "lineColor": "#4D91CE",
-                      "lineThickness": 3,
-                      "title": "Forecast",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-forecast"
-                  },
-                  {
-                      "fillColors": "undefined",
-                      "id": "planned",
-                      "lineColor": "#BBBBBB",
-                      "lineThickness": 3,
-                      "title": "Planeado",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-planned"
-                  }
-              ],
-              "guides": [],
-              "valueAxes": [
-                  {
-                      "id": "ValueAxis-1",
-                      "unit": "USD ",
-                      "unitPosition": "left",
-                      "axisAlpha": 0,
-                      "fontSize": 10,
-                      "gridAlpha": 0.05,
-                      "title": "MILLONES",
-                      "titleBold": false,
-                      "titleFontSize": 10
-                  },
-                  {
-                      "id": "ValueAxis-2",
-                      "position": "right",
-                      "unit": "USD ",
-                      "unitPosition": "left",
-                      "axisAlpha": 0,
-                      "fontSize": 10,
-                      "gridAlpha": 0,
-                      "title": "MILLONES",
-                      "titleBold": false,
-                      "titleFontSize": 10
-                  }
-              ],
-              "allLabels": [],
-              "balloon": {},
-              "legend": {
-                  "enabled": true,
-                  "autoMargins": false,
-                  "marginRight": 0,
-                  "position": "top",
-                  "spacing": 16,
-                  "useGraphSettings": true
-              },
-              "titles": [],
-              "dataProvider": [
-                <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
-                {
-                  <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
-                  <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
-                  <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
-                    "category": "<?=$excelDate[$a]?>",
-                  <?php if (strlen($excelDate[$a])<5):?>
-                    "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
-                    "col-executedAnnual": "<?=$excelEjecutadoDec?>",
-                    "col-executed": "null",
-                    "col-forecast": "null",
-                    "col-planned": "null"
-                  <?php elseif (strlen($excelDate[$a])>4):?>
-                    "col-plannedAnnual": "null",
-                    "col-executedAnnual": "null",
-                    <?php if (is_numeric($excelEjecutado[$a])):?>
-                    "col-executed": "<?=$excelEjecutadoDec?>",
-                    <?php else:?>
-                    "col-executed": "null",
-                    <?php endif;?>
-                    <?php if (is_numeric($excelProyectado[$a])):?>
-                    "col-forecast": "<?=$excelProyectadoDec?>",
-                    <?php else:?>
-                    "col-forecast": "null",
-                    <?php endif;?>
-                    "col-planned": "<?=$excelPlaneadoDec?>"
-                  <?php endif;?>
-                },
-                <?php endfor; ?>
-              ],
-              "export": {
-                  "enabled": true,
-                  "exportTitles": true,
-                  "fileName": "<?=$name?>"
-              }
-          }
-      );
+
+<script>
+    function compare(){
+        var compare = document.querySelector(".compare");
+        compare.classList.toggle("compare-show");
+
+        var compareRisk = document.querySelector(".compare-risk");
+        compareRisk.classList.toggle("compare-show");
+
+        var chartRisk = document.querySelector(".box-risk");
+        chartRisk.classList.toggle("compare-show");
     }
 </script>
-<?php if ($code == $projects->ID_PROJECT && $spi != 0): ?>
-  <?php $SPI = $spi;?>
-<?php elseif ($projects->EXECUTED == null || $projects->PLANNED == null):?>
-  <?php $SPI = 0?>
-<?php else:?>
-<?php $SPI = number_format($projects->EXECUTED/$projects->PLANNED, 2);?>
-<?php endif;?>
+
 <div class="section bcrumb project">
-  <div class="breadcrumb-container">
-      <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
+    <div class="breadcrumb-container">
+        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-          <?php echo $this->Html->link($item[0],['controller'=>$item[2], 'action'=>$item[1]],
-          ['escape' => false,'class'=>'breadcrumb']);?>
+            <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a>
         <?php endforeach; ?>
-          <?php $Category = null;?>
-          <?php $Categoria2 = 0;?>
-        <?php if ($Categoria1 == 870):?>
-          <?php $Category = "crecimiento";?>
-          <?php $Categoria2 = 8996 ?>
-        <?php elseif ($Categoria1 == 871):?>
-          <?php $Category = "sostenimiento";?>
-          <?php $Categoria2 = 8997 ?>
-        <?php endif; ?>
-      <?php if ($ActualEps != 23305): ?>
-            <?php echo $this->Html->link(
-              $titlePrjs,
-              ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($titlePrjs))],
-              ['escape' => false,'class'=>'breadcrumb']
-            );?>
-          <?php endif;?>
-          <?php if ($ActualEps != 34013 && $ActualEps != 34021 && $ActualEps != 34015 && $ActualEps != 34017): ?>
-          <?php echo $this->Html->link(
-                $NameEpsPrjs,
-                ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-                ['escape' => false,'class'=>'breadcrumb']
-          );?>
-        <?php else:?>
-          <?php echo $this->Html->link(
-                $NameEpsPrjs,
-                ['controller'=>'Projects', 'action'=>'companyGas',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-                ['escape' => false,'class'=>'breadcrumb']
-          );?>
-        <?php endif;?>
-        <?php echo $this->Html->link(
-              $Category,
-              ['controller'=>'Projects', 'action'=>'projects',urlencode(base64_encode($current_user['V_ID_P_USER'])),urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent))],
-              ['escape' => false,'class'=>'breadcrumb']
-        );?>
-        <?php echo $this->Html->link(
-            $projects->PROJECT_NAME,
-            ['controller'=>'Projects', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph],
-            ['escape' => false,'class'=>'breadcrumb']
-        );?>
     </div>
-    <?php
-    setlocale(LC_ALL, "es_ES");
-    $FoPo = strftime("%d %B, %Y", strtotime($projects->FOPO));
-    $Adj = strftime("%d %B, %Y", strtotime($projects->ADJUDICACION));
-    $Apr = strftime("%d %B, %Y", strtotime($projects->APROBACION));
-    ?>
+
     <sidebar class="project-sidebar">
-        <?php if ($code == $projects->ID_PROJECT): ?>
-          <h1><?=$ws_project["name"]?></h1>
-        <?php else: ?>
-          <h1><?=$projects->PROJECT_NAME?></h1>
-        <?php endif; ?>
-        <div class="project-sidebar-phase phase primary">
-            <h2>
-              <?php foreach ($fase as $ws_fase => $fase_value):?>
-                <?php if ($fase_value['code_type_id'] == $ws_project["code_fase"]): ?>
-                  <?=$fase_value['description']?>
-                <?php endif;?>
-              <?php endforeach;?>
-            </h2>
+        <h1 id="project-name"></h1>
+        <div class="project-sidebar-phase phase iii">
+            <h2 id="project-phase"></h2>
         </div>
         <div class="project-sidebar-percentages">
             <div class="chart" id="advance"></div>
             <div class="legend">
-              <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                <h3 class="secondary-text"><?= $PlanDec ?>% Avance planeado</h3>
-                <h3 class="accent-text"><?= $EjecDec ?>% Ejecutado</h3>
-              <?php else:?>
-                <h3 class="secondary-text"><?= $projects->PLANNED ?>% Avance planeado</h3>
-                <h3 class="accent-text"><?= $projects->EXECUTED ?>% Ejecutado</h3>
-              <?php endif;?>
+                <h3 class="secondary-text" id="porcentaje-plan"></h3>
+                <h3 class="accent-text" id="porcentaje-ejec"></h3>
             </div>
         </div>
         <div class="project-sidebar-info">
             <h2>Objetivo estratégico</h2>
-            <p><?= $projects->Proj_Obj ?></p>
+            <p id="p-obj-est"></p>
         </div>
         <div class="project-sidebar-info">
             <h2>Información general</h2>
-            <p><?= $projects->DESCRIPTION ?></p>
+            <p id="p-info-general"></p>
         </div>
         <div class="project-sidebar-info">
             <h2>Alcance</h2>
-            <p><?= $projects->ALCANCE ?></p>
+            <p id="p-alcance"></p>
         </div>
         <div class="project-sidebar-info">
             <h2>Controles de cambio</h2>
-            <p><?= $projects->SOLICITUD ?></p>
+            <p id="p-control-cambio"></p>
         </div>
     </sidebar>
 
     <div class="project-content">
-        <div class="indicators row wrap">
-          <div class="data">
-              <div class="data-content">
-                  <ul>
-                      <li>
-                          <i class="material-icons">event</i>
-                          <?php if($projects->FOPO != null):?>
-                            <span>FoPo: <?= $FoPo ?></span>
-                          <?php else:?>
-                            <span>FoPo:</span>
-                          <?php endif;?>
-                      </li>
-                      <?php if ($projects->ADJUDICACION != null):?>
-                      <li>
-                          <i class="material-icons">event_note</i>
-                          <span>Adjudicación: <?= $Adj ?></span>
-                      </li>
-                    <?php else:?>
-                      <li>
-                          <i class="material-icons">event_note</i>
-                          <span>Adjudicación: No aplica</span>
-                      </li>
-                    <?php endif;?>
-                      <li>
-                          <i class="material-icons">event_available</i>
-                          <?php if ($code == $projects->ID_PROJECT && $ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                            && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017): ?>
-                            <span>Fecha corte: <?= strftime("%d %B, %Y", strtotime($corte));?></span>
-                          <?php elseif($code == null && $ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                            && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
-                            <span>Fecha corte: <?= $Apr ?></span>
-                          <?php else:?>
-                            <span>Fecha SPI: <?= strftime("%d %B, %Y", strtotime($corte));?></span>
-                          <?php endif;?>
-                      </li>
-                      <li>
-                        <?php if($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                          && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
-                          <i class="material-icons">straighten</i>
-                          <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
-                        <?php else:?>
-                          <i class="material-icons">date_range</i>
-                          <?php if ($projects->CPI_DATE != null): ?>
-                          <span>Fecha CPI: <?= strftime("%d %B, %Y", strtotime($projects->CPI_DATE));?></span>
-                          <?php else:?>
-                            <span>Fecha CPI:</span>
-                          <?php endif;?>
-                        <?php endif;?>
-                      </li>
-                      <li>
-                        <?php if($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                          && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
-                          <i class="material-icons">place</i>
-                            <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
-                        <?php else:?>
-                          <i class="material-icons">event</i>
-                          <?php if ($projects->IGR_DATE != null): ?>
-                            <span>Fecha IGR: <?=strftime("%d %B, %Y", strtotime($projects->IGR_DATE))?></span>
-                            <?php else: ?>
-                              <span>Fecha IGR:</span>
-                          <?php endif; ?>
-                        <?php endif;?>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-          <?= $this->Html->link($this->Html->tag('i','picture_as_pdf',['class'=>'material-icons tooltipped', 'data-position'=>'right','data-tooltip'=>'Descargar PDF']), ['action' => 'project', 'action'=>'project',$projects->id,$current_user_pr,urlencode(base64_encode($ActualEps)),urlencode(base64_encode($Categoria1)),urlencode(base64_encode($Categoria2)),urlencode(base64_encode($NameEpsPrjs)),urlencode(base64_encode($titlePrjs)),urlencode(base64_encode($idEpsParent)),urlencode(base64_encode($name)),$code,$spi,$corte,$graph , '_ext' => 'pdf'],['escape' => false, 'style'=>'margin-left:1%']); ?>
-            <h2>Indicadores de cronograma</h2>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped modal-trigger" href="#SpiWBS" data-position="bottom" data-tooltip="División entre el valor ganado y presupuestado hasta la fecha">
-                <div class="indicator type-1" style="background-color:
-                    <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                      <?php if ($SPI >= $valueFase['minimun'] && $SPI <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'SPI'):?>
-                          <?php echo $valueFase['hexa_color'];?>
-                      <?php endif;?>
-                    <?php endforeach; ?>">
-                    <h3 class="mr-2">SPI</h3>
-                    <h3 class="ml-auto"><?= $SPI ?></h3>
-                </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance planeado del proyecto.">
-              <div class="indicator type-1 light-blue darken-2">
-                  <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
-                  <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                    <h3 class="ml-auto"><?= $PlanDec ?>%</h3>
-                  <?php else:?>
-                  <h3 class="ml-auto"><?= $projects->PLANNED ?>%</h3>
-                <?php endif;?>
-              </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance ejecutado del proyecto.">
-              <div class="indicator type-1 light-blue darken-3">
-                  <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
-                  <?php if ($code == $projects->ID_PROJECT && $Plan != 0): ?>
-                    <h3 class="ml-auto"><?= $EjecDec ?>%</h3>
-                  <?php else:?>
-                  <h3 class="ml-auto"><?= $projects->EXECUTED ?>%</h3>
-                <?php endif;?>
-              </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 light-blue darken-2">
-                    <h5 class="mr-2">FEPO</h5>
-                    <?php if($ws_project["fepo"] != null):?>
-                      <h5 class="ml-auto right-align"><?= strftime("%d %B, %Y", strtotime($ws_project["fepo"])) ?></h5>
-                    <?php endif;?>
-                </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 light-blue darken-2">
-                    <h5 class="mr-2">Duración total</h5>
-                    <?php if($ws_project["od"] != null):?>
-                      <h5 class="ml-auto right-align"><?= $ws_project["od"] ?></h5>
-                    <?php endif;?>
-                </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 light-blue darken-2">
-                    <h5 class="mr-2">Días de atraso</h5>
-                    <?php if($ws_project["da"] != null):?>
-                      <h5 class="ml-auto right-align"><?= $ws_project["da"] ?></h5>
-                    <?php endif;?>
-                </div>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3">
-                <div class="indicator type-1 light-blue darken-2">
-                    <h5 class="mr-2">Porcentaje de impacto</h5>
-                    <?php if($ws_project["pi"] != null):?>
-                      <h5 class="ml-auto right-align"><?= $ws_project["pi"] ?>%</h5>
-                    <?php endif;?>
-                </div>
+        <div class="data">
+            <div class="data-content">
+                <ul>
+                    <li>
+                        <i class="material-icons">event</i>
+                        <span id="span-fopo">FoPo:</span>
+                    </li>
+                    <li>
+                        <i class="material-icons">event_note</i>
+                        <span id="span-adj">Adjudicación:</span>
+                    </li>
+                    <li>
+                        <i class="material-icons">event_available</i>
+                        <span id="span-spi-date">Fecha SPI:</span>
+                    </li>
+                    <li>
+                        <i class="material-icons">straighten</i>
+                        <span id="span-cpi-date">Fecha CPI:</span>
+                    </li>
+                    <li>
+                        <i class="material-icons">place</i>
+                        <span id="span-igr-date">Fecha IGR</span>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="indicators row wrap mb-4">
-            <h2 class="mb-2">Indicadores de presupuesto</h2>
-            <h3>Total proyecto</h3>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Es la división entre el AC y el PPTO (AC/PPTO).">
-                <a class="indicator type-1 modal-trigger" href="#detailValueExecuted" style="background-color:
-                    <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                      <?php if ($budgetIndicators['cpi'] >= $valueFase['minimun'] && $budgetIndicators['cpi'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
-                          <?php echo $valueFase['hexa_color'];?>
-                      <?php endif;?>
-                    <?php endforeach; ?>">
-                    <h4 class="fw-600 mr-2">CPI</h4>
-                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpi'] ?></h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el valor de dinero gastado, con base a la planeación.">
-                <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                    <h4 class="fw-600 mr-2">AC</h4>
-                    <?php if($projects->AC != null):?>
-                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->AC,2)?> MM</h5>
-                    <?php endif;?>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Total presupuesto aprobado al proyecto">
-              <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                  <h5 class="fw-600">PRESUPUESTO</h5>
-                  <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['totalBudget'],2) ?> MM</h4>
-              </a>
-          </div>
-          <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Proyección del presupuesto anual para invertir en el proyecto">
-              <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                  <h5 class="fw-600">PROYECCIÓN PROYECTO</h5>
-                  <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['forecastTotal'],2) ?> MM</h4>
-              </a>
-          </div>
-          <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
-              <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                  <h5 class="fw-600"><small>DESVIACIÓN PRESUPUESTAL</small></h5>
-                  <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['totalBudget'] - $budgetIndicators['forecastTotal'],2)?> MM</h4>
-              </a>
-          </div>
-          <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Desviación presupuestal / presupuesto">
-              <a class="indicator type-2 modal-trigger" href="#detailValueExecuted" style="background-color:
-                  <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                    <?php if ($budgetIndicators['cpi'] >= $valueFase['minimun'] && $budgetIndicators['cpi'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
-                        <?php echo $valueFase['hexa_color'];?>
-                    <?php endif;?>
-                  <?php endforeach; ?>">
-                  <h5 class="fw-600"><small>% DESVIACIÓN PRESUPUESTAL</small></h5>
-                  <?php if ( $budgetIndicators['totalBudget'] != 0): ?>
-                    <h4 class="fw-600 right-align"><?= number_format(($budgetIndicators['totalBudget'] - $budgetIndicators['forecastTotal']) / $budgetIndicators['totalBudget'],2)?>%</h4>
-                  <?php endif; ?>
-              </a>
-          </div>
-            <h3 class="mt-3">Anual proyecto</h3>
-            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="AC anual  / Presupuesto anual">
-                <a class="indicator type-1 modal-trigger" href="#detailValueExecuted" style="background-color:
-                    <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                      <?php if ($budgetIndicators['cpiAnnual'] >= $valueFase['minimun'] && $budgetIndicators['cpiAnnual'] <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'CPI'):?>
-                          <?php echo $valueFase['hexa_color'];?>
-                      <?php endif;?>
-                    <?php endforeach; ?>">
-                    <h4 class="fw-600 mr-2">CPI <small>ANUAL 2019</small></h4>
-                    <h4 class="fw-600 ml-auto right-align"><?= $budgetIndicators['cpiAnnual'] ?></h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Índice que representa el dinero gastado anualmente, con base a la planeación.">
-                <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                    <h4 class="fw-600 mr-2">AC <small>2019</small></h4>
-                    <?php if($projects->PROJ_AC != null):?>
-                        <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PROJ_AC,2)?> MM</h5>
-                    <?php endif;?>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
-                <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                    <h4 class="fw-600 mr-2">PV <small>2019</small></h4>
-                    <?php if($projects->PV != null):?>
-                      <h5 class="fw-600 ml-auto right-align">USD $ <?=number_format($projects->PV,2)?> MM</h5>
-                    <?php endif;?>
-                </a>
-            </div>
-            <div class="divider transparent"></div>
-            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Presupuesto anual del proyecto.">
-                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                    <h5 class="fw-600">PRESUPUESTO 2019</h5>
-                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'],2) ?> MM</h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Estimado de tiempo / costo en un tiempo determinado.">
-                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                    <h5 class="fw-600">FORECAST 2019</h5>
-                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualForecast'],2) ?> MM</h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
-                <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                    <h5 class="fw-600">VARIACIÓN PROYECTADA 2019</h5>
-                    <h4 class="fw-600 right-align">USD $ <?= number_format($budgetIndicators['annualBudget'] - $budgetIndicators['annualForecast'],2)?> MM</h4>
-                </a>
-            </div>
-            <div class="d-flex col s12 m6 l5 xl3 tooltipped" data-position="bottom" data-tooltip="(Desviación presupuestal / presupuesto) * 100">
-              <a class="indicator type-2 modal-trigger" href="#detailValueExecuted" style="background-color:
-               <?php $operationAnnual =  null;?>
-                <?php if ($budgetIndicators['annualBudget'] != 0): ?>
-                  <?php $operationAnnual = number_format(($budgetIndicators['annualBudget'] - $budgetIndicators['annualForecast']) / $budgetIndicators['annualBudget'],2)?>
-                  <?php endif;?>
-                    <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                      <?php if ($operationAnnual >= $valueFase['minimun'] && $operationAnnual <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'Porcentaje de Impacto'):?>
-                        <?php echo $valueFase['hexa_color'];?>
-                      <?php endif;?>
-                    <?php endforeach; ?>">
-                      <h5 class="fw-600">% VARIACIÓN PROYECTADA 2019</h5>
-                      <?php if ($budgetIndicators['annualBudget'] != 0): ?>
-                        <h4 class="fw-600 right-align"><?= number_format($operationAnnual * 100)?>%</h4>
-                      <?php endif;?>
-                  </a>
-              </div>
-        </div>
-        <?php if ($cont != 0): ?>
-        <div class="color-chart" id="Input_Container">
-          <div class="row" id="Container_Type_Color">
-            <div class="input-field col s8 m6 l4 xl3">
-              <select id="select-work" class="work-select">
-                 <option class="work-option" value="3">Period type</option>
-                 <option class="work-option" value="1">Día</option>
-                 <option class="work-option" value="2">Semana</option>
-                 <option class="work-option" value="3">Mes</option>
-                 <option class="work-option" value="4">Trimestre</option>
-                 <option class="work-option" value="5">Año</option>
-              </select>
-            </div>
-            <div class="input-field col s8 m6 l4 xl3">
-              <select id="select-work-column1" class="work-select-column1">
-                 <option class="work-option-column1" value="line">Línea</option>
-                 <option class="work-option-column1" value="column">Columna</option>
-              </select>
-              <input type="color" id="Id_Color_Column1" value="#A6CE39">
-            </div>
-            <div class="input-field col s8 m6 l4 xl3">
-              <select id="select-work-column2" class="work-select-column2">
-                 <option class="work-option-column2" value="line">Línea</option>
-                 <option class="work-option-column2" value="column">Columna</option>
-              </select>
-              <input type="color" id="Id_Color_Column2" value="#2CACE3">
-            </div>
-            <div class="input-field col s8 m6 l4 xl3">
-              <select id="select-work-column3" class="work-select-column3">
-                 <option class="work-option-column3" value="line">Línea</option>
-                 <option class="work-option-column3" value="column">Columna</option>
-              </select>
-              <input type="color" id="Id_Color_Column3" value="#fc9219">
-            </div>
-          </div>
-            <div class="tt input-field col s8 m6 l4 xl3 mt-auto mb-auto mr-auto">
-              <a id="button_caf"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
-              <a id="button_caf_edit"><i class="material-icons tooltipped modal-trigger" href="#EditChart" data-position="right" data-tooltip="Editar" onclick="return false;">edit</i></a>
-              <?php echo $this->Html->image('gif/download_excel.gif',['id'=>'Excel_Caf_Gif', 'style'=>'display:none'])?>
-            </div>
-        </div>
-        <div class="chart" id="div-gif" style="display:none">
-          <div class="data-box ml-auto mr-auto">
-              <?php echo $this->Html->image('gif/load.gif',array('id'=>'img-id'))?>
-          </div>
-        </div>
-          <div id="idchart" class="chart">
-              <h2>Curva de Avance Físico <span class="icon-download"><a id="Caf_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a></span></h2>
-              <div class="chart-content" id="caf"></div>
-          </div>
-        <?php endif;?>
-        <?php if ($longitudArrayDate != 0):?>
-          <div class="color-chart">
-            <div class="row">
-              <div class="input-field col s8 m6 l4 xl3">
-                <select id="select-work-TG-column1" class="work-select-TG-column1">
-                   <option class="work-option-TG-column1" value="column">Columna</option>
-                   <option class="work-option-TG-column1" value="line">Línea</option>
-                </select>
-                <input type="color" id="Id_Color_TG_Column1" value="#2376BC">
-              </div>
-              <div class="input-field col s8 m6 l4 xl3">
-                <select id="select-work-TG-column2" class="work-select-TG-column2">
-                   <option class="work-option-TG-column2" value="column">Columna</option>
-                   <option class="work-option-TG-column2" value="line">Línea</option>
-                </select>
-                <input type="color" id="Id_Color_TG_Column2" value="#FF8000">
-              </div>
-              <div class="input-field col s8 m6 l4 xl3">
-                <select id="select-work-TG-column3" class="work-select-TG-column3">
-                   <option class="work-option-TG-column3" value="line">Línea</option>
-                   <option class="work-option-TG-column3" value="column">Columna</option>
-                </select>
-                <input type="color" id="Id_Color_TG_Column3" value="#FBB800">
-              </div>
-              <div class="input-field col s8 m6 l4 xl3">
-                <select id="select-work-TG-column4" class="work-select-TG-column4">
-                   <option class="work-option-TG-column4" value="line">Línea</option>
-                   <option class="work-option-TG-column4" value="column">Columna</option>
-                </select>
-                <input type="color" id="Id_Color_TG_Column4" value="#4D91CE">
-              </div>
-              <div class="input-field col s8 m6 l4 xl3">
-                <select id="select-work-TG-column5" class="work-select-TG-column5">
-                   <option class="work-option-TG-column5" value="line">Línea</option>
-                   <option class="work-option-TG-column5" value="column">Columna</option>
-                </select>
-                <input type="color" id="Id_Color_TG_Column5" value="#BBBBBB">
-              </div>
-            </div>
-              <div class="input-field col s8 m6 l4 xl3 mt-auto mb-auto mr-auto">
-                <a id="button_tg"><i class="material-icons tooltipped" data-position="right" data-tooltip="Actualizar gráfica" onclick="return false;">refresh</i></a>
-                <?php echo $this->Html->image('gif/download_excel.gif',['id'=>'Excel_Tg_Gif', 'style'=>'display:none'])?>
-              </div>
-          </div>
-          <div class="chart" id="div-gif-tg" style="display:none">
-            <div class="data-box ml-auto mr-auto">
-                <?php echo $this->Html->image('gif/load.gif',array('id'=>'img-id'))?>
-            </div>
-          </div>
-          <div id="idchart-tg" class="chart">
-              <h2>Tres Generaciones <span class="icon-download"><a id="Tg_Button_Excel"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Descargar Excel" onclick="return false;">file_download</i></a></span></h2>
-              <div class="chart-content" id="tg" style="min-height: 475px;"></div>
-          </div>
-      <?php endif;?>
-      <script>
-      var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
-      </script>
-      <script>
-      var xhr = null;
-      var xhr2 = null;
-      var Column1_color = null;
-      document.getElementById('Id_Color_Column1').onchange=function(){
-        Column1_color = this.value;
-      };
-      var Column2_color = null;
-      document.getElementById('Id_Color_Column2').onchange=function(){
-        Column2_color = this.value;
-      };
-      var Column3_color = null;
-      document.getElementById('Id_Color_Column3').onchange=function(){
-        Column3_color = this.value;
-      };
-      $(document).ready(function() {
-          $('.work-select').change(function() {
-            var Chart_type = $(".work-select-graph").children(":selected").attr("value");
-            var Column1_type = $(".work-select-column1").children(":selected").attr("value");
-            var Column1_type = $(".work-select-column1").children(":selected").attr("value");
-            var Column2_type = $(".work-select-column2").children(":selected").attr("value");
-            var Column3_type = $(".work-select-column3").children(":selected").attr("value");
-            // event.preventDefault();
-              var xhr = $.ajax({
-                  headers:{
-                    'X-CSRF-Token':csrfToken
-                  },
-                  method: "POST",
-                  url: "<?php echo $this->Url->build(['action'=>'ajaxchart']);?>",
-                  data: {
-                      workselected1: $(this).val(),
-                      "work" : "<?php echo $graph; ?>",
-                      chart: Chart_type,
-                      Column1_Type: Column1_type,
-                      Column2_Type: Column2_type,
-                      Column3_Type: Column3_type,
-                      Column1_Color: Column1_color,
-                      Column2_Color: Column2_color,
-                      Column3_Color: Column3_color
-                  },
-                    beforeSend: function() {
-                      $('#div-gif').show();
-                      $('#idchart').hide();
-                  },
-                  complete: function(){
-                    $('#div-gif').hide();
-                    $('#h2caf').hide();
-                    $('#caf').hide();
-                    $('#idchart').show();
-                  },
-                  success: function(data){
-                      $("#idchart").html(data);
-                      xhr.abort();
-                  }
-              });
-          });
-      });
-      $(document).ready(function(){
-        $("#button_caf").click(function(){
-          var Period_type = $(".work-select").children(":selected").attr("value");
-          var Chart_type = $(".work-select-graph").children(":selected").attr("value");
-          var Column1_type = $(".work-select-column1").children(":selected").attr("value");
-          var Column2_type = $(".work-select-column2").children(":selected").attr("value");
-          var Column3_type = $(".work-select-column3").children(":selected").attr("value");
-          $.ajax({
-            headers:{
-              'X-CSRF-Token':csrfToken
-            },
-            method: "POST",
-            url: "<?php echo $this->Url->build(['action'=>'ajaxchart']);?>",
-            data: {
-                workselected1: Period_type,
-                "work" : "<?php echo $graph; ?>",
-                chart: Chart_type,
-                Column1_Type: Column1_type,
-                Column2_Type: Column2_type,
-                Column3_Type: Column3_type,
-                Column1_Color: Column1_color,
-                Column2_Color: Column2_color,
-                Column3_Color: Column3_color
-          },
-              beforeSend: function() {
-                $('#div-gif').show();
-                $('#idchart').hide();
-            },
-            complete: function(){
-              $('#div-gif').hide();
-              $('#caf').hide();
-              $('#idchart').show();
-            },
-            success: function(data){
-                $("#idchart").html(data);
-            }
-          });
-        });
-      });
-      var Column1_TG_color = null;
-      document.getElementById('Id_Color_TG_Column1').onchange=function(){
-        Column1_TG_color = this.value;
-      };
-      var Column2_TG_color = null;
-      document.getElementById('Id_Color_TG_Column2').onchange=function(){
-        Column2_TG_color = this.value;
-      };
-      var Column3_TG_color = null;
-      document.getElementById('Id_Color_TG_Column3').onchange=function(){
-        Column3_TG_color = this.value;
-      };
-      var Column4_TG_color = null;
-      document.getElementById('Id_Color_TG_Column4').onchange=function(){
-        Column4_TG_color = this.value;
-      };
-      var Column5_TG_color = null;
-      document.getElementById('Id_Color_TG_Column5').onchange=function(){
-        Column5_TG_color = this.value;
-      };
-      // Botón carga de gráfica de tres Generaciones.
-      <?php if($projects->CHART != null):?>
-      $(document).ready(function(){
-        $("#button_tg").click(function(){
-          var Column1_TG_type = $(".work-select-TG-column1").children(":selected").attr("value");
-          var Column2_TG_type = $(".work-select-TG-column2").children(":selected").attr("value");
-          var Column3_TG_type = $(".work-select-TG-column3").children(":selected").attr("value");
-          var Column4_TG_type = $(".work-select-TG-column4").children(":selected").attr("value");
-          var Column5_TG_type = $(".work-select-TG-column5").children(":selected").attr("value");
-          $.ajax({
-            headers:{
-              'X-CSRF-Token':csrfToken
-            },
-            method: "POST",
-            url: "<?php echo $this->Url->build(['action'=>'ajaxchartTg']);?>",
-            data: {
-                "Project_Code" : "<?php echo $code; ?>",
-                "Project_Excel": "<?php echo $projects->CHART; ?>",
-                Column1_TG_Type: Column1_TG_type,
-                Column2_TG_Type: Column2_TG_type,
-                Column3_TG_Type: Column3_TG_type,
-                Column4_TG_Type: Column4_TG_type,
-                Column5_TG_Type: Column5_TG_type,
-                Column1_TG_Color: Column1_TG_color,
-                Column2_TG_Color: Column2_TG_color,
-                Column3_TG_Color: Column3_TG_color,
-                Column4_TG_Color: Column4_TG_color,
-                Column5_TG_Color: Column5_TG_color
-          },
-              beforeSend: function() {
-                $('#div-gif-tg').show();
-                $('#idchart-tg').hide();
-            },
-            complete: function(){
-              $('#div-gif-tg').hide();
-              $('#tg').hide();
-              $('#idchart-tg').show();
-            },
-            success: function(data){
-                $("#idchart-tg").html(data);
-            }
-          });
-        });
-      });
-      <?php endif;?>
-      function Import_Caf_Excel(Grafica){
-        $('#Caf_Button_Excel').click(function() {
-          // event.preventDefault();
-            var xhr2 = $.ajax({
-                headers:{
-                  'X-CSRF-Token':csrfToken
-                },
-                method: "POST",
-                url: "<?php echo $this->Url->build(['action'=>'ImportExcelCaf']);?>",
-                async: false,
-                data: {
-                    Curva_Date: <?= json_encode($fecJson)?>,
-                    Curva_Plan: <?= json_encode($acJson)?>,
-                    Curva_Ejec: <?= json_encode($evJson)?>,
-                    Curva_Estimado: <?= json_encode($blJson)?>,
-                    Name: "<?=$name?>",
-                    Id: "<?=$ActualEps?>"
-                },
-                beforeSend: function() {
-                  $("#Excel_Caf_Gif").show();
-                },
-                complete: function(){
-                  $('#Excel_Caf_Gif').hide();
-                },
-                success: function(data){
-                    // xhr2.abort();
-                    window.location.href = "/Portal-Web/<?=$name?>_Curva_S.xlsx";
-                }
-            });
-            xhr_delete = $.ajax({
-            headers:{
-              'X-CSRF-Token':csrfToken
-            },
-            url: "<?php echo $this->Url->build(['action'=>'DeleteExcelFile']);?>",
-            method: "POST",
-            data: {Name: "<?=$name?>_Curva_S.xlsx"},
-            dataType: 'json',
-            success: function (data) {
 
-            }
-          });
-          xhr_delete.abort();
-        }).delay(400);
-      };
-      <?php if ($longitudArrayDate != 0):?>
-      $(document).ready(function(){
-          $('#Tg_Button_Excel').click(function() {
-            // event.preventDefault();
-              var xhr2 = $.ajax({
-                  headers:{
-                    'X-CSRF-Token':csrfToken
-                  },
-                  method: "POST",
-                  url: "<?php echo $this->Url->build(['action'=>'ImportExcelTg']);?>",
-                  data: {
-                      Info_Grafica_Date: <?= json_encode($excelDate)?>,
-                      Info_Grafica_Proyectado: <?= json_encode($excelProyectado)?>,
-                      Info_Grafica_Planeado: <?= json_encode($excelPlaneado)?>,
-                      Info_Grafica_Ejecutado: <?= json_encode($excelEjecutado)?>,
-                      Name: "<?=$name?>",
-                      Id: "<?=$ActualEps?>"
-                  },
-                  beforeSend: function() {
-                    $('#Excel_Tg_Gif').show();
-                  },
-                  complete: function(){
-                    $('#Excel_Tg_Gif').hide();
-                  },
-                  success: function(data){
-                      // xhr2.abort();
-                      window.location.href = "/Portal-Web/<?=$name?>_Curva_Tg.xlsx";
-                  }
-              });
-              delete_TG();
-          }).delay(400);
-      });
-      function delete_TG(){
-        xhr_delete_tg = $.ajax({
-        url: "<?php echo $this->Url->build(['action'=>'DeleteExcelFile']);?>",
-        headers:{
-          'X-CSRF-Token':csrfToken
-        },
-        method: "POST",
-        data: {Name: "<?=$name?>_Curva_Tg.xlsx"},
-        dataType: 'json',
-        success: function (data) {
-           // alert("Eliminado");
-        }
-      });
-      xhr_delete_tg.abort();
-      }
-      <?php endif;?>
-      </script>
+        <div class="compare">
+            <!-- Versión actual -->
+            <div class="compare-item">
+                <div class="compare-item-title">
+                    <h2>VERSIÓN ACTUAL</h2>
+                </div>
+
+                <div class="indicators row wrap">
+                    <h2>Indicadores de cronograma</h2>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 modal-trigger" href="#detailValueExecuted">
+                            <h3 class="mr-2">SPI</h3>
+                            <h3 class="ml-auto" id="spi-indicator"></h3>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
+                            <h3 class="ml-auto" id="avance-plan-indicator"></h3>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
+                            <h3 class="ml-auto" id="avance-ejec-indicator"></h3>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">FEPO</h5>
+                            <h5 class="ml-auto right-align" id="fepo-indicator"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">DURACIÓN TOTAL</h5>
+                            <h4 class="ml-auto right-align" id="od-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small>ESTIMADA DURACIÓN</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>DE IMPACTO</small></h5>
+                            <h4 class="ml-auto" id="pi-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h4 class="mr-2">HITOS</h4>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="indicators row wrap mb-4">
+                    <h2 class="mb-2">Indicadores de presupuesto</h2>
+                    <h3>Total proyecto</h3>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h4 class="fw-600 mr-2">CPI</h4>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600 mr-2">EJECUTADO</h5>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600 mr-2">PLANEADO</h5>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="divider transparent"></div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600">PRESUPUESTO</h5>
+                            <h4 class="ml-auto" id="pi-indicator"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <h3 class="mt-3">Anual proyecto</h3>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="divider transparent"></div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PORCENTAJE VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator">100%</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-content">
+                        <div class="row wrap align-center">
+                            <div class="col flex-300">
+                                <div class="input-field">
+                                    <select id="select-work" class="work-select">
+                                      <option value="" disabled selected>Cambiar periodo</option>
+                                      <option class="work-option" value="1">Día</option>
+                                      <option class="work-option" value="2">Semana</option>
+                                      <option class="work-option" value="3">Mes</option>
+                                      <option class="work-option" value="4">Trimestre</option>
+                                      <option class="work-option" value="5">Año</option>
+                                    </select>
+                                    <label>Periodo</label>
+                                </div>
+                            </div>
+                            <div class="col flex-0">
+                                <a href="" class="btn-floating btn-depressed">
+                                    <i class="mdi mdi-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart">
+                    <h2>Curva de Avance Físico</h2>
+                    <div class="chart-content" id="caf"></div>
+                </div>
+            </div>
+
+            <!-- Otras versiones -->
+            <div class="compare-item compare-item-version">
+                <div class="compare-item-title">
+                    <div class="input-field">
+                        <select>
+                            <option value="1">V1 - Enero 25, 2019</option>
+                            <option value="2">V2 - Marzo 25, 2019</option>
+                            <option value="3">V3 - Agosto 25, 2019</option>
+                        </select>
+                        <label>Versión</label>
+                    </div>
+                </div>
+
+                <div class="indicators row wrap">
+                    <h2>Indicadores de cronograma</h2>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 modal-trigger" href="#detailValueExecuted">
+                            <h3 class="mr-2">SPI</h3>
+                            <h3 class="ml-auto" id="spi-indicator"></h3>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
+                            <h3 class="ml-auto" id="avance-plan-indicator"></h3>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
+                            <h3 class="ml-auto" id="avance-ejec-indicator"></h3>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">FEPO</h5>
+                            <h5 class="ml-auto right-align" id="fepo-indicator"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">DURACIÓN TOTAL</h5>
+                            <h4 class="ml-auto right-align" id="od-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small>ESTIMADA DURACIÓN</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>DE IMPACTO</small></h5>
+                            <h4 class="ml-auto" id="pi-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h4 class="mr-2">HITOS</h4>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="indicators row wrap mb-4">
+                    <h2 class="mb-2">Indicadores de presupuesto</h2>
+                    <h3>Total proyecto</h3>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h4 class="fw-600 mr-2">CPI</h4>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600 mr-2">EJECUTADO</h5>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600 mr-2">PLANEADO</h5>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="divider transparent"></div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600">PRESUPUESTO</h5>
+                            <h4 class="ml-auto" id="pi-indicator"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <h3 class="mt-3">Anual proyecto</h3>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
+                            <h4 class="fw-600 ml-auto right-align"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="divider transparent"></div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small class="small-indicator">VARIACIÓN PROYECTADA <?=date("Y")?></small></h5>
+                            <h4 class="ml-auto" id="da-indicator"></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-content">
+                        <div class="row wrap align-center">
+                            <div class="col flex-300">
+                                <div class="input-field">
+                                    <select>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                    <label>Periodo</label>
+                                </div>
+                            </div>
+                            <div class="col flex-0">
+                                <a href="" class="btn-floating btn-depressed">
+                                    <i class="mdi mdi-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart">
+                    <h2>Curva de Avance Físico</h2>
+                    <div class="chart-content" id="caf"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="chart">
+            <h2>Gráfica acumulado (en construcción)</h2>
+            <div class="chart-content" id="ga"></div>
+            <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
+        </div> -->
+
         <div class="chart">
+            <h2>Tres Generaciones</h2>
+            <div class="chart-content" id="tg" style="min-height: 475px;"></div>
+        </div>
+
+        <div class="compare compare-risk">
+            <div class="compare-item">
+                <div class="chart">
+                    <h2>Riesgos</h2>
+                    <div class="chart-risk">
+                        <div class="chart-risk-list">
+                            <ul class="pa-0 mb-3">
+                                <li>
+                                    <a class="secondary white-text">IGR 90%</a>
+                                </li>
+                            </ul>
+                            <ul class="pa-0">
+                                <?php foreach ($risks as $risk): ?>
+                                <li>
+                                    <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="compare-item compare-item-version">
+                <div class="chart">
+                    <h2>Riesgos</h2>
+                    <div class="chart-risk">
+                        <div class="chart-risk-list">
+                            <ul class="pa-0 mb-3">
+                                <li>
+                                    <a class="secondary white-text">IGR 90%</a>
+                                </li>
+                            </ul>
+                            <ul class="pa-0">
+                                <?php foreach ($risks as $risk): ?>
+                                <li>
+                                    <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart box-risk">
             <h2>Riesgos</h2>
             <div class="chart-risk">
-              <?php if($ActualEps == 34013 || $projects->EPS_REL == 34013 || $ActualEps == 34021 || $projects->EPS_REL == 34021
-              || $ActualEps == 34015 || $projects->EPS_REL == 34015 || $ActualEps == 34017 || $projects->EPS_REL == 34017):?>
-              <div class="indicators row">
-                  <div class="ml-3 col s12 m12 l12 xl6">
-                      <a class="indicator type-1" style="background-color:
-                        <?php foreach ($colorIndicator as $colorFase => $valueFase): ?>
-                          <?php if ($projects->IGR >= $valueFase['minimun'] && $projects->IGR <= $valueFase['maximo'] && $valueFase['indicator_name'] == 'IGR'):?>
-                            <?php echo $valueFase['hexa_color'];?>
-                          <?php endif;?>
-                         <?php endforeach; ?>">
-                        <?php if($projects->IGR != null):?>
-                          <h4 class="fw-600 ml-auto mr-auto">IGR <?= $projects->IGR ?>%</h4>
-                        <?php else:?>
-                          <h4 class="fw-600 ml-auto mr-auto">IGR</h4>
-                        <?php endif;?>
-                      </a>
-                  </div>
-                </div>
-              <?php endif;?>
                 <div class="chart-risk-list">
+                    <ul class="py-0">
+                        <li>
+                            <a class="secondary white-text">IGR 90%</a>
+                        </li>
+                    </ul>
                     <ul>
-                        <?php foreach ($rks as $rk): ?>
-                          <li>
-                            <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
-                          </li>
+                        <?php foreach ($risks as $risk): ?>
+                        <li>
+                            <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                        </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -1128,192 +588,192 @@ $("#button_caf_add").click(function(){
                             <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
                             <th>MA</th>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 1 && $risk['y'] == 1 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach;?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 2 && $risk['y'] == 1 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="orange">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach;?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 3 && $risk['y'] == 1 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="red">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach;?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 4 && $risk['y'] == 1 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="red">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 5 && $risk['y'] == 1 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
-                          </tr>
-                         <tr>
-                          <th>A</th>
+                        </tr>
+                        <tr>
+                            <th>A</th>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 1 && $risk['y'] == 2 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 2 && $risk['y'] == 2 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="orange">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 3 && $risk['y'] == 2 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="orange">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 4 && $risk['y'] == 2 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="red">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 5 && $risk['y'] == 2 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                         </tr>
                         <tr>
                             <th>M</th>
                             <td class="lime accent-4">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 1 && $risk['y'] == 3 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 2 && $risk['y'] == 3 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 3 && $risk['y'] == 3 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="orange">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 4 && $risk['y'] == 3 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="orange">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 5 && $risk['y'] == 3 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                         </tr>
                         <tr>
                             <th>B</th>
                             <td class="lime accent-4">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 1 && $risk['y'] == 4 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 2 && $risk['y'] == 4 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 3 && $risk['y'] == 4 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 4 && $risk['y'] == 4 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 5 && $risk['y'] == 4 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                         </tr>
                         <tr>
-                          <th>MB</th>
+                            <th>MB</th>
                             <td class="lime accent-4">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 1 && $risk['y'] == 5 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 2 && $risk['y'] == 5 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 3 && $risk['y'] == 5 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
                             <td class="lime accent-4">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 4 && $risk['y'] == 5 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
                             </td>
-                           <td class="yellow">
-                              <?php foreach ($rks as $rk):
-                                if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
-                                  echo '<span>' .$rk->RISK_NUMBER. '</span>';
-                                };
-                              endforeach; ?>
-                           </td>
+                            <td class="yellow">
+                                <?php foreach ($risks as $risk):
+                                    if($risk['x'] == 5 && $risk['y'] == 5 ) {
+                                        echo '<span>' .$risk['name']. '</span>';
+                                    };
+                                endforeach; ?>
+                            </td>
                         </tr>
                         <tr>
                             <th class="title" colspan="2"></th>
@@ -1333,49 +793,51 @@ $("#button_caf_add").click(function(){
                 </div>
             </div>
         </div>
-        <!-- IMPORTANTE CAMBIOS SOLICITADOS -->
-          <div class="data">
-            <?php if ($ActualEps != 34013 && $projects->EPS_REL != 34013 && $ActualEps != 34021 && $projects->EPS_REL != 34021
-                      && $ActualEps != 34015 && $projects->EPS_REL != 34015 && $ActualEps != 34017 && $projects->EPS_REL != 34017):?>
-              <div class="data-distance2">
-                  <?= $this->Html->image('icons/torre-blanca.svg') ?>
-                  <div class="data-distance2-content">
-                      <h2>Longitud</h2>
-                      <h3><?= $projects->DISTANCIA ?> Km</h3>
-                      <div class="line-distance"></div>
-                      <h4>de líneas de transmisión de</h4>
-                      <h5><?= $projects->LINEA_TRANS ?>kV</h5>
-                      <div class="divider white mt-3 mb-1"></div>
-                      <h6><?= $projects->TORRE ?> Torres</h6>
-                  </div>
-                  <?= $this->Html->image('icons/torre-blanca.svg') ?>
-              </div>
-            <?php else:?>
-              <div class="data-distance">
-                  <figure class="data-distance-valve start">
-                      <?= $this->Html->image('icons/valvula-izq.svg') ?>
-                  </figure>
-                  <div class="data-distance-content">
-                    <h2>Longitud</h2>
-                    <h3><?= $projects->DISTANCIA ?> Km</h3>
+        <div class="data-distance2">
+            <?= $this->Html->image('icons/torre-blanca.svg') ?>
+            <div class="data-distance2-content">
+                <h2>Longitud</h2>
+                <h3>162 Km</h3>
+                <div class="line-distance"></div>
+                <h4>de líneas de transmisión de</h4>
+                <h5>230kV</h5>
+                <div class="divider white mt-3 mb-1"></div>
+                <h6>344 Torres</h6>
+            </div>
+            <?= $this->Html->image('icons/torre-blanca.svg') ?>
+        </div>
+        <div class="data">
+            <div class="data-distance">
+                <figure class="data-distance-valve start">
+                    <?= $this->Html->image('icons/valvula-izq.svg') ?>
+                </figure>
+                <div class="data-distance-content">
+                    <h2>Distancia</h2>
+                    <h3>162 Km</h3>
                     <div class="line-distance"></div>
-                    <h4>ECG</h4>
-                    <h5>No. <?= $projects->LINEA_TRANS ?></h5>
+                    <h4>de líneas de transmisión de</h4>
+                    <h5>230kV</h5>
                     <div class="divider white mt-3 mb-1"></div>
-                    <h6><?= $projects->TORRE ?> Facilidades</h6>
-                  </div>
-                  <figure class="data-distance-valve end">
-                      <?= $this->Html->image('icons/valvula-der.svg') ?>
-                  </figure>
-              </div>
-            <?php endif;?>
-          </div>
-          <div class="map">
-              <?= $this->Html->image('maps/'.$projects->ID_PROJECT.'/'.$projects->FOTO) ?>
-          </div>
-        <a href="javascript:" class="btn-floating waves-effect waves-light Scroll-button" id="return-to-top"><i class="material-icons">arrow_upward</i></a>
+                    <h6>344 Torres</h6>
+                </div>
+                <figure class="data-distance-valve end">
+                    <?= $this->Html->image('icons/valvula-der.svg') ?>
+                </figure>
+            </div>
+        </div>
+
+        <div class="map">
+            <?= $this->Html->image('maps/mapa-1.jpg') ?>
+        </div>
     </div>
 </div>
+
+<div class="btns-floating btns-floating-right btns-floating-bottom">
+    <button class="btn btn-floating btn-large tertiary" onclick="compare()">
+        <i class="mdi mdi-select-compare"></i>COMPARAR</a>
+    </button>
+</div>
+
 <!-- Modal detalle valor ejecutado -->
 <div id="detailValueExecuted" class="modal">
     <div class="modal-content">
@@ -1414,7 +876,7 @@ $("#button_caf_add").click(function(){
                                 <ul class="collapsible-header-content">
                                     <li>
                                         <small>Código (CBS)</small>
-                                        <h3>2</h3>
+                                        <h3>1</h3>
                                     </li>
                                     <li>
                                         <small>Descripción</small>
@@ -1434,11 +896,11 @@ $("#button_caf_add").click(function(){
                                 <ul class="collapsible">
                                     <li>
                                         <div class="collapsible-header">
-                                            <i class="material-icons">keyboard_arrow_down</i>
+                                            <!-- <i class="material-icons">keyboard_arrow_down</i> -->
                                             <ul class="collapsible-header-content">
                                                 <li>
                                                     <small>Código (CBS)</small>
-                                                    <h3>3</h3>
+                                                    <h3>1</h3>
                                                 </li>
                                                 <li>
                                                     <small>Descripción</small>
@@ -1455,31 +917,188 @@ $("#button_caf_add").click(function(){
                                             </ul>
                                         </div>
                                         <div class="collapsible-body">
-                                          <ul class="collapsible">
-                                              <li>
-                                                  <div class="collapsible-header">
-                                                      <i class="material-icons">keyboard_arrow_down</i>
-                                                      <ul class="collapsible-header-content">
-                                                          <li>
-                                                              <small>Código (CBS)</small>
-                                                              <h3>4</h3>
-                                                          </li>
-                                                          <li>
-                                                              <small>Descripción</small>
-                                                              <h3>Proyecto</h3>
-                                                          </li>
-                                                          <li>
-                                                              <small>Monto (COP)</small>
-                                                              <h3>$ 35,564,214,614</h3>
-                                                          </li>
-                                                          <li>
-                                                              <small>Monto (USD)</small>
-                                                              <h3>$ 1,564,214,614</h3>
-                                                          </li>
-                                                      </ul>
-                                                  </div>
-                                              </li>
-                                          </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="collapsible">
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <ul class="collapsible-header-content">
+                                                <li>
+                                                    <small>Código (CBS)</small>
+                                                    <h3>1</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Descripción</small>
+                                                    <h3>Proyecto</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (COP)</small>
+                                                    <h3>$ 35,564,214,614</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (USD)</small>
+                                                    <h3>$ 1,564,214,614</h3>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="collapsible-body">
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="collapsible">
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <ul class="collapsible-header-content">
+                                                <li>
+                                                    <small>Código (CBS)</small>
+                                                    <h3>1</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Descripción</small>
+                                                    <h3>Proyecto</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (COP)</small>
+                                                    <h3>$ 35,564,214,614</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (USD)</small>
+                                                    <h3>$ 1,564,214,614</h3>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="collapsible-body">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                    <ul class="collapsible-header-content">
+                        <li>
+                            <small>Código (CBS)</small>
+                            <h3>1</h3>
+                        </li>
+                        <li>
+                            <small>Descripción</small>
+                            <h3>Proyecto</h3>
+                        </li>
+                        <li>
+                            <small>Monto (COP)</small>
+                            <h3>$ 35,564,214,614</h3>
+                        </li>
+                        <li>
+                            <small>Monto (USD)</small>
+                            <h3>$ 1,564,214,614</h3>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapsible-body">
+                    <ul class="collapsible">
+                        <li>
+                            <div class="collapsible-header">
+                                <i class="material-icons">keyboard_arrow_down</i>
+                                <ul class="collapsible-header-content">
+                                    <li>
+                                        <small>Código (CBS)</small>
+                                        <h3>1</h3>
+                                    </li>
+                                    <li>
+                                        <small>Descripción</small>
+                                        <h3>Proyecto</h3>
+                                    </li>
+                                    <li>
+                                        <small>Monto (COP)</small>
+                                        <h3>$ 35,564,214,614</h3>
+                                    </li>
+                                    <li>
+                                        <small>Monto (USD)</small>
+                                        <h3>$ 1,564,214,614</h3>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="collapsible-body">
+                                <ul class="collapsible">
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <ul class="collapsible-header-content">
+                                                <li>
+                                                    <small>Código (CBS)</small>
+                                                    <h3>1</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Descripción</small>
+                                                    <h3>Proyecto</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (COP)</small>
+                                                    <h3>$ 35,564,214,614</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (USD)</small>
+                                                    <h3>$ 1,564,214,614</h3>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="collapsible-body">
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="collapsible">
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <ul class="collapsible-header-content">
+                                                <li>
+                                                    <small>Código (CBS)</small>
+                                                    <h3>1</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Descripción</small>
+                                                    <h3>Proyecto</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (COP)</small>
+                                                    <h3>$ 35,564,214,614</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (USD)</small>
+                                                    <h3>$ 1,564,214,614</h3>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="collapsible-body">
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="collapsible">
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <ul class="collapsible-header-content">
+                                                <li>
+                                                    <small>Código (CBS)</small>
+                                                    <h3>1</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Descripción</small>
+                                                    <h3>Proyecto</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (COP)</small>
+                                                    <h3>$ 35,564,214,614</h3>
+                                                </li>
+                                                <li>
+                                                    <small>Monto (USD)</small>
+                                                    <h3>$ 1,564,214,614</h3>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="collapsible-body">
                                         </div>
                                     </li>
                                 </ul>
@@ -1491,67 +1110,9 @@ $("#button_caf_add").click(function(){
         </ul>
     </div>
 </div>
-<!-- Modal SPI -->
-<div id="SpiWBS" class="modal" style="max-weight: 100% !important">
-    <div class="modal-content">
-        <a class="modal-close close">
-            <i class="material-icons">close</i>
-        </a>
-        <h2>Estructuta de WBS</h2>
-        <ul class="collapsible collapsible-data">
-          <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
-            <?php if ($EstructureLevel1["level"] == 1): ?>
-            <li>
-                <div class="collapsible-header" id="div-<?=$EstructureLevel1["wbs_id"]?>">
-                    <i class="material-icons">keyboard_arrow_down</i>
-                    <ul class="collapsible-header-content">
-                          <li>
-                              <small>Nombre</small>
-                              <h3 id="name-level-1"><?=$EstructureLevel1["name"]?></h3>
-                          </li>
-                          <li>
-                              <small>Duración original</small>
-                              <h3 id="duration-level-1"><?=$EstructureLevel1["original duration"]?></h3>
-                          </li>
-                          <li>
-                              <small>Schedule % Complete</small>
-                              <h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3>
-                          </li>
-                          <li>
-                              <small>NL Units % Complete</small>
-                              <h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3>
-                          </li>
-                          <li>
-                              <small>BL Inicio</small>
-                              <h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3>
-                          </li>
-                          <li>
-                              <small>BL Fin</small>
-                              <h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3>
-                          </li>
-                          <li>
-                              <small>Inicio</small>
-                              <h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3>
-                          </li>
-                          <li>
-                              <small>Fin</small>
-                              <h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3>
-                          </li>
-                          <li>
-                              <small>SPI</small>
-                              <h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3>
-                          </li>
-                      </ul>
-                </div>
-            </li>
-          <?php endif; ?>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  </div>
-<?php foreach ($rks as $rk): ?>
+
 <!-- Modal detalle de riesgo -->
-<div id=<?=$rk->id?> class="modal">
+<div id="detailRisk" class="modal">
     <div class="modal-content">
         <a class="modal-close close">
             <i class="material-icons">close</i>
@@ -1559,99 +1120,32 @@ $("#button_caf_add").click(function(){
         <h2>Detalle riesgo</h2>
         <table>
             <tr>
-                <th width="30%">Riesgo</th>
-                <td><?=$rk->RISK_NUMBER?></td>
+                <th width="20%">Risego</th>
+                <td></td>
             </tr>
             <tr>
                 <th>Nombre Riesgo</th>
-                <td><?=$rk->RISK_NAME?></td>
+                <td></td>
             </tr>
             <tr>
                 <th>Probabilidad</th>
-                <?php  if ($rk->PROBABILITY == 1):?>
-                <td>Muy baja</td>
-                <?php endif;?>
-                <?php  if ($rk->PROBABILITY == 2):?>
-                <td>Baja</td>
-                <?php endif;?>
-                <?php  if ($rk->PROBABILITY == 3):?>
-                <td>Media</td>
-                <?php endif;?>
-                <?php  if ($rk->PROBABILITY == 4):?>
-                <td>Alta</td>
-                <?php endif;?>
-                <?php  if ($rk->PROBABILITY == 5):?>
-                <td>Muy alta</td>
-                <?php endif;?>
+                <td></td>
             </tr>
             <tr>
                 <th>Impacto</th>
-                <?php  if ($rk->IMPACT == 1):?>
-                <td>Muy bajo</td>
-                <?php endif;?>
-                <?php  if ($rk->IMPACT == 2):?>
-                <td>Bajo</td>
-                <?php endif;?>
-                <?php  if ($rk->IMPACT == 3):?>
-                <td>Medio</td>
-                <?php endif;?>
-                <?php  if ($rk->IMPACT == 4):?>
-                <td>Alto</td>
-                <?php endif;?>
-                <?php  if ($rk->IMPACT == 5):?>
-                <td>Muy alto</td>
-                <?php endif;?>
+                <td></td>
             </tr>
             <tr>
                 <th>Impacto del riesgo</th>
-                <td><?=$rk->IMPACT_RISK?></td>
-            </tr>
-            <tr>
-                <th>Plan de Respuesta 01</th>
-                <td><?=$rk->PLAN_ONE?></td>
-            </tr>
-            <tr>
-                <th>Plan de Respuesta 02</th>
-                <td><?=$rk->PLAN_TWO?></td>
-            </tr>
-            <tr>
-                <th>Plan de Respuesta 03</th>
-                <td><?=$rk->PLAN_THREE?></td>
-            </tr>
-            <tr>
-                <th>Plan de Respuesta 04</th>
-                <td><?=$rk->PLAN_FOUR?></td>
-            </tr>
-            <tr>
-                <th>Plan de Respuesta 05</th>
-                <td><?=$rk->PLAN_FIVE?></td>
+                <td></td>
             </tr>
             <tr>
                 <th>Estado de las acciones</th>
-                <?php  if ($rk->ACTION_STATE == "fase"):?>
-                <td>N/A En esta fase.</td>
-                <?php endif;?>
-                <?php  if ($rk->ACTION_STATE == "ejecucion"):?>
-                <td>En ejecución.</td>
-                <?php endif;?>
-                <?php  if ($rk->ACTION_STATE == "pendiente"):?>
-                <td>Pendiente.</td>
-                <?php endif;?>
-                <?php  if ($rk->ACTION_STATE == "finalizado"):?>
-                <td>Finalizado.</td>
-                <?php endif;?>
+                <td></td>
             </tr>
             <tr>
-                <th>Materialización del Riesgo</th>
-                <?php  if ($rk->MATERIALIZACION == "abierto"):?>
-                <td>Abierto.</td>
-                <?php endif;?>
-                <?php  if ($rk->MATERIALIZACION == "cerrado"):?>
-                <td>Cerrado.</td>
-                <?php endif;?>
-                <?php  if ($rk->MATERIALIZACION == "materializado"):?>
-                <td>Materializado.</td>
-                <?php endif;?>
+                <th>Materialización del riesgo</th>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -1659,105 +1153,110 @@ $("#button_caf_add").click(function(){
         <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
     </div>
 </div>
-<?php endforeach; ?>
-<div id="EditChart" class="modal" onload="test22();">
-    <div class="modal-content">
-        <a class="modal-close close" id="button_caf_create" onclick="test22()">
-            <i class="material-icons">close</i>
-        </a>
-        <h2>Filtrar gráfica</h2>
-        <div class="row">
-          <div class="input-field col s12">
-            <select class="Select-Option-Column_Caf">
-              <option value="0" disabled selected>Seleccione una opción</option>
-              <option value="1">Planeado</option>
-              <option value="2">Ejecutado</option>
-              <option value="3">Estimado</option>
-            </select>
-            <label>Columna</label>
-            <a id="button_caf_add"><i class="material-icons tooltipped" data-position="right" data-tooltip="Agregar" onclick="return false;">add_box</i></a>
-            <a id="button_caf_cancel"><i class="material-icons tooltipped" data-position="right" data-tooltip="Cancelar" onclick="return false;">cancel</i></a>
-          </div>
-          <div class="input-field col s12">
-            <select class="Select-Option-Date_Caf">
-              <option value="0" disabled selected>Seleccione una opción</option>
-              <option value="1">Abril</option>
-            </select>
-            <label>Fecha</label>
-          </div>
-        </div>
-        <table id="id_table_caf">
-            <thead>
-              <tr role="row">
-                <th id="IdCheckbox" width="8%" style="padding:10px">
-                </th>
-                <th id="IdColumnTitleDate">
-                  <label>
-                    <input id="CheckboxDateTitle" type="checkbox" class="filled-in" checked="checked" />
-                      <span style="font-size:11px">Fecha</span>
-                  </label>
-                </th>
-                <th id="IdColumnTitlePlan">
-                  <label>
-                    <input id="CheckboxPlanTitle" type="checkbox" class="filled-in" checked="checked" />
-                      <span style="font-size:11px">Planeado</span>
-                  </label>
-                </th>
-                <th id="IdColumnTitleEjec">
-                  <label>
-                    <input id="CheckboxEjecTitle" type="checkbox" class="filled-in" checked="checked" />
-                      <span style="font-size:11px">Ejecutado</span>
-                  </label>
-                </th>
-                <th id="IdColumnTitleBl">
-                  <label>
-                    <input id="CheckboxBlTitle" type="checkbox" class="filled-in" checked="checked" />
-                      <span style="font-size:11px">Estimado</span>
-                  </label>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-             <?php for ($i=0; $i<$cont; $i++): ?>
-              <tr id="IdTr<?=$i?>">
-                <td id="IdColumnCheckbox<?=$i?>">
-                  <label>
-                    <input id="CheckboxData<?=$i?>" type="checkbox" class="filled-in" checked="checked" />
-                    <span></span>
-                  </label>
-                </td>
-                <td id="IdColumnDate<?=$i?>">
-                  <input type="text" id="CheckboxDateData<?=$i?>" name="" value="<?=$fecJson[$i]?>">
-                </td>
-                <td id="IdColumnPlan<?=$i?>">
-                  <input type="text" id="CheckboxPlanData<?=$i?>" name="" value="<?=$acJson[$i]?>">
-                </td>
-                <td id="IdColumnEjec<?=$i?>">
-                  <input type="text" id="CheckboxEjecData<?=$i?>" name="" value="<?=$evJson[$i]?>">
-                </td>
-                <td id="IdColumnBl<?=$i?>">
-                  <input type="text" id="CheckboxBlData<?=$i?>" name="" value="<?=$blJson[$i]?>">
-                </td>
-              </tr>
-             <?php endfor;?>
-            </tbody>
-        </table>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
-    </div>
-</div>
-<?= $this->Html->script(['dynamic-charts.js']) ?>
-<script type="text/javascript">
-$(document).ready(function(){
-  <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
-    <?php if ($EstructureLevel1["level"] != 1): ?>
-      $( "#div-"+<?=$EstructureLevel1["wbs_parent_id"]?>).after('<div class="collapsible-body"><ul class="collapsible"><li><div class="collapsible-header" id="div-'+<?=$EstructureLevel1["wbs_id"]?>+'"><i id="i-'+<?=$EstructureLevel1["wbs_id"]?>+'" class="material-icons">keyboard_arrow_down</i><ul class="collapsible-header-content"><li><small>Nombre</small><h3><?=$EstructureLevel1["name"]?></h3></li><li><small>Duración original</small><h3 id="duration-level-1"><?=$EstructureLevel1["original duration"]?></h3></li><li><small>Schedule % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3></li><li><small>NL Units % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3></li><li><small>BL Inicio</small><h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3></li><li><small>BL Fin</small><h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3></li><li><small>Inicio</small><h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3></li><li><small>Fin</small><h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3></li><li><small>SPI</small><h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3></li></ul></div></div></li></ul></div>');
-    <?php if($EstructureLevel1["connect_by_isleaf"] != 0):?>
-      $("#div-"+<?=$EstructureLevel1["wbs_id"]?>).click(false);
-      $("#i-"+<?=$EstructureLevel1["wbs_id"]?>).empty();
-    <?php endif; ?>
-    <?php endif; ?>
-  <?php endforeach; ?>
-});
+<!-- SCRIPT PROJECTS -->
+<script>
+  // $(document).ready(function(){
+    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+    var xhr1, xhr2, xhr3, xhr4;
+    var fase_value = null;
+    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+    if(xhr1 && xhr1.readyState != 4){
+        xhr1.abort();
+    }
+      xhr1 = $.ajax({
+      headers:{
+        'X-CSRF-Token':csrfToken
+      },
+      method: "GET",
+      dataType: "json",
+      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'project_profile']);?>",
+      data: {"project_id" : "<?=$project_id?>"},
+      cache: true,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      },
+      success: function(response){
+        $.each(response, function() {
+          // Function que se encarga de llamar los proyectos de la bd local correspondientes a cada proyecto del ws
+          console.log(this);
+          $('#project-name').text(this.name);
+          if (this.code_fase == '209') {
+              fase_value = 'Fase I';
+          }else if (this.code_fase == '210') {
+              fase_value = 'Fase II';
+          }else if (this.code_fase == '211') {
+              fase_value = 'Fase III';
+          }else if (this.code_fase == '212') {
+              fase_value = 'Fase IV';
+          }else if (this.code_fase == '420') {
+              fase_value = 'Fase V';
+          }else if (this.code_fase == '1910') {
+              fase_value = 'Cerrado';
+          }
+          $('#project-phase').text(fase_value);
+          // Fecha SPI
+          var spi_date = new Date(this.data_date);
+          var spi_format_date = spi_date.getUTCDate() + " " + meses[spi_date.getMonth()] + ", " + spi_date.getUTCFullYear();
+          $('#span-spi-date').text('Fecha SPI: '+spi_format_date);
+          // SPI indicator
+          $('#spi-indicator').text(this.spi_labor_units.toFixed(2));
+          // Fepo indicator
+          if (this.fepo != null) {
+            var fepo_date = new Date(this.fepo);
+            var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+            $('#fepo-indicator').text(fepo_format_date);
+          }
+          local_db_project(this.id_p_project);
+        });
+      }
+    });
+    // Información bd local
+    function local_db_project(id_p_project){
+        xhr2 = $.ajax({
+        headers:{
+          'X-CSRF-Token':csrfToken
+        },
+        method: "GET",
+        dataType: "json",
+        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local_profile']);?>",
+        data: {project_id : id_p_project},
+        cache: true,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        },
+        success: function(response){
+          $.each(response, function() {
+            console.log(this);
+            $('#p-obj-est').text(this.Proj_Obj);
+            $('#p-info-general').text(this.DESCRIPTION);
+            $('#p-alcance').text(this.ALCANCE);
+            $('#p-control-cambio').text(this.SOLICITUD);
+            // Fopo
+            var fopo_date = new Date(this.FOPO);
+            var format_utc_date = fopo_date.getUTCDate() + " " + meses[fopo_date.getMonth()] + ", " + fopo_date.getUTCFullYear();
+            $('#span-fopo').text('FoPo: '+format_utc_date);
+            // Adjudicación
+            var adj, format_adj_date;
+            if (this.ADJUDICACION != null) {
+                var adj = new Date(this.ADJUDICACION);
+                var format_adj_date = adj.getUTCDate() + " " + meses[adj.getMonth()] + ", " + adj.getUTCFullYear();
+                $('#span-adj').text("Adjudicación: "+format_adj_date);
+            } else {
+                $('#span-adj').text("Adjudicación: No aplica");
+            }
+            if (this.CPI_DATE != null) {
+              var cpi_date = new Date(this.CPI_DATE);
+              var cpi_format_date = cpi_date.getUTCDate() + " " + meses[cpi_date.getMonth()] + ", " + cpi_date.getUTCFullYear();
+              $('#span-cpi-date').text('Fecha CPI: '+cpi_format_date);
+            }
+            if (this.IGR_DATE != null) {
+              var igr_date = new Date(this.IGR_DATE);
+              var igr_format_date = igr_date.getUTCDate() + " " + meses[igr_date.getMonth()] + ", " + igr_date.getUTCFullYear();
+              $('#span-igr-date').text('Fecha IGR: '+igr_format_date);
+            }
+          });
+        }
+      });
+    }
+    // GRÁFICA DONA
 </script>
