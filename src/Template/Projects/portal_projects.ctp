@@ -54,24 +54,25 @@
         method: "GET",
         dataType: "json",
         url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'portalProjects']);?>",
-        cache: true,
+        cache: false,
         beforeSend: function(xhr) {
           xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        },
-        success: function(response){
-          $.each(response, function() {
-            // console.log(this);
-            if (this.eps_id == 23305) {
-                $('#a-corp').attr("href", "/Portal-Web/projects/company/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
-            } else if (this.eps_id == 23306) {
-                $('#a-trans').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
-            } else if (this.eps_id == 23307) {
-                $('#a-dist').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
-            } else if (this.eps_id == 23308) {
-                $('#a-gen').attr("href", "/Portal-Web/projects/companies/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
-            }
-          });
         }
+      }).fail(function(response, errorThrown){
+        console.log('php controller status code: '+response.status+", "+errorThrown);
+      })
+      .done(function(response){
+        $.each(response, function() {
+          if (this.eps_id == '23305') {
+              $('#a-corp').attr('href', '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          } else if (this.eps_id == '23306') {
+              $('#a-trans').attr('href', '/Portal-Web/projects/companies/'+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          } else if (this.eps_id == '23307') {
+              $('#a-dist').attr('href', '/Portal-Web/projects/companies/'+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          } else if (this.eps_id == '23308') {
+              $('#a-gen').attr('href', '/Portal-Web/projects/companies/'+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          }
+        });
       });
     // });
 </script>

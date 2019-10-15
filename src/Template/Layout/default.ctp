@@ -74,25 +74,25 @@
                                  <div class="sub-menu-column">
                                     <h3>Proyectos</h3>
                                     <ul>
-                                        <li>
+                                        <li style="display : flex !important">
                                           <?php echo $this->Html->link('Lista de proyectos',
                                             ['controller'=>'Projects','action'=>'index'],
                                             ['escape'=>false]
                                           );?>
                                         </li>
-                                        <li>
+                                        <li style="display : flex !important">
                                           <?php echo $this->Html->link('Crear proyecto',
                                             ['controller'=>'Projects','action'=>'add'],
                                             ['escape'=>false]
                                           );?>
                                         </li>
-                                        <li>
+                                        <li style="display : flex !important">
                                           <?php echo $this->Html->link('Lista de indicadores de proyectos',
                                             ['controller'=>'Indicators','action'=>'index'],
                                             ['escape'=>false]
                                           );?>
                                         </li>
-                                        <li>
+                                        <li style="display : flex !important">
                                           <?php echo $this->Html->link('Crear indicadores de proyectos',
                                             ['controller'=>'Indicators','action'=>'add'],
                                             ['escape'=>false]
@@ -103,13 +103,13 @@
                                 <div class="sub-menu-column">
                                    <h3>Riesgos</h3>
                                    <ul>
-                                     <li>
+                                     <li style="display : flex !important">
                                        <?php echo $this->Html->link('Lista de riesgos',
                                          ['controller'=>'Risks','action'=>'index'],
                                          ['escape'=>false]
                                        );?>
                                      </li>
-                                     <li>
+                                     <li style="display : flex !important">
                                        <?php echo $this->Html->link('Crear riesgo',
                                          ['controller'=>'Risks','action'=>'add'],
                                          ['escape'=>false]
@@ -120,7 +120,7 @@
                                <div class="sub-menu-column">
                                   <h3>EPS</h3>
                                   <ul>
-                                    <li>
+                                    <li style="display : flex !important">
                                       <?php echo $this->Html->link('Lista de EPS',
                                         ['controller'=>'Eps','action'=>'index'],
                                         ['escape'=>false]
@@ -350,39 +350,6 @@
                 hover: true
             });
         });
-        //Ajax que se encarga de cargar las eps del nav bar
-        // $(document).ready(function(){
-        //   var eps_lvl1_titles = "";
-        //   var csrfToken = </?= json_encode($this->request->getParam('_csrfToken')) ?>;
-        //   var xhr2 = $.ajax({
-        //     headers:{
-        //       'X-CSRF-Token':csrfToken
-        //     },
-        //     method: "GET",
-        //     url: "</?php echo $this->Url->build(['controller'=>'Navbar','action'=>'NavPortalProjects']);?>",
-        //     cache: true,
-        //     beforeSend: function(xhr) {
-        //       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        //     },
-        //     success: function(response){
-        //       $.each(response, function() {
-        //         if (this.parent_eps_id == 23307) {
-        //             eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-dist').text())));
-        //             selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-        //             $('.ul-dist').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(</?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
-        //         } else if (this.parent_eps_id == 23306) {
-        //             eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-trans').text())));
-        //             selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-        //             $('.ul-trans').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(</?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+btoa(this.parent_eps_id)+'">'+this.name+'</a></li>');
-        //         } else if (this.parent_eps_id == 23308) {
-        //             eps_lvl1_titles = btoa(unescape(encodeURIComponent($('#h3-gen').text())));
-        //             selected_eps = btoa(unescape(encodeURIComponent(this.name)));
-        //             $('.ul-gen').append('<li class="option-navbar"><a href="/Portal-Web/projects/company/'+btoa(</?=$current_user['V_ID_P_USER']?>)+'/'+btoa(this.eps_id)+'/'+selected_eps+'/'+eps_lvl1_titles+'/'+this.parent_eps_id+'">'+this.name+'</a></li>');
-        //         }
-        //       });
-        //     }
-        //   });
-        // });
     </script>
 </body>
 </html>

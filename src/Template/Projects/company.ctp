@@ -112,7 +112,7 @@
 <script>
   // $(document).ready(function(){
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
-    var xhr3, xhr4, xhr5;
+    var xhr3, xhr4, xhr5, crec_item = $('.crec-url'), crec_item_number = $('.crec-number'), total_item_number = $('.total-number');
     var crec_number = 0, sost_number = 0, mec_number = 0;
     if(xhr3 && xhr3.readyState != 4){
         xhr3.abort();
@@ -124,20 +124,21 @@
       method: "GET",
       dataType: "json",
       url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-crec']);?>",
-      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>", "description" : "<?=$array_company["description"]?>"},
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>"},
       cache: true,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       },
       success: function(response){
         $.each(response, function() {
-          $('.crec-url').attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          crec_item.attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
           crec_number = this.proj_number;
-          $('.crec-number').text(crec_number);
+          crec_item_number.text(crec_number);
           total_projects();
         });
       }
     });
+    var sost_item = $('.sost-url'), sost_item_number = $('.sost-number');
     if(xhr4 && xhr4.readyState != 4){
         xhr4.abort();
     }
@@ -148,20 +149,21 @@
       method: "GET",
       dataType: "json",
       url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-sost']);?>",
-      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>", "description" : "<?=$array_company["description"]?>"},
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>"},
       cache: true,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       },
       success: function(response){
         $.each(response, function() {
-          $('.sost-url').attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          sost_item.attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
           sost_number = this.proj_number;
-          $('.sost-number').text(sost_number);
+          sost_item_number.text(sost_number);
           total_projects();
         });
       }
     });
+    var mec_item = $('.mec-url'), mec_item_number = $('.mec-number');
     if(xhr5 && xhr5.readyState != 4){
         xhr5.abort();
     }
@@ -172,21 +174,21 @@
       method: "GET",
       dataType: "json",
       url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'company-mec']);?>",
-      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>", "description" : "<?=$array_company["description"]?>"},
+      data: {"user_id" : "<?=$current_user["V_ID_P_USER"]?>", "child_eps_id" : "<?=$child_eps_id?>", "name" : "<?=$array_company["name"]?>", "child_name" : "<?=$child_eps_name?>", "eps_id" : "<?=$array_company["eps_id"]?>"},
       cache: true,
       beforeSend: function(xhr) {
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       },
       success: function(response){
         $.each(response, function() {
-          $('.mec-url').attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+          mec_item.attr("href", "/Portal-Web/projects/projects/"+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
           mec_number = this.proj_number;
-          $('.mec-number').text(mec_number);
+          mec_item_number.text(mec_number);
           total_projects();
         });
       }
     });
     function total_projects(){
-      $('.total-number').text(mec_number + sost_number + crec_number);
+      total_item_number.text(mec_number + sost_number + crec_number);
     }
 </script>

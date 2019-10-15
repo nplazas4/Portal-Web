@@ -1,69 +1,11 @@
 <?php
     // Breadcrumb
     $breadcrumb = [
-        [ 'Inicio', '/' ],
-        [ 'Portal Proyectos', '/portal-projects' ],
-        [ 'Transmisión y Transporte', '/portal-projects/companies' ],
-        [ 'Unidad de Transmisión Colombia', '/portal-projects/company' ],
-        [ 'Crecimiento', '/portal-projects/projects' ],
-        [ '﻿UPME 03 – 2010 Norte', '' ],
+        [ 'Inicio', 'home','Pages' ],
+        [ 'Portal Proyectos', 'portalProjects','Projects']
     ];
-
-    // Riesgos
-    $risks = [
-        [
-            'name' => '1',
-            'x' => 5,
-            'y' => 2,
-        ],
-        [
-            'name' => '2',
-            'x' => 5,
-            'y' => 2,
-        ],
-        [
-            'name' => '3',
-            'x' => 1,
-            'y' => 1,
-        ],
-        [
-            'name' => '4',
-            'x' => 1,
-            'y' => 3,
-        ],
-        [
-            'name' => '5',
-            'x' => 4,
-            'y' => 3,
-        ],
-        [
-            'name' => '6',
-            'x' => 3,
-            'y' => 3,
-        ],
-        [
-            'name' => '7',
-            'x' => 2,
-            'y' => 1,
-        ],
-        [
-            'name' => '8',
-            'x' => 3,
-            'y' => 4,
-        ],
-        [
-            'name' => '9',
-            'x' => 4,
-            'y' => 5,
-        ],
-        [
-            'name' => '10',
-            'x' => 3,
-            'y' => 2,
-        ],
-    ];
+    setlocale(LC_ALL, "es_ES");
 ?>
-
 <script>
     function compare(){
         var compare = document.querySelector(".compare");
@@ -78,16 +20,38 @@
 </script>
 
 <div class="section bcrumb project">
-    <div class="breadcrumb-container">
-        <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
+  <div class="breadcrumb-container" id="breadcrumb_ctg">
+      <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
-            <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a>
+          <?php echo $this->Html->link($item[0],
+            ['controller'=>$item[2], 'action'=>$item[1]],
+            ['escape' => false,'class'=>'breadcrumb']
+          );?>
         <?php endforeach; ?>
-    </div>
+        <!--Breadcrumb para las EPS provenientes de la pestaña companies, diferentes a la EPS de grupo de energía de Bogotá.
+  Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_encode($var)) para codificar los parametro a enviar.-->
+  <?php if ($array_project["child_eps_id"] != 23305): ?>
+    <?php echo $this->Html->link(
+          $array_project["name"],
+          ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($json_project))],
+          ['escape' => false,'class'=>'breadcrumb']
+    );?>
+  <?php endif;?>
+  <?php echo $this->Html->link(
+          $array_project["child_name"],
+          ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_project))],
+          ['escape' => false,'class'=>'breadcrumb']
+    );?>
+    <?php echo $this->Html->link(
+      $array_project["category_name"],
+      ['controller'=>'Projects', 'action'=>'projects',urlencode(base64_encode($json_project))],
+      ['escape' => false,'class'=>'breadcrumb']
+    );?>
+  </div>
 
     <sidebar class="project-sidebar">
         <h1 id="project-name"></h1>
-        <div class="project-sidebar-phase phase iii">
+        <div class="project-sidebar-phase">
             <h2 id="project-phase"></h2>
         </div>
         <div class="project-sidebar-percentages">
@@ -146,56 +110,66 @@
         <div class="compare">
             <!-- Versión actual -->
             <div class="compare-item">
-                <div class="compare-item-title">
+                <!-- <div class="compare-item-title">
                     <h2>VERSIÓN ACTUAL</h2>
+                </div> -->
+                <div class="compare-item-title col s12">
+                    <div class="input-field">
+                      <form id="form-select-new" class="input-field">
+                        <select id="compare-select-new" class="select-compare-new">
+                          <option value="actual" id="actual-new">Actual</option>
+                        </select>
+                        <label>Versión</label>
+                      </form>
+                    </div>
                 </div>
 
                 <div class="indicators row wrap">
                     <h2>Indicadores de cronograma</h2>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 modal-trigger" href="#detailValueExecuted">
+                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="% Avance ejecutado / % Avance planeado">
+                        <a class="indicator type-1 modal-trigger" id="spi-new" href="#SpiWBS">
                             <h3 class="mr-2">SPI</h3>
-                            <h3 class="ml-auto" id="spi-indicator"></h3>
+                            <h3 class="ml-auto" id="spi-indicator-new"></h3>
                         </a>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
-                            <h3 class="ml-auto" id="avance-plan-indicator"></h3>
+                            <h3 class="ml-auto" id="avance-plan-new"></h3>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
-                            <h3 class="ml-auto" id="avance-ejec-indicator"></h3>
+                            <h3 class="ml-auto" id="avance-ejec-new"></h3>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">FEPO</h5>
-                            <h5 class="ml-auto right-align" id="fepo-indicator"></h5>
+                            <h5 class="ml-auto right-align" id="fepo-new"></h5>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">DURACIÓN TOTAL</h5>
-                            <h4 class="ml-auto right-align" id="od-indicator"></h4>
+                            <h4 class="ml-auto right-align" id="duration-total-new"></h4>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">VARIACIÓN <small>ESTIMADA DURACIÓN</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h4 class="ml-auto" id="da-new"></h4>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">PORCENTAJE <small>DE IMPACTO</small></h5>
-                            <h4 class="ml-auto" id="pi-indicator"></h4>
+                            <h4 class="ml-auto" id="pi-new"></h4>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#detailValueExecuted">
+                        <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#Hitos-new">
                             <h4 class="mr-2">HITOS</h4>
                         </a>
                     </div>
@@ -205,90 +179,90 @@
                     <h2 class="mb-2">Indicadores de presupuesto</h2>
                     <h3>Total proyecto</h3>
                     <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                        <a class="indicator type-1 modal-trigger" id="cpi-indicator-new" href="#detailValueExecuted">
                             <h4 class="fw-600 mr-2">CPI</h4>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
+                            <h4 class="fw-600 ml-auto right-align" id="cpi-new"></h4>
                         </a>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                             <h5 class="fw-600 mr-2">EJECUTADO</h5>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="ejecutado-new"></h5>
                         </a>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                             <h5 class="fw-600 mr-2">PLANEADO</h5>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="planeado-new"></h5>
                         </a>
                     </div>
                     <div class="divider transparent"></div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
                             <h5 class="fw-600">PRESUPUESTO</h5>
-                            <h4 class="ml-auto" id="pi-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="presupuesto-new"></h5>
                         </a>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 secondary darken-2">
                             <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="proyeccion-new"></h5>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 secondary darken-2">
                             <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="variacion-new"></h5>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
+                        <div class="indicator type-1" id="porcentaje-proy-new">
                             <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h4 class="fw-600 ml-auto right-align" id="porcentaje-var-new"></h4>
                         </div>
                     </div>
                     <h3 class="mt-3">Anual proyecto</h3>
                     <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                        <a class="indicator type-1 modal-trigger" id="cpi-anual-indicator-new" href="#detailValueExecuted">
                             <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
+                            <h4 class="fw-600 ml-auto right-align" id="cpi-anual-new"></h4>
                         </a>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 secondary darken-2">
                             <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="ejec-anual-new"></h5>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 secondary darken-2">
                             <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="plan-anual-new"></h5>
                         </div>
                     </div>
                     <div class="divider transparent"></div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 secondary darken-2">
                             <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="pres-anual-new"></h5>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
                         <div class="indicator type-1 secondary darken-2">
                             <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="proyeccion-anual-new"></h5>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
+                        <div class="indicator type-1 secondary darken-2" id="var-proy-anual-new">
                             <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
+                            <h5 class="fw-600 ml-auto right-align" id="variacion-anual-new"></h5>
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
+                        <div class="indicator type-2" id="porcentaje-pr-anual-new">
                             <h5 class="mr-2">PORCENTAJE VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator">100%</h4>
+                            <h5 class="fw-600 ml-auto right-align" id="porcentaje-anual-new"></h5>
                         </div>
                     </div>
                 </div>
@@ -298,7 +272,200 @@
                         <div class="row wrap align-center">
                             <div class="col flex-300">
                                 <div class="input-field">
-                                    <select id="select-work" class="work-select">
+                                    <select id="actual-select" class="period-select">
+                                      <option value="" disabled selected>Cambiar periodo</option>
+                                      <option class="work-option" value="1">Día</option>
+                                      <option class="work-option" value="2">Semana</option>
+                                      <option class="work-option" value="3">Mes</option>
+                                      <option class="work-option" value="4">Trimestre</option>
+                                      <option class="work-option" value="5">Año</option>
+                                    </select>
+                                    <label>Periodo</label>
+                                </div>
+                            </div>
+                            <div class="col flex-0" id="Caf_Button_Excel_new">
+                                <a class="btn-floating btn-depressed" onclick="return false;">
+                                    <i class="mdi mdi-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart">
+                    <h2>Curva de Avance Físico</h2>
+                    <div class="chart-content" id="caf"></div>
+                </div>
+                <!-- </?php if($longitudArrayDate != 0):?> -->
+                  <div class="chart">
+                      <h2>Tres Generaciones</h2>
+                      <div class="chart-content" id="tg" style="min-height: 475px;"></div>
+                  </div>
+                <!-- </?php endif;?> -->
+            </div>
+
+            <!-- Otras versiones -->
+            <div class="compare-item compare-item-version">
+                <div class="compare-item-title col s12">
+                    <div class="input-field">
+                      <form id="form-select-old" class="input-field">
+                        <select id="compare-select-old" class="select-compare-old">
+                          <option value="actual" id="actual-old">Actual</option>
+                        </select>
+                        <label>Versión</label>
+                      </form>
+                    </div>
+                </div>
+
+                <div class="indicators row wrap">
+                    <h2>Indicadores de cronograma</h2>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 modal-trigger" id="spi-old-color" href="#SpiWBS">
+                            <h3 class="mr-2">SPI</h3>
+                            <h3 class="ml-auto" id="spi-old"></h3>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
+                            <h3 class="ml-auto" id="avance-plan-old"></h3>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
+                            <h3 class="ml-auto" id="avance-ejec-old"></h3>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">FEPO</h5>
+                            <h5 class="ml-auto right-align" id="fepo-old"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">DURACIÓN TOTAL</h5>
+                            <h4 class="ml-auto right-align" id="duracion-total-old"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small>ESTIMADA DURACIÓN</small></h5>
+                            <h4 class="ml-auto" id="variacion-est-old"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 light-blue darken-2">
+                            <h5 class="mr-2">PORCENTAJE <small>DE IMPACTO</small></h5>
+                            <h4 class="ml-auto" id="pi-old"></h4>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#Hitos-old">
+                            <h4 class="mr-2">HITOS</h4>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="indicators row wrap mb-4">
+                    <h2 class="mb-2">Indicadores de presupuesto</h2>
+                    <h3>Total proyecto</h3>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 modal-trigger" id="cpi-indicator-old" href="#detailValueExecuted">
+                            <h4 class="fw-600 mr-2">CPI</h4>
+                            <h4 class="fw-600 ml-auto right-align"  id="cpi-old"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600 mr-2">EJECUTADO</h5>
+                            <h5 class="fw-600 ml-auto right-align" id="ejec-total-old"></h5>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600 mr-2">PLANEADO</h5>
+                            <h5 class="fw-600 ml-auto right-align" id="plan-total-old"></h5>
+                        </a>
+                    </div>
+                    <div class="divider transparent"></div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-2 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                            <h5 class="fw-600">PRESUPUESTO</h5>
+                            <h5 class="right-align" id="pres-total-old"></h5>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
+                            <h5 class="ml-auto" id="proy-total-old"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
+                            <h5 class="ml-auto" id="variacion-total-old"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1" id="porcentaje-proy-old">
+                            <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
+                            <h4 class="ml-auto" id="porcentaje-total-old"></h4>
+                        </div>
+                    </div>
+                    <h3 class="mt-3">Anual proyecto</h3>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <a class="indicator type-1 modal-trigger" href="#detailValueExecuted" id="cpi-anual-indicator-old">
+                            <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
+                            <h4 class="fw-600 ml-auto right-align" id="cpi-anual-old"></h4>
+                        </a>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h5 class="ml-auto" id="ejec-anual-old"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h5 class="ml-auto" id="plan-anual-old"></h5>
+                        </div>
+                    </div>
+                    <div class="divider transparent"></div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
+                            <h5 class="ml-auto" id="pres-anual-old"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
+                            <h5 class="ml-auto" id="proy-anual-old"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1 secondary darken-2">
+                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
+                            <h5 class="ml-auto" id="variacion-anual-old"></h5>
+                        </div>
+                    </div>
+                    <div class="d-flex col s12 m6 l4 xl3">
+                        <div class="indicator type-1" id="porcentaje-anual-old">
+                            <h5 class="mr-2">PORCENTAJE <small class="small-indicator">VARIACIÓN PROYECTADA <?=date("Y")?></small></h5>
+                            <h5 class="ml-auto" id="porc-variacion-anual-old"></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-content">
+                        <div class="row wrap align-center">
+                            <div class="col flex-300">
+                                <div class="input-field">
+                                    <select id="old-select" class="period-select">
                                       <option value="" disabled selected>Cambiar periodo</option>
                                       <option class="work-option" value="1">Día</option>
                                       <option class="work-option" value="2">Semana</option>
@@ -310,7 +477,7 @@
                                 </div>
                             </div>
                             <div class="col flex-0">
-                                <a href="" class="btn-floating btn-depressed">
+                                <a href="#" class="btn-floating btn-depressed" onclick="return false;" id="Caf_Button_Excel_old">
                                     <i class="mdi mdi-download"></i>
                                 </a>
                             </div>
@@ -320,204 +487,15 @@
 
                 <div class="chart">
                     <h2>Curva de Avance Físico</h2>
-                    <div class="chart-content" id="caf"></div>
+                    <div class="chart-content" id="caf-old"></div>
                 </div>
+                <?php if($longitudArrayDate != 0):?>
+                  <div class="chart">
+                      <h2>Tres Generaciones</h2>
+                      <div class="chart-content" id="tg-old" style="min-height: 475px;"></div>
+                  </div>
+                <?php endif;?>
             </div>
-
-            <!-- Otras versiones -->
-            <div class="compare-item compare-item-version">
-                <div class="compare-item-title">
-                    <div class="input-field">
-                        <select>
-                            <option value="1">V1 - Enero 25, 2019</option>
-                            <option value="2">V2 - Marzo 25, 2019</option>
-                            <option value="3">V3 - Agosto 25, 2019</option>
-                        </select>
-                        <label>Versión</label>
-                    </div>
-                </div>
-
-                <div class="indicators row wrap">
-                    <h2>Indicadores de cronograma</h2>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 modal-trigger" href="#detailValueExecuted">
-                            <h3 class="mr-2">SPI</h3>
-                            <h3 class="ml-auto" id="spi-indicator"></h3>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
-                            <h3 class="ml-auto" id="avance-plan-indicator"></h3>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
-                            <h3 class="ml-auto" id="avance-ejec-indicator"></h3>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">FEPO</h5>
-                            <h5 class="ml-auto right-align" id="fepo-indicator"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">DURACIÓN TOTAL</h5>
-                            <h4 class="ml-auto right-align" id="od-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small>ESTIMADA DURACIÓN</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">PORCENTAJE <small>DE IMPACTO</small></h5>
-                            <h4 class="ml-auto" id="pi-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h4 class="mr-2">HITOS</h4>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="indicators row wrap mb-4">
-                    <h2 class="mb-2">Indicadores de presupuesto</h2>
-                    <h3>Total proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h4 class="fw-600 mr-2">CPI</h4>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">EJECUTADO</h5>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">PLANEADO</h5>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
-                        </a>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600">PRESUPUESTO</h5>
-                            <h4 class="ml-auto" id="pi-indicator"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <h3 class="mt-3">Anual proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
-                            <h4 class="fw-600 ml-auto right-align"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PORCENTAJE <small class="small-indicator">VARIACIÓN PROYECTADA <?=date("Y")?></small></h5>
-                            <h4 class="ml-auto" id="da-indicator"></h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <div class="box-content">
-                        <div class="row wrap align-center">
-                            <div class="col flex-300">
-                                <div class="input-field">
-                                    <select>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                    <label>Periodo</label>
-                                </div>
-                            </div>
-                            <div class="col flex-0">
-                                <a href="" class="btn-floating btn-depressed">
-                                    <i class="mdi mdi-download"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chart">
-                    <h2>Curva de Avance Físico</h2>
-                    <div class="chart-content" id="caf"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div class="chart">
-            <h2>Gráfica acumulado (en construcción)</h2>
-            <div class="chart-content" id="ga"></div>
-            <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
-        </div> -->
-
-        <div class="chart">
-            <h2>Tres Generaciones</h2>
-            <div class="chart-content" id="tg" style="min-height: 475px;"></div>
         </div>
 
         <div class="compare compare-risk">
@@ -528,13 +506,47 @@
                         <div class="chart-risk-list">
                             <ul class="pa-0 mb-3">
                                 <li>
-                                    <a class="secondary white-text">IGR 90%</a>
+                                    <a class="lighten-1 white-text" id="igr-value-3"></a>
                                 </li>
                             </ul>
-                            <ul class="pa-0">
-                                <?php foreach ($risks as $risk): ?>
-                                <li>
-                                    <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                            <ul class="py-1 ul-risk">
+                              <li class="li-risks">
+                                  <div class="box-content">
+                                      <div class="row wrap align-center">
+                                        <form id="form-rks-new" class="row flex-300">
+                                          <div class="col s6 input-field">
+                                            <select class="new-rks-filter" id="estado_new">
+                                                <option data-id="all" value="all" selected>Filtrar estado</option>
+                                                <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
+                                                <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
+                                                <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
+                                                <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
+                                            </select>
+                                            <label>Estado de las acciones</label>
+                                          </div>
+                                          <div class="col s6 input-field">
+                                            <select class="new-rks-filter" id="materializado_new">
+                                                <option data-id="all" value="all" selected>Filtrar por materialización</option>
+                                                <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
+                                                <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
+                                                <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
+                                            </select>
+                                              <label>Materialización de riesgo</label>
+                                          </div>
+                                          <div class="col flex-0 mt-3" id="clean-new-rks-filters" style="display:none">
+                                              <div href="#" class="btn-floating btn-depressed">
+                                                  <i class="mdi mdi-window-close"></i>
+                                              </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                  </div>
+                              </li>
+                            </ul>
+                            <ul class="ul-risk">
+                                <?php foreach ($rks as $rk): ?>
+                                <li class="li-risks info-new" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
+                                    <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
                                 </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -549,13 +561,47 @@
                         <div class="chart-risk-list">
                             <ul class="pa-0 mb-3">
                                 <li>
-                                    <a class="secondary white-text">IGR 90%</a>
+                                    <a class="lighten-1 white-text" id="igr-value-1"></a>
                                 </li>
                             </ul>
-                            <ul class="pa-0">
-                                <?php foreach ($risks as $risk): ?>
-                                <li>
-                                    <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                            <ul class="py-1 ul-risk">
+                              <li class="li-risks">
+                                  <div class="box-content">
+                                      <div class="row wrap align-center">
+                                        <form id="form-rks-old" class="row flex-300">
+                                          <div class="col s6 input-field">
+                                            <select class="old-rks-filter" id="estado_old">
+                                                <option data-id="all" value="all" selected>Filtrar estado</option>
+                                                <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
+                                                <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
+                                                <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
+                                                <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
+                                            </select>
+                                            <label>Estado de las acciones</label>
+                                          </div>
+                                          <div class="col s6 input-field">
+                                            <select class="old-rks-filter"id="materializado_old">
+                                                <option data-id="all" value="all" selected>Filtrar por materialización</option>
+                                                <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
+                                                <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
+                                                <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
+                                            </select>
+                                              <label>Materialización de riesgo</label>
+                                          </div>
+                                          <div class="col flex-0 mt-3" id="clean-old-rks-filters" style="display:none">
+                                              <div href="#" class="btn-floating btn-depressed">
+                                                  <i class="mdi mdi-window-close"></i>
+                                              </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                  </div>
+                              </li>
+                            </ul>
+                            <ul class="ul-risk">
+                                <?php foreach ($rks as $rk): ?>
+                                <li class="li-risks info-old" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
+                                    <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
                                 </li>
                                 <?php endforeach; ?>
                             </ul>
@@ -564,276 +610,311 @@
                 </div>
             </div>
         </div>
-
         <div class="chart box-risk">
             <h2>Riesgos</h2>
             <div class="chart-risk">
                 <div class="chart-risk-list">
-                    <ul class="py-0">
-                        <li>
-                            <a class="secondary white-text">IGR 90%</a>
+                    <ul class="py-0 ul-risk mb-6">
+                        <li class="li-risks">
+                            <a class="lighten-1 white-text" id="igr-value-2"></a>
                         </li>
                     </ul>
-                    <ul>
-                        <?php foreach ($risks as $risk): ?>
-                        <li>
-                            <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
+                    <ul class="py-1 ul-risk">
+                      <li class="li-risks">
+                          <div class="box-content">
+                              <div class="row wrap align-center">
+                                  <!-- <div class="row flex-300"> -->
+                                    <form id="form-select-actual" class="row flex-300">
+                                      <div class="col s6 input-field">
+                                          <select class="actual-rks-filter" id="estado_act">
+                                              <option data-id="all" value="all" selected>Filtrar estado</option>
+                                              <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
+                                              <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
+                                              <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
+                                              <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
+                                          </select>
+                                          <label>Estado de las acciones</label>
+                                        </div>
+                                        <div class="col s6 input-field">
+                                          <select class="actual-rks-filter" id="materializado_act">
+                                              <option data-id="all" value="all" selected>Filtrar por materialización</option>
+                                              <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
+                                              <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
+                                              <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
+                                          </select>
+                                          <label>Materialización de riesgo</label>
+                                      </div>
+                                      <div class="col flex-0 mt-3" id="clean-rks-filters" style="display:none">
+                                          <div href="#" class="btn-floating btn-depressed">
+                                              <i class="mdi mdi-window-close"></i>
+                                          </div>
+                                      </div>
+                                    </form>
+                                  <!-- </div> -->
+                              </div>
+                          </div>
+                      </li>
+                    </ul>
+                    <ul class="ul-risk">
+                        <?php foreach ($rks as $rk): ?>
+                        <li class="li-risks info-actual" id="<?=$rk->RISK_NUMBER?>" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
+                            <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
                 <div class="heatmap">
-                    <table>
-                        <tr>
-                            <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
-                            <th>MA</th>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                      <table>
+                          <tr>
+                              <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
+                              <th>MA</th>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                endforeach;?>
+                              </td>
+                              <td class="orange">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                endforeach;?>
+                              </td>
+                              <td class="red">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                endforeach;?>
+                              </td>
+                              <td class="red">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
-                                endforeach; ?>
-                            </td>
-                            <td class="red">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
-                                endforeach; ?>
-                            </td>
-                            <td class="red">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 1 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
-                                endforeach; ?>
-                            </td>
-                        </tr>
-                        <tr>
+                              </td>
+                            </tr>
+                           <tr>
                             <th>A</th>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="orange">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="orange">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="red">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 2 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="red">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>M</th>
-                            <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                          </tr>
+                          <tr>
+                              <th>M</th>
+                              <td class="lime accent-4">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="orange">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="orange">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 3 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="orange">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>B</th>
-                            <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                          </tr>
+                          <tr>
+                              <th>B</th>
+                              <td class="lime accent-4">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="lime accent-4">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 4 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                        </tr>
-                        <tr>
+                              </td>
+                          </tr>
+                          <tr>
                             <th>MB</th>
-                            <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 1 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              <td class="lime accent-4">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 2 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="lime accent-4">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 3 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="lime accent-4">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="lime accent-4">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 4 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                              <td class="lime accent-4">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                            <td class="yellow">
-                                <?php foreach ($risks as $risk):
-                                    if($risk['x'] == 5 && $risk['y'] == 5 ) {
-                                        echo '<span>' .$risk['name']. '</span>';
-                                    };
+                              </td>
+                             <td class="yellow">
+                                <?php foreach ($rks as $rk):
+                                  if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
+                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
                                 endforeach; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="title" colspan="2"></th>
-                            <th>MB</th>
-                            <th>B</th>
-                            <th>M</th>
-                            <th>A</th>
-                            <th>MA</th>
-                        </tr>
-                        <tr>
-                            <th class="title" colspan="2"></th>
-                            <th class="title" colspan="5">
-                                <h3>Impacto</h3>
-                            </th>
-                        </tr>
-                    </table>
-                </div>
+                             </td>
+                          </tr>
+                          <tr>
+                              <th class="title" colspan="2"></th>
+                              <th>MB</th>
+                              <th>B</th>
+                              <th>M</th>
+                              <th>A</th>
+                              <th>MA</th>
+                          </tr>
+                          <tr>
+                              <th class="title" colspan="2"></th>
+                              <th class="title" colspan="5">
+                                  <h3>Impacto</h3>
+                              </th>
+                          </tr>
+                      </table>
+                  </div>
             </div>
         </div>
-        <div class="data-distance2">
-            <?= $this->Html->image('icons/torre-blanca.svg') ?>
-            <div class="data-distance2-content">
-                <h2>Longitud</h2>
-                <h3>162 Km</h3>
-                <div class="line-distance"></div>
-                <h4>de líneas de transmisión de</h4>
-                <h5>230kV</h5>
-                <div class="divider white mt-3 mb-1"></div>
-                <h6>344 Torres</h6>
-            </div>
-            <?= $this->Html->image('icons/torre-blanca.svg') ?>
-        </div>
-        <div class="data">
-            <div class="data-distance">
-                <figure class="data-distance-valve start">
-                    <?= $this->Html->image('icons/valvula-izq.svg') ?>
-                </figure>
-                <div class="data-distance-content">
-                    <h2>Distancia</h2>
-                    <h3>162 Km</h3>
-                    <div class="line-distance"></div>
-                    <h4>de líneas de transmisión de</h4>
-                    <h5>230kV</h5>
-                    <div class="divider white mt-3 mb-1"></div>
-                    <h6>344 Torres</h6>
-                </div>
-                <figure class="data-distance-valve end">
-                    <?= $this->Html->image('icons/valvula-der.svg') ?>
-                </figure>
-            </div>
-        </div>
-
-        <div class="map">
-            <?= $this->Html->image('maps/mapa-1.jpg') ?>
-        </div>
-    </div>
+        <?php if($array_project["child_eps_id"] != 34013 && $array_project["child_eps_id"] != 34021 && $array_project["child_eps_id"] != 34015 && $array_project["child_eps_id"] != 34017):?>
+          <div class="data-distance2">
+              <?= $this->Html->image('icons/torre-blanca.svg') ?>
+              <div class="data-distance2-content">
+                  <h2>Longitud</h2>
+                  <h3 class="long-distance"></h3>
+                  <div class="line-distance"></div>
+                  <h4>de líneas de transmisión de</h4>
+                  <h5 id="lines-distance"></h5>
+                  <div class="divider white mt-3 mb-1"></div>
+                  <h6 id="towers-distance"></h6>
+              </div>
+              <?= $this->Html->image('icons/torre-blanca.svg') ?>
+          </div>
+        <?php else:?>
+          <div class="data">
+              <div class="data-distance">
+                  <figure class="data-distance-valve start">
+                      <?= $this->Html->image('icons/valvula-izq.svg') ?>
+                  </figure>
+                  <div class="data-distance-content">
+                      <h2>Longitud</h2>
+                      <h3 class="long-distance"></h3>
+                      <div class="line-distance"></div>
+                      <h4>ECG</h4>
+                      <h5 id="ecg-value"></h5>
+                      <div class="divider white mt-3 mb-1"></div>
+                      <h6 id="facilidades"></h6>
+                  </div>
+                  <figure class="data-distance-valve end">
+                      <?= $this->Html->image('icons/valvula-der.svg') ?>
+                  </figure>
+              </div>
+          </div>
+        <?php endif;?>
+      <div class="map" id="mapa-img"></div>
+   </div>
 </div>
 
 <div class="btns-floating btns-floating-right btns-floating-bottom">
-    <button class="btn btn-floating btn-large tertiary" onclick="compare()">
+    <button class="btn btn-floating btn-large tertiary" id="btn-compare" onclick="compare()">
         <i class="mdi mdi-select-compare"></i>COMPARAR</a>
     </button>
 </div>
@@ -1110,9 +1191,123 @@
         </ul>
     </div>
 </div>
-
+<div id="SpiWBS" class="modal" style="max-weight: 100% !important">
+    <div class="modal-content">
+        <a class="modal-close close">
+            <i class="material-icons">close</i>
+        </a>
+        <h2>Estructuta de WBS</h2>
+        <ul class="collapsible collapsible-data">
+          <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
+            <?php if ($EstructureLevel1["level"] == 1): ?>
+            <li>
+                <div class="collapsible-header" id="div-<?=$EstructureLevel1["wbs_id"]?>">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                    <ul class="collapsible-header-content">
+                          <li>
+                              <small>Nombre</small>
+                              <h3 id="name-level-1"><?=$EstructureLevel1["name"]?></h3>
+                          </li>
+                          <li>
+                              <small>Avance % Planeado</small>
+                              <h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3>
+                          </li>
+                          <li>
+                              <small>Avance % Real</small>
+                              <h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3>
+                          </li>
+                          <li>
+                              <small>BL Inicio</small>
+                              <h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3>
+                          </li>
+                          <li>
+                              <small>BL Fin</small>
+                              <h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3>
+                          </li>
+                          <li>
+                              <small>Inicio</small>
+                              <h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3>
+                          </li>
+                          <li>
+                              <small>Fin</small>
+                              <h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3>
+                          </li>
+                          <li>
+                              <small>SPI</small>
+                              <h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3>
+                          </li>
+                      </ul>
+                </div>
+            </li>
+          <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+</div>
+<!-- HITOS NEW -->
+<div id="Hitos-new" class="modal" style="max-weight: 100% !important">
+    <div class="modal-content">
+      <div class="modal-content">
+          <a class="modal-close close">
+              <i class="material-icons">close</i>
+          </a>
+          <h2 id="hitos-title-new">Hitos</h2>
+          <table>
+            <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Avance % Planeado</th>
+                  <th>Avance % Real</th>
+                  <th>BL Inicio</th>
+                  <th>BL Fin</th>
+                  <th>Inicio</th>
+                  <th>Fin</th>
+                  <th>Tipo de Hito</th>
+              </tr>
+            </thead>
+            <tbody class="hitos-body" id="hitos-body-new"></tbody>
+          </table>
+        </div>
+      <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
+      </div>
+    </div>
+</div>
+<!-- HITOS NEW -->
+<div id="Hitos-old" class="modal" style="max-weight: 100% !important">
+    <div class="modal-content">
+      <div class="modal-content">
+          <a class="modal-close close">
+              <i class="material-icons">close</i>
+          </a>
+          <h2 id="hitos-title-old">Hitos</h2>
+          <table>
+            <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Avance % Planeado</th>
+                  <th>Avance % Real</th>
+                  <th>BL Inicio</th>
+                  <th>BL Fin</th>
+                  <th>Inicio</th>
+                  <th>Fin</th>
+                  <th>Tipo de Hito</th>
+              </tr>
+            </thead>
+            <tbody class="hitos-body" id="hitos-body-old"></tbody>
+          </table>
+        </div>
+      <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
+      </div>
+    </div>
+</div>
 <!-- Modal detalle de riesgo -->
-<div id="detailRisk" class="modal">
+<?php foreach ($rks as $rk): ?>
+<!-- Modal detalle de riesgo -->
+<div id=<?=$rk->id?> class="modal">
     <div class="modal-content">
         <a class="modal-close close">
             <i class="material-icons">close</i>
@@ -1120,32 +1315,79 @@
         <h2>Detalle riesgo</h2>
         <table>
             <tr>
-                <th width="20%">Risego</th>
-                <td></td>
+                <th width="30%">Riesgo</th>
+                <td><?=$rk->RISK_NUMBER?></td>
             </tr>
             <tr>
                 <th>Nombre Riesgo</th>
-                <td></td>
+                <td><?=$rk->RISK_NAME?></td>
             </tr>
             <tr>
                 <th>Probabilidad</th>
-                <td></td>
+                <?php  if ($rk->PROBABILITY == 1):?>
+                <td>Muy baja</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 2):?>
+                <td>Baja</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 3):?>
+                <td>Media</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 4):?>
+                <td>Alta</td>
+                <?php endif;?>
+                <?php  if ($rk->PROBABILITY == 5):?>
+                <td>Muy alta</td>
+                <?php endif;?>
             </tr>
             <tr>
                 <th>Impacto</th>
-                <td></td>
+                <?php  if ($rk->IMPACT == 1):?>
+                <td>Muy bajo</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 2):?>
+                <td>Bajo</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 3):?>
+                <td>Medio</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 4):?>
+                <td>Alto</td>
+                <?php endif;?>
+                <?php  if ($rk->IMPACT == 5):?>
+                <td>Muy alto</td>
+                <?php endif;?>
             </tr>
             <tr>
                 <th>Impacto del riesgo</th>
-                <td></td>
+                <td><?=$rk->IMPACT_RISK?></td>
             </tr>
             <tr>
                 <th>Estado de las acciones</th>
-                <td></td>
+                <?php  if ($rk->ACTION_STATE == "fase"):?>
+                <td>N/A En esta fase.</td>
+                <?php endif;?>
+                <?php  if ($rk->ACTION_STATE == "ejecucion"):?>
+                <td>En ejecución.</td>
+                <?php endif;?>
+                <?php  if ($rk->ACTION_STATE == "pendiente"):?>
+                <td>Pendiente.</td>
+                <?php endif;?>
+                <?php  if ($rk->ACTION_STATE == "finalizado"):?>
+                <td>Finalizado.</td>
+                <?php endif;?>
             </tr>
             <tr>
-                <th>Materialización del riesgo</th>
-                <td></td>
+                <th>Materialización del Riesgo</th>
+                <?php  if ($rk->MATERIALIZACION == "abierto"):?>
+                <td>Abierto.</td>
+                <?php endif;?>
+                <?php  if ($rk->MATERIALIZACION == "cerrado"):?>
+                <td>Cerrado.</td>
+                <?php endif;?>
+                <?php  if ($rk->MATERIALIZACION == "materializado"):?>
+                <td>Materializado.</td>
+                <?php endif;?>
             </tr>
         </table>
     </div>
@@ -1153,16 +1395,24 @@
         <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
     </div>
 </div>
+<?php endforeach; ?>
 <!-- SCRIPT PROJECTS -->
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
+<script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script>
   // $(document).ready(function(){
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
     var xhr1, xhr2, xhr3, xhr4;
-    var fase_value = null;
+    var fase_value = null, id_project_p6;
     var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-    if(xhr1 && xhr1.readyState != 4){
-        xhr1.abort();
-    }
+    // if(xhr1 && xhr1.readyState != 4){
+    //     xhr1.abort();
+    // }
+    var promise = new Promise(function(resolve, reject){
       xhr1 = $.ajax({
       headers:{
         'X-CSRF-Token':csrfToken
@@ -1178,7 +1428,6 @@
       success: function(response){
         $.each(response, function() {
           // Function que se encarga de llamar los proyectos de la bd local correspondientes a cada proyecto del ws
-          console.log(this);
           $('#project-name').text(this.name);
           if (this.code_fase == '209') {
               fase_value = 'Fase I';
@@ -1199,19 +1448,112 @@
           var spi_format_date = spi_date.getUTCDate() + " " + meses[spi_date.getMonth()] + ", " + spi_date.getUTCFullYear();
           $('#span-spi-date').text('Fecha SPI: '+spi_format_date);
           // SPI indicator
-          $('#spi-indicator').text(this.spi_labor_units.toFixed(2));
+          $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+          $('#spi-old').text(this.spi_labor_units.toFixed(2));
+          if (this.da != null) {
+            $('#da-new').text(this.da);
+            $('#variacion-est-old').text(this.da);
+          }
           // Fepo indicator
           if (this.fepo != null) {
             var fepo_date = new Date(this.fepo);
             var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-            $('#fepo-indicator').text(fepo_format_date);
+            $('#fepo-new').text(fepo_format_date);
+            $('#fepo-old').text(fepo_format_date);
           }
-          local_db_project(this.id_p_project);
+          $('#duration-total-new').text(this.od);
+          $('#duracion-total-old').text(this.od);
+          if (this.pi != null) {
+            $('#pi-new').text(this.pi+"%");
+            $('#pi-old').text(this.pi+"%");
+          }
+          id_project_p6 = this.id_p_project;
+          chart_id = this.project_id_p6;
+          resolve([id_project_p6, chart_id, this.name, this.spi_labor_units.toFixed(2), this.code_unifier]);
         });
       }
     });
-    // Información bd local
-    function local_db_project(id_p_project){
+  });
+  promise.then(function (result) {
+    $('#breadcrumb_ctg').append($('<a>', {text : result[2], class : 'breadcrumb', href : '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[1]))))+'/'+"<?= urlencode(base64_encode($json_project))?>"+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[0]))))}));
+  });
+    // Promesa que contiene la información de Unifier y bd local para alimentar los indicadores de presupuesto
+  promise.then(function (result) {
+    if (result[4] != null) {
+      var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+result[1],
+          "method": "GET",
+          "headers": {
+              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+          }
+        }
+        // INDICADORES DE PRESUPUESTO
+        $.ajax(settings).done(function (response) {
+          $.each(response.items, function() {
+             // TOTAL PROYECTO
+             var unifier_cpi_total = this.cpiusd_total; //Variable que almacena el cpi total proveniente de Unifier
+             if (unifier_cpi_total != null) { //Condicionales que validan si el dato
+               $('#cpi-new').text(parseFloat(unifier_cpi_total));
+             }
+             var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
+             if (unifier_ejec_total != null) {
+               $('#ejecutado-new').text('USD $ '+parseFloat(unifier_ejec_total)+' MM');
+             }
+             var unifier_plan_total = this.planeadousd_total;
+             if (unifier_plan_total != null) {
+               $('#planeado-new').text('USD $ '+parseFloat(unifier_plan_total)+' MM');
+             }
+             var unifier_presp_total = this.presupuestousd_total;
+             if (unifier_presp_total != null) {
+               $('#presupuesto-new').text('USD $ '+parseFloat(unifier_presp_total)+' MM');
+             }
+             var unifier_var_total = this.variacionusd_total;
+             if (unifier_var_total != null) {
+               $('#variacion-new').text('USD $ '+parseFloat(unifier_var_total)+' MM');
+             }
+             var unifier_proy_total = this.proyeccionusd_total;
+             if (unifier_proy_total != null) {
+               $('#proyeccion-new').text('USD $ '+parseFloat(unifier_proy_total)+' MM');
+             }
+             var unifier_porc_total = this.porcentajevausd_total;
+             if (unifier_porc_total != null) {
+               $('#porcentaje-var-new').text(parseFloat(unifier_porc_total)+'%');
+             }
+             // ANUAL PROYECTO
+             var unifier_cpi_anual = this.cpiusd_2019;
+             if (unifier_cpi_anual != null) {
+               $('#cpi-anual-new').text(parseFloat(unifier_cpi_anual));
+             }
+             var unifier_ejec_anual = this.ejecutadusd_2019;
+             if (unifier_ejec_anual != null) {
+               $('#ejec-anual-new').text('USD $ '+parseFloat(unifier_ejec_anual)+' MM');
+             }
+             var unifier_plan_anual = this.planeadousd_2019;
+             if (unifier_plan_anual != null) {
+               $('#plan-anual-new').text('USD $ '+parseFloat(unifier_plan_anual)+' MM');
+             }
+             var unifier_pres_anual = this.presupuestousd_2019;
+             if (unifier_pres_anual != null) {
+               $('#pres-anual-new').text('USD $ '+parseFloat(unifier_pres_anual)+' MM');
+             }
+             var unifier_proy_anual = this.proyeccionusd_2019;
+             if (unifier_proy_anual != null) {
+               $('#proyeccion-anual-new').text('USD $ '+parseFloat(unifier_proy_anual)+' MM');
+             }
+             var unifier_var_anual = this.varacionusd_2019;
+             if (unifier_var_anual != null) {
+               $('#variacion-anual-new').text('USD $ '+parseFloat(unifier_var_anual)+' MM');
+             }
+             var unifier_porc_anual = this.porcentajevausd_2019;
+             if (unifier_porc_anual != null) {
+               $('#porcentaje-anual-new').text(parseFloat(unifier_porc_anual)+'%');
+             }
+              ws_colors(unifier_cpi_total, unifier_porc_total, unifier_cpi_anual, unifier_porc_anual);
+          });
+       });
+    } else {
         xhr2 = $.ajax({
         headers:{
           'X-CSRF-Token':csrfToken
@@ -1219,14 +1561,14 @@
         method: "GET",
         dataType: "json",
         url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local_profile']);?>",
-        data: {project_id : id_p_project},
+        data: {project_id : result[0]},
         cache: true,
         beforeSend: function(xhr) {
           xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         },
         success: function(response){
           $.each(response, function() {
-            console.log(this);
+            // console.log(this);
             $('#p-obj-est').text(this.Proj_Obj);
             $('#p-info-general').text(this.DESCRIPTION);
             $('#p-alcance').text(this.ALCANCE);
@@ -1254,9 +1596,1396 @@
               var igr_format_date = igr_date.getUTCDate() + " " + meses[igr_date.getMonth()] + ", " + igr_date.getUTCFullYear();
               $('#span-igr-date').text('Fecha IGR: '+igr_format_date);
             }
+            $('#igr-value-1').text('IGR '+this.IGR+'%');
+            $('#igr-value-2').text('IGR '+this.IGR+'%');
+            $('#igr-value-3').text('IGR '+this.IGR+'%');
+            $('#mapa-img').append($('<img>', {src : '/Portal-Web/img/maps/'+this.ID_PROJECT+'/'+this.FOTO}));
+            $('#cpi-new').text(this.AC_PPTO);
+            $('#cpi-old').text(this.AC_PPTO);
+            $('#ejecutado-new').text("USD $ "+this.AC+" MM");
+            $('#ejec-total-old').text("USD $ "+this.AC+" MM");
+            $('#planeado-new').text("USD $ "+this.AC_BAC+" MM");
+            $('#plan-total-old').text("USD $ "+this.AC_BAC+" MM");
+            // PRESUPUESTO TOTAL
+            $('#presupuesto-new').text("USD $ "+this.PROJ_TOTAL_PRES+" MM");
+            $('#pres-total-old').text("USD $ "+this.PROJ_TOTAL_PRES+" MM");
+            // PROYECCIÓN PROYECTO
+            $('#proyeccion-new').text("USD $ "+this.TOTAL_FORECAST+" MM");
+            $('#proy-total-old').text("USD $ "+this.TOTAL_FORECAST+" MM");
+            // VARIACIÓN PROYECTADA
+            $('#variacion-new').text("USD $ "+parseFloat(this.PROJ_TOTAL_PRES - this.TOTAL_FORECAST).toFixed(2)+" MM");
+            $('#variacion-total-old').text("USD $ "+parseFloat(this.PROJ_TOTAL_PRES - this.TOTAL_FORECAST).toFixed(2)+" MM");
+            // PORCENTAJE VARIACIÓN PROYECTADA
+            var porcentaje_var_proy = parseFloat((this.PROJ_TOTAL_PRES - this.TOTAL_FORECAST) / this.PROJ_TOTAL_PRES * 100).toFixed(1);
+            $('#porcentaje-var-new').text(porcentaje_var_proy+'%');
+            $('#porcentaje-total-old').text(porcentaje_var_proy+'%');
+            // Anual CPI
+            $('#cpi-anual-new').text(this.CPI_ANUAL);
+            $('#cpi-anual-old').text(this.CPI_ANUAL);
+            // EJECUTADO
+            $('#ejec-anual-new').text("USD $ "+this.PROJ_AC+" MM");
+            $('#ejec-anual-old').text("USD $ "+this.PROJ_AC+" MM");
+            // PLANEADO
+            $('#plan-anual-new').text("USD $ "+parseFloat(this.PV).toFixed(2)+" MM");
+            $('#plan-anual-old').text("USD $ "+parseFloat(this.PV).toFixed(2)+" MM");
+            // PRESUPUESTO
+            $('#pres-anual-new').text("USD $ "+parseFloat(this.PRES_PROJ).toFixed(2)+" MM");
+            $('#pres-anual-old').text("USD $ "+parseFloat(this.PRES_PROJ).toFixed(2)+" MM");
+            // PROYECCIÓN ANUAL
+            $('#proyeccion-anual-new').text("USD $ "+parseFloat(this.FORECAST_PROJ).toFixed(2)+" MM");
+            $('#proy-anual-old').text("USD $ "+parseFloat(this.FORECAST_PROJ).toFixed(2)+" MM");
+            // VARIACIÓN ANUAL
+            $('#variacion-anual-new').text("USD $ "+parseFloat(this.PRES_PROJ - this.FORECAST_PROJ).toFixed(2)+" MM");
+            $('#variacion-anual-old').text("USD $ "+parseFloat(this.PRES_PROJ - this.FORECAST_PROJ).toFixed(2)+" MM");
+            // PORCENTAJE VARIACIÓN ANUAL
+            var proyeccion_anual = parseFloat((this.PRES_PROJ - this.FORECAST_PROJ) / this.PRES_PROJ * 100).toFixed(2);
+            $('#porcentaje-anual-new').text(proyeccion_anual+"%");
+            $('#porc-variacion-anual-old').text(proyeccion_anual+"%");
+            // Valves and towers
+            $('.long-distance').text(this.DISTANCIA+' Km');
+            $('#lines-distance').text(this.LINEA_TRANS+' kV');
+            $('#towers-distance').text(this.TORRE+' Torres');
+            $('#ecg-value').text('No. '+this.LINEA_TRANS);
+            $('#facilidades').text(this.TORRE+' Facilidades');
+            indicators_colors(result[3], this.AC_PPTO, porcentaje_var_proy, this.CPI_ANUAL, proyeccion_anual, this.IGR);
           });
         }
       });
     }
+    // }
+  });
+  function ws_colors(unifier_cpi_total, unifier_porc_total, unifier_cpi_anual, unifier_porc_anual){
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+        "method": "GET",
+        "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+        }
+      }
+      $.ajax(settings).done(function (response) {
+        $.each(response.items, function() {
+          if (unifier_cpi_total > this.minimun && unifier_cpi_total <= this.maximo && this.indicator_name == 'CPI') {
+              $('#cpi-indicator-new').css({'background-color' : this.hexa_color});
+          }
+          if (unifier_cpi_anual > this.minimun && unifier_cpi_anual <= this.maximo && this.indicator_name == 'CPI') {
+              $('#cpi-anual-indicator-new').css({'background-color' : this.hexa_color});
+          }
+          // PORCENTAJE PROYECTADO
+          if (unifier_porc_total < this.maximo && this.name_threshold == 'PI Baja') {
+              $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
+          } else if (unifier_porc_total == this.maximo && this.name_threshold == 'PI Media') {
+              $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
+          } else if (unifier_porc_total < this.maximo && unifier_porc_total > this.minimun && this.name_threshold == 'PI Alta') {
+              $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
+          }
+          // PORCENTAJE PROYECTADO
+          if (unifier_porc_total < this.maximo && this.name_threshold == 'PI Baja') {
+              $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+          } else if (unifier_porc_total == this.maximo && this.name_threshold == 'PI Media') {
+              $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+          } else if (unifier_porc_total < this.maximo && unifier_porc_total > this.minimun && this.name_threshold == 'PI Alta') {
+              $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+          }
+        });
+      });
+  }
+  function indicators_colors(spi, cpi, porcentaje, cpi_anual, proyeccion_anual, igr)
+  {
+    xhr5 = $.ajax({
+      headers:{
+        'X-CSRF-Token':csrfToken
+      },
+      method: "GET",
+      dataType: "json",
+      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'indicator_color_project']);?>",
+      data: {
+              'spi' : spi, 'cpi' : cpi, 'porcentaje' : porcentaje, 'cpi_anual' : cpi_anual,
+              'proyeccion_anual' : proyeccion_anual, 'igr' : igr
+            },
+      cache: true,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      },
+      success: function(response){
+        $.each(response, function() {
+          $('#spi-new').css({'background-color' : this.spi_color});
+          $('#spi-old-color').css({'background-color' : this.spi_color});
+          $('#cpi-indicator-new').css({'background-color' : this.cpi_color});
+          $('#cpi-indicator-old').css({'background-color' : this.cpi_color});
+          $('#cpi-anual-indicator-new').css({'background-color' : this.cpi_anual_color});
+          $('#cpi-anual-indicator-old').css({'background-color' : this.cpi_anual_color});
+          $('#porcentaje-proy-new').css({'background-color' : this.porcentaje_color});
+          $('#porcentaje-proy-old').css({'background-color' : this.porcentaje_color});
+          $('#porcentaje-pr-anual-new').css({'background-color' : this.proyeccion_anual_color});
+          $('#porcentaje-anual-old').css({'background-color' : this.proyeccion_anual_color});
+
+          $('#igr-value-1').css({'background-color' : this.igr_color});
+          $('#igr-value-2').css({'background-color' : this.igr_color});
+          $('#igr-value-3').css({'background-color' : this.igr_color});
+        });
+      }
+    });
+  }
     // GRÁFICA DONA
+    xhr3 = $.ajax({
+      headers:{
+        'X-CSRF-Token':csrfToken
+      },
+      method: "GET",
+      dataType: "json",
+      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'compare_dates']);?>",
+      cache: true,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      },
+      success: function(response){
+        $.each(response, function(index, item) {
+          var select_date = new Date(this.date_h), minute_format;
+          if (select_date.getUTCMinutes() == 0) {
+            minute_format = select_date.getUTCMinutes()+''+0;
+          } else {
+            minute_format = select_date.getUTCMinutes();
+          }
+          var sel_format_date = select_date.getUTCDate() + " " + meses[select_date.getMonth()] + ", " + select_date.getUTCFullYear() + " T" + select_date.getUTCHours()+":"+minute_format;
+          $('.select-compare-new').append(new Option(this.name+" - "+sel_format_date, this.p_historyc_id));
+          $('.select-compare-new').formSelect();
+          $('.select-compare-old').append(new Option(this.name+" - "+sel_format_date, this.p_historyc_id));
+          $('.select-compare-old').formSelect();
+      });
+      }
+    });
+    // SELECT COMPARE
+    promise.then(function (result) {
+      $('#compare-select-new').change(function() {
+          var hitos_body = $('#hitos-body-new');
+          $('#hitos-body-new tr').remove();
+          var selected_date_new = $(this).children(":selected").attr("value");
+          if (selected_date_new == "actual") {
+            info_actual_new();
+            // $('#hitos-title-old').text('HITOS');
+            // $('#hitos-body-new tr').remove();
+            // $('#hitos-title-new').text('HITOS');
+            // $('#hitos-title-old').text('HITOS');
+            hitos_actual(result[1]);
+          }else{
+            option_compare_new_dates(selected_date_new);
+            $('#hitos-title-new').text('HITOS '+$(this).children(":selected").text());
+            hitos_compare(result[1], selected_date_new, hitos_body, 'new');
+          }
+      });
+        $('#compare-select-old').change(function() {
+          var hitos_body = $('#hitos-body-old');
+          $('#hitos-body-old tr').remove();
+          var selected_date_old = $(this).children(":selected").attr("value");
+          if (selected_date_old == "actual") {
+            info_actual_old();
+            $('#hitos-title-old').text('HITOS');
+            hitos_actual(result[1]);
+          }else{
+            option_compare_old_dates(selected_date_old);
+            $('#hitos-title-old').text('HITOS '+$(this).children(":selected").text());
+            hitos_compare(result[1], selected_date_old, hitos_body, 'old');
+          }
+        });
+      });
+      function option_compare_new_dates(selected_date){
+        xhr4 = $.ajax({
+        headers:{
+          'X-CSRF-Token':csrfToken
+        },
+        method: "GET",
+        dataType: "json",
+        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'compare_projects']);?>",
+        data: {project_id : "<?=$project_id?>", date : selected_date},
+        cache: true,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        },
+        success: function(response){
+          $.each(response, function() {
+            $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+            $('#da-new').text(this.da);
+            // Fepo indicator
+            if (this.fepo != null) {
+              var fepo_date = new Date(this.fepo);
+              var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+              $('#fepo-new').text(fepo_format_date);
+              // $('#fepo-old').text(fepo_format_date);
+            }
+            $('#duration-total-new').text(this.od);
+            if (this.pi != null) {
+                $('#pi-new').text(this.pi+"%");
+            }
+          });
+        }
+      });
+    }
+    // OLD
+    function option_compare_old_dates(selected_date){
+      xhr4 = $.ajax({
+      headers:{
+        'X-CSRF-Token':csrfToken
+      },
+      method: "GET",
+      dataType: "json",
+      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'compare_projects']);?>",
+      data: {project_id : "<?=$project_id?>", date : selected_date},
+      cache: true,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      },
+      success: function(response){
+        $.each(response, function() {
+          $('#spi-old').text(this.spi_labor_units.toFixed(2));
+          $('#variacion-est-old').text(this.da);
+          // Fepo indicator
+          if (this.fepo != null) {
+            var fepo_date = new Date(this.fepo);
+            var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+            $('#fepo-old').text(fepo_format_date);
+          }
+          $('#duracion-total-old').text(this.od);
+          $('#pi-old').text(this.pi+"%");
+
+        });
+      }
+    });
+  }
+  promise.then(function (result) {
+      donut(result[1]);
+      caf(result[1], 1, 'all-select');
+      hitos_actual(result[1]);
+  });
+
+    // Porcentajes de avances
+  function donut(result){
+    var xhr_donut = $.ajax({
+        headers:{
+          'X-CSRF-Token':csrfToken
+        },
+        method: "GET",
+        dataType: "json",
+        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'Donut']);?>",
+        data: {id_p6 : result},
+        cache: true,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        },
+        success: function(response){
+          $.each(response, function() {
+            advance_chart(this.planeado, this.ejecutado);
+            $('#avance-plan-new').text(this.planeado+'%');
+            $('#avance-ejec-new').text(this.ejecutado+'%');
+            $('#avance-plan-old').text(this.planeado+'%');
+            $('#avance-ejec-old').text(this.ejecutado+'%');
+            $('#porcentaje-plan').text(this.planeado+'% Avance planeado');
+            $('#porcentaje-ejec').text(this.ejecutado+'% Avance planeado');
+          });
+        }
+      });
+    }
+    promise.then(function (result) {
+        $('#btn-compare').click(function() {
+          var select_new = $('#compare-select-new');
+          // var selected_date_old = $(this).children(":selected").attr("value");
+          $("#form-select-new input").val("actual");
+          select_new.prop('selectedIndex', 0); //Sets the first option as selected
+          select_new.formSelect();
+          info_actual_new();
+
+          var select_old = $('#compare-select-old');
+          $("#form-select-old input").val("actual");
+          select_old.prop('selectedIndex', 0); //Sets the first option as selected
+          select_old.formSelect();
+          info_actual_old();
+
+          hitos_actual(result[1]);
+        });
+    });
+    promise.then(function (result) {
+        var select_object = $('.period-select');
+        select_object.change(function() {
+          var selected_value = $(this).children(":selected").attr("value");
+          var select_id = $(this).attr('id');
+          caf(result[1], selected_value, select_id);
+        });
+        $('#btn-compare').click(function() {
+          select_object.removeClass('period-select').addClass('period-select-compare');
+        });
+        $('period-select-compare').change(function() {
+          var selected_value = $(this).children(":selected").attr("value");
+          var select_id = $(this).attr('id');
+          caf_compare(result[1], selected_value, select_id);
+        });
+    });
+    function caf(result, period_value, select_id){
+      var xhr_caf = $.ajax({
+          headers:{
+            'X-CSRF-Token':csrfToken
+          },
+          method: "GET",
+          dataType: "json",
+          url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'caf']);?>",
+          data: {id_p6 : result, period : period_value},
+          cache: true,
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          },
+          success: function(response){
+            var chart_value = [];
+            $.each(response, function() {
+              chart_value.push({
+                "date": this.start_date,
+                "column-3": parseFloat(this.cum_ac_lu).toFixed(4), //AC
+                "column-2": parseFloat(this.cum_ev_lu).toFixed(4), //EV
+                "column": parseFloat(this.cum_bl_lu).toFixed(4) //BL
+              });
+            });
+            if (select_id == 'actual-select') {
+              caf_chart(chart_value);
+            } else if (select_id == 'all-select') {
+              caf_chart(chart_value);
+              caf_old_chart(chart_value);
+            }
+            else{
+              caf_old_chart(chart_value);
+            }
+          }
+        });
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID="+result+"&P_PERIOD_TYPE="+period_value,
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
+          }
+          $.ajax(settings).done(function (response) {
+            var chart_value = [];
+            $.each(response.items, function() {
+                chart_value.push({
+                  "date": this.start_date,
+                  "column-3": parseFloat(this.cum_ac_lu).toFixed(4), //AC
+                  "column-2": parseFloat(this.cum_ev_lu).toFixed(4), //EV
+                  "column": parseFloat(this.cum_bl_lu).toFixed(4) //BL
+                });
+            });
+            caf_chart(chart_value);
+          });
+        }
+        function advance_chart(planeado, ejecutado){
+          AmCharts.makeChart("advance",
+            {
+              "type": "gauge",
+              "theme": "light",
+              "language": "es",
+              "axes": [
+                  {
+                      "axisAlpha": 0,
+                      "tickAlpha": 0,
+                      "labelsEnabled": false,
+                      "startValue": 0,
+                      "endValue": 100,
+                      "startAngle": 0,
+                      "endAngle": 360,
+                      "bands": [
+                          // Usuarios perdidos
+                          {
+                              "color": "#eee",
+                              "startValue": 0,
+                              "endValue": 100,
+                              "radius": "100%",
+                              "innerRadius": "70%",
+                              "balloonText": "Avance planeado",
+                          },
+                          {
+                              "color": "#A6CE39",
+                              "startValue": 0,
+                              "endValue": planeado,
+                              "radius": "100%",
+                              "innerRadius": "70%",
+                              "balloonText": planeado+"% Avance planeado",
+                          },
+                          // Usuarios pagos
+                          {
+                              "color": "#E6E6E6",
+                              "startValue": 0,
+                              "endValue": 100,
+                              "radius": "70%",
+                              "innerRadius": "40%",
+                              "balloonText": "Ejecutado",
+                          },
+                          {
+                              "color": "#2CACE3",
+                              "startValue": 0,
+                              "endValue": ejecutado,
+                              "radius": "70%",
+                              "innerRadius": "40%",
+                              "balloonText": ejecutado+"% Ejecutado",
+                          },
+                      ]
+                  }
+              ]
+          }
+      );
+    }
+    // Curva de avance físico
+   function caf_chart(chart_values){
+     var chart = AmCharts.makeChart("caf",{
+               "type": "serial",
+               "categoryField": "date",
+               "dataDateFormat": "YYYY-MM-DD",
+               "fontFamily": "'Open Sans'",
+               "theme": "default",
+               "language": "es",
+               "categoryAxis": {
+                   "equalSpacing": true,
+                   "gridPosition": "start",
+                   "minPeriod": "DD",
+                   "parseDates": true,
+                   "startOnAxis": true,
+                   "axisAlpha": 0,
+                   "gridAlpha": 0,
+                   "labelOffset": -1
+
+               },
+               "chartCursor": {
+                   "enabled": true,
+                   "categoryBalloonDateFormat": "DD MMM YYYY",
+                   "cursorColor": "#00A34B"
+               },
+               "chartScrollbar": {
+                   "enabled": true,
+                   "graph": "AmGraph-1",
+                   "graphType": "line",
+                   "gridCount": 7,
+                   "offset": 40,
+                   "oppositeAxis": false,
+                   "scrollbarHeight": 40,
+               },
+               "trendLines": [],
+               "graphs": [
+                   {
+                     "id": "AmGraph-1",
+                     "lineColor": "#A6CE39",
+                     "lineThickness": 5,
+                     "title": "Planeado",
+                     "valueField": "column"
+                   },
+                   {
+                       "id": "AmGraph-2",
+                       "lineColor": "#2CACE3",
+                       "lineThickness": 5,
+                       "title": "Ejecutado",
+                       "valueField": "column-2"
+                   },
+                   {
+                     "customBullet": "",
+                     "dashLength": 7,
+                     "id": "AmGraph-3",
+                     "labelPosition": "right",
+                     "labelText": "",
+                     "lineColor": "#fc9219",
+                     "lineThickness": 5,
+                     "minBulletSize": 3,
+                     "showAllValueLabels": true,
+                     "title": "Estimado a completar",
+                     "valueField": "column-3"
+                   }
+               ],
+               "guides": [],
+               "valueAxes": [
+                   {
+                       "id": "ValueAxis-1",
+                       "minimum": 0,
+                       "maximum": 100,
+                       "totalText": "",
+                       "unit": "%",
+                       "axisAlpha": 0,
+                       "gridAlpha": 0.06,
+                       "title": ""
+                   }
+               ],
+               "allLabels": [],
+               "balloon": {},
+               "legend": {
+                   "enabled": true,
+                   "autoMargins": false,
+                   "marginRight": 0,
+                   "markerSize": 15,
+                   "fontSize": 13,
+                   "position": "top",
+                   "spacing": 16,
+                   "useGraphSettings": true
+               },
+               "titles": [],
+               "dataProvider": chart_values,
+               "export": {
+                   "enabled": true
+               }
+           }
+       );
+   }
+  // CAF old
+  function caf_old_chart(chart_values){
+  var chart_old = AmCharts.makeChart("caf-old",{
+            "type": "serial",
+            "categoryField": "date",
+            "dataDateFormat": "YYYY-MM-DD",
+            "fontFamily": "'Open Sans'",
+            "theme": "default",
+            "language": "es",
+            "categoryAxis": {
+                "equalSpacing": true,
+                "gridPosition": "start",
+                "minPeriod": "DD",
+                "parseDates": true,
+                "startOnAxis": true,
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "labelOffset": -1
+
+            },
+            "chartCursor": {
+                "enabled": true,
+                "categoryBalloonDateFormat": "DD MMM YYYY",
+                "cursorColor": "#00A34B"
+            },
+            "chartScrollbar": {
+                "enabled": true,
+                "graph": "AmGraph-1",
+                "graphType": "line",
+                "gridCount": 7,
+                "offset": 40,
+                "oppositeAxis": false,
+                "scrollbarHeight": 40,
+            },
+            "trendLines": [],
+            "graphs": [
+                {
+                  "id": "AmGraph-1",
+                  "lineColor": "#A6CE39",
+                  "lineThickness": 5,
+                  "title": "Planeado",
+                  "valueField": "column"
+                },
+                {
+                    "id": "AmGraph-2",
+                    "lineColor": "#2CACE3",
+                    "lineThickness": 5,
+                    "title": "Ejecutado",
+                    "valueField": "column-2"
+                },
+                {
+                  "customBullet": "",
+                  "dashLength": 7,
+                  "id": "AmGraph-3",
+                  "labelPosition": "right",
+                  "labelText": "",
+                  "lineColor": "#fc9219",
+                  "lineThickness": 5,
+                  "minBulletSize": 3,
+                  "showAllValueLabels": true,
+                  "title": "Estimado a completar",
+                  "valueField": "column-3"
+                }
+            ],
+            "guides": [],
+            "valueAxes": [
+                {
+                    "id": "ValueAxis-1",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "totalText": "",
+                    "unit": "%",
+                    "axisAlpha": 0,
+                    "gridAlpha": 0.06,
+                    "title": ""
+                }
+            ],
+            "allLabels": [],
+            "balloon": {},
+            "legend": {
+                "enabled": true,
+                "autoMargins": false,
+                "marginRight": 0,
+                "markerSize": 15,
+                "fontSize": 13,
+                "position": "top",
+                "spacing": 16,
+                "useGraphSettings": true
+            },
+            "titles": [],
+            "dataProvider": chart_values,
+            "export": {
+                "enabled": true
+            }
+        }
+    );
+  }
+  promise.then(function (result) {
+      if (result[4] != null) {
+      var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/curve3g/?p_project_id="+result[1],
+          "method": "GET",
+          "headers": {
+              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+          }
+        }
+
+        $.ajax(settings).done(function (response) {
+          var chart_value = [];
+          $.each(response.items, function() {
+            var date_lenght = parseInt(this.periodo), planned_value_col, planned_value_ln, executed_value_col, executed_value_ln, forecast_col, forecast_ln;
+              if (isNaN(date_lenght)) {
+                   planned_value_col = null,
+                   planned_value_ln = this.acum_bl,
+                   executed_value_col = null,
+                   executed_value_ln = this.acum_ejec,
+                   forecast_ln = this.acum_proy;
+              } else {
+                   planned_value_col = this.acum_bl,
+                   planned_value_ln = null,
+                   executed_value_col = this.acum_ejec,
+                   executed_value_ln = null,
+                   forecast_col = this.acum_proy,
+                   forecast_ln = null;
+              }
+              chart_value.push({
+                "category": this.periodo,
+                "col-plannedAnnual": planned_value_col,
+                "col-executedAnnual": executed_value_col,
+                "col-executed": executed_value_ln,
+                "col-forecast": forecast_ln,
+                "col-planned": planned_value_ln,
+              });
+          });
+          tg_chart(chart_value);
+       });
+     }
+    });
+    function tg_chart(chart_tg_val){
+      AmCharts.makeChart("tg",
+          {
+            "type": "serial",
+            "categoryField": "category",
+            "dataDateFormat": "YYYY-MM-DD",
+            "sequencedAnimation": false,
+            "startDuration": 1,
+            "categoryAxis": {
+                "autoRotateAngle": 90,
+                "autoRotateCount": 12,
+                "equalSpacing": true,
+                "gridPosition": "start",
+                "minPeriod": "MM",
+                // "startOnAxis": true,
+                "axisAlpha": 0,
+                "fontSize": 10,
+                "gridAlpha": 0,
+                "ignoreAxisWidth": true,
+                "titleBold": false
+            },
+            "chartCursor": {
+                "enabled": true,
+                "cursorColor": "#00A34B"
+            },
+            "chartScrollbar": {
+                "enabled": true,
+                "color": "#BBBBBB",
+                "graphType": "line",
+                "gridCount": 4,
+                "offset": 60,
+                "oppositeAxis": false,
+                "scrollbarHeight": 40
+            },
+            "trendLines": [],
+            "graphs": [
+                {
+                    "columnWidth": 0.67,
+                    "fillAlphas": 1,
+                    "id": "plannedAnnual",
+                    "lineAlpha": 0,
+                    "lineColor": "#2376BC",
+                    "lineThickness": 0,
+                    "title": "Planeado",
+                    "type": "column",
+                    "valueAxis": "ValueAxis-1",
+                    "valueField": "col-plannedAnnual",
+                    "xAxis": "ValueAxis-1",
+                    "yAxis": "ValueAxis-1"
+                },
+                {
+                    "columnWidth": 0.71,
+                    "fillAlphas": 1,
+                    "id": "executedAnnual",
+                    "lineColor": "#FF8000",
+                    "title": "Ejecutado",
+                    "type": "column",
+                    "valueAxis": "ValueAxis-1",
+                    "valueField": "col-executedAnnual",
+                    "xAxis": "ValueAxis-1",
+                    "yAxis": "ValueAxis-1"
+                },
+                {
+                    "dashLength": 4,
+                    "id": "forecast",
+                    "lineColor": "#4D91CE",
+                    "lineThickness": 3,
+                    "title": "Forecast",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-forecast"
+                },
+                {
+                    "fillColors": "undefined",
+                    "id": "planned",
+                    "lineColor": "#BBBBBB",
+                    "lineThickness": 3,
+                    "title": "Planeado",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-planned"
+                },
+                {
+                    "customMarker": "",
+                    "id": "executed",
+                    "lineColor": "#FBB800",
+                    "lineThickness": 3,
+                    "title": "Ejecutado",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-executed",
+                    "xAxis": "ValueAxis-2",
+                    "yAxis": "ValueAxis-2"
+                }
+            ],
+            "guides": [],
+            "valueAxes": [
+                {
+                    "id": "ValueAxis-1",
+                    "unit": "USD ",
+                    "unitPosition": "left",
+                    "axisAlpha": 0,
+                    "fontSize": 10,
+                    "gridAlpha": 0.05,
+                    "title": "MILLONES",
+                    "titleBold": false,
+                    "titleFontSize": 10
+                },
+                {
+                    "id": "ValueAxis-2",
+                    "position": "right",
+                    "unit": "USD ",
+                    "unitPosition": "left",
+                    "axisAlpha": 0,
+                    "fontSize": 10,
+                    "gridAlpha": 0,
+                    "title": "MILLONES",
+                    "titleBold": false,
+                    "titleFontSize": 10
+                }
+            ],
+            "allLabels": [],
+            "balloon": {},
+            "legend": {
+                "enabled": true,
+                "autoMargins": false,
+                "marginRight": 0,
+                "position": "top",
+                "spacing": 16,
+                "useGraphSettings": true
+            },
+            "titles": [],
+            "dataProvider": chart_tg_val,
+          }
+      );
+    }
+    // Curva TG
+    if (<?=$longitudArrayDate?> != 0) {
+      AmCharts.makeChart("tg2",
+          {
+              "type": "serial",
+              "categoryField": "category",
+              "dataDateFormat": "YYYY-MM-DD",
+              "sequencedAnimation": false,
+              "startDuration": 1,
+              "categoryAxis": {
+                  "autoRotateAngle": 90,
+                  "autoRotateCount": 12,
+                  "equalSpacing": true,
+                  "gridPosition": "start",
+                  "minPeriod": "MM",
+                  // "startOnAxis": true,
+                  "axisAlpha": 0,
+                  "fontSize": 10,
+                  "gridAlpha": 0,
+                  "ignoreAxisWidth": true,
+                  "titleBold": false
+              },
+              "chartCursor": {
+                  "enabled": true,
+                  "cursorColor": "#00A34B"
+              },
+              "chartScrollbar": {
+                  "enabled": true,
+                  "color": "#BBBBBB",
+                  "graphType": "line",
+                  "gridCount": 4,
+                  "offset": 60,
+                  "oppositeAxis": false,
+                  "scrollbarHeight": 40
+              },
+              "trendLines": [],
+              "graphs": [
+                  {
+                      "columnWidth": 0.67,
+                      "fillAlphas": 1,
+                      "id": "plannedAnnual",
+                      "lineAlpha": 0,
+                      "lineColor": "#2376BC",
+                      "lineThickness": 0,
+                      "title": "Planeado",
+                      "type": "column",
+                      "valueAxis": "ValueAxis-1",
+                      "valueField": "col-plannedAnnual",
+                      "xAxis": "ValueAxis-1",
+                      "yAxis": "ValueAxis-1"
+                  },
+                  {
+                      "columnWidth": 0.71,
+                      "fillAlphas": 1,
+                      "id": "executedAnnual",
+                      "lineColor": "#FF8000",
+                      "title": "Ejecutado",
+                      "type": "column",
+                      "valueAxis": "ValueAxis-1",
+                      "valueField": "col-executedAnnual",
+                      "xAxis": "ValueAxis-1",
+                      "yAxis": "ValueAxis-1"
+                  },
+                  {
+                      "dashLength": 4,
+                      "id": "forecast",
+                      "lineColor": "#4D91CE",
+                      "lineThickness": 3,
+                      "title": "Forecast",
+                      "valueAxis": "ValueAxis-2",
+                      "valueField": "col-forecast"
+                  },
+                  {
+                      "fillColors": "undefined",
+                      "id": "planned",
+                      "lineColor": "#BBBBBB",
+                      "lineThickness": 3,
+                      "title": "Planeado",
+                      "valueAxis": "ValueAxis-2",
+                      "valueField": "col-planned"
+                  },
+                  {
+                      "customMarker": "",
+                      "id": "executed",
+                      "lineColor": "#FBB800",
+                      "lineThickness": 3,
+                      "title": "Ejecutado",
+                      "valueAxis": "ValueAxis-2",
+                      "valueField": "col-executed",
+                      "xAxis": "ValueAxis-2",
+                      "yAxis": "ValueAxis-2"
+                  }
+              ],
+              "guides": [],
+              "valueAxes": [
+                  {
+                      "id": "ValueAxis-1",
+                      "unit": "USD ",
+                      "unitPosition": "left",
+                      "axisAlpha": 0,
+                      "fontSize": 10,
+                      "gridAlpha": 0.05,
+                      "title": "MILLONES",
+                      "titleBold": false,
+                      "titleFontSize": 10
+                  },
+                  {
+                      "id": "ValueAxis-2",
+                      "position": "right",
+                      "unit": "USD ",
+                      "unitPosition": "left",
+                      "axisAlpha": 0,
+                      "fontSize": 10,
+                      "gridAlpha": 0,
+                      "title": "MILLONES",
+                      "titleBold": false,
+                      "titleFontSize": 10
+                  }
+              ],
+              "allLabels": [],
+              "balloon": {},
+              "legend": {
+                  "enabled": true,
+                  "autoMargins": false,
+                  "marginRight": 0,
+                  "position": "top",
+                  "spacing": 16,
+                  "useGraphSettings": true
+              },
+              "titles": [],
+              "dataProvider": [
+                <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
+                {
+                  <?php if(isset($excelDate)):?>
+                  <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
+                  <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
+                  <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
+                    "category": "<?=$excelDate[$a]?>",
+                  <?php if (strlen($excelDate[$a])<5):?>
+                    "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
+                    "col-executedAnnual": "<?=$excelEjecutadoDec?>",
+                    "col-executed": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
+                  <?php elseif (strlen($excelDate[$a])>4):?>
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    <?php if (is_numeric($excelEjecutado[$a])):?>
+                    "col-executed": "<?=$excelEjecutadoDec?>",
+                    <?php else:?>
+                    "col-executed": "null",
+                    <?php endif;?>
+                    <?php if (is_numeric($excelProyectado[$a])):?>
+                    "col-forecast": "<?=$excelProyectadoDec?>",
+                    <?php else:?>
+                    "col-forecast": "null",
+                    <?php endif;?>
+                    "col-planned": "<?=$excelPlaneadoDec?>"
+                  <?php endif;?>
+                  <?php endif;?>
+                },
+                <?php endfor; ?>
+              ]
+          }
+      );
+      AmCharts.makeChart("tg-old",
+          {
+              "type": "serial",
+              "categoryField": "category",
+              "dataDateFormat": "YYYY-MM-DD",
+              "sequencedAnimation": false,
+              "startDuration": 1,
+              "categoryAxis": {
+                  "autoRotateAngle": 90,
+                  "autoRotateCount": 12,
+                  "equalSpacing": true,
+                  "gridPosition": "start",
+                  "minPeriod": "MM",
+                  // "startOnAxis": true,
+                  "axisAlpha": 0,
+                  "fontSize": 10,
+                  "gridAlpha": 0,
+                  "ignoreAxisWidth": true,
+                  "titleBold": false
+              },
+              "chartCursor": {
+                  "enabled": true,
+                  "cursorColor": "#00A34B"
+              },
+              "chartScrollbar": {
+                  "enabled": true,
+                  "color": "#BBBBBB",
+                  "graphType": "line",
+                  "gridCount": 4,
+                  "offset": 60,
+                  "oppositeAxis": false,
+                  "scrollbarHeight": 40
+              },
+              "trendLines": [],
+              "graphs": [
+                  {
+                      "columnWidth": 0.67,
+                      "fillAlphas": 1,
+                      "id": "plannedAnnual",
+                      "lineAlpha": 0,
+                      "lineColor": "#2376BC",
+                      "lineThickness": 0,
+                      "title": "Planeado",
+                      "type": "column",
+                      "valueAxis": "ValueAxis-1",
+                      "valueField": "col-plannedAnnual",
+                      "xAxis": "ValueAxis-1",
+                      "yAxis": "ValueAxis-1"
+                  },
+                  {
+                      "columnWidth": 0.71,
+                      "fillAlphas": 1,
+                      "id": "executedAnnual",
+                      "lineColor": "#FF8000",
+                      "title": "Ejecutado",
+                      "type": "column",
+                      "valueAxis": "ValueAxis-1",
+                      "valueField": "col-executedAnnual",
+                      "xAxis": "ValueAxis-1",
+                      "yAxis": "ValueAxis-1"
+                  },
+                  {
+                      "dashLength": 4,
+                      "id": "forecast",
+                      "lineColor": "#4D91CE",
+                      "lineThickness": 3,
+                      "title": "Forecast",
+                      "valueAxis": "ValueAxis-2",
+                      "valueField": "col-forecast"
+                  },
+                  {
+                      "fillColors": "undefined",
+                      "id": "planned",
+                      "lineColor": "#BBBBBB",
+                      "lineThickness": 3,
+                      "title": "Planeado",
+                      "valueAxis": "ValueAxis-2",
+                      "valueField": "col-planned"
+                  },
+                  {
+                      "customMarker": "",
+                      "id": "executed",
+                      "lineColor": "#FBB800",
+                      "lineThickness": 3,
+                      "title": "Ejecutado",
+                      "valueAxis": "ValueAxis-2",
+                      "valueField": "col-executed",
+                      "xAxis": "ValueAxis-2",
+                      "yAxis": "ValueAxis-2"
+                  }
+              ],
+              "guides": [],
+              "valueAxes": [
+                  {
+                      "id": "ValueAxis-1",
+                      "unit": "USD ",
+                      "unitPosition": "left",
+                      "axisAlpha": 0,
+                      "fontSize": 10,
+                      "gridAlpha": 0.05,
+                      "title": "MILLONES",
+                      "titleBold": false,
+                      "titleFontSize": 10
+                  },
+                  {
+                      "id": "ValueAxis-2",
+                      "position": "right",
+                      "unit": "USD ",
+                      "unitPosition": "left",
+                      "axisAlpha": 0,
+                      "fontSize": 10,
+                      "gridAlpha": 0,
+                      "title": "MILLONES",
+                      "titleBold": false,
+                      "titleFontSize": 10
+                  }
+              ],
+              "allLabels": [],
+              "balloon": {},
+              "legend": {
+                  "enabled": true,
+                  "autoMargins": false,
+                  "marginRight": 0,
+                  "position": "top",
+                  "spacing": 16,
+                  "useGraphSettings": true
+              },
+              "titles": [],
+              "dataProvider": [
+                <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
+                {
+                  <?php if(isset($excelDate)):?>
+                  <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
+                  <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
+                  <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
+                    "category": "<?=$excelDate[$a]?>",
+                  <?php if (strlen($excelDate[$a])<5):?>
+                    "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
+                    "col-executedAnnual": "<?=$excelEjecutadoDec?>",
+                    "col-executed": "null",
+                    "col-forecast": "null",
+                    "col-planned": "null"
+                  <?php elseif (strlen($excelDate[$a])>4):?>
+                    "col-plannedAnnual": "null",
+                    "col-executedAnnual": "null",
+                    <?php if (is_numeric($excelEjecutado[$a])):?>
+                    "col-executed": "<?=$excelEjecutadoDec?>",
+                    <?php else:?>
+                    "col-executed": "null",
+                    <?php endif;?>
+                    <?php if (is_numeric($excelProyectado[$a])):?>
+                    "col-forecast": "<?=$excelProyectadoDec?>",
+                    <?php else:?>
+                    "col-forecast": "null",
+                    <?php endif;?>
+                    "col-planned": "<?=$excelPlaneadoDec?>"
+                  <?php endif;?>
+                  <?php endif;?>
+                },
+                <?php endfor; ?>
+              ]
+          }
+      );
+    }
+    $(document).ready(function(){
+    var clean_rks = $('#clean-rks-filters'),e = $(".li-risks.info-actual"), estado_act = $('#estado_new'), materializado_act = $('#materializado_new'), estado_act = $('#estado_act'), materializado_act = $('#materializado_act') ,select_actual = $('.actual-rks-filter'), select_input = $('.form-select-actual input');
+    select_actual.change(function() {
+        var a = select_actual.children(":selected");
+        if (e.show(), 0 != a.length) {
+            var i = $.map(a, function(a) {
+                return $(a).data("id")
+            });
+            if (estado_act.val() == 'all' && materializado_act.val() == 'all') {
+              clean_rks.hide();
+            } else {
+              clean_rks.show();
+            }
+            a.each(function() {
+                var t = $(this);
+                if (t.val() != 'all') {
+                  e.filter(function() {
+                    clean_rks.show();
+                    return i.indexOf($(this).data(t.data("type"))) < 0
+                  }).hide()
+                }
+            })
+          }
+        });
+        clean_rks.click(function(){
+          e.show();
+          clean_rks.hide();
+          var select = select_actual;
+          select_input.val("default");
+          select.prop('selectedIndex', 0); //Sets the first option as selected
+          select.formSelect();
+        })
+      });
+      $(document).ready(function(){
+      var clean_rks = $('#clean-new-rks-filters'),e = $(".li-risks.info-new"), estado_new = $('#estado_new'), materializado_new = $('#materializado_new'), select_new = $('.new-rks-filter'), select_input = $('#form-rks-new input');
+      select_new.change(function() {
+          var a = select_new.children(":selected");
+          if (e.show(), 0 != a.length) {
+              var i = $.map(a, function(a) {
+                  return $(a).data("id")
+              });
+              if (estado_new.val() == 'all' && materializado_new.val() == 'all') {
+                clean_rks.hide();
+              } else {
+                clean_rks.show();
+              }
+              a.each(function() {
+                  var t = $(this);
+                  if (t.val() != 'all') {
+                    e.filter(function() {
+                        clean_rks.show();
+                        return i.indexOf($(this).data(t.data("type"))) < 0
+                    }).hide()
+                  }
+              })
+            }
+          });
+          clean_rks.click(function(){
+            e.show();
+            clean_rks.hide();
+            var select = select_new;
+            select_input.val("default");
+            select.prop('selectedIndex', 0); //Sets the first option as selected
+            select.formSelect();
+          })
+        });
+        $(document).ready(function(){
+        var clean_rks = $('#clean-old-rks-filters'),e = $(".li-risks.info-old"), estado_old = $('#estado_new'), materializado_old = $('#materializado_new'), select_old = $('.old-rks-filter'), select_input = $('#form-rks-old input');
+        select_old.change(function() {
+            var a = select_old.children(":selected");
+            if (e.show(), 0 != a.length) {
+                var i = $.map(a, function(a) {
+                    return $(a).data("id")
+                });
+                if (estado_old.val() == 'all' && materializado_old.val() == 'all') {
+                  clean_rks.hide();
+                } else {
+                  clean_rks.show();
+                }
+                a.each(function() {
+                    var t = $(this);
+                    if (t.val() != 'all') {
+                      e.filter(function() {
+                          clean_rks.show();
+                          return i.indexOf($(this).data(t.data("type"))) < 0
+                      }).hide()
+                    }
+                })
+              }
+            });
+            clean_rks.click(function(){
+              e.show();
+              clean_rks.hide();
+              var select = select_old;
+              select_input.val("default");
+              select.prop('selectedIndex', 0); //Sets the first option as selected
+              select.formSelect();
+            })
+          });
+          $(document).ready(function(){
+            <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
+              <?php if ($EstructureLevel1["level"] != 1): ?>
+                $( "#div-"+<?=$EstructureLevel1["wbs_parent_id"]?>).after('<div class="collapsible-body"><ul class="collapsible"><li><div class="collapsible-header" id="div-'+<?=$EstructureLevel1["wbs_id"]?>+'"><i id="i-'+<?=$EstructureLevel1["wbs_id"]?>+'" class="material-icons">keyboard_arrow_down</i><ul class="collapsible-header-content"><li><small>Nombre</small><h3><?=$EstructureLevel1["name"]?></h3></li><li><small>Schedule % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3></li><li><small>NL Units % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3></li><li><small>BL Inicio</small><h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3></li><li><small>BL Fin</small><h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3></li><li><small>Inicio</small><h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3></li><li><small>Fin</small><h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3></li><li><small>SPI</small><h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3></li></ul></div></div></li></ul></div>');
+                  <?php if($EstructureLevel1["connect_by_isleaf"] != 0):?>
+                    $("#div-"+<?=$EstructureLevel1["wbs_id"]?>).click(false);
+                    $("#i-"+<?=$EstructureLevel1["wbs_id"]?>).empty();
+                  <?php endif; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          });
+          function info_actual_new(){
+            xhr1 = $.ajax({
+            headers:{
+              'X-CSRF-Token':csrfToken
+            },
+            method: "GET",
+            dataType: "json",
+            url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'project_profile']);?>",
+            data: {"project_id" : "<?=$project_id?>"},
+            cache: true,
+            beforeSend: function(xhr) {
+              xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            },
+            success: function(response){
+              $.each(response, function() {
+                // SPI indicator
+                $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+                // $('#spi-old').text(this.spi_labor_units.toFixed(2));
+                $('#da-new').text(this.da);
+                // Fepo indicator
+                if (this.fepo != null) {
+                  var fepo_date = new Date(this.fepo);
+                  var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+                  $('#fepo-new').text(fepo_format_date);
+                  // $('#fepo-old').text(fepo_format_date);
+                }
+                $('#duration-total-new').text(this.od);
+                if (this.pi != null) {
+                    $('#pi-new').text(this.pi+"%");
+                }
+              });
+            }
+          });
+        }
+        function info_actual_old(){
+          xhr1 = $.ajax({
+          headers:{
+            'X-CSRF-Token':csrfToken
+          },
+          method: "GET",
+          dataType: "json",
+          url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'project_profile']);?>",
+          data: {"project_id" : "<?=$project_id?>"},
+          cache: true,
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          },
+          success: function(response){
+            $.each(response, function() {
+              // SPI indicator
+              $('#spi-old').text(this.spi_labor_units.toFixed(2));
+              $('#variacion-est-old').text(this.da);
+              // Fepo indicator
+              if (this.fepo != null) {
+                var fepo_date = new Date(this.fepo);
+                var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+                $('#fepo-old').text(fepo_format_date);
+              }
+              $('#duracion-total-old').text(this.od);
+              $('#pi-old').text(this.pi+"%");
+            });
+          }
+        });
+      }
+      // HITOS ACTUAL
+      function hitos_actual(id_project, actual_option){
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://primavera.eeb.com.co:8080/ords/portal/activity/list/?v_project_id="+id_project,
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+            "cache-control": "no-cache"
+          }
+        }
+        $.ajax(settings).done(function (response) {
+          $.each(response.items, function(i) {
+            /* Format dates
+            BL START DATE  */
+            var bl_start_date = new Date(this.bl_start_date);
+            var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+            // BL FINISH DATE
+            var bl_finish_date = new Date(this.bl_finish_date);
+            var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+            // START DATE
+            var start_date = new Date(this.start_date);
+            var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+            // FINISH DATE
+            var finish_date = new Date(this.finish_date);
+            var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+            // APPEND HITOS
+            $('.hitos-body').append($('<tr>', {class : 'hito-tr-'+i}));
+              $('.hito-tr-'+i).append($('<td>', {text : this.code_activity}))
+              .append($('<td>', {text : this.name}))
+              .append($('<td>', {text : this.spc}))
+              .append($('<td>', {text : this.nlu_percent_complete}))
+              .append($('<td>', {text : bl_start_format}))
+              .append($('<td>', {text : bl_finish_format}))
+              .append($('<td>', {text : start_format}))
+              .append($('<td>', {text : finish_format}))
+              .append($('<td>', {text : this.type}))
+          });
+        });
+      }
+      // COMPARE LOGIC
+      // HITOS COMAPARE
+      function hitos_compare(id_project, selected_date, hitos_body, select_compare){
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://192.168.0.210:8080/ords/portal/captures/milestone/?v_project_id="+id_project+"&v_capture_id="+selected_date,
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+            "cache-control": "no-cache"
+          }
+        }
+        $.ajax(settings).done(function (response) {
+          $.each(response.items, function(i) {
+            /* Format dates
+            BL START DATE  */
+            var bl_start_date = new Date(this.bl_start_date);
+            var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+            // BL FINISH DATE
+            var bl_finish_date = new Date(this.bl_finish_date);
+            var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+            // START DATE
+            var start_date = new Date(this.start_date);
+            var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+            // FINISH DATE
+            var finish_date = new Date(this.finish_date);
+            var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+            // APPEND HITOS
+            hitos_body.append($('<tr>', {id : select_compare+'-'+i}));
+              $('#'+select_compare+'-'+i).append($('<td>', {text : this.code_activity}))
+              .append($('<td>', {text : this.name}))
+              .append($('<td>', {text : this.spc}))
+              .append($('<td>', {text : this.nlu_percent_complete}))
+              .append($('<td>', {text : bl_start_format}))
+              .append($('<td>', {text : bl_finish_format}))
+              .append($('<td>', {text : start_format}))
+              .append($('<td>', {text : finish_format}))
+              .append($('<td>', {text : this.type}))
+          });
+        });
+      }
 </script>

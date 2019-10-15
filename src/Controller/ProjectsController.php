@@ -16,9 +16,9 @@ class ProjectsController extends AppController
 {
     private $Excel_Autor_Name;
     // Función que se ejecuta antes de rederizar cualquier vista dentro la carpeta Projects.
-    public function beforeFilter($event)
-    {
-        parent::beforeFilter($event);
+    // public function beforeFilter($event)
+    // {
+    //     parent::beforeFilter($event);
     //     $this->token();
     //     $this->portalProjects();
     //     // CURL  que obtiene todos los proyectos publicados en el portal administrativo.
@@ -76,7 +76,7 @@ class ProjectsController extends AppController
     //             $this->delete($ProjxDelete);
     //         }
     //     }
-    }
+    // }
     public function index()
     {
         foreach ($_SESSION["Auth"] as $ProjArray => $valueArray) {
@@ -249,19 +249,61 @@ class ProjectsController extends AppController
       }
       curl_close($ch);
     }
+    Private function ProjectHitos($id_project = null){
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/activity/list/?v_project_id='.$id_project);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+      $headers = array();
+      $headers[] = 'Accept: */*';
+      $headers[] = 'Accept-Encoding: gzip, deflate';
+      $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+      $headers[] = 'Cache-Control: no-cache';
+      $headers[] = 'Connection: keep-alive';
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $result = curl_exec($ch);
+      if (curl_errno($ch)) {
+          echo 'Error:' . curl_error($ch);
+      }
+      else {
+        $results = json_decode($result, true);
+        $var1 = array_values($results)[0];
+        // foreach ($var1 as $ws_project => $project_value) {
+          $this->set('hitos_project', $var1);
+        // }
+      }
+      curl_close($ch);
+    }
     // public function project($id, $current_user_pr = null,$ActualEps = null, $Categoria1=null, $Categoria2 = null, $NameEps = null, $title = null, $idEpsParent = null,$name = null, $code = null, $spi = null, $corte = null,
     //  $graph = null)
-    public function project($id = null, $json_breadcrumb = null)
+    public function project($id_p6 = null, $json_breadcrumb = null, $id = null)
     {
-      $project_id_decode = base64_decode(urldecode($id));
+      $project_id_decode = base64_decode(urldecode($id_p6));
+      $proj_id_decode = base64_decode(urldecode($id));
       $project_breadcrumb_decode = base64_decode(urldecode($json_breadcrumb));
       $project_json_decode = json_decode($project_breadcrumb_decode, true);
       $this->set('json_project', $project_breadcrumb_decode);
       $this->set('array_project', $project_json_decode);
       $this->set('project_id', $project_id_decode);
+      $this->set('project_id_p6', $proj_id_decode);
+      // DONA CHART TEMPORAL
+      // $this->Donut($project_id_decode);
+      $this->ProjectWbs($project_id_decode);
+      $this->ProjectHitos($project_id_decode);
+      $this->loadModel('Projects');
+        $local_id_project = $this->Projects->find(
+              'all',
+              array('conditions' => array('Projects.ID_PROJECT' => $proj_id_decode))
+          )->select(['Projects.id', 'Projects.CHART']);
+        foreach ($local_id_project as $local_db) {
+          $this->Risks($local_db->id);
+          $this->importExcelfile($proj_id_decode, $local_db->CHART);
+        }
+        // $this->ChartS($project_id_decode);
+        //
         // $this->ProjectsFase();
         // $this->ProjectProfile($graph);
-        // $this->ProjectWbs($graph);
+
         // $this->index();
         // $this->IndicatorColor();
         // $this->RomanNumbers();
@@ -283,8 +325,6 @@ class ProjectsController extends AppController
         // $this->set('ActualEps', $decoded_EpsPrjs);
         // $this->set('Categoria1', $decoded_Ctg1Prjs);
         // $this->Risks($id);
-        // $this->ChartS($graph);
-        // $this->Donut($graph);
         // $this->IndicatorsAC();
         // $this->IndicatorsAC2();
         // $this->IndicatorsAC3();
@@ -637,10 +677,15 @@ class ProjectsController extends AppController
     }
     public function projects($projects_json = null)
     {
+      $this->ProjectsFase();
+      $this->ProjectCodeArea();
+      $this->ProjectCodeCategory();
+      $this->ProjectCodeMec();
       $projects_decode = base64_decode(urldecode($projects_json));
       $projects_json_decode = json_decode($projects_decode, true);
       $this->set('array_projects', $projects_json_decode);
       $this->set('json_projects', $projects_decode);
+      // $this->IndicatorColor();
       // $company_json_decode = json_decode($company_decode, true);
       // $this->set('array_company', $company_json_decode);
       // $this->set('json_company', $company_decode);
@@ -867,7 +912,6 @@ class ProjectsController extends AppController
                     array_push($ArrayEjec, $Ejecutado);
                     $Plan = json_encode($ArrayPlan);
                     $Ejec = json_encode($ArrayEjec);
-                    ;
                     $this->set('Plan', $Planeado);
                     $this->set('Ejec', $Ejecutado);
                 }
@@ -1112,7 +1156,7 @@ class ProjectsController extends AppController
       $token = array_values($result_arr)[0];
       $_SESSION["PortalToken"] = $token;
     }
-    public function importExcelfile ($id = null, $CHART = null){
+    public function importExcelfile($id = null, $CHART = null){
       $ArrayExcelDate = array();
       $ArrayExcelPlaneado = array();
       $ArrayExcelEjecutado = array();
