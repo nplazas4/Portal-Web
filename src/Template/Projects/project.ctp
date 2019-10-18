@@ -273,7 +273,7 @@
                             <div class="col flex-300">
                                 <div class="input-field">
                                     <select id="actual-select" class="period-select">
-                                      <option value="" disabled selected>Cambiar periodo</option>
+                                      <option value="default" disabled selected>Cambiar periodo</option>
                                       <option class="work-option" value="1">Día</option>
                                       <option class="work-option" value="2">Semana</option>
                                       <option class="work-option" value="3">Mes</option>
@@ -292,12 +292,12 @@
                     </div>
                 </div>
 
-                <div class="chart">
+                <div class="chart" id="div-caf-new">
                     <h2>Curva de Avance Físico</h2>
                     <div class="chart-content" id="caf"></div>
                 </div>
                 <!-- </?php if($longitudArrayDate != 0):?> -->
-                  <div class="chart">
+                  <div class="chart" id="tg-div">
                       <h2>Tres Generaciones</h2>
                       <div class="chart-content" id="tg" style="min-height: 475px;"></div>
                   </div>
@@ -466,7 +466,7 @@
                             <div class="col flex-300">
                                 <div class="input-field">
                                     <select id="old-select" class="period-select">
-                                      <option value="" disabled selected>Cambiar periodo</option>
+                                      <option value="default" disabled selected>Cambiar periodo</option>
                                       <option class="work-option" value="1">Día</option>
                                       <option class="work-option" value="2">Semana</option>
                                       <option class="work-option" value="3">Mes</option>
@@ -485,16 +485,14 @@
                     </div>
                 </div>
 
-                <div class="chart">
+                <div class="chart" id="div-caf-old">
                     <h2>Curva de Avance Físico</h2>
                     <div class="chart-content" id="caf-old"></div>
                 </div>
-                <?php if($longitudArrayDate != 0):?>
-                  <div class="chart">
+                  <div class="chart" id="div-tg-old">
                       <h2>Tres Generaciones</h2>
                       <div class="chart-content" id="tg-old" style="min-height: 475px;"></div>
                   </div>
-                <?php endif;?>
             </div>
         </div>
 
@@ -1478,183 +1476,288 @@
     $('#breadcrumb_ctg').append($('<a>', {text : result[2], class : 'breadcrumb', href : '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[1]))))+'/'+"<?= urlencode(base64_encode($json_project))?>"+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[0]))))}));
   });
     // Promesa que contiene la información de Unifier y bd local para alimentar los indicadores de presupuesto
-  promise.then(function (result) {
-    if (result[4] != null) {
-      var settings = {
-          "async": true,
-          "crossDomain": true,
-          "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+result[1],
-          "method": "GET",
-          "headers": {
-              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+  function Unifier_information(project_id, select_value, unifier_code, spi_value, chart_side) {
+    if (unifier_code != null) {
+      if (select_value == 'actual' || select_value == 'all-select') {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+project_id,
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
+          }
+      } else {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/captures/costindicators/?p_project_id="+project_id+"&p_id_capture="+select_value,
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
           }
         }
         // INDICADORES DE PRESUPUESTO
         $.ajax(settings).done(function (response) {
-          $.each(response.items, function() {
-             // TOTAL PROYECTO
-             var unifier_cpi_total = this.cpiusd_total; //Variable que almacena el cpi total proveniente de Unifier
-             if (unifier_cpi_total != null) { //Condicionales que validan si el dato
-               $('#cpi-new').text(parseFloat(unifier_cpi_total));
-             }
-             var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
-             if (unifier_ejec_total != null) {
-               $('#ejecutado-new').text('USD $ '+parseFloat(unifier_ejec_total)+' MM');
-             }
-             var unifier_plan_total = this.planeadousd_total;
-             if (unifier_plan_total != null) {
-               $('#planeado-new').text('USD $ '+parseFloat(unifier_plan_total)+' MM');
-             }
-             var unifier_presp_total = this.presupuestousd_total;
-             if (unifier_presp_total != null) {
-               $('#presupuesto-new').text('USD $ '+parseFloat(unifier_presp_total)+' MM');
-             }
-             var unifier_var_total = this.variacionusd_total;
-             if (unifier_var_total != null) {
-               $('#variacion-new').text('USD $ '+parseFloat(unifier_var_total)+' MM');
-             }
-             var unifier_proy_total = this.proyeccionusd_total;
-             if (unifier_proy_total != null) {
-               $('#proyeccion-new').text('USD $ '+parseFloat(unifier_proy_total)+' MM');
-             }
-             var unifier_porc_total = this.porcentajevausd_total;
-             if (unifier_porc_total != null) {
-               $('#porcentaje-var-new').text(parseFloat(unifier_porc_total)+'%');
-             }
-             // ANUAL PROYECTO
-             var unifier_cpi_anual = this.cpiusd_2019;
-             if (unifier_cpi_anual != null) {
-               $('#cpi-anual-new').text(parseFloat(unifier_cpi_anual));
-             }
-             var unifier_ejec_anual = this.ejecutadusd_2019;
-             if (unifier_ejec_anual != null) {
-               $('#ejec-anual-new').text('USD $ '+parseFloat(unifier_ejec_anual)+' MM');
-             }
-             var unifier_plan_anual = this.planeadousd_2019;
-             if (unifier_plan_anual != null) {
-               $('#plan-anual-new').text('USD $ '+parseFloat(unifier_plan_anual)+' MM');
-             }
-             var unifier_pres_anual = this.presupuestousd_2019;
-             if (unifier_pres_anual != null) {
-               $('#pres-anual-new').text('USD $ '+parseFloat(unifier_pres_anual)+' MM');
-             }
-             var unifier_proy_anual = this.proyeccionusd_2019;
-             if (unifier_proy_anual != null) {
-               $('#proyeccion-anual-new').text('USD $ '+parseFloat(unifier_proy_anual)+' MM');
-             }
-             var unifier_var_anual = this.varacionusd_2019;
-             if (unifier_var_anual != null) {
-               $('#variacion-anual-new').text('USD $ '+parseFloat(unifier_var_anual)+' MM');
-             }
-             var unifier_porc_anual = this.porcentajevausd_2019;
-             if (unifier_porc_anual != null) {
-               $('#porcentaje-anual-new').text(parseFloat(unifier_porc_anual)+'%');
-             }
-              ws_colors(unifier_cpi_total, unifier_porc_total, unifier_cpi_anual, unifier_porc_anual);
-          });
+          if (select_value == 'actual' && chart_side == 'new') {
+            new_indicators(response, spi_value, select_value, chart_side);
+          } else if(select_value == 'actual' && chart_side == 'old') {
+            old_indicators(response, spi_value, select_value, chart_side);
+          } else if(select_value == 'all-select') {
+            new_indicators(response, spi_value, select_value, chart_side);
+            old_indicators(response, spi_value, select_value, chart_side);
+          } else if(chart_side == 'new') {
+            new_indicators(response, spi_value, select_value, chart_side);
+          } else if(chart_side == 'old') {
+            old_indicators(response, spi_value, select_value, chart_side);
+          }
        });
-    } else {
-        xhr2 = $.ajax({
-        headers:{
-          'X-CSRF-Token':csrfToken
-        },
-        method: "GET",
-        dataType: "json",
-        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local_profile']);?>",
-        data: {project_id : result[0]},
-        cache: true,
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        },
-        success: function(response){
-          $.each(response, function() {
-            // console.log(this);
-            $('#p-obj-est').text(this.Proj_Obj);
-            $('#p-info-general').text(this.DESCRIPTION);
-            $('#p-alcance').text(this.ALCANCE);
-            $('#p-control-cambio').text(this.SOLICITUD);
-            // Fopo
-            var fopo_date = new Date(this.FOPO);
-            var format_utc_date = fopo_date.getUTCDate() + " " + meses[fopo_date.getMonth()] + ", " + fopo_date.getUTCFullYear();
-            $('#span-fopo').text('FoPo: '+format_utc_date);
-            // Adjudicación
-            var adj, format_adj_date;
-            if (this.ADJUDICACION != null) {
-                var adj = new Date(this.ADJUDICACION);
-                var format_adj_date = adj.getUTCDate() + " " + meses[adj.getMonth()] + ", " + adj.getUTCFullYear();
-                $('#span-adj').text("Adjudicación: "+format_adj_date);
-            } else {
-                $('#span-adj').text("Adjudicación: No aplica");
-            }
-            if (this.CPI_DATE != null) {
-              var cpi_date = new Date(this.CPI_DATE);
-              var cpi_format_date = cpi_date.getUTCDate() + " " + meses[cpi_date.getMonth()] + ", " + cpi_date.getUTCFullYear();
-              $('#span-cpi-date').text('Fecha CPI: '+cpi_format_date);
-            }
-            if (this.IGR_DATE != null) {
-              var igr_date = new Date(this.IGR_DATE);
-              var igr_format_date = igr_date.getUTCDate() + " " + meses[igr_date.getMonth()] + ", " + igr_date.getUTCFullYear();
-              $('#span-igr-date').text('Fecha IGR: '+igr_format_date);
-            }
-            $('#igr-value-1').text('IGR '+this.IGR+'%');
-            $('#igr-value-2').text('IGR '+this.IGR+'%');
-            $('#igr-value-3').text('IGR '+this.IGR+'%');
-            $('#mapa-img').append($('<img>', {src : '/Portal-Web/img/maps/'+this.ID_PROJECT+'/'+this.FOTO}));
-            $('#cpi-new').text(this.AC_PPTO);
-            $('#cpi-old').text(this.AC_PPTO);
-            $('#ejecutado-new').text("USD $ "+this.AC+" MM");
-            $('#ejec-total-old').text("USD $ "+this.AC+" MM");
-            $('#planeado-new').text("USD $ "+this.AC_BAC+" MM");
-            $('#plan-total-old').text("USD $ "+this.AC_BAC+" MM");
-            // PRESUPUESTO TOTAL
-            $('#presupuesto-new').text("USD $ "+this.PROJ_TOTAL_PRES+" MM");
-            $('#pres-total-old').text("USD $ "+this.PROJ_TOTAL_PRES+" MM");
-            // PROYECCIÓN PROYECTO
-            $('#proyeccion-new').text("USD $ "+this.TOTAL_FORECAST+" MM");
-            $('#proy-total-old').text("USD $ "+this.TOTAL_FORECAST+" MM");
-            // VARIACIÓN PROYECTADA
-            $('#variacion-new').text("USD $ "+parseFloat(this.PROJ_TOTAL_PRES - this.TOTAL_FORECAST).toFixed(2)+" MM");
-            $('#variacion-total-old').text("USD $ "+parseFloat(this.PROJ_TOTAL_PRES - this.TOTAL_FORECAST).toFixed(2)+" MM");
-            // PORCENTAJE VARIACIÓN PROYECTADA
-            var porcentaje_var_proy = parseFloat((this.PROJ_TOTAL_PRES - this.TOTAL_FORECAST) / this.PROJ_TOTAL_PRES * 100).toFixed(1);
-            $('#porcentaje-var-new').text(porcentaje_var_proy+'%');
-            $('#porcentaje-total-old').text(porcentaje_var_proy+'%');
-            // Anual CPI
-            $('#cpi-anual-new').text(this.CPI_ANUAL);
-            $('#cpi-anual-old').text(this.CPI_ANUAL);
-            // EJECUTADO
-            $('#ejec-anual-new').text("USD $ "+this.PROJ_AC+" MM");
-            $('#ejec-anual-old').text("USD $ "+this.PROJ_AC+" MM");
-            // PLANEADO
-            $('#plan-anual-new').text("USD $ "+parseFloat(this.PV).toFixed(2)+" MM");
-            $('#plan-anual-old').text("USD $ "+parseFloat(this.PV).toFixed(2)+" MM");
-            // PRESUPUESTO
-            $('#pres-anual-new').text("USD $ "+parseFloat(this.PRES_PROJ).toFixed(2)+" MM");
-            $('#pres-anual-old').text("USD $ "+parseFloat(this.PRES_PROJ).toFixed(2)+" MM");
-            // PROYECCIÓN ANUAL
-            $('#proyeccion-anual-new').text("USD $ "+parseFloat(this.FORECAST_PROJ).toFixed(2)+" MM");
-            $('#proy-anual-old').text("USD $ "+parseFloat(this.FORECAST_PROJ).toFixed(2)+" MM");
-            // VARIACIÓN ANUAL
-            $('#variacion-anual-new').text("USD $ "+parseFloat(this.PRES_PROJ - this.FORECAST_PROJ).toFixed(2)+" MM");
-            $('#variacion-anual-old').text("USD $ "+parseFloat(this.PRES_PROJ - this.FORECAST_PROJ).toFixed(2)+" MM");
-            // PORCENTAJE VARIACIÓN ANUAL
-            var proyeccion_anual = parseFloat((this.PRES_PROJ - this.FORECAST_PROJ) / this.PRES_PROJ * 100).toFixed(2);
-            $('#porcentaje-anual-new').text(proyeccion_anual+"%");
-            $('#porc-variacion-anual-old').text(proyeccion_anual+"%");
-            // Valves and towers
-            $('.long-distance').text(this.DISTANCIA+' Km');
-            $('#lines-distance').text(this.LINEA_TRANS+' kV');
-            $('#towers-distance').text(this.TORRE+' Torres');
-            $('#ecg-value').text('No. '+this.LINEA_TRANS);
-            $('#facilidades').text(this.TORRE+' Facilidades');
-            indicators_colors(result[3], this.AC_PPTO, porcentaje_var_proy, this.CPI_ANUAL, proyeccion_anual, this.IGR);
-          });
+     } else {
+       if (spi_value != null) {
+         if (select_value == 'actual' && chart_side == 'new') {
+           ws_colors_new(spi_value);
+         } else if(select_value == 'actual' && chart_side == 'old') {
+           ws_colors_old(spi_value);
+         } else if(select_value == 'all-select') {
+           ws_colors_new(spi_value);
+           ws_colors_old(spi_value);
+         } else if(chart_side == 'new') {
+           ws_colors_new(spi_value);
+         } else if(chart_side == 'old') {
+           ws_colors_old(spi_value);
+         }
+       }
+     }
+    }
+    function new_indicators(response, spi_value, select_value, chart_side){
+      $.each(response.items, function() {
+        // TOTAL PROYECTO
+        var unifier_cpi_total = this.cpiusd_total; //Variable que almacena el cpi total proveniente de Unifier
+        if (unifier_cpi_total != null) { //Condicionales que validan si el dato
+          $('#cpi-new').text(parseFloat(unifier_cpi_total).toFixed(2));
+        } else {
+          $('#cpi-new').text('');
         }
+        var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
+        if (unifier_ejec_total != null) {
+          $('#ejecutado-new').text('USD $ '+parseFloat(unifier_ejec_total)+' MM');
+        } else {
+          $('#ejecutado-new').text('');
+        }
+        var unifier_plan_total = this.planeadousd_total;
+        if (unifier_plan_total != null) {
+          $('#planeado-new').text('USD $ '+parseFloat(unifier_plan_total)+' MM');
+        } else {
+          $('#planeado-new').text('');
+        }
+        var unifier_presp_total = this.presupuestousd_total;
+        if (unifier_presp_total != null) {
+          $('#presupuesto-new').text('USD $ '+parseFloat(unifier_presp_total)+' MM');
+        } else {
+          $('#presupuesto-new').text('');
+        }
+        var unifier_var_total = this.variacionusd_total;
+        if (unifier_var_total != null) {
+          $('#variacion-new').text('USD $ '+parseFloat(unifier_var_total)+' MM');
+        } else {
+          $('#variacion-new').text('');
+        }
+        var unifier_proy_total = this.proyeccionusd_total;
+        if (unifier_proy_total != null) {
+          $('#proyeccion-new').text('USD $ '+parseFloat(unifier_proy_total)+' MM');
+        } else {
+          $('#proyeccion-new').text('');
+        }
+        var unifier_porc_total = this.porcentajevausd_total;
+        if (unifier_porc_total != null) {
+          $('#porcentaje-var-new').text(parseFloat(unifier_porc_total).toFixed(2)+'%');
+        } else {
+          $('#porcentaje-var-new').text('');
+        }
+        // ANUAL PROYECTO
+        var unifier_cpi_anual = this.cpiusd_2019;
+        if (unifier_cpi_anual != null) {
+          $('#cpi-anual-new').text(parseFloat(unifier_cpi_anual).toFixed(2));
+        } else {
+          $('#cpi-anual-new').text('');
+        }
+        var unifier_ejec_anual = this.ejecutadusd_2019;
+        if (unifier_ejec_anual != null) {
+          $('#ejec-anual-new').text('USD $ '+parseFloat(unifier_ejec_anual)+' MM');
+        } else {
+          $('#ejec-anual-new').text('');
+        }
+        var unifier_plan_anual = this.planeadousd_2019;
+        if (unifier_plan_anual != null) {
+          $('#plan-anual-new').text('USD $ '+parseFloat(unifier_plan_anual)+' MM');
+        } else {
+          $('#plan-anual-new').text('');
+        }
+        var unifier_pres_anual = this.presupuestousd_2019;
+        if (unifier_pres_anual != null) {
+          $('#pres-anual-new').text('USD $ '+parseFloat(unifier_pres_anual)+' MM');
+        } else {
+          $('#pres-anual-new').text('');
+        }
+        var unifier_proy_anual = this.proyeccionusd_2019;
+        if (unifier_proy_anual != null) {
+          $('#proyeccion-anual-new').text('USD $ '+parseFloat(unifier_proy_anual)+' MM');
+        } else {
+          $('#proyeccion-anual-new').text('');
+        }
+        var unifier_var_anual = this.varacionusd_2019;
+        if (unifier_var_anual != null) {
+          $('#variacion-anual-new').text('USD $ '+parseFloat(unifier_var_anual)+' MM');
+        } else {
+          $('#variacion-anual-new').text('');
+        }
+        var unifier_porc_anual = this.porcentajevausd_2019;
+        if (unifier_porc_anual != null) {
+          $('#porcentaje-anual-new').text(parseFloat(unifier_porc_anual).toFixed(2)+'%');
+        } else {
+          $('#porcentaje-anual-new').text('');
+        }
+        local_db_info([unifier_cpi_total, unifier_porc_total, unifier_cpi_anual, unifier_porc_anual, spi_value, select_value, chart_side]);
       });
     }
-    // }
-  });
-  function ws_colors(unifier_cpi_total, unifier_porc_total, unifier_cpi_anual, unifier_porc_anual){
+    function old_indicators(response, spi_value, select_value, chart_side){
+      $.each(response.items, function() {
+        // TOTAL PROYECTO
+        var unifier_cpi_total = this.cpiusd_total; //Variable que almacena el cpi total proveniente de Unifier
+        if (unifier_cpi_total != null) { //Condicionales que validan si el dato
+          $('#cpi-old').text(parseFloat(unifier_cpi_total).toFixed(2));
+        }
+        var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
+        if (unifier_ejec_total != null) {
+          $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total)+' MM');
+        }
+        var unifier_plan_total = this.planeadousd_total;
+        if (unifier_plan_total != null) {
+          $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total)+' MM');
+        }
+        var unifier_presp_total = this.presupuestousd_total;
+        if (unifier_presp_total != null) {
+          $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total)+' MM');
+        }
+        var unifier_var_total = this.variacionusd_total;
+        if (unifier_var_total != null) {
+          $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total)+' MM');
+        }
+        var unifier_proy_total = this.proyeccionusd_total;
+        if (unifier_proy_total != null) {
+          $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total)+' MM');
+        }
+        var unifier_porc_total = this.porcentajevausd_total;
+        if (unifier_porc_total != null) {
+          $('#porcentaje-total-old').text(parseFloat(unifier_porc_total).toFixed(2)+'%');
+        }
+        // ANUAL PROYECTO
+        var unifier_cpi_anual = this.cpiusd_2019;
+        if (unifier_cpi_anual != null) {
+          $('#cpi-anual-old').text(parseFloat(unifier_cpi_anual).toFixed(2));
+        }
+        var unifier_ejec_anual = this.ejecutadusd_2019;
+        if (unifier_ejec_anual != null) {
+          $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual)+' MM');
+        }
+        var unifier_plan_anual = this.planeadousd_2019;
+        if (unifier_plan_anual != null) {
+          $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual)+' MM');
+        }
+        var unifier_pres_anual = this.presupuestousd_2019;
+        if (unifier_pres_anual != null) {
+          $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual)+' MM');
+        }
+        var unifier_proy_anual = this.proyeccionusd_2019;
+        if (unifier_proy_anual != null) {
+          $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual)+' MM');
+        }
+        var unifier_var_anual = this.varacionusd_2019;
+        if (unifier_var_anual != null) {
+          $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual)+' MM');
+        }
+        var unifier_porc_anual = this.porcentajevausd_2019;
+        if (unifier_porc_anual != null) {
+          $('#porc-variacion-anual-old').text(parseFloat(unifier_porc_anual).toFixed(2)+'%');
+        }
+        local_db_info([unifier_cpi_total, unifier_porc_total, unifier_cpi_anual, unifier_porc_anual, spi_value, select_value, chart_side]);
+      });
+    }
+    function local_db_info(indicators_col_val){
+    promise.then(function (result) {
+      xhr2 = $.ajax({
+          headers:{
+            'X-CSRF-Token':csrfToken
+          },
+          method: "GET",
+          dataType: "json",
+          url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local_profile']);?>",
+          data: {project_id : result[0]},
+          cache: true,
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          },
+          success: function(response){
+            $.each(response, function() {
+              // console.log(this);
+              $('#p-obj-est').text(this.Proj_Obj);
+              $('#p-info-general').text(this.DESCRIPTION);
+              $('#p-alcance').text(this.ALCANCE);
+              $('#p-control-cambio').text(this.SOLICITUD);
+              // Fopo
+              var fopo_date = new Date(this.FOPO);
+              var format_utc_date = fopo_date.getUTCDate() + " " + meses[fopo_date.getMonth()] + ", " + fopo_date.getUTCFullYear();
+              $('#span-fopo').text('FoPo: '+format_utc_date);
+              // Adjudicación
+              var adj, format_adj_date;
+              if (this.ADJUDICACION != null) {
+                  var adj = new Date(this.ADJUDICACION);
+                  var format_adj_date = adj.getUTCDate() + " " + meses[adj.getMonth()] + ", " + adj.getUTCFullYear();
+                  $('#span-adj').text("Adjudicación: "+format_adj_date);
+              } else {
+                  $('#span-adj').text("Adjudicación: No aplica");
+              }
+              if (this.CPI_DATE != null) {
+                var cpi_date = new Date(this.CPI_DATE);
+                var cpi_format_date = cpi_date.getUTCDate() + " " + meses[cpi_date.getMonth()] + ", " + cpi_date.getUTCFullYear();
+                $('#span-cpi-date').text('Fecha CPI: '+cpi_format_date);
+              }
+              if (this.IGR_DATE != null) {
+                var igr_date = new Date(this.IGR_DATE);
+                var igr_format_date = igr_date.getUTCDate() + " " + meses[igr_date.getMonth()] + ", " + igr_date.getUTCFullYear();
+                $('#span-igr-date').text('Fecha IGR: '+igr_format_date);
+              }
+              $('#igr-value-1').text('IGR '+this.IGR+'%');
+              $('#igr-value-2').text('IGR '+this.IGR+'%');
+              $('#igr-value-3').text('IGR '+this.IGR+'%');
+              $('#mapa-img').append($('<img>', {src : '/Portal-Web/img/maps/'+this.ID_PROJECT+'/'+this.FOTO}));
+              // Valves and towers
+              $('.long-distance').text(this.DISTANCIA+' Km');
+              $('#lines-distance').text(this.LINEA_TRANS+' kV');
+              $('#towers-distance').text(this.TORRE+' Torres');
+              $('#ecg-value').text('No. '+this.LINEA_TRANS);
+              $('#facilidades').text(this.TORRE+' Facilidades');
+              indicators_col_val.push(this.IGR);
+              if (indicators_col_val[5] == 'actual' && indicators_col_val[6] == 'new') {
+                ws_colors_new(indicators_col_val);
+              } else if(indicators_col_val[5] == 'actual' && indicators_col_val[6] == 'old') {
+                ws_colors_old(indicators_col_val);
+              } else if(indicators_col_val[5] == 'all-select') {
+                ws_colors_new(indicators_col_val);
+                ws_colors_old(indicators_col_val);
+              } else if(indicators_col_val[6] == 'new') {
+                ws_colors_new(indicators_col_val);
+              } else if(indicators_col_val[6] == 'old') {
+                ws_colors_old(indicators_col_val);
+              }
+            });
+          }
+        });
+    });
+  }
+  function ws_colors_new(indicators_col_val){
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -1666,67 +1769,99 @@
       }
       $.ajax(settings).done(function (response) {
         $.each(response.items, function() {
-          if (unifier_cpi_total > this.minimun && unifier_cpi_total <= this.maximo && this.indicator_name == 'CPI') {
-              $('#cpi-indicator-new').css({'background-color' : this.hexa_color});
-          }
-          if (unifier_cpi_anual > this.minimun && unifier_cpi_anual <= this.maximo && this.indicator_name == 'CPI') {
-              $('#cpi-anual-indicator-new').css({'background-color' : this.hexa_color});
-          }
-          // PORCENTAJE PROYECTADO
-          if (unifier_porc_total < this.maximo && this.name_threshold == 'PI Baja') {
-              $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
-          } else if (unifier_porc_total == this.maximo && this.name_threshold == 'PI Media') {
-              $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
-          } else if (unifier_porc_total < this.maximo && unifier_porc_total > this.minimun && this.name_threshold == 'PI Alta') {
-              $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
-          }
-          // PORCENTAJE PROYECTADO
-          if (unifier_porc_total < this.maximo && this.name_threshold == 'PI Baja') {
-              $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
-          } else if (unifier_porc_total == this.maximo && this.name_threshold == 'PI Media') {
-              $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
-          } else if (unifier_porc_total < this.maximo && unifier_porc_total > this.minimun && this.name_threshold == 'PI Alta') {
-              $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+          // SPI
+          if (indicators_col_val[4] != undefined) {
+            if (indicators_col_val[4] > this.minimun && indicators_col_val[4] <= this.maximo && this.indicator_name == 'SPI') {
+                $('#spi-new').css({'background-color' : this.hexa_color});
+            }
+            // CPI TOTAL & ANUAL
+            if (indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
+                $('#cpi-indicator-new').css({'background-color' : this.hexa_color});
+            }
+            if (indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
+                $('#cpi-anual-indicator-new').css({'background-color' : this.hexa_color});
+            }
+            // PORCENTAJE PROYECTADO
+            if (indicators_col_val[3] < this.maximo && this.name_threshold == 'PI Baja') {
+                $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[3] == this.maximo && this.name_threshold == 'PI Media') {
+                $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[3] < this.maximo && indicators_col_val[3] > this.minimun && this.name_threshold == 'PI Alta') {
+                $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
+            }
+            // PORCENTAJE PROYECTADO
+            if (indicators_col_val[1] < this.maximo && this.name_threshold == 'PI Baja') {
+                $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[1] == this.maximo && this.name_threshold == 'PI Media') {
+                $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[1] < this.maximo && indicators_col_val[1] > this.minimun && this.name_threshold == 'PI Alta') {
+                $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+            }
+            // IGR
+            if (indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
+              $('#igr-value-2').css({'background-color' : this.hexa_color});
+              $('#igr-value-3').css({'background-color' : this.hexa_color});
+            }
+          } else {
+            if (indicators_col_val > this.minimun && indicators_col_val <= this.maximo && this.indicator_name == 'SPI') {
+                $('#spi-new').css({'background-color' : this.hexa_color});
+            }
           }
         });
       });
   }
-  function indicators_colors(spi, cpi, porcentaje, cpi_anual, proyeccion_anual, igr)
-  {
-    xhr5 = $.ajax({
-      headers:{
-        'X-CSRF-Token':csrfToken
-      },
-      method: "GET",
-      dataType: "json",
-      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'indicator_color_project']);?>",
-      data: {
-              'spi' : spi, 'cpi' : cpi, 'porcentaje' : porcentaje, 'cpi_anual' : cpi_anual,
-              'proyeccion_anual' : proyeccion_anual, 'igr' : igr
-            },
-      cache: true,
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      },
-      success: function(response){
-        $.each(response, function() {
-          $('#spi-new').css({'background-color' : this.spi_color});
-          $('#spi-old-color').css({'background-color' : this.spi_color});
-          $('#cpi-indicator-new').css({'background-color' : this.cpi_color});
-          $('#cpi-indicator-old').css({'background-color' : this.cpi_color});
-          $('#cpi-anual-indicator-new').css({'background-color' : this.cpi_anual_color});
-          $('#cpi-anual-indicator-old').css({'background-color' : this.cpi_anual_color});
-          $('#porcentaje-proy-new').css({'background-color' : this.porcentaje_color});
-          $('#porcentaje-proy-old').css({'background-color' : this.porcentaje_color});
-          $('#porcentaje-pr-anual-new').css({'background-color' : this.proyeccion_anual_color});
-          $('#porcentaje-anual-old').css({'background-color' : this.proyeccion_anual_color});
-
-          $('#igr-value-1').css({'background-color' : this.igr_color});
-          $('#igr-value-2').css({'background-color' : this.igr_color});
-          $('#igr-value-3').css({'background-color' : this.igr_color});
-        });
+  function ws_colors_old(indicators_col_val){
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+        "method": "GET",
+        "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+        }
       }
-    });
+      $.ajax(settings).done(function (response) {
+        $.each(response.items, function() {
+          if (indicators_col_val[4] != undefined) {
+            // SPI
+            if (indicators_col_val[4] > this.minimun && indicators_col_val[4] <= this.maximo && this.indicator_name == 'SPI') {
+                $('#spi-old-color').css({'background-color' : this.hexa_color});
+            }
+            // CPI TOTAL & ANUAL
+            if (indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
+                $('#cpi-indicator-old').css({'background-color' : this.hexa_color});
+            }
+            if (indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
+                $('#cpi-anual-indicator-old').css({'background-color' : this.hexa_color});
+            }
+            // PORCENTAJE PROYECTADO
+            if (indicators_col_val[1] < this.maximo && this.name_threshold == 'PI Baja') {
+                $('#porcentaje-proy-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[1] == this.maximo && this.name_threshold == 'PI Media') {
+                $('#porcentaje-proy-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[1] < this.maximo && indicators_col_val[1] > this.minimun && this.name_threshold == 'PI Alta') {
+                $('#porcentaje-proy-old').css({'background-color' : this.hexa_color});
+            }
+            // PORCENTAJE PROYECTADO
+            if (indicators_col_val[3] < this.maximo && this.name_threshold == 'PI Baja') {
+                $('#porcentaje-anual-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[3] == this.maximo && this.name_threshold == 'PI Media') {
+                $('#porcentaje-anual-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[3] < this.maximo && indicators_col_val[3] > this.minimun && this.name_threshold == 'PI Alta') {
+                $('#porcentaje-anual-old').css({'background-color' : this.hexa_color});
+            }
+            // IGR
+            if (indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
+              $('#igr-value-1').css({'background-color' : this.hexa_color});
+            }
+          }
+          else {
+            if (indicators_col_val > this.minimun && indicators_col_val <= this.maximo && this.indicator_name == 'SPI') {
+                $('#spi-new').css({'background-color' : this.hexa_color});
+            }
+          }
+        });
+      });
   }
     // GRÁFICA DONA
     xhr3 = $.ajax({
@@ -1759,23 +1894,32 @@
     // SELECT COMPARE
     promise.then(function (result) {
       $('#compare-select-new').change(function() {
+          var period_select = $('#actual-select');
+          period_select.prop('selectedIndex', 0); //Sets the first option as selected
+          period_select.formSelect();
           var hitos_body = $('#hitos-body-new');
           $('#hitos-body-new tr').remove();
           var selected_date_new = $(this).children(":selected").attr("value");
           if (selected_date_new == "actual") {
             info_actual_new();
-            // $('#hitos-title-old').text('HITOS');
-            // $('#hitos-body-new tr').remove();
-            // $('#hitos-title-new').text('HITOS');
-            // $('#hitos-title-old').text('HITOS');
+            $('#hitos-title-new').text('HITOS');
             hitos_actual(result[1]);
+            caf(result[1], 1, 'actual-select');
+            actual_tg(result[1], result[4], 'all-select');
+            Unifier_information(result[1], 'actual', result[4], result[3], 'new');
           }else{
             option_compare_new_dates(selected_date_new);
             $('#hitos-title-new').text('HITOS '+$(this).children(":selected").text());
             hitos_compare(result[1], selected_date_new, hitos_body, 'new');
+            curva_s_compare(result[1], selected_date_new, 1, 'new');
+            compare_tg (result[1], selected_date_new, 'new', result[4]);
+            Unifier_information(result[1], selected_date_new, result[4], result[3], 'new');
           }
       });
         $('#compare-select-old').change(function() {
+          var period_select = $('#old-select');
+          period_select.prop('selectedIndex', 0); //Sets the first option as selected
+          period_select.formSelect();
           var hitos_body = $('#hitos-body-old');
           $('#hitos-body-old tr').remove();
           var selected_date_old = $(this).children(":selected").attr("value");
@@ -1783,10 +1927,16 @@
             info_actual_old();
             $('#hitos-title-old').text('HITOS');
             hitos_actual(result[1]);
+            caf(result[1], 1, 'old-select');
+            actual_tg(result[1], result[4], 'all-select');
+            Unifier_information(result[1], 'actual', result[4], result[3], 'old');
           }else{
             option_compare_old_dates(selected_date_old);
             $('#hitos-title-old').text('HITOS '+$(this).children(":selected").text());
             hitos_compare(result[1], selected_date_old, hitos_body, 'old');
+            curva_s_compare(result[1], selected_date_old, 1, 'old');
+            compare_tg (result[1], selected_date_old, 'old', result[4]);
+            Unifier_information(result[1], selected_date_old, result[4], result[3], 'old');
           }
         });
       });
@@ -1856,7 +2006,9 @@
   promise.then(function (result) {
       donut(result[1]);
       caf(result[1], 1, 'all-select');
+      actual_tg(result[1], result[4], 'all-select');
       hitos_actual(result[1]);
+      Unifier_information(result[1], 'all-select', result[4], result[3], 'all');
   });
 
     // Porcentajes de avances
@@ -1901,59 +2053,45 @@
           select_old.formSelect();
           info_actual_old();
 
+          var period_select = $('.period-select');
+          period_select.prop('selectedIndex', 0); //Sets the first option as selected
+          period_select.formSelect();
+
+          $('#hitos-title-old').text('HITOS');
+          $('#hitos-title-new').text('HITOS');
+          $('.hitos-body tr').remove();
           hitos_actual(result[1]);
+
+          caf(result[1], 1, 'actual-select');
+
+          actual_tg(result[1], result[4], 'all-select');
+
+          Unifier_information(result[1], 'all-select', result[4], result[3], 'all');
         });
     });
     promise.then(function (result) {
         var select_object = $('.period-select');
         select_object.change(function() {
           var selected_value = $(this).children(":selected").attr("value");
-          var select_id = $(this).attr('id');
-          caf(result[1], selected_value, select_id);
-        });
-        $('#btn-compare').click(function() {
-          select_object.removeClass('period-select').addClass('period-select-compare');
-        });
-        $('period-select-compare').change(function() {
-          var selected_value = $(this).children(":selected").attr("value");
-          var select_id = $(this).attr('id');
-          caf_compare(result[1], selected_value, select_id);
-        });
-    });
-    function caf(result, period_value, select_id){
-      var xhr_caf = $.ajax({
-          headers:{
-            'X-CSRF-Token':csrfToken
-          },
-          method: "GET",
-          dataType: "json",
-          url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'caf']);?>",
-          data: {id_p6 : result, period : period_value},
-          cache: true,
-          beforeSend: function(xhr) {
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          },
-          success: function(response){
-            var chart_value = [];
-            $.each(response, function() {
-              chart_value.push({
-                "date": this.start_date,
-                "column-3": parseFloat(this.cum_ac_lu).toFixed(4), //AC
-                "column-2": parseFloat(this.cum_ev_lu).toFixed(4), //EV
-                "column": parseFloat(this.cum_bl_lu).toFixed(4) //BL
-              });
-            });
-            if (select_id == 'actual-select') {
-              caf_chart(chart_value);
-            } else if (select_id == 'all-select') {
-              caf_chart(chart_value);
-              caf_old_chart(chart_value);
-            }
-            else{
-              caf_old_chart(chart_value);
+          if ($(this).attr('id') == 'actual-select') {
+              new_compare_sel_value = $('#compare-select-new').children(":selected").attr("value");
+              if (new_compare_sel_value != 'actual') {
+                curva_s_compare(result[1], new_compare_sel_value, selected_value, 'new')
+              } else {
+                caf(result[1], selected_value, 'actual-select')
+              }
+          }
+          else {
+            old_compare_sel_value = $('#compare-select-old').children(":selected").attr("value");
+            if (old_compare_sel_value != 'actual') {
+              curva_s_compare(result[1], old_compare_sel_value, selected_value, 'old')
+            } else {
+              caf(result[1], selected_value, 'old-select')
             }
           }
-        });
+       });
+    });
+    function caf(result, period_value, select_id){
         var settings = {
             "async": true,
             "crossDomain": true,
@@ -1973,7 +2111,15 @@
                   "column": parseFloat(this.cum_bl_lu).toFixed(4) //BL
                 });
             });
-            caf_chart(chart_value);
+            if (select_id == 'actual-select') {
+              caf_chart(chart_value);
+            } else if (select_id == 'all-select') {
+              caf_chart(chart_value);
+              caf_old_chart(chart_value);
+            }
+            else{
+              caf_old_chart(chart_value);
+            }
           });
         }
         function advance_chart(planeado, ejecutado){
@@ -2030,7 +2176,7 @@
                   }
               ]
           }
-      );
+       );
     }
     // Curva de avance físico
    function caf_chart(chart_values){
@@ -2226,49 +2372,69 @@
         }
     );
   }
-  promise.then(function (result) {
-      if (result[4] != null) {
-      var settings = {
-          "async": true,
-          "crossDomain": true,
-          "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/curve3g/?p_project_id="+result[1],
-          "method": "GET",
-          "headers": {
-              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+  function actual_tg(project_id, unifier_code, select_compare) {
+      if (unifier_code != null) {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/curve3g/?p_project_id="+project_id,
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
           }
-        }
 
-        $.ajax(settings).done(function (response) {
-          var chart_value = [];
-          $.each(response.items, function() {
-            var date_lenght = parseInt(this.periodo), planned_value_col, planned_value_ln, executed_value_col, executed_value_ln, forecast_col, forecast_ln;
-              if (isNaN(date_lenght)) {
-                   planned_value_col = null,
-                   planned_value_ln = this.acum_bl,
-                   executed_value_col = null,
-                   executed_value_ln = this.acum_ejec,
-                   forecast_ln = this.acum_proy;
-              } else {
-                   planned_value_col = this.acum_bl,
-                   planned_value_ln = null,
-                   executed_value_col = this.acum_ejec,
-                   executed_value_ln = null,
-                   forecast_col = this.acum_proy,
-                   forecast_ln = null;
-              }
-              chart_value.push({
-                "category": this.periodo,
-                "col-plannedAnnual": planned_value_col,
-                "col-executedAnnual": executed_value_col,
-                "col-executed": executed_value_ln,
-                "col-forecast": forecast_ln,
-                "col-planned": planned_value_ln,
-              });
-          });
-          tg_chart(chart_value);
-       });
-     }
-    });
+          $.ajax(settings).done(function (response) {
+            var chart_value = [];
+            $.each(response.items, function() {
+              var date_lenght = parseInt(this.periodo), planned_value_col, planned_value_ln, executed_value_col,
+                  executed_value_ln, forecast_col, forecast_ln;
+                if (isNaN(date_lenght)) {
+                     planned_value_col = null,
+                     planned_value_ln = this.acum_bl,
+                     executed_value_col = null,
+                     executed_value_ln = this.acum_ejec,
+                     forecast_ln = this.acum_proy;
+                } else {
+                     planned_value_col = this.acum_bl,
+                     planned_value_ln = null,
+                     executed_value_col = this.acum_ejec,
+                     executed_value_ln = null,
+                     forecast_col = this.acum_proy,
+                     forecast_ln = null;
+                }
+                chart_value.push({
+                  "category": this.periodo,
+                  "col-plannedAnnual": parseFloat(planned_value_col).toFixed(4),
+                  "col-executedAnnual": parseFloat(executed_value_col).toFixed(4),
+                  "col-executed": parseFloat(executed_value_ln).toFixed(4),
+                  "col-forecast": parseFloat(forecast_ln).toFixed(4),
+                  "col-planned": parseFloat(planned_value_ln).toFixed(4),
+                });
+            });
+            if (chart_value.length > 0) {
+                if (select_compare == 'actual-select') {
+                  tg_chart(chart_value);
+                  $('#tg-div').show();
+                } else if (select_compare == 'all-select') {
+                  tg_chart(chart_value);
+                  tg_chart_old(chart_value);
+                  $('#tg-div').show();
+                  $('#div-tg-old').show();
+                }
+                else{
+                  tg_chart_old(chart_value);
+                  $('#div-tg-old').show();
+                }
+            } else {
+                $('#tg-div').hide();
+                $('#div-tg-old').hide();
+            }
+         });
+       } else {
+         tg_chart_local_db();
+       }
+    }
     function tg_chart(chart_tg_val){
       AmCharts.makeChart("tg",
           {
@@ -2402,335 +2568,475 @@
           }
       );
     }
-    // Curva TG
-    if (<?=$longitudArrayDate?> != 0) {
-      AmCharts.makeChart("tg2",
-          {
-              "type": "serial",
-              "categoryField": "category",
-              "dataDateFormat": "YYYY-MM-DD",
-              "sequencedAnimation": false,
-              "startDuration": 1,
-              "categoryAxis": {
-                  "autoRotateAngle": 90,
-                  "autoRotateCount": 12,
-                  "equalSpacing": true,
-                  "gridPosition": "start",
-                  "minPeriod": "MM",
-                  // "startOnAxis": true,
-                  "axisAlpha": 0,
-                  "fontSize": 10,
-                  "gridAlpha": 0,
-                  "ignoreAxisWidth": true,
-                  "titleBold": false
-              },
-              "chartCursor": {
-                  "enabled": true,
-                  "cursorColor": "#00A34B"
-              },
-              "chartScrollbar": {
-                  "enabled": true,
-                  "color": "#BBBBBB",
-                  "graphType": "line",
-                  "gridCount": 4,
-                  "offset": 60,
-                  "oppositeAxis": false,
-                  "scrollbarHeight": 40
-              },
-              "trendLines": [],
-              "graphs": [
-                  {
-                      "columnWidth": 0.67,
-                      "fillAlphas": 1,
-                      "id": "plannedAnnual",
-                      "lineAlpha": 0,
-                      "lineColor": "#2376BC",
-                      "lineThickness": 0,
-                      "title": "Planeado",
-                      "type": "column",
-                      "valueAxis": "ValueAxis-1",
-                      "valueField": "col-plannedAnnual",
-                      "xAxis": "ValueAxis-1",
-                      "yAxis": "ValueAxis-1"
-                  },
-                  {
-                      "columnWidth": 0.71,
-                      "fillAlphas": 1,
-                      "id": "executedAnnual",
-                      "lineColor": "#FF8000",
-                      "title": "Ejecutado",
-                      "type": "column",
-                      "valueAxis": "ValueAxis-1",
-                      "valueField": "col-executedAnnual",
-                      "xAxis": "ValueAxis-1",
-                      "yAxis": "ValueAxis-1"
-                  },
-                  {
-                      "dashLength": 4,
-                      "id": "forecast",
-                      "lineColor": "#4D91CE",
-                      "lineThickness": 3,
-                      "title": "Forecast",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-forecast"
-                  },
-                  {
-                      "fillColors": "undefined",
-                      "id": "planned",
-                      "lineColor": "#BBBBBB",
-                      "lineThickness": 3,
-                      "title": "Planeado",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-planned"
-                  },
-                  {
-                      "customMarker": "",
-                      "id": "executed",
-                      "lineColor": "#FBB800",
-                      "lineThickness": 3,
-                      "title": "Ejecutado",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-executed",
-                      "xAxis": "ValueAxis-2",
-                      "yAxis": "ValueAxis-2"
-                  }
-              ],
-              "guides": [],
-              "valueAxes": [
-                  {
-                      "id": "ValueAxis-1",
-                      "unit": "USD ",
-                      "unitPosition": "left",
-                      "axisAlpha": 0,
-                      "fontSize": 10,
-                      "gridAlpha": 0.05,
-                      "title": "MILLONES",
-                      "titleBold": false,
-                      "titleFontSize": 10
-                  },
-                  {
-                      "id": "ValueAxis-2",
-                      "position": "right",
-                      "unit": "USD ",
-                      "unitPosition": "left",
-                      "axisAlpha": 0,
-                      "fontSize": 10,
-                      "gridAlpha": 0,
-                      "title": "MILLONES",
-                      "titleBold": false,
-                      "titleFontSize": 10
-                  }
-              ],
-              "allLabels": [],
-              "balloon": {},
-              "legend": {
-                  "enabled": true,
-                  "autoMargins": false,
-                  "marginRight": 0,
-                  "position": "top",
-                  "spacing": 16,
-                  "useGraphSettings": true
-              },
-              "titles": [],
-              "dataProvider": [
-                <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
-                {
-                  <?php if(isset($excelDate)):?>
-                  <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
-                  <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
-                  <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
-                    "category": "<?=$excelDate[$a]?>",
-                  <?php if (strlen($excelDate[$a])<5):?>
-                    "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
-                    "col-executedAnnual": "<?=$excelEjecutadoDec?>",
-                    "col-executed": "null",
-                    "col-forecast": "null",
-                    "col-planned": "null"
-                  <?php elseif (strlen($excelDate[$a])>4):?>
-                    "col-plannedAnnual": "null",
-                    "col-executedAnnual": "null",
-                    <?php if (is_numeric($excelEjecutado[$a])):?>
-                    "col-executed": "<?=$excelEjecutadoDec?>",
-                    <?php else:?>
-                    "col-executed": "null",
-                    <?php endif;?>
-                    <?php if (is_numeric($excelProyectado[$a])):?>
-                    "col-forecast": "<?=$excelProyectadoDec?>",
-                    <?php else:?>
-                    "col-forecast": "null",
-                    <?php endif;?>
-                    "col-planned": "<?=$excelPlaneadoDec?>"
-                  <?php endif;?>
-                  <?php endif;?>
-                },
-                <?php endfor; ?>
-              ]
-          }
-      );
+    function tg_chart_old(chart_tg_val){
       AmCharts.makeChart("tg-old",
           {
-              "type": "serial",
-              "categoryField": "category",
-              "dataDateFormat": "YYYY-MM-DD",
-              "sequencedAnimation": false,
-              "startDuration": 1,
-              "categoryAxis": {
-                  "autoRotateAngle": 90,
-                  "autoRotateCount": 12,
-                  "equalSpacing": true,
-                  "gridPosition": "start",
-                  "minPeriod": "MM",
-                  // "startOnAxis": true,
-                  "axisAlpha": 0,
-                  "fontSize": 10,
-                  "gridAlpha": 0,
-                  "ignoreAxisWidth": true,
-                  "titleBold": false
-              },
-              "chartCursor": {
-                  "enabled": true,
-                  "cursorColor": "#00A34B"
-              },
-              "chartScrollbar": {
-                  "enabled": true,
-                  "color": "#BBBBBB",
-                  "graphType": "line",
-                  "gridCount": 4,
-                  "offset": 60,
-                  "oppositeAxis": false,
-                  "scrollbarHeight": 40
-              },
-              "trendLines": [],
-              "graphs": [
-                  {
-                      "columnWidth": 0.67,
-                      "fillAlphas": 1,
-                      "id": "plannedAnnual",
-                      "lineAlpha": 0,
-                      "lineColor": "#2376BC",
-                      "lineThickness": 0,
-                      "title": "Planeado",
-                      "type": "column",
-                      "valueAxis": "ValueAxis-1",
-                      "valueField": "col-plannedAnnual",
-                      "xAxis": "ValueAxis-1",
-                      "yAxis": "ValueAxis-1"
-                  },
-                  {
-                      "columnWidth": 0.71,
-                      "fillAlphas": 1,
-                      "id": "executedAnnual",
-                      "lineColor": "#FF8000",
-                      "title": "Ejecutado",
-                      "type": "column",
-                      "valueAxis": "ValueAxis-1",
-                      "valueField": "col-executedAnnual",
-                      "xAxis": "ValueAxis-1",
-                      "yAxis": "ValueAxis-1"
-                  },
-                  {
-                      "dashLength": 4,
-                      "id": "forecast",
-                      "lineColor": "#4D91CE",
-                      "lineThickness": 3,
-                      "title": "Forecast",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-forecast"
-                  },
-                  {
-                      "fillColors": "undefined",
-                      "id": "planned",
-                      "lineColor": "#BBBBBB",
-                      "lineThickness": 3,
-                      "title": "Planeado",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-planned"
-                  },
-                  {
-                      "customMarker": "",
-                      "id": "executed",
-                      "lineColor": "#FBB800",
-                      "lineThickness": 3,
-                      "title": "Ejecutado",
-                      "valueAxis": "ValueAxis-2",
-                      "valueField": "col-executed",
-                      "xAxis": "ValueAxis-2",
-                      "yAxis": "ValueAxis-2"
-                  }
-              ],
-              "guides": [],
-              "valueAxes": [
-                  {
-                      "id": "ValueAxis-1",
-                      "unit": "USD ",
-                      "unitPosition": "left",
-                      "axisAlpha": 0,
-                      "fontSize": 10,
-                      "gridAlpha": 0.05,
-                      "title": "MILLONES",
-                      "titleBold": false,
-                      "titleFontSize": 10
-                  },
-                  {
-                      "id": "ValueAxis-2",
-                      "position": "right",
-                      "unit": "USD ",
-                      "unitPosition": "left",
-                      "axisAlpha": 0,
-                      "fontSize": 10,
-                      "gridAlpha": 0,
-                      "title": "MILLONES",
-                      "titleBold": false,
-                      "titleFontSize": 10
-                  }
-              ],
-              "allLabels": [],
-              "balloon": {},
-              "legend": {
-                  "enabled": true,
-                  "autoMargins": false,
-                  "marginRight": 0,
-                  "position": "top",
-                  "spacing": 16,
-                  "useGraphSettings": true
-              },
-              "titles": [],
-              "dataProvider": [
-                <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
+            "type": "serial",
+            "categoryField": "category",
+            "dataDateFormat": "YYYY-MM-DD",
+            "sequencedAnimation": false,
+            "startDuration": 1,
+            "categoryAxis": {
+                "autoRotateAngle": 90,
+                "autoRotateCount": 12,
+                "equalSpacing": true,
+                "gridPosition": "start",
+                "minPeriod": "MM",
+                // "startOnAxis": true,
+                "axisAlpha": 0,
+                "fontSize": 10,
+                "gridAlpha": 0,
+                "ignoreAxisWidth": true,
+                "titleBold": false
+            },
+            "chartCursor": {
+                "enabled": true,
+                "cursorColor": "#00A34B"
+            },
+            "chartScrollbar": {
+                "enabled": true,
+                "color": "#BBBBBB",
+                "graphType": "line",
+                "gridCount": 4,
+                "offset": 60,
+                "oppositeAxis": false,
+                "scrollbarHeight": 40
+            },
+            "trendLines": [],
+            "graphs": [
                 {
-                  <?php if(isset($excelDate)):?>
-                  <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
-                  <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
-                  <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
-                    "category": "<?=$excelDate[$a]?>",
-                  <?php if (strlen($excelDate[$a])<5):?>
-                    "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
-                    "col-executedAnnual": "<?=$excelEjecutadoDec?>",
-                    "col-executed": "null",
-                    "col-forecast": "null",
-                    "col-planned": "null"
-                  <?php elseif (strlen($excelDate[$a])>4):?>
-                    "col-plannedAnnual": "null",
-                    "col-executedAnnual": "null",
-                    <?php if (is_numeric($excelEjecutado[$a])):?>
-                    "col-executed": "<?=$excelEjecutadoDec?>",
-                    <?php else:?>
-                    "col-executed": "null",
-                    <?php endif;?>
-                    <?php if (is_numeric($excelProyectado[$a])):?>
-                    "col-forecast": "<?=$excelProyectadoDec?>",
-                    <?php else:?>
-                    "col-forecast": "null",
-                    <?php endif;?>
-                    "col-planned": "<?=$excelPlaneadoDec?>"
-                  <?php endif;?>
-                  <?php endif;?>
+                    "columnWidth": 0.67,
+                    "fillAlphas": 1,
+                    "id": "plannedAnnual",
+                    "lineAlpha": 0,
+                    "lineColor": "#2376BC",
+                    "lineThickness": 0,
+                    "title": "Planeado",
+                    "type": "column",
+                    "valueAxis": "ValueAxis-1",
+                    "valueField": "col-plannedAnnual",
+                    "xAxis": "ValueAxis-1",
+                    "yAxis": "ValueAxis-1"
                 },
-                <?php endfor; ?>
-              ]
+                {
+                    "columnWidth": 0.71,
+                    "fillAlphas": 1,
+                    "id": "executedAnnual",
+                    "lineColor": "#FF8000",
+                    "title": "Ejecutado",
+                    "type": "column",
+                    "valueAxis": "ValueAxis-1",
+                    "valueField": "col-executedAnnual",
+                    "xAxis": "ValueAxis-1",
+                    "yAxis": "ValueAxis-1"
+                },
+                {
+                    "dashLength": 4,
+                    "id": "forecast",
+                    "lineColor": "#4D91CE",
+                    "lineThickness": 3,
+                    "title": "Forecast",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-forecast"
+                },
+                {
+                    "fillColors": "undefined",
+                    "id": "planned",
+                    "lineColor": "#BBBBBB",
+                    "lineThickness": 3,
+                    "title": "Planeado",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-planned"
+                },
+                {
+                    "customMarker": "",
+                    "id": "executed",
+                    "lineColor": "#FBB800",
+                    "lineThickness": 3,
+                    "title": "Ejecutado",
+                    "valueAxis": "ValueAxis-2",
+                    "valueField": "col-executed",
+                    "xAxis": "ValueAxis-2",
+                    "yAxis": "ValueAxis-2"
+                }
+            ],
+            "guides": [],
+            "valueAxes": [
+                {
+                    "id": "ValueAxis-1",
+                    "unit": "USD ",
+                    "unitPosition": "left",
+                    "axisAlpha": 0,
+                    "fontSize": 10,
+                    "gridAlpha": 0.05,
+                    "title": "MILLONES",
+                    "titleBold": false,
+                    "titleFontSize": 10
+                },
+                {
+                    "id": "ValueAxis-2",
+                    "position": "right",
+                    "unit": "USD ",
+                    "unitPosition": "left",
+                    "axisAlpha": 0,
+                    "fontSize": 10,
+                    "gridAlpha": 0,
+                    "title": "MILLONES",
+                    "titleBold": false,
+                    "titleFontSize": 10
+                }
+            ],
+            "allLabels": [],
+            "balloon": {},
+            "legend": {
+                "enabled": true,
+                "autoMargins": false,
+                "marginRight": 0,
+                "position": "top",
+                "spacing": 16,
+                "useGraphSettings": true
+            },
+            "titles": [],
+            "dataProvider": chart_tg_val,
           }
       );
     }
+    function tg_chart_local_db(){
+      if ("<?=$longitudArrayDate?>" != 0) {
+        $('#tg-div').show();
+        AmCharts.makeChart("tg",
+            {
+                "type": "serial",
+                "categoryField": "category",
+                "dataDateFormat": "YYYY-MM-DD",
+                "sequencedAnimation": false,
+                "startDuration": 1,
+                "categoryAxis": {
+                    "autoRotateAngle": 90,
+                    "autoRotateCount": 12,
+                    "equalSpacing": true,
+                    "gridPosition": "start",
+                    "minPeriod": "MM",
+                    // "startOnAxis": true,
+                    "axisAlpha": 0,
+                    "fontSize": 10,
+                    "gridAlpha": 0,
+                    "ignoreAxisWidth": true,
+                    "titleBold": false
+                },
+                "chartCursor": {
+                    "enabled": true,
+                    "cursorColor": "#00A34B"
+                },
+                "chartScrollbar": {
+                    "enabled": true,
+                    "color": "#BBBBBB",
+                    "graphType": "line",
+                    "gridCount": 4,
+                    "offset": 60,
+                    "oppositeAxis": false,
+                    "scrollbarHeight": 40
+                },
+                "trendLines": [],
+                "graphs": [
+                    {
+                        "columnWidth": 0.67,
+                        "fillAlphas": 1,
+                        "id": "plannedAnnual",
+                        "lineAlpha": 0,
+                        "lineColor": "#2376BC",
+                        "lineThickness": 0,
+                        "title": "Planeado",
+                        "type": "column",
+                        "valueAxis": "ValueAxis-1",
+                        "valueField": "col-plannedAnnual",
+                        "xAxis": "ValueAxis-1",
+                        "yAxis": "ValueAxis-1"
+                    },
+                    {
+                        "columnWidth": 0.71,
+                        "fillAlphas": 1,
+                        "id": "executedAnnual",
+                        "lineColor": "#FF8000",
+                        "title": "Ejecutado",
+                        "type": "column",
+                        "valueAxis": "ValueAxis-1",
+                        "valueField": "col-executedAnnual",
+                        "xAxis": "ValueAxis-1",
+                        "yAxis": "ValueAxis-1"
+                    },
+                    {
+                        "dashLength": 4,
+                        "id": "forecast",
+                        "lineColor": "#4D91CE",
+                        "lineThickness": 3,
+                        "title": "Forecast",
+                        "valueAxis": "ValueAxis-2",
+                        "valueField": "col-forecast"
+                    },
+                    {
+                        "fillColors": "undefined",
+                        "id": "planned",
+                        "lineColor": "#BBBBBB",
+                        "lineThickness": 3,
+                        "title": "Planeado",
+                        "valueAxis": "ValueAxis-2",
+                        "valueField": "col-planned"
+                    },
+                    {
+                        "customMarker": "",
+                        "id": "executed",
+                        "lineColor": "#FBB800",
+                        "lineThickness": 3,
+                        "title": "Ejecutado",
+                        "valueAxis": "ValueAxis-2",
+                        "valueField": "col-executed",
+                        "xAxis": "ValueAxis-2",
+                        "yAxis": "ValueAxis-2"
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [
+                    {
+                        "id": "ValueAxis-1",
+                        "unit": "USD ",
+                        "unitPosition": "left",
+                        "axisAlpha": 0,
+                        "fontSize": 10,
+                        "gridAlpha": 0.05,
+                        "title": "MILLONES",
+                        "titleBold": false,
+                        "titleFontSize": 10
+                    },
+                    {
+                        "id": "ValueAxis-2",
+                        "position": "right",
+                        "unit": "USD ",
+                        "unitPosition": "left",
+                        "axisAlpha": 0,
+                        "fontSize": 10,
+                        "gridAlpha": 0,
+                        "title": "MILLONES",
+                        "titleBold": false,
+                        "titleFontSize": 10
+                    }
+                ],
+                "allLabels": [],
+                "balloon": {},
+                "legend": {
+                    "enabled": true,
+                    "autoMargins": false,
+                    "marginRight": 0,
+                    "position": "top",
+                    "spacing": 16,
+                    "useGraphSettings": true
+                },
+                "titles": [],
+                "dataProvider": [
+                  <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
+                  {
+                    <?php if(isset($excelDate)):?>
+                    <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
+                    <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
+                    <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
+                      "category": "<?=$excelDate[$a]?>",
+                    <?php if (strlen($excelDate[$a])<5):?>
+                      "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
+                      "col-executedAnnual": "<?=$excelEjecutadoDec?>",
+                      "col-executed": "null",
+                      "col-forecast": "null",
+                      "col-planned": "null"
+                    <?php elseif (strlen($excelDate[$a])>4):?>
+                      "col-plannedAnnual": "null",
+                      "col-executedAnnual": "null",
+                      <?php if (is_numeric($excelEjecutado[$a])):?>
+                      "col-executed": "<?=$excelEjecutadoDec?>",
+                      <?php else:?>
+                      "col-executed": "null",
+                      <?php endif;?>
+                      <?php if (is_numeric($excelProyectado[$a])):?>
+                      "col-forecast": "<?=$excelProyectadoDec?>",
+                      <?php else:?>
+                      "col-forecast": "null",
+                      <?php endif;?>
+                      "col-planned": "<?=$excelPlaneadoDec?>"
+                    <?php endif;?>
+                    <?php endif;?>
+                  },
+                  <?php endfor; ?>
+                ]
+            }
+        );
+      } else {
+        $('#tg-div').hide();
+      }
+    }
+    // Curva TG
+
+    //   AmCharts.makeChart("tg-old",
+    //       {
+    //           "type": "serial",
+    //           "categoryField": "category",
+    //           "dataDateFormat": "YYYY-MM-DD",
+    //           "sequencedAnimation": false,
+    //           "startDuration": 1,
+    //           "categoryAxis": {
+    //               "autoRotateAngle": 90,
+    //               "autoRotateCount": 12,
+    //               "equalSpacing": true,
+    //               "gridPosition": "start",
+    //               "minPeriod": "MM",
+    //               // "startOnAxis": true,
+    //               "axisAlpha": 0,
+    //               "fontSize": 10,
+    //               "gridAlpha": 0,
+    //               "ignoreAxisWidth": true,
+    //               "titleBold": false
+    //           },
+    //           "chartCursor": {
+    //               "enabled": true,
+    //               "cursorColor": "#00A34B"
+    //           },
+    //           "chartScrollbar": {
+    //               "enabled": true,
+    //               "color": "#BBBBBB",
+    //               "graphType": "line",
+    //               "gridCount": 4,
+    //               "offset": 60,
+    //               "oppositeAxis": false,
+    //               "scrollbarHeight": 40
+    //           },
+    //           "trendLines": [],
+    //           "graphs": [
+    //               {
+    //                   "columnWidth": 0.67,
+    //                   "fillAlphas": 1,
+    //                   "id": "plannedAnnual",
+    //                   "lineAlpha": 0,
+    //                   "lineColor": "#2376BC",
+    //                   "lineThickness": 0,
+    //                   "title": "Planeado",
+    //                   "type": "column",
+    //                   "valueAxis": "ValueAxis-1",
+    //                   "valueField": "col-plannedAnnual",
+    //                   "xAxis": "ValueAxis-1",
+    //                   "yAxis": "ValueAxis-1"
+    //               },
+    //               {
+    //                   "columnWidth": 0.71,
+    //                   "fillAlphas": 1,
+    //                   "id": "executedAnnual",
+    //                   "lineColor": "#FF8000",
+    //                   "title": "Ejecutado",
+    //                   "type": "column",
+    //                   "valueAxis": "ValueAxis-1",
+    //                   "valueField": "col-executedAnnual",
+    //                   "xAxis": "ValueAxis-1",
+    //                   "yAxis": "ValueAxis-1"
+    //               },
+    //               {
+    //                   "dashLength": 4,
+    //                   "id": "forecast",
+    //                   "lineColor": "#4D91CE",
+    //                   "lineThickness": 3,
+    //                   "title": "Forecast",
+    //                   "valueAxis": "ValueAxis-2",
+    //                   "valueField": "col-forecast"
+    //               },
+    //               {
+    //                   "fillColors": "undefined",
+    //                   "id": "planned",
+    //                   "lineColor": "#BBBBBB",
+    //                   "lineThickness": 3,
+    //                   "title": "Planeado",
+    //                   "valueAxis": "ValueAxis-2",
+    //                   "valueField": "col-planned"
+    //               },
+    //               {
+    //                   "customMarker": "",
+    //                   "id": "executed",
+    //                   "lineColor": "#FBB800",
+    //                   "lineThickness": 3,
+    //                   "title": "Ejecutado",
+    //                   "valueAxis": "ValueAxis-2",
+    //                   "valueField": "col-executed",
+    //                   "xAxis": "ValueAxis-2",
+    //                   "yAxis": "ValueAxis-2"
+    //               }
+    //           ],
+    //           "guides": [],
+    //           "valueAxes": [
+    //               {
+    //                   "id": "ValueAxis-1",
+    //                   "unit": "USD ",
+    //                   "unitPosition": "left",
+    //                   "axisAlpha": 0,
+    //                   "fontSize": 10,
+    //                   "gridAlpha": 0.05,
+    //                   "title": "MILLONES",
+    //                   "titleBold": false,
+    //                   "titleFontSize": 10
+    //               },
+    //               {
+    //                   "id": "ValueAxis-2",
+    //                   "position": "right",
+    //                   "unit": "USD ",
+    //                   "unitPosition": "left",
+    //                   "axisAlpha": 0,
+    //                   "fontSize": 10,
+    //                   "gridAlpha": 0,
+    //                   "title": "MILLONES",
+    //                   "titleBold": false,
+    //                   "titleFontSize": 10
+    //               }
+    //           ],
+    //           "allLabels": [],
+    //           "balloon": {},
+    //           "legend": {
+    //               "enabled": true,
+    //               "autoMargins": false,
+    //               "marginRight": 0,
+    //               "position": "top",
+    //               "spacing": 16,
+    //               "useGraphSettings": true
+    //           },
+    //           "titles": [],
+    //           "dataProvider": [
+    //             <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
+    //             {
+    //               <?php if(isset($excelDate)):?>
+    //               <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
+    //               <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
+    //               <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
+    //                 "category": "<?=$excelDate[$a]?>",
+    //               <?php if (strlen($excelDate[$a])<5):?>
+    //                 "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
+    //                 "col-executedAnnual": "<?=$excelEjecutadoDec?>",
+    //                 "col-executed": "null",
+    //                 "col-forecast": "null",
+    //                 "col-planned": "null"
+    //               <?php elseif (strlen($excelDate[$a])>4):?>
+    //                 "col-plannedAnnual": "null",
+    //                 "col-executedAnnual": "null",
+    //                 <?php if (is_numeric($excelEjecutado[$a])):?>
+    //                 "col-executed": "<?=$excelEjecutadoDec?>",
+    //                 <?php else:?>
+    //                 "col-executed": "null",
+    //                 <?php endif;?>
+    //                 <?php if (is_numeric($excelProyectado[$a])):?>
+    //                 "col-forecast": "<?=$excelProyectadoDec?>",
+    //                 <?php else:?>
+    //                 "col-forecast": "null",
+    //                 <?php endif;?>
+    //                 "col-planned": "<?=$excelPlaneadoDec?>"
+    //               <?php endif;?>
+    //               <?php endif;?>
+    //             },
+    //             <?php endfor; ?>
+    //           ]
+    //       }
+    //   );
+    // }
     $(document).ready(function(){
     var clean_rks = $('#clean-rks-filters'),e = $(".li-risks.info-actual"), estado_act = $('#estado_new'), materializado_act = $('#materializado_new'), estado_act = $('#estado_act'), materializado_act = $('#materializado_act') ,select_actual = $('.actual-rks-filter'), select_input = $('.form-select-actual input');
     select_actual.change(function() {
@@ -2906,7 +3212,7 @@
         });
       }
       // HITOS ACTUAL
-      function hitos_actual(id_project, actual_option){
+      function hitos_actual(id_project){
         var settings = {
           "async": true,
           "crossDomain": true,
@@ -2988,4 +3294,110 @@
           });
         });
       }
+      // Curva S Compare
+      function curva_s_compare(id_project, selected_date, period_type, chart_side){
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://primavera.eeb.com.co:8080/ords/portal/captures/graph/?p_project_id="+id_project+"&p_period_type="+period_type+"&p_capture_id="+selected_date,
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+            "cache-control": "no-cache"
+          }
+        }
+        $.ajax(settings).done(function (response) {
+          var chart_value = [];
+          $.each(response.items, function() {
+              chart_value.push({
+                "date": this.start_date,
+                "column-3": parseFloat(this.cum_ac_lu).toFixed(4), //AC
+                "column-2": parseFloat(this.cum_ev_lu).toFixed(4), //EV
+                "column": parseFloat(this.cum_bl_lu).toFixed(4) //BL
+              });
+          });
+          if (chart_side.length > 0) {
+            if (chart_side == 'new') {
+              caf_chart(chart_value);
+            }
+            else{
+              caf_old_chart(chart_value);
+            }
+          }
+        });
+      }
+      // Function que se encarga de los históricos de curva 3g
+      function compare_tg (id_project, capture_id, chart_side, unifier_code) {
+          if (unifier_code != null) {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://192.168.0.210:8080/ords/portal/captures/curve3g/?p_project_id="+id_project+"&p_id_capture="+capture_id,
+                "method": "GET",
+                "headers": {
+                    "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+                }
+              }
+
+              $.ajax(settings).done(function (response) {
+                var chart_value = [];
+                $.each(response.items, function() {
+                  var date_lenght = parseInt(this.periodo), planned_value_col, planned_value_ln, executed_value_col,
+                      executed_value_ln, forecast_col, forecast_ln;
+                    if (isNaN(date_lenght)) {
+                         planned_value_col = null,
+                         planned_value_ln = this.acum_bl,
+                         executed_value_col = null,
+                         executed_value_ln = this.acum_ejec,
+                         forecast_ln = this.acum_proy;
+                    } else {
+                         planned_value_col = this.acum_bl,
+                         planned_value_ln = null,
+                         executed_value_col = this.acum_ejec,
+                         executed_value_ln = null,
+                         forecast_col = this.acum_proy,
+                         forecast_ln = null;
+                    }
+                    chart_value.push({
+                      "category": this.periodo,
+                      "col-plannedAnnual": parseFloat(planned_value_col).toFixed(4),
+                      "col-executedAnnual": parseFloat(executed_value_col).toFixed(4),
+                      "col-executed": parseFloat(executed_value_ln).toFixed(4),
+                      "col-forecast": parseFloat(forecast_ln).toFixed(4),
+                      "col-planned": parseFloat(planned_value_ln).toFixed(4),
+                    });
+                });
+                if (chart_side == 'new') {
+                  if (chart_value.length > 0) {
+                    $('#tg-div').show();
+                    tg_chart(chart_value);
+                  }
+                  else
+                  {
+                    $('#tg-div').hide();
+                  }
+                }
+                if (chart_side == 'old') {
+                  if (chart_value.length > 0) {
+                    $('#div-tg-old').show();
+                    tg_chart_old(chart_value);
+                  }
+                  else
+                  {
+                    $('#div-tg-old').hide();
+                  }
+                }
+              });
+            }
+          }
+          $( document ).ready(function() {
+            var isMobile = window.matchMedia("(max-width: 760px)").matches;
+
+            if (isMobile) {
+              //Conditional script here
+              $('#btn-compare').hide();
+            } else {
+              $('#btn-compare').show();
+            }
+          });
 </script>

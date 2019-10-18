@@ -289,7 +289,7 @@ class ProjectsController extends AppController
       // DONA CHART TEMPORAL
       // $this->Donut($project_id_decode);
       $this->ProjectWbs($project_id_decode);
-      $this->ProjectHitos($project_id_decode);
+      // $this->ProjectHitos($project_id_decode);
       $this->loadModel('Projects');
         $local_id_project = $this->Projects->find(
               'all',
@@ -299,50 +299,6 @@ class ProjectsController extends AppController
           $this->Risks($local_db->id);
           $this->importExcelfile($proj_id_decode, $local_db->CHART);
         }
-        // $this->ChartS($project_id_decode);
-        //
-        // $this->ProjectsFase();
-        // $this->ProjectProfile($graph);
-
-        // $this->index();
-        // $this->IndicatorColor();
-        // $this->RomanNumbers();
-        // $decoded_Name = base64_decode(urldecode($name)); // Nombre del proyecto.
-        // $decoded_NameEpsPrjs = base64_decode(urldecode($NameEps)); // Nombre de la EPS
-        // $decoded_titlePrjs = base64_decode(urldecode($title)); //Nombre de la EPS mandante
-        // $decoded_EpsPrjs = base64_decode(urldecode($ActualEps)); // Código de la EPS actual
-        // $decoded_Ctg1Prjs = base64_decode(urldecode($Categoria1)); //Código de la categoría 1
-        // $decoded_Ctg2Prjs = base64_decode(urldecode($Categoria2)); //Código de la categoría 2
-        // $decoded_IdEpsParent = base64_decode(urldecode($idEpsParent)); //Id de la EPS parent del proyecto seleccionado.
-        // $this->pdf($decoded_Name);
-        // // Envía las variables a la vista de Projects.ctp.
-        // $this->set('idEpsParent', $decoded_IdEpsParent);
-        // $this->set('NameEpsPrjs', $decoded_NameEpsPrjs);
-        // $this->set('titlePrjs', $decoded_titlePrjs);
-        // //Id del usuario loggeado.
-        // $decoded_current_user_pr = base64_decode(urldecode($current_user_pr));
-        // $this->set('current_user_pr', $decoded_current_user_pr);
-        // $this->set('ActualEps', $decoded_EpsPrjs);
-        // $this->set('Categoria1', $decoded_Ctg1Prjs);
-        // $this->Risks($id);
-        // $this->IndicatorsAC();
-        // $this->IndicatorsAC2();
-        // $this->IndicatorsAC3();
-        // // Variable que obtiene todos los registros de un proyecto registrado en la base de datos interna.
-        // $projects = $this->Projects->get($id);
-        // $this->importExcelfile($projects->ID_PROJECT,$projects->CHART);
-        // $this->set('current_user_pr', $current_user_pr);
-        // $this->set('projects', $projects);
-        // $this->set('name', $decoded_Name);
-        // $this->set('code', $code);
-        // $this->set('spi', $spi);
-        // $this->set('corte', $corte);
-        // $this->set('graph', $graph);
-        // $this->set('da', $da);
-        // $this->set('pi', $pi);
-        // $this->set('od', $od);
-        // setlocale(LC_ALL, "es_ES");
-        // $this->set('fepo', strftime("%d %B, %Y", strtotime($fepo)));
     }
     public function ImportExcelCaf()
     {

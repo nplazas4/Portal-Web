@@ -229,7 +229,7 @@
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle">
+                            <div class="data-box-circle" id="div-spi-new">
                                 <h4 id="spi-new"></h4>
                             </div>
                             <div class="data-box-content">
@@ -237,7 +237,7 @@
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle error">
+                            <div class="data-box-circle" id="div-cpi-new">
                                 <h5 id="cpi-new"></h5>
                             </div>
                             <div class="data-box-content">
@@ -368,7 +368,7 @@
         array_lenght = response.length;
         $.each(response, function(i) {
           var iteration_num = i + 1;
-          $('#main-div').append($('<div>', {class : 'Search list d-flex col s12 m6 l4 xl3', id : this.project_id_p6})).hide().fadeIn(200);
+          $('#main-div').append($('<div>', {class : 'Search list d-flex col s12 m6 l4 xl3', id : this.project_id_p6}));
           var project_div = $('#'+this.project_id_p6);
           project_div.attr({'data-fase' : this.code_fase, 'data-category' : this.code_category, 'data-mec' : this.code_pec, 'data-area' : this.code_area});
           project_div.append($('<div>', {class : 'sheet pointer', id: 'sheet-pointer-'+iteration_num}));
@@ -397,27 +397,27 @@
           if (this.code_fase == '209') {
             $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'I', class : 'phase-text'})); //FASE DATA
             $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Estructuración'})); //FASE NAME
+            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Estructuración', class : 'span-text'})); //FASE NAME
           } else if (this.code_fase == '210') {
             $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'II', class : 'phase-text'})); //FASE DATA
             $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Selección'})); //FASE NAME
+            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Selección', class : 'span-text'})); //FASE NAME
           }else if (this.code_fase == '211') {
             $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'III', class : 'phase-text'})); //FASE DATA
             $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Planeación'})); //FASE NAME
+            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Planeación', class : 'span-text'})); //FASE NAME
           }else if (this.code_fase == '212') {
             $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'IV', class : 'phase-text'})); //FASE DATA
             $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Ejecución'})); //FASE NAME
+            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Ejecución', class : 'span-text'})); //FASE NAME
           }else if (this.code_fase == '420') {
             $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'V', class : 'phase-text'})); //FASE DATA
             $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cierre y transferencia'})); //FASE NAME
+            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cierre y transferencia', class : 'span-text'})); //FASE NAME
           }else if (this.code_fase == '1910') {
             $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'C', class : 'phase-text'})); //FASE DATA
             $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cerrado'})); //FASE NAME
+            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cerrado', class : 'span-text'})); //FASE NAME
           }
           // SPI
           $('#data-box-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-spi-'+iteration_num}));
@@ -454,66 +454,103 @@
           $('#data-ejecutado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Ejecutado (USD)'})); // Presupuesto Title value
           $('#data-ejecutado-'+iteration_num).append($('<h4>', {class : 'presupuesto-ejec', id : 'pres-id-'+iteration_num})); // Presupuesto Planeado value
           // Function que se encarga de llamar los proyectos de la bd local correspondientes a cada proyecto del ws
-          if (this.code_unifier != null) {
-              console.log(this.name);
-          } else {
-              local_db_projects(this.id_p_project, iteration_num);
-          }
+          // if (this.code_unifier != null) {
+            Unifier_information(this.project_id_p6, iteration_num);
+          // }
         });
-        resolve();
+          resolve();
+        });
       });
-    });
-      function local_db_projects(id_p_project, iteration_num){
-        xhr2 = $.ajax({
-        headers:{
-          'X-CSRF-Token':csrfToken
-        },
-        method: "GET",
-        dataType: "json",
-        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local']);?>",
-        data: {project_id : id_p_project},
-        cache: true,
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        },
-        success: function(response){
-          var spi = $('#spi-id-'+iteration_num), cpi_anual = $('#cpi-id-'+iteration_num), cpi_total = $('#cpi-id-total-'+iteration_num),
-              igr = $('#igr-value-'+iteration_num);
-          var cpi_anual_val, cpi_total_val, igr_val;
-          $.each(response, function() {
-              if (this.CPI_ANUAL != null) {
-                cpi_anual_val = parseFloat(this.CPI_ANUAL.toFixed(2));
-                cpi_anual.text(cpi_anual_val.toFixed(2));
-              } else {
-                cpi_anual_val = null;
-              }
-              if (this.AC_PPTO != null) {
-                cpi_total_val = parseFloat(this.AC_PPTO);
-                cpi_total.text(cpi_total_val);
-              } else {
-                cpi_total_val = null;
-              }
-              if (this.IGR != null) {
-                igr_val = parseFloat(this.IGR).toFixed(1);
-                igr.text(igr_val+'%');
-              } else {
-                igr_val = null;
-              }
-              if (this.CAPEX_PLANNED != null) {
-                $('#plan-id-'+iteration_num).text(parseFloat(this.CAPEX_PLANNED).toFixed(2)+' MM');
-              }
-              if (this.AC != null) {
-                $('#pres-id-'+iteration_num).text(parseFloat(this.AC).toFixed(2)+' MM');
-              }
-              $('#regional-div-'+iteration_num).addClass('text-'+this.REGIONAL);
-              global_indicators(iteration_num, this.PRES_PROJ, this.PROJ_AC, this.CAPEX_EXECUTED);
-              project_colors(spi, cpi_anual_val, cpi_total_val, igr_val, iteration_num);
-          });
+      function Unifier_information(id_p_project, iteration_num){
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+id_p_project,
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
         }
-      });
-    }
+      }
+
+      $.ajax(settings).done(function (response) {
+          $.each(response.items, function() {
+            var spi = $('#spi-id-'+iteration_num), cpi_anual = $('#cpi-id-'+iteration_num), cpi_total = $('#cpi-id-total-'+iteration_num),
+              igr = $('#igr-value-'+iteration_num);
+            var cpi_anual_val, cpi_total_val, igr_val;
+            if (this.cpiusd_2019 != null) {
+              cpi_anual_val = parseFloat(this.cpiusd_2019.toFixed(2));
+              cpi_anual.text(cpi_anual_val.toFixed(2));
+            }
+            else {
+              cpi_anual_val = null;
+            }
+            if (this.cpiusd_total != null) {
+              cpi_total_val = parseFloat(this.cpiusd_total);
+              cpi_total.text(cpi_total_val.toFixed(2));
+            } else {
+              cpi_total_val = null;
+            }
+            if (this.planeadousd_total != null) {
+              $('#plan-id-'+iteration_num).text(parseFloat(this.planeadousd_total).toFixed(2)+' MM');
+            }
+            if (this.presupuestousd_total != null) {
+              $('#pres-id-'+iteration_num).text(parseFloat(this.presupuestousd_total).toFixed(2)+' MM');
+            }
+            global_indicators(iteration_num, this.presupuestousd_2019, this.ejecutadusd_2019, this.ejecutadousd_total, this.presupuestousd_total);
+            // global_indicators(iteration_num, this.PRES_PROJ, this.PROJ_AC, this.CAPEX_EXECUTED);
+          });
+        });
+      }
+      //   xhr2 = $.ajax({
+      //   headers:{
+      //     'X-CSRF-Token':csrfToken
+      //   },
+      //   method: "GET",
+      //   dataType: "json",
+      //   url: "</?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local']);?>",
+      //   data: {project_id : id_p_project},
+      //   cache: true,
+      //   beforeSend: function(xhr) {
+      //     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      //   },
+      //   success: function(response){
+      //     var spi = $('#spi-id-'+iteration_num), cpi_anual = $('#cpi-id-'+iteration_num), cpi_total = $('#cpi-id-total-'+iteration_num),
+      //         igr = $('#igr-value-'+iteration_num);
+      //     var cpi_anual_val, cpi_total_val, igr_val;
+      //     $.each(response, function() {
+      //         if (this.CPI_ANUAL != null) {
+      //           cpi_anual_val = parseFloat(this.CPI_ANUAL.toFixed(2));
+      //           cpi_anual.text(cpi_anual_val.toFixed(2));
+      //         } else {
+      //           cpi_anual_val = null;
+      //         }
+      //         if (this.AC_PPTO != null) {
+      //           cpi_total_val = parseFloat(this.AC_PPTO);
+      //           cpi_total.text(cpi_total_val);
+      //         } else {
+      //           cpi_total_val = null;
+      //         }
+      //         if (this.IGR != null) {
+      //           igr_val = parseFloat(this.IGR).toFixed(1);
+      //           igr.text(igr_val+'%');
+      //         } else {
+      //           igr_val = null;
+      //         }
+      //         if (this.CAPEX_PLANNED != null) {
+      //           $('#plan-id-'+iteration_num).text(parseFloat(this.CAPEX_PLANNED).toFixed(2)+' MM');
+      //         }
+      //         if (this.AC != null) {
+      //           $('#pres-id-'+iteration_num).text(parseFloat(this.AC).toFixed(2)+' MM');
+      //         }
+      //         $('#regional-div-'+iteration_num).addClass('text-'+this.REGIONAL);
+      //         global_indicators(iteration_num, this.PRES_PROJ, this.PROJ_AC, this.CAPEX_EXECUTED);
+      //         project_colors(spi, cpi_anual_val, cpi_total_val, igr_val, iteration_num);
+      //     });
+      //   }
+      // });
+    // }
     var promise1;
-    function global_indicators(iteration_num, pres_anual, ejec_anual, total_ejec){
+    function global_indicators(iteration_num, pres_anual, ejec_anual, total_ejec, total_pres){
     var promise1 = new Promise(function(resolve, reject) {
       total_spi += parseFloat($('#spi-id-'+iteration_num).text() / array_lenght);
       $('#spi-indicator').text(total_spi.toFixed(2));
@@ -521,9 +558,9 @@
       total_cpi += parseFloat($('#cpi-id-total-'+iteration_num).text() / array_lenght);
       $('#cpi-indicator').text(total_cpi.toFixed(2));
 
-      total_pres = $('#plan-id-'+iteration_num).text();
-      if (total_pres != '') {
-        total_pres_total += parseFloat($('#plan-id-'+iteration_num).text());
+      // total_pres = $('#plan-id-'+iteration_num).text();
+      if (total_pres != null) {
+        total_pres_total += parseFloat(total_pres);
         $('#pres-total-indicator').text('$ '+total_pres_total.toFixed(2)+' MM');
       }
 
@@ -591,12 +628,14 @@
       select.formSelect();
       $('#compare-title').text($('#'+parent_id+' h2').text());
       $('#fase-new').text($('#'+parent_id+' .phase-text').text());
+      $('#fase-title-new').text($('#'+parent_id+' .span-text').text());
       $('#spi-new').text($('#'+parent_id+' .spi-value').text());
       $('#cpi-new').text($('#'+parent_id+' .cpi-anual-data').text());
       $('#cpi-total-new').text($('#'+parent_id+' .cpi-total-data').text());
       $('#igr-new').text($('#'+parent_id+' .igr_data').text());
       $('#pres-plan-new').text($('#'+parent_id+' .presupuesto-plan').text());
       $('#pres-ejec-new').text($('#'+parent_id+' .presupuesto-ejec').text());
+      ws_colors_new([$('#'+parent_id+' .spi-value').text(), $('#'+parent_id+' .cpi-anual-data').text()]);
     }
 
     function old_compare(){
@@ -605,14 +644,38 @@
       select.prop('selectedIndex', 0); //Sets the first option as selected
       select.formSelect();
       $('#fase-old').text($('#'+parent_id+' .phase-text').text());
+      $('#fase-title-old').text($('#'+parent_id+' .span-text').text());
       $('#spi-old').text($('#'+parent_id+' .spi-value').text());
       $('#cpi-old').text($('#'+parent_id+' .cpi-anual-data').text());
       $('#cpi-total-old').text($('#'+parent_id+' .cpi-total-data').text());
       $('#igr-old').text($('#'+parent_id+' .igr_data').text());
       $('#pres-plan-old').text($('#'+parent_id+' .presupuesto-plan').text());
       $('#pres-ejec-old').text($('#'+parent_id+' .presupuesto-ejec').text());
+      // ws_colors_new();
+      // console.log(parent_id);
     }
 
+    function ws_colors_new(indicators_col_val){
+      var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+          "method": "GET",
+          "headers": {
+              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+          }
+        }
+        $.ajax(settings).done(function (response) {
+          $.each(response.items, function() {
+            if (indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'SPI') {
+                $('#div-spi-new').css({'background-color' : this.hexa_color});
+            }
+            if (indicators_col_val[1] > this.minimun && indicators_col_val[1] <= this.maximo && this.indicator_name == 'CPI') {
+                $('#div-cpi-new').css({'background-color' : this.hexa_color});
+            }
+          });
+        });
+      }
     // Petición ajax para llenar los dropdown select
     xhr3 = $.ajax({
       headers:{
@@ -647,7 +710,6 @@
 
     // new
     function option_compare_new_dates(selected_date_new, id_project){
-      console.log(id_project);
       xhr4 = $.ajax({
       headers:{
         'X-CSRF-Token':csrfToken
@@ -772,25 +834,27 @@
 
     function indicators_colors(spi_finish_value, cpi_finish_value)
     {
-      xhr5 = $.ajax({
-        headers:{
-          'X-CSRF-Token':csrfToken
-        },
-        method: "GET",
-        dataType: "json",
-        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'indicator_color1']);?>",
-        data: {'spi_global' : spi_finish_value, 'cpi_global' : cpi_finish_value},
-        cache: true,
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        },
-        success: function(response){
-          $.each(response, function() {
-            $('#div-spi-indicator').css({'background-color' : this.spi_color_global});
-            $('#div-cpi-indicator').css({'background-color' : this.cpi_color_global});
-          });
+      var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+            "method": "GET",
+            "headers": {
+              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
         }
-      });
+
+        $.ajax(settings).done(function (response) {
+          $.each(response.items, function() {
+            if (spi_finish_value > this.minimun && spi_finish_value <= this.maximo && this.indicator_name == 'SPI') {
+                $('#div-spi-indicator').css({'background-color' : this.hexa_color});
+            }
+            // CPI TOTAL & ANUAL
+            if (cpi_finish_value > this.minimun && cpi_finish_value <= this.maximo && this.indicator_name == 'CPI') {
+                $('#div-cpi-indicator').css({'background-color' : this.hexa_color});
+            }
+          });
+        });
     }
     function project_colors(spi, cpi, cpi_total, igr, iteration_num)
     {

@@ -32,7 +32,11 @@
   })
   .done(function(response){
     $.each(response, function() {
-      if (this.eps_id == 23307) {
+      if (this.eps_id == 23305) {
+        // Append enlaces navbar eps
+        $('.a-corp').attr('href', '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this)))));
+      }
+      else if (this.eps_id == 23307) {
         // Append enlaces navbar eps
         $('.ul-dist').append([
           $('<li>',{class : 'option-navbar', style : 'display : flex !important'}).append([

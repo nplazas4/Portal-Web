@@ -142,7 +142,7 @@
                                 <div class="sub-menu-content">
                                     <h2>Grupos estratégicos de negocios</h2>
                                      <div class="sub-menu-column">
-                                        <h3 id="h3-corp">Corporativo</h3>
+                                        <h3 id="h3-corp"><a class="a-corp no-hover" style="background-color: #fff;" id="nav-a-corp">Corporativo</a></h3>
                                     </div>
                                     <div class="sub-menu-column">
                                         <h3 id="h3-dist">Distribución</h3>
@@ -305,7 +305,7 @@
                   <div class='submenu'>
                     <h2>Grupos estratégicos de negocio</h2>
                       <div class="submenu-row">
-                        <h3>Corporativo</h3>
+                        <h3><a class="a-corp no-hover" style="background-color: #fff;" id="nav-a-corp">Corporativo</a></h3>
                         <h3>Distribución</h3>
                           <ul class = "ul-dist">
                           </ul>

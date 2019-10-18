@@ -46,8 +46,11 @@ class NavbarController extends AppController
             $AllvarEps = array_values($responsesEps)[0];
             $eps_childrens = array();
             foreach ($AllvarEps as $rowEps => $valueEps) {
-                if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
+                if ($valueEps["parent_eps_object_id"] != null || $valueEps["eps_id"] == 23305) {
                     $AllEpsId = $valueEps["parent_eps_object_id"];
+                    if ($valueEps["eps_id"] == 23305) {
+                        array_push($eps_childrens, array("name" => $valueEps["name"], "eps_id" => $valueEps["eps_id"], "parent_eps_id" => $valueEps["parent_eps_object_id"], "description" => null));
+                    }
                     if ($AllEpsId == 23306) {
                         array_push($eps_childrens, array("child_name" => $valueEps["name"], "child_eps_id" => $valueEps["eps_id"], "eps_id" => $valueEps["parent_eps_object_id"], "name" => "Transmisión y Transporte"));
                     }
@@ -722,7 +725,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projectpercent//percents/?V_PROJECT='.$_GET["id_p6"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projectpercent/percents/?V_PROJECT='.$_GET["id_p6"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
