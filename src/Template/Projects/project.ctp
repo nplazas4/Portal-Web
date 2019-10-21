@@ -1446,8 +1446,10 @@
           var spi_format_date = spi_date.getUTCDate() + " " + meses[spi_date.getMonth()] + ", " + spi_date.getUTCFullYear();
           $('#span-spi-date').text('Fecha SPI: '+spi_format_date);
           // SPI indicator
-          $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
-          $('#spi-old').text(this.spi_labor_units.toFixed(2));
+          if (this.spi_labor_units != null) {
+            $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+            $('#spi-old').text(this.spi_labor_units.toFixed(2));
+          }
           if (this.da != null) {
             $('#da-new').text(this.da);
             $('#variacion-est-old').text(this.da);
@@ -1628,59 +1630,87 @@
         var unifier_cpi_total = this.cpiusd_total; //Variable que almacena el cpi total proveniente de Unifier
         if (unifier_cpi_total != null) { //Condicionales que validan si el dato
           $('#cpi-old').text(parseFloat(unifier_cpi_total).toFixed(2));
+        } else {
+          $('#cpi-old').text('');
         }
         var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
         if (unifier_ejec_total != null) {
           $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total)+' MM');
+        } else {
+          $('#ejec-total-old').text('');
         }
         var unifier_plan_total = this.planeadousd_total;
         if (unifier_plan_total != null) {
           $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total)+' MM');
+        } else {
+          $('#plan-total-old').text('');
         }
         var unifier_presp_total = this.presupuestousd_total;
         if (unifier_presp_total != null) {
           $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total)+' MM');
+        } else {
+          $('#pres-total-old').text('');
         }
         var unifier_var_total = this.variacionusd_total;
         if (unifier_var_total != null) {
           $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total)+' MM');
+        } else {
+          $('#variacion-total-old').text('');
         }
         var unifier_proy_total = this.proyeccionusd_total;
         if (unifier_proy_total != null) {
           $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total)+' MM');
+        } else {
+          $('#proy-total-old').text('');
         }
         var unifier_porc_total = this.porcentajevausd_total;
         if (unifier_porc_total != null) {
           $('#porcentaje-total-old').text(parseFloat(unifier_porc_total).toFixed(2)+'%');
+        } else {
+          $('#porcentaje-total-old').text('');
         }
         // ANUAL PROYECTO
         var unifier_cpi_anual = this.cpiusd_2019;
         if (unifier_cpi_anual != null) {
           $('#cpi-anual-old').text(parseFloat(unifier_cpi_anual).toFixed(2));
+        } else {
+          $('#cpi-anual-old').text('');
         }
         var unifier_ejec_anual = this.ejecutadusd_2019;
         if (unifier_ejec_anual != null) {
           $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual)+' MM');
+        } else {
+          $('#ejec-anual-old').text('');
         }
         var unifier_plan_anual = this.planeadousd_2019;
         if (unifier_plan_anual != null) {
           $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual)+' MM');
+        } else {
+          $('#plan-anual-old').text('');
         }
         var unifier_pres_anual = this.presupuestousd_2019;
         if (unifier_pres_anual != null) {
           $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual)+' MM');
+        } else {
+          $('#pres-anual-old').text('');
         }
         var unifier_proy_anual = this.proyeccionusd_2019;
         if (unifier_proy_anual != null) {
           $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual)+' MM');
+        } else {
+          $('#proy-anual-old').text('');
         }
         var unifier_var_anual = this.varacionusd_2019;
         if (unifier_var_anual != null) {
           $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual)+' MM');
+        } else {
+          $('#variacion-anual-old').text('');
         }
         var unifier_porc_anual = this.porcentajevausd_2019;
         if (unifier_porc_anual != null) {
           $('#porc-variacion-anual-old').text(parseFloat(unifier_porc_anual).toFixed(2)+'%');
+        } else {
+          $('#porc-variacion-anual-old').text('');
         }
         local_db_info([unifier_cpi_total, unifier_porc_total, unifier_cpi_anual, unifier_porc_anual, spi_value, select_value, chart_side]);
       });
@@ -1701,7 +1731,6 @@
           },
           success: function(response){
             $.each(response, function() {
-              // console.log(this);
               $('#p-obj-est').text(this.Proj_Obj);
               $('#p-info-general').text(this.DESCRIPTION);
               $('#p-alcance').text(this.ALCANCE);
@@ -1729,16 +1758,28 @@
                 var igr_format_date = igr_date.getUTCDate() + " " + meses[igr_date.getMonth()] + ", " + igr_date.getUTCFullYear();
                 $('#span-igr-date').text('Fecha IGR: '+igr_format_date);
               }
-              $('#igr-value-1').text('IGR '+this.IGR+'%');
-              $('#igr-value-2').text('IGR '+this.IGR+'%');
-              $('#igr-value-3').text('IGR '+this.IGR+'%');
-              $('#mapa-img').append($('<img>', {src : '/Portal-Web/img/maps/'+this.ID_PROJECT+'/'+this.FOTO}));
+              if (this.IGR != null) {
+                $('#igr-value-1').text('IGR '+this.IGR+'%');
+                $('#igr-value-2').text('IGR '+this.IGR+'%');
+                $('#igr-value-3').text('IGR '+this.IGR+'%');
+              }
+              if (this.FOTO != null) {
+                $('#mapa-img').append($('<img>', {src : '/Portal-Web/img/maps/'+this.ID_PROJECT+'/'+this.FOTO}));
+              }
               // Valves and towers
-              $('.long-distance').text(this.DISTANCIA+' Km');
-              $('#lines-distance').text(this.LINEA_TRANS+' kV');
-              $('#towers-distance').text(this.TORRE+' Torres');
+              if (this.DISTANCIA != null) {
+                $('.long-distance').text(this.DISTANCIA+' Km');
+              }
+              if (this.LINEA_TRANS != null) {
+                $('#lines-distance').text(this.LINEA_TRANS+' kV');
+              }
+              if (this.TORRE != null) {
+                $('#towers-distance').text(this.TORRE+' Torres');
+              }
               $('#ecg-value').text('No. '+this.LINEA_TRANS);
-              $('#facilidades').text(this.TORRE+' Facilidades');
+              if (this.TORRE != null) {
+                $('#facilidades').text(this.TORRE+' Facilidades');
+              }
               indicators_col_val.push(this.IGR);
               if (indicators_col_val[5] == 'actual' && indicators_col_val[6] == 'new') {
                 ws_colors_new(indicators_col_val);
@@ -1771,39 +1812,39 @@
         $.each(response.items, function() {
           // SPI
           if (indicators_col_val[4] != undefined) {
-            if (indicators_col_val[4] > this.minimun && indicators_col_val[4] <= this.maximo && this.indicator_name == 'SPI') {
+            if (indicators_col_val[4] != null && indicators_col_val[4] > this.minimun && indicators_col_val[4] <= this.maximo && this.indicator_name == 'SPI') {
                 $('#spi-new').css({'background-color' : this.hexa_color});
             }
             // CPI TOTAL & ANUAL
-            if (indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
+            if (indicators_col_val[0] != null && indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-indicator-new').css({'background-color' : this.hexa_color});
             }
-            if (indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
+            if (indicators_col_val[2] != null && indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-anual-indicator-new').css({'background-color' : this.hexa_color});
             }
             // PORCENTAJE PROYECTADO
-            if (indicators_col_val[3] < this.maximo && this.name_threshold == 'PI Baja') {
+            if (indicators_col_val[3] != null && indicators_col_val[3] < this.maximo && this.name_threshold == 'PI Baja') {
                 $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
-            } else if (indicators_col_val[3] == this.maximo && this.name_threshold == 'PI Media') {
+            } else if (indicators_col_val[3] != null && indicators_col_val[3] == this.maximo && this.name_threshold == 'PI Media') {
                 $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
-            } else if (indicators_col_val[3] < this.maximo && indicators_col_val[3] > this.minimun && this.name_threshold == 'PI Alta') {
+            } else if (indicators_col_val[3] != null && indicators_col_val[3] < this.maximo && indicators_col_val[3] > this.minimun && this.name_threshold == 'PI Alta') {
                 $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
             }
             // PORCENTAJE PROYECTADO
-            if (indicators_col_val[1] < this.maximo && this.name_threshold == 'PI Baja') {
+            if (indicators_col_val[1] != null && indicators_col_val[1] < this.maximo && this.name_threshold == 'PI Baja') {
                 $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
-            } else if (indicators_col_val[1] == this.maximo && this.name_threshold == 'PI Media') {
+            } else if (indicators_col_val[1] != null && indicators_col_val[1] == this.maximo && this.name_threshold == 'PI Media') {
                 $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
-            } else if (indicators_col_val[1] < this.maximo && indicators_col_val[1] > this.minimun && this.name_threshold == 'PI Alta') {
+            } else if (indicators_col_val[1] != null && indicators_col_val[1] < this.maximo && indicators_col_val[1] > this.minimun && this.name_threshold == 'PI Alta') {
                 $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
             }
             // IGR
-            if (indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
+            if (indicators_col_val[7] != null && indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
               $('#igr-value-2').css({'background-color' : this.hexa_color});
               $('#igr-value-3').css({'background-color' : this.hexa_color});
             }
           } else {
-            if (indicators_col_val > this.minimun && indicators_col_val <= this.maximo && this.indicator_name == 'SPI') {
+            if (indicators_col_val != null && indicators_col_val > this.minimun && indicators_col_val <= this.maximo && this.indicator_name == 'SPI') {
                 $('#spi-new').css({'background-color' : this.hexa_color});
             }
           }
@@ -1828,10 +1869,10 @@
                 $('#spi-old-color').css({'background-color' : this.hexa_color});
             }
             // CPI TOTAL & ANUAL
-            if (indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
+            if (indicators_col_val[0] != null && indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-indicator-old').css({'background-color' : this.hexa_color});
             }
-            if (indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
+            if (indicators_col_val[2] != null && indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-anual-indicator-old').css({'background-color' : this.hexa_color});
             }
             // PORCENTAJE PROYECTADO
@@ -1851,7 +1892,7 @@
                 $('#porcentaje-anual-old').css({'background-color' : this.hexa_color});
             }
             // IGR
-            if (indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
+            if (indicators_col_val[7] != null && indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
               $('#igr-value-1').css({'background-color' : this.hexa_color});
             }
           }
@@ -1909,6 +1950,7 @@
             Unifier_information(result[1], 'actual', result[4], result[3], 'new');
           }else{
             option_compare_new_dates(selected_date_new);
+            advance_compare(result[1], selected_date_new, 'new');
             $('#hitos-title-new').text('HITOS '+$(this).children(":selected").text());
             hitos_compare(result[1], selected_date_new, hitos_body, 'new');
             curva_s_compare(result[1], selected_date_new, 1, 'new');
@@ -2028,12 +2070,16 @@
         success: function(response){
           $.each(response, function() {
             advance_chart(this.planeado, this.ejecutado);
-            $('#avance-plan-new').text(this.planeado+'%');
-            $('#avance-ejec-new').text(this.ejecutado+'%');
-            $('#avance-plan-old').text(this.planeado+'%');
-            $('#avance-ejec-old').text(this.ejecutado+'%');
-            $('#porcentaje-plan').text(this.planeado+'% Avance planeado');
-            $('#porcentaje-ejec').text(this.ejecutado+'% Avance planeado');
+            if (this.planeado != null) {
+              $('#avance-plan-new').text(this.planeado+'%');
+              $('#avance-plan-old').text(this.planeado+'%');
+              $('#porcentaje-plan').text(this.planeado+'% Avance planeado');
+            }
+            if (this.ejecutado != null) {
+              $('#avance-ejec-new').text(this.ejecutado+'%');
+              $('#avance-ejec-old').text(this.ejecutado+'%');
+              $('#porcentaje-ejec').text(this.ejecutado+'% Avance ejecutado');
+            }
           });
         }
       });
@@ -3206,7 +3252,9 @@
                 $('#fepo-old').text(fepo_format_date);
               }
               $('#duracion-total-old').text(this.od);
-              $('#pi-old').text(this.pi+"%");
+              if (this.pi != null) {
+                $('#pi-old').text(this.pi+"%");
+              }
             });
           }
         });
@@ -3253,6 +3301,24 @@
         });
       }
       // COMPARE LOGIC
+      // COMPARE - PORCENTAJE PLANEADO Y EJECUTADO
+      function advance_compare(id_project, capture_id, chart_side){
+        console.log(id_project+" "+capture_id+" "+chart_side);
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://192.168.0.210:8080/ords/portal/captures/projectpercent/?v_project_id="+id_project+"&v_historyc_id="+capture_id,
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+            "cache-control": "no-cache"
+          }
+        }
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+        });
+      }
       // HITOS COMAPARE
       function hitos_compare(id_project, selected_date, hitos_body, select_compare){
         var settings = {

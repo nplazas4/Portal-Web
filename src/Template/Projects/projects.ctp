@@ -245,7 +245,7 @@
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle tertiary">
+                            <div class="data-box-circle" id="div-cpi-total-new">
                                 <h5 id="cpi-total-new"></h5>
                             </div>
                             <div class="data-box-content">
@@ -253,7 +253,7 @@
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle tertiary">
+                            <div class="data-box-circle" id="div-igr-new">
                                 <h5 id="igr-new"></h5>
                             </div>
                             <div class="data-box-content">
@@ -292,7 +292,7 @@
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle">
+                            <div class="data-box-circle" id="div-spi-old">
                                 <h4 id="spi-old"></h4>
                             </div>
                             <div class="data-box-content">
@@ -300,7 +300,7 @@
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle error">
+                            <div class="data-box-circle" id="div-cpi-annual-old">
                                 <h5 id="cpi-old"></h5>
                             </div>
                             <div class="data-box-content">
@@ -308,15 +308,15 @@
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle tertiary">
+                            <div class="data-box-circle" id="div-cpi-total-old">
                                 <h5 id="cpi-total-old"></h5>
                             </div>
-                            <div class="data-box-content">
+                            <div class="data-box-content" id="div-cpi-total-old">
                                 <span>CPI Total</span>
                             </div>
                         </div>
                         <div class="data-box mx-0">
-                            <div class="data-box-circle tertiary">
+                            <div class="data-box-circle" id="div-igr-old">
                                 <h5 id="igr-old"></h5>
                             </div>
                             <div class="data-box-content">
@@ -455,17 +455,17 @@
           $('#data-ejecutado-'+iteration_num).append($('<h4>', {class : 'presupuesto-ejec', id : 'pres-id-'+iteration_num})); // Presupuesto Planeado value
           // Function que se encarga de llamar los proyectos de la bd local correspondientes a cada proyecto del ws
           // if (this.code_unifier != null) {
-            Unifier_information(this.project_id_p6, iteration_num);
+            Unifier_information(this.project_id_p6, this.id_p_project, iteration_num, this.spi_labor_units);
           // }
         });
           resolve();
         });
       });
-      function Unifier_information(id_p_project, iteration_num){
+      function Unifier_information(id_p_project_p6, project_id, iteration_num, spi_val){
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+id_p_project,
+          "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+id_p_project_p6,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -498,57 +498,38 @@
             }
             global_indicators(iteration_num, this.presupuestousd_2019, this.ejecutadusd_2019, this.ejecutadousd_total, this.presupuestousd_total);
             // global_indicators(iteration_num, this.PRES_PROJ, this.PROJ_AC, this.CAPEX_EXECUTED);
+            local_db_info(id_p_project_p6, project_id, iteration_num, spi_val, cpi_anual_val,cpi_total_val);
           });
         });
       }
-      //   xhr2 = $.ajax({
-      //   headers:{
-      //     'X-CSRF-Token':csrfToken
-      //   },
-      //   method: "GET",
-      //   dataType: "json",
-      //   url: "</?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local']);?>",
-      //   data: {project_id : id_p_project},
-      //   cache: true,
-      //   beforeSend: function(xhr) {
-      //     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      //   },
-      //   success: function(response){
-      //     var spi = $('#spi-id-'+iteration_num), cpi_anual = $('#cpi-id-'+iteration_num), cpi_total = $('#cpi-id-total-'+iteration_num),
-      //         igr = $('#igr-value-'+iteration_num);
-      //     var cpi_anual_val, cpi_total_val, igr_val;
-      //     $.each(response, function() {
-      //         if (this.CPI_ANUAL != null) {
-      //           cpi_anual_val = parseFloat(this.CPI_ANUAL.toFixed(2));
-      //           cpi_anual.text(cpi_anual_val.toFixed(2));
-      //         } else {
-      //           cpi_anual_val = null;
-      //         }
-      //         if (this.AC_PPTO != null) {
-      //           cpi_total_val = parseFloat(this.AC_PPTO);
-      //           cpi_total.text(cpi_total_val);
-      //         } else {
-      //           cpi_total_val = null;
-      //         }
-      //         if (this.IGR != null) {
-      //           igr_val = parseFloat(this.IGR).toFixed(1);
-      //           igr.text(igr_val+'%');
-      //         } else {
-      //           igr_val = null;
-      //         }
-      //         if (this.CAPEX_PLANNED != null) {
-      //           $('#plan-id-'+iteration_num).text(parseFloat(this.CAPEX_PLANNED).toFixed(2)+' MM');
-      //         }
-      //         if (this.AC != null) {
-      //           $('#pres-id-'+iteration_num).text(parseFloat(this.AC).toFixed(2)+' MM');
-      //         }
-      //         $('#regional-div-'+iteration_num).addClass('text-'+this.REGIONAL);
-      //         global_indicators(iteration_num, this.PRES_PROJ, this.PROJ_AC, this.CAPEX_EXECUTED);
-      //         project_colors(spi, cpi_anual_val, cpi_total_val, igr_val, iteration_num);
-      //     });
-      //   }
-      // });
-    // }
+      function local_db_info(id_p_project_p6, p_project_id,iteration_num, spi, cpi_anual_val,cpi_total_val){
+        xhr2 = $.ajax({
+          headers:{
+            'X-CSRF-Token':csrfToken
+          },
+          method: "GET",
+          dataType: "json",
+          url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'local']);?>",
+          data: {project_id : p_project_id},
+          cache: true,
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          },
+          success: function(response){
+            var igr_val, igr = $('#igr-value-'+iteration_num);
+            $.each(response, function() {
+                igr_val = parseFloat(this.IGR).toFixed(1);
+                if (this.IGR != null) {
+                  igr.text(igr_val+'%');
+                } else {
+                  igr.text();
+                }
+                $('#regional-div-'+iteration_num).addClass('text-'+this.REGIONAL);
+                ws_colors_new([spi, cpi_anual_val, cpi_total_val, igr_val, iteration_num]);
+            });
+          }
+        });
+      }
     var promise1;
     function global_indicators(iteration_num, pres_anual, ejec_anual, total_ejec, total_pres){
     var promise1 = new Promise(function(resolve, reject) {
@@ -635,7 +616,8 @@
       $('#igr-new').text($('#'+parent_id+' .igr_data').text());
       $('#pres-plan-new').text($('#'+parent_id+' .presupuesto-plan').text());
       $('#pres-ejec-new').text($('#'+parent_id+' .presupuesto-ejec').text());
-      ws_colors_new([$('#'+parent_id+' .spi-value').text(), $('#'+parent_id+' .cpi-anual-data').text()]);
+      var igr_value = $('#'+parent_id+' .igr_data').text();
+      color_indicator_new([$('#'+parent_id+' .spi-value').text(), $('#'+parent_id+' .cpi-anual-data').text(), $('#'+parent_id+' .cpi-total-data').text(), igr_value.slice(0,-1)]);
     }
 
     function old_compare(){
@@ -651,11 +633,14 @@
       $('#igr-old').text($('#'+parent_id+' .igr_data').text());
       $('#pres-plan-old').text($('#'+parent_id+' .presupuesto-plan').text());
       $('#pres-ejec-old').text($('#'+parent_id+' .presupuesto-ejec').text());
+      var igr_value = $('#'+parent_id+' .igr_data').text();
+      color_indicator_old([$('#'+parent_id+' .spi-value').text(), $('#'+parent_id+' .cpi-anual-data').text(), $('#'+parent_id+' .cpi-total-data').text(), igr_value.slice(0,-1)]);
       // ws_colors_new();
       // console.log(parent_id);
     }
 
-    function ws_colors_new(indicators_col_val){
+    function color_indicator_new(indicators_col_val){
+      console.log('new '+indicators_col_val[0]+' '+indicators_col_val[1]+' '+indicators_col_val[2]);
       var settings = {
           "async": true,
           "crossDomain": true,
@@ -667,15 +652,94 @@
         }
         $.ajax(settings).done(function (response) {
           $.each(response.items, function() {
-            if (indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'SPI') {
+            if (indicators_col_val[0] != null && indicators_col_val[0] != '' && indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'SPI') {
                 $('#div-spi-new').css({'background-color' : this.hexa_color});
+            } else if(indicators_col_val[0] == null || indicators_col_val[0] == '') {
+                $('#div-spi-new').removeAttr('style');
             }
-            if (indicators_col_val[1] > this.minimun && indicators_col_val[1] <= this.maximo && this.indicator_name == 'CPI') {
+            if (indicators_col_val[1] != null && indicators_col_val[1] != '' && indicators_col_val[1] > this.minimun && indicators_col_val[1] <= this.maximo && this.indicator_name == 'CPI') {
+                // console.log('true '+indicators_col_val[0]);
                 $('#div-cpi-new').css({'background-color' : this.hexa_color});
+            } else if(indicators_col_val[1] == null || indicators_col_val[1] == '') {
+                $('#div-cpi-new').removeAttr('style');
+                // console.log('false '+indicators_col_val[0]);
+            }
+            if (indicators_col_val[2] != null && indicators_col_val[2] != '' && indicators_col_val[2] != null && indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
+                $('#div-cpi-total-new').css({'background-color' : this.hexa_color});
+            } else if(indicators_col_val[2] == null || indicators_col_val[2] == '') {
+                $('#div-cpi-total-new').removeAttr('style');
+            }
+            // IGR
+            if (indicators_col_val[3] != null && indicators_col_val[3] != '' && indicators_col_val[3] != null && indicators_col_val[3] != 'undefined' && (indicators_col_val[3]/100) > this.minimun && (indicators_col_val[3] / 100) <= this.maximo && this.indicator_name == 'IGR') {
+              $('#div-igr-new').css({'background-color' : this.hexa_color});
             }
           });
         });
       }
+      function ws_colors_new(indicators_col_val){
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
+          }
+          $.ajax(settings).done(function (response) {
+            $.each(response.items, function() {
+              if (indicators_col_val[0] != null && indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'SPI') {
+                  $('#spi-circle-'+indicators_col_val[4]).css({'background-color' : this.hexa_color});
+              }
+              // CPI TOTAL & ANUAL
+              if (indicators_col_val[1] != null && indicators_col_val[1] > this.minimun && indicators_col_val[1] <= this.maximo && this.indicator_name == 'CPI') {
+                  $('#cpi-circle-'+indicators_col_val[4]).css({'background-color' : this.hexa_color});
+              }
+              if (indicators_col_val[2] != null && indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
+                  $('#cpi-circle-total-'+indicators_col_val[4]).css({'background-color' : this.hexa_color});
+              }
+              // IGR
+              if (indicators_col_val[3] != null && indicators_col_val[3] != 'undefined' && (indicators_col_val[3]/100) > this.minimun && (indicators_col_val[3] / 100) <= this.maximo && this.indicator_name == 'IGR') {
+                $('#igr-circle-'+indicators_col_val[4]).css({'background-color' : this.hexa_color});
+              }
+            });
+          });
+      }
+      function color_indicator_old(indicators_col_val){
+        console.log('new '+indicators_col_val[0]+' '+indicators_col_val[1]+' '+indicators_col_val[2]);
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
+          }
+          $.ajax(settings).done(function (response) {
+            $.each(response.items, function() {
+              if (indicators_col_val[0] != null && indicators_col_val[0] != '' && indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'SPI') {
+                  $('#div-spi-old').css({'background-color' : this.hexa_color});
+              } else if(indicators_col_val[0] == null || indicators_col_val[0] == ''){
+                  $('#div-spi-old').removeAttr('style');
+              }
+              if (indicators_col_val[1] != '' && indicators_col_val[1] > this.minimun && indicators_col_val[1] <= this.maximo && this.indicator_name == 'CPI') {
+                  $('#div-cpi-annual-old').css({'background-color' : this.hexa_color});
+              } else if(indicators_col_val[1] == null || indicators_col_val[1] == '') {
+                  $('#div-cpi-annual-old').removeAttr('style');
+              }
+              if (indicators_col_val[2] != '' && indicators_col_val[2] != null && indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
+                  $('#div-cpi-total-old').css({'background-color' : this.hexa_color});
+              } else if(indicators_col_val[2] == null || indicators_col_val[2] == '') {
+                  $('#div-cpi-total-old').removeAttr('style');
+              }
+              // IGR
+              if (indicators_col_val[3] != '' && indicators_col_val[3] != null && indicators_col_val[3] != 'undefined' && (indicators_col_val[3]/100) > this.minimun && (indicators_col_val[3] / 100) <= this.maximo && this.indicator_name == 'IGR') {
+                $('#div-igr-old').css({'background-color' : this.hexa_color});
+              }
+            });
+          });
+        }
     // Petición ajax para llenar los dropdown select
     xhr3 = $.ajax({
       headers:{
@@ -710,59 +774,108 @@
 
     // new
     function option_compare_new_dates(selected_date_new, id_project){
-      xhr4 = $.ajax({
-      headers:{
-        'X-CSRF-Token':csrfToken
-      },
-      method: "GET",
-      dataType: "json",
-      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'compare_projects']);?>",
-      data: {project_id : id_project, date : selected_date_new},
-      cache: true,
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      },
-      success: function(response){
-        $.each(response, function() {
-          $('#compare-title').text(this.name);
-          if (this.code_fase == '209') {
-            $('#fase-title-new').text('Estructuración');
-            $('#fase-new').text('I');
-          } else if (this.code_fase == '210') {
-            $('#fase-title-new').text('Selección');
-            $('#fase-new').text('II');
-          }else if (this.code_fase == '211') {
-            $('#fase-title-new').text('Planeación');
-            $('#fase-new').text('III');
-          }else if (this.code_fase == '212') {
-            $('#fase-title-new').text('Ejecución');
-            $('#fase-new').text('IV');
-          }else if (this.code_fase == '420') {
-            $('#fase-title-new').text('Cierre y transferencia');
-            $('#fase-new').text('V');
-          }else if (this.code_fase == '1910') {
-            $('#fase-title-new').text('Cerrado');
-            $('#fase-new').text('C');
-          }
-          $('#spi-new').text(this.spi_labor_units.toFixed(2));
-          // CPI Anual
-          $('#cpi-new').text(cpi_anual_comp);
-          // CPI TOTAL
-          $('#cpi-total-new').text(cpi_total_comp);
-          // igr
-          $('#igr-new').text(igr_compare+"%");
-          // Presupuesto planeado
-          $('#pres-plan-new').text(pres_planeado+" MM");
-          // Presupuesto ejecutado
-          $('#pres-ejec-new').text(pres_ejecutado+" MM");
-        });
+      var code_unifier = null, spi = null, cpi_anual = null, cpi_total = null;
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date_new,
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+        }
       }
-    });
+      $.ajax(settings).done(function (response) {
+        $.each(response.items, function() {
+          if (this.code_fase == '209') {
+              $('#fase-title-new').text('Estructuración');
+              $('#fase-new').text('I');
+          } else if (this.code_fase == '210') {
+              $('#fase-title-new').text('Selección');
+              $('#fase-new').text('II');
+          }else if (this.code_fase == '211') {
+              $('#fase-title-new').text('Planeación');
+              $('#fase-new').text('III');
+          }else if (this.code_fase == '212') {
+              $('#fase-title-new').text('Ejecución');
+              $('#fase-new').text('IV');
+          }else if (this.code_fase == '420') {
+              $('#fase-title-new').text('Cierre y transferencia');
+              $('#fase-new').text('V');
+          }else if (this.code_fase == '1910') {
+              $('#fase-title-new').text('Cerrado');
+              $('#fase-new').text('C');
+          } else {
+              $('#fase-title-new').text('');
+              $('#fase-new').text('');
+          }
+          // SPI COMPARE LEFT SIDE - NEW
+          if (this.spi_labor_units != null) {
+              spi = this.spi_labor_units;
+              $('#spi-new').text(parseFloat(spi).toFixed(2));
+          } else {
+              $('#spi-new').text('');
+              $('#div-spi-new').removeAttr('style');
+          }
+          code_unifier = this.code_unifier;
+        });
+        if (code_unifier != null) {
+          var unifier_capture = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/captures/costindicators/?p_project_id="+id_project+"&p_id_capture="+selected_date_new,
+            "method": "GET",
+            "headers": {
+              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
+          }
+          $.ajax(unifier_capture).done(function (response) {
+            $.each(response.items, function() {
+              // CPI Anual
+              if (this.cpiusd_2019 != null) {
+                cpi_anual = this.cpiusd_2019;
+                $('#cpi-new').text(parseFloat(cpi_anual).toFixed(2));
+              } else {
+                $('#cpi-new').text('');
+                $('#div-cpi-new').removeAttr('style');
+              }
+              // CPI Total
+              if (this.cpiusd_total != null) {
+                cpi_total = this.cpiusd_total;
+                $('#cpi-total-new').text(parseFloat(cpi_total).toFixed(2));
+              }else {
+                $('#cpi-total-new').text('');
+                $('#div-cpi-total-new').removeAttr('style');
+              }
+              // PRESUPUESTO PLANEADO
+              if (this.planeadousd_total != null) {
+                $('#pres-plan-new').text(parseFloat(this.planeadousd_total).toFixed(2)+' MM');
+              } else {
+                $('#pres-plan-new').text('');
+              }
+              // PRESUPUESTO EJECUTADO
+              if (this.presupuestousd_total != null) {
+                $('#pres-ejec-new').text(parseFloat(this.presupuestousd_total.toFixed(2))+' MM');
+              } else {
+                $('#pres-ejec-new').text('');
+              }
+              color_indicator_new([spi, cpi_anual, cpi_total]);
+            });
+          });
+        } else {
+          color_indicator_new([spi, cpi_anual, cpi_total]);
+          $('#cpi-new').text('');
+          $('#div-cpi-new').removeAttr('style');
+          $('#cpi-total-new').text('');
+          $('#div-cpi-total-new').removeAttr('style');
+          $('#pres-plan-new').text('');
+          $('#pres-ejec-new').text('');
+        }
+      });
     }
 
     $('#compare-select-old').change(function() {
       var selected_date_old = $(this).children(":selected").attr("value");
-      var id_project = $(".modal-trigger").parent().parent().parent().parent().parent().attr('id');
+      var id_project = $(".compare-opt.active").parent().parent().parent().parent().attr('id');
       if (selected_date_old == "actual") {
         $('.compare-opt.active').click();
       }else {
@@ -771,55 +884,104 @@
     });
 
     // OLD
-    function option_compare_old_dates(selected_date, id_project){
-    xhr4 = $.ajax({
-    headers:{
-      'X-CSRF-Token':csrfToken
-    },
-    method: "GET",
-    dataType: "json",
-    url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'compare_projects']);?>",
-    data: {project_id : id_project, date : selected_date},
-    cache: true,
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    },
-    success: function(response){
-      $.each(response, function() {
-        $('#compare-title').text(this.name);
-        if (this.code_fase == '209') {
-          $('#fase-title-old').text('Estructuración');
-          $('#fase-old').text('I');
-        } else if (this.code_fase == '210') {
-          $('#fase-title-old').text('Selección');
-          $('#fase-old').text('II');
-        }else if (this.code_fase == '211') {
-          $('#fase-title-old').text('Planeación');
-          $('#fase-old').text('III');;
-        }else if (this.code_fase == '212') {
-          $('#fase-title-old').text('Ejecución');
-          $('#fase-old').text('IV');
-        }else if (this.code_fase == '420') {
-          $('#fase-title-old').text('Cierre y transferencia');
-          $('#fase-old').text('V');
-        }else if (this.code_fase == '1910') {
-          $('#fase-title-old').text('Cerrado');
-          $('#fase-old').text('C');
+    function option_compare_old_dates(selected_date_old, id_project){
+      var code_inifier = null, spi = null, cpi_anual = null, cpi_total = null;
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date_old,
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
         }
-        $('#spi-old').text(this.spi_labor_units.toFixed(2));
-        // CPI Anual
-        $('#cpi-old').text(cpi_anual_comp);
-        // CPI TOTAL
-        $('#cpi-total-old').text(cpi_total_comp);
-        // igr
-        $('#igr-old').text(igr_compare+"%");
-        // Presupuesto planeado
-        $('#pres-plan-old').text(pres_planeado+" MM");
-        // Presupuesto ejecutado
-        $('#pres-ejec-old').text(pres_ejecutado+" MM");
+      }
+      $.ajax(settings).done(function (response) {
+        $.each(response.items, function() {
+          if (this.code_fase == '209') {
+              $('#fase-title-old').text('Estructuración');
+              $('#fase-old').text('I');
+          } else if (this.code_fase == '210') {
+              $('#fase-title-old').text('Selección');
+              $('#fase-old').text('II');
+          }else if (this.code_fase == '211') {
+              $('#fase-title-old').text('Planeación');
+              $('#fase-old').text('III');
+          }else if (this.code_fase == '212') {
+              $('#fase-title-old').text('Ejecución');
+              $('#fase-old').text('IV');
+          }else if (this.code_fase == '420') {
+              $('#fase-title-old').text('Cierre y transferencia');
+              $('#fase-old').text('V');
+          }else if (this.code_fase == '1910') {
+              $('#fase-title-old').text('Cerrado');
+              $('#fase-old').text('C');
+          } else {
+              $('#fase-title-old').text('');
+              $('#fase-old').text('');
+          }
+          // SPI COMPARE RIGHT SIDE - old
+          if (this.spi_labor_units != null) {
+              spi = this.spi_labor_units;
+              $('#spi-old').text(spi.toFixed(2));
+          } else {
+              $('#spi-old').text('');
+              $('#div-spi-old').removeAttr('style');
+          }
+          code_inifier = this.code_unifier;
+        });
+        if (code_inifier != null) {
+          var unifier_capture = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/captures/costindicators/?p_project_id="+id_project+"&p_id_capture="+selected_date_old,
+            "method": "GET",
+            "headers": {
+              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
+          }
+          $.ajax(unifier_capture).done(function (response) {
+            $.each(response.items, function() {
+              // CPI Anual
+              if (this.cpiusd_2019 != null) {
+                cpi_anual = this.cpiusd_2019;
+                $('#cpi-old').text(parseFloat(cpi_anual).toFixed(2));
+              } else {
+                $('#cpi-old').text('');
+                $('#div-cpi-old').removeAttr('style');
+              }
+              // CPI Total
+              if (this.cpiusd_total != null) {
+                cpi_total = this.cpiusd_total;
+                $('#cpi-total-old').text(parseFloat(cpi_total).toFixed(2));
+              }else {
+                $('#cpi-total-old').text('');
+                $('#div-cpi-total-old').removeAttr('style');
+              }
+              // PRESUPUESTO PLANEADO
+              if (this.planeadousd_total != null) {
+                $('#pres-plan-old').text(parseFloat(this.planeadousd_total).toFixed(2)+' MM');
+              } else {
+                $('#pres-plan-old').text('');
+              }
+              // PRESUPUESTO EJECUTADO
+              if (this.presupuestousd_total != null) {
+                $('#pres-ejec-old').text(parseFloat(this.presupuestousd_total.toFixed(2))+' MM');
+              } else {
+                $('#pres-ejec-old').text('');
+              }
+              color_indicator_old([spi, cpi_anual, cpi_total]);
+            });
+          });
+        } else {
+          color_indicator_old([spi, cpi_anual, cpi_total]);
+          $('#cpi-old').text('');
+          $('#div-cpi-old').removeAttr('style');
+          $('#cpi-total-old').text('');
+          $('#div-cpi-total-old').removeAttr('style');
+          $('#pres-plan-old').text('');
+          $('#pres-ejec-old').text('');
+        }
       });
-    }
-    });
     }
 
     // Función que se encarga de ocultar la etiqueta ul de comparar cada vez que hacen click fuera de este.
@@ -855,30 +1017,6 @@
             }
           });
         });
-    }
-    function project_colors(spi, cpi, cpi_total, igr, iteration_num)
-    {
-      xhr5 = $.ajax({
-        headers:{
-          'X-CSRF-Token':csrfToken
-        },
-        method: "GET",
-        dataType: "json",
-        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'indicator_color']);?>",
-        data: {'spi' : spi.text(), 'cpi' : cpi, 'cpi_total' : cpi_total, 'igr' : igr},
-        cache: true,
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        },
-        success: function(response){
-          $.each(response, function() {
-            $('#spi-circle-'+iteration_num).css({'background-color' : this.spi_color});
-            $('#cpi-circle-'+iteration_num).css({'background-color' : this.cpi_color});
-            $('#cpi-circle-total-'+iteration_num).css({'background-color' : this.cpi_total_color});
-            $('#igr-circle-'+iteration_num).css({'background-color' : this.igr_color});
-          });
-        }
-      });
     }
     xhr_info = $.ajax({
       headers:{
