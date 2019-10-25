@@ -16,67 +16,55 @@ class ProjectsController extends AppController
 {
     private $Excel_Autor_Name;
     // Función que se ejecuta antes de rederizar cualquier vista dentro la carpeta Projects.
-    // public function beforeFilter($event)
-    // {
-    //     parent::beforeFilter($event);
-    //     $this->token();
-    //     $this->portalProjects();
-    //     // CURL  que obtiene todos los proyectos publicados en el portal administrativo.
-    //     $curl = curl_init();
-    //     curl_setopt_array($curl, array(
-    //     CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/publicprojects/list/",
-    //     CURLOPT_RETURNTRANSFER => true,
-    //     CURLOPT_ENCODING => "",
-    //     CURLOPT_MAXREDIRS => 10,
-    //     CURLOPT_TIMEOUT => 30,
-    //     CURLOPT_CUSTOMREQUEST => "GET",
-    //     CURLOPT_HTTPHEADER => array(
-    //     "Authorization: Bearer ".$_SESSION["PortalToken"],
-    //     "Cache-Control: no-cache"
-    //   ),
-    // ));
-    //     $Proj_response = curl_exec($curl);
-    //     $err = curl_error($curl);
-    //     curl_close($curl);
-    //     if ($err) {
-    //         echo "cURL Error #:" . $err;
-    //     } else {
-    //         $Proj_responses = json_decode($Proj_response, true);
-    //         $ArrayProjectCodId = array();
-    //         $ArrayProjectCodName = array();
-    //         $All_Proj = array_values($Proj_responses)[0];
-    //         $this->set('All_Proj', $All_Proj);
-    //         foreach ($All_Proj as $row => $value3) {
-    //           //Asigna por separado los valores del array de All_Proj
-    //             $ProjectCodId = $value3["id_p_project"];
-    //             $ProjectCodStatus = $value3["is_enabled"];
-    //             array_push($ArrayProjectCodId, $ProjectCodId);
-    //             $ProjectCodName = $value3["name"];
-    //             $ProjectIdP6 = $value3["code_p6"];
-    //             $ProjectCodId = $value3["id_p_project"];
-    //             // Registra el proyecto en la BD local
-    //             $logsTable = \Cake\ORM\TableRegistry::get('Projects', array('table' => 'projects'));
-    //             $log = $logsTable->newEntity();
-    //             $log->ID_PROJECT  = $ProjectCodId;
-    //             $log->PROJECT_NAME  = $ProjectCodName.' ('.$ProjectIdP6.')';
-    //             $log->STATUS  = $ProjectCodStatus;
-    //             $logsTable->save($log);
-    //             // $this->set('ProjectCodId', $ArrayProjectCodId);//RV
-    //         }
-    //         $ArrayProjDelete = array();
-    //         $AllProjForDelete = $this->Projects->find('all');
-    //         // Foreach que obtiene todos los projectos que provienen de Web services y se encuentra deshabilitados o eliminados.
-    //         foreach ($AllProjForDelete as $ProjDelete) {
-    //             if (!in_array($ProjDelete->ID_PROJECT, $ArrayProjectCodId) && $ProjDelete->STATUS == 1) {
-    //                 array_push($ArrayProjDelete, $ProjDelete->id);
-    //             }
-    //         }
-    //         // Foreach que elimina que no existen en el WS de la base de datos local.
-    //         foreach ($ArrayProjDelete as $ProjxDelete) {
-    //             $this->delete($ProjxDelete);
-    //         }
-    //     }
-    // }
+    public function beforeFilter($event)
+    {
+        parent::beforeFilter($event);
+        $this->token();
+        $this->portalProjects();
+        // CURL  que obtiene todos los proyectos publicados en el portal administrativo.
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/publicprojects/list/",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+        "Authorization: Bearer ".$_SESSION["PortalToken"],
+        "Cache-Control: no-cache"
+      ),
+    ));
+        $Proj_response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $Proj_responses = json_decode($Proj_response, true);
+            $ArrayProjectCodId = array();
+            $ArrayProjectCodName = array();
+            $All_Proj = array_values($Proj_responses)[0];
+            $this->set('All_Proj', $All_Proj);
+            foreach ($All_Proj as $row => $value3) {
+              //Asigna por separado los valores del array de All_Proj
+                $ProjectCodId = $value3["id_p_project"];
+                $ProjectCodStatus = $value3["is_enabled"];
+                array_push($ArrayProjectCodId, $ProjectCodId);
+                $ProjectCodName = $value3["name"];
+                $ProjectIdP6 = $value3["code_p6"];
+                $ProjectCodId = $value3["id_p_project"];
+                // Registra el proyecto en la BD local
+                $logsTable = \Cake\ORM\TableRegistry::get('Projects', array('table' => 'projects'));
+                $log = $logsTable->newEntity();
+                $log->ID_PROJECT  = $ProjectCodId;
+                $log->PROJECT_NAME  = $ProjectCodName.' ('.$ProjectIdP6.')';
+                $log->STATUS  = $ProjectCodStatus;
+                $logsTable->save($log);
+                $this->set('ProjectCodId', $ArrayProjectCodId);
+            }
+        }
+    }
     public function index()
     {
         foreach ($_SESSION["Auth"] as $ProjArray => $valueArray) {
@@ -641,75 +629,6 @@ class ProjectsController extends AppController
       $projects_json_decode = json_decode($projects_decode, true);
       $this->set('array_projects', $projects_json_decode);
       $this->set('json_projects', $projects_decode);
-      // $this->IndicatorColor();
-      // $company_json_decode = json_decode($company_decode, true);
-      // $this->set('array_company', $company_json_decode);
-      // $this->set('json_company', $company_decode);
-      //   $this->ProjectsFase();
-      //   $this->ProjectCodeArea();
-      //   $this->ProjectCodeCategory();
-      //   $this->ProjectCodeMec();
-      //   $this->AllProjects();
-      //   $this->IndicatorColor();
-      //   // $this->RomanNumbers();
-      //   // Decodifica todas la variables pasadas a través de la URL.
-      //   $decoded_NameEpsPrjs = base64_decode(urldecode($NameEps));
-      //   $decoded_titlePrjs = base64_decode(urldecode($title));
-      //   $this->pdf($decoded_NameEpsPrjs);
-      //   $decoded_EpsPrjs = base64_decode(urldecode($EPS));
-      //   $decoded_Ctg1Prjs = base64_decode(urldecode($Categoria1));
-      //   $decoded_Ctg2Prjs = base64_decode(urldecode($Categoria2));
-      //   $decoded_IdEpsParent = base64_decode(urldecode($idEpsParent));
-      //   $this->set('idEpsParent', $decoded_IdEpsParent);
-      //   $this->set('NameEpsPrjs', $decoded_NameEpsPrjs);
-      //   $this->set('titlePrjs', $decoded_titlePrjs);
-      //   $decoded_current_user_pr = base64_decode(urldecode($current_user_pr));
-      //   $Codigo_Categoria = base64_decode(urldecode($Categoria1)); //Variable que Decodifica el código de la categoría.
-      //   $Categoria2_Decoded = base64_decode(urldecode($Categoria2));
-      //   $Nombre_Categoria = null; //Variable que va a almacenar el nombre de la categoría con base al código de categoría
-      //   if ($Codigo_Categoria == 870) {
-      //     $Nombre_Categoria = "Crecimiento";
-      //   }elseif ($Codigo_Categoria == 871) {
-      //     $Nombre_Categoria = "Sostenimiento";
-      //   }
-      //   $this->set('Categoria2',$Categoria2_Decoded);
-      //   $this->set('CategoryPrTitle',$Nombre_Categoria);
-      //   //Variable que obtiene todos los proyectos relacionados a la EPS actual.
-      //   $projectsCategory = $this->Projects->find(
-      //       'all',
-      //       array('conditions' => array('Projects.EPS_REL' => $decoded_EpsPrjs, 'Projects.CATEGORY' => $Nombre_Categoria ))
-      //   );
-      //   $this->set('projectsCategory', $projectsCategory);
-      //   $this->set('ActualEps', $decoded_EpsPrjs);
-      //   $this->set('Categoria1', $decoded_Ctg1Prjs);
-      //   $curl = curl_init();
-      //   curl_setopt_array($curl, array(
-      //   CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/projects/list/?V_EPS=".$decoded_EpsPrjs."&V_PROJCODE1=".$decoded_Ctg1Prjs."&V_PROJCODE2=".$decoded_Ctg2Prjs."&V_ID_USER=".$decoded_current_user_pr,
-      //   CURLOPT_RETURNTRANSFER => true,
-      //   CURLOPT_ENCODING => "",
-      //   CURLOPT_MAXREDIRS => 10,
-      //   CURLOPT_TIMEOUT => 30,
-      //   CURLOPT_CUSTOMREQUEST => "GET",
-      //   CURLOPT_HTTPHEADER => array(
-      //     "Authorization: Bearer ".$_SESSION["PortalToken"],
-      //     "Cache-Control: no-cache"
-      //   ),
-      // ));
-      //   $response = curl_exec($curl);
-      //   $err = curl_error($curl);
-      //   curl_close($curl);
-      //   if ($err) {
-      //       echo "cURL Error #:" . $err;
-      //   } else {
-      //       $responses = json_decode($response, true);
-      //       $ArrayEpsId = array();
-      //       $ArrayParentEpsId = array();
-      //       $ArrayName = array();
-      //       $ArrayLevel = array();
-      //       // Arreglo que contiene los proyecto por categoría.
-      //       $ProjectsWS = array_values($responses)[0];
-      //       $this->set('ProjectsWS', $ProjectsWS);
-      //   }
     }
     public function Indicators()
     {

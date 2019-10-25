@@ -640,7 +640,6 @@
     }
 
     function color_indicator_new(indicators_col_val){
-      console.log('new '+indicators_col_val[0]+' '+indicators_col_val[1]+' '+indicators_col_val[2]);
       var settings = {
           "async": true,
           "crossDomain": true,
@@ -706,7 +705,6 @@
           });
       }
       function color_indicator_old(indicators_col_val){
-        console.log('new '+indicators_col_val[0]+' '+indicators_col_val[1]+' '+indicators_col_val[2]);
         var settings = {
             "async": true,
             "crossDomain": true,

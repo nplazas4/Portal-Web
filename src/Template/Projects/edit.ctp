@@ -22,8 +22,8 @@
     <div class="section home">
         <div class="home-menu">
           <div class="container-contact100">
-          <a href="Arriba:" class="btn-floating Scroll-button" style="margin-right:5%; margin-bottom:8%" id="next"><i class="material-icons">arrow_upward</i></a>
-          <a href="Abajo:" class="btn-floating Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
+          <a class="btn-floating Scroll-button" style="margin-right:5%; margin-bottom:8%" id="next"><i class="material-icons">arrow_upward</i></a>
+          <a class="btn-floating Scroll-button" style="margin-right:5%; margin-bottom:4%" id="return"><i class="material-icons">arrow_downward</i></a>
           <div class="wrap-contact100">
             <div class="contact100-form validate-form active" id="Form-1">
             <?= $this->Form->create($projects,['type' => 'file', 'class'=>'contact100-form']) ?>
@@ -36,31 +36,31 @@
             <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
               <span class="label-input100">Id</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Número de identificación del proyecto" onclick="return false;">help_outline</i></span>
-              <?php echo $this->Form->input('ID_PROJECT',['id'=>'id','placeholder'=>'Id','class'=>'validate','required','readonly'=>'readonly','div' => false, 'label' => false]);?>
+              <?php echo $this->Form->input('ID_PROJECT',['id'=>'id','placeholder'=>'Id','class'=>'validate','readonly'=>'readonly','div' => false, 'label' => false]);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Nombre</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Nombre del proyecto" onclick="return false;">help_outline</i></span>
-              <?php echo $this->Form->input('PROJECT_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
+              <?php echo $this->Form->input('PROJECT_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate']);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Objetivo estratégico</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Objeyivo estratégico" onclick="return false;">help_outline</i></span>
-              <?php echo $this->Form->textarea('Proj_Obj',['placeholder'=>'Objetivo estratégico','class'=>'materialize-textarea','required']);?>
+              <?php echo $this->Form->textarea('Proj_Obj',['placeholder'=>'Objetivo estratégico','class'=>'materialize-textarea']);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Información general</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese la información general del proyecto" onclick="return false;">help_outline</i></span>
-              <?php echo $this->Form->textarea('DESCRIPTION',['placeholder'=>'Información general','class'=>'materialize-textarea','required']);?>
+              <?php echo $this->Form->textarea('DESCRIPTION',['placeholder'=>'Información general','class'=>'materialize-textarea']);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Alcance</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el Alcance" onclick="return false;">help_outline</i></span>
-              <?php echo $this->Form->textarea('ALCANCE',['label'=>'Alcance','placeholder'=>'Alcance','class'=>'materialize-textarea','required']);?>
+              <?php echo $this->Form->textarea('ALCANCE',['label'=>'Alcance','placeholder'=>'Alcance','class'=>'materialize-textarea']);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input">
@@ -94,19 +94,19 @@
             <div class="wrap-input100 rs1-wrap-input100 validate-input">
               <span class="label-input100">Controles de cambio / Solicitud</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese los controles de cambio o Solicitud">help_outline</i></span>
-              <?php echo $this->Form->textarea('SOLICITUD',['placeholder'=>'Controles de cambio','class'=>'materialize-textarea','required']);?>
+              <?php echo $this->Form->textarea('SOLICITUD',['placeholder'=>'Controles de cambio','class'=>'materialize-textarea']);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="parent-div-num-sub">
               <span class="label-input100">No. De subestaciones</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el número de subestaciones del proyecto">help_outline</i></span>
-              <?php echo $this->Form->input('NUM_SUBESTACION',['placeholder'=>'No. De subestaciones','id' => 'input-subestaciones','class'=>'validate','required','div' => false, 'label' => false]);?>
+              <?php echo $this->Form->input('NUM_SUBESTACION',['placeholder'=>'No. De subestaciones','id' => 'input-subestaciones','class'=>'validate','div' => false, 'label' => false]);?>
               <!-- <span class="error-text">Validación</span> -->
             </div>
             <div class="wrap-input100 rs1-wrap-input100 validate-input" id="parent-div-igr-value">
               <span class="label-input100">Valor IGR</span>
               <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el valor del riesgo IGR">help_outline</i></span>
-              <?php echo $this->Form->input('IGR',['placeholder'=>'Riesgo IGR','id' => 'input-valor-igr','class'=>'validate','required','div' => false, 'label' => false]);?>
+              <?php echo $this->Form->input('IGR',['placeholder'=>'Riesgo IGR','id' => 'input-valor-igr','class'=>'validate','div' => false, 'label' => false]);?>
             </div>
           </div>
           <div class="contact100-form validate-form" id="Form-2">
@@ -119,19 +119,19 @@
           <div class="wrap-input100 rs1-wrap-input100 validate-input">
             <span class="label-input100">FOPO</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Seleccione la fecha correspondiente al FOPO del proyecto">help_outline</i></span>
-            <?php echo $this->Form->input('FOPO',['placeholder'=>'FoPo','type'=>'text','class'=>'datepicker','required','readonly'=>'readonly','div' => false, 'label' => false]);?>
+            <?php echo $this->Form->input('FOPO',['placeholder'=>'FoPo','type'=>'text','class'=>'datepicker','readonly'=>'readonly','div' => false, 'label' => false]);?>
             <!-- <span class="error-text">Validación</span> -->
           </div>
           <div class="wrap-input100 rs1-wrap-input100 validate-input">
             <span class="label-input100">FEPO</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Seleccione la fecha correspondiente al FEPO del proyecto">help_outline</i></span>
-            <?php echo $this->Form->input('FEPO',['placeholder'=>'FePo','type'=>'text','class'=>'datepicker2','required','readonly'=>'readonly','div' => false, 'label' => false]);?>
+            <?php echo $this->Form->input('FEPO',['placeholder'=>'FePo','type'=>'text','class'=>'datepicker2','readonly'=>'readonly','div' => false, 'label' => false]);?>
             <!-- <span class="error-text">Validación</span> -->
           </div>
           <div class="wrap-input100 rs1-wrap-input100 validate-input">
             <span class="label-input100">Fecha SPI / Corte</span>
             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Seleccione la fecha correspondiente al SPI / Corte del proyecto">help_outline</i></span>
-            <?php echo $this->Form->input('APROBACION',['placeholder'=>'SPI / Corte','id' => 'input-corte','type'=>'text','class'=>'datepicker4','required','readonly'=>'readonly','div' => false, 'label' => false]);?>
+            <?php echo $this->Form->input('APROBACION',['placeholder'=>'SPI / Corte','id' => 'input-corte','type'=>'text','class'=>'datepicker4','readonly'=>'readonly','div' => false, 'label' => false]);?>
             <!-- <span class="error-text">Validación</span> -->
           </div>
           <div class="wrap-input100 rs1-wrap-input100 validate-input">
@@ -189,128 +189,34 @@
               <?php endif;?>
             </div>
           </div>
+          <span class="contact100-form-sub-title">
+            Distancias
+          </span>
+          <div class="wrap-input100 rs1-wrap-input100 validate-input">
+            <span class="label-input100">Longitud</span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Longitud del proyecto">help_outline</i></span>
+            <?php echo $this->Form->input('DISTANCIA',['placeholder'=>'Longitud','id'=>'input-distancia','class'=>'validate','div' => false, 'label' => false]);?>
+            <!-- <span class="error-text">Validación</span> -->
+          </div>
+          <div class="wrap-input100 rs1-wrap-input100 validate-input">
+            <span class="label-input100">ECG / Líneas de transmisión</span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del ECG o Líneas de transmisión">help_outline</i></span>
+            <?php echo $this->Form->input('LINEA_TRANS',['placeholder'=>'Líneas de transmisión','id'=>'input-linea','class'=>'validate','div' => false, 'label' => false]);?>
+            <!-- <span class="error-text">Validación</span> -->
+          </div>
+          <div class="wrap-input100 rs1-wrap-input100 validate-input">
+            <span class="label-input100">Torres</span>
+            <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Cantidad de torres">help_outline</i></span>
+            <?php echo $this->Form->input('TORRE',['placeholder'=>'Torres','id'=>'input-torres','class'=>'validate','div' => false, 'label' => false]);?>
+            <!-- <span class="error-text">Validación</span> -->
+          </div>
+          <div class="container-contact100-form-btn">
+            <?= $this->Form->button('
+              Enviar
+              <i class="material-icons right" aria-hidden="true">send</i>',['class'=>'contact100-form-btn'])?>
+          </div>
+          <?= $this->Form->end();?>
         </div>
-        <div class="contact100-form validate-form" id="Form-3">
-        <span class="contact100-form-title">
-          EDITAR PROYECTO
-        </span>
-        <span class="contact100-form-sub-title">
-          INDICADORES DE PRESUPUESTO
-        </span>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">Presupuesto planeado</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el monto correspondiente al presupuesto planeado del proyecto">help_outline</i></span>
-          <?php echo $this->Form->input('CAPEX_PLANNED',['placeholder'=>'Presupuesto planeado','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">Presupuesto ejecutado</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el monto correspondiente al presupuesto ejecutado del proyecto">help_outline</i></span>
-          <?php echo $this->Form->input('CAPEX_EXECUTED',['placeholder'=>'Presupuesto ejecutado','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-        <span class="contact100-form-sub-title">
-          Total proyecto
-        </span>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">CPI</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Monto correspondiente al CPI total del proyecto">help_outline</i></span>
-          <?php echo $this->Form->input('AC_PPTO',['placeholder'=>'CPI','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">AC</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del AC del proyecto">help_outline</i></span>
-          <?php echo $this->Form->input('AC',['placeholder'=>'AC','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">Presupuesto</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del presupuesto total">help_outline</i></span>
-          <?php echo $this->Form->input('PROJ_TOTAL_PRES',['placeholder'=>'Presupuesto total','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">Proyección del proyecto</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor de la proyección total del proyecto">help_outline</i></span>
-          <?php echo $this->Form->input('TOTAL_FORECAST',['placeholder'=>'Proyección del proyecto','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-        <div class="wrap-input100 rs1-wrap-input100 validate-input">
-          <span class="label-input100">AC / BAC</span>
-          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Seleccione el valor del AC/BAC del proyecto">help_outline</i></span>
-          <?php echo $this->Form->input('AC_BAC',['placeholder'=>'AC/BAC','class'=>'validate','required','div' => false, 'label' => false]);?>
-          <!-- <span class="error-text">Validación</span> -->
-        </div>
-      </div>
-      <div class="contact100-form validate-form" id="Form-4">
-      <span class="contact100-form-title">
-        EDITAR PROYECTO
-      </span>
-      <span class="contact100-form-sub-title">
-        INDICADORES DE PRESUPUESTO
-      </span>
-      <span class="contact100-form-sub-title">
-        Anual proyecto
-      </span>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">CPI Anual <?=date("Y")?></span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del CPI anual">help_outline</i></span>
-        <?php echo $this->Form->input('CPI_ANUAL',['placeholder'=>'CPI anual','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">AC <?=date("Y")?></span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del AC anual">help_outline</i></span>
-        <?php echo $this->Form->input('PROJ_AC',['placeholder'=>'AC anual','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">PV <?=date("Y")?></span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del PV anual">help_outline</i></span>
-        <?php echo $this->Form->input('PV',['placeholder'=>'PV','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" >
-        <span class="label-input100">Presupuesto <?=date("Y")?></span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del presupuesto anual">help_outline</i></span>
-        <?php echo $this->Form->input('PRES_PROJ',['placeholder'=>'Presupuesto anual','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">Proyección del proyecto <?=date("Y")?></span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor de la proyección de proyecto anual">help_outline</i></span>
-        <?php echo $this->Form->input('FORECAST_PROJ',['placeholder'=>'Proyección anual','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <span class="contact100-form-sub-title">
-        Distancias
-      </span>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">Longitud</span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Longitud del proyecto">help_outline</i></span>
-        <?php echo $this->Form->input('DISTANCIA',['placeholder'=>'Longitud','id'=>'input-distancia','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">ECG / Líneas de transmisión</span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Valor del ECG o Líneas de transmisión">help_outline</i></span>
-        <?php echo $this->Form->input('LINEA_TRANS',['placeholder'=>'Líneas de transmisión','id'=>'input-linea','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input">
-        <span class="label-input100">Torres</span>
-        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Cantidad de torres">help_outline</i></span>
-        <?php echo $this->Form->input('TORRE',['placeholder'=>'Torres','id'=>'input-torres','class'=>'validate','required','div' => false, 'label' => false]);?>
-        <!-- <span class="error-text">Validación</span> -->
-      </div>
-      <div class="container-contact100-form-btn">
-        <?= $this->Form->button('
-          Enviar
-          <i class="material-icons right" aria-hidden="true">send</i>',['class'=>'contact100-form-btn'])?>
-      </div>
-      <?= $this->Form->end();?>
-    </div>
 <!-- DIVS Estructurales -->
         </div>
       </div>
@@ -321,18 +227,9 @@
 $(document).ready(function(){
 $('#next').hide();
 $('#Form-2').hide();
-$('#Form-3').hide();
-$('#Form-4').hide();
-// $( "#return" ).dblclick(function() {
-//   $('.contact100-form.validate-form').hide();
-//   $('#Form-4').show();
-// });
-// $( "#next" ).dblclick(function() {
-//   $('.contact100-form.validate-form').hide();
-//   $('#Form-1').show();
-// });
 var Form_Numbers = null;
-$("#next").click(function(){
+$("#next").on("click", function (event) {
+// $("#next").click(function(){
 Form_Numbers = $('.contact100-form.validate-form.active').index();
 BtnNextHide(Form_Numbers);
  if ($('.contact100-form.validate-form.active').index() > 0) {
@@ -343,7 +240,8 @@ BtnNextHide(Form_Numbers);
      scrollTop : 0
  }, 500);
 });
-$("#return").click(function(){
+$("#return").on("click", function (event) {
+// $("#return").click(function(){
 Form_Numbers = $('.contact100-form.validate-form.active').index();
 BtnReturnHide(Form_Numbers);
  if ($('.contact100-form.validate-form.active').index() < $(".contact100-form.validate-form").length-1) {
@@ -357,15 +255,14 @@ BtnReturnHide(Form_Numbers);
 });
 function BtnNextHide(Form_Numbers){
   if(Form_Numbers == 1){
-    $("#next").hide();
-  }else{
     $("#return").show();
-    $("#next").show();
+    $("#next").hide();
   }
 }
 function BtnReturnHide(Form_Numbers){
-  if (Form_Numbers == 2) {
+  if (Form_Numbers == 0) {
     $("#return").hide();
+    $("#next").show();
   }else{
     $("#return").show();
     $("#next").show();

@@ -111,7 +111,7 @@ class ProjectsTable extends Table
 
         $validator
             ->scalar('ALCANCE')
-            ->maxLength('ALCANCE', 500)
+            // ->maxLength('ALCANCE', 500)
             ->allowEmpty('ALCANCE');
 
         $validator

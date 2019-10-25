@@ -127,7 +127,7 @@
                 <div class="indicators row wrap">
                     <h2>Indicadores de cronograma</h2>
                     <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="% Avance ejecutado / % Avance planeado">
-                        <a class="indicator type-1 modal-trigger" id="spi-new" href="#SpiWBS">
+                        <a class="indicator type-1 modal-trigger" id="spi-new" href="#wbs-main-new">
                             <h3 class="mr-2">SPI</h3>
                             <h3 class="ml-auto" id="spi-indicator-new"></h3>
                         </a>
@@ -292,16 +292,14 @@
                     </div>
                 </div>
 
-                <div class="chart" id="div-caf-new">
-                    <h2>Curva de Avance Físico</h2>
-                    <div class="chart-content" id="caf"></div>
-                </div>
-                <!-- </?php if($longitudArrayDate != 0):?> -->
-                  <div class="chart" id="tg-div">
-                      <h2>Tres Generaciones</h2>
-                      <div class="chart-content" id="tg" style="min-height: 475px;"></div>
-                  </div>
-                <!-- </?php endif;?> -->
+              <div class="chart" id="div-caf-new">
+                <h2>Curva de Avance Físico</h2>
+                <div class="chart-content" id="caf"></div>
+              </div>
+              <div class="chart" id="tg-div">
+                <h2>Tres Generaciones</h2>
+                <div class="chart-content" id="tg" style="min-height: 475px;"></div>
+              </div>
             </div>
 
             <!-- Otras versiones -->
@@ -320,7 +318,7 @@
                 <div class="indicators row wrap">
                     <h2>Indicadores de cronograma</h2>
                     <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 modal-trigger" id="spi-old-color" href="#SpiWBS">
+                        <a class="indicator type-1 modal-trigger" id="spi-old-color" href="#wbs-main-old">
                             <h3 class="mr-2">SPI</h3>
                             <h3 class="ml-auto" id="spi-old"></h3>
                         </a>
@@ -1189,57 +1187,24 @@
         </ul>
     </div>
 </div>
-<div id="SpiWBS" class="modal" style="max-weight: 100% !important">
+<!-- WBS NEW -->
+<div id="wbs-main-new" class="modal" style="max-weight: 100% !important">
     <div class="modal-content">
         <a class="modal-close close">
             <i class="material-icons">close</i>
         </a>
-        <h2>Estructuta de WBS</h2>
-        <ul class="collapsible collapsible-data">
-          <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
-            <?php if ($EstructureLevel1["level"] == 1): ?>
-            <li>
-                <div class="collapsible-header" id="div-<?=$EstructureLevel1["wbs_id"]?>">
-                    <i class="material-icons">keyboard_arrow_down</i>
-                    <ul class="collapsible-header-content">
-                          <li>
-                              <small>Nombre</small>
-                              <h3 id="name-level-1"><?=$EstructureLevel1["name"]?></h3>
-                          </li>
-                          <li>
-                              <small>Avance % Planeado</small>
-                              <h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3>
-                          </li>
-                          <li>
-                              <small>Avance % Real</small>
-                              <h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3>
-                          </li>
-                          <li>
-                              <small>BL Inicio</small>
-                              <h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3>
-                          </li>
-                          <li>
-                              <small>BL Fin</small>
-                              <h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3>
-                          </li>
-                          <li>
-                              <small>Inicio</small>
-                              <h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3>
-                          </li>
-                          <li>
-                              <small>Fin</small>
-                              <h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3>
-                          </li>
-                          <li>
-                              <small>SPI</small>
-                              <h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3>
-                          </li>
-                      </ul>
-                </div>
-            </li>
-          <?php endif; ?>
-        <?php endforeach; ?>
-        </ul>
+        <h2 id="title-wbs-new">Estructura de WBS</h2>
+        <ul class="collapsible collapsible-data" id="wbs-new"></ul>
+    </div>
+</div>
+<!-- WBS NEW -->
+<div id="wbs-main-old" class="modal" style="max-weight: 100% !important">
+    <div class="modal-content">
+        <a class="modal-close close">
+            <i class="material-icons">close</i>
+        </a>
+        <h2 id="title-wbs-old">Estructura de WBS</h2>
+        <ul class="collapsible collapsible-data" id="wbs-old"></ul>
     </div>
 </div>
 <!-- HITOS NEW -->
@@ -1272,7 +1237,7 @@
       </div>
     </div>
 </div>
-<!-- HITOS NEW -->
+<!-- HITOS OLD -->
 <div id="Hitos-old" class="modal" style="max-weight: 100% !important">
     <div class="modal-content">
       <div class="modal-content">
@@ -1517,6 +1482,7 @@
           }
        });
      } else {
+       local_db_info([null, null, null, null, spi_value, select_value, chart_side]);
        if (spi_value != null) {
          if (select_value == 'actual' && chart_side == 'new') {
            ws_colors_new(spi_value);
@@ -1544,31 +1510,31 @@
         }
         var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
         if (unifier_ejec_total != null) {
-          $('#ejecutado-new').text('USD $ '+parseFloat(unifier_ejec_total)+' MM');
+          $('#ejecutado-new').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
         } else {
           $('#ejecutado-new').text('');
         }
         var unifier_plan_total = this.planeadousd_total;
         if (unifier_plan_total != null) {
-          $('#planeado-new').text('USD $ '+parseFloat(unifier_plan_total)+' MM');
+          $('#planeado-new').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
         } else {
           $('#planeado-new').text('');
         }
         var unifier_presp_total = this.presupuestousd_total;
         if (unifier_presp_total != null) {
-          $('#presupuesto-new').text('USD $ '+parseFloat(unifier_presp_total)+' MM');
+          $('#presupuesto-new').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
         } else {
           $('#presupuesto-new').text('');
         }
         var unifier_var_total = this.variacionusd_total;
         if (unifier_var_total != null) {
-          $('#variacion-new').text('USD $ '+parseFloat(unifier_var_total)+' MM');
+          $('#variacion-new').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
         } else {
           $('#variacion-new').text('');
         }
         var unifier_proy_total = this.proyeccionusd_total;
         if (unifier_proy_total != null) {
-          $('#proyeccion-new').text('USD $ '+parseFloat(unifier_proy_total)+' MM');
+          $('#proyeccion-new').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
         } else {
           $('#proyeccion-new').text('');
         }
@@ -1587,31 +1553,31 @@
         }
         var unifier_ejec_anual = this.ejecutadusd_2019;
         if (unifier_ejec_anual != null) {
-          $('#ejec-anual-new').text('USD $ '+parseFloat(unifier_ejec_anual)+' MM');
+          $('#ejec-anual-new').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
         } else {
           $('#ejec-anual-new').text('');
         }
         var unifier_plan_anual = this.planeadousd_2019;
         if (unifier_plan_anual != null) {
-          $('#plan-anual-new').text('USD $ '+parseFloat(unifier_plan_anual)+' MM');
+          $('#plan-anual-new').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
         } else {
           $('#plan-anual-new').text('');
         }
         var unifier_pres_anual = this.presupuestousd_2019;
         if (unifier_pres_anual != null) {
-          $('#pres-anual-new').text('USD $ '+parseFloat(unifier_pres_anual)+' MM');
+          $('#pres-anual-new').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
         } else {
           $('#pres-anual-new').text('');
         }
         var unifier_proy_anual = this.proyeccionusd_2019;
         if (unifier_proy_anual != null) {
-          $('#proyeccion-anual-new').text('USD $ '+parseFloat(unifier_proy_anual)+' MM');
+          $('#proyeccion-anual-new').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
         } else {
           $('#proyeccion-anual-new').text('');
         }
         var unifier_var_anual = this.varacionusd_2019;
         if (unifier_var_anual != null) {
-          $('#variacion-anual-new').text('USD $ '+parseFloat(unifier_var_anual)+' MM');
+          $('#variacion-anual-new').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
         } else {
           $('#variacion-anual-new').text('');
         }
@@ -1635,31 +1601,31 @@
         }
         var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
         if (unifier_ejec_total != null) {
-          $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total)+' MM');
+          $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
         } else {
           $('#ejec-total-old').text('');
         }
         var unifier_plan_total = this.planeadousd_total;
         if (unifier_plan_total != null) {
-          $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total)+' MM');
+          $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
         } else {
           $('#plan-total-old').text('');
         }
         var unifier_presp_total = this.presupuestousd_total;
         if (unifier_presp_total != null) {
-          $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total)+' MM');
+          $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
         } else {
           $('#pres-total-old').text('');
         }
         var unifier_var_total = this.variacionusd_total;
         if (unifier_var_total != null) {
-          $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total)+' MM');
+          $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
         } else {
           $('#variacion-total-old').text('');
         }
         var unifier_proy_total = this.proyeccionusd_total;
         if (unifier_proy_total != null) {
-          $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total)+' MM');
+          $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
         } else {
           $('#proy-total-old').text('');
         }
@@ -1678,31 +1644,31 @@
         }
         var unifier_ejec_anual = this.ejecutadusd_2019;
         if (unifier_ejec_anual != null) {
-          $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual)+' MM');
+          $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
         } else {
           $('#ejec-anual-old').text('');
         }
         var unifier_plan_anual = this.planeadousd_2019;
         if (unifier_plan_anual != null) {
-          $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual)+' MM');
+          $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
         } else {
           $('#plan-anual-old').text('');
         }
         var unifier_pres_anual = this.presupuestousd_2019;
         if (unifier_pres_anual != null) {
-          $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual)+' MM');
+          $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
         } else {
           $('#pres-anual-old').text('');
         }
         var unifier_proy_anual = this.proyeccionusd_2019;
         if (unifier_proy_anual != null) {
-          $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual)+' MM');
+          $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
         } else {
           $('#proy-anual-old').text('');
         }
         var unifier_var_anual = this.varacionusd_2019;
         if (unifier_var_anual != null) {
-          $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual)+' MM');
+          $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
         } else {
           $('#variacion-anual-old').text('');
         }
@@ -1763,7 +1729,7 @@
                 $('#igr-value-2').text('IGR '+this.IGR+'%');
                 $('#igr-value-3').text('IGR '+this.IGR+'%');
               }
-              if (this.FOTO != null) {
+              if (this.FOTO != null && $('#mapa-img img').length == 0 && $('#mapa-img img').length <= 1) {
                 $('#mapa-img').append($('<img>', {src : '/Portal-Web/img/maps/'+this.ID_PROJECT+'/'+this.FOTO}));
               }
               // Valves and towers
@@ -1814,13 +1780,19 @@
           if (indicators_col_val[4] != undefined) {
             if (indicators_col_val[4] != null && indicators_col_val[4] > this.minimun && indicators_col_val[4] <= this.maximo && this.indicator_name == 'SPI') {
                 $('#spi-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[4] == null) {
+                $('#spi-new').removeAttr('style');
             }
             // CPI TOTAL & ANUAL
             if (indicators_col_val[0] != null && indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-indicator-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[0] == null) {
+                $('#cpi-indicator-new').removeAttr('style');
             }
             if (indicators_col_val[2] != null && indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-anual-indicator-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[2] == null) {
+                $('#cpi-anual-indicator-new').removeAttr('style');
             }
             // PORCENTAJE PROYECTADO
             if (indicators_col_val[3] != null && indicators_col_val[3] < this.maximo && this.name_threshold == 'PI Baja') {
@@ -1829,6 +1801,8 @@
                 $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
             } else if (indicators_col_val[3] != null && indicators_col_val[3] < this.maximo && indicators_col_val[3] > this.minimun && this.name_threshold == 'PI Alta') {
                 $('#porcentaje-pr-anual-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[3] == null) {
+                $('#porcentaje-pr-anual-new').removeAttr('style');
             }
             // PORCENTAJE PROYECTADO
             if (indicators_col_val[1] != null && indicators_col_val[1] < this.maximo && this.name_threshold == 'PI Baja') {
@@ -1837,15 +1811,22 @@
                 $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
             } else if (indicators_col_val[1] != null && indicators_col_val[1] < this.maximo && indicators_col_val[1] > this.minimun && this.name_threshold == 'PI Alta') {
                 $('#porcentaje-proy-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[1] == null) {
+                $('#porcentaje-proy-new').removeAttr('style');
             }
             // IGR
             if (indicators_col_val[7] != null && indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
               $('#igr-value-2').css({'background-color' : this.hexa_color});
               $('#igr-value-3').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[7] == null){
+              $('#igr-value-2').removeAttr('style');
+              $('#igr-value-3').removeAttr('style');
             }
           } else {
             if (indicators_col_val != null && indicators_col_val > this.minimun && indicators_col_val <= this.maximo && this.indicator_name == 'SPI') {
                 $('#spi-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val == null) {
+                $('#spi-new').removeAttr('style');
             }
           }
         });
@@ -1867,13 +1848,19 @@
             // SPI
             if (indicators_col_val[4] > this.minimun && indicators_col_val[4] <= this.maximo && this.indicator_name == 'SPI') {
                 $('#spi-old-color').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[4] == null){
+                $('#spi-old-color').removeAttr('style');
             }
             // CPI TOTAL & ANUAL
             if (indicators_col_val[0] != null && indicators_col_val[0] > this.minimun && indicators_col_val[0] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-indicator-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[0] == null){
+                $('#cpi-indicator-old').removeAttr('style');
             }
             if (indicators_col_val[2] != null && indicators_col_val[2] > this.minimun && indicators_col_val[2] <= this.maximo && this.indicator_name == 'CPI') {
                 $('#cpi-anual-indicator-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[2] == null){
+                $('#cpi-anual-indicator-old').removeAttr('style');
             }
             // PORCENTAJE PROYECTADO
             if (indicators_col_val[1] < this.maximo && this.name_threshold == 'PI Baja') {
@@ -1882,6 +1869,8 @@
                 $('#porcentaje-proy-old').css({'background-color' : this.hexa_color});
             } else if (indicators_col_val[1] < this.maximo && indicators_col_val[1] > this.minimun && this.name_threshold == 'PI Alta') {
                 $('#porcentaje-proy-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[1] == null){
+                $('#porcentaje-proy-old').removeAttr('style');
             }
             // PORCENTAJE PROYECTADO
             if (indicators_col_val[3] < this.maximo && this.name_threshold == 'PI Baja') {
@@ -1890,15 +1879,21 @@
                 $('#porcentaje-anual-old').css({'background-color' : this.hexa_color});
             } else if (indicators_col_val[3] < this.maximo && indicators_col_val[3] > this.minimun && this.name_threshold == 'PI Alta') {
                 $('#porcentaje-anual-old').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[3] == null){
+                $('#porcentaje-anual-old').removeAttr('style');
             }
             // IGR
             if (indicators_col_val[7] != null && indicators_col_val[7] != 'undefined' && (indicators_col_val[7]/100) > this.minimun && (indicators_col_val[7] / 100) <= this.maximo && this.indicator_name == 'IGR') {
               $('#igr-value-1').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val[7] == null){
+              $('#igr-value-1').removeAttr('style');
             }
           }
           else {
             if (indicators_col_val > this.minimun && indicators_col_val <= this.maximo && this.indicator_name == 'SPI') {
                 $('#spi-new').css({'background-color' : this.hexa_color});
+            } else if (indicators_col_val == null){
+                $('#spi-new').removeAttr('style');
             }
           }
         });
@@ -1939,17 +1934,19 @@
           period_select.prop('selectedIndex', 0); //Sets the first option as selected
           period_select.formSelect();
           var hitos_body = $('#hitos-body-new');
-          $('#hitos-body-new tr').remove();
-          var selected_date_new = $(this).children(":selected").attr("value");
+          var div_wbs = $('#wbs-new');
+          var selected_date_new = $(this).children(":selected").attr("value"), selected_value = $(this).children(":selected").text();
           if (selected_date_new == "actual") {
             info_actual_new();
+            wbs_actual(result[1], 'new');
             $('#hitos-title-new').text('HITOS');
-            hitos_actual(result[1]);
+            hitos_actual(result[1], 'new');
             caf(result[1], 1, 'actual-select');
-            actual_tg(result[1], result[4], 'all-select');
+            actual_tg(result[1], result[4], selected_date_new, 'new');
             Unifier_information(result[1], 'actual', result[4], result[3], 'new');
           }else{
             option_compare_new_dates(selected_date_new);
+            wbs_compare(result[1], selected_date_new, selected_value, div_wbs, 'new');
             advance_compare(result[1], selected_date_new, 'new');
             $('#hitos-title-new').text('HITOS '+$(this).children(":selected").text());
             hitos_compare(result[1], selected_date_new, hitos_body, 'new');
@@ -1963,17 +1960,20 @@
           period_select.prop('selectedIndex', 0); //Sets the first option as selected
           period_select.formSelect();
           var hitos_body = $('#hitos-body-old');
-          $('#hitos-body-old tr').remove();
-          var selected_date_old = $(this).children(":selected").attr("value");
+          var div_wbs = $('#wbs-old');
+          var selected_date_old = $(this).children(":selected").attr("value"), selected_value = $(this).children(":selected").text();
           if (selected_date_old == "actual") {
             info_actual_old();
+            wbs_actual(result[1], 'old');
             $('#hitos-title-old').text('HITOS');
-            hitos_actual(result[1]);
+            hitos_actual(result[1], 'old');
             caf(result[1], 1, 'old-select');
-            actual_tg(result[1], result[4], 'all-select');
+            actual_tg(result[1], result[4], selected_date_old, 'old');
             Unifier_information(result[1], 'actual', result[4], result[3], 'old');
           }else{
             option_compare_old_dates(selected_date_old);
+            wbs_compare(result[1], selected_date_old, selected_value, div_wbs, 'old');
+            advance_compare(result[1], selected_date_old, 'old');
             $('#hitos-title-old').text('HITOS '+$(this).children(":selected").text());
             hitos_compare(result[1], selected_date_old, hitos_body, 'old');
             curva_s_compare(result[1], selected_date_old, 1, 'old');
@@ -1997,18 +1997,25 @@
         },
         success: function(response){
           $.each(response, function() {
-            $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+            if (this.spi_labor_units != null) {
+              $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+            } else {
+              $('#spi-indicator-new').text('');
+            }
             $('#da-new').text(this.da);
             // Fepo indicator
             if (this.fepo != null) {
               var fepo_date = new Date(this.fepo);
               var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
               $('#fepo-new').text(fepo_format_date);
-              // $('#fepo-old').text(fepo_format_date);
+            } else {
+              $('#fepo-new').text('');
             }
             $('#duration-total-new').text(this.od);
             if (this.pi != null) {
-                $('#pi-new').text(this.pi+"%");
+              $('#pi-new').text(this.pi+"%");
+            } else {
+              $('#pi-new').text('');
             }
           });
         }
@@ -2030,7 +2037,11 @@
       },
       success: function(response){
         $.each(response, function() {
-          $('#spi-old').text(this.spi_labor_units.toFixed(2));
+          if (this.spi_labor_units != null) {
+            $('#spi-old').text(this.spi_labor_units.toFixed(2));
+          } else {
+            $('#spi-old').text('');
+          }
           $('#variacion-est-old').text(this.da);
           // Fepo indicator
           if (this.fepo != null) {
@@ -2039,17 +2050,21 @@
             $('#fepo-old').text(fepo_format_date);
           }
           $('#duracion-total-old').text(this.od);
-          $('#pi-old').text(this.pi+"%");
-
+          if (this.pi != null) {
+            $('#pi-old').text(this.pi+"%");
+          } else {
+            $('#pi-old').text('');
+          }
         });
       }
     });
   }
   promise.then(function (result) {
+      wbs_actual(result[1], 'new');
       donut(result[1]);
       caf(result[1], 1, 'all-select');
-      actual_tg(result[1], result[4], 'all-select');
-      hitos_actual(result[1]);
+      actual_tg(result[1], result[4], 'all', 'all-select');
+      hitos_actual(result[1], 'new');
       Unifier_information(result[1], 'all-select', result[4], result[3], 'all');
   });
 
@@ -2103,14 +2118,15 @@
           period_select.prop('selectedIndex', 0); //Sets the first option as selected
           period_select.formSelect();
 
-          $('#hitos-title-old').text('HITOS');
-          $('#hitos-title-new').text('HITOS');
-          $('.hitos-body tr').remove();
-          hitos_actual(result[1]);
+          wbs_actual(result[1], 'new');
+          wbs_actual(result[1], 'old');
+
+          hitos_actual(result[1], 'new');
+          hitos_actual(result[1], 'old');
 
           caf(result[1], 1, 'actual-select');
 
-          actual_tg(result[1], result[4], 'all-select');
+          actual_tg(result[1], result[4], 'all', 'all-select');
 
           Unifier_information(result[1], 'all-select', result[4], result[3], 'all');
         });
@@ -2418,7 +2434,7 @@
         }
     );
   }
-  function actual_tg(project_id, unifier_code, select_compare) {
+  function actual_tg(project_id, unifier_code, select_compare, select_side) {
       if (unifier_code != null) {
         var settings = {
             "async": true,
@@ -2458,23 +2474,38 @@
                   "col-planned": parseFloat(planned_value_ln).toFixed(4),
                 });
             });
-            if (chart_value.length > 0) {
-                if (select_compare == 'actual-select') {
-                  tg_chart(chart_value);
-                  $('#tg-div').show();
-                } else if (select_compare == 'all-select') {
-                  tg_chart(chart_value);
-                  tg_chart_old(chart_value);
-                  $('#tg-div').show();
-                  $('#div-tg-old').show();
-                }
-                else{
-                  tg_chart_old(chart_value);
-                  $('#div-tg-old').show();
-                }
-            } else {
+            if (select_compare == 'actual' && select_side == 'new') {
+              if (chart_value.length > 0) {
+                tg_chart(chart_value);
+                $('#tg-div').show();
+              }
+              else
+              {
+                $('#tg-div').hide();
+              }
+            }
+            if (select_compare == 'actual' && select_side == 'old') {
+              if (chart_value.length > 0) {
+                tg_chart_old(chart_value);
+                $('#div-tg-old').show();
+              }
+              else
+              {
+                $('#div-tg-old').hide();
+              }
+            }
+            if (select_compare == 'all' && select_side == 'all-select') {
+              if (chart_value.length > 0) {
+                tg_chart(chart_value);
+                tg_chart_old(chart_value);
+                $('#tg-div').show();
+                $('#div-tg-old').show();
+              }
+              else
+              {
                 $('#tg-div').hide();
                 $('#div-tg-old').hide();
+              }
             }
          });
        } else {
@@ -3182,17 +3213,7 @@
               select.formSelect();
             })
           });
-          $(document).ready(function(){
-            <?php foreach ($wbsEstructure as $estructre_wbs => $EstructureLevel1): ?>
-              <?php if ($EstructureLevel1["level"] != 1): ?>
-                $( "#div-"+<?=$EstructureLevel1["wbs_parent_id"]?>).after('<div class="collapsible-body"><ul class="collapsible"><li><div class="collapsible-header" id="div-'+<?=$EstructureLevel1["wbs_id"]?>+'"><i id="i-'+<?=$EstructureLevel1["wbs_id"]?>+'" class="material-icons">keyboard_arrow_down</i><ul class="collapsible-header-content"><li><small>Nombre</small><h3><?=$EstructureLevel1["name"]?></h3></li><li><small>Schedule % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["schedule percent complete"]?></h3></li><li><small>NL Units % Complete</small><h3 id="schedule-level-1"><?=$EstructureLevel1["nonlabor percent complete"]?></h3></li><li><small>BL Inicio</small><h3 id="bl-initial-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_start_date"]))?></h3></li><li><small>BL Fin</small><h3 id="bl-fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["bl_finish_daste"]))?></h3></li><li><small>Inicio</small><h3 id="inicio-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["start_date"]))?></h3></li><li><small>Fin</small><h3 id="fin-level-1"><?=strftime("%d %B, %Y", strtotime($EstructureLevel1["finish_date"]))?></h3></li><li><small>SPI</small><h3 id="spi-level-1"><?=$EstructureLevel1["spi_cost"]?></h3></li></ul></div></div></li></ul></div>');
-                  <?php if($EstructureLevel1["connect_by_isleaf"] != 0):?>
-                    $("#div-"+<?=$EstructureLevel1["wbs_id"]?>).click(false);
-                    $("#i-"+<?=$EstructureLevel1["wbs_id"]?>).empty();
-                  <?php endif; ?>
-              <?php endif; ?>
-            <?php endforeach; ?>
-          });
+
           function info_actual_new(){
             xhr1 = $.ajax({
             headers:{
@@ -3209,7 +3230,11 @@
             success: function(response){
               $.each(response, function() {
                 // SPI indicator
-                $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+                if (this.spi_labor_units != null) {
+                  $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+                }
+                $('#avance-plan-new').text($('#porcentaje-plan').text().replace(' Avance planeado', ''));
+                $('#avance-ejec-new').text($('#porcentaje-ejec').text().replace(' Avance ejecutado', ''));
                 // $('#spi-old').text(this.spi_labor_units.toFixed(2));
                 $('#da-new').text(this.da);
                 // Fepo indicator
@@ -3245,6 +3270,9 @@
               // SPI indicator
               $('#spi-old').text(this.spi_labor_units.toFixed(2));
               $('#variacion-est-old').text(this.da);
+              // PORCENTAJE PLANEADO Y EJECUTADO
+              $('#avance-plan-old').text($('#porcentaje-plan').text().replace('Avance planeado', ''));
+              $('#avance-ejec-old').text($('#porcentaje-ejec').text().replace('Avance ejecutado', ''));
               // Fepo indicator
               if (this.fepo != null) {
                 var fepo_date = new Date(this.fepo);
@@ -3260,7 +3288,9 @@
         });
       }
       // HITOS ACTUAL
-      function hitos_actual(id_project){
+      function hitos_actual(id_project, compare_side){
+        $('#hitos-title-'+compare_side).text('HITOS');
+        $('#hitos-body-'+compare_side+' tr').remove();
         var settings = {
           "async": true,
           "crossDomain": true,
@@ -3287,8 +3317,8 @@
             var finish_date = new Date(this.finish_date);
             var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
             // APPEND HITOS
-            $('.hitos-body').append($('<tr>', {class : 'hito-tr-'+i}));
-              $('.hito-tr-'+i).append($('<td>', {text : this.code_activity}))
+            $('#hitos-body-'+compare_side).append($('<tr>', {id : 'hito-tr-'+compare_side+'-'+i}));
+              $('#hito-tr-'+compare_side+'-'+i).append($('<td>', {text : this.code_activity+' '+compare_side}))
               .append($('<td>', {text : this.name}))
               .append($('<td>', {text : this.spc}))
               .append($('<td>', {text : this.nlu_percent_complete}))
@@ -3300,10 +3330,293 @@
           });
         });
       }
+      // WBS
+      function wbs_actual(id_project, compare_side){
+        $('#title-wbs-'+compare_side).text('ESTRUCTURA DE WBS');
+        $('#wbs-'+compare_side+' li').remove();
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://primavera.eeb.com.co:8080/ords/portal/wbs/list/?v_project="+id_project,
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+            "cache-control": "no-cache"
+          }
+        }
+
+        $.ajax(settings).done(function (response) {
+          // console.log(response);
+          $.each(response.items, function(i) {
+            if (this.level == 1) {
+              $('#wbs-'+compare_side).append($('<li>', {id : 'li-'+compare_side+'-'+this.wbs_id}));
+              $('#li-'+compare_side+'-'+this.wbs_id).append($('<div>', {id : 'div-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header'}));
+              if (this.connect_by_isleaf == 0) {
+                $('#div-'+compare_side+'-'+this.wbs_id).append($('<i>', {class : 'material-icons', text : 'keyboard_arrow_down'}));
+              } else {
+                $('#div-'+compare_side+'-'+this.wbs_id).click(false);
+              }
+              $('#div-'+compare_side+'-'+this.wbs_id).append($('<ul>', {id : 'ul-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header-content'}));
+              // NAME
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'name-'+compare_side+'-'+this.wbs_id}));
+              $('#name-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Nombre'}));
+              $('#name-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this.name}));
+              // AVANCE % PLANEADO
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'plan-'+compare_side+'-'+this.wbs_id}));
+              $('#plan-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Planeado'}));
+              $('#plan-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['schedule percent complete']}));
+              // AVANCE % REAL
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'real-'+compare_side+'-'+this.wbs_id}));
+              $('#real-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Real'}));
+              $('#real-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['nonlabor percent complete']}));
+              // BL INICIO
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_inicio-'+compare_side+'-'+this.wbs_id}));
+              $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
+              var bl_start_date = new Date(this.bl_start_date);
+              var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+              $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+              // BL FIN
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_fin-'+compare_side+'-'+this.wbs_id}));
+              $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
+              var bl_finish_date = new Date(this.bl_finish_daste);
+              var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+              $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+              // INICIO
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'inicio-'+compare_side+'-'+this.wbs_id}));
+              $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
+              var start_date = new Date(this.start_date);
+              var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+              $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+              // FIN
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'fin-'+compare_side+'-'+this.wbs_id}));
+              $('#fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
+              var finish_date = new Date(this.finish_date);
+              var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+              $('#fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+              // SPI
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'spi-'+compare_side+'-'+this.wbs_id}));
+              $('#spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
+              $('#spi-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['spi_cost']}));
+            }
+              // CHILDRENS
+              if (this.level != 1) {
+                $('#div-'+compare_side+'-'+this.wbs_parent_id).after($('<div>', {id: 'div-child-'+compare_side+'-'+this.wbs_id, class : 'collapsible-body'}));
+                $('#div-child-'+compare_side+'-'+this.wbs_id).append($('<ul>', {id: 'ul-'+compare_side+'-'+this.wbs_id, class : 'collapsible'}));
+                $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'li-'+compare_side+'-'+this.wbs_id}));
+                $('#li-'+compare_side+'-'+this.wbs_id).append($('<div>', {id : 'div-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header'}));
+                if (this.connect_by_isleaf == 0) {
+                  $('#div-'+compare_side+'-'+this.wbs_id).append($('<i>', {class : 'material-icons', text : 'keyboard_arrow_down'}));
+                } else {
+                  $('#div-'+compare_side+'-'+this.wbs_id).click(false);
+                }
+                $('#div-'+compare_side+'-'+this.wbs_id).append($('<ul>', {id: 'ul-child-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header-content'}));
+                // NOMBRE
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-name-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-name-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Nombre'}));
+                $('#li-child-name-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this.name}));
+                // SCHEDULE % COMPLETE
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-plan-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-plan-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Planeado'}));
+                $('#li-child-plan-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['schedule percent complete']}));
+                // NL UNITS % COMPLETE
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-real-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-real-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Real'}));
+                $('#li-child-real-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['nonlabor percent complete']}));
+                // BL INICIO
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-bl-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
+                // FORMAT
+                var bl_start_date = new Date(this.bl_start_date);
+                var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+                $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+                // BL FIN
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-fin-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
+                // FORMAT
+                var bl_finish_date = new Date(this.bl_finish_daste);
+                var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+                $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+                // INICIO
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-start-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
+                // FORMAT
+                var start_date = new Date(this.start_date);
+                var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+                // APPEND DATE
+                $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+                // FIN
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-finish-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
+                // FORMAT
+                var finish_date = new Date(this.finish_date);
+                var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+                // APPEND DATE
+                $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+                // SPI
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-spi-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
+                $('#li-child-spi-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this.spi_cost}));
+
+            }
+          });
+          // JavaScript necesario para la función de acordeon
+          var collapsible = document.querySelectorAll('.collapsible');
+          var options = {
+            accordion: function(){
+              var carousel = document.querySelectorAll('.collapsible-header');
+              var cInstances = M.Carousel.init(carousel,{
+                indicators: true
+              });
+            }
+          };
+          var instances = M.Collapsible.init(collapsible, options);
+        });
+      }
       // COMPARE LOGIC
+      // WBS COMPARE
+      function wbs_compare(id_project, capture_id, capture_value, main_div, compare_side){
+        $('#title-wbs-'+compare_side).text('ESTRUCTURA DE WBS '+capture_value);
+        $('#wbs-'+compare_side+' li').remove();
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://primavera.eeb.com.co:8080/ords/portal/captures/wbs/?id_project="+id_project+"&id_capture="+capture_id,
+          "method": "GET",
+          "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+            "cache-control": "no-cache"
+          }
+        }
+
+        $.ajax(settings).done(function (response) {
+          // console.log(response);
+          $.each(response.items, function() {
+            if (this.level == 1) {
+              main_div.append($('<li>', {id : 'li-'+compare_side+'-'+this.wbs_id}));
+              $('#li-'+compare_side+'-'+this.wbs_id).append($('<div>', {id : 'div-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header'}));
+              if (this.connect_by_isleaf == 0) {
+                $('#div-'+compare_side+'-'+this.wbs_id).append($('<i>', {class : 'material-icons', text : 'keyboard_arrow_down'}));
+              } else {
+                $('#div-'+compare_side+'-'+this.wbs_id).click(false);
+              }
+              $('#div-'+compare_side+'-'+this.wbs_id).append($('<ul>', {id : 'ul-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header-content'}));
+              // NAME
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'name-'+compare_side+'-'+this.wbs_id}));
+              $('#name-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Nombre'}));
+              $('#name-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this.name}));
+              // AVANCE % PLANEADO
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'plan-'+compare_side+'-'+this.wbs_id}));
+              $('#plan-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Planeado'}));
+              $('#plan-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['schedule percent complete']}));
+              // AVANCE % REAL
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'real-'+compare_side+'-'+this.wbs_id}));
+              $('#real-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Real'}));
+              $('#real-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['nonlabor percent complete']}));
+              // BL INICIO
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_inicio-'+compare_side+'-'+this.wbs_id}));
+              $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
+              var bl_start_date = new Date(this.bl_start_date);
+              var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+              $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+              // BL FIN
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_fin-'+compare_side+'-'+this.wbs_id}));
+              $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
+              var bl_finish_date = new Date(this.bl_finish_daste);
+              var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+              $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+              // INICIO
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'inicio-'+compare_side+'-'+this.wbs_id}));
+              $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
+              var start_date = new Date(this.start_date);
+              var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+              $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+              // FIN
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'fin-'+compare_side+'-'+this.wbs_id}));
+              $('#fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
+              var finish_date = new Date(this.finish_date);
+              var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+              $('#fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+              // SPI
+              $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'spi-'+compare_side+'-'+this.wbs_id}));
+              $('#spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
+              $('#spi-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['spi_cost']}));
+            }
+              // CHILDRENS
+              if (this.level != 1) {
+                $('#div-'+compare_side+'-'+this.wbs_parent_id).after($('<div>', {id: 'div-child-'+compare_side+'-'+this.wbs_id, class : 'collapsible-body'}));
+                $('#div-child-'+compare_side+'-'+this.wbs_id).append($('<ul>', {id: 'ul-'+compare_side+'-'+this.wbs_id, class : 'collapsible'}));
+                $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'li-'+compare_side+'-'+this.wbs_id}));
+                $('#li-'+compare_side+'-'+this.wbs_id).append($('<div>', {id : 'div-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header'}));
+                if (this.connect_by_isleaf == 0) {
+                  $('#div-'+compare_side+'-'+this.wbs_id).append($('<i>', {class : 'material-icons', text : 'keyboard_arrow_down'}));
+                } else {
+                  $('#div-'+compare_side+'-'+this.wbs_id).click(false);
+                }
+                $('#div-'+compare_side+'-'+this.wbs_id).append($('<ul>', {id: 'ul-child-'+compare_side+'-'+this.wbs_id, class : 'collapsible-header-content'}));
+                // NOMBRE
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-name-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-name-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Nombre'}));
+                $('#li-child-name-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this.name}));
+                // SCHEDULE % COMPLETE
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-plan-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-plan-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Planeado'}));
+                $('#li-child-plan-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['schedule percent complete']}));
+                // NL UNITS % COMPLETE
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-real-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-real-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Real'}));
+                $('#li-child-real-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['nonlabor percent complete']}));
+                // BL INICIO
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-bl-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
+                // FORMAT
+                var bl_start_date = new Date(this.bl_start_date);
+                var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+                $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+                // BL FIN
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-fin-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
+                // FORMAT
+                var bl_finish_date = new Date(this.bl_finish_daste);
+                var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+                $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+                // INICIO
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-start-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
+                // FORMAT
+                var start_date = new Date(this.start_date);
+                var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+                // APPEND DATE
+                $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+                // FIN
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-finish-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
+                // FORMAT
+                var finish_date = new Date(this.finish_date);
+                var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+                // APPEND DATE
+                $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+                // SPI
+                $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-spi-'+compare_side+'-'+this.wbs_id}));
+                $('#li-child-spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
+                $('#li-child-spi-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this.spi_cost}));
+
+            }
+          });
+          // JavaScript necesario para la función de acordeon
+          var collapsible = document.querySelectorAll('.collapsible');
+          var options = {
+            accordion: function(){
+              var carousel = document.querySelectorAll('.collapsible-header');
+              var cInstances = M.Carousel.init(carousel,{
+                indicators: true
+              });
+            }
+          };
+          var instances = M.Collapsible.init(collapsible, options);
+        });
+      }
       // COMPARE - PORCENTAJE PLANEADO Y EJECUTADO
       function advance_compare(id_project, capture_id, chart_side){
-        console.log(id_project+" "+capture_id+" "+chart_side);
         var settings = {
           "async": true,
           "crossDomain": true,
@@ -3314,9 +3627,42 @@
             "cache-control": "no-cache"
           }
         }
-
         $.ajax(settings).done(function (response) {
-          console.log(response);
+          if (response.items.length == 0 && chart_side == 'new') {
+            $('#avance-plan-new').text('');
+            $('#avance-ejec-new').text('');
+          } else if (response.items.length == 0 && chart_side == 'old') {
+            $('#avance-plan-old').text('');
+            $('#avance-ejec-old').text('');
+          }
+          $.each(response.items, function() {
+            if (chart_side == 'new') {
+              if (this.planeado != null) {
+                $('#avance-plan-new').text(this.planeado+'%');
+              }
+              else {
+                $('#avance-plan-new').text('');
+              }
+              if (this.ejecutado != null) {
+                $('#avance-ejec-new').text(this.ejecutado+'%');
+              }
+              else {
+                $('#avance-ejec-new').text('');
+              }
+            }
+            if (chart_side == 'old') {
+              if (this.planeado != null) {
+                $('#avance-plan-old').text(this.planeado+'%');
+              } else {
+                $('#avance-plan-old').text('');
+              }
+              if (this.ejecutado != null) {
+                $('#avance-ejec-old').text(this.ejecutado+'%');
+              } else {
+                $('#avance-ejec-old').text('');
+              }
+            }
+          });
         });
       }
       // HITOS COMAPARE
@@ -3382,7 +3728,7 @@
                 "column": parseFloat(this.cum_bl_lu).toFixed(4) //BL
               });
           });
-          if (chart_side.length > 0) {
+          if (chart_value.length > 0) {
             if (chart_side == 'new') {
               caf_chart(chart_value);
             }
