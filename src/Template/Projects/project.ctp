@@ -667,35 +667,35 @@
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -705,35 +705,35 @@
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -743,35 +743,35 @@
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -781,35 +781,35 @@
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -819,35 +819,35 @@
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                              <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                              </td>
@@ -910,9 +910,15 @@
 </div>
 
 <div class="btns-floating btns-floating-right btns-floating-bottom">
-    <button class="btn btn-floating btn-large tertiary" id="btn-compare" onclick="compare()">
-        <i class="mdi mdi-select-compare"></i>COMPARAR</a>
-    </button>
+  <button class="btn btn-floating btn-large tertiary" id="return-to-top">
+      <i class="mdi material-icons">arrow_upward</i></a>
+  </button>
+</div>
+
+<div class="btns-floating btns-floating-right btns-floating-bottom mb-6 pb-6">
+  <button class="btn btn-floating btn-large tertiary" id="btn-compare" onclick="compare()">
+      <i class="mdi mdi-select-compare"></i>COMPARAR</a>
+  </button>
 </div>
 
 <!-- Modal detalle valor ejecutado -->
@@ -1197,7 +1203,7 @@
         <ul class="collapsible collapsible-data" id="wbs-new"></ul>
     </div>
 </div>
-<!-- WBS NEW -->
+<!-- WBS OLD -->
 <div id="wbs-main-old" class="modal" style="max-weight: 100% !important">
     <div class="modal-content">
         <a class="modal-close close">
@@ -1366,15 +1372,14 @@
 <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<?= $this->Html->script('dynamic-charts.min.js',['async']);?>
 <script>
   // $(document).ready(function(){
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
     var xhr1, xhr2, xhr3, xhr4;
     var fase_value = null, id_project_p6;
     var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-    // if(xhr1 && xhr1.readyState != 4){
-    //     xhr1.abort();
-    // }
+
     var promise = new Promise(function(resolve, reject){
       xhr1 = $.ajax({
       headers:{
@@ -1411,9 +1416,11 @@
           var spi_format_date = spi_date.getUTCDate() + " " + meses[spi_date.getMonth()] + ", " + spi_date.getUTCFullYear();
           $('#span-spi-date').text('Fecha SPI: '+spi_format_date);
           // SPI indicator
+          var spi_project = null;
           if (this.spi_labor_units != null) {
-            $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
-            $('#spi-old').text(this.spi_labor_units.toFixed(2));
+            spi_project = this.spi_labor_units.toFixed(2);
+            $('#spi-indicator-new').text(spi_project);
+            $('#spi-old').text(this.spi_labor_units.toFixed(spi_project));
           }
           if (this.da != null) {
             $('#da-new').text(this.da);
@@ -1434,7 +1441,8 @@
           }
           id_project_p6 = this.id_p_project;
           chart_id = this.project_id_p6;
-          resolve([id_project_p6, chart_id, this.name, this.spi_labor_units.toFixed(2), this.code_unifier]);
+
+          resolve([id_project_p6, chart_id, this.name, spi_project, this.code_unifier]);
         });
       }
     });
@@ -1444,7 +1452,7 @@
   });
     // Promesa que contiene la información de Unifier y bd local para alimentar los indicadores de presupuesto
   function Unifier_information(project_id, select_value, unifier_code, spi_value, chart_side) {
-    if (unifier_code != null) {
+    // if (unifier_code != null) {
       if (select_value == 'actual' || select_value == 'all-select') {
         var settings = {
             "async": true,
@@ -1481,26 +1489,14 @@
             old_indicators(response, spi_value, select_value, chart_side);
           }
        });
-     } else {
-       local_db_info([null, null, null, null, spi_value, select_value, chart_side]);
-       if (spi_value != null) {
-         if (select_value == 'actual' && chart_side == 'new') {
-           ws_colors_new(spi_value);
-         } else if(select_value == 'actual' && chart_side == 'old') {
-           ws_colors_old(spi_value);
-         } else if(select_value == 'all-select') {
-           ws_colors_new(spi_value);
-           ws_colors_old(spi_value);
-         } else if(chart_side == 'new') {
-           ws_colors_new(spi_value);
-         } else if(chart_side == 'old') {
-           ws_colors_old(spi_value);
-         }
-       }
-     }
     }
     function new_indicators(response, spi_value, select_value, chart_side){
       $.each(response.items, function() {
+        if (select_value == 'all-select' && this.fecha_cortecpi != null) {
+          var cpi_date = new Date(this.fecha_cortecpi);
+          var cpi_format_date = cpi_date.getUTCDate() + " " + meses[cpi_date.getMonth()] + ", " + cpi_date.getUTCFullYear();
+          $('#span-cpi-date').text('Fecha CPI: '+cpi_format_date);
+        }
         // TOTAL PROYECTO
         var unifier_cpi_total = this.cpiusd_total; //Variable que almacena el cpi total proveniente de Unifier
         if (unifier_cpi_total != null) { //Condicionales que validan si el dato
@@ -1714,11 +1710,11 @@
               } else {
                   $('#span-adj').text("Adjudicación: No aplica");
               }
-              if (this.CPI_DATE != null) {
-                var cpi_date = new Date(this.CPI_DATE);
-                var cpi_format_date = cpi_date.getUTCDate() + " " + meses[cpi_date.getMonth()] + ", " + cpi_date.getUTCFullYear();
-                $('#span-cpi-date').text('Fecha CPI: '+cpi_format_date);
-              }
+              // if (this.CPI_DATE != null) {
+              //   var cpi_date = new Date(this.CPI_DATE);
+              //   var cpi_format_date = cpi_date.getUTCDate() + " " + meses[cpi_date.getMonth()] + ", " + cpi_date.getUTCFullYear();
+              //   $('#span-cpi-date').text('Fecha CPI: '+cpi_format_date);
+              // }
               if (this.IGR_DATE != null) {
                 var igr_date = new Date(this.IGR_DATE);
                 var igr_format_date = igr_date.getUTCDate() + " " + meses[igr_date.getMonth()] + ", " + igr_date.getUTCFullYear();
@@ -1765,6 +1761,7 @@
     });
   }
   function ws_colors_new(indicators_col_val){
+    // console.log(indicators_col_val);
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -1945,14 +1942,14 @@
             actual_tg(result[1], result[4], selected_date_new, 'new');
             Unifier_information(result[1], 'actual', result[4], result[3], 'new');
           }else{
-            option_compare_new_dates(selected_date_new);
+            option_compare_new_dates(result[1], selected_date_new, result[4], 'new');
             wbs_compare(result[1], selected_date_new, selected_value, div_wbs, 'new');
             advance_compare(result[1], selected_date_new, 'new');
             $('#hitos-title-new').text('HITOS '+$(this).children(":selected").text());
             hitos_compare(result[1], selected_date_new, hitos_body, 'new');
             curva_s_compare(result[1], selected_date_new, 1, 'new');
             compare_tg (result[1], selected_date_new, 'new', result[4]);
-            Unifier_information(result[1], selected_date_new, result[4], result[3], 'new');
+            // Unifier_information(result[1], selected_date_new, result[4], result[3], 'new');
           }
       });
         $('#compare-select-old').change(function() {
@@ -1971,102 +1968,118 @@
             actual_tg(result[1], result[4], selected_date_old, 'old');
             Unifier_information(result[1], 'actual', result[4], result[3], 'old');
           }else{
-            option_compare_old_dates(selected_date_old);
+            option_compare_old_dates(result[1], selected_date_old, result[4], 'old');
             wbs_compare(result[1], selected_date_old, selected_value, div_wbs, 'old');
             advance_compare(result[1], selected_date_old, 'old');
             $('#hitos-title-old').text('HITOS '+$(this).children(":selected").text());
             hitos_compare(result[1], selected_date_old, hitos_body, 'old');
             curva_s_compare(result[1], selected_date_old, 1, 'old');
             compare_tg (result[1], selected_date_old, 'old', result[4]);
-            Unifier_information(result[1], selected_date_old, result[4], result[3], 'old');
+            // Unifier_information(result[1], selected_date_old, result[4], result[3], 'old');
           }
         });
       });
-      function option_compare_new_dates(selected_date){
-        xhr4 = $.ajax({
-        headers:{
-          'X-CSRF-Token':csrfToken
-        },
-        method: "GET",
-        dataType: "json",
-        url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'compare_projects']);?>",
-        data: {project_id : "<?=$project_id?>", date : selected_date},
-        cache: true,
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        },
-        success: function(response){
-          $.each(response, function() {
-            if (this.spi_labor_units != null) {
-              $('#spi-indicator-new').text(this.spi_labor_units.toFixed(2));
+      function option_compare_new_dates(id_project, selected_date, unifier_code, chart_side){
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
+            }
+          }
+          $.ajax(settings).done(function (response) {
+            var spi_value = null;
+            if (response.items.length > 0) {
+              $.each(response.items, function() {
+                  if (this.spi_labor_units != null) {
+                    spi_value = this.spi_labor_units.toFixed(2);
+                    $('#spi-indicator-new').text(spi_value);
+                  } else {
+                    $('#spi-indicator-new').text('');
+                  }
+                  $('#da-new').text(this.da);
+                  // Fepo indicator
+                  if (this.fepo != null) {
+                    var fepo_date = new Date(this.fepo);
+                    var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+                    $('#fepo-new').text(fepo_format_date);
+                  } else {
+                    $('#fepo-new').text('');
+                  }
+                  $('#duration-total-new').text(this.od);
+                  if (this.pi != null) {
+                    $('#pi-new').text(this.pi+"%");
+                  } else {
+                    $('#pi-new').text('');
+                  }
+              });
+              Unifier_information(id_project, selected_date, unifier_code, spi_value, chart_side);
             } else {
+              $('#spi-new').removeAttr('style');
               $('#spi-indicator-new').text('');
-            }
-            $('#da-new').text(this.da);
-            // Fepo indicator
-            if (this.fepo != null) {
-              var fepo_date = new Date(this.fepo);
-              var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-              $('#fepo-new').text(fepo_format_date);
-            } else {
               $('#fepo-new').text('');
-            }
-            $('#duration-total-new').text(this.od);
-            if (this.pi != null) {
-              $('#pi-new').text(this.pi+"%");
-            } else {
               $('#pi-new').text('');
+              $('#da-new').text('');
+              $('#duration-total-new').text('');
             }
           });
         }
-      });
-    }
     // OLD
-    function option_compare_old_dates(selected_date){
-      xhr4 = $.ajax({
-      headers:{
-        'X-CSRF-Token':csrfToken
-      },
-      method: "GET",
-      dataType: "json",
-      url: "<?php echo $this->Url->build(['controller'=>'Navbar','action'=>'compare_projects']);?>",
-      data: {project_id : "<?=$project_id?>", date : selected_date},
-      cache: true,
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      },
-      success: function(response){
-        $.each(response, function() {
-          if (this.spi_labor_units != null) {
-            $('#spi-old').text(this.spi_labor_units.toFixed(2));
-          } else {
-            $('#spi-old').text('');
+    function option_compare_old_dates(id_project, selected_date, unifier_code, chart_side){
+      var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
+          "method": "GET",
+          "headers": {
+              "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
           }
-          $('#variacion-est-old').text(this.da);
-          // Fepo indicator
-          if (this.fepo != null) {
-            var fepo_date = new Date(this.fepo);
-            var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-            $('#fepo-old').text(fepo_format_date);
-          }
-          $('#duracion-total-old').text(this.od);
-          if (this.pi != null) {
-            $('#pi-old').text(this.pi+"%");
+        }
+        $.ajax(settings).done(function (response) {
+          var spi_value = null;
+          if (response.items.length > 0) {
+            $.each(response.items, function() {
+              if (this.spi_labor_units != null) {
+                spi_value = this.spi_labor_units.toFixed(2);
+                $('#spi-old').text(spi_value);
+              } else {
+                $('#spi-old').text('');
+              }
+              $('#variacion-est-old').text(this.da);
+              // Fepo indicator
+              if (this.fepo != null) {
+                var fepo_date = new Date(this.fepo);
+                var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+                $('#fepo-old').text(fepo_format_date);
+              }
+              $('#duracion-total-old').text(this.od);
+              if (this.pi != null) {
+                $('#pi-old').text(this.pi+"%");
+              } else {
+                $('#pi-old').text('');
+              }
+            });
+            Unifier_information(id_project, selected_date, unifier_code, spi_value, chart_side);
           } else {
+            $('#spi-old-color').removeAttr('style');
+            $('#fepo-old').text('');
             $('#pi-old').text('');
+            $('#variacion-est-old').text('');
+            $('#spi-old').text('');
+            $('#duracion-total-old').text('');
           }
         });
       }
-    });
-  }
-  promise.then(function (result) {
-      wbs_actual(result[1], 'new');
-      donut(result[1]);
-      caf(result[1], 1, 'all-select');
-      actual_tg(result[1], result[4], 'all', 'all-select');
-      hitos_actual(result[1], 'new');
-      Unifier_information(result[1], 'all-select', result[4], result[3], 'all');
-  });
+      promise.then(function (result) {
+          wbs_actual(result[1], 'new');
+          donut(result[1]);
+          caf(result[1], 1, 'all-select');
+          actual_tg(result[1], result[4], 'all', 'all-select');
+          hitos_actual(result[1], 'new');
+          Unifier_information(result[1], 'all-select', result[4], result[3], 'all');
+      });
 
     // Porcentajes de avances
   function donut(result){
@@ -2508,8 +2521,6 @@
               }
             }
          });
-       } else {
-         tg_chart_local_db();
        }
     }
     function tg_chart(chart_tg_val){
@@ -2778,342 +2789,6 @@
           }
       );
     }
-    function tg_chart_local_db(){
-      if ("<?=$longitudArrayDate?>" != 0) {
-        $('#tg-div').show();
-        AmCharts.makeChart("tg",
-            {
-                "type": "serial",
-                "categoryField": "category",
-                "dataDateFormat": "YYYY-MM-DD",
-                "sequencedAnimation": false,
-                "startDuration": 1,
-                "categoryAxis": {
-                    "autoRotateAngle": 90,
-                    "autoRotateCount": 12,
-                    "equalSpacing": true,
-                    "gridPosition": "start",
-                    "minPeriod": "MM",
-                    // "startOnAxis": true,
-                    "axisAlpha": 0,
-                    "fontSize": 10,
-                    "gridAlpha": 0,
-                    "ignoreAxisWidth": true,
-                    "titleBold": false
-                },
-                "chartCursor": {
-                    "enabled": true,
-                    "cursorColor": "#00A34B"
-                },
-                "chartScrollbar": {
-                    "enabled": true,
-                    "color": "#BBBBBB",
-                    "graphType": "line",
-                    "gridCount": 4,
-                    "offset": 60,
-                    "oppositeAxis": false,
-                    "scrollbarHeight": 40
-                },
-                "trendLines": [],
-                "graphs": [
-                    {
-                        "columnWidth": 0.67,
-                        "fillAlphas": 1,
-                        "id": "plannedAnnual",
-                        "lineAlpha": 0,
-                        "lineColor": "#2376BC",
-                        "lineThickness": 0,
-                        "title": "Planeado",
-                        "type": "column",
-                        "valueAxis": "ValueAxis-1",
-                        "valueField": "col-plannedAnnual",
-                        "xAxis": "ValueAxis-1",
-                        "yAxis": "ValueAxis-1"
-                    },
-                    {
-                        "columnWidth": 0.71,
-                        "fillAlphas": 1,
-                        "id": "executedAnnual",
-                        "lineColor": "#FF8000",
-                        "title": "Ejecutado",
-                        "type": "column",
-                        "valueAxis": "ValueAxis-1",
-                        "valueField": "col-executedAnnual",
-                        "xAxis": "ValueAxis-1",
-                        "yAxis": "ValueAxis-1"
-                    },
-                    {
-                        "dashLength": 4,
-                        "id": "forecast",
-                        "lineColor": "#4D91CE",
-                        "lineThickness": 3,
-                        "title": "Forecast",
-                        "valueAxis": "ValueAxis-2",
-                        "valueField": "col-forecast"
-                    },
-                    {
-                        "fillColors": "undefined",
-                        "id": "planned",
-                        "lineColor": "#BBBBBB",
-                        "lineThickness": 3,
-                        "title": "Planeado",
-                        "valueAxis": "ValueAxis-2",
-                        "valueField": "col-planned"
-                    },
-                    {
-                        "customMarker": "",
-                        "id": "executed",
-                        "lineColor": "#FBB800",
-                        "lineThickness": 3,
-                        "title": "Ejecutado",
-                        "valueAxis": "ValueAxis-2",
-                        "valueField": "col-executed",
-                        "xAxis": "ValueAxis-2",
-                        "yAxis": "ValueAxis-2"
-                    }
-                ],
-                "guides": [],
-                "valueAxes": [
-                    {
-                        "id": "ValueAxis-1",
-                        "unit": "USD ",
-                        "unitPosition": "left",
-                        "axisAlpha": 0,
-                        "fontSize": 10,
-                        "gridAlpha": 0.05,
-                        "title": "MILLONES",
-                        "titleBold": false,
-                        "titleFontSize": 10
-                    },
-                    {
-                        "id": "ValueAxis-2",
-                        "position": "right",
-                        "unit": "USD ",
-                        "unitPosition": "left",
-                        "axisAlpha": 0,
-                        "fontSize": 10,
-                        "gridAlpha": 0,
-                        "title": "MILLONES",
-                        "titleBold": false,
-                        "titleFontSize": 10
-                    }
-                ],
-                "allLabels": [],
-                "balloon": {},
-                "legend": {
-                    "enabled": true,
-                    "autoMargins": false,
-                    "marginRight": 0,
-                    "position": "top",
-                    "spacing": 16,
-                    "useGraphSettings": true
-                },
-                "titles": [],
-                "dataProvider": [
-                  <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
-                  {
-                    <?php if(isset($excelDate)):?>
-                    <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
-                    <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
-                    <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
-                      "category": "<?=$excelDate[$a]?>",
-                    <?php if (strlen($excelDate[$a])<5):?>
-                      "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
-                      "col-executedAnnual": "<?=$excelEjecutadoDec?>",
-                      "col-executed": "null",
-                      "col-forecast": "null",
-                      "col-planned": "null"
-                    <?php elseif (strlen($excelDate[$a])>4):?>
-                      "col-plannedAnnual": "null",
-                      "col-executedAnnual": "null",
-                      <?php if (is_numeric($excelEjecutado[$a])):?>
-                      "col-executed": "<?=$excelEjecutadoDec?>",
-                      <?php else:?>
-                      "col-executed": "null",
-                      <?php endif;?>
-                      <?php if (is_numeric($excelProyectado[$a])):?>
-                      "col-forecast": "<?=$excelProyectadoDec?>",
-                      <?php else:?>
-                      "col-forecast": "null",
-                      <?php endif;?>
-                      "col-planned": "<?=$excelPlaneadoDec?>"
-                    <?php endif;?>
-                    <?php endif;?>
-                  },
-                  <?php endfor; ?>
-                ]
-            }
-        );
-      } else {
-        $('#tg-div').hide();
-      }
-    }
-    // Curva TG
-
-    //   AmCharts.makeChart("tg-old",
-    //       {
-    //           "type": "serial",
-    //           "categoryField": "category",
-    //           "dataDateFormat": "YYYY-MM-DD",
-    //           "sequencedAnimation": false,
-    //           "startDuration": 1,
-    //           "categoryAxis": {
-    //               "autoRotateAngle": 90,
-    //               "autoRotateCount": 12,
-    //               "equalSpacing": true,
-    //               "gridPosition": "start",
-    //               "minPeriod": "MM",
-    //               // "startOnAxis": true,
-    //               "axisAlpha": 0,
-    //               "fontSize": 10,
-    //               "gridAlpha": 0,
-    //               "ignoreAxisWidth": true,
-    //               "titleBold": false
-    //           },
-    //           "chartCursor": {
-    //               "enabled": true,
-    //               "cursorColor": "#00A34B"
-    //           },
-    //           "chartScrollbar": {
-    //               "enabled": true,
-    //               "color": "#BBBBBB",
-    //               "graphType": "line",
-    //               "gridCount": 4,
-    //               "offset": 60,
-    //               "oppositeAxis": false,
-    //               "scrollbarHeight": 40
-    //           },
-    //           "trendLines": [],
-    //           "graphs": [
-    //               {
-    //                   "columnWidth": 0.67,
-    //                   "fillAlphas": 1,
-    //                   "id": "plannedAnnual",
-    //                   "lineAlpha": 0,
-    //                   "lineColor": "#2376BC",
-    //                   "lineThickness": 0,
-    //                   "title": "Planeado",
-    //                   "type": "column",
-    //                   "valueAxis": "ValueAxis-1",
-    //                   "valueField": "col-plannedAnnual",
-    //                   "xAxis": "ValueAxis-1",
-    //                   "yAxis": "ValueAxis-1"
-    //               },
-    //               {
-    //                   "columnWidth": 0.71,
-    //                   "fillAlphas": 1,
-    //                   "id": "executedAnnual",
-    //                   "lineColor": "#FF8000",
-    //                   "title": "Ejecutado",
-    //                   "type": "column",
-    //                   "valueAxis": "ValueAxis-1",
-    //                   "valueField": "col-executedAnnual",
-    //                   "xAxis": "ValueAxis-1",
-    //                   "yAxis": "ValueAxis-1"
-    //               },
-    //               {
-    //                   "dashLength": 4,
-    //                   "id": "forecast",
-    //                   "lineColor": "#4D91CE",
-    //                   "lineThickness": 3,
-    //                   "title": "Forecast",
-    //                   "valueAxis": "ValueAxis-2",
-    //                   "valueField": "col-forecast"
-    //               },
-    //               {
-    //                   "fillColors": "undefined",
-    //                   "id": "planned",
-    //                   "lineColor": "#BBBBBB",
-    //                   "lineThickness": 3,
-    //                   "title": "Planeado",
-    //                   "valueAxis": "ValueAxis-2",
-    //                   "valueField": "col-planned"
-    //               },
-    //               {
-    //                   "customMarker": "",
-    //                   "id": "executed",
-    //                   "lineColor": "#FBB800",
-    //                   "lineThickness": 3,
-    //                   "title": "Ejecutado",
-    //                   "valueAxis": "ValueAxis-2",
-    //                   "valueField": "col-executed",
-    //                   "xAxis": "ValueAxis-2",
-    //                   "yAxis": "ValueAxis-2"
-    //               }
-    //           ],
-    //           "guides": [],
-    //           "valueAxes": [
-    //               {
-    //                   "id": "ValueAxis-1",
-    //                   "unit": "USD ",
-    //                   "unitPosition": "left",
-    //                   "axisAlpha": 0,
-    //                   "fontSize": 10,
-    //                   "gridAlpha": 0.05,
-    //                   "title": "MILLONES",
-    //                   "titleBold": false,
-    //                   "titleFontSize": 10
-    //               },
-    //               {
-    //                   "id": "ValueAxis-2",
-    //                   "position": "right",
-    //                   "unit": "USD ",
-    //                   "unitPosition": "left",
-    //                   "axisAlpha": 0,
-    //                   "fontSize": 10,
-    //                   "gridAlpha": 0,
-    //                   "title": "MILLONES",
-    //                   "titleBold": false,
-    //                   "titleFontSize": 10
-    //               }
-    //           ],
-    //           "allLabels": [],
-    //           "balloon": {},
-    //           "legend": {
-    //               "enabled": true,
-    //               "autoMargins": false,
-    //               "marginRight": 0,
-    //               "position": "top",
-    //               "spacing": 16,
-    //               "useGraphSettings": true
-    //           },
-    //           "titles": [],
-    //           "dataProvider": [
-    //             <?php for ($a=1; $a<=$longitudArrayDate; $a++): ?>
-    //             {
-    //               <?php if(isset($excelDate)):?>
-    //               <?php $excelEjecutadoDec = bcdiv($excelEjecutado[$a], '1', 4);?>
-    //               <?php $excelPlaneadoDec = bcdiv($excelPlaneado[$a], '1', 4);?>
-    //               <?php $excelProyectadoDec = bcdiv($excelProyectado[$a], '1', 4);?>
-    //                 "category": "<?=$excelDate[$a]?>",
-    //               <?php if (strlen($excelDate[$a])<5):?>
-    //                 "col-plannedAnnual": "<?=$excelPlaneadoDec?>",
-    //                 "col-executedAnnual": "<?=$excelEjecutadoDec?>",
-    //                 "col-executed": "null",
-    //                 "col-forecast": "null",
-    //                 "col-planned": "null"
-    //               <?php elseif (strlen($excelDate[$a])>4):?>
-    //                 "col-plannedAnnual": "null",
-    //                 "col-executedAnnual": "null",
-    //                 <?php if (is_numeric($excelEjecutado[$a])):?>
-    //                 "col-executed": "<?=$excelEjecutadoDec?>",
-    //                 <?php else:?>
-    //                 "col-executed": "null",
-    //                 <?php endif;?>
-    //                 <?php if (is_numeric($excelProyectado[$a])):?>
-    //                 "col-forecast": "<?=$excelProyectadoDec?>",
-    //                 <?php else:?>
-    //                 "col-forecast": "null",
-    //                 <?php endif;?>
-    //                 "col-planned": "<?=$excelPlaneadoDec?>"
-    //               <?php endif;?>
-    //               <?php endif;?>
-    //             },
-    //             <?php endfor; ?>
-    //           ]
-    //       }
-    //   );
-    // }
     $(document).ready(function(){
     var clean_rks = $('#clean-rks-filters'),e = $(".li-risks.info-actual"), estado_act = $('#estado_new'), materializado_act = $('#materializado_new'), estado_act = $('#estado_act'), materializado_act = $('#materializado_act') ,select_actual = $('.actual-rks-filter'), select_input = $('.form-select-actual input');
     select_actual.change(function() {
@@ -3811,5 +3486,18 @@
             } else {
               $('#btn-compare').show();
             }
+            // new LeaderLine(startElement, endElement, {color: 'red', size: 3});
           });
+        //   var cont = 0;
+        //   setInterval(function () {
+        //     var contador = cont++;
+        //     if (contador <= 1) {
+        //       var startElement = document.getElementById('R1_risk'),
+        //           endElement = document.getElementById('R8_risk');
+        //       new LeaderLine(startElement, endElement, {dash: {animation: true, color : 'red'}});
+        //       var startElement2 = document.getElementById('R10_risk'),
+        //           endElement2 = document.getElementById('R9_risk');
+        //       new LeaderLine(startElement2, endElement2, {dash: {animation: true, color : 'red'}});
+        //     }
+        // }, 6000);
 </script>

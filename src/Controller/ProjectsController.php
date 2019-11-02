@@ -274,9 +274,6 @@ class ProjectsController extends AppController
       $this->set('array_project', $project_json_decode);
       $this->set('project_id', $project_id_decode);
       $this->set('project_id_p6', $proj_id_decode);
-      // DONA CHART TEMPORAL
-      // $this->Donut($project_id_decode);
-      $this->ProjectWbs($project_id_decode);
       // $this->ProjectHitos($project_id_decode);
       $this->loadModel('Projects');
         $local_id_project = $this->Projects->find(

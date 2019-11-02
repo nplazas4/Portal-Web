@@ -336,12 +336,15 @@
                 </div>
             </div>
         </div>
+        <div id="first"></div>
+<div id="second"></div>
     </div>
     <div class="modal-footer">
         <a class="modal-close waves-effect waves-light btn btn-depressed tertiary my-0">Aceptar</a>
     </div>
 </div>
 <script>
+  !function(t,e){function r(t){return t.x===e&&t.y===e?!1:(t.x=parseFloat(t.x)||0,t.y=parseFloat(t.y)||0,t)}function a(e,r,a){var n=[e.x,e.y,r.x,r.y,a.w,a.h].join(",");if(o[n])return t.extend({},o[n]);var i,s=Math.abs(r.x-e.x),l=Math.abs(r.y-e.y),h=s&&l?Math.sqrt(s*s+l*l):s||l,d=Math.min(e.x,r.x),u=Math.min(e.y,r.y),x=d+s/2,c=u+l/2,p=x-h/2,y=c,b=o[n]={width:h};return a.w>1&&(b.width-=a.w-1),a.h>1&&(y-=a.h/2),a.bw&&(p+=a.bw/2),a.bh&&(y+=a.bh/2),t.support.matrixFilter||(p-=a.l,y-=a.t),p=Math.round(p),y=Math.round(y),b.width=Math.round(b.width),i=s?l?(180+180*Math.atan2(e.y-r.y,e.x-r.x)/Math.PI+360)%360:e.x<r.x?0:180:e.y<r.y?90:270,b.transform="rotate("+i+"deg)",b.left=p,b.top=y,b.extra={center:{x:x,y:c},rotation:{deg:i,rad:i%360*Math.PI/180}},t.extend({},b)}var o={};t.line=function(e,o,n){if(e=r(e),o=r(o),!e||!o)return!1;var i,s,l,h=t.extend({},t.line.defaults,n||{}),d=h.elem?t(h.elem):t("<div/>",{"class":h.className}),u={position:"absolute",backgroundColor:h.lineColor,width:1,height:h.lineWidth},x=d;return d.css(u),d.length&&!d[0].parentNode&&d.appendTo("body"),s={w:d.outerWidth(),h:d.outerHeight(),l:parseFloat(d.css("marginLeft"))||0,t:parseFloat(d.css("marginTop"))||0},t.support.matrixFilter&&(s.bw=(parseFloat(d.css("borderLeftWidth"))||0)+(parseFloat(d.css("borderRightWidth"))||0),s.bh=(parseFloat(d.css("borderTopWidth"))||0)+(parseFloat(d.css("borderBottomWidth"))||0)),i=a(e,o,s),l=i.extra,delete i.extra,d.css(i),h.returnValues&&(x={from:e,to:o,center:l.center,rotation:l.rotation}),x},t.line.defaults={elem:"",className:"jquery-line",lineWidth:1,lineColor:"#000",returnValues:!1}}(jQuery);
   // $(document).ready(function(){
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
     var xhr2, xhr3, xhr4;
@@ -421,8 +424,12 @@
           }
           // SPI
           $('#data-box-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-spi-'+iteration_num}));
-          $('#data-spi-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'spi-circle-'+iteration_num}));
-          $('#spi-circle-'+iteration_num).append($('<h4>', {text : parseFloat(this.spi_labor_units).toFixed(2), id : 'spi-id-'+iteration_num, class : 'spi-value'})); //SPI DATA
+          $('#data-spi-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'spi-circle-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : '% Avance ejecutado / % Avance planeado'}));
+          var project_spi = null;
+          if (this.spi_labor_units != null) {
+              project_spi = parseFloat(this.spi_labor_units).toFixed(2)
+          }
+          $('#spi-circle-'+iteration_num).append($('<h4>', {text : project_spi, id : 'spi-id-'+iteration_num, class : 'spi-value'})); //SPI DATA
           $('#spi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'spi-text-'+iteration_num}));
           $('#spi-text-'+iteration_num).append($('<span>', {text : 'SPI'}));
           // CPI Anual
@@ -764,7 +771,8 @@
       var selected_date_new = $(this).children(":selected").attr("value");
       var id_project = $(".compare-opt.active").parent().parent().parent().parent().attr('id');
       if (selected_date_new == "actual") {
-        $('.compare-opt.active').click();
+        // $('.compare-opt.active').click();
+        actual_compare();
       }else {
         option_compare_new_dates(selected_date_new, id_project);
       }
@@ -783,39 +791,45 @@
         }
       }
       $.ajax(settings).done(function (response) {
-        $.each(response.items, function() {
-          if (this.code_fase == '209') {
-              $('#fase-title-new').text('Estructuración');
-              $('#fase-new').text('I');
-          } else if (this.code_fase == '210') {
-              $('#fase-title-new').text('Selección');
-              $('#fase-new').text('II');
-          }else if (this.code_fase == '211') {
-              $('#fase-title-new').text('Planeación');
-              $('#fase-new').text('III');
-          }else if (this.code_fase == '212') {
-              $('#fase-title-new').text('Ejecución');
-              $('#fase-new').text('IV');
-          }else if (this.code_fase == '420') {
-              $('#fase-title-new').text('Cierre y transferencia');
-              $('#fase-new').text('V');
-          }else if (this.code_fase == '1910') {
-              $('#fase-title-new').text('Cerrado');
-              $('#fase-new').text('C');
-          } else {
-              $('#fase-title-new').text('');
-              $('#fase-new').text('');
-          }
-          // SPI COMPARE LEFT SIDE - NEW
-          if (this.spi_labor_units != null) {
-              spi = this.spi_labor_units;
-              $('#spi-new').text(parseFloat(spi).toFixed(2));
-          } else {
-              $('#spi-new').text('');
-              $('#div-spi-new').removeAttr('style');
-          }
-          code_unifier = this.code_unifier;
-        });
+        if (response.items.length > 0) {
+          $.each(response.items, function() {
+            if (this.code_fase == '209') {
+                $('#fase-title-new').text('Estructuración');
+                $('#fase-new').text('I');
+            } else if (this.code_fase == '210') {
+                $('#fase-title-new').text('Selección');
+                $('#fase-new').text('II');
+            }else if (this.code_fase == '211') {
+                $('#fase-title-new').text('Planeación');
+                $('#fase-new').text('III');
+            }else if (this.code_fase == '212') {
+                $('#fase-title-new').text('Ejecución');
+                $('#fase-new').text('IV');
+            }else if (this.code_fase == '420') {
+                $('#fase-title-new').text('Cierre y transferencia');
+                $('#fase-new').text('V');
+            }else if (this.code_fase == '1910') {
+                $('#fase-title-new').text('Cerrado');
+                $('#fase-new').text('C');
+            } else {
+                $('#fase-title-new').text('');
+                $('#fase-new').text('');
+            }
+            // SPI COMPARE LEFT SIDE - NEW
+            if (this.spi_labor_units != null) {
+                spi = this.spi_labor_units;
+                $('#spi-new').text(parseFloat(spi).toFixed(2));
+            } else {
+                $('#spi-new').text('');
+                $('#div-spi-new').removeAttr('style');
+            }
+            code_unifier = this.code_unifier;
+          });
+        } else {
+          $('#fase-title-new').text('');
+          $('#fase-new').text('');
+          $('#spi-new').text('');
+        }
         if (code_unifier != null) {
           var unifier_capture = {
             "async": true,
@@ -875,7 +889,7 @@
       var selected_date_old = $(this).children(":selected").attr("value");
       var id_project = $(".compare-opt.active").parent().parent().parent().parent().attr('id');
       if (selected_date_old == "actual") {
-        $('.compare-opt.active').click();
+        old_compare();
       }else {
         option_compare_old_dates(selected_date_old, id_project);
       }
@@ -894,39 +908,45 @@
         }
       }
       $.ajax(settings).done(function (response) {
-        $.each(response.items, function() {
-          if (this.code_fase == '209') {
-              $('#fase-title-old').text('Estructuración');
-              $('#fase-old').text('I');
-          } else if (this.code_fase == '210') {
-              $('#fase-title-old').text('Selección');
-              $('#fase-old').text('II');
-          }else if (this.code_fase == '211') {
-              $('#fase-title-old').text('Planeación');
-              $('#fase-old').text('III');
-          }else if (this.code_fase == '212') {
-              $('#fase-title-old').text('Ejecución');
-              $('#fase-old').text('IV');
-          }else if (this.code_fase == '420') {
-              $('#fase-title-old').text('Cierre y transferencia');
-              $('#fase-old').text('V');
-          }else if (this.code_fase == '1910') {
-              $('#fase-title-old').text('Cerrado');
-              $('#fase-old').text('C');
-          } else {
-              $('#fase-title-old').text('');
-              $('#fase-old').text('');
-          }
-          // SPI COMPARE RIGHT SIDE - old
-          if (this.spi_labor_units != null) {
-              spi = this.spi_labor_units;
-              $('#spi-old').text(spi.toFixed(2));
-          } else {
-              $('#spi-old').text('');
-              $('#div-spi-old').removeAttr('style');
-          }
-          code_inifier = this.code_unifier;
-        });
+        if (response.items.length > 0) {
+          $.each(response.items, function() {
+            if (this.code_fase == '209') {
+                $('#fase-title-old').text('Estructuración');
+                $('#fase-old').text('I');
+            } else if (this.code_fase == '210') {
+                $('#fase-title-old').text('Selección');
+                $('#fase-old').text('II');
+            }else if (this.code_fase == '211') {
+                $('#fase-title-old').text('Planeación');
+                $('#fase-old').text('III');
+            }else if (this.code_fase == '212') {
+                $('#fase-title-old').text('Ejecución');
+                $('#fase-old').text('IV');
+            }else if (this.code_fase == '420') {
+                $('#fase-title-old').text('Cierre y transferencia');
+                $('#fase-old').text('V');
+            }else if (this.code_fase == '1910') {
+                $('#fase-title-old').text('Cerrado');
+                $('#fase-old').text('C');
+            } else {
+                $('#fase-title-old').text('');
+                $('#fase-old').text('');
+            }
+            // SPI COMPARE RIGHT SIDE - old
+            if (this.spi_labor_units != null) {
+                spi = this.spi_labor_units;
+                $('#spi-old').text(spi.toFixed(2));
+            } else {
+                $('#spi-old').text('');
+                $('#div-spi-old').removeAttr('style');
+            }
+            code_inifier = this.code_unifier;
+          });
+        } else {
+          $('#fase-title-old').text('');
+          $('#fase-old').text('');
+          $('#spi-old').text('');
+        }
         if (code_inifier != null) {
           var unifier_capture = {
             "async": true,

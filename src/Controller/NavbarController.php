@@ -418,11 +418,8 @@ class NavbarController extends AppController
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
-                // $headers[] = 'Accept: */*';
                 $headers[] = 'Accept-Encoding: gzip, deflate';
                 $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
-                // $headers[] = 'Cache-Control: no-cache';
-                // $headers[] = 'Connection: keep-alive';
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 $result = curl_exec($ch);
                 if (curl_errno($ch)) {
