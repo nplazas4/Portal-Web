@@ -71,9 +71,18 @@ class RisksTable extends Table
             ->notEmpty('IMPACT');
 
         $validator
+            ->scalar('PROBABILITY_POST')
+            ->requirePresence('PROBABILITY_POST', 'create');
+
+        $validator
+            ->scalar('IMPACT_POST')
+            ->requirePresence('IMPACT_POST', 'create');    
+
+        $validator
             ->decimal('IMPACT_RISK')
             ->requirePresence('IMPACT_RISK', 'create')
             ->notEmpty('IMPACT_RISK');
+
 
         $validator
             ->scalar('PLAN_ONE')

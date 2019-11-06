@@ -38,12 +38,22 @@
                           <?php echo $this->Form->textarea('RISK_NAME',['label'=>'Nombre','placeholder'=>'Nombre','class'=>'materialize-textarea','required']);?>
                         </div>
                       </div>
+                      <h6 class"centered">Valoración inicial</h6>
                       <div class="row">
                         <div class="input-field col s6">
                            <?php echo $this->Form->input('PROBABILITY',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
                         </div>
                         <div class="input-field col s6">
                           <?php echo $this->Form->input('IMPACT',['label'=>'Impacto','id'=>'impact-risk','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto'], ]);?>
+                        </div>
+                      </div>
+                      <h6 class"centered">Valoración post-control</h6>
+                      <div class="row">
+                        <div class="input-field col s6">
+                           <?php echo $this->Form->input('PROBABILITY_POST',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
+                        </div>
+                        <div class="input-field col s6">
+                          <?php echo $this->Form->input('IMPACT_POST',['label'=>'Impacto','id'=>'impact-risk','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto'], ]);?>
                         </div>
                       </div>
                       <div class="row">

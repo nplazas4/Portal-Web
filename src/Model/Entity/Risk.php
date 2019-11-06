@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property string $RISK_NAME
  * @property string $PROBABILITY
  * @property string $IMPACT
+ * @property string $PROBABILITY_POST
+ * @property string $IMPACT_POST
  * @property float $IMPACT_RISK
  * @property string $PLAN_ONE
  * @property string $PLAN_TWO
@@ -38,6 +40,8 @@ class Risk extends Entity
         'RISK_NAME' => true,
         'PROBABILITY' => true,
         'IMPACT' => true,
+        'PROBABILITY_POST' => true,
+        'IMPACT_POST' => true,
         'IMPACT_RISK' => true,
         'PLAN_ONE' => true,
         'PLAN_TWO' => true,

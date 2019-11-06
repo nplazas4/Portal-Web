@@ -48,8 +48,7 @@
 </head>
 <body>
     <header class="header">
-        <!-- </?= $this->Html->css('login.css') ?>
-        </?= $this->Html->css('textlength.css') ?>
+        <!--
         </?= $this->Html->css('placeholder.css') ?>
         </?= $this->Html->css('error')?> -->
         <div class="header-wrapper">

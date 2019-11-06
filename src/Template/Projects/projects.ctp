@@ -7,44 +7,63 @@
     ];
 
     // Indicadores
-    $indicators = [
-        [
-            'name' => '﻿SPI',
-            'id' => 'spi-indicator',
-            'icon' => 'show_chart',
-            'color' => '',
-        ],
-        [
-            'name' => 'Presupuesto Total USD ',
-            'id' => 'pres-total-indicator',
-            'icon' => 'language',
-            'color' => 'accent',
-        ],
-        [
-            'name' => 'Ejecutado Total USD',
-            'id' => 'ejec-total-indicator',
-            'icon' => 'language',
-            'color' => 'tertiary',
-        ],
-        [
-            'name' => 'CPI',
-            'id' => 'cpi-indicator',
-            'icon' => 'show_chart',
-            'color' => '',
-        ],
-        [
-            'name' => 'Presupuesto Anual USD',
-            'id' => 'pres-anual-indicator',
-            'icon' => 'language',
-            'color' => 'primary',
-        ],
-        [
-            'name' => 'Ejecutado Anual USD',
-            'id' => 'ejec-anual-indicator',
-            'icon' => 'language',
-            'color' => 'primary',
-        ],
-    ];
+    $indicators = [];
+    if ($array_projects['code_1'] != 1921) {
+      $indicators = [
+          [
+              'name' => '﻿SPI',
+              'id' => 'spi-indicator',
+              'icon' => 'show_chart',
+              'color' => '',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Presupuesto Total USD ',
+              'id' => 'pres-total-indicator',
+              'icon' => 'language',
+              'color' => 'accent',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Ejecutado Total USD',
+              'id' => 'ejec-total-indicator',
+              'icon' => 'language',
+              'color' => 'tertiary',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'CPI',
+              'id' => 'cpi-indicator',
+              'icon' => 'show_chart',
+              'color' => '',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Presupuesto Anual USD',
+              'id' => 'pres-anual-indicator',
+              'icon' => 'language',
+              'color' => 'primary',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Ejecutado Anual USD',
+              'id' => 'ejec-anual-indicator',
+              'icon' => 'language',
+              'color' => 'primary',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+      ];
+    } else {
+      $indicators = [
+          [
+              'name' => '﻿SPI',
+              'id' => 'spi-indicator',
+              'icon' => 'show_chart',
+              'color' => '',
+              'class' => 'd-flex col s12',
+          ]
+      ];
+    }
 ?>
 <div class="section projects">
     <div class="breadcrumb-container">
@@ -100,7 +119,7 @@
   <div class="projects-content">
       <div class="indicators row wrap">
         <?php foreach ($indicators as $indicator): ?>
-          <div class="d-flex col s12 m6 l4 xl4">
+          <div class="<?=$indicator['class']?>">
             <div id="div-<?= $indicator['id']?>" class="indicator <?= $indicator['color'] ?>">
               <h2><?= $indicator['name'] ?></h2>
               <h3 id="<?= $indicator['id']?>"></h3>

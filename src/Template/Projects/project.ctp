@@ -36,12 +36,18 @@
           ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($json_project))],
           ['escape' => false,'class'=>'breadcrumb']
     );?>
+    <?php echo $this->Html->link(
+            $array_project["child_name"],
+            ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_project))],
+            ['escape' => false,'class'=>'breadcrumb']
+      );?>
+  <?php else:?>
+    <?php echo $this->Html->link(
+            $array_project["name"],
+            ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_project))],
+            ['escape' => false,'class'=>'breadcrumb']
+      );?>
   <?php endif;?>
-  <?php echo $this->Html->link(
-          $array_project["child_name"],
-          ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_project))],
-          ['escape' => false,'class'=>'breadcrumb']
-    );?>
     <?php echo $this->Html->link(
       $array_project["category_name"],
       ['controller'=>'Projects', 'action'=>'projects',urlencode(base64_encode($json_project))],
@@ -51,9 +57,11 @@
 
     <sidebar class="project-sidebar">
         <h1 id="project-name"></h1>
-        <div class="project-sidebar-phase">
-            <h2 id="project-phase"></h2>
-        </div>
+          <div class="project-sidebar-phase">
+            <?php if ($array_project['code_1'] != 1921):?>
+              <h2 id="project-phase"></h2>
+            <?php endif;?>
+          </div>
         <div class="project-sidebar-percentages">
             <div class="chart" id="advance"></div>
             <div class="legend">
@@ -175,98 +183,99 @@
                     </div>
                 </div>
 
-                <div class="indicators row wrap mb-4">
-                    <h2 class="mb-2">Indicadores de presupuesto</h2>
-                    <h3>Total proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 modal-trigger" id="cpi-indicator-new" href="#detailValueExecuted">
-                            <h4 class="fw-600 mr-2">CPI</h4>
-                            <h4 class="fw-600 ml-auto right-align" id="cpi-new"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">EJECUTADO</h5>
-                            <h5 class="fw-600 ml-auto right-align" id="ejecutado-new"></h5>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">PLANEADO</h5>
-                            <h5 class="fw-600 ml-auto right-align" id="planeado-new"></h5>
-                        </a>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600">PRESUPUESTO</h5>
-                            <h5 class="fw-600 ml-auto right-align" id="presupuesto-new"></h5>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="proyeccion-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="variacion-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1" id="porcentaje-proy-new">
-                            <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
-                            <h4 class="fw-600 ml-auto right-align" id="porcentaje-var-new"></h4>
-                        </div>
-                    </div>
-                    <h3 class="mt-3">Anual proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 modal-trigger" id="cpi-anual-indicator-new" href="#detailValueExecuted">
-                            <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
-                            <h4 class="fw-600 ml-auto right-align" id="cpi-anual-new"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="ejec-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="plan-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="pres-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="proyeccion-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 secondary darken-2" id="var-proy-anual-new">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="variacion-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-2" id="porcentaje-pr-anual-new">
-                            <h5 class="mr-2">PORCENTAJE VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h5 class="fw-600 ml-auto right-align" id="porcentaje-anual-new"></h5>
-                        </div>
-                    </div>
-                </div>
-
+                <?php if ($array_project['code_1'] != 1921):?>
+                  <div class="indicators row wrap mb-4">
+                      <h2 class="mb-2">Indicadores de presupuesto</h2>
+                      <h3>Total proyecto</h3>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <a class="indicator type-1 modal-trigger" id="cpi-indicator-new" href="#detailValueExecuted">
+                              <h4 class="fw-600 mr-2">CPI</h4>
+                              <h4 class="fw-600 ml-auto right-align" id="cpi-new"></h4>
+                          </a>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                              <h5 class="fw-600 mr-2">EJECUTADO</h5>
+                              <h5 class="fw-600 ml-auto right-align" id="ejecutado-new"></h5>
+                          </a>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                              <h5 class="fw-600 mr-2">PLANEADO</h5>
+                              <h5 class="fw-600 ml-auto right-align" id="planeado-new"></h5>
+                          </a>
+                      </div>
+                      <div class="divider transparent"></div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
+                              <h5 class="fw-600">PRESUPUESTO</h5>
+                              <h5 class="fw-600 ml-auto right-align" id="presupuesto-new"></h5>
+                          </a>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1 secondary darken-2">
+                              <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="proyeccion-new"></h5>
+                          </div>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1 secondary darken-2">
+                              <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="variacion-new"></h5>
+                          </div>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1" id="porcentaje-proy-new">
+                              <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
+                              <h4 class="fw-600 ml-auto right-align" id="porcentaje-var-new"></h4>
+                          </div>
+                      </div>
+                      <h3 class="mt-3">Anual proyecto</h3>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <a class="indicator type-1 modal-trigger" id="cpi-anual-indicator-new" href="#detailValueExecuted">
+                              <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
+                              <h4 class="fw-600 ml-auto right-align" id="cpi-anual-new"></h4>
+                          </a>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1 secondary darken-2">
+                              <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="ejec-anual-new"></h5>
+                          </div>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1 secondary darken-2">
+                              <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="plan-anual-new"></h5>
+                          </div>
+                      </div>
+                      <div class="divider transparent"></div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1 secondary darken-2">
+                              <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="pres-anual-new"></h5>
+                          </div>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1 secondary darken-2">
+                              <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="proyeccion-anual-new"></h5>
+                          </div>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-1 secondary darken-2" id="var-proy-anual-new">
+                              <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="variacion-anual-new"></h5>
+                          </div>
+                      </div>
+                      <div class="d-flex col s12 m6 l4 xl3">
+                          <div class="indicator type-2" id="porcentaje-pr-anual-new">
+                              <h5 class="mr-2">PORCENTAJE VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
+                              <h5 class="fw-600 ml-auto right-align" id="porcentaje-anual-new"></h5>
+                          </div>
+                      </div>
+                  </div>
+                <?php endif;?>
                 <div class="box">
                     <div class="box-content">
                         <div class="row wrap align-center">
@@ -296,10 +305,12 @@
                 <h2>Curva de Avance Físico</h2>
                 <div class="chart-content" id="caf"></div>
               </div>
-              <div class="chart" id="tg-div">
-                <h2>Tres Generaciones</h2>
-                <div class="chart-content" id="tg" style="min-height: 475px;"></div>
-              </div>
+              <?php if ($array_project['code_1'] != 1921):?>
+                <div class="chart" id="tg-div">
+                  <h2>Tres Generaciones</h2>
+                  <div class="chart-content" id="tg" style="min-height: 475px;"></div>
+                </div>
+              <?php endif;?>
             </div>
 
             <!-- Otras versiones -->
@@ -365,8 +376,8 @@
                         </a>
                     </div>
                 </div>
-
-                <div class="indicators row wrap mb-4">
+                <?php if ($array_project['code_1'] != 1921):?>
+                  <div class="indicators row wrap mb-4">
                     <h2 class="mb-2">Indicadores de presupuesto</h2>
                     <h3>Total proyecto</h3>
                     <div class="d-flex col s12 m6 l4 xl3">
@@ -457,7 +468,7 @@
                         </div>
                     </div>
                 </div>
-
+                <?php endif;?>
                 <div class="box">
                     <div class="box-content">
                         <div class="row wrap align-center">
@@ -487,126 +498,129 @@
                     <h2>Curva de Avance Físico</h2>
                     <div class="chart-content" id="caf-old"></div>
                 </div>
+                <?php if ($array_project['code_1'] != 1921):?>
                   <div class="chart" id="div-tg-old">
                       <h2>Tres Generaciones</h2>
                       <div class="chart-content" id="tg-old" style="min-height: 475px;"></div>
                   </div>
+                <?php endif;?>
             </div>
         </div>
 
-        <div class="compare compare-risk">
-            <div class="compare-item">
-                <div class="chart">
-                    <h2>Riesgos</h2>
-                    <div class="chart-risk">
-                        <div class="chart-risk-list">
-                            <ul class="pa-0 mb-3">
-                                <li>
-                                    <a class="lighten-1 white-text" id="igr-value-3"></a>
+        <?php if ($array_project['code_1'] != 1921):?>
+          <div class="compare compare-risk">
+              <div class="compare-item">
+                  <div class="chart">
+                      <h2>Riesgos</h2>
+                      <div class="chart-risk">
+                          <div class="chart-risk-list">
+                              <ul class="pa-0 mb-3">
+                                  <li>
+                                      <a class="lighten-1 white-text" id="igr-value-3"></a>
+                                  </li>
+                              </ul>
+                              <ul class="py-1 ul-risk">
+                                <li class="li-risks">
+                                    <div class="box-content">
+                                        <div class="row wrap align-center">
+                                          <form id="form-rks-new" class="row flex-300">
+                                            <div class="col s6 input-field">
+                                              <select class="new-rks-filter" id="estado_new">
+                                                  <option data-id="all" value="all" selected>Filtrar estado</option>
+                                                  <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
+                                                  <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
+                                                  <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
+                                                  <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
+                                              </select>
+                                              <label>Estado de las acciones</label>
+                                            </div>
+                                            <div class="col s6 input-field">
+                                              <select class="new-rks-filter" id="materializado_new">
+                                                  <option data-id="all" value="all" selected>Filtrar por materialización</option>
+                                                  <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
+                                                  <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
+                                                  <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
+                                              </select>
+                                                <label>Materialización de riesgo</label>
+                                            </div>
+                                            <div class="col flex-0 mt-3" id="clean-new-rks-filters" style="display:none">
+                                                <div href="#" class="btn-floating btn-depressed">
+                                                    <i class="mdi mdi-window-close"></i>
+                                                </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                    </div>
                                 </li>
-                            </ul>
-                            <ul class="py-1 ul-risk">
-                              <li class="li-risks">
-                                  <div class="box-content">
-                                      <div class="row wrap align-center">
-                                        <form id="form-rks-new" class="row flex-300">
-                                          <div class="col s6 input-field">
-                                            <select class="new-rks-filter" id="estado_new">
-                                                <option data-id="all" value="all" selected>Filtrar estado</option>
-                                                <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
-                                                <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
-                                                <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
-                                                <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
-                                            </select>
-                                            <label>Estado de las acciones</label>
-                                          </div>
-                                          <div class="col s6 input-field">
-                                            <select class="new-rks-filter" id="materializado_new">
-                                                <option data-id="all" value="all" selected>Filtrar por materialización</option>
-                                                <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
-                                                <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
-                                                <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
-                                            </select>
-                                              <label>Materialización de riesgo</label>
-                                          </div>
-                                          <div class="col flex-0 mt-3" id="clean-new-rks-filters" style="display:none">
-                                              <div href="#" class="btn-floating btn-depressed">
-                                                  <i class="mdi mdi-window-close"></i>
-                                              </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                  </div>
-                              </li>
-                            </ul>
-                            <ul class="ul-risk">
-                                <?php foreach ($rks as $rk): ?>
-                                <li class="li-risks info-new" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                                    <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
+                              </ul>
+                              <ul class="ul-risk">
+                                  <?php foreach ($rks as $rk): ?>
+                                  <li class="li-risks info-new" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
+                                      <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
+                                  </li>
+                                  <?php endforeach; ?>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="compare-item compare-item-version">
+                  <div class="chart">
+                      <h2>Riesgos</h2>
+                      <div class="chart-risk">
+                          <div class="chart-risk-list">
+                              <ul class="pa-0 mb-3">
+                                  <li>
+                                      <a class="lighten-1 white-text" id="igr-value-1"></a>
+                                  </li>
+                              </ul>
+                              <ul class="py-1 ul-risk">
+                                <li class="li-risks">
+                                    <div class="box-content">
+                                        <div class="row wrap align-center">
+                                          <form id="form-rks-old" class="row flex-300">
+                                            <div class="col s6 input-field">
+                                              <select class="old-rks-filter" id="estado_old">
+                                                  <option data-id="all" value="all" selected>Filtrar estado</option>
+                                                  <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
+                                                  <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
+                                                  <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
+                                                  <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
+                                              </select>
+                                              <label>Estado de las acciones</label>
+                                            </div>
+                                            <div class="col s6 input-field">
+                                              <select class="old-rks-filter"id="materializado_old">
+                                                  <option data-id="all" value="all" selected>Filtrar por materialización</option>
+                                                  <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
+                                                  <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
+                                                  <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
+                                              </select>
+                                                <label>Materialización de riesgo</label>
+                                            </div>
+                                            <div class="col flex-0 mt-3" id="clean-old-rks-filters" style="display:none">
+                                                <div href="#" class="btn-floating btn-depressed">
+                                                    <i class="mdi mdi-window-close"></i>
+                                                </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                    </div>
                                 </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="compare-item compare-item-version">
-                <div class="chart">
-                    <h2>Riesgos</h2>
-                    <div class="chart-risk">
-                        <div class="chart-risk-list">
-                            <ul class="pa-0 mb-3">
-                                <li>
-                                    <a class="lighten-1 white-text" id="igr-value-1"></a>
-                                </li>
-                            </ul>
-                            <ul class="py-1 ul-risk">
-                              <li class="li-risks">
-                                  <div class="box-content">
-                                      <div class="row wrap align-center">
-                                        <form id="form-rks-old" class="row flex-300">
-                                          <div class="col s6 input-field">
-                                            <select class="old-rks-filter" id="estado_old">
-                                                <option data-id="all" value="all" selected>Filtrar estado</option>
-                                                <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
-                                                <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
-                                                <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
-                                                <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
-                                            </select>
-                                            <label>Estado de las acciones</label>
-                                          </div>
-                                          <div class="col s6 input-field">
-                                            <select class="old-rks-filter"id="materializado_old">
-                                                <option data-id="all" value="all" selected>Filtrar por materialización</option>
-                                                <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
-                                                <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
-                                                <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
-                                            </select>
-                                              <label>Materialización de riesgo</label>
-                                          </div>
-                                          <div class="col flex-0 mt-3" id="clean-old-rks-filters" style="display:none">
-                                              <div href="#" class="btn-floating btn-depressed">
-                                                  <i class="mdi mdi-window-close"></i>
-                                              </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                  </div>
-                              </li>
-                            </ul>
-                            <ul class="ul-risk">
-                                <?php foreach ($rks as $rk): ?>
-                                <li class="li-risks info-old" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                                    <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
-                                </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="chart box-risk">
+                              </ul>
+                              <ul class="ul-risk">
+                                  <?php foreach ($rks as $rk): ?>
+                                  <li class="li-risks info-old" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
+                                      <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
+                                  </li>
+                                  <?php endforeach; ?>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="chart box-risk">
             <h2>Riesgos</h2>
             <div class="chart-risk">
                 <div class="chart-risk-list">
@@ -667,35 +681,50 @@
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 5) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 5) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 5) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 5) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 5) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -705,35 +734,50 @@
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 1 &&  $rk->PROBABILITY_POST == 4) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 4) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 4) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 4) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 4) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -743,35 +787,50 @@
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 3) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 3) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 3) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 3) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 3) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -781,35 +840,50 @@
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 2) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 2) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 2) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 2) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 2) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -819,35 +893,50 @@
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 1) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 1) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 1) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 1) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                              <td class="yellow">
                                 <?php foreach ($rks as $rk):
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
-                                    echo '<span id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                  };
+                                  if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 1) {
+                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                              </td>
@@ -870,40 +959,41 @@
                   </div>
             </div>
         </div>
-        <?php if($array_project["child_eps_id"] != 34013 && $array_project["child_eps_id"] != 34021 && $array_project["child_eps_id"] != 34015 && $array_project["child_eps_id"] != 34017):?>
-          <div class="data-distance2">
-              <?= $this->Html->image('icons/torre-blanca.svg') ?>
-              <div class="data-distance2-content">
-                  <h2>Longitud</h2>
-                  <h3 class="long-distance"></h3>
-                  <div class="line-distance"></div>
-                  <h4>de líneas de transmisión de</h4>
-                  <h5 id="lines-distance"></h5>
-                  <div class="divider white mt-3 mb-1"></div>
-                  <h6 id="towers-distance"></h6>
-              </div>
-              <?= $this->Html->image('icons/torre-blanca.svg') ?>
-          </div>
-        <?php else:?>
-          <div class="data">
-              <div class="data-distance">
-                  <figure class="data-distance-valve start">
-                      <?= $this->Html->image('icons/valvula-izq.svg') ?>
-                  </figure>
-                  <div class="data-distance-content">
-                      <h2>Longitud</h2>
-                      <h3 class="long-distance"></h3>
-                      <div class="line-distance"></div>
-                      <h4>ECG</h4>
-                      <h5 id="ecg-value"></h5>
-                      <div class="divider white mt-3 mb-1"></div>
-                      <h6 id="facilidades"></h6>
-                  </div>
-                  <figure class="data-distance-valve end">
-                      <?= $this->Html->image('icons/valvula-der.svg') ?>
-                  </figure>
-              </div>
-          </div>
+          <?php if($array_project["child_eps_id"] != 34013 && $array_project["child_eps_id"] != 34021 && $array_project["child_eps_id"] != 34015 && $array_project["child_eps_id"] != 34017):?>
+            <div class="data-distance2">
+                <?= $this->Html->image('icons/torre-blanca.svg') ?>
+                <div class="data-distance2-content">
+                    <h2>Longitud</h2>
+                    <h3 class="long-distance"></h3>
+                    <div class="line-distance"></div>
+                    <h4>de líneas de transmisión de</h4>
+                    <h5 id="lines-distance"></h5>
+                    <div class="divider white mt-3 mb-1"></div>
+                    <h6 id="towers-distance"></h6>
+                </div>
+                <?= $this->Html->image('icons/torre-blanca.svg') ?>
+            </div>
+          <?php else:?>
+            <div class="data">
+                <div class="data-distance">
+                    <figure class="data-distance-valve start">
+                        <?= $this->Html->image('icons/valvula-izq.svg') ?>
+                    </figure>
+                    <div class="data-distance-content">
+                        <h2>Longitud</h2>
+                        <h3 class="long-distance"></h3>
+                        <div class="line-distance"></div>
+                        <h4>ECG</h4>
+                        <h5 id="ecg-value"></h5>
+                        <div class="divider white mt-3 mb-1"></div>
+                        <h6 id="facilidades"></h6>
+                    </div>
+                    <figure class="data-distance-valve end">
+                        <?= $this->Html->image('icons/valvula-der.svg') ?>
+                    </figure>
+                </div>
+            </div>
+          <?php endif;?>
         <?php endif;?>
       <div class="map" id="mapa-img"></div>
    </div>
@@ -3488,16 +3578,20 @@
             }
             // new LeaderLine(startElement, endElement, {color: 'red', size: 3});
           });
-        //   var cont = 0;
-        //   setInterval(function () {
-        //     var contador = cont++;
-        //     if (contador <= 1) {
-        //       var startElement = document.getElementById('R1_risk'),
-        //           endElement = document.getElementById('R8_risk');
-        //       new LeaderLine(startElement, endElement, {dash: {animation: true, color : 'red'}});
-        //       var startElement2 = document.getElementById('R10_risk'),
-        //           endElement2 = document.getElementById('R9_risk');
-        //       new LeaderLine(startElement2, endElement2, {dash: {animation: true, color : 'red'}});
-        //     }
-        // }, 6000);
+          var cont = 0, foreach_loops = 0;
+          setInterval(function () {
+            var contador = cont++;
+            if (contador <= 1) {
+              console.log(contador);
+              <?php foreach ($rks as $rk):?>
+                var loop_start = foreach_loops++,
+                    loop_end = foreach_loops++;
+              <?php if ($rk->IMPACT_POST != null && $rk->PROBABILITY_POST != null):?>
+                var loop_start = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_risk'),
+                    loop_end  = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_post');
+                new LeaderLine(loop_start , loop_end, {color: 'rgba(0, 0, 0)', dash: {animation: true}});
+              <?php endif;?>
+              <?php endforeach;?>
+            }
+        }, 10000);
 </script>

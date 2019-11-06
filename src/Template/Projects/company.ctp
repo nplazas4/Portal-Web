@@ -57,13 +57,15 @@
             </div>
             <h2>Sostenimiento</h2>
         </a>
-        <a class="mec-url company-towers-content-tower pec">
+          <a class="mec-url company-towers-content-tower pec">
+              <?php if ($array_company['eps_id'] == 23305):?>
             <!-- <?= $this->Html->image('icons/torre-crecimiento.svg') ?> -->
-            <div class="number">
-                <h3 class="mec-number"></h3>
-            </div>
-            <h2>MEC</h2>
-        </a>
+              <div class="number">
+                  <h3 class="mec-number"></h3>
+              </div>
+              <h2>MEC</h2>
+              <?php endif;?>
+          </a>
         <a class="crec-url company-towers-content-tower increase">
             <?= $this->Html->image('icons/torre-crecimiento.svg') ?>
             <div class="number">
@@ -92,13 +94,13 @@
             </div>
             <h2>Crecimiento</h2>
         </a>
-        <a class="mec-url company-content-valve pec">
-            <?= $this->Html->image('icons/valvula-pec.svg') ?>
-            <h2>MEC</h2>
-            <div class="number">
-                <h3 class="mec-number"></h3>
-            </div>
-        </a>
+        <!-- <a class="mec-url company-content-valve pec">
+          </?= $this->Html->image('icons/valvula-pec.svg') ?>
+          <h2>MEC</h2>
+          <div class="number">
+            <h3 class="mec-number"></h3>
+          </div>
+        </a> -->
         <a class="sost-url company-content-valve sustenance">
             <?= $this->Html->image('icons/valvula-sostenimiento.svg') ?>
             <div class="number">
