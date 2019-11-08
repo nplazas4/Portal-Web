@@ -3577,21 +3577,20 @@
               $('#btn-compare').show();
             }
             // new LeaderLine(startElement, endElement, {color: 'red', size: 3});
+              var cont = 0, foreach_loops = 0;
+              setInterval(function () {
+                var contador = cont++;
+                if (contador <= 1) {
+                  <?php foreach ($rks as $rk):?>
+                    var loop_start = foreach_loops++,
+                        loop_end = foreach_loops++;
+                  <?php if ($rk->IMPACT_POST != null && $rk->PROBABILITY_POST != null):?>
+                    var loop_start = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_risk'),
+                        loop_end  = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_post');
+                    new LeaderLine(loop_start , loop_end, {color: 'rgba(0, 0, 0)', dash: {animation: true}});
+                  <?php endif;?>
+                  <?php endforeach;?>
+                }
+            }, 10000);
           });
-          var cont = 0, foreach_loops = 0;
-          setInterval(function () {
-            var contador = cont++;
-            if (contador <= 1) {
-              console.log(contador);
-              <?php foreach ($rks as $rk):?>
-                var loop_start = foreach_loops++,
-                    loop_end = foreach_loops++;
-              <?php if ($rk->IMPACT_POST != null && $rk->PROBABILITY_POST != null):?>
-                var loop_start = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_risk'),
-                    loop_end  = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_post');
-                new LeaderLine(loop_start , loop_end, {color: 'rgba(0, 0, 0)', dash: {animation: true}});
-              <?php endif;?>
-              <?php endforeach;?>
-            }
-        }, 10000);
 </script>

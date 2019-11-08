@@ -363,8 +363,6 @@
     </div>
 </div>
 <script>
-  !function(t,e){function r(t){return t.x===e&&t.y===e?!1:(t.x=parseFloat(t.x)||0,t.y=parseFloat(t.y)||0,t)}function a(e,r,a){var n=[e.x,e.y,r.x,r.y,a.w,a.h].join(",");if(o[n])return t.extend({},o[n]);var i,s=Math.abs(r.x-e.x),l=Math.abs(r.y-e.y),h=s&&l?Math.sqrt(s*s+l*l):s||l,d=Math.min(e.x,r.x),u=Math.min(e.y,r.y),x=d+s/2,c=u+l/2,p=x-h/2,y=c,b=o[n]={width:h};return a.w>1&&(b.width-=a.w-1),a.h>1&&(y-=a.h/2),a.bw&&(p+=a.bw/2),a.bh&&(y+=a.bh/2),t.support.matrixFilter||(p-=a.l,y-=a.t),p=Math.round(p),y=Math.round(y),b.width=Math.round(b.width),i=s?l?(180+180*Math.atan2(e.y-r.y,e.x-r.x)/Math.PI+360)%360:e.x<r.x?0:180:e.y<r.y?90:270,b.transform="rotate("+i+"deg)",b.left=p,b.top=y,b.extra={center:{x:x,y:c},rotation:{deg:i,rad:i%360*Math.PI/180}},t.extend({},b)}var o={};t.line=function(e,o,n){if(e=r(e),o=r(o),!e||!o)return!1;var i,s,l,h=t.extend({},t.line.defaults,n||{}),d=h.elem?t(h.elem):t("<div/>",{"class":h.className}),u={position:"absolute",backgroundColor:h.lineColor,width:1,height:h.lineWidth},x=d;return d.css(u),d.length&&!d[0].parentNode&&d.appendTo("body"),s={w:d.outerWidth(),h:d.outerHeight(),l:parseFloat(d.css("marginLeft"))||0,t:parseFloat(d.css("marginTop"))||0},t.support.matrixFilter&&(s.bw=(parseFloat(d.css("borderLeftWidth"))||0)+(parseFloat(d.css("borderRightWidth"))||0),s.bh=(parseFloat(d.css("borderTopWidth"))||0)+(parseFloat(d.css("borderBottomWidth"))||0)),i=a(e,o,s),l=i.extra,delete i.extra,d.css(i),h.returnValues&&(x={from:e,to:o,center:l.center,rotation:l.rotation}),x},t.line.defaults={elem:"",className:"jquery-line",lineWidth:1,lineColor:"#000",returnValues:!1}}(jQuery);
-  // $(document).ready(function(){
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
     var xhr2, xhr3, xhr4;
     var total_spi = 0, total_cpi = 0, total_pres_total = 0, total_eject_total = 0, total_pres_anual = 0, total_ejec_anual = 0;
@@ -390,95 +388,137 @@
         array_lenght = response.length;
         $.each(response, function(i) {
           var iteration_num = i + 1;
-          $('#main-div').append($('<div>', {class : 'Search list d-flex col s12 m6 l4 xl3', id : this.project_id_p6}));
-          var project_div = $('#'+this.project_id_p6);
-          project_div.attr({'data-fase' : this.code_fase, 'data-category' : this.code_category, 'data-mec' : this.code_pec, 'data-area' : this.code_area});
-          project_div.append($('<div>', {class : 'sheet pointer', id: 'sheet-pointer-'+iteration_num}));
-          $('#sheet-pointer-'+iteration_num).append($('<div>', {class : 'sheet-options', id: 'sheet-options-'+iteration_num}));
-          $('#sheet-options-'+iteration_num).append($('<a>', {class : 'dropdown-trigger btn-floating btn-flat', id: 'a-icon-'+iteration_num}));
-          $('#a-icon-'+iteration_num).attr('data-target','dropdown'+iteration_num);
-          $('#a-icon-'+iteration_num).append($('<i>', {class : 'material-icons', id : 'i-icon'+iteration_num, text : 'more_vert'}));
-          // $('#a-icon-'+iteration_num).after($('<ul>', {id : 'dropdown'+iteration_num, class : 'dropdown-content', style : 'display: block; width: 200px; left: 0px; top: 0px; height: 55px; transform-origin: 100% 0px; opacity: 1; transform: scaleX(1) scaleY(1);'}));
-          $('#a-icon-'+iteration_num).after($('<ul>', {id : 'dropdown'+iteration_num, class : 'dropdown-content'}));
-          $('#dropdown'+iteration_num).append($('<li>', {id : 'li-compare-'+iteration_num, class : 'compare-opt'}));
-          $('#li-compare-'+iteration_num).append($('<a>', {class : 'modal-trigger', href : '#compareProjectVersion', id : 'a-compare-'+iteration_num}));
-          $('#a-compare-'+iteration_num).append($('<i>', {class : 'mdi mdi-select-compare', id: 'compare-icon-'+iteration_num}));
-          $('#compare-icon-'+iteration_num).after('COMPARAR');
-          // Div siguiente a sheet-option
-          $('#sheet-options-'+iteration_num).after($('<div>', {class : 'sheet-line regional-text', id : 'regional-div-'+iteration_num}));
-          $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
-          $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
-          $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
-          // DIV DATA
-          var url_project = '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(this.project_id_p6))))+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(<?=$json_projects?>))))+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(this.id_p_project))));
-          $('#regional-div-'+iteration_num).after($('<div>', {class : 'sheet-content pl-5', onclick : 'location.href="'+url_project+'"' ,id : 'div-data'+iteration_num})); //onclick
-          $('#div-data'+iteration_num).append($('<h2>', {text : this.name, id : 'h2-name-'+iteration_num}));
-          // FASE
-          $('#h2-name-'+iteration_num).after($('<div>', {class : 'data-box mt-auto', id : 'data-box-'+iteration_num}));
-          $('#data-box-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'data-box-circle-'+iteration_num})); //FASE CIRCLE
-          if (this.code_fase == '209') {
-            $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'I', class : 'phase-text'})); //FASE DATA
-            $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Estructuración', class : 'span-text'})); //FASE NAME
-          } else if (this.code_fase == '210') {
-            $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'II', class : 'phase-text'})); //FASE DATA
-            $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Selección', class : 'span-text'})); //FASE NAME
-          }else if (this.code_fase == '211') {
-            $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'III', class : 'phase-text'})); //FASE DATA
-            $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Planeación', class : 'span-text'})); //FASE NAME
-          }else if (this.code_fase == '212') {
-            $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'IV', class : 'phase-text'})); //FASE DATA
-            $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Ejecución', class : 'span-text'})); //FASE NAME
-          }else if (this.code_fase == '420') {
-            $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'V', class : 'phase-text'})); //FASE DATA
-            $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cierre y transferencia', class : 'span-text'})); //FASE NAME
-          }else if (this.code_fase == '1910') {
-            $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'C', class : 'phase-text'})); //FASE DATA
-            $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-            $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cerrado', class : 'span-text'})); //FASE NAME
-          }
-          // SPI
-          $('#data-box-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-spi-'+iteration_num}));
-          $('#data-spi-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'spi-circle-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : '% Avance ejecutado / % Avance planeado'}));
-          var project_spi = null;
-          if (this.spi_labor_units != null) {
-              project_spi = parseFloat(this.spi_labor_units).toFixed(2)
-          }
-          $('#spi-circle-'+iteration_num).append($('<h4>', {text : project_spi, id : 'spi-id-'+iteration_num, class : 'spi-value'})); //SPI DATA
-          $('#spi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'spi-text-'+iteration_num}));
-          $('#spi-text-'+iteration_num).append($('<span>', {text : 'SPI'}));
-          // CPI Anual
-          $('#data-spi-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-cpi-'+iteration_num}));
-          $('#data-cpi-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'cpi-circle-'+iteration_num}));
-          $('#cpi-circle-'+iteration_num).append($('<h5>', {class : 'cpi-anual-data', id : 'cpi-id-'+iteration_num})); //CPI DATA
-          $('#cpi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'cpi-text-'+iteration_num}));
-          $('#cpi-text-'+iteration_num).append($('<span>', {text : 'CPI Anual'}));
-          // CPI TOTAL
-          $('#data-cpi-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-cpi-total-'+iteration_num}));
-          $('#data-cpi-total-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'cpi-circle-total-'+iteration_num}));
-          $('#cpi-circle-total-'+iteration_num).append($('<h5>', {class : 'cpi-total-data', id : 'cpi-id-total-'+iteration_num})); //CPI TOTAL DATA
-          $('#cpi-circle-total-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'cpi-text-total-'+iteration_num}));
-          $('#cpi-text-total-'+iteration_num).append($('<span>', {text : 'CPI Total'}));
-          // IGR
-          $('#data-cpi-total-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-igr-'+iteration_num}));
-          $('#data-igr-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'igr-circle-'+iteration_num}));
-          $('#igr-circle-'+iteration_num).append($('<h5>', {class : 'igr_data', id : 'igr-value-'+iteration_num})); //IGR DATA
-          $('#igr-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'igr-text-'+iteration_num}));
-          $('#igr-text-'+iteration_num).append($('<span>', {text : 'IGR'}));
-          // Divider Circle - Presupuesto
-          $('#data-igr-'+iteration_num).after($('<div>', {class : 'divider transparent', id : 'divider-div-'+iteration_num}));
-          // Presupuesto Planeado
-          $('#divider-div-'+iteration_num).after($('<div>', {class : 'data-chip accent', id : 'data-planeado-'+iteration_num}));
-          $('#data-planeado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Planeado (USD)'})); // Presupuesto Title value
-          $('#data-planeado-'+iteration_num).append($('<h4>', {class : 'presupuesto-plan', id : 'plan-id-'+iteration_num})); // Presupuesto Planeado value
-          // Presupuesto Ejecutado
-          $('#data-planeado-'+iteration_num).after($('<div>', {class : 'data-chip secondary mb-0', id : 'data-ejecutado-'+iteration_num}));
-          $('#data-ejecutado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Ejecutado (USD)'})); // Presupuesto Title value
-          $('#data-ejecutado-'+iteration_num).append($('<h4>', {class : 'presupuesto-ejec', id : 'pres-id-'+iteration_num})); // Presupuesto Planeado value
+          <?php if ($array_projects['code_1'] != 1921):?>
+              $('#main-div').append($('<div>', {class : 'Search list d-flex col s12 m6 l4 xl3', id : this.project_id_p6}));
+              var project_div = $('#'+this.project_id_p6);
+              project_div.attr({'data-fase' : this.code_fase, 'data-category' : this.code_category, 'data-mec' : this.code_pec, 'data-area' : this.code_area});
+              project_div.append($('<div>', {class : 'sheet pointer', id: 'sheet-pointer-'+iteration_num}));
+              $('#sheet-pointer-'+iteration_num).append($('<div>', {class : 'sheet-options', id: 'sheet-options-'+iteration_num}));
+              $('#sheet-options-'+iteration_num).append($('<a>', {class : 'dropdown-trigger btn-floating btn-flat', id: 'a-icon-'+iteration_num}));
+              $('#a-icon-'+iteration_num).attr('data-target','dropdown'+iteration_num);
+              $('#a-icon-'+iteration_num).append($('<i>', {class : 'material-icons', id : 'i-icon'+iteration_num, text : 'more_vert'}));
+              // $('#a-icon-'+iteration_num).after($('<ul>', {id : 'dropdown'+iteration_num, class : 'dropdown-content', style : 'display: block; width: 200px; left: 0px; top: 0px; height: 55px; transform-origin: 100% 0px; opacity: 1; transform: scaleX(1) scaleY(1);'}));
+              $('#a-icon-'+iteration_num).after($('<ul>', {id : 'dropdown'+iteration_num, class : 'dropdown-content'}));
+              $('#dropdown'+iteration_num).append($('<li>', {id : 'li-compare-'+iteration_num, class : 'compare-opt'}));
+              $('#li-compare-'+iteration_num).append($('<a>', {class : 'modal-trigger', href : '#compareProjectVersion', id : 'a-compare-'+iteration_num}));
+              $('#a-compare-'+iteration_num).append($('<i>', {class : 'mdi mdi-select-compare', id: 'compare-icon-'+iteration_num}));
+              $('#compare-icon-'+iteration_num).after('COMPARAR');
+              // Div siguiente a sheet-option
+              $('#sheet-options-'+iteration_num).after($('<div>', {class : 'sheet-line regional-text', id : 'regional-div-'+iteration_num}));
+              $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
+              $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
+              $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
+              // DIV DATA
+              var url_project = '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(this.project_id_p6))))+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(<?=$json_projects?>))))+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(this.id_p_project))));
+              $('#regional-div-'+iteration_num).after($('<div>', {class : 'sheet-content pl-5', onclick : 'location.href="'+url_project+'"' ,id : 'div-data'+iteration_num})); //onclick
+              $('#div-data'+iteration_num).append($('<h2>', {text : this.name, id : 'h2-name-'+iteration_num}));
+              // FASE
+              $('#h2-name-'+iteration_num).after($('<div>', {class : 'data-box mt-auto', id : 'data-box-'+iteration_num}));
+              $('#data-box-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'data-box-circle-'+iteration_num})); //FASE CIRCLE
+              if (this.code_fase == '209') {
+                $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'I', class : 'phase-text'})); //FASE DATA
+                $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
+                $('#phase-text-'+iteration_num).append($('<span>', {text : 'Estructuración', class : 'span-text'})); //FASE NAME
+              } else if (this.code_fase == '210') {
+                $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'II', class : 'phase-text'})); //FASE DATA
+                $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
+                $('#phase-text-'+iteration_num).append($('<span>', {text : 'Selección', class : 'span-text'})); //FASE NAME
+              }else if (this.code_fase == '211') {
+                $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'III', class : 'phase-text'})); //FASE DATA
+                $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
+                $('#phase-text-'+iteration_num).append($('<span>', {text : 'Planeación', class : 'span-text'})); //FASE NAME
+              }else if (this.code_fase == '212') {
+                $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'IV', class : 'phase-text'})); //FASE DATA
+                $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
+                $('#phase-text-'+iteration_num).append($('<span>', {text : 'Ejecución', class : 'span-text'})); //FASE NAME
+              }else if (this.code_fase == '420') {
+                $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'V', class : 'phase-text'})); //FASE DATA
+                $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
+                $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cierre y transferencia', class : 'span-text'})); //FASE NAME
+              }else if (this.code_fase == '1910') {
+                $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'C', class : 'phase-text'})); //FASE DATA
+                $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
+                $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cerrado', class : 'span-text'})); //FASE NAME
+              }
+              // SPI
+              $('#data-box-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-spi-'+iteration_num}));
+              $('#data-spi-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'spi-circle-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : '% Avance ejecutado / % Avance planeado'}));
+              var project_spi = null;
+              if (this.spi_labor_units != null) {
+                  project_spi = parseFloat(this.spi_labor_units).toFixed(2)
+              }
+              $('#spi-circle-'+iteration_num).append($('<h4>', {text : project_spi, id : 'spi-id-'+iteration_num, class : 'spi-value'})); //SPI DATA
+              $('#spi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'spi-text-'+iteration_num}));
+              $('#spi-text-'+iteration_num).append($('<span>', {text : 'SPI'}));
+              // CPI Anual
+              $('#data-spi-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-cpi-'+iteration_num}));
+              $('#data-cpi-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'cpi-circle-'+iteration_num}));
+              $('#cpi-circle-'+iteration_num).append($('<h5>', {class : 'cpi-anual-data', id : 'cpi-id-'+iteration_num})); //CPI DATA
+              $('#cpi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'cpi-text-'+iteration_num}));
+              $('#cpi-text-'+iteration_num).append($('<span>', {text : 'CPI Anual'}));
+              // CPI TOTAL
+              $('#data-cpi-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-cpi-total-'+iteration_num}));
+              $('#data-cpi-total-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'cpi-circle-total-'+iteration_num}));
+              $('#cpi-circle-total-'+iteration_num).append($('<h5>', {class : 'cpi-total-data', id : 'cpi-id-total-'+iteration_num})); //CPI TOTAL DATA
+              $('#cpi-circle-total-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'cpi-text-total-'+iteration_num}));
+              $('#cpi-text-total-'+iteration_num).append($('<span>', {text : 'CPI Total'}));
+              // IGR
+              $('#data-cpi-total-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-igr-'+iteration_num}));
+              $('#data-igr-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'igr-circle-'+iteration_num}));
+              $('#igr-circle-'+iteration_num).append($('<h5>', {class : 'igr_data', id : 'igr-value-'+iteration_num})); //IGR DATA
+              $('#igr-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'igr-text-'+iteration_num}));
+              $('#igr-text-'+iteration_num).append($('<span>', {text : 'IGR'}));
+              // Divider Circle - Presupuesto
+              $('#data-igr-'+iteration_num).after($('<div>', {class : 'divider transparent', id : 'divider-div-'+iteration_num}));
+              // Presupuesto Planeado
+              $('#divider-div-'+iteration_num).after($('<div>', {class : 'data-chip accent', id : 'data-planeado-'+iteration_num}));
+              $('#data-planeado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Planeado (USD)'})); // Presupuesto Title value
+              $('#data-planeado-'+iteration_num).append($('<h4>', {class : 'presupuesto-plan', id : 'plan-id-'+iteration_num})); // Presupuesto Planeado value
+              // Presupuesto Ejecutado
+              $('#data-planeado-'+iteration_num).after($('<div>', {class : 'data-chip secondary mb-0', id : 'data-ejecutado-'+iteration_num}));
+              $('#data-ejecutado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Ejecutado (USD)'})); // Presupuesto Title value
+              $('#data-ejecutado-'+iteration_num).append($('<h4>', {class : 'presupuesto-ejec', id : 'pres-id-'+iteration_num})); // Presupuesto Planeado value
+          <?php else:?>
+              $('#main-div').append($('<div>', {class : 'Search list d-flex col s12 m6 l4 xl3', id : this.project_id_p6}));
+              var project_div = $('#'+this.project_id_p6);
+              project_div.attr({'data-fase' : this.code_fase, 'data-category' : this.code_category, 'data-mec' : this.code_pec, 'data-area' : this.code_area});
+              project_div.append($('<div>', {class : 'sheet pointer', id: 'sheet-pointer-'+iteration_num}));
+              $('#sheet-pointer-'+iteration_num).append($('<div>', {class : 'sheet-options', id: 'sheet-options-'+iteration_num}));
+              $('#sheet-options-'+iteration_num).append($('<a>', {class : 'dropdown-trigger btn-floating btn-flat', id: 'a-icon-'+iteration_num}));
+              $('#a-icon-'+iteration_num).attr('data-target','dropdown'+iteration_num);
+              $('#a-icon-'+iteration_num).append($('<i>', {class : 'material-icons', id : 'i-icon'+iteration_num, text : 'more_vert'}));
+              // $('#a-icon-'+iteration_num).after($('<ul>', {id : 'dropdown'+iteration_num, class : 'dropdown-content', style : 'display: block; width: 200px; left: 0px; top: 0px; height: 55px; transform-origin: 100% 0px; opacity: 1; transform: scaleX(1) scaleY(1);'}));
+              $('#a-icon-'+iteration_num).after($('<ul>', {id : 'dropdown'+iteration_num, class : 'dropdown-content'}));
+              $('#dropdown'+iteration_num).append($('<li>', {id : 'li-compare-'+iteration_num, class : 'compare-opt'}));
+              $('#li-compare-'+iteration_num).append($('<a>', {class : 'modal-trigger', href : '#compareProjectVersion', id : 'a-compare-'+iteration_num}));
+              $('#a-compare-'+iteration_num).append($('<i>', {class : 'mdi mdi-select-compare', id: 'compare-icon-'+iteration_num}));
+              $('#compare-icon-'+iteration_num).after('COMPARAR');
+              // Div siguiente a sheet-option
+              $('#sheet-options-'+iteration_num).after($('<div>', {class : 'sheet-line regional-text', id : 'regional-div-'+iteration_num}));
+              $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
+              $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
+              $('#regional-div-'+iteration_num).append($('<div>', {class : 'sheet-line-item'}));
+              // DIV DATA
+              var url_project = '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(this.project_id_p6))))+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(<?=$json_projects?>))))+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(this.id_p_project))));
+              $('#regional-div-'+iteration_num).after($('<div>', {class : 'sheet-content pl-5', onclick : 'location.href="'+url_project+'"' ,id : 'div-data'+iteration_num})); //onclick
+              $('#div-data'+iteration_num).append($('<h2>', {text : this.name, id : 'h2-name-'+iteration_num}));
+              // FASE
+              $('#h2-name-'+iteration_num).after($('<div>', {class : 'data-box mt-auto', id : 'data-box-'+iteration_num}));
+              // $('#data-box-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'data-box-circle-'+iteration_num})); //FASE CIRCLE
+                // $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'C', class : 'phase-text'})); //FASE DATA
+                // $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
+                // $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cerrado', class : 'span-text'})); //FASE NAME
+              // SPI
+              $('#data-box-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-spi-'+iteration_num}));
+              $('#data-spi-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'spi-circle-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : '% Avance ejecutado / % Avance planeado'}));
+              var project_spi = null;
+              if (this.spi_labor_units != null) {
+                  project_spi = parseFloat(this.spi_labor_units).toFixed(2)
+              }
+              $('#spi-circle-'+iteration_num).append($('<h4>', {text : project_spi, id : 'spi-id-'+iteration_num, class : 'spi-value'})); //SPI DATA
+              $('#spi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'spi-text-'+iteration_num}));
+              $('#spi-text-'+iteration_num).append($('<span>', {text : 'SPI'}));
+          <?php endif;?>
           // Function que se encarga de llamar los proyectos de la bd local correspondientes a cada proyecto del ws
           // if (this.code_unifier != null) {
             Unifier_information(this.project_id_p6, this.id_p_project, iteration_num, this.spi_labor_units);

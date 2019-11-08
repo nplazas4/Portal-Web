@@ -698,12 +698,12 @@ left: 25%;
                             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Requerimientos y oportunidades que tienen potencial para desarrollarse como iniciativa y posteriormente como proyecto en el GEB."
                                   onclick="return false;">help_outline</i></span>
                             <input class="input100 entrada tooltipped" data-position="bottom" data-tooltip="Requerimientos y oportunidades que tienen potencial para desarrollarse como iniciativa y posteriormente como proyecto en el GEB. Pueden ser de crecimiento o sostenimiento" autocomplete="off"
-                                  type="text" name="t_name" onkeyup="validarTexto(this);" placeholder="Ingrese el nombre del requerimiento u oportunidad">
+                                  type="text" name="t_name" placeholder="Ingrese el nombre del requerimiento u oportunidad">
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Gestor RYOS *</span>
                             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Campo de texto para libre diligenciamiento donde se indica quién es el responsable del RYOS que se registra, habitualmente es quien diligencia el formato." onclick="return false;">help_outline</i></span>
-                            <input class="input100 entrada" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_gestor" placeholder="Ingrese el gestor">
+                            <input class="input100 entrada"  autocomplete="off" type="text" name="t_gestor" placeholder="Ingrese el gestor">
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Grupo Estratégico de Negocio (GEN) *</span>
@@ -744,13 +744,13 @@ left: 25%;
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Vicepresidencia / Dirección *</span>
                             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Campo de texto para libre diligenciamiento, se debe indicar la vicepresidencia o dirección a la cual pertenece el RYOS." onclick="return false;">help_outline</i></span>
-                            <input class="input100 entrada" id="ryos-vice" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_vicepresidencia" placeholder="Ingrese la Vicepresidencia / dirección">
+                            <input class="input100 entrada" id="ryos-vice"  autocomplete="off" type="text" name="t_vicepresidencia" placeholder="Ingrese la Vicepresidencia / dirección">
                         </div>
 
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Gerencia *</span>
                             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Campo de texto para libre diligenciamiento, se debe indicar la gerencia a la cual pertenece el RYOS." onclick="return false;">help_outline</i></span>
-                            <input class="input100 entrada" id="ryos-ger" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_gerencia" placeholder="Ingrese la gerencia">
+                            <input class="input100 entrada" id="ryos-ger"  autocomplete="off" type="text" name="t_gerencia" placeholder="Ingrese la gerencia">
                         </div>
 
                         <div class="wrap-input100 rs1-wrap-input100">
@@ -848,30 +848,30 @@ left: 25%;
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-necesidad">
                           <span class="label-input100">Necesidad a resolver *</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Campo de texto para diligenciamiento donde se debe registrar cuál es la necesidad o situación a la cual el RYOS da respuesta. Se deben incluir tantos datos de oferta, demanda, características, etc. como sean posibles." onclick="return false;">help_outline</i></span>
-                          <textarea id="ryos-necesidad" name="t_necesidad" onkeyup="validarTexto(this);" class="textarea-general materialize-textarea"></textarea>
+                          <textarea id="ryos-necesidad" name="t_necesidad"  class="textarea-general materialize-textarea"></textarea>
                       </div>
 
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-just">
                           <span class="label-input100">Justificación del valor *</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Establecer la importancia de realizar el proyecto, puede fundamentarse en la respuesta a las siguientes preguntas: ¿Qué beneficios o usos tendrá la idea? ¿Por qué la organización tendría que hacerlo? ¿Qué sucede si no se hace el RYOS? ¿Por qué es mejor que lo que existe? ¿Por qué es diferente de lo que existe?" onclick="return false;">help_outline</i></span>
-                          <textarea id="ryos-just" name="t_just_val" onkeyup="validarTexto(this);" class="textarea-general materialize-textarea"></textarea>
+                          <textarea id="ryos-just" name="t_just_val"  class="textarea-general materialize-textarea"></textarea>
                       </div>
 
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-alcance">
                           <span class="label-input100">Alcance *</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Campo de texto para diligenciamiento donde debe describirse en qué consiste el RYOS que está registrando, siendo preciso en cuanto a lo qué se haría en el proyecto y cuáles serían los productos o servicios entregables de ser aprobado." onclick="return false;">help_outline</i></span>
-                          <textarea id="ryos-alcance" name="t_alcance" onkeyup="validarTexto(this);" class="textarea-general materialize-textarea"></textarea>
+                          <textarea id="ryos-alcance" name="t_alcance"  class="textarea-general materialize-textarea"></textarea>
                       </div>
 
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-rest">
                           <span class="label-input100">Restricciones y exclusiones *</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Campo de texto para diligenciamiento donde se deben especificar todas las restricciones (situaciones que no permitirían adelantar parcial o totalmente el proyecto) técnicas, sociales, ambientales, normativas, de tiempo entre otras que hayan sido identificadas, así mismo se incluye una descripción de qué no incluye el RYOS en su alcance, es decir qué NO se haría en el proyecto de ser aprobado." onclick="return false;">help_outline</i></span>
-                          <textarea id="ryos-rest" name="t_restriccion" onkeyup="validarTexto(this);" class="textarea-general materialize-textarea"></textarea>
+                          <textarea id="ryos-rest" name="t_restriccion"  class="textarea-general materialize-textarea"></textarea>
                       </div>
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-sup">
                           <span class="label-input100">Supuestos *</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Factores que se consideran verdaderos, reales o ciertos sin prueba ni demostración, que garantiza el éxito del proyecto." onclick="return false;">help_outline</i></span>
-                          <textarea id="ryos-sup" name="t_supuestos" onkeyup="validarTexto(this);" class="textarea-general materialize-textarea"></textarea>
+                          <textarea id="ryos-sup" name="t_supuestos"  class="textarea-general materialize-textarea"></textarea>
                       </div>
                     </form>
                     <form class="contact100-form validate-form" id="Form-3" style="display:none">
@@ -882,13 +882,13 @@ left: 25%;
                       <div class="wrap-input100 rs1-wrap-input100 validate-input">
                           <span class="label-input100">Objetivo # <?=$i?></span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Objetivo # <?=$i?>" onclick="return false;">help_outline</i></span>
-                          <select  id = "t_objetive-<?=$i?>" name = "select-estrategic" class="select-estrategic objectives">
+                          <select  id = "t_objetive_<?=$i?>" name = "select-estrategic" class="select-estrategic objectives">
                           </select>
                       </div>
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-app<?=$i?>">
                           <span class="label-input100">Aplicación</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Aplicación" onclick="return false;">help_outline</i></span>
-                          <input class="input100 estrategic" autocomplete="off" onkeyup="validarTexto(this);" id="input-<?=$i?>" type="text" name="t_application_<?=$i?>" placeholder="Ingrese la aplicación">
+                          <input class="input100 estrategic" autocomplete="off"  id="input-<?=$i?>" type="text" name="t_application_<?=$i?>" placeholder="Ingrese la aplicación">
                       </div>
                       <?php endfor;?>
                       <span class="contact100-form-sub-title" id="gen-valor">
@@ -963,7 +963,7 @@ left: 25%;
                     <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-just-peti" style="display:none">
                         <span class="label-input100">Justificación *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-                        <input class="input100 peti" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_just_peti" id="input-just-peti" placeholder="Ingrese la justificación">
+                        <input class="input100 peti"  autocomplete="off" type="text" name="t_just_peti" id="input-just-peti" placeholder="Ingrese la justificación">
                     </div>
                     <!-- CRECIMIENTO FLAGS -->
                     <span class="crec-flags contact100-form-sub-title">
@@ -1008,7 +1008,7 @@ left: 25%;
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input">
                         <span class="label-input100">Aplicación *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-                        <input class="input100 flag" id="app5" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_application_flag_1" placeholder="Ingrese la aplicación">
+                        <input class="input100 flag" id="app5"  autocomplete="off" type="text" name="t_application_flag_1" placeholder="Ingrese la aplicación">
                     </div>
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox tesis-inversion">
                         <span class="label-input100">2. Tesis de Inversión *</span>
@@ -1048,7 +1048,7 @@ left: 25%;
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app6">
                         <span class="label-input100">Aplicación *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-                        <input class="input100 flag" id="app6" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_application_flag_2" placeholder="Ingrese la aplicación">
+                        <input class="input100 flag" id="app6"  autocomplete="off" type="text" name="t_application_flag_2" placeholder="Ingrese la aplicación">
                     </div>
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox posicion-mercado">
                         <span class="label-input100">3. Posición de Mercado *</span>
@@ -1082,7 +1082,7 @@ left: 25%;
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app7">
                         <span class="label-input100">Aplicación *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-                        <input class="input100 flag" id="app7" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_application_flag_3" placeholder="Ingrese la aplicación">
+                        <input class="input100 flag" id="app7"  autocomplete="off" type="text" name="t_application_flag_3" placeholder="Ingrese la aplicación">
                     </div>
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox modelo-intervencion">
                         <span class="label-input100">4. Modelo de Intervención *</span>
@@ -1116,7 +1116,7 @@ left: 25%;
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app8">
                         <span class="label-input100">Aplicación *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-                        <input class="input100 flag" id="app8" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_application_flag_4" placeholder="Ingrese la aplicación">
+                        <input class="input100 flag" id="app8"  autocomplete="off" type="text" name="t_application_flag_4" placeholder="Ingrese la aplicación">
                     </div>
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input checkbox capacidades">
                         <span class="label-input100">5. Capacidades Técnicas, Financieras y de Gestión de Riesgos Clave *</span>
@@ -1202,7 +1202,7 @@ left: 25%;
                     <div class="crec-flags wrap-input100 rs1-wrap-input100 validate-input" id="div-app10">
                         <span class="label-input100">Aplicación *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-                        <input class="input100 flag" id="app10" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="t_application_flag_6" placeholder="Ingrese la aplicación">
+                        <input class="input100 flag" id="app10"  autocomplete="off" type="text" name="t_application_flag_6" placeholder="Ingrese la aplicación">
                     </div>
                     <!-- SOCIO ESTRATÉGICO -->
                     <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-socio-est">
@@ -1217,17 +1217,276 @@ left: 25%;
                     <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="div-cual2">
                         <span class="label-input100">¿Cuál? (opcional) *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál? (opcional)" onclick="return false;">help_outline</i></span>
-                        <input class="input100 socio" id="t_cual_soc_est" onkeyup="validarTexto(this);" autocomplete="off" type="text" name="" placeholder="">
+                        <input class="input100 socio" id="t_cual_soc_est"  autocomplete="off" type="text" name="" placeholder="">
                     </div>
                     <span class="socio-est contact100-form-sub-title" style="display:none">Porcentaje de un socio estratégico</span>
                     <div class="socio-est wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="Div-valor">
                         <span class="label-input100">Valor tentativo *</span>
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
-                        <input class="input100 socio" autocomplete="off" type="number" id="n_tentative_val" onkeyup="validarNumero(this);" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
+                        <input class="input100 socio" autocomplete="off" type="number" id="n_tentative_val" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
                     </div>
                     </form>
                     <form class="contact100-form validate-form" id="Form-4" style="display:none">
-                      <h1>4</h1>
+                      <span class="contact100-form-sub-title">
+                          VIABILIDAD FINANCIERA
+                      </span>
+                      <!-- CRECIMIENTO -->
+                      <div class="crec-info-finaciera wrap-input100 validate-input" style="display:none">
+                          <span class="label-input100">Estimativo de ingresos anuales *</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Estimado de ingresos anuales" onclick="return false;">help_outline</i></span>
+                          <table class="display highlight centered">
+                              <thead>
+                                  <tr>
+                                      <th>Moneda</th>
+                                      <th>Tasa de cambio a USD</th>
+                                      <th>Ingreso anual</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>Millones COP</td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100 financiera" id="input-anual-default-1" autocomplete="off" type="number" readonly onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="3013.11"
+                                                style="text-align:center"></div>
+                                      </td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100 viabilidad-financiera" id="n_cop_anual" autocomplete="off" onkeydown="return event.keyCode !== 69" type="number" min="0.00" max="10000.00" step="0.01" value="0.00"
+                                                style="text-align:center"></div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Millones USD</td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100" id="input-anual-default-2" readonly autocomplete="off" onkeydown="return event.keyCode !== 69" type="number" min="0.00" max="10000.00" step="0.01" value="1.00"
+                                                style="text-align:center"></div>
+                                      </td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100 viabilidad-financiera" id="n_usd_anual" autocomplete="off" onkeydown="return event.keyCode !== 69" type="number" min="0.00" max="10000.00" step="0.01" value="0.00"
+                                                style="text-align:center"></div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Millones EUR</td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100 financiera" id="input-anual-default-3" readonly autocomplete="off" type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.85"
+                                                style="text-align:center"></div>
+                                      </td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100 viabilidad-financiera" id="n_eur_anual" autocomplete="off" type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.00"
+                                                style="text-align:center"></div>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Millones GTQ</td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100 financiera" id="input-anual-default-4" readonly autocomplete="off" type="number" min="0.00" max="10000.00" step="0.01" value="7.18" style="text-align:center"></div>
+                                      </td>
+                                      <td>
+                                          <div class="input-icons"><i class="material-icons icon">attach_money</i>
+                                              <input class="input100 viabilidad-financiera" id="n_gtq_anual" autocomplete="off" type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.00"
+                                                style="text-align:center"></div>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+                          <span class="label-input100">Ingresos anuales *</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Ingresos anuales" onclick="return false;">help_outline</i></span>
+                          <input class="input100 viabilidad-financiera" id="n_ingresos_anuales" autocomplete="off" type="number" readonly name="name" value="0" placeholder="Ingresos anuales">
+                      </div>
+                      <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+                          <span class="label-input100">EBITDA *</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="EBITDA" onclick="return false;">help_outline</i></span>
+                          <input class="input100 viabilidad-financiera" id="n_ebitda" type="number" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0" name="name" placeholder="EBITDA" autocomplete="off">
+                      </div>
+                      <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+                          <span class="label-input100">Aporte a la MEGA *</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione las características que mejor definan al RYOS que está registrando"
+                                onclick="return false;">help_outline</i></span>
+                          <select class="select-estrategic" id="t_mega">
+                              <option value="default">Seleccione una opción</option>
+                              <option>Baja - Aporte menor al 2% de la MEGA</option>
+                              <option>Media - Aporte entre el 2% y el 5% de la MEGA</option>
+                              <option>Alta - Aporte mayor al 5% de la MEGA</option>
+                          </select>
+                      </div>
+                      <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+                          <span class="label-input100">Estabilidad de ingresos *</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione las características que mejor definan el RYOS que está registrando"
+                                onclick="return false;">help_outline</i></span>
+                          <select class="select-estrategic" id="t_estabilidad">
+                              <option value="default">Seleccione una opción</option>
+                              <option>Baja - Ingresos por otros mecanismos</option>
+                              <option>Media - Ingreso por vía modificación base de activos USO (Ampliaciones y compra activos USO)</option>
+                              <option>Alta - Ingreso por vía de convocatorias o contratos en firme</option>
+                          </select>
+                      </div>
+                      <div class="crec-info-finaciera wrap-input100 rs1-wrap-input100 validate-input" style="display:none">
+                          <span class="label-input100">Vía de ingresos *</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione las características que mejor definan el RYOS que está registrando"
+                                onclick="return false;">help_outline</i></span>
+                          <select class="select-estrategic" id="t_ingresos">
+                              <option value="default">Seleccione una opción</option>
+                              <option>Ingreso por vía de convocatorias o contratos en firme</option>
+                              <option>Ingreso por vía de demandas existentes en el mercado o mezcla de ingreso por contrato</option>
+                              <option>Ingreso por posible demanda asociada al crecimiento del mercado</option>
+                          </select>
+                      </div>
+                      <div class="wrap-input100 validate-input">
+                          <span class="label-input100">Beneficios tangibles e intangibles</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione el beneficio junto a su respectiva descripción" onclick="return false;">help_outline</i></span>
+                          <table class="display highlight centered">
+                              <thead>
+                                  <tr>
+                                      <th>Tipo de beneficio</th>
+                                      <th>Descripción de beneficio</th>
+                                      <th>Situación actual (Cifra o descripción)</th>
+                                      <th>Situación con el beneficio (Cifra o descripción)</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <select class="select-estrategic" id="t_tipo_beneficio_1">
+                                              <option value="default">Seleccione una opción</option>
+                                              <option>Tangible</option>
+                                              <option>Intangible</option>
+                                          </select>
+                                      </td>
+                                      <td id="parent-txt1"><textarea class="input300 financiera materialize-textarea" id="t_desc_beneficio_1" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt2"><textarea class="input300 financiera materialize-textarea" id="t_situacion_actual_1" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt3"><textarea class="input300 financiera materialize-textarea" id="t_situacion_beneficio_1"  style="margin-top: 6.5px"></textarea></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <select class="select-estrategic" id="t_tipo_beneficio_2">
+                                              <option value="default">Seleccione una opción</option>
+                                              <option class="work-option">Tangible</option>
+                                              <option class="work-option">Intangible</option>
+                                          </select>
+                                      </td>
+                                      <td id="parent-txt4"><textarea class="input300 financiera materialize-textarea" id="t_desc_beneficio_2" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt5"><textarea class="input300 financiera materialize-textarea" id="t_situacion_actual_2" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt6"><textarea class="input300 financiera materialize-textarea" id="t_situacion_beneficio_2" style="margin-top: 6.5px"></textarea></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <select class="select-estrategic" id="t_tipo_beneficio_3">
+                                              <option value="default">Seleccione una opción</option>
+                                              <option class="work-option">Tangible</option>
+                                              <option class="work-option">Intangible</option>
+                                          </select>
+                                      </td>
+                                      <td id="parent-txt7"><textarea class="input300 financiera materialize-textarea" id="t_desc_beneficio_3" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt8"><textarea class="input300 financiera materialize-textarea" id="t_situacion_actual_3" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt9"><textarea class="input300 financiera materialize-textarea" id="t_situacion_beneficio_3" style="margin-top: 6.5px"></textarea></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <select class="select-estrategic" id="t_tipo_beneficio_4">
+                                              <option value="default">Seleccione una opción</option>
+                                              <option class="work-option">Tangible</option>
+                                              <option class="work-option">Intangible</option>
+                                          </select>
+                                      </td>
+                                      <td id="parent-txt10"><textarea class="input300 financiera materialize-textarea" id="t_desc_beneficio_4"  style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt11"><textarea class="input300 financiera materialize-textarea" id="t_situacion_actual_4" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt12"><textarea class="input300 financiera materialize-textarea" id="t_situacion_beneficio_4" style="margin-top: 6.5px"></textarea></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <select class="select-estrategic" id="t_tipo_beneficio_5">
+                                              <option value="default">Seleccione una opción</option>
+                                              <option class="work-option">Tangible</option>
+                                              <option class="work-option">Intangible</option>
+                                          </select>
+                                      </td>
+                                      <td id="parent-txt13"><textarea class="input300 financiera materialize-textarea" id="t_desc_beneficio_5" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt14"><textarea class="input300 financiera materialize-textarea" id="t_situacion_actual_5"  style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt15"><textarea class="input300 financiera materialize-textarea" id="t_situacion_beneficio_5" style="margin-top: 6.5px"></textarea></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <select class="select-estrategic" id="t_tipo_beneficio_6">
+                                              <option value="default">Seleccione una opción</option>
+                                              <option class="work-option">Tangible</option>
+                                              <option class="work-option">Intangible</option>
+                                          </select>
+                                      </td>
+                                      <td id="parent-txt16"><textarea class="input300 financiera materialize-textarea" id="t_desc_beneficio_6" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt17"><textarea class="input300 financiera materialize-textarea" id="t_situacion_actual_6" style="margin-top: 6.5px"></textarea></td>
+                                      <td id="parent-txt18"><textarea class="input300 financiera materialize-textarea" id="t_situacion_beneficio_6" style="margin-top: 6.5px"></textarea></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="wrap-input100 validate-input" data-validate="Message is required">
+                          <span class="label-input100">Estimado de costos de inversión</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Relacione el presupuesto requerido año a año, en la respectiva moneda" onclick="return false;">help_outline</i></span>
+                          <table class="display highlight centered" id="table-inversion">
+                              <thead>
+                                  <tr id="tr-head">
+                                      <th id="first_th">Moneda</th>
+                                      <th id="last_th"></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td id="tr_1">Millones COP</td>
+                                      <td>Millones COP</td>
+                                  </tr>
+                                  <tr>
+                                      <td id="tr_2">Millones USD</td>
+                                      <td>Millones USD</td>
+                                  </tr>
+                                  <tr>
+                                      <td id="tr_3">Millones EUR</td>
+                                      <td>Millones EUR</td>
+                                  </tr>
+                                  <tr>
+                                      <td id="tr_4">Millones GTQ</td>
+                                      <td>Millones GTQ</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-pres-total">
+                          <span class="label-input100">Presupuesto total</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
+                          <input class="input100 financiera" id="Pres-total" autocomplete="off" type="text" name="name" value="0" readonly placeholder="Ingrese el presupuesto">
+                      </div>
+                      <div class="wrap-input100 rs1-wrap-input100 validate-input" id="ciclo-div">
+                          <span class="label-input100">Ciclo de vida del producto (años)</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el tiempo que operará el producto que se genera por la implementación de su RYOS"
+                                onclick="return false;">help_outline</i></span>
+                          <input class="input100 financiera" type="number" id="ciclo" autocomplete="off" value="0" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px"
+                            placeholder="Ingrese el ciclo de vida">
+                      </div>
+                      <span class="origen-mandatorio contact100-form-sub-title">
+                          PROYECTOS DE ORIGEN MANDATORIO
+                      </span>
+                      <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input" id="costos-div">
+                          <span class="label-input100">Costos por no ejecución</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom"
+                                data-tooltip="Estime e incluya el monto económico que estima GEB tendría que desembolsar por concepto de multas, penalidades y otros, en caso de no implementar esta RYOS"
+                                onclick="return false;">help_outline</i></span>
+                          <input class="input100 financiera" type="number" name="name" id="costos" placeholder="Ingrese los costos" value="0" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" autocomplete="off"
+                                 onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
+                      </div>
+                      <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input" id="parent-txt19">
+                          <span class="label-input100">Consecuencia sin RYOS</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Relacione todas las consecuencias identificadas en las cuales incurriría GEB en caso de no ejecutar el RYOS"
+                                onclick="return false;">help_outline</i></span>
+                          <textarea class="input300 financiera materialize-textarea" id="t_consecuencia" value="-" placeholder="Ingrese la consecuencia" style="margin-top: 1px"></textarea>
+                      </div>
                     </form>
                     <form class="contact100-form validate-form" id="Form-5" style="display:none">
                       <h1>5</h1>
@@ -1379,6 +1638,9 @@ $(document).ready(function() {
             return !$(this).val()
         }).length;
         console.log(empty_inputs);
+    }
+    if ($('#Form-3').is(":visible")) {
+        estimate_cost();
     }
     next_module(empty_inputs);
     show_mec(project_type, subcategory_value);
@@ -1656,7 +1918,6 @@ $(document).ready(function() {
                           'Ninguna'
                         ];
         $('.div-gen-valor-ti').hide();
-        // $('.div-gen-valor-ti input').val('');
     }
     // REGRESAR LOS SELECT DE ALINEAMIENTO ESTRATÉGICOS A LA PRIMERA POSICIÓN
     var estrategic_select = $('.select-estrategic');
@@ -1685,21 +1946,28 @@ $(document).ready(function() {
         $('.crec-flags').show();
         $('.input100.flag').addClass('active');
         $('.checkbox-flag').addClass('active');
+        // form 4
+        $('.crec-info-finaciera').show();
+        $('.input100.viabilidad-financiera').addClass('active');
       } else {
         $('#div-peti').show();
         $('#div-just-peti').show();
         $('#div-socio-est').hide();
         $('.crec-flags').hide();
+        $('.crec-info-finaciera').hide();
         $('#input-just-peti').addClass('active');
         $('.input100.flag.active').removeClass('active');
         $('.checkbox-flag.active').removeClass('active');
+        $('.input100.viabilidad-financiera.active').removeClass('active');
       }
     } else {
       $('.mec-exclusive').hide();
       $('.input100.mec.active').removeClass('active');
       $('.crec-flags').hide();
+      $('.crec-info-finaciera').hide();
       $('.input100.flag.active').removeClass('active');
       $('.checkbox-flag.active').removeClass('active');
+      $('.input100.viabilidad-financiera.active').removeClass('active');
     }
   }
   // FLAGS COLORS
@@ -1821,6 +2089,66 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
     }
   });
   // FIN JQUERY FORM 3
+  // INICIO JQUERY FORM 4
+  $('.input100.viabilidad-financiera').change(function() {
+      // $('#ingresos-anuales').attr('value');
+      var count = 0;
+      var result = 0;
+      $('.input100.viabilidad-financiera').each(function() {
+          count += +1;
+          result += +$(this).val() / $('#input-anual-default-' + count).val();
+      })
+      $('#ingresos-anuales').val(result);
+  });
+  $(document).on('change', '.input100.financiera.inv-estimate', function() {
+      var count = 0;
+      var result_1 = 0;
+      var result_2 = 0;
+      var result_3 = 0;
+      var result_4 = 0;
+      $('.input100.financiera.inv-estimate.1').each(function() {
+          count = 1;
+          result_1 += +$(this).val() / $('#input-anual-default-' + 1).val();
+      });
+      $('.input100.financiera.inv-estimate.2').each(function() {
+          result_2 += +$(this).val() / $('#input-anual-default-' + 2).val();
+      });
+      $('.input100.financiera.inv-estimate.3').each(function() {
+          result_3 += +$(this).val() / $('#input-anual-default-' + 3).val();
+      });
+      $('.input100.financiera.inv-estimate.4').each(function() {
+          result_4 += +$(this).val() / $('#input-anual-default-' + 4).val();
+      });
+      $('#Pres-total').val(result_1 + result_2 + result_3 + result_4);
+  });
+  function estimate_cost() {
+      var Table_Dates = new Array();
+      $('.input100.entrada.table-date').each(function() {
+          if ($(this).val() != "") {
+              var date = new Date($(this).val());
+              year = date.getFullYear();
+              if ($("." + year).hasClass(year) == false) {
+                  Table_Dates.push(year);
+              }
+          }
+      });
+      loop_estimate(Table_Dates.sort());
+  };
+
+  // REVISAR
+  function loop_estimate(Table_Dates) {
+      var length_thead = document.getElementById("tr-head").childElementCount;
+      for (var i = 0; i < Table_Dates.length; i++) {
+          // if (length_thead > 2) {
+          if ($("." + Table_Dates[i]).hasClass(Table_Dates[i]) == false) {
+              $('#last_th').before("<th id=" + [i] + " class=" + Table_Dates[i] + ">" + Table_Dates[i] + "</th>");
+              for (var j = 1; j < 5; j++) {
+                  $('#tr_' + [j]).after('<td><div class="input-icons"><i class="material-icons icon">attach_money</i><input class="input100 financiera inv-estimate ' + [j] + '" type="number" id="n_cost_'+Table_Dates[i]+'_'+[j]+'" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" value="0.00" style="text-align:center"></div></td>');
+              }
+          }
+      }
+  }
+  // FIN JQUERY FORM 4
   // JSON DEL FORMULARIO
   function json_form(){
     var array_form = {};
@@ -1863,6 +2191,18 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
     $('.input100.socio.active').each(function() {
         array_form[$(this).attr('id')] = $(this).val();
     });
+    // FORM 4
+    // CREC
+    $('.input100.viabilidad-financiera.active').each(function(){
+        array_form[$(this).attr('id')] = $(this).val();
+    });
+    $('.input300.financiera.materialize-textarea').each(function(){
+        array_form[$(this).attr('id')] = $(this).val();
+    });
+    $('.input100.financiera.inv-estimate').each(function(){
+        array_form[$(this).attr('id')] = $(this).val();
+    });
     console.log(array_form);
+    // console.log(JSON.stringify(array_form));
   }
 </script>
