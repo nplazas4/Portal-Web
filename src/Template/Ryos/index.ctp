@@ -1461,14 +1461,27 @@ left: 25%;
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-pres-total">
                           <span class="label-input100">Presupuesto total</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
-                          <input class="input100 financiera" id="Pres-total" autocomplete="off" type="text" name="name" value="0" readonly placeholder="Ingrese el presupuesto">
+                          <input class="input100 financiera" id="Pres-total" autocomplete="off" type="text" name="t_pres_total" value="0" readonly placeholder="Ingrese el presupuesto">
                       </div>
-                      <div class="wrap-input100 rs1-wrap-input100 validate-input" id="ciclo-div">
-                          <span class="label-input100">Ciclo de vida del producto (años)</span>
-                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el tiempo que operará el producto que se genera por la implementación de su RYOS"
-                                onclick="return false;">help_outline</i></span>
-                          <input class="input100 financiera" type="number" id="ciclo" autocomplete="off" value="0" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px"
-                            placeholder="Ingrese el ciclo de vida">
+                      <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-bc" style="display:none">
+                          <span class="label-input100">Relación B/C *</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Presupuesto" onclick="return false;">help_outline</i></span>
+                          <input class="input100 financiera" id="n_relation_bc" autocomplete="off" type="number" name="n_relation_bc" value="0" placeholder="Ingrese el presupuesto">
+                      </div>
+                      <div class="wrap-input100 rs1-wrap-input100 " id="ciclo-input-div">
+                        <span class="label-input100">Ciclo de vida del producto (años) *</span>
+                        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el tiempo que operará el producto que se genera por la implementación de su RYOS" onclick="return false;">help_outline</i></span>
+                        <input class="input100 financiera active" type="number" id="n_ciclo_vida" name="n_ciclo_vida" autocomplete="off" value="0" onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px" placeholder="Ingrese el ciclo de vida">
+                      </div>
+                      <div class="wrap-input100 rs1-wrap-input100" id="ciclo-select-div" style="display:none">
+                        <span id="span-ciclo-title" class="label-input100">Ciclo de vida del producto (años) *</span>
+                        <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Ingrese el tiempo que operará el producto que se genera por la implementación de su RYOS" onclick="return false;">help_outline</i></span>
+                        <select class="select-estrategic" id="t_ciclo_vida" name="t_ciclo_vida">
+                            <option value="default">Seleccione una opción</option>
+                            <option>Mayor a 5 años</option>
+                            <option>Entre 2 y 5 años</option>
+                            <option>Menor a 2 años</option>
+                        </select>
                       </div>
                       <span class="origen-mandatorio contact100-form-sub-title">
                           PROYECTOS DE ORIGEN MANDATORIO
@@ -1478,18 +1491,315 @@ left: 25%;
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom"
                                 data-tooltip="Estime e incluya el monto económico que estima GEB tendría que desembolsar por concepto de multas, penalidades y otros, en caso de no implementar esta RYOS"
                                 onclick="return false;">help_outline</i></span>
-                          <input class="input100 financiera" type="number" name="name" id="costos" placeholder="Ingrese los costos" value="0" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" autocomplete="off"
+                          <input class="input100 financiera active" type="number" name="name" id="n_costos_no_ejec" placeholder="Ingrese los costos" onkeydown="return event.keyCode !== 69" min="0.00" max="10000.00" step="0.01" autocomplete="off"
                                  onkeydown="return event.keyCode !== 69" style="margin-bottom: 20px">
                       </div>
                       <div class="origen-mandatorio wrap-input100 rs1-wrap-input100 validate-input" id="parent-txt19">
                           <span class="label-input100">Consecuencia sin RYOS</span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Relacione todas las consecuencias identificadas en las cuales incurriría GEB en caso de no ejecutar el RYOS"
                                 onclick="return false;">help_outline</i></span>
-                          <textarea class="input300 financiera materialize-textarea" id="t_consecuencia" value="-" placeholder="Ingrese la consecuencia" style="margin-top: 1px"></textarea>
+                          <textarea class="input300 financiera materialize-textarea" id="t_consecuencia" placeholder="Ingrese la consecuencia" style="margin-top: 1px"></textarea>
                       </div>
                     </form>
                     <form class="contact100-form validate-form" id="Form-5" style="display:none">
-                      <h1>5</h1>
+                      <span class="contact100-form-sub-title">
+                          ATRACTIVIDAD TÉCNICA
+                      </span>
+                      <!-- CO -->
+                      <div class="comp-co wrap-input100 rs1-wrap-input100">
+                          <span class="label-input100">Criticidad en la operación</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="t_criticidad_co" name="t_criticidad_co" class="select-estrategic">
+                              <option disabled selected value="default">Seleccione una opción</option>
+                              <option>No afecta la continuidad operacional</option>
+                              <option>Afectación menor a la continuidad operacional</option>
+                              <option>Afectación mayor a la continuidad operacional</option>
+                          </select>
+                      </div>
+                      <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Cambio tecnológico</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="t_cambio_co" name="t_cambio_co" class="select-estrategic">
+                              <option disabled selected value="default">Seleccione una opción</option>
+                              <option class="work-option">No hay cambio de tecnología en el activo o sus componentes</option>
+                              <option class="work-option">Uno o más componentes / activo cambia a conocida en GEB</option>
+                              <option class="work-option">Uno o más componentes cambia a conocida en GEB</option>
+                              <option class="work-option">Uno o más componentes cambia a desconocida en GEB</option>
+                              <option class="work-option">Uno o más componentes / activo cambia a desconocida en GEB</option>
+                          </select>
+                      </div>
+                      <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Disponibilidad de los activos</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="t_activos_co" name="t_activos_co" class="select-estrategic">
+                              <option disabled selected value="default">Seleccione una opción</option>
+                              <option class="work-option">No hay cambio en la disponibilidad en el activo o sus componentes</option>
+                              <option class="work-option">Reduce frecuencia de paradas no programadas sin modificar tiempo de paradas programadas</option>
+                              <option class="work-option">Reduce tiempo de paradas programadas pero no modifica frecuencia de paradas no programadas</option>
+                              <option class="work-option">Reduce tiempo de paradas programadas y frecuencia de paradas no programadas</option>
+                          </select>
+                      </div>
+                      <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Vida útil del activo</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="t_vida_util_co" name="t_vida_util_co" class="select-estrategic">
+                              <option disabled selected value="default">Seleccione una opción</option>
+                              <option class="work-option">No hay cambio en la vida útil del activo o sus componentes</option>
+                              <option class="work-option">No aumenta la vida útil del activo pero si de sus componentes</option>
+                              <option class="work-option">Aumenta la vida útil del activo y de sus componentes</option>
+                          </select>
+                      </div>
+                      <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Esquema de mantenimiento</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="t_esquema_co" name="t_esquema_co" class="select-estrategic">
+                              <option disabled selected value="default">Seleccione una opción</option>
+                              <option class="work-option">No hay cambio en el esquema de mantenimiento del activo o sus componentes</option>
+                              <option class="work-option">Reduce frecuencia de paradas programadas sin modificar tiempo de intervención</option>
+                              <option class="work-option">Reduce tiempo de paradas programadas sin modificar su frecuencia</option>
+                              <option class="work-option">La intervención permite reducir el tiempo de las paradas programadas y su frecuencia</option>
+                          </select>
+                      </div>
+                      <div class="comp-co wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="t_sinergia_co" name="t_sinergia_co" class="select-estrategic">
+                              <option>NO</option>
+                              <option>SI</option>
+                          </select>
+                      </div>
+                      <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-cual-co" style="display:none">
+                          <span class="label-input100">¿Cuál (es)?</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál (es)?" onclick="return false;">help_outline</i></span>
+                          <input class="input100 form5" value="-" id="cual-co" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
+                      </div>
+                      <!-- TI -->
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Tipo de proyecto de TI</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">Soluciones tecnológicas</option>
+                              <option class="work-option">Servicios de arquitectura e innovación en TI</option>
+                          </select>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Criticidad en la operación</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">No afecta la continuidad operacional</option>
+                              <option class="work-option">Afectación menor a la continuidad operacional</option>
+                              <option class="work-option">Afectación mayor a la continuidad operacional</option>
+                          </select>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">¿Se instalará tecnología?</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">SI</option>
+                              <option class="work-option">NO</option>
+                          </select>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Cuadrante de Gartner</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">Retadores - Challengers</option>
+                              <option class="work-option">Líderes - Leaders</option>
+                              <option class="work-option">Jugadores de Nicho - Niche players</option>
+                              <option class="work-option">Visionarios - Visionaries</option>
+                          </select>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Estado de la tecnología</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">Conocida en el mundo y empleada en GEB</option>
+                              <option class="work-option">Conocida en el mundo, nueva en GEB</option>
+                              <option class="work-option">Nueva en el mundo</option>
+                          </select>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-sinergia-ti">
+                              <option class="sinergia-ti-option">NO</option>
+                              <option class="sinergia-ti-option">SI</option>
+                          </select>
+                      </div>
+                      <div class="wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="div-cual-ti">
+                          <span class="label-input100">¿Cuál (es)?</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál (es)?" onclick="return false;">help_outline</i></span>
+                          <input class="input100 form5" value="-" id="cual-ti" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Complejidad del proyecto</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-complejidad-ti">
+                              <option class="complejidad-ti-option">Alta</option>
+                              <option class="complejidad-ti-option">Media</option>
+                              <option class="complejidad-ti-option">Baja</option>
+                          </select>
+                          <span id="complejidad-ti-span">Duración ejecución proyecto mayor a 8 meses, participación de más de 3 áreas de la empresa y un equipo de proyecto mayor a 5 personas.</span>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Impacto sobre la empresa</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">Muy positivo. Genera un beneficio por encima de lo previsto</option>
+                              <option class="work-option">Positivo. Genera el beneficio previsto</option>
+                              <option class="work-option">Neutral. No genera ningún beneficio</option>
+                          </select>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Impacto sobre GEB</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">Muy positivo. Genera un beneficio por encima de lo previsto</option>
+                              <option class="work-option">Positivo. Genera el beneficio previsto</option>
+                              <option class="work-option">Neutral. No genera ningún beneficio</option>
+                          </select>
+                      </div>
+                      <div class="comp-ti wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Resistencia al cambio</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-resistencia-ti">
+                              <option class="resistencia-ti-option">Alta</option>
+                              <option class="resistencia-ti-option">Media</option>
+                              <option class="resistencia-ti-option">Baja</option>
+                          </select>
+                          <span id="span-resistencia-ti">No es un cambio necesario y en la compañía se ve como una carga adicional en las tareas.</span>
+                      </div>
+                      <!-- AC -->
+                      <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Restricciones regulatorias</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-restricciones-reg">
+                              <option class="restricciones-reg-option" value="no">No se requieren trámites</option>
+                              <option class="restricciones-reg-option" value="algunos">Se requieren algunos trámites</option>
+                              <option class="restricciones-reg-option" value="si">Se requieren trámites</option>
+                          </select>
+                          <span id="span-restricciones-reg">Para implementarlo no se requieren trámites (p.e. Licencias o permisos) que pongan en riesgo la ejecución o la retrasen.</span>
+                      </div>
+                      <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Criticidad en la operación</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">No afecta la continuidad operacional</option>
+                              <option class="work-option">Afectación menor a la continuidad operacional</option>
+                              <option class="work-option">Afectación mayor a la continuidad operacional</option>
+                          </select>
+                      </div>
+                      <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Disponibilidad de los recursos</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-disponibilidad">
+                              <option class="disponibilidad-option">Alta</option>
+                              <option class="disponibilidad-option">Media</option>
+                              <option class="disponibilidad-option">Baja</option>
+                          </select>
+                          <span id="disponibilidad-span">GEB cuenta con recursos competentes suficientes para implementarlo.</span>
+                      </div>
+                      <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Sinergia con otros proyectos (Incluye Sucursal y filiales del GEB)</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-sinergia-ac">
+                              <option class="work-option">NO</option>
+                              <option class="work-option">SI</option>
+                          </select>
+                      </div>
+                      <div class="wrap-input100 rs1-wrap-input100 validate-input" style="display:none" id="div-cual-ac">
+                          <span class="label-input100">¿Cuál (es)?</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="¿Cuál (es)?" onclick="return false;">help_outline</i></span>
+                          <input class="input100 form5" value="-" id="cual-ac" onkeyup="validarTexto(this);" value="-" autocomplete="off" type="text" name="" placeholder="">
+                      </div>
+                      <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Impacto en SST</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-impacto-sst">
+                              <option class="impacto-sst-option">Alto</option>
+                              <option class="impacto-sst-option">Medio</option>
+                              <option class="impacto-sst-option">Bajo</option>
+                          </select>
+                          <span id="impacto-sst-info-span">Reduce la probabilidad de accidentes, incidentes y enfermedades laborales.</span>
+                      </div>
+                      <div class="comp-ac wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Sinergia con estrategias de gestión humana</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Tipo de proyecto TI que aplica (Informativo)" onclick="return false;">help_outline</i></span>
+                          <select id="select-sinergia">
+                              <option class="sinergia-option">Alta</option>
+                              <option class="sinergia-option">Media</option>
+                              <option class="sinergia-option">Baja</option>
+                          </select>
+                          <span id="sinergia-span">Permite apalancar las estrategias de gestión humana y calidad de vida.</span>
+                      </div>
+                      <!-- CRECIMIENTO -->
+                      <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Interconexión (Mercados entre)</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Seleccione la interconexión" onclick="return false;">help_outline</i></span>
+                          <select id="select-interconexion">
+                              <option class="interconexion-option" value="FE">Fuentes energéticas</option>
+                              <option class="interconexion-option" value="FE-GU">Fuentes energéticas y grandes usuarios</option>
+                              <option class="interconexion-option" value="FE-CP">Fuentes energéticas y ciudades pequeñas</option>
+                          </select>
+                          <span id="interconexion-span">Baja emisión y grandes usuarios industriales/comerciales o ciudades de más de 4 Millones de habitantes.</span><br />
+                      </div>
+                      <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Tecnología a instalar</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija en el desplegable el nivel de conocimiento en el mundo y GEB de la tecnología vinculada con el RYOS en registro"
+                                onclick="return false;">help_outline</i></span>
+                          <select id="select-work">
+                              <option class="work-option">Conocida en el mundo y empleada en GEB</option>
+                              <option class="work-option">Conocida en el mundo, nueva en GEB</option>
+                              <option class="work-option">Nueva en el mundo</option>
+                          </select>
+                      </div>
+                      <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Complejidad del proyecto</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando"
+                                onclick="return false;">help_outline</i></span>
+                          <select id="select-complejidad-crec">
+                              <option class="complejidad-crec-option">Alta</option>
+                              <option class="complejidad-crec-option">Media</option>
+                              <option class="complejidad-crec-option">Baja</option>
+                          </select>
+                          <span id="complejidad-crec-span-1">- Más de tres activos para construir o línea de más de 100 km.</span><br />
+                          <span id="complejidad-crec-span-2">- CAPEX mayor de MUSD 100.</span><br />
+                          <span id="complejidad-crec-span-3">- Requiere expertos senior.</span><br />
+                          <span id="complejidad-crec-span-4">- Gran esfuerzo de ingeniería.</span>
+                      </div>
+                      <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Gestión social</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando"
+                                onclick="return false;">help_outline</i></span>
+                          <select id="select-social">
+                              <option class="social-option">Bajo</option>
+                              <option class="social-option">Medio</option>
+                              <option class="social-option">Alto</option>
+                          </select>
+                          <span id="social-span">Sin presencia de comunidades o grupos étnicos / zonas con antecedentes de negociaciones exitosas para proyectos lineales.</span>
+                      </div>
+                      <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Gestión ambiental</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando"
+                                onclick="return false;">help_outline</i></span>
+                          <select id="select-gestion-ambiental">
+                              <option class="gestion-ambiental-option">Bajo</option>
+                              <option class="gestion-ambiental-option">Medio</option>
+                              <option class="gestion-ambiental-option">Alto</option>
+                          </select>
+                          <span id="gestion-ambiental-span">Cambio menor de licencia ambiental.</span>
+                      </div>
+                      <div class="comp-crec wrap-input100 rs1-wrap-input100 validate-input">
+                          <span class="label-input100">Sinergia con otros proyectos o activos propios</span>
+                          <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Elija el nivel de complejidad del proyecto en función de las características del RYOS que esta registrando"
+                                onclick="return false;">help_outline</i></span>
+                          <select id="select-sinergia-crec">
+                              <option class="sinergia-crec-option">Alta</option>
+                              <option class="sinergia-crec-option">Media</option>
+                              <option class="sinergia-crec-option">Baja</option>
+                          </select>
+                          <span id="sinergia-crec-span">En sinergia con otras empresas, activos o proyectos del GEB o Proyectos futuros.</span>
+                      </div>
                     </form>
                     <form class="contact100-form validate-form" id="Form-6" style="display:none">
                       <h1>6</h1>
@@ -1600,7 +1910,7 @@ $(document).ready(function() {
        }, 500);
      // } else {
      error_text = 'Por favor revisar, campos vacíos.';
-     alert(error_text);
+     alert_notification(error_text);
      // }
  }
   // FUNCIÓN QUE OCULTA EL BÓTON DE REGRESAR CUANDO SE ENCUENTRA EN EL FORMULARIO 1
@@ -1629,7 +1939,6 @@ $(document).ready(function() {
         } else {
             $('#form-title').text(est_group_val + ' - ' + 'Información Detallada');
         }
-        console.log(empty_inputs);
     }
     if ($('#Form-2').is(":visible")) {
         estrategic_objectives(filial_value);
@@ -1637,10 +1946,10 @@ $(document).ready(function() {
         var empty_inputs = $('.textarea-general').filter(function() {
             return !$(this).val()
         }).length;
-        console.log(empty_inputs);
     }
     if ($('#Form-3').is(":visible")) {
         estimate_cost();
+        ciclo_and_bc(subcategory_value);
     }
     next_module(empty_inputs);
     show_mec(project_type, subcategory_value);
@@ -1656,11 +1965,11 @@ $(document).ready(function() {
                   cont_success = i;
               } else {
                   error_text = 'El orden de las fechas tentativas no son logicas.';
-                  alert(error_text);
+                  alert_notification(error_text);
               }
           } else {
               error_text = 'Por favor revisar, campos vacíos.'
-              alert(error_text);
+              alert_notification(error_text);
           }
       }
   }
@@ -1720,7 +2029,7 @@ $(document).ready(function() {
       });
   }
   // ALERTA
-  function alert(error_text) {
+  function alert_notification(error_text) {
       if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
           $('#btn-error').click();
           $('#div-notify').text("");
@@ -1737,6 +2046,18 @@ $(document).ready(function() {
           }, 4000);
       }
   }
+  $('#select-origen').change(function(){
+    var mandatorio_val = document.getElementById(this.id).value, proj_mandandatorios = $('.origen-mandatorio');
+    if (mandatorio_val == 'SI') {
+      proj_mandandatorios.show();
+      $('#n_costos_no_ejec').addClass('active');
+      $('#t_consecuencia').addClass('materialize-textarea');
+    } else {
+      proj_mandandatorios.hide();
+      $('#n_costos_no_ejec').removeClass('active');
+      $('#t_consecuencia').removeClass('materialize-textarea');
+    }
+  });
   // FIN JQUERY FORM 1 - ENTRADA
   // INICIO JQUERY FORM 3
   function estrategic_objectives(filial_value){
@@ -2079,7 +2400,6 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
 });
   $('#t_socio_est').change(function(){
     var peti_value = document.getElementById(this.id).value;
-    console.log(peti_value);
     if (peti_value == 'SI') {
       $('.socio-est').show();
       $('.socio-est input').addClass('active');
@@ -2091,14 +2411,13 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
   // FIN JQUERY FORM 3
   // INICIO JQUERY FORM 4
   $('.input100.viabilidad-financiera').change(function() {
-      // $('#ingresos-anuales').attr('value');
       var count = 0;
       var result = 0;
       $('.input100.viabilidad-financiera').each(function() {
           count += +1;
           result += +$(this).val() / $('#input-anual-default-' + count).val();
       })
-      $('#ingresos-anuales').val(result);
+      $('#n_ingresos_anuales').val(result);
   });
   $(document).on('change', '.input100.financiera.inv-estimate', function() {
       var count = 0;
@@ -2148,7 +2467,226 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
           }
       }
   }
+  function ciclo_and_bc(subcategory){
+    $('#n_ciclo_vida').removeClass('active');
+    $('#n_relation_bc').removeClass('active');
+    $('#ciclo-input-div').hide();
+    $('#div-bc').hide();
+    $('#ciclo-select-div').hide();
+    // Atractividad técnica
+    $('.comp-crec').hide();
+    $('.comp-co').hide();
+    $('.comp-ti').hide();
+    $('.comp-ac').hide();
+    $('#div-cual-ti').hide();
+    $('#div-cual-co').hide();
+    $('#div-cual-ac').hide();
+    $('#span-ciclo-title').text('Ciclo de vida del producto (años) *');
+    switch (subcategory) {
+      case 'CREC':
+        $('#ciclo-input-div').show();
+        $('#n_ciclo_vida').addClass('active');
+        $('.comp-crec').show();
+        break;
+      case 'Continuidad operacional':
+        $('#div-bc').show();
+        $('#n_relation_bc').addClass('active');
+        $('.comp-co').show();
+        break;
+      case 'Tecnología de información':
+        $('#span-ciclo-title').text('Ciclo de vida de la tecnología (años) *');
+        $('#div-bc').show();
+        $('#n_relation_bc').addClass('active');
+        $('#ciclo-select-div').show();
+        $('.comp-ti').show();
+        break;
+      case 'Administrativos corporativos':
+        $('#div-bc').show();
+        $('#n_relation_bc').addClass('active');
+        $('#ciclo-select-div').show();
+        $('.comp-ac').show();
+        break;
+      default:
+        console.log('error en la obtención de subcategoría.');
+    }
+  }
   // FIN JQUERY FORM 4
+  // INICIO JQUERY FORM 5
+  $(document).ready(function() {
+      // CRECIMIENTO AT
+      // Interconexión
+      $('#select-interconexion').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'FE') {
+              $('#interconexion-span').text("Baja emisión y grandes usuarios industriales/comerciales o ciudades de más de 4 Millones de habitantes.");
+          } else if (value_rest == 'FE-GU') {
+              $('#interconexion-span').text("Sector petroquímico, Clúster o ciudades entre 3 y 4 Millones de habitantes.");
+          } else if (value_rest == 'FE-CP') {
+              $('#interconexion-span').text("Ciudades con menos de 3 Millones de habitantes.");
+          }
+      });
+      // Complejidad del proyecto
+      $('#select-complejidad-crec').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'Alta') {
+              $('#complejidad-crec-span-1').text("- Más de tres activos para construir o línea de más de 100 km.");
+              $('#complejidad-crec-span-2').text("- CAPEX mayor de MUSD 100.");
+              $('#complejidad-crec-span-3').text("- Requiere expertos senior.");
+              $('#complejidad-crec-span-4').text("- Gran esfuerzo de ingeniería.");
+          } else if (value_rest == 'Media') {
+              $('#complejidad-crec-span-1').text("- Dos a tres activos para construir o línea entre 50 y 100 km.");
+              $('#complejidad-crec-span-2').text("- CAPEX entre MUSD 20 y 100.");
+              $('#complejidad-crec-span-3').text("- Requiere pocos expertos senior.");
+              $('#complejidad-crec-span-4').text("- Esfuerzo mayor de ingeniería.");
+          } else if (value_rest == 'Baja') {
+              $('#complejidad-crec-span-1').text("- Un activo para construir.");
+              $('#complejidad-crec-span-2').text("- CAPEX menor a MUSD 20.");
+              $('#complejidad-crec-span-3').text("- No requiere recursos de expertos senior.");
+              $('#complejidad-crec-span-4').text("- Esfuerzo normal de ingeniería.");
+          }
+      });
+      // Gestión social
+      $('#select-social').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'Bajo') {
+              $('#social-span').text("Sin presencia de comunidades o grupos étnicos / zonas con antecedentes de negociaciones exitosas para proyectos lineales.");
+          } else if (value_rest == 'Medio') {
+              $('#social-span').text("Presencia de comunidades o grupos étnicos sin antecedentes de oposición.");
+          } else if (value_rest == 'Alto') {
+              $('#social-span').text("Presencia de comunidades y grupos étnicos con antecedentes de oposición.");
+          }
+      });
+      // Gestión ambiental
+      $('#select-gestion-ambiental').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'Bajo') {
+              $('#gestion-ambiental-span').text("Cambio menor de licencia ambiental.");
+          } else if (value_rest == 'Medio') {
+              $('#gestion-ambiental-span').text("Licenciamiento ambiental ante corporaciones.");
+          } else if (value_rest == 'Alto') {
+              $('#gestion-ambiental-span').text("Licenciamiento ambiental ante ANLA.");
+          }
+      });
+      // Sinergia con otros poryectos o activos propios
+      $('#select-sinergia-crec').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'Alta') {
+              $('#sinergia-crec-span').text("En sinergia con otras empresas, activos o proyectos del GEB o Proyectos futuros.");
+          } else if (value_rest == 'Media') {
+              $('#sinergia-crec-span').text("Cercano a proyectos o activos actuales del GEB.");
+          } else if (value_rest == 'Baja') {
+              $('#sinergia-crec-span').text("Sin conectividad o cercanía con proyectos o activos actuales del GEB.");
+          }
+      });
+  });
+  // Fin, atractividad técnica - crecimiento
+  // CO AT
+  $(document).ready(function() {
+      $('#t_sinergia_co').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'SI') {
+              $('#div-cual-co').show();
+          } else {
+              $('#div-cual-co').hide();
+              $('#div-cual-ac').hide();
+              $('#div-cual-ti').hide();
+          }
+      });
+  });
+  // TI AT
+  $(document).ready(function() {
+      // Complejidad del proyecto
+      $('#select-complejidad-ti').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'Alta') {
+              $('#complejidad-ti-span').text("Duración ejecución proyecto mayor a 8 meses, participación de más de 3 áreas de la empresa y un equipo de proyecto mayor a 5 personas.");
+          } else if (value_rest == 'Media') {
+              $('#complejidad-ti-span').text("Duración ejecución proyecto entre 4 y  8 meses, participación de 2 áreas diferentes a TI y un equipo de proyecto en promedio de 3 o 4 personas.");
+          } else if (value_rest == 'Baja') {
+              $('#complejidad-ti-span').text("Duración ejecución proyecto menor a 4 meses, participación de 1 o ninguna área diferente a TI y un equipo de proyecto de hasta 3 personas.");
+          }
+      });
+      // Resistencia al cambio
+      $('#select-resistencia-ti').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'Alta') {
+              $('#span-resistencia-ti').text("No es un cambio necesario y en la compañía se ve como una carga adicional en las tareas.");
+          } else if (value_rest == 'Media') {
+              $('#span-resistencia-ti').text("Es un cambio necesario y en la compañía no se ve un cambio en el nivel de esfuerzo al realizar las tareas.");
+          } else if (value_rest == 'Baja') {
+              $('#span-resistencia-ti').text("Es un cambio necesario y en la compañía se ve como un alivio en las tareas.");
+          }
+      });
+      $('#select-sinergia-ti').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'SI') {
+              $('#div-cual-ti').show();
+          } else {
+              $('#div-cual-ti').hide();
+              $('#div-cual-co').hide();
+              $('#div-cual-ac').hide();
+          }
+      });
+  });
+  // AC AT
+  $(document).ready(function() {
+      // Restricciones regulatorias
+      $('#select-restricciones-reg').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'no') {
+              $('#span-restricciones-reg').text("Para implementarlo no se requieren trámites (p.e. licencias o permisos) que pongan en riesgo la ejecución o la retrasen.");
+          } else if (value_rest == 'algunos') {
+              $('#span-restricciones-reg').text("Para implementarlo se requieren algunos trámites (p.e. licencias o permisos) que podrían retrasar la ejecución.");
+          } else if (value_rest == 'si') {
+              $('#span-restricciones-reg').text("Para implementarlo se requieren  trámites (p.e. licencias o permisos) que ponen en riesgo la ejecución o la retrasan.");
+          }
+      });
+      // Disponibilidad de los recursos
+      $('#select-disponibilidad').change(function() {
+          var value_disponibilidad = document.getElementById(this.id).value;
+          if (value_disponibilidad == 'Alta') {
+              $('#disponibilidad-span').text("GEB cuenta con recursos competentes suficientes para implementarlo.");
+          } else if (value_disponibilidad == 'Media') {
+              $('#disponibilidad-span').text("GEB debe contratar algunos recursos nuevos para implementarlo.");
+          } else if (value_disponibilidad == 'Baja') {
+              $('#disponibilidad-span').text("GEB debe contratar todos los recursos para implementarlo.");
+          }
+      });
+      // Impacto en SST
+      $('#select-impacto-sst').change(function() {
+          var value_sst = document.getElementById(this.id).value;
+          if (value_sst == 'Bajo') {
+              $('#impacto-sst-info-span').text("No reducen la probebilidad de accidentes, incidentes y enfermedades laborales.");
+          } else if (value_sst == 'Medio') {
+              $('#impacto-sst-info-span').text("Se evidencia mejoras potenciales en al menos uno de los aspectos (salud o seguridad en el trabajo).");
+          } else if (value_sst == 'Alto') {
+              $('#impacto-sst-info-span').text("Reduce la probabilidad de accidentes, incidentes y enfermedades laborales.");
+          }
+      });
+      // Sinergia con estrategias de gestión humana
+      $('#select-sinergia').change(function() {
+          var value_sinergia = document.getElementById(this.id).value;
+          // console.log(value_sinergia);
+          if (value_sinergia == 'Alta') {
+              $('#sinergia-span').text("Permite apalancar las estrategias de gestión humana y calidad de vida.");
+          } else if (value_sinergia == 'Media') {
+              $('#sinergia-span').text("Apalanca alguna de las estrategias de gestión humana y calidad de vida.");
+          } else if (value_sinergia == 'Baja') {
+              $('#sinergia-span').text("No apalanca las estrategias de gestión humana y calidad de vida.");
+          }
+      });
+      $('#select-sinergia-ac').change(function() {
+          var value_rest = document.getElementById(this.id).value;
+          if (value_rest == 'SI') {
+              $('#div-cual-ac').show();
+          } else {
+              $('#div-cual-ac').hide();
+              $('#div-cual-co').hide();
+              $('#div-cual-ti').hide();
+          }
+      });
+  });
+  //  FIN JQUERY FORM 5
   // JSON DEL FORMULARIO
   function json_form(){
     var array_form = {};
@@ -2200,6 +2738,9 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
         array_form[$(this).attr('id')] = $(this).val();
     });
     $('.input100.financiera.inv-estimate').each(function(){
+        array_form[$(this).attr('id')] = $(this).val();
+    });
+    $('.input100.financiera.active').each(function(){
         array_form[$(this).attr('id')] = $(this).val();
     });
     console.log(array_form);

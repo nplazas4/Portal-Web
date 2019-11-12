@@ -239,6 +239,7 @@
                           <label>Versión</label>
                         </form>
                       </div>
+                      <?php if ($array_projects['code_1'] != 1921):?>
                         <div class="data-box mt-auto mx-0">
                             <div class="data-box-circle phase">
                                 <h3 id="fase-new"></h3>
@@ -288,6 +289,16 @@
                             <h3>Presupuesto Ejecutado (USD)</h3>
                             <h4 id="pres-ejec-new"></h4>
                         </div>
+                      <?php else:?>
+                        <div class="data-box mx-0">
+                            <div class="data-box-circle" id="div-spi-new">
+                                <h4 id="spi-new"></h4>
+                            </div>
+                            <div class="data-box-content">
+                                <span>SPI</span>
+                            </div>
+                        </div>
+                      <?php endif;?>
                     </div>
                 </div>
             </div>
@@ -302,6 +313,7 @@
                             <label>Versión</label>
                           </form>
                         </div>
+                        <?php if ($array_projects['code_1'] != 1921):?>
                         <div class="data-box mt-auto mx-0">
                             <div class="data-box-circle phase">
                                 <h3 id="fase-old"></h3>
@@ -351,6 +363,16 @@
                             <h3>Presupuesto Ejecutado (USD)</h3>
                             <h4 id="pres-ejec-old"></h4>
                         </div>
+                      <?php else:?>
+                        <div class="data-box mx-0">
+                            <div class="data-box-circle" id="div-spi-old">
+                                <h4 id="spi-old"></h4>
+                            </div>
+                            <div class="data-box-content">
+                                <span>SPI</span>
+                            </div>
+                        </div>
+                      <?php endif;?>
                     </div>
                 </div>
             </div>
@@ -504,10 +526,6 @@
               $('#div-data'+iteration_num).append($('<h2>', {text : this.name, id : 'h2-name-'+iteration_num}));
               // FASE
               $('#h2-name-'+iteration_num).after($('<div>', {class : 'data-box mt-auto', id : 'data-box-'+iteration_num}));
-              // $('#data-box-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'data-box-circle-'+iteration_num})); //FASE CIRCLE
-                // $('#data-box-circle-'+iteration_num).append($('<h3>', {text : 'C', class : 'phase-text'})); //FASE DATA
-                // $('#data-box-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'phase-text-'+iteration_num}));
-                // $('#phase-text-'+iteration_num).append($('<span>', {text : 'Cerrado', class : 'span-text'})); //FASE NAME
               // SPI
               $('#data-box-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-spi-'+iteration_num}));
               $('#data-spi-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'spi-circle-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : '% Avance ejecutado / % Avance planeado'}));
@@ -519,10 +537,7 @@
               $('#spi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'spi-text-'+iteration_num}));
               $('#spi-text-'+iteration_num).append($('<span>', {text : 'SPI'}));
           <?php endif;?>
-          // Function que se encarga de llamar los proyectos de la bd local correspondientes a cada proyecto del ws
-          // if (this.code_unifier != null) {
             Unifier_information(this.project_id_p6, this.id_p_project, iteration_num, this.spi_labor_units);
-          // }
         });
           resolve();
         });
