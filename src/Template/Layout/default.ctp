@@ -180,7 +180,7 @@
                     <div class="header-user-avatar"><?= $user['avatar'] ?></div>
                     <div class="dropdown-user-content">
                         <h2><?= $user['name'] ?></h2>
-                        <small><?= $user['email'] ?></small>
+                        <small id="email-element"><?= $user['email'] ?></small>
                     </div>
                 </li>
                 <li class="divider" tabindex="-1"></li>

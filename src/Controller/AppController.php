@@ -124,19 +124,19 @@ class AppController extends Controller
         try {
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_PORT => "8080",
-            CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-              "Authorization: Bearer ".$token,
-              "Cache-Control: no-cache"
-            ),
-        ));
+              CURLOPT_PORT => "8080",
+              CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                  "Authorization: Bearer ".$token,
+                  "Cache-Control: no-cache"
+                ),
+            ));
             $responseEps = curl_exec($curl);
             $err = curl_error($curl);
             curl_close($curl);
@@ -164,10 +164,6 @@ class AppController extends Controller
                     if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
                         array_push($eps_childrens, array("name" => $valueEps["name"], "eps_id" => $valueEps["eps_id"], "parent_eps_id" => $valueEps["parent_eps_object_id"]));
                     }
-                    // $ParentEpsId2 = $valueEps["parent_eps_object_id"];
-                    // if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
-                    //     array_push($eps_level_1, array("name" => $valueEps["name"], "id" => $valueEps["eps_id"]));
-                    // }
                 }
             }
             $this->set('eps_childrens', $eps_childrens);
