@@ -59,7 +59,6 @@
   var promise = new Promise(function(resolve, reject) {
       $.ajax(settings).done(function(response) {
           $.each(response.items, function(i) {
-              console.log(this);
               $('#tbody-ryos').append($('<tr>', {
                   id: 'tr_' + this.record_no
               }));

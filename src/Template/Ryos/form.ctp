@@ -897,8 +897,7 @@ left: 25%;
                       </span>
                       <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input">
                           <span class="label-input100" style="color:#fff">text</span>
-                          <select id="t_gen_val_1" name="select-gen" class="select-estrategic">
-                          </select>
+                          <select id="t_gen_val_1" name="select-gen" class="select-estrategic"></select>
                       </div>
                       <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input">
                           <span class="label-input100">Aplicación</span>
@@ -1964,86 +1963,86 @@ left: 25%;
                               <div class="heatmap">
                                   <table>
                                       <tr>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-1" href="#detailBtnRisks1" draggable="true">R1</a></span></th>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" href="#detailBtnRisks2" id="btn-2" draggable="true">R2</a></span></th>
+                                          <th class="btn-space" id="space-1"><a class="event btn-floating btn-large title modal-trigger red" id="risk_1" data-number="1" href="#detailBtnRisks1" draggable="true">R1</a></th>
+                                          <th class="btn-space" id="space-2"><a class="event btn-floating btn-large title modal-trigger red" href="#detailBtnRisks2" id="risk_2" data-number="2" draggable="true">R2</a></th>
                                           <th></th>
                                           <th class="title" rowspan="5">
                                               <h3 class="vert">Probabilidad</h3>
                                           </th>
                                           <th>MA</th>
-                                          <td class="yellow" style="width: 20%">
+                                          <td class="yellow" data-prob="Muy alta" data-impact="Muy bajo" style="width: 20%">
                                           </td>
-                                          <td class="yellow" style="width: 20%">
+                                          <td class="yellow" data-prob="Muy alta" data-impact="Bajo" style="width: 20%">
                                           </td>
-                                          <td class="orange" style="width: 20%">
+                                          <td class="orange" data-prob="Muy alta" data-impact="Medio" style="width: 20%">
                                           </td>
-                                          <td class="red" style="width: 20%" style="width: 20%">
+                                          <td class="red" data-prob="Muy alta" data-impact="Alto" style="width: 20%" style="width: 20%">
                                           </td>
-                                          <td class="red" style="width: 20%">
+                                          <td class="red" data-prob="Muy alta" data-impact="Muy alto" style="width: 20%">
                                           </td>
                                       </tr>
                                       <tr>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-3" href="#detailBtnRisks3" draggable="true">R3</a></span></th>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-4" href="#detailBtnRisks4" draggable="true">R4</a></span></th>
+                                          <th class="btn-space" id="space-3"><a class="event btn-floating btn-large title modal-trigger red" id="risk_3" data-number="3" href="#detailBtnRisks3" draggable="true">R3</a></th>
+                                          <th class="btn-space" id="space-4"><a class="event btn-floating btn-large title modal-trigger red" id="risk_4" data-number="4" href="#detailBtnRisks4" draggable="true">R4</a></th>
                                           <th></th>
                                           <th>A</th>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Alta" data-impact="Muy bajo">
                                           </td>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Alta" data-impact="Bajo">
                                           </td>
-                                          <td class="orange">
+                                          <td class="orange" data-prob="Alta" data-impact="Medio">
                                           </td>
-                                          <td class="orange">
+                                          <td class="orange" data-prob="Alta" data-impact="Alto">
                                           </td>
-                                          <td class="red">
+                                          <td class="red" data-prob="Alta" data-impact="Muy alto">
                                           </td>
                                       </tr>
                                       <tr>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-5" href="#detailBtnRisks5" draggable="true">R5</a></span></th>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-6" href="#detailBtnRisks6" draggable="true">R6</a></span></th>
+                                          <th class="btn-space" id="space-5"><a class="event btn-floating btn-large title modal-trigger red" id="risk_5" data-number="5" href="#detailBtnRisks5" draggable="true">R5</a></th>
+                                          <th class="btn-space" id="space-6"><a class="event btn-floating btn-large title modal-trigger red" id="risk_6" data-number="6" href="#detailBtnRisks6" draggable="true">R6</a></th>
                                           <th></th>
                                           <th>M</th>
-                                          <td class="lime accent-4">
+                                          <td class="lime accent-4" data-prob="Media" data-impact="Muy bajo">
                                           </td>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Media" data-impact="Bajo">
                                           </td>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Media" data-impact="Medio">
                                           </td>
-                                          <td class="orange">
+                                          <td class="orange" data-prob="Media" data-impact="Alto">
                                           </td>
-                                          <td class="orange">
+                                          <td class="orange" data-prob="Media" data-impact="Muy alto">
                                           </td>
                                       </tr>
                                       <tr>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-7" href="#detailBtnRisks7" draggable="true">R7</a></span></th>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-8" href="#detailBtnRisks8" draggable="true">R8</a></span></th>
+                                          <th class="btn-space" id="space-7"><a class="event btn-floating btn-large title modal-trigger red" id="risk_7" data-number="7" href="#detailBtnRisks7" draggable="true">R7</a></th>
+                                          <th class="btn-space" id="space-8"><a class="event btn-floating btn-large title modal-trigger red" id="risk_8" data-number="8" href="#detailBtnRisks8" draggable="true">R8</a></th>
                                           <th></th>
                                           <th>B</th>
-                                          <td class="lime accent-4">
+                                          <td class="lime accent-4" data-prob="Baja" data-impact="Muy bajo">
                                           </td>
-                                          <td class="lime accent-4">
+                                          <td class="lime accent-4" data-prob="Baja" data-impact="Bajo">
                                           </td>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Baja" data-impact="Medio">
                                           </td>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Baja" data-impact="Alto">
                                           </td>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Baja" data-impact="Muy alto">
                                           </td>
                                       </tr>
                                       <tr>
-                                          <th class="btn-space"><span><a class="event btn-floating btn-large title modal-trigger red" id="btn-9" href="#detailBtnRisks9" draggable="true">R9</a></span></th>
-                                          <th class="btn-space"></th>
+                                          <th class="btn-space" id="space-9"><a class="event btn-floating btn-large title modal-trigger red" id="risk_9" data-number="9" href="#detailBtnRisks9" draggable="true">R9</a></th>
+                                          <th class="btn-space" id="space-10"></th>
                                           <th></th>
                                           <th>MB</th>
-                                          <td class="lime accent-4">
+                                          <td class="lime accent-4" data-prob="Muy baja" data-impact="Muy bajo">
                                           </td>
-                                          <td class="lime accent-4">
+                                          <td class="lime accent-4" data-prob="Muy baja" data-impact="Bajo">
                                           </td>
-                                          <td class="lime accent-4">
+                                          <td class="lime accent-4" data-prob="Muy baja" data-impact="Medio">
                                           </td>
-                                          <td class="lime accent-4">
+                                          <td class="lime accent-4" data-prob="Muy baja" data-impact="Alto">
                                           </td>
-                                          <td class="yellow">
+                                          <td class="yellow" data-prob="Muy baja" data-impact="Muy alto">
                                           </td>
                                       </tr>
                                       <tr>
@@ -2097,7 +2096,7 @@ left: 25%;
     </div>
 </div>
 <?php for ($i= 1; $i < 10; $i++):?>
-  <div id="detailBtnRisks<?=$i?>" class="modal">
+  <div id="detailBtnRisks<?=$i?>" data-modal="<?=$i?>" class="modal">
    <div class="modal-content">
      <a class="modal-close close">
        <i class="material-icons">close</i>
@@ -2225,6 +2224,7 @@ $(document).ready(function() {
         subcategory_value = document.getElementById('select-subcategoria').value,
         est_group_val = document.getElementById("select-grupo-est").value,
         project_type = document.getElementById('select-tipo-proyecto').value;
+    var cont_sel = 0;
     if ($('#Form-1').is(":visible")) {
         validate_tentative_dts();
         var empty_inputs = $('.input100.entrada').filter(function() {
@@ -2236,7 +2236,7 @@ $(document).ready(function() {
         } else {
             $('#form-title').text(est_group_val + ' - ' + 'Información Detallada');
         }
-        // console.log('form 1 '+empty_inputs);
+        console.log('form 1 '+empty_inputs);
     }
     if ($('#Form-2').is(":visible")) {
         estrategic_objectives(filial_value);
@@ -2249,25 +2249,68 @@ $(document).ready(function() {
     if ($('#Form-3').is(":visible")) {
         estimate_cost();
         ciclo_and_bc(subcategory_value);
-        // Alineamiento estratégico
+        /* Alineamiento estratégico
+           Inputs
+        */
         var empty_inputs1 = $('.input100.estrategic').filter(function() {
-            return !$(this).val()
+            return $(this).val()
         }).length;
-        if (empty_inputs1 < 3) {
+        // Selects
+        $('.select-estrategic.objectives').each(function(){
+            if ($(this).children(":selected").val() != 'default') {
+              return cont_sel++;
+            }
+        });
+        if (empty_inputs1 == cont_sel && cont_sel > 0) {
             empty_inputs1 = 0;
+        } else {
+          alert_notification('Alineamiento estratégico vacío.');
         }
         // Generación de valor
+        var cont_gen = 0;
         var empty_inputs2 = $('.input100.gen-valor').filter(function() {
-            return !$(this).val()
+            return $(this).val()
         }).length;
+        $('[name="select-gen"]').each(function(){
+            if ($(this).children(":selected").val() != 'default') {
+              return cont_gen++;
+            }
+        });
+        console.log('GEN '+empty_inputs2+' '+cont_gen);
+        if (empty_inputs2 == cont_sel && cont_gen > 0) {
+            empty_inputs2 = 0;
+        } else {
+          alert_notification('Generación de valor vacío.');
+        }
         // MEC
+        var cont_mec = 0;
         var empty_inputs3 = $('.input100.mec.active').filter(function() {
-            return !$(this).val()
+            return $(this).val()
         }).length;
+        $('#t_mec').each(function(){
+            if ($(this).children(":selected").val() != 'default') {
+              return cont_mec++;
+            }
+        });
+        console.log('MEC '+empty_inputs3+' '+cont_mec);
+        if (empty_inputs3 == cont_mec && cont_mec > 0) {
+            empty_inputs3 = 0;
+        } else {
+          alert_notification('¿Está en el MEC?, campo vacío.');
+        }
         // Flags
+        var cont_flags = 0;
         var empty_inputs4 = $('.input100.flag.active').filter(function() {
-            return !$(this).val()
+            return $(this).val()
         }).length;
+        // $('input[name="first_checkbox"]:checked').length
+        // $('.checkbox-flag.active').each(function() {
+        if ($('input[name="first_checkbox"]').hasClass('checkbox-flag active')) {
+          $('input[name="first_checkbox"]:checked').each(function() {
+              return cont_flags++;
+          });
+        }
+        console.log('FLAGS '+empty_inputs4+' '+cont_flags);
         // Socio estratégico
         var empty_inputs5 = $('.input100.socio.active').filter(function() {
             return !$(this).val()
@@ -3077,6 +3120,8 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
           }
       });
   });
+  //  FIN JQUERY FORM 5
+  // FORM 6
   $(document).ready(function() {
       $('.event').on("dragstart", function(event) {
           var dt = event.originalEvent.dataTransfer;
@@ -3086,22 +3131,28 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
           event.preventDefault();
           if (event.type === 'drop') {
               var data = event.originalEvent.dataTransfer.getData('Text', $(this).attr('id'));
+              position = $('#' + data).attr('data-number');
+              $('#t_risk_'+position).addClass('active');
               de = $('#' + data).detach();
               de.appendTo($(this));
           };
       });
-      $('table .btn-space').on("dragenter dragover drop", function(event) {
-          event.preventDefault();
-          if (event.type === 'drop') {
-              if ($(this).children().length <= 1) {
-                var data = event.originalEvent.dataTransfer.getData('Text', $(this).attr('id'));
-                de = $('#' + data).detach();
-                de.appendTo($(this));
-              }
-          };
-      });
+      // $('table .btn-space').on("dragenter dragover drop", function(event) {
+      //     event.preventDefault();
+      //     if (event.type === 'drop') {
+      //         if ($(this).children().length == 0) {
+      //           var data = event.originalEvent.dataTransfer.getData('Text', $(this).attr('id'));
+      //           de = $('#' + data).detach();
+      //           de.appendTo($(this));
+      //         }
+      //     };
+      // });
   });
-  //  FIN JQUERY FORM 5
+  $('.modal-close.waves-effect.error.btn.btn-depressed').click( function(){
+    var rks_position = $(this).parent().parent().attr('data-modal');
+    $("#risk_"+rks_position).prependTo($("#space-"+rks_position));
+      $('#t_risk_'+rks_position).removeClass('active');
+  });
   // JSON DEL FORMULARIO
   function json_form(){
     var array_form = {};
@@ -3169,12 +3220,21 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
         array_form[$(this).attr('id')] = $(this).val();
     });
     // FORM 6
-    $('.risks-input.materialize-textarea').each(function(){
+    var cont_rks = 0;
+    $('.risks-input.materialize-textarea.active').each(function(){
+        alert(cont_rks++);
         array_form[$(this).attr('id')] = $(this).val();
+    });
+    $('.event.btn-floating.btn-large.title.modal-trigger').each(function(){
+      var impact_rks = $(this).parent().attr('data-impact');
+      if (impact_rks != undefined) {
+        array_form[$(this).attr('id')+'_impact'] = $(this).parent().attr('data-impact');
+        array_form[$(this).attr('id')+'_prob'] = $(this).parent().attr('data-prob');
+      }
     });
     array_form['t_email_user'] = $('#email-element').text();
 
-    // console.log(array_form);
+    console.log(array_form);
     json_format = JSON.stringify({"data" : [array_form]});
     // send_json(json_format);
   }
