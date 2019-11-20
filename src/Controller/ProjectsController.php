@@ -282,7 +282,7 @@ class ProjectsController extends AppController
           )->select(['Projects.id', 'Projects.CHART']);
         foreach ($local_id_project as $local_db) {
           $this->Risks($local_db->id);
-          $this->importExcelfile($proj_id_decode, $local_db->CHART);
+          // $this->importExcelfile($proj_id_decode, $local_db->CHART);
         }
     }
     public function ImportExcelCaf()
