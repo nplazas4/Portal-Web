@@ -8,14 +8,20 @@
 ?>
 <script>
     function compare(){
-        var compare = document.querySelector(".compare");
+        var compare = document.querySelector(".compare"), notebook = $('#notebook-main');
         compare.classList.toggle("compare-show");
+        <?php if ($array_project['code_1'] != 1921):?>
+          var compareRisk = document.querySelector(".compare-risk");
+          compareRisk.classList.toggle("compare-show");
 
-        var compareRisk = document.querySelector(".compare-risk");
-        compareRisk.classList.toggle("compare-show");
-
-        var chartRisk = document.querySelector(".box-risk");
-        chartRisk.classList.toggle("compare-show");
+          var chartRisk = document.querySelector(".box-risk");
+          chartRisk.classList.toggle("compare-show");
+        <?php endif;?>
+        if (notebook.is(":visible")) {
+            notebook.hide();
+        } else {
+            notebook.show();
+        }
     }
 </script>
 
@@ -276,7 +282,25 @@
                       </div>
                   </div>
                 <?php endif;?>
-                <div class="box">
+                <!-- NOTEBOOKS -->
+                <div class="box" id="notebook-main">
+                    <div class="box-content">
+                        <div class="row wrap align-center">
+                            <div class="col flex-300">
+                                <div class="input-field">
+                                    <select id="notebooks-select">
+                                      <option value="default" disabled selected>Seleccionar notebook</option>
+                                    </select>
+                                    <label>Notebooks</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="align-center">
+                          <P id="notebooks-p"></P>
+                        </div>
+                    </div>
+                </div>
+                <div class="box" id="div-caf-new-box">
                     <div class="box-content">
                         <div class="row wrap align-center">
                             <div class="col flex-300">
@@ -469,7 +493,7 @@
                     </div>
                 </div>
                 <?php endif;?>
-                <div class="box">
+                <div class="box" id="div-caf-old-box">
                     <div class="box-content">
                         <div class="row wrap align-center">
                             <div class="col flex-300">
@@ -556,7 +580,7 @@
                               <ul class="ul-risk">
                                   <?php foreach ($rks as $rk): ?>
                                   <li class="li-risks info-new" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                                      <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
+                                      <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-code="<?=$rk->RISK_NUMBER?>" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
                                   </li>
                                   <?php endforeach; ?>
                               </ul>
@@ -611,7 +635,7 @@
                               <ul class="ul-risk">
                                   <?php foreach ($rks as $rk): ?>
                                   <li class="li-risks info-old" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                                      <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
+                                      <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-code="<?=$rk->RISK_NUMBER?>" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
                                   </li>
                                   <?php endforeach; ?>
                               </ul>
@@ -668,13 +692,13 @@
                     <ul class="ul-risk">
                         <?php foreach ($rks as $rk): ?>
                         <li class="li-risks info-actual" id="<?=$rk->RISK_NUMBER?>" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                            <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
+                            <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-code="<?=$rk->RISK_NUMBER?>" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
                 <div class="heatmap">
-                      <table>
+                      <table id="risk-tr">
                           <tr>
                               <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
                               <th>MA</th>
@@ -1512,27 +1536,15 @@
             $('#spi-indicator-new').text(spi_project);
             $('#spi-old').text(this.spi_labor_units.toFixed(spi_project));
           }
-          if (this.da != null) {
-            $('#da-new').text(this.da);
-            $('#variacion-est-old').text(this.da);
-          }
-          // Fepo indicator
-          if (this.fepo != null) {
-            var fepo_date = new Date(this.fepo);
-            var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-            $('#fepo-new').text(fepo_format_date);
-            $('#fepo-old').text(fepo_format_date);
-          }
-          $('#duration-total-new').text(this.od);
-          $('#duracion-total-old').text(this.od);
-          if (this.pi != null) {
-            $('#pi-new').text(this.pi+"%");
-            $('#pi-old').text(this.pi+"%");
-          }
-          id_project_p6 = this.id_p_project;
+          id_project = this.id_p_project;
           chart_id = this.project_id_p6;
-
-          resolve([id_project_p6, chart_id, this.name, spi_project, this.code_unifier]);
+          <?php if ($array_project['code_1'] != 1921):?>
+            crono_indicators_new(this.da, this.fepo, this.od, this.pi);
+            crono_indicators_old(this.da, this.fepo, this.od, this.pi);
+          <?php else:?>
+            crono_actual('new');
+          <?php endif;?>
+          resolve([id_project, chart_id, this.name, spi_project, this.code_unifier]);
         });
       }
     });
@@ -1540,6 +1552,33 @@
   promise.then(function (result) {
     $('#breadcrumb_ctg').append($('<a>', {text : result[2], class : 'breadcrumb', href : '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[1]))))+'/'+"<?= urlencode(base64_encode($json_project))?>"+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[0]))))}));
   });
+  promise.then(function(result) {
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.0.210:8080/ords/portal/notebook/list/" + result[1],
+        "method": "GET",
+        "headers": {
+            "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+            "cache-control": "no-cache"
+        }
+    }
+
+    $.ajax(settings).done(function(response) {
+        if (response.items.length > 0) {
+            $('#notebook-main').show();
+            $.each(response.items, function() {
+                $('#notebooks-select').append(new Option(this.notebooktopicname, this.rawtextnote));
+                $('#notebooks-select').formSelect();
+            });
+        } else {
+            $('#notebook-main').hide();
+        }
+    });
+    $('#notebooks-select').change(function() {
+        $('#notebooks-p').text($(this).children(":selected").attr("value"))
+    });
+});
     // Promesa que contiene la información de Unifier y bd local para alimentar los indicadores de presupuesto
   function Unifier_information(project_id, select_value, unifier_code, spi_value, chart_side) {
     // if (unifier_code != null) {
@@ -2021,6 +2060,7 @@
           period_select.prop('selectedIndex', 0); //Sets the first option as selected
           period_select.formSelect();
           var hitos_body = $('#hitos-body-new');
+          $('#hitos-body-new td').remove();
           var div_wbs = $('#wbs-new');
           var selected_date_new = $(this).children(":selected").attr("value"), selected_value = $(this).children(":selected").text();
           if (selected_date_new == "actual") {
@@ -2047,6 +2087,7 @@
           period_select.prop('selectedIndex', 0); //Sets the first option as selected
           period_select.formSelect();
           var hitos_body = $('#hitos-body-old');
+          $('#hitos-body-old td').remove();
           var div_wbs = $('#wbs-old');
           var selected_date_old = $(this).children(":selected").attr("value"), selected_value = $(this).children(":selected").text();
           if (selected_date_old == "actual") {
@@ -2089,21 +2130,11 @@
                   } else {
                     $('#spi-indicator-new').text('');
                   }
-                  $('#da-new').text(this.da);
-                  // Fepo indicator
-                  if (this.fepo != null) {
-                    var fepo_date = new Date(this.fepo);
-                    var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-                    $('#fepo-new').text(fepo_format_date);
-                  } else {
-                    $('#fepo-new').text('');
-                  }
-                  $('#duration-total-new').text(this.od);
-                  if (this.pi != null) {
-                    $('#pi-new').text(this.pi+"%");
-                  } else {
-                    $('#pi-new').text('');
-                  }
+                  <?php if ($array_project['code_1'] != 1921):?>
+                    crono_indicators_new(this.da, this.fepo, this.od, this.pi);
+                  <?php else:?>
+                    crono_indicators_mec("new", selected_date);
+                  <?php endif;?>
               });
               Unifier_information(id_project, selected_date, unifier_code, spi_value, chart_side);
             } else {
@@ -2137,19 +2168,11 @@
               } else {
                 $('#spi-old').text('');
               }
-              $('#variacion-est-old').text(this.da);
-              // Fepo indicator
-              if (this.fepo != null) {
-                var fepo_date = new Date(this.fepo);
-                var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-                $('#fepo-old').text(fepo_format_date);
-              }
-              $('#duracion-total-old').text(this.od);
-              if (this.pi != null) {
-                $('#pi-old').text(this.pi+"%");
-              } else {
-                $('#pi-old').text('');
-              }
+              <?php if ($array_project['code_1'] != 1921):?>
+                crono_indicators_old(this.da, this.fepo, this.od, this.pi);
+              <?php else:?>
+                crono_indicators_mec("old", selected_date);
+              <?php endif;?>
             });
             Unifier_information(id_project, selected_date, unifier_code, spi_value, chart_side);
           } else {
@@ -2161,6 +2184,62 @@
             $('#duracion-total-old').text('');
           }
         });
+      }
+      function crono_indicators_mec(compare_side, selected_date){
+        promise.then(function (result) {
+          var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "http://192.168.0.210:8080/ords/portal/captures/indicatorsbyproject/?project_id="+result[1]+"&capture_id="+selected_date,
+              "method": "GET",
+              "headers": {
+                  "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+                  "cache-control": "no-cache"
+              }
+          }
+
+          $.ajax(settings).done(function(response) {
+            $.each(response.items, function() {
+              if (compare_side == 'new') {
+                  crono_indicators_new(this.da, this.fepo, this.od, this.pi);
+              } else {
+                  crono_indicators_old(this.da, this.fepo, this.od, this.pi);
+              }
+            });
+          });
+        });
+      }
+      function crono_indicators_new(da, fepo, od, pi) {
+        $('#da-new').text(da);
+        // Fepo indicator
+        if (fepo != null) {
+          var fepo_date = new Date(fepo);
+          var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+          $('#fepo-new').text(fepo_format_date);
+        } else {
+          $('#fepo-new').text('');
+        }
+        $('#duration-total-new').text(od);
+        if (pi != null) {
+          $('#pi-new').text(pi+"%");
+        } else {
+          $('#pi-new').text('');
+        }
+      }
+      function crono_indicators_old(da, fepo, od, pi) {
+          $('#variacion-est-old').text(da);
+          // Fepo indicator
+          if (fepo != null) {
+              var fepo_date = new Date(fepo);
+              var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
+              $('#fepo-old').text(fepo_format_date);
+          }
+          $('#duracion-total-old').text(od);
+          if (pi != null) {
+              $('#pi-old').text(pi + "%");
+          } else {
+              $('#pi-old').text('');
+          }
       }
       promise.then(function (result) {
           wbs_actual(result[1], 'new');
@@ -2221,6 +2300,11 @@
           period_select.prop('selectedIndex', 0); //Sets the first option as selected
           period_select.formSelect();
 
+          $('#div-caf-new-box').show();
+          $('#div-caf-new').show();
+          $('#div-caf-old-box').show();
+          $('#div-caf-old').show();
+
           wbs_actual(result[1], 'new');
           wbs_actual(result[1], 'old');
 
@@ -2277,12 +2361,16 @@
                 });
             });
             if (select_id == 'actual-select') {
+              $('#div-caf-new-box').show();
+              $('#div-caf-new').show();
               caf_chart(chart_value);
             } else if (select_id == 'all-select') {
               caf_chart(chart_value);
               caf_old_chart(chart_value);
             }
             else{
+              $('#div-caf-old-box').show();
+              $('#div-caf-old').show();
               caf_old_chart(chart_value);
             }
           });
@@ -3000,19 +3088,11 @@
                 }
                 $('#avance-plan-new').text($('#porcentaje-plan').text().replace(' Avance planeado', ''));
                 $('#avance-ejec-new').text($('#porcentaje-ejec').text().replace(' Avance ejecutado', ''));
-                // $('#spi-old').text(this.spi_labor_units.toFixed(2));
-                $('#da-new').text(this.da);
-                // Fepo indicator
-                if (this.fepo != null) {
-                  var fepo_date = new Date(this.fepo);
-                  var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-                  $('#fepo-new').text(fepo_format_date);
-                  // $('#fepo-old').text(fepo_format_date);
-                }
-                $('#duration-total-new').text(this.od);
-                if (this.pi != null) {
-                    $('#pi-new').text(this.pi+"%");
-                }
+                <?php if ($array_project['code_1'] != 1921):?>
+                  crono_indicators_new(this.da, this.fepo, this.od, this.pi);
+                <?php else:?>
+                  crono_actual('new');
+                <?php endif;?>
               });
             }
           });
@@ -3034,22 +3114,41 @@
             $.each(response, function() {
               // SPI indicator
               $('#spi-old').text(this.spi_labor_units.toFixed(2));
-              $('#variacion-est-old').text(this.da);
               // PORCENTAJE PLANEADO Y EJECUTADO
               $('#avance-plan-old').text($('#porcentaje-plan').text().replace('Avance planeado', ''));
               $('#avance-ejec-old').text($('#porcentaje-ejec').text().replace('Avance ejecutado', ''));
-              // Fepo indicator
-              if (this.fepo != null) {
-                var fepo_date = new Date(this.fepo);
-                var fepo_format_date = fepo_date.getUTCDate() + " " + meses[fepo_date.getMonth()] + ", " + fepo_date.getUTCFullYear();
-                $('#fepo-old').text(fepo_format_date);
-              }
-              $('#duracion-total-old').text(this.od);
-              if (this.pi != null) {
-                $('#pi-old').text(this.pi+"%");
-              }
+              <?php if ($array_project['code_1'] != 1921):?>
+                crono_indicators_old(this.da, this.fepo, this.od, this.pi);
+              <?php else:?>
+                crono_actual('old');
+              <?php endif;?>
             });
           }
+        });
+      }
+      // INDICADORES DE CRONOGRAMA ACTUALES FEPO, DURACIÓN, VARIACIÓN Y PORCENTAJE
+      function crono_actual(compare_side){
+        promise.then(function (result) {
+          var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "http://192.168.0.210:8080/ords/portal/indicators/indicatorsbyproject/"+result[1],
+              "method": "GET",
+              "headers": {
+                  "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+                  "cache-control": "no-cache"
+              }
+          }
+
+          $.ajax(settings).done(function(response) {
+            $.each(response.items, function() {
+              if (compare_side == 'new') {
+                  crono_indicators_new(this.da, this.fepo, this.od, this.pi);
+              } else {
+                  crono_indicators_old(this.da, this.fepo, this.od, this.pi);
+              }
+            });
+          });
         });
       }
       // HITOS ACTUAL
@@ -3068,25 +3167,42 @@
         }
         $.ajax(settings).done(function (response) {
           $.each(response.items, function(i) {
-            /* Format dates
-            BL START DATE  */
-            var bl_start_date = new Date(this.bl_start_date);
-            var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
-            // BL FINISH DATE
-            var bl_finish_date = new Date(this.bl_finish_date);
-            var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
-            // START DATE
-            var start_date = new Date(this.start_date);
-            var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
-            // FINISH DATE
-            var finish_date = new Date(this.finish_date);
-            var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+            // Format dates
+            var bl_start_format = null;
+            if (this.bl_start_date != null) {
+              // BL START DATE
+              var bl_start_date = new Date(this.bl_start_date);
+              var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+            }
+            var bl_finish_format = null;
+            if (this.bl_finish_date != null) {
+              // BL FINISH DATE
+              var bl_finish_date = new Date(this.bl_finish_date);
+              var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+            }
+            var start_format = null;
+            if (this.start_date != null) {
+              // START DATE
+              var start_date = new Date(this.start_date);
+              var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+            }
+            var finish_format = null;
+            if (this.finish_date != null) {
+              // FINISH DATE
+              var finish_date = new Date(this.finish_date);
+              var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+            }
             // APPEND HITOS
+            if (this.nlu_percent_complete == '100') {
+              var color_text_npc = 'primary-text';
+            } else if (this.spc == '100') {
+              var color_text_spc = 'primary-text';
+            }
             $('#hitos-body-'+compare_side).append($('<tr>', {id : 'hito-tr-'+compare_side+'-'+i}));
-              $('#hito-tr-'+compare_side+'-'+i).append($('<td>', {text : this.code_activity+' '+compare_side}))
+              $('#hito-tr-'+compare_side+'-'+i).append($('<td>', {text : this.code_activity}))
               .append($('<td>', {text : this.name}))
-              .append($('<td>', {text : this.spc}))
-              .append($('<td>', {text : this.nlu_percent_complete}))
+              .append($('<td>', {text : this.spc, class : color_text_spc}))
+              .append($('<td>', {text : this.nlu_percent_complete, class : color_text_npc}))
               .append($('<td>', {text : bl_start_format}))
               .append($('<td>', {text : bl_finish_format}))
               .append($('<td>', {text : start_format}))
@@ -3135,29 +3251,38 @@
               $('#real-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Avance % Real'}));
               $('#real-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : this['nonlabor percent complete']}));
               // BL INICIO
+              // var bl_start_format = null;
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_inicio-'+compare_side+'-'+this.wbs_id}));
               $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
-              var bl_start_date = new Date(this.bl_start_date);
-              var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
-              $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+              if (this.bl_start_date != null) {
+                var bl_start_date = new Date(this.bl_start_date);
+                var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+                $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+              }
               // BL FIN
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_fin-'+compare_side+'-'+this.wbs_id}));
               $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
-              var bl_finish_date = new Date(this.bl_finish_daste);
-              var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
-              $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+              if (this.bl_finish_daste != 'null') {
+                var bl_finish_date = new Date(this.bl_finish_daste);
+                var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+                $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+              }
               // INICIO
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'inicio-'+compare_side+'-'+this.wbs_id}));
               $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
-              var start_date = new Date(this.start_date);
-              var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
-              $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+              if (this.start_date != null) {
+                var start_date = new Date(this.start_date);
+                var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+                $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+              }
               // FIN
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'fin-'+compare_side+'-'+this.wbs_id}));
               $('#fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
-              var finish_date = new Date(this.finish_date);
-              var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
-              $('#fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+              if (this.finish_date != null) {
+                var finish_date = new Date(this.finish_date);
+                var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+                $('#fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+              }
               // SPI
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'spi-'+compare_side+'-'+this.wbs_id}));
               $('#spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
@@ -3191,32 +3316,40 @@
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-bl-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
                 // FORMAT
-                var bl_start_date = new Date(this.bl_start_date);
-                var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
-                $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+                if (this.bl_start_date != null) {
+                  var bl_start_date = new Date(this.bl_start_date);
+                  var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+                  $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+                }
                 // BL FIN
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-fin-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
                 // FORMAT
-                var bl_finish_date = new Date(this.bl_finish_daste);
-                var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
-                $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+                if (this.bl_finish_daste != null) {
+                  var bl_finish_date = new Date(this.bl_finish_daste);
+                  var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+                  $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+                }
                 // INICIO
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-start-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
                 // FORMAT
-                var start_date = new Date(this.start_date);
-                var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
-                // APPEND DATE
-                $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+                if (this.start_date != null) {
+                  var start_date = new Date(this.start_date);
+                  var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+                  // APPEND DATE
+                  $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+                }
                 // FIN
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-finish-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
                 // FORMAT
-                var finish_date = new Date(this.finish_date);
-                var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
-                // APPEND DATE
-                $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+                if (this.finish_date != null) {
+                  var finish_date = new Date(this.finish_date);
+                  var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+                  // APPEND DATE
+                  $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+                }
                 // SPI
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-spi-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
@@ -3280,27 +3413,35 @@
               // BL INICIO
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_inicio-'+compare_side+'-'+this.wbs_id}));
               $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
-              var bl_start_date = new Date(this.bl_start_date);
-              var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
-              $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+              if (this.bl_start_date != null) {
+                var bl_start_date = new Date(this.bl_start_date);
+                var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+                $('#bl_inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+              }
               // BL FIN
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'bl_fin-'+compare_side+'-'+this.wbs_id}));
               $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
-              var bl_finish_date = new Date(this.bl_finish_daste);
-              var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
-              $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+              if (this.bl_finish_daste != null) {
+                var bl_finish_date = new Date(this.bl_finish_daste);
+                var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+                $('#bl_fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+              }
               // INICIO
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'inicio-'+compare_side+'-'+this.wbs_id}));
               $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
-              var start_date = new Date(this.start_date);
-              var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
-              $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+              if (this.start_date != null) {
+                var start_date = new Date(this.start_date);
+                var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+                $('#inicio-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+              }
               // FIN
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'fin-'+compare_side+'-'+this.wbs_id}));
               $('#fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
-              var finish_date = new Date(this.finish_date);
-              var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
-              $('#fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+              if (this.finish_date != null) {
+                var finish_date = new Date(this.finish_date);
+                var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+                $('#fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+              }
               // SPI
               $('#ul-'+compare_side+'-'+this.wbs_id).append($('<li>', {id : 'spi-'+compare_side+'-'+this.wbs_id}));
               $('#spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
@@ -3334,32 +3475,40 @@
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-bl-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Inicio'}));
                 // FORMAT
-                var bl_start_date = new Date(this.bl_start_date);
-                var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
-                $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+                if (this.bl_start_date != null) {
+                  var bl_start_date = new Date(this.bl_start_date);
+                  var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+                  $('#li-child-bl-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_start_format}));
+                }
                 // BL FIN
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-fin-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'BL Fin'}));
                 // FORMAT
-                var bl_finish_date = new Date(this.bl_finish_daste);
-                var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
-                $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+                if (this.bl_finish_daste != null) {
+                  var bl_finish_date = new Date(this.bl_finish_daste);
+                  var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+                  $('#li-child-fin-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : bl_finish_format}));
+                }
                 // INICIO
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-start-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Inicio'}));
                 // FORMAT
-                var start_date = new Date(this.start_date);
-                var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
-                // APPEND DATE
-                $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+                if (this.start_date != null) {
+                  var start_date = new Date(this.start_date);
+                  var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+                  // APPEND DATE
+                  $('#li-child-start-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : start_format}));
+                }
                 // FIN
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-finish-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'Fin'}));
                 // FORMAT
-                var finish_date = new Date(this.finish_date);
-                var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
-                // APPEND DATE
-                $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+                if (this.finish_date != null) {
+                  var finish_date = new Date(this.finish_date);
+                  var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+                  // APPEND DATE
+                  $('#li-child-finish-'+compare_side+'-'+this.wbs_id).append($('<h3>', {text : finish_format}));
+                }
                 // SPI
                 $('#ul-child-'+compare_side+'-'+this.wbs_id).append($('<li>', {id: 'li-child-spi-'+compare_side+'-'+this.wbs_id}));
                 $('#li-child-spi-'+compare_side+'-'+this.wbs_id).append($('<small>', {text : 'SPI'}));
@@ -3446,23 +3595,41 @@
           $.each(response.items, function(i) {
             /* Format dates
             BL START DATE  */
-            var bl_start_date = new Date(this.bl_start_date);
-            var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+            var bl_start_format = null;
+            if (this.bl_start_date != null) {
+              var bl_start_date = new Date(this.bl_start_date);
+              var bl_start_format = bl_start_date.getUTCDate() + " " + meses[bl_start_date.getMonth()] + ", " + bl_start_date.getUTCFullYear();
+            }
             // BL FINISH DATE
-            var bl_finish_date = new Date(this.bl_finish_date);
-            var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+            var bl_finish_format = null;
+            if (this.bl_finish_date != null) {
+              var bl_finish_date = new Date(this.bl_finish_date);
+              var bl_finish_format = bl_finish_date.getUTCDate() + " " + meses[bl_finish_date.getMonth()] + ", " + bl_finish_date.getUTCFullYear();
+            }
             // START DATE
-            var start_date = new Date(this.start_date);
-            var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+            var start_format = null;
+            if (this.start_date != null) {
+              var start_date = new Date(this.start_date);
+              var start_format = start_date.getUTCDate() + " " + meses[start_date.getMonth()] + ", " + start_date.getUTCFullYear();
+            }
             // FINISH DATE
-            var finish_date = new Date(this.finish_date);
-            var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+            var finish_format = null;
+            if (this.finish_date != null) {
+              var finish_date = new Date(this.finish_date);
+              var finish_format = finish_date.getUTCDate() + " " + meses[finish_date.getMonth()] + ", " + finish_date.getUTCFullYear();
+            }
+            // Color text
+            if (this.nlu_percent_complete == '100') {
+              var color_text_npc = 'error-text';
+            } else if (this.spc == '100') {
+              var color_text_spc = 'error-text';
+            }
             // APPEND HITOS
             hitos_body.append($('<tr>', {id : select_compare+'-'+i}));
               $('#'+select_compare+'-'+i).append($('<td>', {text : this.code_activity}))
               .append($('<td>', {text : this.name}))
-              .append($('<td>', {text : this.spc}))
-              .append($('<td>', {text : this.nlu_percent_complete}))
+              .append($('<td>', {text : this.spc, class : color_text_spc}))
+              .append($('<td>', {text : this.nlu_percent_complete, class : color_text_npc}))
               .append($('<td>', {text : bl_start_format}))
               .append($('<td>', {text : bl_finish_format}))
               .append($('<td>', {text : start_format}))
@@ -3495,10 +3662,22 @@
           });
           if (chart_value.length > 0) {
             if (chart_side == 'new') {
+              $('#div-caf-new-box').show();
+              $('#div-caf-new').show();
               caf_chart(chart_value);
             }
             else{
+              $('#div-caf-old-box').show();
+              $('#div-caf-old').show();
               caf_old_chart(chart_value);
+            }
+          } else {
+            if (chart_side == 'new') {
+              $('#div-caf-new-box').hide();
+              $('#div-caf-new').hide();
+            } else {
+              $('#div-caf-old-box').hide();
+              $('#div-caf-old').hide();
             }
           }
         });
@@ -3567,30 +3746,38 @@
               });
             }
           }
+          $('#risk-tr span').hide();
           $( document ).ready(function() {
             var isMobile = window.matchMedia("(max-width: 760px)").matches;
-
             if (isMobile) {
-              //Conditional script here
               $('#btn-compare').hide();
             } else {
               $('#btn-compare').show();
             }
-            // new LeaderLine(startElement, endElement, {color: 'red', size: 3});
-              var cont = 0, foreach_loops = 0;
-              setInterval(function () {
-                var contador = cont++;
-                if (contador <= 1) {
-                  <?php foreach ($rks as $rk):?>
-                    var loop_start = foreach_loops++,
-                        loop_end = foreach_loops++;
-                  <?php if ($rk->IMPACT_POST != null && $rk->PROBABILITY_POST != null):?>
-                    var loop_start = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_risk'),
-                        loop_end  = document.getElementById('<?=$rk->RISK_NUMBER?>'+'_post');
-                    new LeaderLine(loop_start , loop_end, {color: 'rgba(0, 0, 0)', dash: {animation: true}});
-                  <?php endif;?>
-                  <?php endforeach;?>
+            $('.modal-trigger.tooltipped').hover(function() {
+                var rks_position = $(this).attr('data-code');
+                $('#' + rks_position + '_risk').addClass('active').show();
+                $('#' + rks_position + '_post').addClass('active').show();
+                var rks_start = document.getElementById(rks_position + '_risk'),
+                    rks_end = document.getElementById(rks_position + '_post');
+                if (rks_end != null) {
+                    var line = new LeaderLine(rks_start, rks_end, {
+                        color: 'rgba(0, 0, 0)',
+                        dash: {
+                            animation: true
+                        }
+                    });
+                    line.path = 'straight';
+                    line.showEffectName = 'draw';
                 }
-            }, 10000);
+            }, function() {
+                line_exist = document.querySelector('.leader-line') !== null;
+                if (line_exist) {
+                    document.querySelector('.leader-line').remove();
+                }
+                var rks_position = $(this).attr('data-code');
+                $('#' + rks_position + '_risk').removeClass('active').hide();
+                $('#' + rks_position + '_post').removeClass('active').hide();
+            });
           });
 </script>
