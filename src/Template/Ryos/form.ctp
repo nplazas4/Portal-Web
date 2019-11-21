@@ -2299,18 +2299,38 @@ $(document).ready(function() {
           alert_notification('¿Está en el MEC?, campo vacío.');
         }
         // Flags
-        var cont_flags = 0;
+        var cont_flags_1 = 0, cont_flags_2 = 0, cont_flags_3 = 0, cont_flags_4 = 0, cont_flags_5 = 0, cont_flags_6 = 0;
         var empty_inputs4 = $('.input100.flag.active').filter(function() {
-            return $(this).val()
+            return !$(this).val()
         }).length;
         // $('input[name="first_checkbox"]:checked').length
         // $('.checkbox-flag.active').each(function() {
         if ($('input[name="first_checkbox"]').hasClass('checkbox-flag active')) {
           $('input[name="first_checkbox"]:checked').each(function() {
-              return cont_flags++;
+              return cont_flags_1++;
+          });
+          $('input[name="second_checkbox"]:checked').each(function() {
+              return cont_flags_2++;
+          });
+          $('input[name="third_checkbox"]:checked').each(function() {
+              return cont_flags_3++;
+          });
+          $('input[name="fourth_checkbox"]:checked').each(function() {
+              return cont_flags_4++;
+          });
+          $('input[name="fifth_checkbox"]:checked').each(function() {
+              return cont_flags_5++;
+          });
+          $('input[name="sixth_checkbox"]:checked').each(function() {
+              return cont_flags_6++;
           });
         }
-        console.log('FLAGS '+empty_inputs4+' '+cont_flags);
+        if (empty_inputs4 == 0 && cont_flags_1 > 0 && cont_flags_2 > 0 && cont_flags_3 > 0 && cont_flags_4 > 0 && cont_flags_5 > 0 && cont_flags_6 > 0) {
+            return empty_inputs4;
+        } else {
+          alert_notification('Alineamiento Estratégico (Fit Estratégico)');
+        }
+        console.log('FLAGS '+empty_inputs4+' '+cont_flags_1+' '+cont_flags_2+' '+cont_flags_3+' '+cont_flags_4+' '+cont_flags_5+' '+cont_flags_6);
         // Socio estratégico
         var empty_inputs5 = $('.input100.socio.active').filter(function() {
             return !$(this).val()
