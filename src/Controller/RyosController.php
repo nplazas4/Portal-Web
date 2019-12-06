@@ -79,4 +79,69 @@ class RyosController extends AppController
         }
         $this->autoRender = false;
     }
+    public function download()
+    {
+        $this->layout = false;
+        try {
+            if ($this->request->is('Ajax')) {
+              $ryos_json = json_decode($_POST['ryos_form'], true);
+              $ryos_form= array_values($ryos_json);
+              $spreadsheet = new Spreadsheet();
+              $worksheet = $spreadsheet->getActiveSheet();
+              $i = 3;
+              $worksheet->setTitle("Ryos");
+              // $worksheet->setCellValue('B1', $_POST["Name"]);
+              $worksheet->setCellValue('A2', 'Etiqueta');
+              $worksheet->setCellValue('B2', "Valor");
+              $worksheet->getRowDimension('1')->setRowHeight(80);
+              $worksheet->getColumnDimension('A')->setWidth(80);
+              $worksheet->getColumnDimension('B')->setWidth(80);
+              $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+              $drawing->setName('Logo');
+              $drawing->setDescription('Logo');
+              $Img_Dir = WWW_ROOT . 'img/logos/excel/logo.png';
+              $drawing->setPath($Img_Dir); //Imagen
+              $drawing->setHeight(115);
+              $drawing->setCoordinates('A1');
+              $drawing->setOffsetX(150);
+              // $drawing->setOffsetY(0);
+              $drawing->setWorksheet($spreadsheet->getActiveSheet());
+              $cont = 1;
+              foreach ($ryos_json as $key => $ryos_value) {
+                $cont = $i++;
+                $worksheet->setCellValue('A'.$cont, $key);
+                $worksheet->setCellValue('B'.$cont, $ryos_value);
+                  // $this->set('ryos', $key);
+              }
+              $worksheet2 = array(
+                'borders' => array(
+                  'allBorders' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => array('argb' => '212121'),
+                  ),
+                ),
+              );
+              $worksheet3 = array(
+                'alignment' => array(
+                  'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                ),
+              );
+              $worksheet->setShowGridlines(false);
+              $worksheet->getStyle('A2:B2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('A6CE39');
+              $worksheet->getColumnDimension('A')->setAutoSize(true);
+              $worksheet->getColumnDimension('B')->setAutoSize(true);
+              $worksheet->getStyle('B1:B'.$worksheet->getHighestRow())->applyFromArray($worksheet3);
+              $worksheet->getStyle('A3:B'.$worksheet->getHighestRow())->applyFromArray($worksheet2);
+              $writer = new Xlsx($spreadsheet);
+              $callStartTime = microtime(true);
+              $writer->save('ryos.xlsx');
+              $this->response->type('json');
+              $this->response->body('200');
+              return $this->response;
+            }
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+        $this->autoRender = false;
+    }
 }

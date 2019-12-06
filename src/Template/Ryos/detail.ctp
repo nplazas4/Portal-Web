@@ -17,13 +17,20 @@
         <?php endforeach; ?>
     </div>
     <div class="modal-content" style="width: 100%; height: 100%; padding-top: 0% !important">
-      <h2>Detalle del RYOS</h2>
+      <h2 id="title-ryos">Detalle del RYOS</h2>
         <table class="centered" id="<?=$json_ryos?>">
           <tr>
             <th>Nombre de etiqueta</th>
             <th>Valor</th>
           </tr>
         </table>
+        <div class="container-contact100-form-btn mt-6">
+            <button class="contact100-form-btn" type="button" id="main-btn">
+                <span>
+                    Descargar
+                </span>
+            </button>
+        </div>
       </div>
     </div>
 <script>
@@ -47,14 +54,14 @@ var name = null;
 $.ajax(settings).done(function(response) {
     $.each(response.items, function() {
         $.each(this.data, function(key, data) {
-            $('h2').text('RYOS - ' + this.t_name);
+            $('#title-ryos').text('RYOS - ' + this.t_name);
             $('#breadcrumb_ryos').append($('<a>', {
                 text: this.t_name,
                 class: 'breadcrumb',
                 href: '/Portal-Web/ryos/detail/' + ryos_code
             }));
             $.each(this, function(index, data) {
-                $('#' + ryos_code).append($('<tr>', {id : index}));
+                $('#' + ryos_code).append($('<tr>', {id : index, class : 'tr-ryos'}));
                 // NOMBRE
                 if (index == 't_name') {
                   name = 'Nombre Requerimiento u Oportunidad - RYOS';
@@ -1217,4 +1224,40 @@ $.ajax(settings).done(function(response) {
         });
     });
 });
+$('#main-btn').click(function(){
+  json_form();
+});
+function json_form(){
+  var array_form = {};
+  $('.tr-ryos').each(function() {
+    var first_child = $(this).children().first().text(),
+        last_child = $(this).children().last().text();
+    console.log(first_child+' '+last_child);
+    array_form[first_child] = last_child;
+  });
+  // console.log(array_form)
+  send_json(JSON.stringify(array_form));
+}
+var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+function send_json(json_form){
+    xhr2 = $.ajax({
+        headers:{
+          'X-CSRF-Token':csrfToken
+        },
+        method: "POST",
+        dataType: "json",
+        url: "<?php echo $this->Url->build(['controller'=>'Ryos','action'=>'download']);?>",
+        data: {ryos_form : json_form},
+        cache: true,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        },
+        success: function(response){
+            if (response == 200) {
+              // success_notification('El RYOS ha sido enviado correctamente.');
+              window.location.href = "/Portal-Web/ryos.xlsx";
+            }
+        }
+      });
+  }
 </script>

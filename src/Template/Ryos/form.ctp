@@ -693,7 +693,7 @@ left: 25%;
                         <span class="contact100-form-sub-title">
                             ENTRADA
                         </span>
-                        <span style="font-size: 15px !important;" class="contact100-form-sub-title">Los campos marcador con (*) son obligatorios.</span>
+                        <span style="font-size: 15px !important;" class="contact100-form-sub-title">Los campos marcados con (*) son obligatorios.</span>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Nombre Requerimiento u Oportunidad - RYOS *</span>
                             <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="Requerimientos y oportunidades que tienen potencial para desarrollarse como iniciativa y posteriormente como proyecto en el GEB."
@@ -2244,7 +2244,7 @@ $(document).ready(function() {
         var empty_inputs = $('.textarea-general').filter(function() {
             return !$(this).val()
         }).length;
-        // console.log('form 2 '+empty_inputs);
+        console.log('form 2 '+empty_inputs);
     }
     if ($('#Form-3').is(":visible")) {
         estimate_cost();
@@ -2303,8 +2303,6 @@ $(document).ready(function() {
         var empty_inputs4 = $('.input100.flag.active').filter(function() {
             return !$(this).val()
         }).length;
-        // $('input[name="first_checkbox"]:checked').length
-        // $('.checkbox-flag.active').each(function() {
         if ($('input[name="first_checkbox"]').hasClass('checkbox-flag active')) {
           $('input[name="first_checkbox"]:checked').each(function() {
               return cont_flags_1++;
@@ -2328,7 +2326,7 @@ $(document).ready(function() {
         if (empty_inputs4 == 0 && cont_flags_1 > 0 && cont_flags_2 > 0 && cont_flags_3 > 0 && cont_flags_4 > 0 && cont_flags_5 > 0 && cont_flags_6 > 0) {
             return empty_inputs4;
         } else {
-          alert_notification('Alineamiento Estratégico (Fit Estratégico)');
+            alert_notification('Alineamiento Estratégico (Fit Estratégico), campo(s) vacíos.');
         }
         console.log('FLAGS '+empty_inputs4+' '+cont_flags_1+' '+cont_flags_2+' '+cont_flags_3+' '+cont_flags_4+' '+cont_flags_5+' '+cont_flags_6);
         // Socio estratégico
@@ -2344,11 +2342,30 @@ $(document).ready(function() {
         var empty_inputs2 = $('.input100.viabilidad-financiera-inputs.active').filter(function() {
             return !$(this).val()
         }).length;
-        var empty_inputs3 = $('[name="textarea-beneficios"]').filter(function() {
-            return !$(this).val()
-        }).length;
-        if (empty_inputs3 <= 15) {
-            empty_inputs3 = 0;
+        var array_select = [], empty_inputs3 = 1;
+        for (var i = 1; i <= 6; i++) {
+          if ($('#t_tipo_beneficio_'+[i]).children(":selected").val() != 'default') {
+              var empty_inputs_db = $('#t_desc_beneficio_'+[i]).filter(function() {
+                  return !$(this).val()
+              }).length;
+              var empty_inputs_sa = $('#t_situacion_actual_'+[i]).filter(function() {
+                  return !$(this).val()
+              }).length;
+              var empty_inputs_sb = $('#t_situacion_beneficio_'+[i]).filter(function() {
+                  return !$(this).val()
+              }).length;
+              if (empty_inputs_db == 0 && empty_inputs_sa == 0 && empty_inputs_sb == 0) {
+                empty_inputs3 = 0;
+              } else {
+                  alert_notification('Por favor revisar campos vacíos beneficios.');
+              }
+              console.log(empty_inputs_db+' '+empty_inputs_sa+' '+empty_inputs_sb);
+          } else {
+            array_select.push([i]);
+            if (array_select.length > 5) {
+                alert_notification('Debe ingresar al menos 1 beneficio.');
+            }
+          }
         }
         var empty_inputs4 = $('.input100.financiera.inv-estimate').filter(function() {
             return !$(this).val()
@@ -2362,11 +2379,27 @@ $(document).ready(function() {
         var empty_inputs7 = $('.input300.financiera.materialize-textarea.active').filter(function() {
             return !$(this).val()
         }).length;
-        // console.log(empty_inputs1+empty_inputs2+empty_inputs3+empty_inputs4+empty_inputs5+empty_inputs6+empty_inputs7);
         empty_inputs = (empty_inputs1 + empty_inputs2 + empty_inputs3 + empty_inputs4 + empty_inputs5 + empty_inputs6 + empty_inputs7);
+        console.log('form 4: '+empty_inputs);
     }
     if ($('#Form-5').is(":visible")) {
+      $('#Form-5 select').each(function() {
+        if ($(this).parent().parent().attr('style') != 'display: none;') {
+          console.log(this.length);
+          if ($(this).children(":selected").val() != 'default') {
 
+          } else {
+
+          }
+        }
+        // if ($(this).children(":selected").val() != 'default') {
+
+        // }
+      });
+      var empty_inputs = $('select:visible').filter(function() {
+        return !$(this).val()
+    }).length;
+      // console.log('Form 5: '+empty_inputs);
     }
     next_module(empty_inputs);
     show_mec(project_type, subcategory_value);
@@ -3273,7 +3306,6 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
           xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         },
         success: function(response){
-          console.log(response);
           if (response.status == '200') {
               success_text = response.event_1+': '+response.record_no;
               success_notification(success_text);
@@ -3281,4 +3313,5 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
         }
       });
   }
+  // VALIDACIONES
 </script>
