@@ -3,7 +3,7 @@
     $breadcrumb = [
         [ 'Inicio', 'home','Pages','PortalProjects'],
         [ 'Lista de lecciones aprendidas','index','Events'],
-        [ 'Formulario','form','Events'],
+        [ 'Registrar lección aprendida','form','Events'],
     ];
 ?>
 <style>
@@ -687,11 +687,15 @@ left: 25%;
                 </main>
                 <div class="wrap-contact100">
                     <form class="contact100-form validate-form active" id="Form-1">
-                        <span class="contact100-form-title">Lecciones aprendidas</span>
-                        <span style="font-size: 15px !important;" class="contact100-form-sub-title">Los campos marcador con (*) son obligatorios.</span>
+                        <span class="contact100-form-title">Lección aprendida</span>
+                        <span style="font-size: 15px !important;" class="contact100-form-sub-title">Los campos marcados con (*) son obligatorios.</span>
+                        <div class="wrap-input100">
+                            <span class="label-input100">Proyecto *</span>
+                            <select name="select-project" id="select-project"></select>
+                        </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Nombre del usuario *</span>
-                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_019_s_NombreUsuario" placeholder="Ingrese el nombre de usuario">
+                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_019_s_NombreUsuario" placeholder="Ingrese el nombre de usuario" readonly>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Cargo *</span>
@@ -699,7 +703,7 @@ left: 25%;
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Correo electrónico *</span>
-                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_021_s_Correo" placeholder="Ingrese el correo">
+                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_021_s_Correo" placeholder="Ingrese el correo" readonly>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Líder/Cargo funcional para consulta *</span>
@@ -707,7 +711,7 @@ left: 25%;
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Qué sucedio? *</span>
-                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Ingrese el líder/cargo funcional"></textarea>
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder=""></textarea>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Cúando ocurrio? *</span>
@@ -751,8 +755,9 @@ left: 25%;
                             </select>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
-                            <span class="label-input100">¿En que Fase Ocurrio? *</span>
+                            <span class="label-input100">¿En que fase ocurrio?</span>
                             <select name="la-select" id="lare_010_t_Fase">
+                                <option value=""></option>
                                 <option value="RYOS">RYOS</option>
                                 <option value="Fase I - Estructuracion">Fase I - Estructuración</option>
                                 <option value="Fase II - Seleccion">Fase II - Selección</option>
@@ -762,77 +767,53 @@ left: 25%;
                                 <option value="O&M">O&M</option>
                             </select>
                         </div>
-                        <?php
-                            // Riesgos
-                            $risks = [
-                                [
-                                    'name' => '1',
-                                    'x' => 5,
-                                    'y' => 2,
-                                ],
-                                [
-                                    'name' => '2',
-                                    'x' => 5,
-                                    'y' => 2,
-                                ],
-                                [
-                                    'name' => '3',
-                                    'x' => 1,
-                                    'y' => 1,
-                                ],
-                                [
-                                    'name' => '4',
-                                    'x' => 1,
-                                    'y' => 3,
-                                ],
-                                [
-                                    'name' => '5',
-                                    'x' => 4,
-                                    'y' => 3,
-                                ],
-                                [
-                                    'name' => '6',
-                                    'x' => 3,
-                                    'y' => 3,
-                                ],
-                                [
-                                    'name' => '7',
-                                    'x' => 2,
-                                    'y' => 1,
-                                ],
-                                [
-                                    'name' => '8',
-                                    'x' => 3,
-                                    'y' => 4,
-                                ],
-                                [
-                                    'name' => '9',
-                                    'x' => 4,
-                                    'y' => 5,
-                                ],
-                                [
-                                    'name' => '10',
-                                    'x' => 3,
-                                    'y' => 2,
-                                ],
-                            ];
-                        ?>
+                        <div class="wrap-input100 rs1-wrap-input100" style="display:none">
+                            <span class="label-input100">¿Que Afecta? *</span>
+                            <select name="la-select" id="lare_011_t_Afecta">
+                                <option value="" disabled></option>
+                                <option value="Lineas de transmision">Líneas de transmisión</option>
+                                <option value="Subestaciones">Subestaciones</option>
+                                <option value="Gasoductos">Gasoductos</option>
+                                <option value="Estaciones compresoras">Estaciones compresoras</option>
+                                <option value="Tecnologia">Tecnología</option>
+                                <option value="Administrativo Corporativo">Administrativo Corporativo</option>
+                                <option value="Generacion">Generación</option>
+                                <option value="Cogeneracion">Cogeneración</option>
+                                <option value="Otro">Otro</option>
+                                <option value="N/A">N/A</option>
+                            </select>
+                        </div>
+                        <div class="wrap-input100 rs1-wrap-input100">
+                            <span class="label-input100">Tipo de evento *</span>
+                            <select name="la-select" id="lare_012_TipoEvento">
+                                <option value="Caso de Exito">Caso de éxito</option>
+                                <option value="Oportunidad de Mejora">Oportunidad de mejora</option>
+                            </select>
+                        </div>
+                        <div class="wrap-input100 rs1-wrap-input100">
+                            <span class="label-input100">¿Que cree que puede aprender? *</span>
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_013_s_PuedeAprender" placeholder=""></textarea>
+                        </div>
+                        <div class="wrap-input100 rs1-wrap-input100">
+                            <span class="label-input100">¿Que puede mejorar o potenciar?</span>
+                            <textarea class="materialize-textarea la-input-optl" autocomplete="off" type="text" name="la-input" id="lare_014_s_MejorarPotenciar" placeholder=""></textarea>
+                        </div>
+                        <div class="wrap-input100 rs1-wrap-input100" style="display:none">
+                            <span class="label-input100">Tipo de registro *</span>
+                            <select name="la-select" id="lare_005_t_TipoRegistro">
+                                <option value="Actual">Actual</option>
+                            </select>
+                        </div>
                         <div class="project-content">
-                            <div class="chart box-risk">
-                                <h2>Line items:</h2>
+                            <div class="chart box-risk mb-6 pb-6">
+                                <h2>Causas:</h2>
                                 <div class="chart-risk">
                                     <div class="chart-risk-list">
-                                        <ul class="row wrap">
-                                            <?php foreach ($risks as $risk): ?>
-                                            <li class="d-flex col s12 m6 l4 xl3">
-                                                <a href="#detailRisk" class="modal-trigger">Riesgo <?= $risk['name'] ?></a>
-                                            </li>
-                                            <?php endforeach; ?>
-                                        </ul>
+                                        <ul class="row wrap" id="li-ul"></ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="container-contact100-form-btn mt-6 mb-6">
+                            <div class="container-contact100-form-btn mb-3 pb-6">
                                 <button class="contact100-form-btn" type="button" id="main-btn">
                                     <span>
                                         Enviar
@@ -847,28 +828,40 @@ left: 25%;
             </div>
         </div>
     </div>
-    <div class="btns-floating btns-floating-right btns-floating-bottom mr-6 pb-6">
-      <button class="btn btn-floating btn-large tertiary" id="next">
-          <i class="mdi material-icons">arrow_downward</i></a>
+    <div class="btns-floating btns-floating-right btns-floating-bottom mr-3 mb-3 pb-6">
+      <button class="btn btn-floating btn-large white" id="load-gif" style="display:none">
+          <a><i class="mdi material-icons pt-1" style="margin-top: 2%"> <?= $this->Html->image('gif/test5.gif') ?></i></a>
       </button>
     </div>
-
-    <div class="btns-floating btns-floating-right btns-floating-bottom mb-6 pb-6 mr-6">
-      <button class="btn btn-floating btn-large tertiary" id="return" style="display:none;">
-          <i class="mdi material-icons">arrow_upward</i></a>
+    <div class="btns-floating btns-floating-right btns-floating-bottom mr-3 mb-3 pb-6">
+      <button class="btn btn-floating btn-large tertiary" id="add">
+          <i class="mdi material-icons">add</i></a>
       </button>
     </div>
 </div>
-<?php for ($i= 1; $i < 10; $i++):?>
-  <div id="detailBtnRisks<?=$i?>" data-modal="<?=$i?>" class="modal">
+<?php for ($i= 1; $i < 100; $i++):?>
+  <div id="detailEvents<?=$i?>" data-modal="<?=$i?>" class="modal">
    <div class="modal-content">
      <a class="modal-close close">
        <i class="material-icons">close</i>
      </a>
-     <h2>RIESGOS ESPECÍFICOS RELEVANTES IDENTIFICADOS POR EL GESTOR DEL RYOS</h2>
-       <span class="label-input100">RIESGO</span>
-       <div class="input100">
-        <textarea id="t_risk_<?=$i?>" class="risks-input materialize-textarea"></textarea>
+     <h2>Causa</h2>
+       <!-- <span class="label-input100">RIESGO</span> -->
+       <div class="wrap-input100" style="display:none">
+           <span class="label-input100">Causas *</span>|
+           <input class="la-input-li-<?=$i?> li-item" autocomplete="off" type="text" name="uuu_tab_id" value="Causas" readonly>
+       </div>
+       <div class="wrap-input100 mt-6 pt-6">
+           <span class="label-input100">Breve descripción *</span>
+           <input class="la-input-li-<?=$i?> li-item" autocomplete="off" type="text" name="short_desc" placeholder="" value="Procesos de Calidad">
+       </div>
+       <div class="wrap-input100" style="display:none">
+           <span class="label-input100">Número *</span>
+           <input class="la-input-li-<?=$i?> li-item" id="num-<?=$i?>" autocomplete="off" type="text" name="li_num" placeholder="" readonly>
+       </div>
+       <div class="wrap-input100">
+           <span class="label-input100">¿Por qué sucedio? *</span>
+           <textarea class="materialize-textarea la-input-li-<?=$i?> li-item" autocomplete="off" type="text" name="lare_016_s_PorQueSucedio" placeholder=""></textarea>
        </div>
       </div>
       <div class="modal-footer">
@@ -898,5 +891,214 @@ left: 25%;
   }
 </script>
 <script type="text/javascript">
+$(document).ready(function(){
 
+  $('.button').on('click', function(event) {
+      var type = $(this).data('type');
+      var status = $(this).data('status');
+      $('.button').removeClass('is-active');
+      $(this).addClass('is-active');
+      $('.notify')
+          .removeClass()
+          .attr('data-notification-status', status)
+          .addClass(type + ' notify')
+          .addClass('do-show');
+  });
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://192.168.0.210:8080/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
+      "method": "GET",
+      "headers": {
+          "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+          "cache-control": "no-cache"
+      }
+  }
+
+  $.ajax(settings).done(function(response) {
+      // console.log(response);
+      $.each(response.items, function() {
+          $('#select-project').append(new Option(this.name, this.project_id_p6));
+          $('#select-project').formSelect();
+      });
+  });
+  $('#lapa_019_s_NombreUsuario').val($('#name-element').text());
+  $('#lapa_021_s_Correo').val($('#email-element').text());
+  $("#main-btn").click(function() {
+    validate();
+    // $(this).attr('disabled', true);
+  });
+
+  function validate() {
+    // INPUTS EMPTY
+    var empty_inputs = $('.la-input').filter(function() {
+        return !$(this).val()
+    }).length;
+
+    // MODAL EMPTY
+    for (var i = 1; i <= $('#li-ul').children().length; i++) {
+        var empty_modal = $('.la-input-li-' + [i]).filter(function() {
+            return !$(this).val()
+        }).length;
+    }
+    if (empty_modal != undefined) {
+        var num = (empty_inputs + empty_modal);
+        if (num == 0) {
+            json_form();
+        } else {
+            alert_notification('Por favor revisar, campos vacíos.')
+        }
+    } else {
+        alert_notification('Debe existir al menos una causa.')
+    }
+    // Llmar función que crea el json del fromulario de lecciones aprendidas
+}
+
+function json_form() {
+    var array_form = {};
+    $('.la-input').each(function() {
+        array_form[$(this).attr('id')] = normalize($(this).val());
+    });
+    $('select[name="la-select"]').each(function() {
+        array_form[$(this).attr('id')] = $(this).children(":selected").val();
+    });
+    array_form['_bp_lineitems'] = [];
+    for (var i = 1; i <= $('#li-ul').children().length; i++) {
+        var array_form_li = {};
+        $('.la-input-li-' + [i]).each(function() {
+            array_form_li[$(this).attr('name')] = normalize($(this).val());
+        });
+        array_form._bp_lineitems.push(array_form_li);
+    }
+    console.log(array_form);
+    console.log(JSON.stringify({
+        "data": [array_form]
+    }));
+    json_format = JSON.stringify({
+        "data": [array_form]
+    });
+    send_json(json_format);
+}
+var normalize = (function() {
+    var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+        to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+        mapping = {};
+
+    for (var i = 0, j = from.length; i < j; i++)
+        mapping[from.charAt(i)] = to.charAt(i);
+
+    return function(str) {
+        var ret = [];
+        for (var i = 0, j = str.length; i < j; i++) {
+            var c = str.charAt(i);
+            if (mapping.hasOwnProperty(str.charAt(i)))
+                ret.push(mapping[c]);
+            else
+                ret.push(c);
+        }
+        return ret.join('');
+    }
+
+})();
+$('#add').click(function() {
+    var position = $('#li-ul').children().length;
+    LineItems(position + 1);
+    ModalLineItems(position + 1);
+});
+
+function LineItems(num) {
+    $('#li-ul').append($('<li>', {
+            class: 'd-flex col s12 m6 l4 xl3'
+        })
+        .append($('<a>', {
+            id: num,
+            href: '#detailEvents' + num,
+            class: 'modal-trigger',
+            text: 'Causa ' + num
+        })));
+}
+
+function ModalLineItems(num) {
+    $('#num-' + num).val(num);
+}
+var csrfToken = <?=json_encode($this->request->getParam('_csrfToken'))?> ;
+
+function send_json(json_data) {
+    var project_id = $('#select-project').children(":selected").val()
+    xhr_form = $.ajax({
+        headers: {
+            'X-CSRF-Token': csrfToken
+        },
+        method: "POST",
+        dataType: "json",
+        url: "<?php echo $this->Url->build(['controller'=>'Events','action'=>'send_event']);?>",
+        data: {
+            la_form: json_data,
+            id_project: project_id
+        },
+        cache: true,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            $('#load-gif').show();
+        },
+        success: function(response) {
+            console.log(response);
+            $('#load-gif').hide();
+            $('#add').hide();
+            if (response != null) {
+                if (response.status == '200') {
+                    $('#load-gif').hide();
+                    $('#add').show();
+                    success_text = response.event + ': ' + response.record_no;
+                    success_notification(success_text);
+                    $('#main-btn').attr('disabled', false);
+                } else {
+                    alert_notification('La lección aprendida no ha sido enviada.')
+                    $('#main-btn').attr('disabled', false);
+                }
+            } else {
+                validate();
+            }
+        }
+    });
+}
+// ALERTA
+function alert_notification(error_text) {
+    if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
+        $('#btn-error').click();
+        $('#div-notify').text("");
+        if ($('#div-notify').children().length == 0) {
+            $('#div-notify').append($('<i>', {
+                    id: 'icon-notify',
+                    class: 'material-icons mr-2',
+                    text: 'cancel'
+                }))
+                .append(error_text);
+        }
+        setTimeout(function() {
+            $('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')
+        }, 4000);
+    }
+}
+
+function success_notification(success_text) {
+    if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
+        $('#btn-success').click();
+        $('#div-notify').text("");
+        if ($('#div-notify').children().length == 0) {
+            $('#div-notify').append($('<i>', {
+                    id: 'icon-notify',
+                    class: 'material-icons mr-2',
+                    text: 'check_circle'
+                }))
+                .append(success_text);
+        } else {
+            alert_notification('Error al enviar la lección aprendida.');
+        }
+        setTimeout(function() {
+            $('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')
+        }, 4000);
+    }
+}
+});
 </script>
