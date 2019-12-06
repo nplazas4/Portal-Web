@@ -23,7 +23,7 @@
             'children' => []
         ],
         [ 'RYOS', 'index','Ryos','id' => '','class' => '','children' => [] ],
-        [ 'Portafolio', 'home','Pages','id' => '','class' => '', 'children' => [] ],
+        [ 'Lecciones aprendidas', 'index','Events','id' => '','class' => '', 'children' => [] ],
         [ 'Documentos gestión de programas y proyectos', 'home','Pages','id' => '','class' => '', 'children' => [] ],
     ];
 ?>
@@ -179,7 +179,7 @@
                 <li class="dropdown-user">
                     <div class="header-user-avatar"><?= $user['avatar'] ?></div>
                     <div class="dropdown-user-content">
-                        <h2><?= $user['name'] ?></h2>
+                        <h2 id="name-element"><?= $user['name'] ?></h2>
                         <small id="email-element"><?= $user['email'] ?></small>
                     </div>
                 </li>
