@@ -174,7 +174,7 @@
               MEC
             </a>
             <ul style="right: -105px !important;" id="ul-mec">
-              <li><a class="btn-floating warning"><i id="cancel_mec" class="large material-icons" id="btn_main_filter">cancel</i></a></li>
+              <li><a class="btn-floating warning"><i id="cancel_mec" class="large material-icons">cancel</i></a></li>
               <?php foreach ($mec as $ws_mec => $mec_value):?>
                 <li class="btn-filter-phase" data-id="<?=$mec_value['code_type_id']?>" data-type="mec"  value="<?=$mec_value['code_type_id']?>"><a id="<?=$mec_value['code_type_id']?>" class="btn-floating dark lighten-1"><?=substr($mec_value['description'],0,3)?></a></li>
               <?php endforeach;?>
@@ -465,6 +465,7 @@
               // SPI
               $('#data-box-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-spi-'+iteration_num}));
               $('#data-spi-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'spi-circle-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : '% Avance ejecutado / % Avance planeado'}));
+
               var project_spi = null;
               if (this.spi_labor_units != null) {
                   project_spi = parseFloat(this.spi_labor_units).toFixed(2)
@@ -474,13 +475,13 @@
               $('#spi-text-'+iteration_num).append($('<span>', {text : 'SPI'}));
               // CPI Anual
               $('#data-spi-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-cpi-'+iteration_num}));
-              $('#data-cpi-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'cpi-circle-'+iteration_num}));
+              $('#data-cpi-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'cpi-circle-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : 'AC anual  / Presupuesto anual'}));
               $('#cpi-circle-'+iteration_num).append($('<h5>', {class : 'cpi-anual-data', id : 'cpi-id-'+iteration_num})); //CPI DATA
               $('#cpi-circle-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'cpi-text-'+iteration_num}));
               $('#cpi-text-'+iteration_num).append($('<span>', {text : 'CPI Anual'}));
               // CPI TOTAL
               $('#data-cpi-'+iteration_num).after($('<div>', {class : 'data-box', id : 'data-cpi-total-'+iteration_num}));
-              $('#data-cpi-total-'+iteration_num).append($('<div>', {class : 'data-box-circle', id : 'cpi-circle-total-'+iteration_num}));
+              $('#data-cpi-total-'+iteration_num).append($('<div>', {class : 'data-box-circle tooltipped', id : 'cpi-circle-total-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : 'División entre AC y el PPTO (AC/PPTO)'}));
               $('#cpi-circle-total-'+iteration_num).append($('<h5>', {class : 'cpi-total-data', id : 'cpi-id-total-'+iteration_num})); //CPI TOTAL DATA
               $('#cpi-circle-total-'+iteration_num).after($('<div>', {class : 'data-box-content', id : 'cpi-text-total-'+iteration_num}));
               $('#cpi-text-total-'+iteration_num).append($('<span>', {text : 'CPI Total'}));
@@ -493,11 +494,11 @@
               // Divider Circle - Presupuesto
               $('#data-igr-'+iteration_num).after($('<div>', {class : 'divider transparent', id : 'divider-div-'+iteration_num}));
               // Presupuesto Planeado
-              $('#divider-div-'+iteration_num).after($('<div>', {class : 'data-chip accent', id : 'data-planeado-'+iteration_num}));
+              $('#divider-div-'+iteration_num).after($('<div>', {class : 'data-chip accent tooltipped', id : 'data-planeado-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : 'Presupuesto planeado individual'}));
               $('#data-planeado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Planeado (USD)'})); // Presupuesto Title value
               $('#data-planeado-'+iteration_num).append($('<h4>', {class : 'presupuesto-plan', id : 'plan-id-'+iteration_num})); // Presupuesto Planeado value
               // Presupuesto Ejecutado
-              $('#data-planeado-'+iteration_num).after($('<div>', {class : 'data-chip secondary mb-0', id : 'data-ejecutado-'+iteration_num}));
+              $('#data-planeado-'+iteration_num).after($('<div>', {class : 'data-chip secondary mb-0 tooltipped', id : 'data-ejecutado-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : 'Presupuesto ejecutado individual'}));
               $('#data-ejecutado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Ejecutado (USD)'})); // Presupuesto Title value
               $('#data-ejecutado-'+iteration_num).append($('<h4>', {class : 'presupuesto-ejec', id : 'pres-id-'+iteration_num})); // Presupuesto Planeado value
           <?php else:?>
@@ -538,6 +539,7 @@
               $('#spi-text-'+iteration_num).append($('<span>', {text : 'SPI'}));
           <?php endif;?>
             Unifier_information(this.project_id_p6, this.id_p_project, iteration_num, this.spi_labor_units);
+            $('.tooltipped').tooltip({delay: 50});
         });
           resolve();
         });

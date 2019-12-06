@@ -1346,7 +1346,6 @@
                   <th>BL Fin</th>
                   <th>Inicio</th>
                   <th>Fin</th>
-                  <th>Tipo de Hito</th>
               </tr>
             </thead>
             <tbody class="hitos-body" id="hitos-body-new"></tbody>
@@ -1376,7 +1375,6 @@
                   <th>BL Fin</th>
                   <th>Inicio</th>
                   <th>Fin</th>
-                  <th>Tipo de Hito</th>
               </tr>
             </thead>
             <tbody class="hitos-body" id="hitos-body-old"></tbody>
@@ -2968,12 +2966,14 @@
       );
     }
     $(document).ready(function(){
-    var clean_rks = $('#clean-rks-filters'),e = $(".li-risks.info-actual"), estado_act = $('#estado_new'), materializado_act = $('#materializado_new'), estado_act = $('#estado_act'), materializado_act = $('#materializado_act') ,select_actual = $('.actual-rks-filter'), select_input = $('.form-select-actual input');
+    var clean_rks = $('#clean-rks-filters'),e = $(".li-risks.info-actual"), estado_act = $('#estado_new'),
+        materializado_act = $('#materializado_new'), estado_act = $('#estado_act'), materializado_act = $('#materializado_act'),
+        select_actual = $('.actual-rks-filter'), select_input = $('.form-select-actual input');
     select_actual.change(function() {
         var a = select_actual.children(":selected");
         if (e.show(), 0 != a.length) {
             var i = $.map(a, function(a) {
-                return $(a).data("id")
+                return $(a).data("id");
             });
             if (estado_act.val() == 'all' && materializado_act.val() == 'all') {
               clean_rks.hide();
@@ -3207,7 +3207,6 @@
               .append($('<td>', {text : bl_finish_format}))
               .append($('<td>', {text : start_format}))
               .append($('<td>', {text : finish_format}))
-              .append($('<td>', {text : this.type}))
           });
         });
       }
@@ -3579,7 +3578,7 @@
           });
         });
       }
-      // HITOS COMAPARE
+      // HITOS COMPARE
       function hitos_compare(id_project, selected_date, hitos_body, select_compare){
         var settings = {
           "async": true,
@@ -3620,9 +3619,9 @@
             }
             // Color text
             if (this.nlu_percent_complete == '100') {
-              var color_text_npc = 'error-text';
+              var color_text_npc = 'primary-text';
             } else if (this.spc == '100') {
-              var color_text_spc = 'error-text';
+              var color_text_spc = 'primary-text';
             }
             // APPEND HITOS
             hitos_body.append($('<tr>', {id : select_compare+'-'+i}));
@@ -3634,7 +3633,6 @@
               .append($('<td>', {text : bl_finish_format}))
               .append($('<td>', {text : start_format}))
               .append($('<td>', {text : finish_format}))
-              .append($('<td>', {text : this.type}))
           });
         });
       }

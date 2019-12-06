@@ -42,12 +42,12 @@
                   'section',
                   $this->Html->link(
                   '',
-                  array('controller'=>'Projects','action'=>'PortalProjects'),
+                  array('controller'=>'Events','action'=>'index'),
                   array('class'=>'tooltipped','data-position'=>'right','data-tooltip'=>'Información del Portafolio de GEB y sus filiales.')
               ).
               $this->Html->tag(
                   'div',
-                  $this->Html->tag('h2', 'Portafolio'),
+                  $this->Html->tag('h2', 'Lecciones aprendidas'),
                   array('class'=>'home-item-title')
               ).
               $this->Html->tag('figure', $this->Html->image('icons/portafolio.svg')).
