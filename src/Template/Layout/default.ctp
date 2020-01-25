@@ -24,7 +24,7 @@
         ],
         [ 'RYOS', 'index','Ryos','id' => '','class' => '','children' => [] ],
         [ 'Lecciones aprendidas', 'index','Events','id' => '','class' => '', 'children' => [] ],
-        [ 'Documentos gestión de programas y proyectos', 'home','Pages','id' => '','class' => '', 'children' => [] ],
+        [ 'Documentos gestión de programas y proyectos', 'index','Documents','id' => '','class' => '', 'children' => [] ],
     ];
 ?>
 <!DOCTYPE html>
@@ -38,6 +38,10 @@
     </title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->script(['jquery-3.3.1.min.js','alert.js', 'leader-line.min.js']) ?>
+    <?= $this->Html->script('amcharts4/core.js') ?>
+    <?= $this->Html->script('amcharts4/charts.js') ?>
+    <?= $this->Html->script('amcharts4/material.js') ?>
+    <?= $this->Html->script('amcharts4/animated.js') ?>
     <!-- </?= $this->Html->script('jquery-3.3.1.min.js',['async']) ?> -->
     <?= $this->Html->css('materialize.css') ?>
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -166,7 +170,7 @@
             </nav>
             <?php  if (isset($current_user)):?>
             <?php  if($current_user['V_ROL']=='Administrator' || $current_user['V_ROL']=='Editor' || $current_user['V_ROL']=='Viewer'):?>
-            <div class="header-user dropdown-trigger" data-target='dropdownUser'>
+            <div id="header-user" class="header-user dropdown-trigger" data-target='dropdownUser' data-identifier='<?= $current_user['V_ID_P_USER'] ?>'>
                 <div class="header-user-content">
                     <h2><?= $user['name'] ?></h2>
                     <small><?= $user['email'] ?></small>
@@ -347,6 +351,11 @@
             $('.dropdown-trigger').dropdown();
             $('.dropdown-hover').dropdown({
                 hover: true
+            });
+            $('.tabs').tabs();
+            $('.carousel.carousel-slider').carousel({
+              fullWidth: true,
+              indicators: true
             });
         });
     </script>

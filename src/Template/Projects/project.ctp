@@ -698,57 +698,87 @@
                     </ul>
                 </div>
                 <div class="heatmap">
-                      <table id="risk-tr">
+                  <table id="risk-tr">
                           <tr>
                               <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
                               <th>MA</th>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -757,51 +787,81 @@
                             <th>A</th>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 &&  $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="red">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -810,51 +870,81 @@
                               <th>M</th>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="orange">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -863,51 +953,81 @@
                               <th>B</th>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -916,51 +1036,81 @@
                             <th>MB</th>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                               <td class="lime accent-4">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
                              <td class="yellow">
                                 <?php foreach ($rks as $rk):
+                                  $color_rks;
                                   if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
-                                    echo '<span class="warning" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    if ($rk->MATERIALIZACION == "materializado") {
+                                      $color_rks = "dark lighten-1";
+                                    } else {
+                                      $color_rks = "warning";
+                                    }
+                                    echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="primary" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                              </td>
@@ -980,7 +1130,7 @@
                               </th>
                           </tr>
                       </table>
-                  </div>
+                </div>
             </div>
         </div>
           <?php if($array_project["child_eps_id"] != 34013 && $array_project["child_eps_id"] != 34021 && $array_project["child_eps_id"] != 34015 && $array_project["child_eps_id"] != 34017):?>

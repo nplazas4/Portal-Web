@@ -6,7 +6,7 @@
     ];
 ?>
 <div class="section portal-projects">
-    <div class="breadcrumb-container">
+    <div class="breadcrumb-container" id="breadcrumb_la">
         <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
           <?php echo $this->Html->link(
@@ -210,8 +210,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  console.log($('form').attr('id'));
-  if ($('form').attr('id') == 'person') {
+  var user = $('form').attr('id');
+  if (user == 'person') {
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -226,6 +226,11 @@ $(document).ready(function(){
     $.ajax(settings).done(function(response) {
         $.each(response.items, function() {
             $('#title-detail').text('Lección aprendida - '+ this.record_no);
+            $('#breadcrumb_la').append($('<a>', {
+                text: this.record_no,
+                class: 'breadcrumb',
+                href: '/Portal-Web/events/detail/'+user+'/'+this.record_no
+            }));
             $('#select-project').val(this.empresa);
             $('#lapa_019_s_NombreUsuario').val(this.lapa_019_s_nombreusuario);
             $('#lapa_021_s_Correo').val(this.lapa_021_s_correo);
@@ -264,6 +269,11 @@ $(document).ready(function(){
         $.each(response.items, function() {
             console.log(this);
             $('#title-detail').text('Lección aprendida - '+ "<?=$code?>");
+            $('#breadcrumb_la').append($('<a>', {
+                "text": "<?=$code?>",
+                class: 'breadcrumb',
+                href: '/Portal-Web/events/detail/'+user+'/'+"<?=$code?>"
+            }));
             $('#status').val(this.status);
             $('#lapa_045_proyectoreferecia').val(this.lapa_045_proyectoreferecia);
             $('#lapa_046_t_empresa').val(this.lapa_046_t_empresa);

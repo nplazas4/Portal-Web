@@ -44,7 +44,11 @@
   <?php if($child_eps_id != 34013 && $child_eps_id != 34021 && $child_eps_id != 34015 && $child_eps_id != 34017):?>
     <div class="company-towers-content">
         <div class="company-towers-content-data">
+            <?php if($child_eps_id != 34020):?>
               <?= $this->Html->image('logos/'.$child_eps_id.'.svg') ?>
+            <?php else:?>
+              <?= $this->Html->image('logos/'.$child_eps_id.'.png') ?>
+            <?php endif;?>
             <div class="number">
                 <h2 class="total-number"></h2>
             </div>
@@ -77,7 +81,11 @@
   <?php else: ?>
     <div class="company-content">
         <figure class="company-content-logo">
+          <?php if($child_eps_id == 34017):?>
+            <?= $this->Html->image('logos/'.$child_eps_id.'.jpg') ?>
+          <?php else:?>
             <?= $this->Html->image('logos/'.$child_eps_id.'.svg') ?>
+          <?php endif;?>
         </figure>
         <div class="company-content-data">
             <figure class="company-content-data-station">

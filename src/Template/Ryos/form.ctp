@@ -5,6 +5,80 @@
         [ 'Lista de RYOS','index','Ryos'],
         [ 'RYOS','index','Ryos'],
     ];
+
+    // Gestión de interesados
+    $interesados = [
+      ['AUTORIDADES','GOBERNACIÓN'],
+      ['AUTORIDADES','ALCALDÍAS'],
+      ['AUTORIDADES','MINISTERIOS'],
+      ['AUTORIDADES','PROCURADURÍA'],
+      ['AUTORIDADES','CORPORACIÓN REGIONAL (Ambiental)'],
+      ['AUTORIDADES','AGENCIA NACIONAL DE LICENCIAS AMBIENTALES - ANLA'],
+      ['AUTORIDADES','DEFENSORÍA DEL PUEBLO'],
+      ['AUTORIDADES','PERSONERÍAS MUNICIPALES'],
+      ['AUTORIDADES','CONCEJOS'],
+      ['AUTORIDADES','AGENCIA NACIONAL DE INFRAESTRUCTURA - ANI'],
+      ['AUTORIDADES','POLICÍA NACIONAL'],
+      ['AUTORIDADES','POLICÍA DE CARRETERAS'],
+      ['AUTORIDADES','EJÉRCITO'],
+      ['AUTORIDADES','BOMBEROS'],
+      ['AUTORIDADES','DEFENSA CIVIL'],
+      ['AUTORIDADES','CRUZ ROJA'],
+      ['AUTORIDADES','DIRECCIÓN DE IMPUESTOS Y ADUANAS NACIONALES - DIAN'],
+      ['AUTORIDADES','UNIDAD DE PLANEACIÓN MINERO ENERGÉTICA - UPME'],
+      ['COMUNIDADES','COMUNIDADES DE BASE'],
+      ['COMUNIDADES','JUNTAS DE ACCIÓN DE COMUNAL'],
+      ['COMUNIDADES','LÍDERES COMUNITARIOS'],
+      ['COMUNIDADES','JUNTAS DE ACUEDUCTO VEREDAL'],
+      ['COMUNIDADES','TERCEROS INTERVINIENTES'],
+      ['COMUNIDADES','EMPRESAS O INDUSTRIAS VECINAS'],
+      ['COLABORADORES','ÁREA LOGÍSTICA'],
+      ['COLABORADORES','TRABAJADORES'],
+      ['COLABORADORES','SINDICATO TRABAJADORES'],
+      ['COLABORADORES','COMUNICACIONES'],
+      ['COLABORADORES','GESTIÓN HUMANA'],
+      ['COLABORADORES','OPERACIÓN'],
+      ['COLABORADORES','MANTENIMIENTO'],
+      ['COLABORADORES','GERENCIA'],
+      ['COLABORADORES','MATERIAS PRIMAS'],
+      ['COLABORADORES','COMPRAS'],
+      ['COLABORADORES','COMERCIO EXTERIOR'],
+      ['COLABORADORES','SINDICATOS'],
+      ['COLABORADORES','DIRECTIVOS'],
+      ['COLABORADORES','SST'],
+      ['COLABORADORES','IMPUESTOS'],
+      ['COLABORADORES','TESORERÍA'],
+      ['COLABORADORES','CUENTAS POR PAGAR'],
+      ['COLABORADORES','SEGURIDAD FÍSICA'],
+      ['COLABORADORES','LEGAL'],
+      ['COLABORADORES','SEGUROS'],
+      ['COLABORADORES','ACTIVOS'],
+      ['COLABORADORES','INVENTARIOS'],
+      ['COLABORADORES','GESTIÓN INMOBILIARIA'],
+      ['COLABORADORES','CALIDAD'],
+      ['COLABORADORES','COMITÉS'],
+      ['COLABORADORES','GERENCIA LEGAL DE SOSTENIBILIDAD'],
+      ['COLABORADORES','VICEPRESIDENCIA FINANCIERA'],
+      ['COLABORADORES','VICEPRESIDENCIA DE TRANSMISIÓN'],
+      ['PROVEEDORES Y CONTRATISTAS','ABASTECIMIENTO'],
+      ['PROVEEDORES Y CONTRATISTAS','INGENIERÍA'],
+      ['PROVEEDORES Y CONTRATISTAS','PROPIETARIOS DE PREDIOS DE INTERÉS'],
+      ['PROVEEDORES Y CONTRATISTAS','INMOBILIARIAS'],
+      ['PROVEEDORES Y CONTRATISTAS','GESTIÓN AMBIENTAL'],
+      ['OTROS','INSTITUCIONES EDUCATIVAS'],
+      ['OTROS','TRANSPORTE'],
+      ['OTROS','MEDIOS DE COMUNICACIÓN'],
+      ['OTROS','EMPRESAS COMPETIDORAS'],
+      ['OTROS','GREMIOS'],
+      ['OTROS','UNIDADES PRODUCTIVAS'],
+      ['OTROS','ACTORES POLÍTICOS'],
+      ['OTROS','OFICINAS DE EMPLEO'],
+      ['OTROS','LÍDERES RELIGIOSOS'],
+      ['OTROS','ONG'],
+      ['OTROS','CÁMARAS DE COMERCIO'],
+      ['OTROS','INSTITUCIONES Y ENTIDADES MEDICAS / PRESTADORAS DE SALUD'],
+      ['OTROS','ALIADOS COMERCIALES'],
+    ];
 ?>
 <style>
 @-webkit-keyframes fade-in {
@@ -39,11 +113,6 @@
             transform: translateY(0);
   }
 }
-
-/* h1 {
-  color: #fff;
-  font-size: 55px;
-} */
 
 p {
   line-height: 1.5;
@@ -875,15 +944,15 @@ left: 25%;
                           <textarea id="ryos-sup" name="t_supuestos"  class="textarea-general materialize-textarea"></textarea>
                       </div>
                     </form>
-                    <form class="contact100-form validate-form" id="Form-3" style="display:none">
+                    <form class="contact100-form validate-form" id="Form-3" style="display:none" style="overflow-y:visible;">
                       <span class="contact100-form-sub-title">
                           ALINEAMIENTO ESTRATÉGICO
                       </span>
                       <?php for ($i=1; $i <= 3 ; $i++):?>
-                      <div class="wrap-input100 rs1-wrap-input100 validate-input">
+                      <div class="wrap-input100 rs1-wrap-input100 validate-input" style="overflow-y:visible;">
                           <span class="label-input100">Objetivo # <?=$i?></span>
                           <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Objetivo # <?=$i?>" onclick="return false;">help_outline</i></span>
-                          <select  id = "t_objetive_<?=$i?>" name = "select-estrategic" class="select-estrategic objectives">
+                          <select  id="t_objetive_<?=$i?>" name="select-estrategic" class="select-estrategic objectives">
                           </select>
                       </div>
                       <div class="wrap-input100 rs1-wrap-input100 validate-input" id="div-app<?=$i?>">
@@ -895,7 +964,7 @@ left: 25%;
                       <span class="contact100-form-sub-title" id="gen-valor">
                           Generación de Valor
                       </span>
-                      <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input">
+                      <div class="div-gen-valor wrap-input100 rs1-wrap-input100 validate-input" style="overflow-y:visible;">
                           <span class="label-input100" style="color:#fff">text</span>
                           <select id="t_gen_val_1" name="select-gen" class="select-estrategic"></select>
                       </div>
@@ -904,7 +973,7 @@ left: 25%;
                           <input class="input100 gen-valor" autocomplete="off" type="text" name="t_gen_application_1" placeholder="Ingrese la aplicación">
                       </div>
                       <!-- TI - GENERACIÓN DE VALOR -->
-                      <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input">
+                      <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 validate-input" style="overflow-y:visible;">
                           <span class="label-input100" style="color:#fff">text</span>
                           <select id="t_gen-val_2" name="select-gen" class="select-estrategic">
                               <option selected value="default">Seleccione una opción</option>
@@ -921,7 +990,7 @@ left: 25%;
                       </div>
                       <div class="div-gen-valor-ti wrap-input100 rs1-wrap-input100 pt-4">
                           <!-- <span class="label-input100">text</span> -->
-                          <select id="t_gen-val_3" name="select-gen" class="select-estrategic">
+                          <select id="t_gen-val_3" name="select-gen" class="select-estrategic" style="overflow-y:visible;">
                               <option selected value="default">Seleccione una opción</option>
                               <option class="work-option">Excelencia y eficiencia operacional</option>
                               <option class="work-option">Excelencia y eficiencia operacional</option>
@@ -1961,7 +2030,7 @@ left: 25%;
                           </span>
                           <div class="chart-risk">
                               <div class="heatmap">
-                                  <table>
+                                  <table id="risk-table">
                                       <tr>
                                           <th class="btn-space" id="space-1"><a class="event btn-floating btn-large title modal-trigger red" id="risk_1" data-number="1" href="#detailBtnRisks1" draggable="true">R1</a></th>
                                           <th class="btn-space" id="space-2"><a class="event btn-floating btn-large title modal-trigger red" href="#detailBtnRisks2" id="risk_2" data-number="2" draggable="true">R2</a></th>
@@ -2068,6 +2137,57 @@ left: 25%;
                                   </table>
                               </div>
                           </div>
+                          <div class="wrap-input100 rs1-wrap-input100">
+                              <span class="label-input100">Nivel de riesgos estimado por el gestor ryos *</span>
+                              <span class="icon-download"><i class="material-icons tooltipped" data-position="bottom" data-tooltip="" onclick="return false;">help_outline</i></span>
+                              <select id="t_risk_lvl" class="select-estrategic">
+                                  <option disabled selected value="default">Seleccione una opción</option>
+                                  <option>Extremo</option>
+                                  <option>Muy alto</option>
+                                  <option>Alto</option>
+                                  <option>Medio</option>
+                                  <option>Bajo</option>
+                                  <option>Muy bajo</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="wrap-input100 validate-input">
+                          <span class="contact100-form-sub-title">
+                              GESTIÓN DE INTERESADOS
+                          </span>
+                          <table class="display highlight centered" id="table-gi">
+                              <thead>
+                                  <tr>
+                                      <th>Interesados</th>
+                                      <th>¿Qué pasa si no me comunico con él y no lo gestiono?</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr class="wrap-input100 rs1-wrap-input100">
+                                      <td><input id="t_interesado_1" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                      <td><input id="t_gi_question_1" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                  </tr>
+                                  <tr class="wrap-input100 rs1-wrap-input100">
+                                      <td><input id="t_interesado_2" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                      <td><input id="t_gi_question_2" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                  </tr>
+                                  <tr class="wrap-input100 rs1-wrap-input100">
+                                      <td><input id="t_interesado_3" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                      <td><input id="t_gi_question_3" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                  </tr>
+                                  <tr class="wrap-input100 rs1-wrap-input100">
+                                      <td><input id="t_interesado_4" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                      <td><input id="t_gi_question_4" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                  </tr>
+                                  <tr class="wrap-input100 rs1-wrap-input100">
+                                      <td><input id="t_interesado_5" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                      <td><input id="t_gi_question_5" name="input_gi" class="input100" type="text" style="text-align:center"></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <div class="mt-4">
+                            <a class="modal-trigger tertiary-text" href="#detailGI">Ejemplo de algunos interesados (clic sobre este texto), recuerde dejar los 5 más relevantes en esta tabla.</a>
+                          </div>
                       </div>
                       <div class="container-contact100-form-btn mb-6">
                           <button class="contact100-form-btn" type="button" id="main-btn">
@@ -2106,13 +2226,67 @@ left: 25%;
        <div class="input100">
         <textarea id="t_risk_<?=$i?>" class="risks-input materialize-textarea"></textarea>
        </div>
+       <form class="contact100-form pt-6">
+       <div class="wrap-input100 rs1-wrap-input100">
+           <span class="label-input100">Probabilidad</span>
+           <select id="prob-select-<?=$i?>" name="risk-coord-<?=$i?>">
+               <option value="default" selected>Seleccione una opción</option>
+               <option>Muy alta</option>
+               <option>Alta</option>
+               <option>Media</option>
+               <option>Baja</option>
+               <option>Muy baja</option>
+           </select>
+       </div>
+       <div class="wrap-input100 rs1-wrap-input100">
+           <span class="label-input100">Impacto</span>
+           <select id="impact-select-<?=$i?>" name="risk-coord-<?=$i?>">
+               <option value="default" selected>Seleccione una opción</option>
+               <option>Muy alto</option>
+               <option>Alto</option>
+               <option>Medio</option>
+               <option>Bajo</option>
+               <option>Muy bajo</option>
+           </select>
+       </div>
+     </form>
       </div>
       <div class="modal-footer">
-          <a class="modal-close waves-effect error btn btn-depressed">Cancelar</a>
-          <a class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
+          <a class="modal-reset modal-close waves-effect error btn btn-depressed">Cancelar</a>
+          <a class="modal-change modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
       </div>
      </div>
 <?php endfor;?>
+<div id="detailGI" data-modal="1" class="modal">
+ <div class="modal-content">
+   <a class="modal-close close">
+     <i class="material-icons">close</i>
+   </a>
+   <h2>RIESGOS ESPECÍFICOS RELEVANTES IDENTIFICADOS POR EL GESTOR DEL RYOS</h2>
+   <table class="display highlight centered" id="gestion-interesados">
+       <thead>
+           <tr>
+               <th>Categoría</th>
+               <th>Subgrupo</th>
+               <th>Copiar</th>
+           </tr>
+       </thead>
+       <tbody>
+         <?php foreach ($interesados as $item): ?>
+           <tr class="wrap-input100 rs1-wrap-input100">
+               <td><?=$item[0]?></td>
+               <td><?=$item[1]?></td>
+               <td style="cursor: pointer;"><i class="copy-gi material-icons">content_copy</i></td>
+           </tr>
+        <?php endforeach;?>
+       </tbody>
+   </table>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-reset modal-close waves-effect error btn btn-depressed">Cancelar</a>
+    <a class="modal-change modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
+  </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
   for (var i = 1; i <= 10; i++) {
@@ -2153,7 +2327,7 @@ $(document).ready(function() {
       var Form_Numbers = null;
       $("#return").click(function() {
           Form_Numbers = $('.contact100-form.validate-form.active').index();
-          BtnNextHide(Form_Numbers);
+          BtnReturnHide(Form_Numbers);
           if ($('.contact100-form.validate-form.active').index() > 0) {
               $('.contact100-form.validate-form').hide();
               $('.contact100-form.validate-form.active').removeClass("active").prev().addClass("active").show();
@@ -2165,29 +2339,61 @@ $(document).ready(function() {
       // BÓTON SIGUIENTE
       $("#next").click(function() {
           Form_Numbers = $('.contact100-form.validate-form.active').index();
-          BtnReturnHide(Form_Numbers);
+          BtnNextHide(Form_Numbers + 1);
           visible_form();
       });
       $("#main-btn").click(function() {
+        if ($('#Form-6').is(":visible")) {
+          var select_lenght = 0, select_active = 0;
+          $('#Form-6 select').each(function() {
+            if ($(this).parent().parent().attr('style') != 'display: none;') {
+              select_lenght += $(this).length;
+              if ($(this).children(":selected").val() != 'default') {
+                select_active += $(this).length;
+              }
+            }
+          });
+          var empty_input = $('[name="input_gi"]').filter(function(){
+              return $(this).val()
+          }).length;
+          console.log(empty_input);
+          if (empty_input >0 && empty_input % 2 == 0) {
+            if (select_lenght == select_active && select_lenght != 0) {
+                validate_form5();
+            } else if (select_lenght == 0 && select_active == 0) {
+                validate_form5();
+            }
+            else {
+                alert_notification('Por favor revisar, campos obligatorios.');
+            }
+          } else {
+                alert_notification('Por favor revisar, campos vacíos.');
+          }
+        }
           json_form();
       });
   });
+  function validate_form5(){
+    var empty_inputs = null, inputs_empty = 0, cont_elements = 0;
+    $.each($('#risk-table td a'), function(i){
+      cont_elements += $(this).length;
+
+      var modal_id = $(this).attr('href').split('#')[1];
+      empty_inputs = $('#'+modal_id+' textarea').filter(function() {
+          return $(this).val()
+      }).length;
+      inputs_empty += empty_inputs;
+    });
+    if (cont_elements != 0 && inputs_empty == cont_elements) {
+      json_form();
+    } else {
+      alert_notification('Por favor favor revisar, campos vacíos.');
+    }
+    console.log('elementos '+cont_elements+' vacíos '+inputs_empty);
+  }
  function next_module(empty_inputs) {
-     // switch (empty_inputs) {
-     //     case 0:
-     //         if ($('.contact100-form.validate-form.active').index() < $(".contact100-form.validate-form").length - 1) {
-     //             $('.contact100-form.validate-form.active').hide();
-     //             $('.contact100-form.validate-form.active').removeClass("active").next().show().addClass("active");
-     //         }
-     //         $('#return').show();
-     //         $('body,html').animate({
-     //             scrollTop: 0
-     //         }, 500);
-     //         break;
-     //     default:
-     //
-     // }
-     // if (empty_inputs >= 0) {
+     // alert('empty '+empty_inputs);
+     if (empty_inputs == 0) {
        if ($('.contact100-form.validate-form.active').index() < $(".contact100-form.validate-form").length - 1) {
            $('.contact100-form.validate-form.active').hide();
            $('.contact100-form.validate-form.active').removeClass("active").next().show().addClass("active");
@@ -2196,23 +2402,22 @@ $(document).ready(function() {
        $('body,html').animate({
            scrollTop: 0
        }, 500);
-     // } else {
-     error_text = 'Por favor revisar, campos vacíos.';
-     alert_notification(error_text);
-     // }
+     } else {
+       alert_notification('Por favor favor revisar, campos vacíos .');
+     }
  }
   // FUNCIÓN QUE OCULTA EL BÓTON DE REGRESAR CUANDO SE ENCUENTRA EN EL FORMULARIO 1
   function BtnNextHide(Form_Numbers) {
-      if (Form_Numbers == 1) {
-          $("#return").hide();
+      if (Form_Numbers == 5) {
+          $("#next").hide();
       } else {
           $("#return").show();
           $("#next").show();
       }
   }
   function BtnReturnHide(Form_Numbers) {
-      if (Form_Numbers == 4) {
-          $("#next").hide();
+      if (Form_Numbers == 1) {
+          $("#return").hide();
       } else {
           $("#return").show();
           $("#next").show();
@@ -2256,11 +2461,22 @@ $(document).ready(function() {
             return $(this).val()
         }).length;
         // Selects
-        $('.select-estrategic.objectives').each(function(){
+        var array_obj = [];
+        $('.select-estrategic.objectives').each(function(i){
             if ($(this).children(":selected").val() != 'default') {
-              return cont_sel++;
+                array_obj.push($(this).children(":selected").val());
+            }
+            let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) != index)
+            console.log(findDuplicates(array_obj));
+            if (findDuplicates(array_obj).length == 0) {
+              if ($(this).children(":selected").val() != 'default') {
+                return cont_sel++;
+              }
+            } else {
+              alert_notification('Objetivos estratégicos repetidos.');
             }
         });
+        console.log(empty_inputs1+' '+cont_sel+' '+cont_sel);
         if (empty_inputs1 == cont_sel && cont_sel > 0) {
             empty_inputs1 = 0;
         } else {
@@ -2277,62 +2493,66 @@ $(document).ready(function() {
             }
         });
         console.log('GEN '+empty_inputs2+' '+cont_gen);
-        if (empty_inputs2 == cont_sel && cont_gen > 0) {
+        if (empty_inputs2 == cont_gen && cont_gen > 0) {
             empty_inputs2 = 0;
-        } else {
-          alert_notification('Generación de valor vacío.');
+        }else {
+            alert_notification('Generación de valor vacío.');
+            empty_inputs2 = onkeyup = 1;
         }
         // MEC
         var cont_mec = 0;
-        var empty_inputs3 = $('.input100.mec.active').filter(function() {
-            return $(this).val()
-        }).length;
-        $('#t_mec').each(function(){
-            if ($(this).children(":selected").val() != 'default') {
-              return cont_mec++;
-            }
-        });
-        console.log('MEC '+empty_inputs3+' '+cont_mec);
+        var empty_inputs3 = 1;
+        if ($('.input100.mec').hasClass('active') && $('.input100.mec').is(":visible")) {
+          empty_inputs3 = $('.input100.mec.active').filter(function() {
+              return $(this).val()
+          }).length;
+          $('#t_mec').each(function(){
+              if ($(this).children(":selected").val() != 'default') {
+                return cont_mec++;
+              }
+          });
+        }
+        console.log('MEC '+$('.input100.mec').is(":visible"));
         if (empty_inputs3 == cont_mec && cont_mec > 0) {
             empty_inputs3 = 0;
-        } else {
+        } else if (empty_inputs3 == 1) {
+            empty_inputs3 = 0;
+        }
+        else {
           alert_notification('¿Está en el MEC?, campo vacío.');
         }
         // Flags
-        var cont_flags_1 = 0, cont_flags_2 = 0, cont_flags_3 = 0, cont_flags_4 = 0, cont_flags_5 = 0, cont_flags_6 = 0;
+        var cont_flags_1 = 0, cont_flags_2 = 0, cont_flags_3 = 0, cont_flags_4 = 0, cont_flags_5 = 0, cont_flags_6 = 0, empty_test = 0;
         var empty_inputs4 = $('.input100.flag.active').filter(function() {
             return !$(this).val()
         }).length;
         if ($('input[name="first_checkbox"]').hasClass('checkbox-flag active')) {
           $('input[name="first_checkbox"]:checked').each(function() {
-              return cont_flags_1++;
+              return cont_flags_1++
           });
           $('input[name="second_checkbox"]:checked').each(function() {
-              return cont_flags_2++;
+              return cont_flags_2++
           });
           $('input[name="third_checkbox"]:checked').each(function() {
-              return cont_flags_3++;
+              return cont_flags_3++
           });
           $('input[name="fourth_checkbox"]:checked').each(function() {
-              return cont_flags_4++;
+              return cont_flags_4++
           });
           $('input[name="fifth_checkbox"]:checked').each(function() {
-              return cont_flags_5++;
+              return cont_flags_5++
           });
           $('input[name="sixth_checkbox"]:checked').each(function() {
-              return cont_flags_6++;
+              return cont_flags_6++
           });
         }
-        if (empty_inputs4 == 0 && cont_flags_1 > 0 && cont_flags_2 > 0 && cont_flags_3 > 0 && cont_flags_4 > 0 && cont_flags_5 > 0 && cont_flags_6 > 0) {
-            return empty_inputs4;
-        } else {
+        if (empty_inputs4 != 0) {
             alert_notification('Alineamiento Estratégico (Fit Estratégico), campo(s) vacíos.');
         }
-        console.log('FLAGS '+empty_inputs4+' '+cont_flags_1+' '+cont_flags_2+' '+cont_flags_3+' '+cont_flags_4+' '+cont_flags_5+' '+cont_flags_6);
-        // Socio estratégico
         var empty_inputs5 = $('.input100.socio.active').filter(function() {
             return !$(this).val()
         }).length;
+        console.log(empty_inputs1 +' '+empty_inputs2 +' '+empty_inputs3 +' '+empty_inputs4 +' '+empty_inputs5);
         empty_inputs = (empty_inputs1 + empty_inputs2 + empty_inputs3 + empty_inputs4 + empty_inputs5);
     }
     if ($('#Form-4').is(":visible")) {
@@ -2383,22 +2603,23 @@ $(document).ready(function() {
         console.log('form 4: '+empty_inputs);
     }
     if ($('#Form-5').is(":visible")) {
+      var select_lenght = 0, select_active = 0;
       $('#Form-5 select').each(function() {
         if ($(this).parent().parent().attr('style') != 'display: none;') {
-          console.log(this.length);
+          select_lenght += $(this).length;
           if ($(this).children(":selected").val() != 'default') {
-
-          } else {
-
+            select_active += $(this).length;
           }
         }
-        // if ($(this).children(":selected").val() != 'default') {
-
-        // }
       });
-      var empty_inputs = $('select:visible').filter(function() {
-        return !$(this).val()
-    }).length;
+      if (select_lenght == select_active) {
+        var empty_inputs = $('select:visible').filter(function() {
+          return !$(this).val()
+        }).length;
+      } else {
+        alert_notification('Por favor revisar, campos obligatorios.');
+      }
+      console.log('select '+select_lenght+' '+'select active '+select_active);
       // console.log('Form 5: '+empty_inputs);
     }
     next_module(empty_inputs);
@@ -2634,7 +2855,7 @@ $(document).ready(function() {
                         ];
         break;
       // GUATEMALA
-      case 'EBBIS':
+      case 'EEBIS':
         array_obj_est = [
                           '1. Maximizar dividendos de largo plazo',
                           '2. Maximizar la eficiencia financiera',
@@ -3190,22 +3411,57 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
               de.appendTo($(this));
           };
       });
-      // $('table .btn-space').on("dragenter dragover drop", function(event) {
-      //     event.preventDefault();
-      //     if (event.type === 'drop') {
-      //         if ($(this).children().length == 0) {
-      //           var data = event.originalEvent.dataTransfer.getData('Text', $(this).attr('id'));
-      //           de = $('#' + data).detach();
-      //           de.appendTo($(this));
-      //         }
-      //     };
-      // });
+      $('table .btn-space').on("dragenter dragover drop", function(event) {
+          event.preventDefault();
+          if (event.type === 'drop') {
+              if ($(this).children().length == 0) {
+                var data = event.originalEvent.dataTransfer.getData('Text', $(this).attr('id'));
+                de = $('#' + data).detach();
+                de.appendTo($(this));
+              }
+          };
+      });
   });
-  $('.modal-close.waves-effect.error.btn.btn-depressed').click( function(){
+  $('.modal-change').click( function(){
     var rks_position = $(this).parent().parent().attr('data-modal');
-    $("#risk_"+rks_position).prependTo($("#space-"+rks_position));
-      $('#t_risk_'+rks_position).removeClass('active');
+    var select_prob = $('#prob-select-'+rks_position).children(":selected").val();
+    var select_impact = $('#impact-select-'+rks_position).children(":selected").val();
+    if (select_prob != 'default' && select_impact != 'default') {
+        $('#risk_'+rks_position).remove();
+        $('[data-impact="' + select_impact + '"][data-prob="' + select_prob + '"]').append($('<a>', {
+            id: 'risk_'+rks_position,
+            class: 'event btn-floating btn-large title modal-trigger red',
+            href: '#detailBtnRisks'+rks_position,
+            // draggable: true,
+            text: 'R'+rks_position
+        }).attr(
+           'data-number', rks_position
+        ));
+        // alert($('#risk_'+rks_position).length);
+      } else {
+        alert_notification('Probabilidad e impacto son obligatorios');
+      }
   });
+  $('.modal-reset').click(function(){
+    var rks_position = $(this).parent().parent().attr('data-modal');
+    $('#risk_'+rks_position).remove();
+    $('#space-'+rks_position).append($('<a>', {
+        id: 'risk_'+rks_position,
+        class: 'event btn-floating btn-large title modal-trigger red',
+        href: '#detailBtnRisks'+rks_position,
+        text: 'R'+rks_position
+    }).attr(
+       'data-number', rks_position
+    ));
+    var estrategic_select = $('select[name="risk-coord-'+rks_position+'"]');
+    estrategic_select.prop('selectedIndex', 0);
+    estrategic_select.formSelect();
+  });
+  // $('.modal-close.waves-effect.error.btn.btn-depressed').click( function(){
+  //   var rks_position = $(this).parent().parent().attr('data-modal');
+  //   $("#risk_"+rks_position).prependTo($("#space-"+rks_position));
+  //   $('#t_risk_'+rks_position).removeClass('active');
+  // });
   // JSON DEL FORMULARIO
   function json_form(){
     var array_form = {};
@@ -3275,7 +3531,7 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
     // FORM 6
     var cont_rks = 0;
     $('.risks-input.materialize-textarea.active').each(function(){
-        alert(cont_rks++);
+        // alert(cont_rks++);
         array_form[$(this).attr('id')] = $(this).val();
     });
     $('.event.btn-floating.btn-large.title.modal-trigger').each(function(){
@@ -3286,6 +3542,9 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
       }
     });
     array_form['t_email_user'] = $('#email-element').text();
+    $('[name="input_gi"]').each(function(){
+        array_form[$(this).attr('id')] = $(this).val();
+    });
 
     console.log(array_form);
     json_format = JSON.stringify({"data" : [array_form]});
@@ -3313,5 +3572,15 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
         }
       });
   }
+  $('.copy-gi').click(function(){
+    var text = $(this).parent().prev().get(0);
+    var selection = window.getSelection();
+    var range = document.createRange();
+    range.selectNodeContents(text);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    //add to clipboard.
+    document.execCommand('copy');
+  });
   // VALIDACIONES
 </script>

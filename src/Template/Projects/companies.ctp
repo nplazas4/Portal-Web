@@ -101,7 +101,27 @@ $(document).ready(function () {
             $('<span>',{class : 'item-tooltip', text : description})
           ])
         ]).hide().fadeIn(200);
-      } else {
+      } else if(this.child_eps_id == 34020){
+        div_companies.append([
+          $('<a>',{class : 'companies-menu-item', href : '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))}).append([
+            $('<img>',{src : '/Portal-Web/img/logos/'+this.child_eps_id+'.png'}).append([
+              $('<i>',{class : 'material-icons', text : 'keyboard_arrow_right'})
+            ])
+          ]).append([
+            $('<span>',{class : 'item-tooltip', text : description})
+          ])
+        ]).hide().fadeIn(200);
+      } else if(this.child_eps_id == 34017){
+        div_companies.append([
+          $('<a>',{class : 'companies-menu-item', href : '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))}).append([
+            $('<img>',{src : '/Portal-Web/img/logos/'+this.child_eps_id+'.jpg'}).append([
+              $('<i>',{class : 'material-icons', text : 'keyboard_arrow_right'})
+            ])
+          ]).append([
+            $('<span>',{class : 'item-tooltip', text : description})
+          ])
+        ]).hide().fadeIn(200);
+      }else {
         div_companies.append([
           $('<a>',{class : 'companies-menu-item', href : '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))}).append([
             $('<img>',{src : '/Portal-Web/img/logos/34016.svg'}).append([

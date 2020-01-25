@@ -39,14 +39,16 @@
         </div>
         <div class="switch ml-5">
             <label>
-                <a class="btn-floating btn-depressed white" onclick="return false;">
-                    <i class="mdi material-icons grey-text">person</i>
+                <a class="mdi black-text" onclick="return false;">
+                  person
+                    <!-- <i class="mdi primary-text">person</i> -->
                 </a>
                 <!-- </div> -->
                 <input class="mdi" id="checkbox-la" type="checkbox">
                 <span class="lever"></span>
-                <a class="btn-floating btn-depressed white" onclick="return false;">
-                    <i class="mdi material-icons grey-text">group</i>
+                <a class="mdi black-text" onclick="return false;">
+                  group
+                    <!-- <i class="mdi black-text">group</i> -->
                 </a>
             </label>
         </div>
@@ -420,6 +422,7 @@
             'data-project' : this.lapa_045_proyectoreferecia,
             'data-status' : this.status
           }));
+          var format_fidentificacion = this.lapa_002_s_fidentificacion.split(' ')[0];
           $('#tr_' + this.record_no)
               .append($('<td>', {
                   text: this.record_no
@@ -452,7 +455,7 @@
                   text: this.status
               }))
               .append($('<td>', {
-                  text: this.lapa_002_s_fidentificacion
+                  text: format_fidentificacion
               }))
               .append($('<td>', {
                   class: 'actions'
