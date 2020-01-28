@@ -52,6 +52,29 @@
             'regional' => 'occidente',
         ],
     ];
+
+    $GeneralIndicators = [
+      [
+        'id' => 'pe-value',
+        'name' => 'Proyectos Enlazados',
+        'value' => ''
+      ],
+      [
+        'id' => 'pa-value',
+        'name' => 'Proyectos Asignados',
+        'value' => ''
+      ],
+      [
+        'id' => 'nr-value',
+        'name' => 'Muestra del número de registros',
+        'value' => ''
+      ],
+      [
+        'id' => 'bp-value',
+        'name' => 'BP',
+        'value' => '3'
+      ]
+    ];
 ?>
 <div class="section portal-projects">
   <div class="breadcrumb-container">
@@ -64,127 +87,148 @@
     <?php endforeach; ?>
   </div>
   <div class="section home">
-    <!-- <div class="projects-content"> -->
-      <div class="col s12 ml-1 mr-1">
-        <ul class="tabs mb-3" style="border-bottom: 1px solid #ccc">
-          <li class="tab col l2 m4 s6"><a class="active" href="#general">Gráficas</a></li>
-          <li class="tab col l3 m4 s6"><a  href="#mainConf">Lista</a></li>
-        </ul>
-      </div>
-      <!-- <div class="switch ml-2">
-        <label>
-          <a class="mdi black-text" onclick="return false;">
-            person
-          </a>
-          <input class="mdi" id="checkbox-la" type="checkbox">
-          <span class="lever"></span>
-          <a class="mdi black-text" onclick="return false;">
-            group
-          </a> 
-        </label>
-      </div> -->
-      <div class="col l12 m12 s12 mt-1 ml-2 mr-2">
-        <div class="row">
-          <div class="col l3 m4 s6 item-card">
-            <a href="/proveedores" class="not-link-style">
-              <div class="kpi-card border-color">
-                <div class="value-kpi" id="pe-value"></div>
-                <div class="cont-title-kpi">
-                  <div class="title-kpi t-semibold">Proyectos Enlazados</div>
-                  <div><i class="p9 fas fa-arrow-right"></i></div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col l3 m4 s6 item-card">
-            <a href="#" class="not-link-style">
-              <div class="kpi-card border-color">
-                <div class="value-kpi" id="pa-value"></div>
-                <div class="cont-title-kpi">
-                  <div class="title-kpi t-semibold">Proyectos Asignados</div>
-                  <div><i class="p9 fas fa-arrow-right"></i></div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col l3 m4 s6 item-card">
-            <a href="#" class="not-link-style">
-              <div class="kpi-card border-color">
-                <div class="value-kpi" id="nr-value"></div>
-                <div class="cont-title-kpi">
-                  <div class="title-kpi t-semibold">Muestra del número de registros</div>
-                  <div><i class="p9 fas fa-arrow-right"></i></div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col l3 m4 s6 item-card">
-            <a href="/interfaces" class="not-link-style">
-              <div class="kpi-card border-color">
-                <div class="value-kpi" id="bp-value">3</div>
-                <div class="cont-title-kpi">
-                  <div class="title-kpi t-semibold">BP</div>
-                  <div><i class="p9 fas fa-arrow-right"></i></div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="divider transparent mb-1"></div>
+    <div class="col s12 ml-1 mr-1 pb-1">
+      <ul class="tabs mb-3" style="border-bottom: 1px solid #ccc">
+        <li class="tab col l2 m4 s6"><a class="active" href="#general">Gráficas</a></li>
+        <li class="tab col l3 m4 s6"><a  href="#mainConf">Lista</a></li>
+      </ul>
+    </div>
+    <div class="col l12 m12 s12 mt-1 ml-2 mr-2">
       <div class="row wrap">
-        <?php 
-          $a = 1;
-          $cont = 0;
-          $loop = 0;
-        ?>
-        <?php foreach ($projects as $project): ?> 
-          <?php
-            $loop = $a++;
-            if($a == 2){
-              $cont = 1;
-            } else {
-              $cont = $a;
-            } 
-          ?>
-          <div class="d-flex col s12 m6 l6 xl6">      
-            <div class="col xl12 l12 m12 s12">
-              <div class="graph-card" style="overflow: auto;">
-                <div class="carousel carousel-slider center">
-                <div class="sheet-options">
-                  <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
-                    <i class="material-icons" style="font-size: 2rem">more_vert</i>
-                  </a>
-                  <ul id='dropdown<?= $project['id'] ?>' class='dropdown-content'>
-                    <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi mdi-select-compare"></i>Filtrar gráfica</a></li>
-                    <li><a href="#!"><i class="mdi mdi-content-save-outline"></i>Descargar pdf</a></li>
-                  </ul>
+        <?php foreach ($GeneralIndicators as $Indicators): ?> 
+          <div class="d-flex col s6 m3 l3 xl3" style="padding:0 !important; margin:0 !important">      
+            <div class="col xl3 l3 m6 s6 item-card" style="padding-bottom:0 !important; padding-top:0 !important">
+              <div class="kpi-card border-color">
+                <div class="value-kpi" id="<?=$Indicators['id']?>"><?=$Indicators['value']?></div>
+                <div class="cont-title-kpi">
+                  <div class="title-kpi t-semibold"><?=$Indicators['name']?></div>
+                  <div><i class="p9 fas fa-arrow-right"></i></div>
                 </div>
-                  <div class="carousel-fixed-item center">
-                    
-                  </div>
-                  <div class="carousel-item" href="#one!">
-                    <div id="advance<?=$loop?>" style="width: 90%; height: 370px; margin-left: 5%;"></div>
-                  </div>
-                  <div class="carousel-item amber white-text" href="#two!">
-                    <div id="column<?=$loop?>" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
-                  </div>
-                  <div class="carousel-item green white-text" href="#three!">
-                    <h2>Third Panel</h2>
-                    <p class="white-text">This is your third panel</p>
-                  </div>
-                  <div class="carousel-item blue white-text" href="#four!">
-                    <h2>Fourth Panel</h2>
-                    <p class="white-text">This is your fourth panel</p>
-                  </div>
+              </div>
+            </div> 
+          </div> 
+        <?php endforeach;?>
+      </div>
+    </div>         
+    <div class="divider transparent mb-1"></div>
+    <div class="row wrap">
+      <?php 
+        $a = 1;
+        $cont = 0;
+        $loop = 0;
+      ?>
+      <?php foreach ($projects as $project): ?> 
+        <?php
+          $loop = $a++;
+          if($a == 2){
+            $cont = 1;
+          } else {
+            $cont = $a;
+          } 
+        ?>
+        <?php if($loop == 1 || $loop == 2):?>
+        <div class="d-flex col s12 m6 l6 xl6">      
+          <div class="col xl12 l12 m12 s12">
+            <div class="graph-card" style="overflow: auto;">
+              <div class="sheet-options">
+                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
+                  <i class="material-icons" style="font-size: 2rem">more_vert</i>
+                </a>
+                <ul id='dropdown<?= $project['id'] ?>' class='dropdown-content'>
+                  <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
+                  <li>
+                    <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
+                    </svg></i>Descargar pdf</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="carousel carousel-slider center">
+                <div class="carousel-item white" href="#one!">
+                  <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                </div>
+                <div class="carousel-item white white-text" href="#two!">
+                  <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                </div>
+                <div class="carousel-item white white-text" href="#three!">
+                  <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
                 </div>
               </div>
             </div>
-            <!-- </div> -->
           </div>
-        <?php endforeach; ?>
-      </div>
-    <!-- </div> -->
+        </div>
+        <?php elseif($loop == 3):?>
+          <div class="d-flex col s12 m12 l9 xl9">      
+          <div class="col xl12 l12 m12 s12">
+            <div class="graph-card" style="overflow: auto;">
+              <div class="sheet-options">
+                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
+                  <i class="material-icons" style="font-size: 2rem">more_vert</i>
+                </a>
+                <ul id='dropdown<?= $project['id'] ?>' class='dropdown-content'>
+                  <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
+                  <li>
+                    <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
+                    </svg></i>Descargar pdf</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="carousel carousel-slider center">
+                <div class="carousel-item white" href="#one!">
+                  <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                </div>
+                <div id="projectCarousel" class="carousel-item white white-text" href="#two!">
+                  <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                </div>
+                <div class="carousel-item white white-text" href="#three!">
+                  <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">      
+          <div class="col xl12 l12 m12 s12">
+            <div id="legendwrapper" class="graph-card" style="height: 300px;">
+              <div id="legenddiv"></div>
+            </div>
+          </div>
+        </div>
+        <?php else:?>
+          <div class="d-flex col s12 m6 l3 xl3">      
+          <div class="col xl12 l12 m12 s12">
+            <div class="graph-card">
+              <div class="sheet-options">
+                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
+                  <i class="material-icons" style="font-size: 2rem">more_vert</i>
+                </a>
+                <ul id='dropdown<?= $project['id'] ?>' class='dropdown-content'>
+                  <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
+                  <li>
+                    <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
+                    </svg></i>Descargar pdf</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="carousel carousel-slider center">
+                <div class="carousel-item white" href="#one!">
+                  <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                </div>
+                <div class="carousel-item white white-text" href="#two!">
+                  <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                </div>
+                <div class="carousel-item white white-text" href="#three!">
+                  <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php endif;?>
+      <?php endforeach; ?>
+    </div>
   </div>
 </div>
 <?php for ($i=1; $i < 5; $i++):?>
@@ -272,9 +316,8 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/"+this.link,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "7e373540-33e3-41a0-b74d-37a17cad22b4"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
 
@@ -293,9 +336,8 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/filtergen/",
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "389ac047-e750-4533-8433-d276fa3003ef"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
 
@@ -320,9 +362,8 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/filtercompany/"+company_id,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "ba0fe31c-537d-435a-99a8-f7612621c9f9"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
 
@@ -346,9 +387,8 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/filterproject/?v_eps="+eps_id+"&v_id_user="+user_id,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "3b79e65b-479d-41be-a228-b59117af94a7"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
 
@@ -369,9 +409,8 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/filterbp/"+unifier_code,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "20f04666-50f6-485c-ba3d-bb34e2f6e2f3"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
 
@@ -383,9 +422,9 @@
           if(this.id_p_bp == '181'){
             option.setAttribute('selected', 'selected');
             graph1(this.id_p_bp);
-            // graph2(this.id_p_bp);
-            // graph3(this.id_p_bp);
-            // graph4(this.id_p_bp);
+            graph2(this.id_p_bp);
+            graph3(this.id_p_bp);
+            graph4(this.id_p_bp);
           } else {
             // graph1(this.id_p_bp);
             // graph2(this.id_p_bp);
@@ -396,7 +435,9 @@
         console.log("El proyecto seleccionado, no tiene ningún BP asociado.")
         var chart_number = '1', 
             dataprovider = [];
-        updateData(dataprovider, chart_number);
+        updateData1(dataprovider, chart_number);
+        updateColData1(dataprovider, chart_number);
+        // updateBarData1(dataprovider, chart_number);
       }
     });
   }
@@ -416,15 +457,16 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/graph1/"+id_bp,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "ed1ba23b-b77d-4074-8b09-be4a66998402"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
     $.ajax(settings).done(function (response) {
       // console.log(response);
       var chart_number = '1';
-      updateData(response.items, chart_number);
+      updateData1(response.items, chart_number);
+      updateColData1(response.items, chart_number);
+      // updateBarData1(response.items, chart_number);
     });
   }
   function graph2(id_bp){
@@ -434,15 +476,16 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/graph2/"+id_bp,
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "ed1ba23b-b77d-4074-8b09-be4a66998402"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
     $.ajax(settings).done(function (response) {
       // console.log(response);
       var chart_number = '2';
-      pie_chart(response.items, chart_number);
+      updateData2(response.items, chart_number);
+      updateColData2(response.items, chart_number);
+      // updateBarData2(response.items, chart_number);
     });
   }
   function graph3(){
@@ -452,16 +495,17 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/graph3/Bp%20Registro%20Documental%20Interno",
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "4b725e0e-b802-4d06-81a0-8f09f8b8cf37"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
 
     $.ajax(settings).done(function (response) {
       // console.log(response);
       var chart_number = '3';
-      pie_chart(response.items, chart_number);
+      updateData3(response.items, chart_number);
+      updateColData3(response.items, chart_number);
+      // updateBarData3(response.items, chart_number);
     });
   }
   function graph4(){
@@ -471,16 +515,17 @@
       "url": "http://192.168.0.210:8080/ords/portal/documents/graph4/TGIGPY19026",
       "method": "GET",
       "headers": {
-        "Authorization": "Bearer ZdupjDKTdxa0Xocr4xcu0Q..",
-        "cache-control": "no-cache",
-        "Postman-Token": "03b7f8a8-2b60-45ab-9c02-077ca35b09cb"
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
       }
     }
 
     $.ajax(settings).done(function (response) {
-      // console.log(response);
+      console.log(response);
       var chart_number = '4';
-      pie_chart(response.items, chart_number);
+      updateData4(response.items, chart_number);
+      updateColData4(response.items, chart_number);
+      // updateBarData4(response.items, chart_number);
     });
   }
   // ON CHANGE
@@ -580,167 +625,257 @@
   });
   // INICIO SCRIPT PERTENECIENTE A LAS GRÁFICAS
   // Themes begin
-  am4core.useTheme(am4themes_material);
-  am4core.useTheme(am4themes_animated);
-  // DONUT CHARTS
-  // function pie_chart(bp_data, chart_number){
-  if (chartDonut) {
-    chartDonut.dispose();
-  }
-  var chartDonut = am4core.create("advance1", am4charts.PieChart);
-  // Add data
-  chartDonut.data = generateData();
-  // Add and configure series
-  var pieSeries = chartDonut.series.push(new am4charts.PieSeries());
-      pieSeries.dataFields.value = "registros";
-      pieSeries.dataFields.category = "v_value";
-  // Let's cut a hole in our Pie chart the size of 30% the radius
-  chartDonut.innerRadius = am4core.percent(0);
-  // Put a thick white border around each Slice
-  pieSeries.slices.template.stroke = am4core.color("#fff");
-  pieSeries.slices.template.strokeWidth = 2;
-  pieSeries.slices.template.strokeOpacity = 1;
-  pieSeries.slices.template
-  // change the cursor on hover to make it apparent the object can be interacted with
-  .cursorOverStyle = [
-    {
-      "property": "cursor",
-      "value": "pointer"
+  for(i = 1; i < 5; i++){
+    am4core.useTheme(am4themes_material3);
+    am4core.useTheme(am4themes_animated);
+    // DONUT CHARTS
+    // function pie_chart(bp_data, chart_number){
+    if (this["chartDonut"+i]) {
+      this["chartDonut"+i].dispose();
     }
-  ];
-  
-  pieSeries.alignLabels = false;
-  pieSeries.labels.template.bent = true;
-  pieSeries.labels.template.radius = 3;
-  pieSeries.labels.template.padding(0,0,0,0);
-  pieSeries.ticks.template.disabled = true;
-  // Create a base filter effect (as if it's not there) for the hover to return to
-  var shadow = pieSeries.slices.template.filters.push(new am4core.DropShadowFilter);
-      shadow.opacity = 0;
-  // Create hover state
-  var hoverState = pieSeries.slices.template.states.getKey("hover"); // normally we have to create the hover state, in this case it already exists
-  // Slightly shift the shadow and make it more prominent on hover
-  var hoverShadow = hoverState.filters.push(new am4core.DropShadowFilter);
-      hoverShadow.opacity = 0.7;
-      hoverShadow.blur = 5;  
-      var indicatorLabel = pieSeries.createChild(am4core.Label);
-      indicatorLabel.align = "center";
-      indicatorLabel.valign = "middle";
-      indicatorLabel.fontSize = 20;
-      indicatorLabel.x = -40;
-      indicatorLabel.y = -10; 
-
-  function generateData(bp_data) {
-    return bp_data;
-  }
-  function updateData(bp_data) {
-    chartDonut.data = generateData(bp_data);
-    if(bp_data.length == 0){
-      indicatorLabel.text = "No data...";
+    this["chartDonut"+i] = am4core.create("advance"+i, am4charts.PieChart);
+    
+    // Add data
+    this["chartDonut"+i].data = generateData();
+    // Add and configure series
+    
+    this["pieSeries"+i] = this["chartDonut"+i].series.push(new am4charts.PieSeries());
+    this["pieSeries"+i].dataFields.value = "registros";
+    this["pieSeries"+i].dataFields.category = "v_value";
+    // Let's cut a hole in our Pie chart the size of 30% the radius
+    this["chartDonut"+i].innerRadius = am4core.percent(0);
+    // Put a thick white border around each Slice
+    this["pieSeries"+i].slices.template.stroke = am4core.color("#fff");
+    this["pieSeries"+i].slices.template.strokeWidth = 2;
+    this["pieSeries"+i].slices.template.strokeOpacity = 1;
+    this["pieSeries"+i].slices.template
+    // change the cursor on hover to make it apparent the object can be interacted with
+    .cursorOverStyle = [
+      {
+        "property": "cursor",
+        "value": "pointer"
+      }
+    ];
+    if(i != 3){
+      this["pieSeries"+i].alignLabels = false;
+      this["pieSeries"+i].labels.template.bent = true;
+      this["pieSeries"+i].labels.template.radius = 3;
+      this["pieSeries"+i].labels.template.padding(0,0,0,0);
+      this["pieSeries"+i].ticks.template.disabled = true;
     } else {
-      indicatorLabel.text = "";
+      // /* Disable labels */
+      pieSeries3.labels.template.disabled = true;
+      pieSeries3.ticks.template.disabled = true;
+      /* Create legend */
+chartDonut3.legend = new am4charts.Legend();
+
+chartDonut3.legend.labels.template.wrap = true;
+/* Create a separate container to put legend in */
+var legendContainer = am4core.create("legenddiv", am4core.Container);
+legendContainer.width = am4core.percent(80);
+legendContainer.height = am4core.percent(100);
+chartDonut3.legend.parent = legendContainer;
+
+chartDonut3.events.on("datavalidated", resizeLegend);
+chartDonut3.events.on("maxsizechanged", resizeLegend);
+// chartDonut3.legend.labels.template.truncate = true;
+// chartDonut3.legend.labels.template.wrap = true;
+
+function resizeLegend(ev) {
+  document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
+}
+    }
+
+    // Create a base filter effect (as if it's not there) for the hover to return to
+    this["shadow"+i] = this["pieSeries"+i].slices.template.filters.push(new am4core.DropShadowFilter);
+    this["shadow"+i].opacity = 0;
+    // Create hover state
+    this["hoverState"+i] = this["pieSeries"+i].slices.template.states.getKey("hover"); // normally we have to create the hover state, in this case it already exists
+    // Slightly shift the shadow and make it more prominent on hover
+    this["hoverShadow"+i]= this["hoverState"+i].filters.push(new am4core.DropShadowFilter);
+    this["hoverShadow"+i].opacity = 0.7;
+    this["hoverShadow"+i].blur = 5;  
+    this["indicatorLabel"+i] = this["pieSeries"+i].createChild(am4core.Label);
+    this["indicatorLabel"+i].align = "center";
+    this["indicatorLabel"+i].valign = "middle";
+    this["indicatorLabel"+i].x = -40;
+    this["indicatorLabel"+i].y = -10; 
+
+    this["chartDonut"+i].fontSize = 15;
+
+    // this["chartDonut"+i].legend = new am4charts.Legend();
+    // this["chartDonut"+i].legend.position = "right";
+  // function chart_id(chart_number) {
+  //   return chart_number;
+  // }
+  this["updateData"+i] = function(bp_data, chart_number) {
+    this['chartDonut'+chart_number].data = generateData(bp_data);
+    // chart_id(chart_number);
+    if(bp_data.length == 0){
+      this["indicatorLabel"+chart_number].text = "No data...";
+    } else {
+      this["indicatorLabel"+chart_number].text = "";
     }
   }
-  // INICIO COLUMN CHART
-  // Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
+  // COLUMN CHART BEGIN
+  if (this["chartColumn"+i]) {
+    this["chartColumn"+i].dispose();
+  }
+  // Create chart instance
+  this["chartColumn"+i] = am4core.create("column"+i, am4charts.XYChart);
+  this["chartColumn"+i].scrollbarY = new am4core.Scrollbar();
 
-// Create chart instance
-var chart = am4core.create("column1", am4charts.XYChart);
-// chart.scrollbarY = new am4core.Scrollbar();
-chart.scrollbarX = new am4core.Scrollbar();
-chart.scrollbarX.parent = chart.bottomAxesContainer;
-// Add data
-chart.data = [{
-  "country": "USA",
-  "visits": 3025
-}, {
-  "country": "China",
-  "visits": 1882
-}, {
-  "country": "Japan",
-  "visits": 1809
-}, {
-  "country": "Germany",
-  "visits": 1322
-}, {
-  "country": "UK",
-  "visits": 1122
-}, {
-  "country": "France",
-  "visits": 1114
-}, {
-  "country": "India",
-  "visits": 984
-}, {
-  "country": "Spain",
-  "visits": 711
-}, {
-  "country": "Netherlands",
-  "visits": 665
-}, {
-  "country": "Russia",
-  "visits": 580
-}, {
-  "country": "South Korea",
-  "visits": 443
-}, {
-  "country": "Canada",
-  "visits": 441
-}];
+  // chart.scrollbarX = new am4core.Scrollbar();
+  // chart.scrollbarX.parent = chart.bottomAxesContainer;
+  // Add data
+  this["chartColumn"+i].data = generateData();
 
-// Create axes
-var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-// categoryAxis.renderer.grid.template.disabled = true;
-categoryAxis.dataFields.category = "country";
-categoryAxis.renderer.grid.template.location = 0;
-categoryAxis.renderer.minGridDistance = 30;
-categoryAxis.renderer.labels.template.horizontalCenter = "right";
-categoryAxis.renderer.labels.template.verticalCenter = "middle";
-categoryAxis.renderer.labels.template.rotation = 270;
-categoryAxis.tooltip.disabled = true;
-categoryAxis.renderer.minHeight = 110;
+  // Create axes
+  this["categoryAxis"+i] = this["chartColumn"+i].xAxes.push(new am4charts.CategoryAxis());
+  // categoryAxis.renderer.grid.template.disabled = true;
+  this["categoryAxis"+i].dataFields.category = "v_value";
+  this["categoryAxis"+i].renderer.grid.template.location = 0;
+  this["categoryAxis"+i].renderer.minGridDistance = 30;
+  this["categoryAxis"+i].renderer.labels.template.horizontalCenter = "right";
+  this["categoryAxis"+i].renderer.labels.template.verticalCenter = "middle";
+  this["categoryAxis"+i].renderer.labels.template.rotation = 270;
+  this["categoryAxis"+i].renderer.fontSize = 12;
+  // categoryAxis.tooltip.disabled = true;
+  // categoryAxis.renderer.minHeight = 110;
+  this["valueAxis"+i] = this["chartColumn"+i].yAxes.push(new am4charts.ValueAxis());
+  // valueAxis.renderer.grid.template.disabled = true;
+  this["valueAxis"+i].renderer.minWidth = 50;
 
-var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-// valueAxis.renderer.grid.template.disabled = true;
-valueAxis.renderer.minWidth = 50;
+  this["label"+i] = this["categoryAxis"+i].renderer.labels.template;
+  // label.wrap = true;
+  this["label"+i].truncate = true;
+  this["label"+i].maxWidth = 120;
 
-// Create series
-var series = chart.series.push(new am4charts.ColumnSeries());
-series.sequencedInterpolation = true;
-series.dataFields.valueY = "visits";
-series.dataFields.categoryX = "country";
-series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
-series.columns.template.strokeWidth = 0;
+  // Create series
+  this["series"+i] = this["chartColumn"+i].series.push(new am4charts.ColumnSeries());
+  this["series"+i].sequencedInterpolation = true;
+  this["series"+i].dataFields.valueY = "registros";
+  this["series"+i].dataFields.categoryX = "v_value";
+  this["series"+i].tooltipText = "[{categoryX}: bold]{valueY}[/]";
+  this["series"+i].columns.template.strokeWidth = 0;
 
-series.tooltip.pointerOrientation = "vertical";
+  this["series"+i].tooltip.pointerOrientation = "vertical";
 
-series.columns.template.column.cornerRadiusTopLeft = 10;
-series.columns.template.column.cornerRadiusTopRight = 10;
-series.columns.template.column.fillOpacity = 0.8;
+  this["series"+i].columns.template.column.cornerRadiusTopLeft = 10;
+  this["series"+i].columns.template.column.cornerRadiusTopRight = 10;
+  this["series"+i].columns.template.column.fillOpacity = 0.8;
 
-// on hover, make corner radiuses bigger
-var hoverState = series.columns.template.column.states.create("hover");
-hoverState.properties.cornerRadiusTopLeft = 0;
-hoverState.properties.cornerRadiusTopRight = 0;
-hoverState.properties.fillOpacity = 1;
+  // on hover, make corner radiuses bigger
+  this["hoverState"+i] = this["series"+i].columns.template.column.states.create("hover");
+  this["hoverState"+i].properties.cornerRadiusTopLeft = 0;
+  this["hoverState"+i].properties.cornerRadiusTopRight = 0;
+  this["hoverState"+i].properties.fillOpacity = 1;
 
-series.columns.template.adapter.add("fill", function(fill, target) {
-  return chart.colors.getIndex(target.dataItem.index);
+  this["ColindicatorLabel"+i] = this["series"+i].createChild(am4core.Label);
+  this["ColindicatorLabel"+i].align = "center";
+  this["ColindicatorLabel"+i].valign = "middle";
+  this["ColindicatorLabel"+i].fontSize = 20;
+  this["ColindicatorLabel"+i].x = 185;
+  this["ColindicatorLabel"+i].y = 80; 
+
+  this["series"+i].columns.template.adapter.add("fill", function(fill, target) {
+    return chartColumn1.colors.getIndex(target.dataItem.index);
+  });
+
+  // Cursor
+  this["chartColumn"+i].cursor = new am4charts.XYCursor();
+
+  // series.columns.template.adapter.add("fill", function(fill, target) {
+  //   return this["chartColumn"+i].colors.getIndex(target.dataItem.index);
+  // });
+
+  this["updateColData"+i] = function(bp_data, chart_number) {
+      // bp_length(bp_data.length);
+      this['chartColumn'+chart_number].data = generateData(bp_data);
+      if(bp_data.length == 0){
+        this['ColindicatorLabel'+chart_number].text = "No data...";
+        this['chartColumn'+chart_number].scrollbarX.dispose();
+      } else {
+        this['chartColumn'+chart_number].scrollbarX = new am4core.Scrollbar();
+        this['chartColumn'+chart_number].scrollbarX.parent = this['chartColumn'+chart_number].bottomAxesContainer;
+        this['ColindicatorLabel'+chart_number].text = "";
+      }
+    }
+    // COLUMN CHART END
+    // INICIO BAR CHART
+    // this["chartBar"+i] = am4core.create("bar"+i, am4charts.XYChart);
+
+    // this["chartBar"+i].data = generateData();
+
+    // //create category axis for years
+    // this["categoryAxis"+i] = this["chartBar"+i].yAxes.push(new am4charts.CategoryAxis());
+    // this["categoryAxis"+i].dataFields.category = "v_value";
+    // this["categoryAxis"+i].renderer.inversed = true;
+    // this["categoryAxis"+i].renderer.grid.template.location = 0;
+
+    // //create value axis for income and expenses
+    // this["valueAxis"+i] = this["chartBar"+i].xAxes.push(new am4charts.ValueAxis());
+    // this["valueAxis"+i].renderer.opposite = false;
+
+
+    // //create columns
+    // this["series"+i] = this["chartBar"+i].series.push(new am4charts.ColumnSeries());
+    // this["series"+i].dataFields.categoryY = "v_value";
+    // this["series"+i].dataFields.valueX = "registros";
+    // this["series"+i].name = "registros";
+    // this["series"+i].tooltipText = "{categoryY}: {valueX.value}";
+    // this["series"+i].columns.template.strokeWidth = 0;
+    // this["series"+i].columns.template.column.fillOpacity = 0.8;
+
+    // this["hoverState"+i] = series1.columns.template.column.states.create("hover");
+    // this["hoverState"+i].properties.cornerRadiusTopLeft = 0;
+    // this["hoverState"+i].properties.cornerRadiusTopRight = 0;
+    // this["hoverState"+i].properties.fillOpacity = 1;
+
+    // //add chart cursor
+    // this["chartBar"+i].cursor = new am4charts.XYCursor();
+    // this["chartBar"+i].cursor.behavior = "zoomY";
+
+    // this["barLabel"+i] = this["categoryAxis"+i].renderer.labels.template;
+    // // label.wrap = true;
+    // this["barLabel"+i].truncate = true;
+    // this["barLabel"+i].maxWidth = 120;
+
+    // this["series"+i].columns.template.adapter.add("fill", (fill, target) => {
+    //   return chartBar1.colors.getIndex(target.dataItem.index);
+    // });
+
+    // this["updateBarData"+i] = function(bp_data, chart_number) {
+    //     this["chartBar"+chart_number].data = generateData(bp_data);
+    //     if(bp_data.length == 0){
+    //       // ColindicatorLabel.text = "No data...";
+    //       // chart.scrollbarX.dispose();
+    //     } else {
+    //       // chart.scrollbarX = new am4core.Scrollbar();
+    //       // chart.scrollbarX.parent = chart.bottomAxesContainer;
+    //       // ColindicatorLabel.text = "";
+    //     }
+    //   }
+    //     // FIN BAR CHART
+    } 
+    function generateData(bp_data) {
+        return bp_data;
+    } 
+
+$('html').on("webkitTransitionEnd transitionend", function(e) {
+  if($('#projectCarousel').hasClass("active")){
+    $("#legendMainDiv").show();
+  } else{
+    $("#legendMainDiv").hide();
+  }
 });
-
-// Cursor
-chart.cursor = new am4charts.XYCursor();
-  // FIN COLUM CHART
-  // FIN SCRIPT GRÁFICAS
-  var donutBtn = $('#donut-chart'), columnBtn = $('#column-chart'), advanceDiv = $('#advance1'), columnDiv = $('#column1');
-  donutBtn.click(function(){
-    advanceDiv.show();
-    columnDiv.hide();
-  });
-  columnBtn.click(function(){
-    advanceDiv.hide();
-    columnDiv.show();
-  });
+var contInterval = 0;
+var timer = setInterval(function(){
+  console.log(contInterval++);
+  var a = contInterval++;
+  // if(a == 1){
+    $("#legendMainDiv").hide(); 
+  // }
+  clearInterval(timer);
+}, 3000);
 </script>
