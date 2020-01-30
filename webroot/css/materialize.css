@@ -11973,4 +11973,28 @@ html, body{ margin:0; padding: 0}
   overflow-x: auto;
   overflow-y: auto;
 }
+.head-dropdown-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.head-dropdown-filter .cont-title {
+  display: flex;
+  flex: 1 1 auto;
+}
+.head-dropdown-filter .cont-filterdrop {
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+}
+@media screen and (max-width: 375px) {
+  .head-dropdown-filter {
+    flex-direction: column;
+  }
+  .head-dropdown-filter .title-graph {
+    text-align: center;
+  }
+}
 

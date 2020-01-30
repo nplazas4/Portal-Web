@@ -71,7 +71,7 @@
       ],
       [
         'id' => 'bp-value',
-        'name' => 'BP',
+        'name' => 'Procesos de negocio',
         'value' => '3'
       ]
     ];
@@ -120,16 +120,16 @@
       <?php foreach ($projects as $project): ?> 
         <?php
           $loop = $a++;
-          if($a == 2){
+          if($loop == 2){
             $cont = 1;
           } else {
-            $cont = $a;
+            $cont = $loop;
           } 
         ?>
         <?php if($loop == 1 || $loop == 2):?>
         <div class="d-flex col s12 m6 l6 xl6">      
           <div class="col xl12 l12 m12 s12">
-            <div class="graph-card" style="overflow: auto;">
+            <div class="graph-card">
               <div class="sheet-options">
                 <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
                   <i class="material-icons" style="font-size: 2rem">more_vert</i>
@@ -142,6 +142,15 @@
                     </svg></i>Descargar pdf</a>
                   </li>
                 </ul>
+              </div>
+              <div class="head-dropdown-filter">
+                <div class="cont-title">
+                  <?php if($loop == 1):?>
+                    <div class="title-graph p1 tc" style="font-weight: bold;">Estados</div>
+                  <?php else:?>
+                    <div class="title-graph p1 tc" style="font-weight: bold;">Usuarios</div>
+                  <?php endif;?>    
+                </div>
               </div>
               <div class="carousel carousel-slider center">
                 <div class="carousel-item white" href="#one!">
@@ -173,6 +182,11 @@
                     </svg></i>Descargar pdf</a>
                   </li>
                 </ul>
+              </div>
+              <div class="head-dropdown-filter">
+                <div class="cont-title">
+                  <div class="title-graph p1 tc" style="font-weight: bold;">Proyectos</div>
+                </div>
               </div>
               <div class="carousel carousel-slider center">
                 <div class="carousel-item white" href="#one!">
@@ -212,9 +226,14 @@
                   </li>
                 </ul>
               </div>
+              <div class="head-dropdown-filter">
+                <div class="cont-title">
+                  <div class="title-graph p1 tc" style="font-weight: bold;">Procesos de negocio</div>
+                </div>
+              </div>
               <div class="carousel carousel-slider center">
-                <div class="carousel-item white" href="#one!">
-                  <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                <div class="carousel-item white" href="#one!">                
+                  <div id="advance<?=$loop?>" class="" style="width: 90%; height: 300px; margin-left: 5%;"></div>
                 </div>
                 <div class="carousel-item white white-text" href="#two!">
                   <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
@@ -249,28 +268,30 @@
       <div class="row wrap ma-0">
         <div class="d-flex col s12 m6 l6 xl6">      
           <div class="input-field col xl12 l12 m12 s12">
-            <select id="select-gen-<?=$i?>"></select>
+            <select class="select-gen-gd" id="select-gen-<?=$i?>"></select>
             <label style="color: #333333; font-weight: bold;">Grupo estratégicos de negocios</label>
           </div>
         </div>
         <div class="d-flex col s12 m6 l6 xl6">      
           <div class="input-field col xl12 l12 m12 s12">
-            <select id="select-company-<?=$i?>"></select>
+            <select class="select-comp-gd" id="select-company-<?=$i?>"></select>
             <label style="color: #333333; font-weight: bold;">Empresas</label>
           </div>
         </div>
         <div class="d-flex col s12 m6 l6 xl6">      
           <div class="input-field col xl12 l12 m12 s12">
-            <select id="select-project-<?=$i?>"></select>
+            <select class="select-proj-gd" id="select-project-<?=$i?>"></select>
             <label style="color: #333333; font-weight: bold;">Proyectos</label>
           </div>
         </div>
-        <div class="d-flex col s12 m6 l6 xl6">      
-          <div class="input-field col xl12 l12 m12 s12">
-            <select id="select-bp-<?=$i?>"></select>
-            <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
+        <?php if($i != 4):?>
+          <div class="d-flex col s12 m6 l6 xl6">      
+            <div class="input-field col xl12 l12 m12 s12">
+              <select class="select-bp-gd" id="select-bp-<?=$i?>"></select>
+              <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
+            </div>
           </div>
-        </div>
+        <?php endif;?> 
       </div>
     </div>
     <div class="modal-footer">
@@ -288,8 +309,8 @@
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
 <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
-<script>
-  const input_identifier = ['1','3'],
+<script type="text/javascript">
+  const input_identifier = ['1','3','4'],
         user_id = $('#header-user').attr('data-identifier');
   gen();
   const array_general_items = [
@@ -340,15 +361,16 @@
         "cache-control": "no-cache"
       }
     }
-
+    var genJson;
     $.ajax(settings).done(function (response) {
       $.each(response.items, function(){
         var option = new Option(this.display, this.ret);
             option.setAttribute('id', this.ret);
         if(this.ret == '23306'){
           option.setAttribute('selected', 'selected');
-        }            
-        append_options('select-gen-', option);
+        }
+          $('.select-gen-gd').append(option);
+          // $('.select-gen-gd').formSelect(); 
       });
       filter_company(response.items[1].ret);
       default_option(response.items[1].ret);
@@ -374,13 +396,15 @@
         if(this.r == '34013'){
           option.setAttribute('selected', 'selected');
         }
-        append_options('select-company-', option);
+        $('.select-comp-gd').append(option);
+        $('.select-comp-gd').formSelect(); 
+        // append_options('select-company-', option);
       });
-      project(response.items[1].r);
+      filter_project(response.items[1].r);
     });
   }
-
-  function project(eps_id) {
+  // REALIZR CAMBIOS EN ESTA FUNCIÓN DEBE ENVIAR EL CÓDIGO DE UNIFIER A LA FUNCIÓN CHART4 -- NOTA
+  function filter_project(eps_id) {
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -394,11 +418,14 @@
 
     $.ajax(settings).done(function (response) {
       $.each(response.items, function(){
-        // console.log(this);
+        console.log(response.items[0].code_unifier);
         var option = new Option(this.name, this.code_unifier);
-        append_options('select-project-', option);
+        $('.select-proj-gd').append(option);
+        $('.select-proj-gd').formSelect(); 
+        // append_options('select-project-', option);
       });
       filter_bp(response.items[0].code_unifier);
+      graph4(response.items[0].code_unifier);
     });
   }
 
@@ -415,35 +442,44 @@
     }
 
     $.ajax(settings).done(function (response) {
-      // console.log(response);
+      console.log(response);
       if(response.items.length > 0){
         $.each(response.items, function(){
           var option = new Option(this.name, this.id_p_bp);
           if(this.id_p_bp == '181'){
             option.setAttribute('selected', 'selected');
+            // CONDICIONAL GRÁFICA SELECCIONADA - GRÁFICA 1, 2, 3 GENERAL PRIMERA CARGA -- NOTA
             graph1(this.id_p_bp);
             graph2(this.id_p_bp);
-            graph3(this.id_p_bp);
-            graph4(this.id_p_bp);
+            graph3(this.name);
           } else {
             // graph1(this.id_p_bp);
             // graph2(this.id_p_bp);
           }
-          append_options('select-bp-', option);
+          // append_options('select-bp-', option);
+          $('.select-bp-gd').append(option);
+          $('.select-bp-gd').formSelect(); 
         });
       } else {
         console.log("El proyecto seleccionado, no tiene ningún BP asociado.")
         var chart_number = '1', 
             dataprovider = [];
+        // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
         updateData1(dataprovider, chart_number);
         updateColData1(dataprovider, chart_number);
-        // updateBarData1(dataprovider, chart_number);
+        updateBarData1(dataprovider, chart_number);
       }
     });
   }
   function append_options(select_id, option) {
-    $('#'+select_id+input_identifier).append(option);
-    $('#'+select_id+input_identifier).formSelect();
+    console.log(select_id);
+    $('#'+select_id).append(option);
+    $('#'+select_id).formSelect();
+  }
+  function append_options3(select_id, option) {
+    // console.log(select_id);
+    $('#'+select_id).append(option);
+    $('#'+select_id).formSelect();
   }
   function default_option(id_gen) {
     // console.log(id_gen);
@@ -466,7 +502,7 @@
       var chart_number = '1';
       updateData1(response.items, chart_number);
       updateColData1(response.items, chart_number);
-      // updateBarData1(response.items, chart_number);
+      updateBarData1(response.items, chart_number);
     });
   }
   function graph2(id_bp){
@@ -485,14 +521,14 @@
       var chart_number = '2';
       updateData2(response.items, chart_number);
       updateColData2(response.items, chart_number);
-      // updateBarData2(response.items, chart_number);
+      updateBarData2(response.items, chart_number);
     });
   }
-  function graph3(){
+  function graph3(bp_name){
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.0.210:8080/ords/portal/documents/graph3/Bp%20Registro%20Documental%20Interno",
+      "url": "http://192.168.0.210:8080/ords/portal/documents/graph3/"+bp_name,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -505,14 +541,15 @@
       var chart_number = '3';
       updateData3(response.items, chart_number);
       updateColData3(response.items, chart_number);
-      // updateBarData3(response.items, chart_number);
+      updateBarData3(response.items, chart_number);
     });
   }
-  function graph4(){
+  function graph4(unifier_code){
+    console.log('UNIFIER '+unifier_code);
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.0.210:8080/ords/portal/documents/graph4/TGIGPY19026",
+      "url": "http://192.168.0.210:8080/ords/portal/documents/graph4/"+unifier_code,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -525,7 +562,7 @@
       var chart_number = '4';
       updateData4(response.items, chart_number);
       updateColData4(response.items, chart_number);
-      // updateBarData4(response.items, chart_number);
+      updateBarData4(response.items, chart_number);
     });
   }
   // ON CHANGE
@@ -609,20 +646,32 @@
       start : 4,
       end : 4,
       select_4 : 'bp',
-      function : 'filter_bp',
+      function : 'graph4',
     }
   ];
   $.each(array_select, function(a, b){
     $("#"+this.id).change(function(){
-      var value = $(this).children(":selected").attr("value");
+      console.log($(b)[0].value);
       var array_data = $(b)[0];
+      // if(array_data.value != 'undefined'){
+        var value = $(this).children(":selected").attr("value");
+      // } else{
+        // var value = $(this).children(":selected").attr("value");
+      // }
       for(i = array_data.start; i <= array_data.end; i++){
         $('#select-'+array_data['select_'+i]+'-'+array_data.key).children().remove();
       } 
       $('select').formSelect();
-      eval(array_data.function + "("+value+")");
+      console.log(array_data.function+' '+ value);
+      // this[array_data.function](value); 
+      window[array_data.function](value); 
+      // eval(array_data.function + "("+value+")");
     });
   });
+  $("#select-project-4").change(function(){
+    var value = $(this).children(":selected").attr("value");
+    graph4(value);
+  })
   // INICIO SCRIPT PERTENECIENTE A LAS GRÁFICAS
   // Themes begin
   for(i = 1; i < 5; i++){
@@ -662,28 +711,29 @@
       this["pieSeries"+i].labels.template.radius = 3;
       this["pieSeries"+i].labels.template.padding(0,0,0,0);
       this["pieSeries"+i].ticks.template.disabled = true;
+      this["pieSeries"+i].fontSize = 14;
+      
     } else {
       // /* Disable labels */
       pieSeries3.labels.template.disabled = true;
       pieSeries3.ticks.template.disabled = true;
       /* Create legend */
-chartDonut3.legend = new am4charts.Legend();
+      chartDonut3.legend = new am4charts.Legend();
+      chartDonut3.legend.labels.template.wrap = true;
+      /* Create a separate container to put legend in */
+      var legendContainer = am4core.create("legenddiv", am4core.Container);
+      legendContainer.width = am4core.percent(80);
+      legendContainer.height = am4core.percent(100);
+      chartDonut3.legend.parent = legendContainer;
 
-chartDonut3.legend.labels.template.wrap = true;
-/* Create a separate container to put legend in */
-var legendContainer = am4core.create("legenddiv", am4core.Container);
-legendContainer.width = am4core.percent(80);
-legendContainer.height = am4core.percent(100);
-chartDonut3.legend.parent = legendContainer;
+      chartDonut3.events.on("datavalidated", resizeLegend);
+      chartDonut3.events.on("maxsizechanged", resizeLegend);
+      // chartDonut3.legend.labels.template.truncate = true;
+      // chartDonut3.legend.labels.template.wrap = true;
 
-chartDonut3.events.on("datavalidated", resizeLegend);
-chartDonut3.events.on("maxsizechanged", resizeLegend);
-// chartDonut3.legend.labels.template.truncate = true;
-// chartDonut3.legend.labels.template.wrap = true;
-
-function resizeLegend(ev) {
-  document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
-}
+      function resizeLegend(ev) {
+        document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
+      }
     }
 
     // Create a base filter effect (as if it's not there) for the hover to return to
@@ -718,76 +768,62 @@ function resizeLegend(ev) {
     }
   }
   // COLUMN CHART BEGIN
-  if (this["chartColumn"+i]) {
-    this["chartColumn"+i].dispose();
-  }
-  // Create chart instance
-  this["chartColumn"+i] = am4core.create("column"+i, am4charts.XYChart);
-  this["chartColumn"+i].scrollbarY = new am4core.Scrollbar();
+    if (this["chartColumn"+i]) {
+      this["chartColumn"+i].dispose();
+    }
+    // Create chart instance
+    this["chartColumn"+i] = am4core.create("column"+i, am4charts.XYChart);
+    this["chartColumn"+i].data = generateData();
 
-  // chart.scrollbarX = new am4core.Scrollbar();
-  // chart.scrollbarX.parent = chart.bottomAxesContainer;
-  // Add data
-  this["chartColumn"+i].data = generateData();
+    this["categoryAxis"+i] = this["chartColumn"+i].xAxes.push(new am4charts.CategoryAxis());
+    // categoryAxis.renderer.grid.template.disabled = true;
+    this["categoryAxis"+i].dataFields.category = "v_value";
+    this["categoryAxis"+i].renderer.grid.template.location = 0;
+    this["categoryAxis"+i].renderer.minGridDistance = 30;
+    this["categoryAxis"+i].renderer.labels.template.horizontalCenter = "right";
+    this["categoryAxis"+i].renderer.labels.template.verticalCenter = "middle";
+    this["categoryAxis"+i].renderer.labels.template.rotation = 270;
+    this["categoryAxis"+i].renderer.fontSize = 12;
+    this["label"+i] = this["categoryAxis"+i].renderer.labels.template;
+    // label.wrap = true;
+    this["label"+i].truncate = true;
+    this["label"+i].maxWidth = 120;
+    // categoryAxis.tooltip.disabled = true;
+    // this["categoryAxis"+i].renderer.minHeight = 110;
+    this["valueAxis"+i] = this["chartColumn"+i].yAxes.push(new am4charts.ValueAxis());
+    // valueAxis.renderer.grid.template.disabled = true;
+    this["valueAxis"+i].renderer.minWidth = 50;
 
-  // Create axes
-  this["categoryAxis"+i] = this["chartColumn"+i].xAxes.push(new am4charts.CategoryAxis());
-  // categoryAxis.renderer.grid.template.disabled = true;
-  this["categoryAxis"+i].dataFields.category = "v_value";
-  this["categoryAxis"+i].renderer.grid.template.location = 0;
-  this["categoryAxis"+i].renderer.minGridDistance = 30;
-  this["categoryAxis"+i].renderer.labels.template.horizontalCenter = "right";
-  this["categoryAxis"+i].renderer.labels.template.verticalCenter = "middle";
-  this["categoryAxis"+i].renderer.labels.template.rotation = 270;
-  this["categoryAxis"+i].renderer.fontSize = 12;
-  // categoryAxis.tooltip.disabled = true;
-  // categoryAxis.renderer.minHeight = 110;
-  this["valueAxis"+i] = this["chartColumn"+i].yAxes.push(new am4charts.ValueAxis());
-  // valueAxis.renderer.grid.template.disabled = true;
-  this["valueAxis"+i].renderer.minWidth = 50;
+    this["categoryAxis"+i] = this["chartColumn"+i].yAxes.push(new am4charts.ValueAxis());
 
-  this["label"+i] = this["categoryAxis"+i].renderer.labels.template;
-  // label.wrap = true;
-  this["label"+i].truncate = true;
-  this["label"+i].maxWidth = 120;
+    // Create series
+    this["series"+i] = this["chartColumn"+i].series.push(new am4charts.ColumnSeries());
+    this["series"+i].sequencedInterpolation = true
+    this["series"+i].dataFields.valueY = "registros";
+    this["series"+i].dataFields.categoryX = "v_value";
+    this["series"+i].name = "registros";
+    this["series"+i].columns.template.tooltipText = "{categoryX}: {valueY}[/]";
+    this["series"+i].columns.template.column.cornerRadiusTopLeft = 10;
+    this["series"+i].columns.template.column.cornerRadiusTopRight = 10;
+    this["series"+i].columns.template.column.fillOpacity = 0.8;
+    this["series"+i].columns.template.strokeWidth = 0;
+    this["series"+i].columns.template.adapter.add("fill", function(fill, target) {
+      return chartColumn1.colors.getIndex(target.dataItem.index);
+    });
 
-  // Create series
-  this["series"+i] = this["chartColumn"+i].series.push(new am4charts.ColumnSeries());
-  this["series"+i].sequencedInterpolation = true;
-  this["series"+i].dataFields.valueY = "registros";
-  this["series"+i].dataFields.categoryX = "v_value";
-  this["series"+i].tooltipText = "[{categoryX}: bold]{valueY}[/]";
-  this["series"+i].columns.template.strokeWidth = 0;
+    // on hover, make corner radiuses bigger
+    this["hoverState"+i] = this["series"+i].columns.template.column.states.create("hover");
+    this["hoverState"+i].properties.cornerRadiusTopLeft = 0;
+    this["hoverState"+i].properties.cornerRadiusTopRight = 0;
+    this["hoverState"+i].properties.fillOpacity = 1;
 
-  this["series"+i].tooltip.pointerOrientation = "vertical";
-
-  this["series"+i].columns.template.column.cornerRadiusTopLeft = 10;
-  this["series"+i].columns.template.column.cornerRadiusTopRight = 10;
-  this["series"+i].columns.template.column.fillOpacity = 0.8;
-
-  // on hover, make corner radiuses bigger
-  this["hoverState"+i] = this["series"+i].columns.template.column.states.create("hover");
-  this["hoverState"+i].properties.cornerRadiusTopLeft = 0;
-  this["hoverState"+i].properties.cornerRadiusTopRight = 0;
-  this["hoverState"+i].properties.fillOpacity = 1;
-
-  this["ColindicatorLabel"+i] = this["series"+i].createChild(am4core.Label);
-  this["ColindicatorLabel"+i].align = "center";
-  this["ColindicatorLabel"+i].valign = "middle";
-  this["ColindicatorLabel"+i].fontSize = 20;
-  this["ColindicatorLabel"+i].x = 185;
-  this["ColindicatorLabel"+i].y = 80; 
-
-  this["series"+i].columns.template.adapter.add("fill", function(fill, target) {
-    return chartColumn1.colors.getIndex(target.dataItem.index);
-  });
-
-  // Cursor
-  this["chartColumn"+i].cursor = new am4charts.XYCursor();
-
-  // series.columns.template.adapter.add("fill", function(fill, target) {
-  //   return this["chartColumn"+i].colors.getIndex(target.dataItem.index);
-  // });
+    this["ColindicatorLabel"+i] = this["series"+i].createChild(am4core.Label);
+    this["ColindicatorLabel"+i].align = "center";
+    this["ColindicatorLabel"+i].valign = "middle";
+    this["ColindicatorLabel"+i].fontSize = 20;
+    this["ColindicatorLabel"+i].x = 185;
+    this["ColindicatorLabel"+i].y = 80; 
+ 
 
   this["updateColData"+i] = function(bp_data, chart_number) {
       // bp_length(bp_data.length);
@@ -802,80 +838,69 @@ function resizeLegend(ev) {
       }
     }
     // COLUMN CHART END
-    // INICIO BAR CHART
-    // this["chartBar"+i] = am4core.create("bar"+i, am4charts.XYChart);
+    // INICIO BAR CHART fontSize
+    this["chart"+i] = am4core.create("bar"+i, am4charts.XYChart);
+    this["chart"+i].data = generateData();
 
-    // this["chartBar"+i].data = generateData();
+    //create category axis for years
+    this["categoryAxis"+i] = this["chart"+i].yAxes.push(new am4charts.CategoryAxis());
+    this["categoryAxis"+i].dataFields.category = "v_value";
+    this["categoryAxis"+i].renderer.inversed = true;
+    this["categoryAxis"+i].renderer.grid.template.location = 0;
+    this["barLabel"+i] = this["categoryAxis"+i].renderer.labels.template;
+    // label.wrap = true;
+    this["barLabel"+i].truncate = true;
+    this["barLabel"+i].maxWidth = 120;
 
-    // //create category axis for years
-    // this["categoryAxis"+i] = this["chartBar"+i].yAxes.push(new am4charts.CategoryAxis());
-    // this["categoryAxis"+i].dataFields.category = "v_value";
-    // this["categoryAxis"+i].renderer.inversed = true;
-    // this["categoryAxis"+i].renderer.grid.template.location = 0;
+    //create value axis for income and expenses
+    this["valueAxis"+i] = this["chart"+i].xAxes.push(new am4charts.ValueAxis());
+    this["valueAxis"+i].renderer.opposite = false;
 
-    // //create value axis for income and expenses
-    // this["valueAxis"+i] = this["chartBar"+i].xAxes.push(new am4charts.ValueAxis());
-    // this["valueAxis"+i].renderer.opposite = false;
+    //create columns
+    this["series"+i] = this["chart"+i].series.push(new am4charts.ColumnSeries());
+    this["series"+i].dataFields.categoryY = "v_value";
+    this["series"+i].dataFields.valueX = "registros";
+    this["series"+i].name = "registros";
+    this["series"+i].columns.template.tooltipText = "{categoryY}: {valueX}[/]";
+    this["series"+i].columns.template.strokeWidth = 0;
+    this["series"+i].columns.template.column.fillOpacity = 0.8;
+    this["series"+i].tooltip.pointerOrientation = "down";
+    
+    this["hoverState"+i] = this["series"+i].columns.template.column.states.create("hover");
+    this["hoverState"+i].properties.cornerRadiusTopLeft = 0;
+    this["hoverState"+i].properties.cornerRadiusTopRight = 0;
+    this["hoverState"+i].properties.fillOpacity = 1;
+    // this["chart"+i].cursor = new am4charts.XYCursor();
+    this["series"+i].columns.template.adapter.add("fill", (fill, target) => {
+    return chart1.colors.getIndex(target.dataItem.index);
+    });
 
-
-    // //create columns
-    // this["series"+i] = this["chartBar"+i].series.push(new am4charts.ColumnSeries());
-    // this["series"+i].dataFields.categoryY = "v_value";
-    // this["series"+i].dataFields.valueX = "registros";
-    // this["series"+i].name = "registros";
-    // this["series"+i].tooltipText = "{categoryY}: {valueX.value}";
-    // this["series"+i].columns.template.strokeWidth = 0;
-    // this["series"+i].columns.template.column.fillOpacity = 0.8;
-
-    // this["hoverState"+i] = series1.columns.template.column.states.create("hover");
-    // this["hoverState"+i].properties.cornerRadiusTopLeft = 0;
-    // this["hoverState"+i].properties.cornerRadiusTopRight = 0;
-    // this["hoverState"+i].properties.fillOpacity = 1;
-
-    // //add chart cursor
-    // this["chartBar"+i].cursor = new am4charts.XYCursor();
-    // this["chartBar"+i].cursor.behavior = "zoomY";
-
-    // this["barLabel"+i] = this["categoryAxis"+i].renderer.labels.template;
-    // // label.wrap = true;
-    // this["barLabel"+i].truncate = true;
-    // this["barLabel"+i].maxWidth = 120;
-
-    // this["series"+i].columns.template.adapter.add("fill", (fill, target) => {
-    //   return chartBar1.colors.getIndex(target.dataItem.index);
-    // });
-
-    // this["updateBarData"+i] = function(bp_data, chart_number) {
-    //     this["chartBar"+chart_number].data = generateData(bp_data);
-    //     if(bp_data.length == 0){
-    //       // ColindicatorLabel.text = "No data...";
-    //       // chart.scrollbarX.dispose();
-    //     } else {
-    //       // chart.scrollbarX = new am4core.Scrollbar();
-    //       // chart.scrollbarX.parent = chart.bottomAxesContainer;
-    //       // ColindicatorLabel.text = "";
-    //     }
-    //   }
-    //     // FIN BAR CHART
+    this["updateBarData"+i] = function(bp_data, chart_number) {
+    // function updateBarData1(bp_data, chart_number) {
+      this['chart'+chart_number].data = generateData(bp_data);
+      // chart1.data = generateData(bp_data);
+        // alert(bp_data);
+      }
+       // FIN BAR CHART
     } 
     function generateData(bp_data) {
         return bp_data;
     } 
-
-$('html').on("webkitTransitionEnd transitionend", function(e) {
-  if($('#projectCarousel').hasClass("active")){
-    $("#legendMainDiv").show();
-  } else{
-    $("#legendMainDiv").hide();
-  }
-});
-var contInterval = 0;
-var timer = setInterval(function(){
-  console.log(contInterval++);
-  var a = contInterval++;
-  // if(a == 1){
-    $("#legendMainDiv").hide(); 
-  // }
-  clearInterval(timer);
-}, 3000);
+    $('html').on("webkitTransitionEnd transitionend", function(e) {
+      if($('#projectCarousel').hasClass("active")){
+        $("#legendMainDiv").show();
+      } else{
+        $("#legendMainDiv").hide();
+      }
+    });
+    var contInterval = 0;
+    var timer = setInterval(function(){
+      console.log(contInterval++);
+      var a = contInterval++;
+      // if(a == 1){
+        $("#legendMainDiv").hide(); 
+      // }
+      clearInterval(timer);
+    }, 4400);
+    
 </script>
