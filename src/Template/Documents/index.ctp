@@ -1,3 +1,94 @@
+
+<?php
+$headers_table = ['Registro','Estatus','Fecha registro','Proyecto','Título','Creador', 'Título doc', 'Descripción','Carpeta'];
+
+$data_table_logs = [
+   0 => [
+       'date'=>     '23-08-2019',
+       'work_name'=> 'Trabajo FR342D',
+       'interface'=> 'P6 CBBS',
+       'f_business'=>  'Get CBS',
+       'state'=>     'Exitoso',
+       'date_ini'=>  '09-05-2019',
+       'date_end'=> '10-05-2019',
+    ],
+    1 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+     2 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+     3 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+     4 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+     5 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+     6 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+     7 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+     8 => [
+        'date'=>     '23-08-2019',
+        'work_name'=> 'Trabajo FR342D',
+        'interface'=> 'P6 CBBS',
+        'f_business'=>  'Get CBS',
+        'state'=>     'Exitoso',
+        'date_ini'=>  '09-05-2019',
+        'date_end'=> '10-05-2019',
+     ],
+
+];
+
+?>
+
 <?php
     // Breadcrumb
     $breadcrumb = [
@@ -89,14 +180,14 @@
   <div class="section home">
     <div class="col s12 ml-1 mr-1 pb-1">
       <ul class="tabs mb-3" style="border-bottom: 1px solid #ccc">
-        <li class="tab col l2 m4 s6"><a class="active" href="#general">Gráficas</a></li>
-        <li class="tab col l3 m4 s6"><a  href="#mainConf">Lista</a></li>
+        <li id="graph_link" class="tab col l2 m4 s6"><a class="active" href="">Gráficas</a></li>
+        <li id="list_link" class="tab col l3 m4 s6"><a href="">Lista</a></li>
       </ul>
     </div>
     <div class="col l12 m12 s12 mt-1 ml-2 mr-2">
       <div class="row wrap">
-        <?php foreach ($GeneralIndicators as $Indicators): ?> 
-          <div class="d-flex col s6 m3 l3 xl3" style="padding:0 !important; margin:0 !important">      
+        <?php foreach ($GeneralIndicators as $Indicators): ?>
+          <div class="d-flex col s6 m3 l3 xl3" style="padding:0 !important; margin:0 !important">
             <div class="col xl3 l3 m6 s6 item-card" style="padding-bottom:0 !important; padding-top:0 !important">
               <div class="kpi-card border-color">
                 <div class="value-kpi" id="<?=$Indicators['id']?>"><?=$Indicators['value']?></div>
@@ -105,29 +196,37 @@
                   <div><i class="p9 fas fa-arrow-right"></i></div>
                 </div>
               </div>
-            </div> 
-          </div> 
+            </div>
+          </div>
         <?php endforeach;?>
       </div>
-    </div>         
+    </div>
+    <div class="table-container col l5 m6 s12 mt-1 ml-1 mr-1">
+      <!-- Field camp -->
+      <div class="field-search">
+        <div class="cont-icon" style="opacity: 0.8"><i class=" material-icons">search</i></div>
+        <input type="text" placeholder="Buscar en la lista ">
+        <div class="cont-icon" style="opacity: 0.7; cursor:pointer"><i class="material-icons">close</i></div>
+      </div>
+    </div>
     <div class="divider transparent mb-1"></div>
-    <div class="row wrap">
-      <?php 
+    <div id="chart-container" class="row wrap">
+      <?php
         $a = 1;
         $cont = 0;
         $loop = 0;
       ?>
-      <?php foreach ($projects as $project): ?> 
+      <?php foreach ($projects as $project): ?>
         <?php
           $loop = $a++;
           if($loop == 2){
             $cont = 1;
           } else {
             $cont = $loop;
-          } 
+          }
         ?>
         <?php if($loop == 1 || $loop == 2):?>
-        <div class="d-flex col s12 m6 l6 xl6">      
+        <div class="d-flex col s12 m6 l6 xl6">
           <div class="col xl12 l12 m12 s12">
             <div class="graph-card">
               <div class="sheet-options">
@@ -149,7 +248,7 @@
                     <div class="title-graph p1 tc" style="font-weight: bold;">Estados</div>
                   <?php else:?>
                     <div class="title-graph p1 tc" style="font-weight: bold;">Usuarios</div>
-                  <?php endif;?>    
+                  <?php endif;?>
                 </div>
               </div>
               <div class="carousel carousel-slider center">
@@ -167,7 +266,7 @@
           </div>
         </div>
         <?php elseif($loop == 3):?>
-          <div class="d-flex col s12 m12 l9 xl9">      
+          <div class="d-flex col s12 m12 l9 xl9">
           <div class="col xl12 l12 m12 s12">
             <div class="graph-card" style="overflow: auto;">
               <div class="sheet-options">
@@ -202,7 +301,7 @@
             </div>
           </div>
         </div>
-        <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">      
+        <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">
           <div class="col xl12 l12 m12 s12">
             <div id="legendwrapper" class="graph-card" style="height: 300px;">
               <div id="legenddiv"></div>
@@ -210,7 +309,7 @@
           </div>
         </div>
         <?php else:?>
-          <div class="d-flex col s12 m6 l3 xl3">      
+          <div class="d-flex col s12 m6 l3 xl3">
           <div class="col xl12 l12 m12 s12">
             <div class="graph-card">
               <div class="sheet-options">
@@ -232,7 +331,7 @@
                 </div>
               </div>
               <div class="carousel carousel-slider center">
-                <div class="carousel-item white" href="#one!">                
+                <div class="carousel-item white" href="#one!">
                   <div id="advance<?=$loop?>" class="" style="width: 90%; height: 300px; margin-left: 5%;"></div>
                 </div>
                 <div class="carousel-item white white-text" href="#two!">
@@ -248,61 +347,208 @@
         <?php endif;?>
       <?php endforeach; ?>
     </div>
-  </div>
-</div>
-<?php for ($i=1; $i < 5; $i++):?>
-  <?php
-    $a = 0;
-    if($i == 2){
-      $a = 1;
-    } else {
-      $a = $i;
-    }    
-  ?>
-  <div id="modalFilter<?=$a?>" class="modal w-600" style="overflow-y:visible;">
-    <div class="modal-content">
-      <a class="modal-close close">
-        <i class="material-icons">close</i>
-      </a>
-      <h2>Filtrar gráfica <?=$i?></h2>
-      <div class="row wrap ma-0">
-        <div class="d-flex col s12 m6 l6 xl6">      
-          <div class="input-field col xl12 l12 m12 s12">
-            <select class="select-gen-gd" id="select-gen-<?=$i?>"></select>
-            <label style="color: #333333; font-weight: bold;">Grupo estratégicos de negocios</label>
+    <div class="table-container col l12 m12 s12 ml-2 mr-2">
+      <div class="row">
+        <div class="col l12 m12 s12">
+          <div class="cont-table">
+            <table class="table-compress">
+              <thead>
+                <tr>
+                  <th>BP Registro Documental Contratista</th>
+                  <?php foreach($headers_table as $item_header): ?>
+                    <th></th>
+                  <?php endforeach;?>
+                </tr> 
+                <tr>
+                  <?php foreach($headers_table as $item_header): ?>
+                    <th>
+                      <?= $item_header ?>
+                      <i class="xed fas fa-arrow-up"></i>
+                      <!-- <i class="xed fas fa-arrow-down"></i> -->
+                    </th>
+                  <?php endforeach;?>
+                </tr>
+              </thead>
+              <tbody id="tbody-bp-contratista"></tbody>
+            </table>
+            <!-- Footer table -->
+            <div class="footer-table">
+              <div class="spacer-table"></div>
+                <div class="cont-contrls">
+                  <div class="rows-cant">
+                    <div class="label">Filas por pág:</div>
+                    <div class="cont-select">
+                      <select>
+                        <option value="1">10</option>
+                        <option value="2">15</option>
+                        <option value="3">20</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="conter-rows">1-8 de 200</div>
+                  <div>
+                    <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
+                    <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cont-table mt-3">
+              <table class="table-compress">
+                <thead>
+                  <tr>
+                    <th>BP Registro Documental Interno</th>
+                    <?php foreach($headers_table as $item_header): ?>
+                      <th></th>
+                    <?php endforeach;?>
+                  </tr> 
+                  <tr>
+                    <?php foreach($headers_table as $item_header): ?>
+                      <th>
+                        <?= $item_header ?>
+                        <i class="xed fas fa-arrow-up"></i>
+                        <!-- <i class="xed fas fa-arrow-down"></i> -->
+                      </th>
+                    <?php endforeach;?>
+                  </tr>
+                </thead>
+                <tbody id="tbody-bp-interno"></tbody>
+              </table>
+              <!-- Footer table -->
+              <div class="footer-table">
+                <div class="spacer-table"></div>
+                  <div class="cont-contrls">
+                    <div class="rows-cant">
+                      <div class="label">Filas por pág:</div>
+                      <div class="cont-select">
+                        <select>
+                          <option value="1">10</option>
+                          <option value="2">15</option>
+                          <option value="3">20</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="conter-rows">1-8 de 200</div>
+                    <div>
+                      <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
+                      <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cont-table mt-3">
+                <table class="table-compress">
+                  <thead>
+                    <tr>
+                      <th>BP Registro Documental Externo</th>
+                      <?php foreach($headers_table as $item_header): ?>
+                        <th></th>
+                      <?php endforeach;?>
+                    </tr> 
+                    <tr>
+                      <?php foreach($headers_table as $item_header): ?>
+                        <th>
+                          <?= $item_header ?>
+                          <i class="xed fas fa-arrow-up"></i>
+                          <!-- <i class="xed fas fa-arrow-down"></i> -->
+                        </th>
+                      <?php endforeach;?>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-bp-externo"></tbody>
+                </table>
+                <!-- Footer table -->
+                <div class="footer-table">
+                  <ul class="pagination tc">
+                    <li class="disabled"><a href="#!"><i class="fas fa-chevron-left p9"></i></a></li>
+                    <li class="active"><a href="#!">1</a></li>
+                    <li class="waves-effect"><a href="#!">2</a></li>
+                    <li class="waves-effect"><a href="#!">3</a></li>
+                    <li class="waves-effect"><a href="#!">4</a></li>
+                    <li class="waves-effect"><a href="#!">5</a></li>
+                    <li class="waves-effect"><a href="#!"><i class="fas fa-chevron-right p9"></i></a></li>
+                  </ul>
+                  <div class="spacer-table"></div>
+                    <div class="cont-contrls">
+                      <div class="rows-cant">
+                        <div class="label">Filas por pág:</div>
+                        <div class="cont-select">
+                          <select>
+                            <option value="1">10</option>
+                            <option value="2">15</option>
+                            <option value="3">20</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="conter-rows">1-8 de 200</div>
+                      <div>
+                        <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
+                        <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
           </div>
         </div>
-        <div class="d-flex col s12 m6 l6 xl6">      
-          <div class="input-field col xl12 l12 m12 s12">
-            <select class="select-comp-gd" id="select-company-<?=$i?>"></select>
-            <label style="color: #333333; font-weight: bold;">Empresas</label>
-          </div>
-        </div>
-        <div class="d-flex col s12 m6 l6 xl6">      
-          <div class="input-field col xl12 l12 m12 s12">
-            <select class="select-proj-gd" id="select-project-<?=$i?>"></select>
-            <label style="color: #333333; font-weight: bold;">Proyectos</label>
-          </div>
-        </div>
-        <?php if($i != 4):?>
-          <div class="d-flex col s12 m6 l6 xl6">      
+      </div>
+    <?php for ($i=1; $i < 6; $i++):?>
+      <?php
+        $a = 0;
+        if($i == 2){
+          $a = 1;
+        } else {
+          $a = $i;
+        }
+      ?>
+    <div id="modalFilter<?=$a?>" class="modal w-600" style="overflow-y:visible;">
+      <div class="modal-content">
+        <a class="modal-close close">
+          <i class="material-icons">close</i>
+        </a>
+        <h2>Filtrar gráfica <?=$i?></h2>
+        <div class="row wrap ma-0">
+          <div class="d-flex col s12 m6 l6 xl6">
             <div class="input-field col xl12 l12 m12 s12">
-              <select class="select-bp-gd" id="select-bp-<?=$i?>"></select>
-              <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
+              <select class="select-gen-gd" id="select-gen-<?=$i?>"></select>
+              <label style="color: #333333; font-weight: bold;">Grupo estratégicos de negocios</label>
             </div>
           </div>
-        <?php endif;?> 
+          <div class="d-flex col s12 m6 l6 xl6">
+            <div class="input-field col xl12 l12 m12 s12">
+              <select class="select-comp-gd" id="select-company-<?=$i?>"></select>
+              <label style="color: #333333; font-weight: bold;">Empresas</label>
+            </div>
+          </div>
+          <div class="d-flex col s12 m6 l6 xl6">
+            <div class="input-field col xl12 l12 m12 s12">
+              <select class="select-proj-gd" id="select-project-<?=$i?>"></select>
+              <label style="color: #333333; font-weight: bold;">Proyectos</label>
+            </div>
+          </div>
+          <?php if($i != 4):?>
+            <div class="d-flex col s12 m6 l6 xl6">
+              <div class="input-field col xl12 l12 m12 s12">
+                <select class="select-bp-gd" id="select-bp-<?=$i?>"></select>
+                <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
+              </div>
+            </div>
+          <?php endif;?>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-close btn btn-depressed error" id="filter_cancel">
+          <i class="large material-icons noselect">cancel</i>
+        </a>
+        <a class="modal-close btn btn-depressed tertiary">
+          <i class="large material-icons noselect " id="filter_la">search</i>
+        </a>
       </div>
     </div>
-    <div class="modal-footer">
-      <a class="modal-close btn btn-depressed error" id="filter_cancel">
-        <i class="large material-icons noselect">cancel</i>
-      </a>
-      <a class="modal-close btn btn-depressed tertiary">
-        <i class="large material-icons noselect " id="filter_la">search</i>
-      </a>
-    </div>
-  </div>
+    <div class="fixed-action-btn">
+  <a class="btn-floating btn-large tertiary Scroll-button">
+    <i class="large material-icons noselect" id="add">search</i>
+  </a>
+</div>
 <?php endfor;?>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -361,7 +607,7 @@
         "cache-control": "no-cache"
       }
     }
-    var genJson;
+    var genJson; // NOTA
     $.ajax(settings).done(function (response) {
       $.each(response.items, function(){
         var option = new Option(this.display, this.ret);
@@ -370,14 +616,15 @@
           option.setAttribute('selected', 'selected');
         }
           $('.select-gen-gd').append(option);
-          // $('.select-gen-gd').formSelect(); 
+          // $('.select-gen-gd').formSelect();
       });
       filter_company(response.items[1].ret);
       default_option(response.items[1].ret);
     });
   }
-  //  
-  function filter_company(company_id) {
+  //
+  function filter_company(company_id, chart_num) {
+    console.log('Compañia num: '+ chart_num)
       var settings = {
       "async": true,
       "crossDomain": true,
@@ -397,14 +644,14 @@
           option.setAttribute('selected', 'selected');
         }
         $('.select-comp-gd').append(option);
-        $('.select-comp-gd').formSelect(); 
+        $('.select-comp-gd').formSelect();
         // append_options('select-company-', option);
       });
-      filter_project(response.items[1].r);
+      filter_project(response.items[1].r, chart_num);
     });
   }
   // REALIZR CAMBIOS EN ESTA FUNCIÓN DEBE ENVIAR EL CÓDIGO DE UNIFIER A LA FUNCIÓN CHART4 -- NOTA
-  function filter_project(eps_id) {
+  function filter_project(eps_id, chart_num) {
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -417,19 +664,23 @@
     }
 
     $.ajax(settings).done(function (response) {
-      $.each(response.items, function(){
-        console.log(response.items[0].code_unifier);
-        var option = new Option(this.name, this.code_unifier);
-        $('.select-proj-gd').append(option);
-        $('.select-proj-gd').formSelect(); 
-        // append_options('select-project-', option);
+      if(response.items.length > 0){
+        $.each(response.items, function(){
+          console.log(response.items[0].code_unifier);
+          var option = new Option(this.name, this.code_unifier);
+          $('.select-proj-gd').append(option);
+          $('.select-proj-gd').formSelect();
+          // append_options('select-project-', option);
+        });
+        filter_bp(response.items[0].code_unifier, chart_num);
+        if(chart_num == '4' || chart_num == undefined){
+          graph4(response.items[0].code_unifier);
+        }
+      }
       });
-      filter_bp(response.items[0].code_unifier);
-      graph4(response.items[0].code_unifier);
-    });
   }
 
-  function filter_bp(unifier_code) {
+  function filter_bp(unifier_code, chart_num) {
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -442,32 +693,40 @@
     }
 
     $.ajax(settings).done(function (response) {
-      console.log(response);
+      console.log('chart_num '+chart_num);
       if(response.items.length > 0){
         $.each(response.items, function(){
           var option = new Option(this.name, this.id_p_bp);
-          if(this.id_p_bp == '181'){
+          if(this.id_p_bp == '181' && chart_num == undefined){
             option.setAttribute('selected', 'selected');
             // CONDICIONAL GRÁFICA SELECCIONADA - GRÁFICA 1, 2, 3 GENERAL PRIMERA CARGA -- NOTA
             graph1(this.id_p_bp);
             graph2(this.id_p_bp);
             graph3(this.name);
-          } else {
-            // graph1(this.id_p_bp);
-            // graph2(this.id_p_bp);
+          } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3') {
+            eval("graph"+chart_num + "("+this.id_p_bp+")");
+          } else if(chart_num == '3') {
+            graph3(this.name);
+          }
+          else if(chart_num == '1' || chart_num == '2') {
+            graph1(this.id_p_bp);
+            graph2(this.id_p_bp);
           }
           // append_options('select-bp-', option);
           $('.select-bp-gd').append(option);
-          $('.select-bp-gd').formSelect(); 
+          $('.select-bp-gd').formSelect();
         });
       } else {
         console.log("El proyecto seleccionado, no tiene ningún BP asociado.")
-        var chart_number = '1', 
+        var chart_number = '1',
             dataprovider = [];
         // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
         updateData1(dataprovider, chart_number);
         updateColData1(dataprovider, chart_number);
         updateBarData1(dataprovider, chart_number);
+        updateData2(dataprovider, '2');
+        updateColData2(dataprovider, '2');
+        updateBarData2(dataprovider, '2');
       }
     });
   }
@@ -487,6 +746,7 @@
   }
   // CHARTS WS
   function graph1(id_bp){
+    console.log("graph 1 "+id_bp)
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -506,6 +766,7 @@
     });
   }
   function graph2(id_bp){
+    console.log('GRAPH 2'+id_bp);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -517,7 +778,7 @@
       }
     }
     $.ajax(settings).done(function (response) {
-      // console.log(response);
+      console.log(response);
       var chart_number = '2';
       updateData2(response.items, chart_number);
       updateColData2(response.items, chart_number);
@@ -525,6 +786,7 @@
     });
   }
   function graph3(bp_name){
+    // alert(bp_name);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -576,6 +838,7 @@
       select_3 : 'project',
       select_4 : 'bp',
       function : 'filter_company',
+      chart : 1,
     },
     {
       id : 'select-gen-3',
@@ -586,6 +849,7 @@
       select_3 : 'project',
       select_4 : 'bp',
       function : 'filter_company',
+      chart : 3,
     },
     {
       id : 'select-gen-4',
@@ -596,6 +860,7 @@
       select_3 : 'project',
       select_4 : 'bp',
       function : 'filter_company',
+      chart : 4,
     },
     {
       id : 'select-company-1',
@@ -605,6 +870,7 @@
       select_3 : 'project',
       select_4 : 'bp',
       function : 'filter_project',
+      chart : 1,
     },
     {
       id : 'select-company-3',
@@ -614,6 +880,7 @@
       select_3 : 'project',
       select_4 : 'bp',
       function : 'filter_project',
+      chart : 3,
     },
     {
       id : 'select-company-4',
@@ -623,6 +890,7 @@
       select_3 : 'project',
       select_4 : 'bp',
       function : 'filter_project',
+      chart : 4,
     },
     {
       id : 'select-project-1',
@@ -631,6 +899,7 @@
       end : 4,
       select_4 : 'bp',
       function : 'filter_bp',
+      chart : 1,
     },
     {
       id : 'select-project-3',
@@ -639,6 +908,7 @@
       end : 4,
       select_4 : 'bp',
       function : 'filter_bp',
+      chart : 3,
     },
     {
       id : 'select-project-4',
@@ -647,6 +917,7 @@
       end : 4,
       select_4 : 'bp',
       function : 'graph4',
+      chart : 4,
     }
   ];
   $.each(array_select, function(a, b){
@@ -660,18 +931,23 @@
       // }
       for(i = array_data.start; i <= array_data.end; i++){
         $('#select-'+array_data['select_'+i]+'-'+array_data.key).children().remove();
-      } 
+      }
       $('select').formSelect();
       console.log(array_data.function+' '+ value);
-      // this[array_data.function](value); 
-      window[array_data.function](value); 
+      // this[array_data.function](value);
+      window[array_data.function](value,array_data.chart);
       // eval(array_data.function + "("+value+")");
     });
   });
-  $("#select-project-4").change(function(){
+  $("#select-bp-1").change(function(){
     var value = $(this).children(":selected").attr("value");
-    graph4(value);
-  })
+    graph1(value);
+    graph2(value);
+  });
+  $("#select-bp-3").change(function(){
+    var value = $(this).children(":selected").text();
+    graph3(value);
+  });
   // INICIO SCRIPT PERTENECIENTE A LAS GRÁFICAS
   // Themes begin
   for(i = 1; i < 5; i++){
@@ -683,11 +959,11 @@
       this["chartDonut"+i].dispose();
     }
     this["chartDonut"+i] = am4core.create("advance"+i, am4charts.PieChart);
-    
+
     // Add data
     this["chartDonut"+i].data = generateData();
     // Add and configure series
-    
+
     this["pieSeries"+i] = this["chartDonut"+i].series.push(new am4charts.PieSeries());
     this["pieSeries"+i].dataFields.value = "registros";
     this["pieSeries"+i].dataFields.category = "v_value";
@@ -712,7 +988,7 @@
       this["pieSeries"+i].labels.template.padding(0,0,0,0);
       this["pieSeries"+i].ticks.template.disabled = true;
       this["pieSeries"+i].fontSize = 14;
-      
+
     } else {
       // /* Disable labels */
       pieSeries3.labels.template.disabled = true;
@@ -744,12 +1020,12 @@
     // Slightly shift the shadow and make it more prominent on hover
     this["hoverShadow"+i]= this["hoverState"+i].filters.push(new am4core.DropShadowFilter);
     this["hoverShadow"+i].opacity = 0.7;
-    this["hoverShadow"+i].blur = 5;  
+    this["hoverShadow"+i].blur = 5;
     this["indicatorLabel"+i] = this["pieSeries"+i].createChild(am4core.Label);
     this["indicatorLabel"+i].align = "center";
     this["indicatorLabel"+i].valign = "middle";
     this["indicatorLabel"+i].x = -40;
-    this["indicatorLabel"+i].y = -10; 
+    this["indicatorLabel"+i].y = -10;
 
     this["chartDonut"+i].fontSize = 15;
 
@@ -822,8 +1098,8 @@
     this["ColindicatorLabel"+i].valign = "middle";
     this["ColindicatorLabel"+i].fontSize = 20;
     this["ColindicatorLabel"+i].x = 185;
-    this["ColindicatorLabel"+i].y = 80; 
- 
+    this["ColindicatorLabel"+i].y = 80;
+
 
   this["updateColData"+i] = function(bp_data, chart_number) {
       // bp_length(bp_data.length);
@@ -865,7 +1141,7 @@
     this["series"+i].columns.template.strokeWidth = 0;
     this["series"+i].columns.template.column.fillOpacity = 0.8;
     this["series"+i].tooltip.pointerOrientation = "down";
-    
+
     this["hoverState"+i] = this["series"+i].columns.template.column.states.create("hover");
     this["hoverState"+i].properties.cornerRadiusTopLeft = 0;
     this["hoverState"+i].properties.cornerRadiusTopRight = 0;
@@ -882,10 +1158,10 @@
         // alert(bp_data);
       }
        // FIN BAR CHART
-    } 
+    }
     function generateData(bp_data) {
         return bp_data;
-    } 
+    }
     $('html').on("webkitTransitionEnd transitionend", function(e) {
       if($('#projectCarousel').hasClass("active")){
         $("#legendMainDiv").show();
@@ -898,9 +1174,99 @@
       console.log(contInterval++);
       var a = contInterval++;
       // if(a == 1){
-        $("#legendMainDiv").hide(); 
+        $("#legendMainDiv").hide();
       // }
       clearInterval(timer);
     }, 4400);
-    
+    $('.table-container').hide();
+    $('#graph_link').click(function(){
+      $('#chart-container').show();
+      $('.table-container').hide();
+    });
+    $('#list_link').click(function(){
+      $('#chart-container').hide();
+      $('.table-container').show();
+    });
+
+// AJAX LIST TABLE
+var settings1 = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.0.210:8080/ords/portal/documents/bprdc/TYTINT18001",
+  "method": "GET",
+  "headers": {
+    "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+    "cache-control": "no-cache"
+  }
+}
+
+$.ajax(settings1).done(function (response) {
+  console.log(response.items);
+  $.each(response.items, function(){
+    $('#tbody-bp-contratista').append($('<tr>')
+                              .append($('<td>', {text: this.record_no}))
+                              .append($('<td>', {text: this.status}))
+                              .append($('<td>', {text: this.drdocon_002_fecharegistro}))
+                              .append($('<td>', {text: this.project_projectname}))
+                              .append($('<td>', {text: this.title}))
+                              .append($('<td>', {text: this.trdocon_001_creador}))
+                              .append($('<td>', {text: this.trdocon_040_titulo_doc_long}))
+                              .append($('<td>', {text: this.trdocon_038_descripcion_doc}))
+                              .append($('<td>', {text: this.trdocon_033_carpeta_geb}))
+                              );
+  });
+});
+var settings2 = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.0.210:8080/ords/portal/documents/bprdi/TGIGPY19026",
+  "method": "GET",
+  "headers": {
+    "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+    "cache-control": "no-cache"
+  }
+}
+
+$.ajax(settings2).done(function (response) {
+  $.each(response.items, function(){
+    $('#tbody-bp-interno').append($('<tr>')
+                              .append($('<td>', {text: this.record_no}))
+                              .append($('<td>', {text: this.status}))
+                              .append($('<td>', {text: this.drdi_04_fecha_cre_registro}))
+                              .append($('<td>', {text: this.project_projectname}))
+                              .append($('<td>', {text: this.title}))
+                              .append($('<td>', {text: this.trdi_01_creador}))
+                              .append($('<td>', {text: this.trdi_02_nombre_documento}))
+                              .append($('<td>', {text: this.trdi_03_asunto_documento}))
+                              .append($('<td>', {text: this.trdi_05_requiere_apro}))
+                              );
+  });
+});
+var settings3 = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.0.210:8080/ords/portal/documents/bprde/TGIGPY19030",
+  "method": "GET",
+  "headers": {
+    "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+    "cache-control": "no-cache"
+  }
+}
+
+$.ajax(settings3).done(function (response) {
+  console.log(response.items);
+  $.each(response.items, function(){
+    $('#tbody-bp-externo').append($('<tr>')
+                          .append($('<td>', {text: this.record_no}))
+                          .append($('<td>', {text: this.status}))
+                          .append($('<td>', {text: this.drde_02_fecha_cre_registro}))
+                          .append($('<td>', {text: this.project_projectname}))
+                          .append($('<td>', {text: this.title}))
+                          .append($('<td>', {text: this.trdi_01_creador}))
+                          .append($('<td>', {text: this.trde_03_nombre_documento}))
+                          .append($('<td>', {text: this.trde_04_asunto_documento}))
+                          .append($('<td>', {text: this.uuu_user_email}))
+                        );
+  });
+});
 </script>
