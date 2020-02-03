@@ -214,9 +214,8 @@
   function Search() {
       var searchText = document.getElementById('Search_Input').value.toUpperCase();
       if (searchText != null) {
-          var targetTable = document.getElementById('myTable');
+          
           var targetTableColCount;
-
           //Loop through table rows
           for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
               var rowData = '';
@@ -534,7 +533,7 @@
       } else {
         table(range.val());
       }
-    })
+    });
     function table(range){
       $('.paginator.center').remove();
       $('#myTable').after('<div id="nav" class="paginator center mt-4"></div>');
@@ -665,6 +664,7 @@
   }
   function Click_Next_Prev(rowsShown){
     $('.Paginate_Next_Prev').bind('click', function(){
+      console.log(document.getElementsByClassName("active"));
         var Get_Element = document.getElementsByClassName("active")[0].getElementsByClassName("Paginate_Numbers")[0];
         var Rel_Attribute = Get_Element.getAttribute('rel');
         var Rel_Id = Get_Element.getAttribute('id');

@@ -180,7 +180,7 @@ $data_table_logs = [
   <div class="section home">
     <div class="col s12 ml-1 mr-1 pb-1">
       <ul class="tabs mb-3" style="border-bottom: 1px solid #ccc">
-        <li id="graph_link" class="tab col l2 m4 s6"><a class="active" href="">Gráficas</a></li>
+        <li id="graph_link" class="tab col l2 m4 s6"><a class="active-side" href="">Gráficas</a></li>
         <li id="list_link" class="tab col l3 m4 s6"><a href="">Lista</a></li>
       </ul>
     </div>
@@ -205,8 +205,8 @@ $data_table_logs = [
       <!-- Field camp -->
       <div class="field-search">
         <div class="cont-icon" style="opacity: 0.8"><i class=" material-icons">search</i></div>
-        <input type="text" placeholder="Buscar en la lista ">
-        <div class="cont-icon" style="opacity: 0.7; cursor:pointer"><i class="material-icons">close</i></div>
+        <input id="Search_Input" onkeyup="Search()" type="text" placeholder="Buscar en la lista ">
+        <div class="cont-icon" style="opacity: 0.7; cursor:pointer"><i id="remove-search" class="material-icons">close</i></div>
       </div>
     </div>
     <div class="divider transparent mb-1"></div>
@@ -351,7 +351,7 @@ $data_table_logs = [
       <div class="row">
         <div class="col l12 m12 s12">
           <div class="cont-table">
-            <table class="table-compress">
+            <table id="myTable1" class="table-compress myTable">
               <thead>
                 <tr>
                   <th>BP Registro Documental Contratista</th>
@@ -369,32 +369,35 @@ $data_table_logs = [
                   <?php endforeach;?>
                 </tr>
               </thead>
-              <tbody id="tbody-bp-contratista"></tbody>
+              <tbody id="tbody-bp-contratista" class="table-body"></tbody>
             </table>
             <!-- Footer table -->
             <div class="footer-table">
+              <ul id="rd-cont" class="pagination tc"></ul>
               <div class="spacer-table"></div>
                 <div class="cont-contrls">
                   <div class="rows-cant">
                     <div class="label">Filas por pág:</div>
                     <div class="cont-select">
-                      <select>
-                        <option value="1">10</option>
-                        <option value="2">15</option>
-                        <option value="3">20</option>
+                      <select id="row-range-cont" class="row-range">
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="250">250</option>
+                        <option value="500">500</option>
                       </select>
                     </div>
                   </div>
-                  <div class="conter-rows">1-8 de 200</div>
+                  <!-- <div class="conter-rows">1-8 de 200</div>
                   <div>
                     <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
                     <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
             <div class="cont-table mt-3">
-              <table class="table-compress">
+              <table id="myTable2" class="table-compress myTable">
                 <thead>
                   <tr>
                     <th>BP Registro Documental Interno</th>
@@ -412,32 +415,35 @@ $data_table_logs = [
                     <?php endforeach;?>
                   </tr>
                 </thead>
-                <tbody id="tbody-bp-interno"></tbody>
+                <tbody id="tbody-bp-interno" class="table-body"></tbody>
               </table>
               <!-- Footer table -->
               <div class="footer-table">
+                <ul id="rd-interno" class="pagination tc"></ul>
                 <div class="spacer-table"></div>
                   <div class="cont-contrls">
                     <div class="rows-cant">
                       <div class="label">Filas por pág:</div>
                       <div class="cont-select">
-                        <select>
-                          <option value="1">10</option>
-                          <option value="2">15</option>
-                          <option value="3">20</option>
+                        <select id="row-range-interno" class="row-range">
+                          <option value="5">25</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                          <option value="250">250</option>
+                          <option value="500">500</option>
                         </select>
                       </div>
                     </div>
-                    <div class="conter-rows">1-8 de 200</div>
+                    <!-- <div class="conter-rows">1-8 de 200</div>
                     <div>
                       <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
                       <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
               <div class="cont-table mt-3">
-                <table class="table-compress">
+                <table id="myTable3" class="table-compress myTable">
                   <thead>
                     <tr>
                       <th>BP Registro Documental Externo</th>
@@ -455,36 +461,30 @@ $data_table_logs = [
                       <?php endforeach;?>
                     </tr>
                   </thead>
-                  <tbody id="tbody-bp-externo"></tbody>
+                  <tbody id="tbody-bp-externo" class="table-body"></tbody>
                 </table>
                 <!-- Footer table -->
                 <div class="footer-table">
-                  <ul class="pagination tc">
-                    <li class="disabled"><a href="#!"><i class="fas fa-chevron-left p9"></i></a></li>
-                    <li class="active"><a href="#!">1</a></li>
-                    <li class="waves-effect"><a href="#!">2</a></li>
-                    <li class="waves-effect"><a href="#!">3</a></li>
-                    <li class="waves-effect"><a href="#!">4</a></li>
-                    <li class="waves-effect"><a href="#!">5</a></li>
-                    <li class="waves-effect"><a href="#!"><i class="fas fa-chevron-right p9"></i></a></li>
-                  </ul>
+                  <ul id="rd-externo" class="pagination tc"></ul>
                   <div class="spacer-table"></div>
                     <div class="cont-contrls">
                       <div class="rows-cant">
                         <div class="label">Filas por pág:</div>
                         <div class="cont-select">
-                          <select>
-                            <option value="1">10</option>
-                            <option value="2">15</option>
-                            <option value="3">20</option>
+                          <select id="row-range-externo" class="row-range">
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="250">250</option>
+                            <option value="500">500</option>
                           </select>
                         </div>
                       </div>
-                      <div class="conter-rows">1-8 de 200</div>
+                      <!-- <div class="conter-rows">1-8 de 200</div>
                       <div>
                         <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
                         <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -525,11 +525,28 @@ $data_table_logs = [
               <label style="color: #333333; font-weight: bold;">Proyectos</label>
             </div>
           </div>
-          <?php if($i != 4):?>
+          <?php if($i != 4 && $i != 5):?>
             <div class="d-flex col s12 m6 l6 xl6">
               <div class="input-field col xl12 l12 m12 s12">
                 <select class="select-bp-gd" id="select-bp-<?=$i?>"></select>
                 <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
+              </div>
+            </div>
+          <?php elseif($i == 5):?>
+            <div class="d-flex col s12 m6 l6 xl6">
+              <div class="input-field col xl12 l12 m12 s12">
+                <select class="select-estatus-gd filter-list" id="select-estatus-<?=$i?>">
+                  <option data-id="all" value="all" selected></option>
+                </select>
+                <label style="color: #333333; font-weight: bold;">Estatus</label>
+              </div>
+            </div>
+            <div class="d-flex col s12 m6 l6 xl6">
+              <div class="input-field col xl12 l12 m12 s12">
+                <select class="select-creador-gd filter-list" id="select-creador-<?=$i?>">
+                  <option data-id="all" value="all" selected></option>
+                </select>
+                <label style="color: #333333; font-weight: bold;">Creador</label>
               </div>
             </div>
           <?php endif;?>
@@ -539,16 +556,16 @@ $data_table_logs = [
         <a class="modal-close btn btn-depressed error" id="filter_cancel">
           <i class="large material-icons noselect">cancel</i>
         </a>
-        <a class="modal-close btn btn-depressed tertiary">
+        <!-- <a class="modal-close btn btn-depressed tertiary">
           <i class="large material-icons noselect " id="filter_la">search</i>
-        </a>
+        </a> -->
       </div>
     </div>
-    <div class="fixed-action-btn">
-  <a class="btn-floating btn-large tertiary Scroll-button">
-    <i class="large material-icons noselect" id="add">search</i>
-  </a>
-</div>
+    <div class="table-container fixed-action-btn">
+      <a class="modal-trigger btn-floating btn-large tertiary Scroll-button" href="#modalFilter5">
+        <i class="large material-icons noselect" id="add">search</i>
+      </a>
+    </div>
 <?php endfor;?>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -624,7 +641,6 @@ $data_table_logs = [
   }
   //
   function filter_company(company_id, chart_num) {
-    console.log('Compañia num: '+ chart_num)
       var settings = {
       "async": true,
       "crossDomain": true,
@@ -666,7 +682,6 @@ $data_table_logs = [
     $.ajax(settings).done(function (response) {
       if(response.items.length > 0){
         $.each(response.items, function(){
-          console.log(response.items[0].code_unifier);
           var option = new Option(this.name, this.code_unifier);
           $('.select-proj-gd').append(option);
           $('.select-proj-gd').formSelect();
@@ -675,6 +690,8 @@ $data_table_logs = [
         filter_bp(response.items[0].code_unifier, chart_num);
         if(chart_num == '4' || chart_num == undefined){
           graph4(response.items[0].code_unifier);
+        } else if(chart_num == '5'){
+          listGD(response.items[0].code_unifier);
         }
       }
       });
@@ -693,7 +710,6 @@ $data_table_logs = [
     }
 
     $.ajax(settings).done(function (response) {
-      console.log('chart_num '+chart_num);
       if(response.items.length > 0){
         $.each(response.items, function(){
           var option = new Option(this.name, this.id_p_bp);
@@ -703,7 +719,7 @@ $data_table_logs = [
             graph1(this.id_p_bp);
             graph2(this.id_p_bp);
             graph3(this.name);
-          } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3') {
+          } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3' && chart_num != '5') {
             eval("graph"+chart_num + "("+this.id_p_bp+")");
           } else if(chart_num == '3') {
             graph3(this.name);
@@ -731,7 +747,6 @@ $data_table_logs = [
     });
   }
   function append_options(select_id, option) {
-    console.log(select_id);
     $('#'+select_id).append(option);
     $('#'+select_id).formSelect();
   }
@@ -746,7 +761,6 @@ $data_table_logs = [
   }
   // CHARTS WS
   function graph1(id_bp){
-    console.log("graph 1 "+id_bp)
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -766,7 +780,6 @@ $data_table_logs = [
     });
   }
   function graph2(id_bp){
-    console.log('GRAPH 2'+id_bp);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -778,7 +791,6 @@ $data_table_logs = [
       }
     }
     $.ajax(settings).done(function (response) {
-      console.log(response);
       var chart_number = '2';
       updateData2(response.items, chart_number);
       updateColData2(response.items, chart_number);
@@ -807,7 +819,6 @@ $data_table_logs = [
     });
   }
   function graph4(unifier_code){
-    console.log('UNIFIER '+unifier_code);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -820,7 +831,6 @@ $data_table_logs = [
     }
 
     $.ajax(settings).done(function (response) {
-      console.log(response);
       var chart_number = '4';
       updateData4(response.items, chart_number);
       updateColData4(response.items, chart_number);
@@ -863,6 +873,17 @@ $data_table_logs = [
       chart : 4,
     },
     {
+      id : 'select-gen-5',
+      key : '5',
+      start : 2,
+      end : 4,
+      select_2 : 'company',
+      select_3 : 'project',
+      select_4 : 'bp',
+      function : 'filter_company',
+      chart : 5,
+    },
+    {
       id : 'select-company-1',
       key : '1',
       start : 3,
@@ -893,6 +914,16 @@ $data_table_logs = [
       chart : 4,
     },
     {
+      id : 'select-company-5',
+      key : '5',
+      start : 3,
+      end : 4,
+      select_3 : 'project',
+      select_4 : 'bp',
+      function : 'filter_project',
+      chart : 5,
+    },
+    {
       id : 'select-project-1',
       key : '1',
       start : 4,
@@ -918,11 +949,19 @@ $data_table_logs = [
       select_4 : 'bp',
       function : 'graph4',
       chart : 4,
+    },
+    {
+      id : 'select-project-5',
+      key : '5',
+      start : 4,
+      end : 4,
+      select_4 : 'bp',
+      function : 'listGD',
+      chart : 5,
     }
   ];
   $.each(array_select, function(a, b){
     $("#"+this.id).change(function(){
-      console.log($(b)[0].value);
       var array_data = $(b)[0];
       // if(array_data.value != 'undefined'){
         var value = $(this).children(":selected").attr("value");
@@ -933,7 +972,6 @@ $data_table_logs = [
         $('#select-'+array_data['select_'+i]+'-'+array_data.key).children().remove();
       }
       $('select').formSelect();
-      console.log(array_data.function+' '+ value);
       // this[array_data.function](value);
       window[array_data.function](value,array_data.chart);
       // eval(array_data.function + "("+value+")");
@@ -947,6 +985,10 @@ $data_table_logs = [
   $("#select-bp-3").change(function(){
     var value = $(this).children(":selected").text();
     graph3(value);
+  });
+  $("#select-bp-5").change(function(){
+    var value = $(this).children(":selected").attr("value");
+    listGD(value);
   });
   // INICIO SCRIPT PERTENECIENTE A LAS GRÁFICAS
   // Themes begin
@@ -1163,7 +1205,7 @@ $data_table_logs = [
         return bp_data;
     }
     $('html').on("webkitTransitionEnd transitionend", function(e) {
-      if($('#projectCarousel').hasClass("active")){
+      if($('#projectCarousel').hasClass("active-side")){
         $("#legendMainDiv").show();
       } else{
         $("#legendMainDiv").hide();
@@ -1171,7 +1213,6 @@ $data_table_logs = [
     });
     var contInterval = 0;
     var timer = setInterval(function(){
-      console.log(contInterval++);
       var a = contInterval++;
       // if(a == 1){
         $("#legendMainDiv").hide();
@@ -1187,86 +1228,360 @@ $data_table_logs = [
       $('#chart-container').hide();
       $('.table-container').show();
     });
+// AJAX FILTERS LIST
+creator();
+status();
+function creator() {
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://192.168.0.210:8080/ords/portal/documents/filtercreator/",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
+      }
+    }
 
+    $.ajax(settings).done(function (response) {
+      $.each(response.items, function(){      
+        var option = new Option(this.creator);
+            option.setAttribute('data-id', this.creator);
+            option.setAttribute('data-type' , 'creator');
+        $('.select-creador-gd').append(option);
+        $('.select-creador-gd').formSelect();
+      });
+    });
+}
+function status() {
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://192.168.0.210:8080/ords/portal/documents/filterstatus/",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+        "cache-control": "no-cache"
+      }
+    }
+
+    $.ajax(settings).done(function (response) {
+      $.each(response.items, function(){
+        var option = new Option(this.status);
+            option.setAttribute('data-id', this.status);
+            option.setAttribute('data-type' , 'status');
+        $('.select-estatus-gd').append(option);
+        $('.select-estatus-gd').formSelect();
+      });
+    });
+}
 // AJAX LIST TABLE
-var settings1 = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://192.168.0.210:8080/ords/portal/documents/bprdc/TYTINT18001",
-  "method": "GET",
-  "headers": {
-    "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
-    "cache-control": "no-cache"
+function listGD(code_unifier){
+  $('.table-body').empty();
+  bp_reg_contratista(code_unifier);
+  bp__reg_interno(code_unifier);
+  bp_reg_externo(code_unifier);
+}
+bp_reg_contratista('TGIGPY19031');
+bp__reg_interno('TGIGPY19031');
+bp_reg_externo('TGIGPY19031');
+function bp_reg_contratista(code_unifier){
+  var settings1 = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://192.168.0.210:8080/ords/portal/documents/bprdc/"+code_unifier,
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+      "cache-control": "no-cache"
+    }
+  }
+
+  $.ajax(settings1).done(function (response) {
+    $.each(response.items, function(){
+      $('#tbody-bp-contratista').append($('<tr>',{
+                                  class : 'public-table'
+                                })
+                                .attr({
+                                  'data-project' : this.project_projectname,
+                                  'data-status' : this.status,
+                                  'data-creator' : this.trdocon_001_creador
+                                }) 
+                                .append($('<td>', {text: this.record_no}))
+                                .append($('<td>', {text: this.status}))
+                                .append($('<td>', {text: this.drdocon_002_fecharegistro}))
+                                .append($('<td>', {text: this.project_projectname}))
+                                .append($('<td>', {text: this.title}))
+                                .append($('<td>', {text: this.trdocon_001_creador}))
+                                .append($('<td>', {text: this.trdocon_040_titulo_doc_long}))
+                                .append($('<td>', {text: this.trdocon_038_descripcion_doc}))
+                                .append($('<td>', {text: this.trdocon_033_carpeta_geb}))
+                                );
+    });
+    tableRange('row-range-cont', 'myTable1');
+  });
+}
+function bp__reg_interno(code_unifier){
+  var settings2 = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://192.168.0.210:8080/ords/portal/documents/bprdi/"+code_unifier,
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+      "cache-control": "no-cache"
+    }
+  }
+
+  $.ajax(settings2).done(function (response) {
+    $.each(response.items, function(){
+      $('#tbody-bp-interno').append($('<tr>',{
+                                  class : 'public-table'
+                                })
+                                .attr({
+                                  'data-project' : this.project_projectname,
+                                  'data-status' : this.status,
+                                  'data-creator' : this.trdi_01_creador
+                                }) 
+                                .append($('<td>', {text: this.record_no}))
+                                .append($('<td>', {text: this.status}))
+                                .append($('<td>', {text: this.drdi_04_fecha_cre_registro}))
+                                .append($('<td>', {text: this.project_projectname}))
+                                .append($('<td>', {text: this.title}))
+                                .append($('<td>', {text: this.trdi_01_creador}))
+                                .append($('<td>', {text: this.trdi_02_nombre_documento}))
+                                .append($('<td>', {text: this.trdi_03_asunto_documento}))
+                                .append($('<td>', {text: this.trdi_05_requiere_apro}))
+                                );
+    });
+    tableRange('row-range-interno', 'myTable2');
+  });
+}
+function bp_reg_externo(code_unifier){
+  var settings3 = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://192.168.0.210:8080/ords/portal/documents/bprde/"+code_unifier,
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+      "cache-control": "no-cache"
+    }
+  }
+
+  $.ajax(settings3).done(function (response) {
+    $.each(response.items, function(){
+      $('#tbody-bp-externo').append($('<tr>',{
+                              class : 'public-table'
+                            })
+                            .attr({
+                              'data-project' : this.project_projectname,
+                              'data-status' : this.status,
+                              'data-creator' : this.trde_01_creador
+                            }) 
+                            .append($('<td>', {text: this.record_no}))
+                            .append($('<td>', {text: this.status}))
+                            .append($('<td>', {text: this.drde_02_fecha_cre_registro}))
+                            .append($('<td>', {text: this.project_projectname}))
+                            .append($('<td>', {text: this.title}))
+                            .append($('<td>', {text: this.trde_01_creador}))
+                            .append($('<td>', {text: this.trde_03_nombre_documento}))
+                            .append($('<td>', {text: this.trde_04_asunto_documento}))
+                            .append($('<td>', {text: this.uuu_user_email}))
+                          );
+    });
+    tableRange('row-range-externo', 'myTable3');
+  });
+}
+// $(document).ready(function(){
+var targetTable = document.getElementById('tbody-bp-contratista');
+var targetTable2 = document.getElementById('tbody-bp-interno');
+var targetTable3 = document.getElementById('tbody-bp-externo');
+// REMOVE SEARCH
+$('#remove-search').click(function(){
+  $('#Search_Input').val("");
+  logicSearch(targetTable, '');
+  logicSearch(targetTable2, '');
+  logicSearch(targetTable3, '');
+})
+// SEARCH FUNCTION
+function Search() {
+  var searchText = document.getElementById('Search_Input').value.toUpperCase();
+  if (searchText != null) {
+    logicSearch(targetTable, searchText);
+    logicSearch(targetTable2, searchText);
+    logicSearch(targetTable3, searchText);
   }
 }
+function logicSearch(targetTable, searchText){
+  var targetTableColCount;
+  // alert(targetTable.rows.length);
+  //Loop through table rows
+  for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+    var rowData = '';
+    //Get column count from header row
+    if (rowIndex == 0) {
+      targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+      continue; //do not execute further code for header row.
+    }
 
-$.ajax(settings1).done(function (response) {
-  console.log(response.items);
-  $.each(response.items, function(){
-    $('#tbody-bp-contratista').append($('<tr>')
-                              .append($('<td>', {text: this.record_no}))
-                              .append($('<td>', {text: this.status}))
-                              .append($('<td>', {text: this.drdocon_002_fecharegistro}))
-                              .append($('<td>', {text: this.project_projectname}))
-                              .append($('<td>', {text: this.title}))
-                              .append($('<td>', {text: this.trdocon_001_creador}))
-                              .append($('<td>', {text: this.trdocon_040_titulo_doc_long}))
-                              .append($('<td>', {text: this.trdocon_038_descripcion_doc}))
-                              .append($('<td>', {text: this.trdocon_033_carpeta_geb}))
-                              );
-  });
-});
-var settings2 = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://192.168.0.210:8080/ords/portal/documents/bprdi/TGIGPY19026",
-  "method": "GET",
-  "headers": {
-    "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
-    "cache-control": "no-cache"
+    //Process data rows. (rowIndex >= 1)
+    for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+      rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).textContent.toUpperCase();
+    }
+    //If search term is not found in row data
+    //then hide the row, else show
+    if (rowData.indexOf(searchText) == -1) {
+      $('.paginator.center').hide();
+      targetTable.rows.item(rowIndex).style.display = 'none';
+    } else {
+      if (searchText != "") {
+      $('.paginator.center').hide();
+      targetTable.rows.item(rowIndex).style.display = 'table-row';
+      } else {
+        var Get_Element_Button_Number = document.getElementsByClassName('active')[2].getElementsByClassName("Paginate_Numbers")[0];
+        $(Get_Element_Button_Number).click();
+        $('.paginator.center').show();
+      }
+    }
   }
 }
-
-$.ajax(settings2).done(function (response) {
-  $.each(response.items, function(){
-    $('#tbody-bp-interno').append($('<tr>')
-                              .append($('<td>', {text: this.record_no}))
-                              .append($('<td>', {text: this.status}))
-                              .append($('<td>', {text: this.drdi_04_fecha_cre_registro}))
-                              .append($('<td>', {text: this.project_projectname}))
-                              .append($('<td>', {text: this.title}))
-                              .append($('<td>', {text: this.trdi_01_creador}))
-                              .append($('<td>', {text: this.trdi_02_nombre_documento}))
-                              .append($('<td>', {text: this.trdi_03_asunto_documento}))
-                              .append($('<td>', {text: this.trdi_05_requiere_apro}))
-                              );
+  // $('#filter_cancel').hide();
+  // SELECT LIST FILTERS (CREATOR AND STATUS)
+  select_actual = $('.filter-list');
+    select_actual.change(function() {
+      var a = select_actual.children(":selected"), range = $('.row-range').children(":selected"), clean_rks = $('#filter_cancel'), status = $('#select-estatus-5'), creator = $('#select-creador-5');
+      if ($('.public-table').show(), 0 != a.length) {
+        var i = $.map(a, function(a) {
+        return $(a).data("id")
+      });
+      if (creator.val() == 'all' && status.val() == 'all') {
+        clean_rks.hide();
+        table(range.val());
+        // $('.active').children().click();
+      } else {
+        clean_rks.show();
+      }
+      a.each(function() {
+        var t = $(this);
+        if (t.val() != 'all') {
+          $('.public-table:visible').filter(function() {
+            return i.indexOf($(this).data(t.data("type"))) > 0
+          }).removeClass('active-item').addClass('active-item');
+          $('.public-table').filter(function() {
+            clean_rks.show();
+            return i.indexOf($(this).data(t.data("type"))) < 0
+            }).hide().removeClass('active-item');
+            // table2();
+        }
+      })
+    }
   });
-});
-var settings3 = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://192.168.0.210:8080/ords/portal/documents/bprde/TGIGPY19030",
-  "method": "GET",
-  "headers": {
-    "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
-    "cache-control": "no-cache"
+    $('.row-range').change(function(){
+      var range = $(this).children(":selected");
+      table(range.val());     
+    });
+    function tableRange(select_obj, table_id){
+      var range = $('#'+select_obj).children(":selected");
+      table(range.val(),table_id);
+    }
+    function table(range, table_id){
+      $('#rd-cont').empty();
+      // $('#myTable2').after('<div id="nav" class="paginator center mt-4"></div>');
+      $('#rd-cont').append('<ul class="pagination" id="myPager"></ul>');
+      var rowsShown = range;
+      var rowsTotal = $('#myTable1 tbody tr').length;
+      if (rowsTotal > 0) {
+        var numPages = rowsTotal/rowsShown;
+        console.log(numPages+' = '+rowsTotal+'/'+rowsShown);
+        for(i = 0; i < Math.round(numPages); i++) {
+            var pageNum = i + 1;
+            $('#myPager').append('<li><a href="#!" id="'+pageNum+'" class="Paginate_Numbers" rel="'+i+'">'+pageNum+'</a></li>');
+        }
+        var LastPage = i-1;
+        $('#myTable1 tbody tr').hide();
+        $('#myTable1 tbody tr').slice(0, rowsShown).show();
+        $('#rd-cont li:first').addClass('active');
+        $('<li class="first" style="display:none"><a href="#!" rel="0" class="Paginate_Numbers"><i class="material-icons">first_page</i></a></li>').insertBefore(".active");
+        $('<li class="prev" style="display:none"><a href="#!" class="Paginate_Next_Prev"><i class="material-icons">chevron_left</i></a></li>').insertBefore(".active");
+        $('#myPager').append('<li class="next"><a href="#!" class="Paginate_Next_Prev"><i class="material-icons">chevron_right</i></a></li>');
+        $('#myPager').append('<li class="last"><a href="#!" rel="'+LastPage+'" class="Paginate_Numbers"><i class="material-icons">last_page</i></a></li>');
+        Click_Pagination(rowsShown);
+        Click_Next_Prev(rowsShown);
+      } else {
+        $('#rd-cont').empty();
+      }
   }
-}
-
-$.ajax(settings3).done(function (response) {
-  console.log(response.items);
-  $.each(response.items, function(){
-    $('#tbody-bp-externo').append($('<tr>')
-                          .append($('<td>', {text: this.record_no}))
-                          .append($('<td>', {text: this.status}))
-                          .append($('<td>', {text: this.drde_02_fecha_cre_registro}))
-                          .append($('<td>', {text: this.project_projectname}))
-                          .append($('<td>', {text: this.title}))
-                          .append($('<td>', {text: this.trdi_01_creador}))
-                          .append($('<td>', {text: this.trde_03_nombre_documento}))
-                          .append($('<td>', {text: this.trde_04_asunto_documento}))
-                          .append($('<td>', {text: this.uuu_user_email}))
-                        );
-  });
-});
+  function Remove_Class(){
+    $('#rd-cont li').removeClass('active');
+  }
+  function Click_Pagination(rowsShown){
+    $('.Paginate_Numbers').bind('click', function(){
+        Remove_Class();
+        var Class_li = $(this).parent().attr('class');
+        if(Class_li == "first"){
+          document.getElementById("1").closest('li').classList.add("active");
+          Hide_Prev_Next_Button(1);
+        }else if(Class_li == "last"){
+          document.getElementById(i).closest('li').classList.add("active");
+          Hide_Prev_Next_Button(i);
+        }else{
+          $(this).closest('li').addClass('active');
+          var Id_li = $(this).attr('id');
+          Hide_Prev_Next_Button(Id_li);
+        }
+        // $(this).closest('li').removeClass('disabled');
+        var currPage = $(this).attr('rel');
+        var startItem = currPage * rowsShown;
+        var endItem = startItem + rowsShown;
+        console.log(startItem+' - '+endItem);
+        console.log(startItem+' - '+endItem);
+        $('#myTable1 tbody tr').css('opacity','1').hide().slice(startItem, endItem).
+        css('display','table-row').animate({opacity:1}, 300);
+    });
+  }
+  function Click_Next_Prev(rowsShown){
+    $('.Paginate_Next_Prev').bind('click', function(){
+        var Get_Element = document.getElementsByClassName("active")[9].getElementsByClassName("Paginate_Numbers")[0];
+        var Rel_Attribute = Get_Element.getAttribute('rel');
+        var Rel_Id = Get_Element.getAttribute('id');
+        var Class_li = $(this).parent().attr('class');
+        if (Class_li == "next") {
+          var currPage = parseInt(Rel_Attribute) + 1;
+          var next_Id = parseInt(Rel_Id) + 1;
+          Hide_Prev_Next_Button(next_Id);
+        }else{
+          var currPage = parseInt(Rel_Attribute) - 1;
+          var next_Id = parseInt(Rel_Id) - 1;
+          Hide_Prev_Next_Button(next_Id);
+        }
+        if(next_Id <= i && next_Id > 0){
+        Remove_Class();
+        document.getElementById(next_Id).closest('li').classList.add("active");
+        var startItem = currPage * rowsShown;
+        var endItem = startItem + rowsShown;
+        $('#myTable1 tbody tr').css('opacity','1').hide().slice(startItem, endItem).
+        css('display','table-row').animate({opacity:1}, 300);
+      }
+    });
+  }
+  function Hide_Prev_Next_Button(next_Id){
+    if (next_Id <= 1) {
+      $('.prev').hide();
+      $('.first').hide();
+      $('.next').show();
+      $('.last').show();
+    } else if (next_Id >= i) {
+      $('.next').hide();
+      $('.last').hide();
+      $('.prev').show();
+      $('.first').show();
+    }else{
+      $('.next').show();
+      $('.last').show();
+      $('.prev').show();
+      $('.first').show();
+    }
+  }
+// });
 </script>
