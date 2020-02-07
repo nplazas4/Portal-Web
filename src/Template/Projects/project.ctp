@@ -590,7 +590,7 @@
               </div>
               <div class="compare-item compare-item-version">
                   <div class="chart">
-                      <h2>Riesgos</h2>
+                      <h2>Riesgos <span>test</span></h2>
                       <div class="chart-risk">
                           <div class="chart-risk-list">
                               <ul class="pa-0 mb-3">
@@ -645,7 +645,7 @@
               </div>
           </div>
           <div class="chart box-risk">
-            <h2>Riesgos</h2>
+            <h2>Riesgos <span class="icon-download"><i class="material-icons">info_outline</i></span></h2>
             <div class="chart-risk">
                 <div class="chart-risk-list">
                     <ul class="py-0 ul-risk mb-6">
@@ -714,7 +714,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -730,7 +730,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
@@ -746,7 +746,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
@@ -762,7 +762,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach;?>
                               </td>
@@ -778,7 +778,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 5) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -797,7 +797,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 &&  $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -813,7 +813,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -829,7 +829,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -845,7 +845,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -861,7 +861,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 4) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -880,7 +880,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -896,7 +896,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -912,7 +912,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -928,7 +928,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -944,7 +944,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 3) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -963,7 +963,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -979,7 +979,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -995,7 +995,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -1011,7 +1011,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -1027,7 +1027,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 2) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -1046,7 +1046,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -1055,14 +1055,14 @@
                                   $color_rks;
                                   if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
                                     if ($rk->MATERIALIZACION == "materializado") {
-                                      $color_rks = "dark lighten-1";
+                                      $color_rks = "dark lighten-1 rks-post";
                                     } else {
                                       $color_rks = "warning";
                                     }
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -1078,7 +1078,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -1094,7 +1094,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                               </td>
@@ -1110,7 +1110,7 @@
                                     echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                   if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 1) {
-                                    echo '<span class="dark lighten-1" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
+                                    echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
                                   };
                                 endforeach; ?>
                              </td>
@@ -3894,7 +3894,7 @@
               });
             }
           }
-          $('#risk-tr span').hide();
+          // $('#risk-tr span').hide();
           $( document ).ready(function() {
             var isMobile = window.matchMedia("(max-width: 760px)").matches;
             if (isMobile) {
@@ -3902,9 +3902,10 @@
             } else {
               $('#btn-compare').show();
             }
+            $('.rks-post').hide();
             $('.modal-trigger.tooltipped').hover(function() {
                 var rks_position = $(this).attr('data-code');
-                $('#' + rks_position + '_risk').addClass('active').show();
+                $('#' + rks_position + '_risk').addClass('active');
                 $('#' + rks_position + '_post').addClass('active').show();
                 var rks_start = document.getElementById(rks_position + '_risk'),
                     rks_end = document.getElementById(rks_position + '_post');
@@ -3924,7 +3925,7 @@
                     document.querySelector('.leader-line').remove();
                 }
                 var rks_position = $(this).attr('data-code');
-                $('#' + rks_position + '_risk').removeClass('active').hide();
+                $('#' + rks_position + '_risk').removeClass('active');
                 $('#' + rks_position + '_post').removeClass('active').hide();
             });
           });

@@ -22,15 +22,6 @@
 <?= $this->Html->script('https://www.amcharts.com/lib/3/pie.js',['fullBase' => true]) ?>
 <?= $this->Html->script('https://www.amcharts.com/lib/3/gauge.js',['fullBase' => true]) ?>
 <?= $this->Html->script('https://www.amcharts.com/lib/3/lang/es.js',['fullBase' => true]) ?>
-<!-- </?= $this->Html->script('https://www.amcharts.com/lib/3/plugins/export/export.min.js',['fullBase' => true]) ?> -->
-<!-- </?= $this->Html->css('https://www.amcharts.com/lib/3/plugins/export/export.css',['fullBase' => true]) ?> -->
-<!-- <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script> -->
-<!-- <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script> -->
-<!-- <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script> -->
-<!-- <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" /> -->
 <script type="text/javascript">
     // Porcentajes de avances
     AmCharts.makeChart("advance",
