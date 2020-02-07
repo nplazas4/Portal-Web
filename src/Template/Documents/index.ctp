@@ -1,94 +1,3 @@
-
-<?php
-$headers_table = ['Registro','Estatus','Fecha registro','Proyecto','Título','Creador', 'Título doc', 'Descripción','Carpeta'];
-
-$data_table_logs = [
-   0 => [
-       'date'=>     '23-08-2019',
-       'work_name'=> 'Trabajo FR342D',
-       'interface'=> 'P6 CBBS',
-       'f_business'=>  'Get CBS',
-       'state'=>     'Exitoso',
-       'date_ini'=>  '09-05-2019',
-       'date_end'=> '10-05-2019',
-    ],
-    1 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-     2 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-     3 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-     4 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-     5 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-     6 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-     7 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-     8 => [
-        'date'=>     '23-08-2019',
-        'work_name'=> 'Trabajo FR342D',
-        'interface'=> 'P6 CBBS',
-        'f_business'=>  'Get CBS',
-        'state'=>     'Exitoso',
-        'date_ini'=>  '09-05-2019',
-        'date_end'=> '10-05-2019',
-     ],
-
-];
-
-?>
-
 <?php
     // Breadcrumb
     $breadcrumb = [
@@ -97,50 +6,22 @@ $data_table_logs = [
     ];
 
     // Proyectos
-    $projects = [
+    $charts = [
         [
             'id' => 1,
-            'name' => 'Gráfica 1', // Nombre proyecto
-            'phase' => 3, // Fase
-            'spi' => 0.74, // SPI
-            'cpiAnnual' => 42, // CPI anual
-            'acBac' => 11, // AC/BAC
-            'capexPlanned' => 16.09, // CAPEX Planeado (USD)
-            'capexExecuted' => 1.77, // CAPEX Ejecutado (USD)
-            'regional' => 'sur', // Regional
+            'name' => 'Gráfica 1', // Título gráfica
         ],
         [
             'id' => 2,
-            'name' => 'Gráfica 2',
-            'phase' => 1,
-            'spi' => 0.8,
-            'cpiAnnual' => 2,
-            'acBac' => 2,
-            'capexPlanned' => 16.09,
-            'capexExecuted' => 1.77,
-            'regional' => 'centro',
+            'name' => 'Gráfica 2'
         ],
         [
             'id' => 3,
-            'name' => 'Gráfica 3',
-            'phase' => 2,
-            'spi' => 0.9,
-            'cpiAnnual' => 50,
-            'acBac' => 45,
-            'capexPlanned' => 16.09,
-            'capexExecuted' => 1.77,
-            'regional' => 'norte',
+            'name' => 'Gráfica 3'
         ],
         [
             'id' => 4,
-            'name' => 'Gráfica 4',
-            'phase' => 4,
-            'spi' => 0.98,
-            'cpiAnnual' => 60,
-            'acBac' => 75,
-            'capexPlanned' => 16.09,
-            'capexExecuted' => 1.77,
-            'regional' => 'occidente',
+            'name' => 'Gráfica 4'
         ],
     ];
 
@@ -166,6 +47,10 @@ $data_table_logs = [
         'value' => '3'
       ]
     ];
+    // Títulos tablas
+    $headers_table_1 = ['Registro','Estatus','Fecha registro','Proyecto','Título','Creador','Título doc.','Descripción','Carpeta'];
+    $headers_table_2 = ['Registro','Estatus','Fecha registro','Proyecto','Título','Creador','Nombre doc.','Asunto doc.','Aprobación'];
+    $headers_table_3 = ['Registro','Estatus','Fecha registro','Proyecto','Título','Creador','Nombre doc.','Asunto doc.','Email'];
 ?>
 <div class="section portal-projects">
   <div class="breadcrumb-container">
@@ -216,7 +101,7 @@ $data_table_logs = [
         $cont = 0;
         $loop = 0;
       ?>
-      <?php foreach ($projects as $project): ?>
+      <?php foreach ($charts as $chart): ?>
         <?php
           $loop = $a++;
           if($loop == 2){
@@ -230,10 +115,10 @@ $data_table_logs = [
           <div class="col xl12 l12 m12 s12">
             <div class="graph-card">
               <div class="sheet-options">
-                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
+                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $chart['id'] ?>'>
                   <i class="material-icons" style="font-size: 2rem">more_vert</i>
                 </a>
-                <ul id='dropdown<?= $project['id'] ?>' class='dropdown-content'>
+                <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
                   <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
                   <li>
                     <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -245,9 +130,9 @@ $data_table_logs = [
               <div class="head-dropdown-filter">
                 <div class="cont-title">
                   <?php if($loop == 1):?>
-                    <div class="title-graph p1 tc" style="font-weight: bold;">Estados</div>
+                    <div class="title-graph p1 tc" style="font-weight: bold;">Estados de los registros</div>
                   <?php else:?>
-                    <div class="title-graph p1 tc" style="font-weight: bold;">Usuarios</div>
+                    <div class="title-graph p1 tc" style="font-weight: bold;">Creadores de registros</div>
                   <?php endif;?>
                 </div>
               </div>
@@ -266,57 +151,56 @@ $data_table_logs = [
           </div>
         </div>
         <?php elseif($loop == 3):?>
-          <div class="d-flex col s12 m12 l9 xl9">
-          <div class="col xl12 l12 m12 s12">
-            <div class="graph-card" style="overflow: auto;">
-              <div class="sheet-options">
-                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
-                  <i class="material-icons" style="font-size: 2rem">more_vert</i>
-                </a>
-                <ul id='dropdown<?= $project['id'] ?>' class='dropdown-content'>
-                  <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
-                  <li>
-                    <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                      <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
-                    </svg></i>Descargar pdf</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="head-dropdown-filter">
-                <div class="cont-title">
-                  <div class="title-graph p1 tc" style="font-weight: bold;">Proyectos</div>
+          <div id="container-chart-3" class="d-flex col s12 m12 l8 xl8">
+            <div class="col xl12 l12 m12 s12">
+              <div class="graph-card" style="overflow: auto;">
+                <div class="sheet-options">
+                  <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $chart['id'] ?>'>
+                    <i class="material-icons" style="font-size: 2rem">more_vert</i>
+                  </a>
+                  <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
+                    <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
+                    <li>
+                      <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
+                      </svg></i>Descargar pdf</a>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="carousel carousel-slider center">
-                <div class="carousel-item white" href="#one!">
-                  <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                <div class="head-dropdown-filter">
+                  <div class="cont-title">
+                    <?php echo $this->Html->link(__('Export to PDF'), array('action' => 'index', '_ext' => 'pdf')); ?>
+                    <div class="title-graph p1 tc" style="font-weight: bold;">Número de registros por proyecto</div>
+                  </div>
                 </div>
-                <div id="projectCarousel" class="carousel-item white white-text" href="#two!">
-                  <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
-                </div>
-                <div class="carousel-item white white-text" href="#three!">
-                  <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                <div class="carousel carousel-slider center">
+                  <div class="carousel-item white" href="#one!">
+                    <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                  </div>
+                  <div id="projectCarousel" class="carousel-item white white-text" href="#two!">
+                    <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                  </div>
+                  <div class="carousel-item white white-text" href="#three!">
+                    <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">
+        <!-- <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">
           <div class="col xl12 l12 m12 s12">
-            <div id="legendwrapper" class="graph-card" style="height: 300px;">
-              <div id="legenddiv"></div>
-            </div>
+            
           </div>
-        </div>
+        </div> -->
         <?php else:?>
-          <div class="d-flex col s12 m6 l3 xl3">
+          <div class="d-flex col s12 m6 l4 xl4">
           <div class="col xl12 l12 m12 s12">
             <div class="graph-card">
               <div class="sheet-options">
-                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $project['id'] ?>'>
+                <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $chart['id'] ?>'>
                   <i class="material-icons" style="font-size: 2rem">more_vert</i>
                 </a>
-                <ul id='dropdown<?= $project['id'] ?>' class='dropdown-content'>
+                <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
                   <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
                   <li>
                     <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -327,7 +211,7 @@ $data_table_logs = [
               </div>
               <div class="head-dropdown-filter">
                 <div class="cont-title">
-                  <div class="title-graph p1 tc" style="font-weight: bold;">Procesos de negocio</div>
+                  <div class="title-graph p1 tc" style="font-weight: bold;">Procesos de negocio - Proyecto</div>
                 </div>
               </div>
               <div class="carousel carousel-slider center">
@@ -355,12 +239,12 @@ $data_table_logs = [
               <thead>
                 <tr>
                   <th>BP Registro Documental Contratista</th>
-                  <?php foreach($headers_table as $item_header): ?>
+                  <?php foreach($headers_table_1 as $item_header): ?>
                     <th></th>
                   <?php endforeach;?>
                 </tr> 
                 <tr>
-                  <?php foreach($headers_table as $item_header): ?>
+                  <?php foreach($headers_table_1 as $item_header): ?>
                     <th>
                       <?= $item_header ?>
                       <i class="xed fas fa-arrow-up"></i>
@@ -401,12 +285,12 @@ $data_table_logs = [
                 <thead>
                   <tr>
                     <th>BP Registro Documental Interno</th>
-                    <?php foreach($headers_table as $item_header): ?>
+                    <?php foreach($headers_table_2 as $item_header): ?>
                       <th></th>
                     <?php endforeach;?>
                   </tr> 
                   <tr>
-                    <?php foreach($headers_table as $item_header): ?>
+                    <?php foreach($headers_table_2 as $item_header): ?>
                       <th>
                         <?= $item_header ?>
                         <i class="xed fas fa-arrow-up"></i>
@@ -426,7 +310,7 @@ $data_table_logs = [
                       <div class="label">Filas por pág:</div>
                       <div class="cont-select">
                         <select id="row-range-interno" class="row-range">
-                          <option value="5">25</option>
+                          <option value="2">25</option>
                           <option value="50">50</option>
                           <option value="100">100</option>
                           <option value="250">250</option>
@@ -447,12 +331,12 @@ $data_table_logs = [
                   <thead>
                     <tr>
                       <th>BP Registro Documental Externo</th>
-                      <?php foreach($headers_table as $item_header): ?>
+                      <?php foreach($headers_table_3 as $item_header): ?>
                         <th></th>
                       <?php endforeach;?>
                     </tr> 
                     <tr>
-                      <?php foreach($headers_table as $item_header): ?>
+                      <?php foreach($headers_table_3 as $item_header): ?>
                         <th>
                           <?= $item_header ?>
                           <i class="xed fas fa-arrow-up"></i>
@@ -694,7 +578,7 @@ $data_table_logs = [
           listGD(response.items[0].code_unifier);
         }
       }
-      });
+    });
   }
 
   function filter_bp(unifier_code, chart_num) {
@@ -713,36 +597,47 @@ $data_table_logs = [
       if(response.items.length > 0){
         $.each(response.items, function(){
           var option = new Option(this.name, this.id_p_bp);
-          if(this.id_p_bp == '181' && chart_num == undefined){
+          // if(this.id_p_bp == '181' && chart_num == undefined){
             option.setAttribute('selected', 'selected');
             // CONDICIONAL GRÁFICA SELECCIONADA - GRÁFICA 1, 2, 3 GENERAL PRIMERA CARGA -- NOTA
-            graph1(this.id_p_bp);
-            graph2(this.id_p_bp);
-            graph3(this.name);
-          } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3' && chart_num != '5') {
-            eval("graph"+chart_num + "("+this.id_p_bp+")");
-          } else if(chart_num == '3') {
-            graph3(this.name);
-          }
-          else if(chart_num == '1' || chart_num == '2') {
-            graph1(this.id_p_bp);
-            graph2(this.id_p_bp);
-          }
+          // }
           // append_options('select-bp-', option);
           $('.select-bp-gd').append(option);
           $('.select-bp-gd').formSelect();
         });
+        var obj_length = (response.items.length - 1);
+        if(chart_num == undefined){
+            graph1(response.items[obj_length].id_p_bp);
+            graph2(response.items[obj_length].id_p_bp);
+            graph3(response.items[obj_length].name);
+          } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3' && chart_num != '5') {
+            eval("graph"+chart_num + "("+response.items[obj_length].id_p_bp+")");
+          } else if(chart_num == '3') {
+            graph3(response.items[obj_length].name);
+          }
+          else if(chart_num == '1' || chart_num == '2') {
+            graph1(response.items[obj_length].id_p_bp);
+            graph2(response.items[obj_length].id_p_bp);
+          }
+        
       } else {
-        console.log("El proyecto seleccionado, no tiene ningún BP asociado.")
-        var chart_number = '1',
-            dataprovider = [];
+        console.log("El proyecto seleccionado, no tiene ningún BP asociado. ");
+        var dataprovider = [];
         // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
-        updateData1(dataprovider, chart_number);
-        updateColData1(dataprovider, chart_number);
-        updateBarData1(dataprovider, chart_number);
-        updateData2(dataprovider, '2');
-        updateColData2(dataprovider, '2');
-        updateBarData2(dataprovider, '2');
+        if(chart_num != '5'){
+          if(chart_num != '1' && chart_num != '2'){
+            eval("updateData"+chart_num + "("+dataprovider+","+chart_number+")");
+            eval("updateColData"+chart_num + "("+dataprovider+","+chart_number+")");
+            eval("updateBarData"+chart_num + "("+dataprovider+","+chart_number+")");
+          } else {
+            updateData1(dataprovider, '1');
+            updateColData1(dataprovider, '1');
+            updateBarData1(dataprovider, '1');
+            updateData2(dataprovider, '2');
+            updateColData2(dataprovider, '2');
+            updateBarData2(dataprovider, '2');
+          }
+        }
       }
     });
   }
@@ -1001,7 +896,7 @@ $data_table_logs = [
       this["chartDonut"+i].dispose();
     }
     this["chartDonut"+i] = am4core.create("advance"+i, am4charts.PieChart);
-
+    this["chartDonut"+i].hideLabelsPercent = 15;
     // Add data
     this["chartDonut"+i].data = generateData();
     // Add and configure series
@@ -1023,6 +918,11 @@ $data_table_logs = [
         "value": "pointer"
       }
     ];
+    this["pieSeries"+i].ticks.template.adapter.add("hidden", hideSmall);
+    this["pieSeries"+i].labels.template.adapter.add("hidden", hideSmall);
+    function hideSmall(hidden, target) {
+      return target.dataItem.values.value.percent < 5 ? true : false;
+    }
     if(i != 3){
       this["pieSeries"+i].alignLabels = false;
       this["pieSeries"+i].labels.template.bent = true;
@@ -1039,21 +939,30 @@ $data_table_logs = [
       chartDonut3.legend = new am4charts.Legend();
       chartDonut3.legend.labels.template.wrap = true;
       /* Create a separate container to put legend in */
-      var legendContainer = am4core.create("legenddiv", am4core.Container);
-      legendContainer.width = am4core.percent(80);
-      legendContainer.height = am4core.percent(100);
-      chartDonut3.legend.parent = legendContainer;
+      if($('#legenddiv').length == 0){
+        $('#container-chart-3').after($('<div>',{id : 'legendMainDiv', class : 'd-flex col s12 m6 l3 xl3'})
+                               .append($('<div>',{class : 'col xl12 l12 m12 s12'})
+                               .append($('<div>',{id : 'legendwrapper', class : 'graph-card', style : 'height: 300px;'})
+                               .append($('<div>',{id : 'legenddiv'}))
+                              )));
+        var legendContainer = am4core.create("legenddiv", am4core.Container);
+        legendContainer.width = am4core.percent(80);
+        legendContainer.height = am4core.percent(100);
+        chartDonut3.legend.parent = legendContainer;
 
-      chartDonut3.events.on("datavalidated", resizeLegend);
-      chartDonut3.events.on("maxsizechanged", resizeLegend);
-      // chartDonut3.legend.labels.template.truncate = true;
-      // chartDonut3.legend.labels.template.wrap = true;
+        chartDonut3.events.on("datavalidated", resizeLegend);
+        chartDonut3.events.on("maxsizechanged", resizeLegend);
+        // chartDonut3.legend.labels.template.truncate = true;
+        // chartDonut3.legend.labels.template.wrap = true;
 
-      function resizeLegend(ev) {
-        document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
+        function resizeLegend(ev) {
+          document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
+        }
+      } else {
+        $('#legendMainDiv').remove();
       }
     }
-
+  
     // Create a base filter effect (as if it's not there) for the hover to return to
     this["shadow"+i] = this["pieSeries"+i].slices.template.filters.push(new am4core.DropShadowFilter);
     this["shadow"+i].opacity = 0;
@@ -1205,26 +1114,28 @@ $data_table_logs = [
         return bp_data;
     }
     $('html').on("webkitTransitionEnd transitionend", function(e) {
-      if($('#projectCarousel').hasClass("active-side")){
+      if($('#projectCarousel').hasClass("active")){
         $("#legendMainDiv").show();
       } else{
-        $("#legendMainDiv").hide();
+        // $("#legendMainDiv").hide();
       }
     });
     var contInterval = 0;
-    var timer = setInterval(function(){
-      var a = contInterval++;
-      // if(a == 1){
-        $("#legendMainDiv").hide();
-      // }
-      clearInterval(timer);
-    }, 4400);
+    // var timer = setInterval(function(){
+    //   var a = contInterval++;
+    //   // if(a == 1){
+    //     $("#legendMainDiv").hide();
+    //   // }
+    //   clearInterval(timer);
+    // }, 4400);
     $('.table-container').hide();
-    $('#graph_link').click(function(){
+    $('#graph_link').click(function(e){
+      e.preventDefault();
       $('#chart-container').show();
       $('.table-container').hide();
     });
-    $('#list_link').click(function(){
+    $('#list_link').click(function(e){
+      e.preventDefault();
       $('#chart-container').hide();
       $('.table-container').show();
     });
@@ -1318,7 +1229,7 @@ function bp_reg_contratista(code_unifier){
                                 .append($('<td>', {text: this.trdocon_033_carpeta_geb}))
                                 );
     });
-    tableRange('row-range-cont', 'myTable1');
+    // tableRange('row-range-cont', 'myTable1');
   });
 }
 function bp__reg_interno(code_unifier){
@@ -1354,7 +1265,7 @@ function bp__reg_interno(code_unifier){
                                 .append($('<td>', {text: this.trdi_05_requiere_apro}))
                                 );
     });
-    tableRange('row-range-interno', 'myTable2');
+    tableRange('row-range-interno', '2', 'rd-interno');
   });
 }
 function bp_reg_externo(code_unifier){
@@ -1390,62 +1301,61 @@ function bp_reg_externo(code_unifier){
                             .append($('<td>', {text: this.uuu_user_email}))
                           );
     });
-    tableRange('row-range-externo', 'myTable3');
+    tableRange('row-range-externo', '3', 'rd-externo');
   });
 }
 // $(document).ready(function(){
-var targetTable = document.getElementById('tbody-bp-contratista');
+// var targetTable = document.getElementById('tbody-bp-contratista');
 var targetTable2 = document.getElementById('tbody-bp-interno');
-var targetTable3 = document.getElementById('tbody-bp-externo');
+// var targetTable3 = document.getElementById('tbody-bp-externo');
 // REMOVE SEARCH
-$('#remove-search').click(function(){
-  $('#Search_Input').val("");
-  logicSearch(targetTable, '');
-  logicSearch(targetTable2, '');
-  logicSearch(targetTable3, '');
-})
+// $('#remove-search').click(function(){
+//   $('#Search_Input').val("");
+//   logicSearch(targetTable, '');
+//   logicSearch(targetTable2, '');
+//   logicSearch(targetTable3, '');
+// })
 // SEARCH FUNCTION
-function Search() {
-  var searchText = document.getElementById('Search_Input').value.toUpperCase();
-  if (searchText != null) {
-    logicSearch(targetTable, searchText);
-    logicSearch(targetTable2, searchText);
-    logicSearch(targetTable3, searchText);
-  }
-}
-function logicSearch(targetTable, searchText){
-  var targetTableColCount;
-  // alert(targetTable.rows.length);
-  //Loop through table rows
-  for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
-    var rowData = '';
-    //Get column count from header row
-    if (rowIndex == 0) {
-      targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
-      continue; //do not execute further code for header row.
-    }
 
-    //Process data rows. (rowIndex >= 1)
-    for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
-      rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).textContent.toUpperCase();
-    }
-    //If search term is not found in row data
-    //then hide the row, else show
-    if (rowData.indexOf(searchText) == -1) {
-      $('.paginator.center').hide();
-      targetTable.rows.item(rowIndex).style.display = 'none';
-    } else {
-      if (searchText != "") {
-      $('.paginator.center').hide();
-      targetTable.rows.item(rowIndex).style.display = 'table-row';
-      } else {
-        var Get_Element_Button_Number = document.getElementsByClassName('active')[2].getElementsByClassName("Paginate_Numbers")[0];
-        $(Get_Element_Button_Number).click();
-        $('.paginator.center').show();
+function Search() {
+      var searchText = document.getElementById('Search_Input').value.toUpperCase();
+      if (searchText != null) {
+          var targetTable = document.getElementById('tbody-bp-interno');
+          console.log(targetTable);
+          var targetTableColCount;
+          //Loop through table rows
+          for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+              var rowData = '';
+
+              //Get column count from header row
+              if (rowIndex == 0) {
+                  targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+                  continue; //do not execute further code for header row.
+              }
+
+              //Process data rows. (rowIndex >= 1)
+              for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+                  rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).textContent.toUpperCase();
+              }
+              console.log(rowData);
+              //If search term is not found in row data
+              //then hide the row, else show
+              if (rowData.indexOf(searchText) == -1) {
+                  $('.paginator.center').hide();
+                  targetTable.rows.item(rowIndex).style.display = 'none';
+              } else {
+                  if (searchText != "") {
+                      $('.paginator.center').hide();
+                      targetTable.rows.item(rowIndex).style.display = 'table-row';
+                  } else {
+                      var Get_Element_Button_Number = document.getElementsByClassName('active')[9].getElementsByClassName("Paginate_Numbers2")[0];
+                      $(Get_Element_Button_Number).click();
+                      $('.paginator.center').show();
+                  }
+              }
+          }
       }
-    }
   }
-}
   // $('#filter_cancel').hide();
   // SELECT LIST FILTERS (CREATOR AND STATUS)
   select_actual = $('.filter-list');
@@ -1481,106 +1391,103 @@ function logicSearch(targetTable, searchText){
       var range = $(this).children(":selected");
       table(range.val());     
     });
-    function tableRange(select_obj, table_id){
+    function tableRange(select_obj, table_id, pag_obj){
       var range = $('#'+select_obj).children(":selected");
-      table(range.val(),table_id);
+      table(range.val(), table_id, pag_obj);
     }
-    function table(range, table_id){
-      $('#rd-cont').empty();
+    function table(range, table_id, pag_obj){
+      $('#'+pag_obj).empty();
       // $('#myTable2').after('<div id="nav" class="paginator center mt-4"></div>');
-      $('#rd-cont').append('<ul class="pagination" id="myPager"></ul>');
+      $('#'+pag_obj).append('<ul class="pagination" id="myPager'+table_id+'"></ul>');
       var rowsShown = range;
-      var rowsTotal = $('#myTable1 tbody tr').length;
+      var rowsTotal = $('#myTable'+table_id+' tbody tr').length;
       if (rowsTotal > 0) {
         var numPages = rowsTotal/rowsShown;
-        console.log(numPages+' = '+rowsTotal+'/'+rowsShown);
-        for(i = 0; i < Math.round(numPages); i++) {
+        for(i = 0; i < numPages; i++) {
             var pageNum = i + 1;
-            $('#myPager').append('<li><a href="#!" id="'+pageNum+'" class="Paginate_Numbers" rel="'+i+'">'+pageNum+'</a></li>');
+            $('#myPager'+table_id).append('<li><a href="#!" id="'+table_id+'-'+pageNum+'" data-ref="'+pageNum+'" class="Paginate_Numbers'+table_id+'" rel="'+i+'">'+pageNum+'</a></li>');
         }
         var LastPage = i-1;
-        $('#myTable1 tbody tr').hide();
-        $('#myTable1 tbody tr').slice(0, rowsShown).show();
-        $('#rd-cont li:first').addClass('active');
-        $('<li class="first" style="display:none"><a href="#!" rel="0" class="Paginate_Numbers"><i class="material-icons">first_page</i></a></li>').insertBefore(".active");
-        $('<li class="prev" style="display:none"><a href="#!" class="Paginate_Next_Prev"><i class="material-icons">chevron_left</i></a></li>').insertBefore(".active");
-        $('#myPager').append('<li class="next"><a href="#!" class="Paginate_Next_Prev"><i class="material-icons">chevron_right</i></a></li>');
-        $('#myPager').append('<li class="last"><a href="#!" rel="'+LastPage+'" class="Paginate_Numbers"><i class="material-icons">last_page</i></a></li>');
-        Click_Pagination(rowsShown);
-        Click_Next_Prev(rowsShown);
+        $('#myTable'+table_id+' tbody tr').hide();
+        $('#myTable'+table_id+' tbody tr').slice(0, rowsShown).show();
+        $('#'+pag_obj+' li:first').addClass('active pagination-item-'+table_id);
+        $('<li class="first-'+table_id+'" style="display:none"><a href="#!" rel="0" class="Paginate_Numbers'+table_id+'"><i class="material-icons">first_page</i></a></li>').insertBefore(".active.pagination-item-"+table_id);
+        $('<li class="prev-'+table_id+'" style="display:none"><a href="#!" class="Paginate_Next_Prev'+table_id+'"><i class="material-icons">chevron_left</i></a></li>').insertBefore(".active.pagination-item-"+table_id);
+        $('#myPager'+table_id).append('<li class="next-'+table_id+'"><a href="#!" class="Paginate_Next_Prev'+table_id+'"><i class="material-icons">chevron_right</i></a></li>');
+        $('#myPager'+table_id).append('<li class="last-'+table_id+'"><a href="#!" rel="'+LastPage+'" class="Paginate_Numbers'+table_id+'"><i class="material-icons">last_page</i></a></li>');
+        Click_Pagination(rowsShown,table_id,pag_obj,Math.round(numPages));
+        Click_Next_Prev(rowsShown,table_id,pag_obj,Math.round(numPages));
       } else {
-        $('#rd-cont').empty();
+        $('#'+pag_obj).empty();
       }
   }
-  function Remove_Class(){
-    $('#rd-cont li').removeClass('active');
+  function Remove_Class(pag_obj, table_id){
+    $('#'+pag_obj+' li').removeClass('active pagination-item-'+table_id);
   }
-  function Click_Pagination(rowsShown){
-    $('.Paginate_Numbers').bind('click', function(){
-        Remove_Class();
+  function Click_Pagination(rowsShown,table_id, pag_obj, numPages){
+    $('.Paginate_Numbers'+table_id).bind('click', function(){
+        Remove_Class(pag_obj, table_id);
         var Class_li = $(this).parent().attr('class');
-        if(Class_li == "first"){
-          document.getElementById("1").closest('li').classList.add("active");
-          Hide_Prev_Next_Button(1);
-        }else if(Class_li == "last"){
-          document.getElementById(i).closest('li').classList.add("active");
-          Hide_Prev_Next_Button(i);
+        if(Class_li == "first-"+table_id){
+          document.getElementById(table_id+'-1').closest('li').classList.add("active", "pagination-item-"+table_id);
+          Hide_Prev_Next_Button(1, table_id);
+        }else if(Class_li == "last-"+table_id){
+          document.getElementById(table_id+'-'+numPages).closest('li').classList.add("active", "pagination-item-"+table_id);
+          Hide_Prev_Next_Button(numPages, table_id,numPages);
         }else{
-          $(this).closest('li').addClass('active');
-          var Id_li = $(this).attr('id');
-          Hide_Prev_Next_Button(Id_li);
+          $(this).closest('li').addClass('active pagination-item-'+table_id);
+          var Id_li = $(this).attr('data-ref');
+          Hide_Prev_Next_Button(Id_li,table_id,numPages);
         }
         // $(this).closest('li').removeClass('disabled');
         var currPage = $(this).attr('rel');
         var startItem = currPage * rowsShown;
-        var endItem = startItem + rowsShown;
-        console.log(startItem+' - '+endItem);
-        console.log(startItem+' - '+endItem);
-        $('#myTable1 tbody tr').css('opacity','1').hide().slice(startItem, endItem).
+        var endItem = parseFloat(startItem) + parseFloat(rowsShown);
+        $('#myTable'+table_id+' tbody tr').css('opacity','1').hide().slice(startItem, endItem).
         css('display','table-row').animate({opacity:1}, 300);
     });
   }
-  function Click_Next_Prev(rowsShown){
-    $('.Paginate_Next_Prev').bind('click', function(){
-        var Get_Element = document.getElementsByClassName("active")[9].getElementsByClassName("Paginate_Numbers")[0];
+  function Click_Next_Prev(rowsShown,table_id, pag_obj,numPages){
+    $('.Paginate_Next_Prev'+table_id).bind('click', function(){
+        var Get_Element = document.getElementsByClassName("pagination-item-"+table_id)[0].getElementsByClassName("Paginate_Numbers"+table_id)[0];
         var Rel_Attribute = Get_Element.getAttribute('rel');
-        var Rel_Id = Get_Element.getAttribute('id');
+        var Rel_Id = Get_Element.getAttribute('data-ref');
         var Class_li = $(this).parent().attr('class');
-        if (Class_li == "next") {
+        if (Class_li == "next-"+table_id) {
           var currPage = parseInt(Rel_Attribute) + 1;
           var next_Id = parseInt(Rel_Id) + 1;
-          Hide_Prev_Next_Button(next_Id);
+          Hide_Prev_Next_Button(next_Id, table_id, numPages);
         }else{
           var currPage = parseInt(Rel_Attribute) - 1;
           var next_Id = parseInt(Rel_Id) - 1;
-          Hide_Prev_Next_Button(next_Id);
+          Hide_Prev_Next_Button(next_Id,table_id,numPages);
         }
         if(next_Id <= i && next_Id > 0){
-        Remove_Class();
-        document.getElementById(next_Id).closest('li').classList.add("active");
+        Remove_Class(pag_obj, table_id);
+        document.getElementById(table_id+'-'+next_Id).closest('li').classList.add("active", "pagination-item-"+table_id);
         var startItem = currPage * rowsShown;
-        var endItem = startItem + rowsShown;
-        $('#myTable1 tbody tr').css('opacity','1').hide().slice(startItem, endItem).
+         var endItem = parseFloat(startItem) + parseFloat(rowsShown);
+        $('#myTable'+table_id+' tbody tr').css('opacity','1').hide().slice(startItem, endItem).
         css('display','table-row').animate({opacity:1}, 300);
       }
     });
   }
-  function Hide_Prev_Next_Button(next_Id){
+  function Hide_Prev_Next_Button(next_Id,table_id,numPages){
     if (next_Id <= 1) {
-      $('.prev').hide();
-      $('.first').hide();
-      $('.next').show();
-      $('.last').show();
-    } else if (next_Id >= i) {
-      $('.next').hide();
-      $('.last').hide();
-      $('.prev').show();
-      $('.first').show();
+      $('.prev-'+table_id).hide();
+      $('.first-'+table_id).hide();
+      $('.next-'+table_id).show();
+      $('.last-'+table_id).show();
+    } else if (next_Id >= numPages) {
+      $('.next-'+table_id).hide();
+      $('.last-'+table_id).hide();
+      $('.prev-'+table_id).show();
+      $('.first-'+table_id).show();
     }else{
-      $('.next').show();
-      $('.last').show();
-      $('.prev').show();
-      $('.first').show();
+      $('.next-'+table_id).show();
+      $('.last-'+table_id).show();
+      $('.prev-'+table_id).show();
+      $('.first-'+table_id).show();
     }
   }
 // });

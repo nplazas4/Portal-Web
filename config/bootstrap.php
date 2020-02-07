@@ -225,7 +225,7 @@ try {
             'bottom' => 10,
             'left' => 15,
             'right' => 15,
-            'top' => 10
+            'top' => 3
     ],
     'download' => true
 ]);

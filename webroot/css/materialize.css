@@ -2393,7 +2393,7 @@
 
 ::-webkit-scrollbar {
   border-radius: 10px;
-  height: 5px;
+  height: 7px;
   width: 5px;
   opacity: 0.5;
 }
@@ -12217,10 +12217,6 @@ html, body{ margin:0; padding: 0}
   }
 }
 @media (min-width: 1201px) and (max-width: 3800px) {
-  .cont-btn-filter {
-    /* display: none; */
-  }
-
   .cont-filters-mobile {
     display: none;
   }
@@ -12240,6 +12236,8 @@ html, body{ margin:0; padding: 0}
 .btn_filter i {
   color: rgba(0, 0, 0, 0.7);
 }
+/* tooltip risk */
+
 
 
 

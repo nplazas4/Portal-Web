@@ -214,7 +214,7 @@
   function Search() {
       var searchText = document.getElementById('Search_Input').value.toUpperCase();
       if (searchText != null) {
-          
+          var targetTable = document.getElementById('myTable');
           var targetTableColCount;
           //Loop through table rows
           for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
