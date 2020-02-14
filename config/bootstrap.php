@@ -215,17 +215,24 @@ try {
         // 'binary' => '/usr/local/bin/wkhtmltopdf', // Si estas en Mac OS X / Linux
         'binary' => 'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe',
         'options' => [
-            'print-media-type' => false,
+            'print-media-type' => true,
             'outline' => true,
-            'dpi' => 300,
-            // 'javascript-delay' => 500,
+            'dpi' => 200,
+            'debug-javascript' => true,
+            'enable-javascript' => true,
+            'javascript-delay' => 800,
+            'no-stop-slow-scripts' => true,
+            'footer-right' => '[page]',
+            'footer-font-size' => 8,
+            'header-html' => "http://portalgeb.com/Portal-Web/documents/image",
+            'page-size' => 'Letter',
         ],
     ],
     'margin' => [
             'bottom' => 10,
-            'left' => 15,
-            'right' => 15,
-            'top' => 3
+            'left' => 10,
+            'right' => 10,
+            'top' => 25,
     ],
     'download' => true
 ]);

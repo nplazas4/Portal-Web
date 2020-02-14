@@ -120,8 +120,8 @@
                 </a>
                 <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
                   <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
-                  <li>
-                    <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <li id="li-chart-<?=$chart['id']?>">
+                    <a id="link-pdf-<?=$chart['id']?>"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
                     </svg></i>Descargar pdf</a>
                   </li>
@@ -137,14 +137,14 @@
                 </div>
               </div>
               <div class="carousel carousel-slider center">
-                <div class="carousel-item white" href="#one!">
-                  <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white" href="#one!">
+                  <div id="advance<?=$loop?>" data-chart="pie" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
                 </div>
-                <div class="carousel-item white white-text" href="#two!">
-                  <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#two!">
+                  <div id="column<?=$loop?>" data-chart="column" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
                 </div>
-                <div class="carousel-item white white-text" href="#three!">
-                  <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#three!">
+                  <div id="bar<?=$loop?>" data-chart="bar" style="width: 90%; height: 370px; margin-left: 2%;"></div>
                 </div>
               </div>
             </div>
@@ -160,8 +160,8 @@
                   </a>
                   <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
                     <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
-                    <li>
-                      <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <li id="li-chart-<?=$chart['id']?>">
+                      <a id="link-pdf-3"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
                       </svg></i>Descargar pdf</a>
                     </li>
@@ -169,29 +169,30 @@
                 </div>
                 <div class="head-dropdown-filter">
                   <div class="cont-title">
-                    <?php echo $this->Html->link(__('Export to PDF'), array('action' => 'index', '_ext' => 'pdf')); ?>
                     <div class="title-graph p1 tc" style="font-weight: bold;">Número de registros por proyecto</div>
                   </div>
                 </div>
                 <div class="carousel carousel-slider center">
-                  <div class="carousel-item white" href="#one!">
-                    <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                  <div class="carousel-item carousel-<?= $chart['id'] ?> white" href="#one!">
+                    <div id="column<?=$loop?>" data-chart="column" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
                   </div>
-                  <div id="projectCarousel" class="carousel-item white white-text" href="#two!">
-                    <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                  <div id="projectCarousel" class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#two!">
+                    <div id="advance<?=$loop?>" data-chart="pie" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
                   </div>
-                  <div class="carousel-item white white-text" href="#three!">
-                    <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                  <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#three!">
+                    <div id="bar<?=$loop?>" data-chart="bar" style="width: 90%; height: 370px; margin-left: 2%;"></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        <!-- <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">
-          <div class="col xl12 l12 m12 s12">
-            
+          <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">
+            <div class="col xl12 l12 m12 s12">
+              <div id="legendwrapper" class="graph-card" style="height: 300px;">
+                <div id="legenddiv"></div>
+              </div>
+            </div>
           </div>
-        </div> -->
         <?php else:?>
           <div class="d-flex col s12 m6 l4 xl4">
           <div class="col xl12 l12 m12 s12">
@@ -202,8 +203,8 @@
                 </a>
                 <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
                   <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
-                  <li>
-                    <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <li id="li-chart-<?=$chart['id']?>">
+                    <a id="link-pdf-4"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
                       <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
                     </svg></i>Descargar pdf</a>
                   </li>
@@ -215,14 +216,14 @@
                 </div>
               </div>
               <div class="carousel carousel-slider center">
-                <div class="carousel-item white" href="#one!">
-                  <div id="advance<?=$loop?>" class="" style="width: 90%; height: 300px; margin-left: 5%;"></div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white" href="#one!">
+                  <div id="advance<?=$loop?>" data-chart="pie" class="" style="width: 90%; height: 300px; margin-left: 5%;"></div>
                 </div>
-                <div class="carousel-item white white-text" href="#two!">
-                  <div id="column<?=$loop?>" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#two!">
+                  <div id="column<?=$loop?>" data-chart="column" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
                 </div>
-                <div class="carousel-item white white-text" href="#three!">
-                  <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#three!">
+                  <div id="bar<?=$loop?>" data-chart="bar" style="width: 90%; height: 370px; margin-left: 2%;"></div>
                 </div>
               </div>
             </div>
@@ -340,7 +341,6 @@
                         <th>
                           <?= $item_header ?>
                           <i class="xed fas fa-arrow-up"></i>
-                          <!-- <i class="xed fas fa-arrow-down"></i> -->
                         </th>
                       <?php endforeach;?>
                     </tr>
@@ -364,11 +364,6 @@
                           </select>
                         </div>
                       </div>
-                      <!-- <div class="conter-rows">1-8 de 200</div>
-                      <div>
-                        <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
-                        <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -384,78 +379,70 @@
           $a = $i;
         }
       ?>
-    <div id="modalFilter<?=$a?>" class="modal w-600" style="overflow-y:visible;">
-      <div class="modal-content">
-        <a class="modal-close close">
-          <i class="material-icons">close</i>
-        </a>
-        <h2>Filtrar gráfica <?=$i?></h2>
-        <div class="row wrap ma-0">
-          <div class="d-flex col s12 m6 l6 xl6">
-            <div class="input-field col xl12 l12 m12 s12">
-              <select class="select-gen-gd" id="select-gen-<?=$i?>"></select>
-              <label style="color: #333333; font-weight: bold;">Grupo estratégicos de negocios</label>
-            </div>
-          </div>
-          <div class="d-flex col s12 m6 l6 xl6">
-            <div class="input-field col xl12 l12 m12 s12">
-              <select class="select-comp-gd" id="select-company-<?=$i?>"></select>
-              <label style="color: #333333; font-weight: bold;">Empresas</label>
-            </div>
-          </div>
-          <div class="d-flex col s12 m6 l6 xl6">
-            <div class="input-field col xl12 l12 m12 s12">
-              <select class="select-proj-gd" id="select-project-<?=$i?>"></select>
-              <label style="color: #333333; font-weight: bold;">Proyectos</label>
-            </div>
-          </div>
-          <?php if($i != 4 && $i != 5):?>
+      <div id="modalFilter<?=$a?>" class="modal w-600" style="overflow-y:visible;">
+        <div class="modal-content">
+          <a class="modal-close close">
+            <i class="material-icons">close</i>
+          </a>
+          <h2>Filtrar gráfica <?=$i?></h2>
+          <div class="row wrap ma-0">
             <div class="d-flex col s12 m6 l6 xl6">
               <div class="input-field col xl12 l12 m12 s12">
-                <select class="select-bp-gd" id="select-bp-<?=$i?>"></select>
-                <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
-              </div>
-            </div>
-          <?php elseif($i == 5):?>
-            <div class="d-flex col s12 m6 l6 xl6">
-              <div class="input-field col xl12 l12 m12 s12">
-                <select class="select-estatus-gd filter-list" id="select-estatus-<?=$i?>">
-                  <option data-id="all" value="all" selected></option>
-                </select>
-                <label style="color: #333333; font-weight: bold;">Estatus</label>
+                <select class="select-gen-gd" id="select-gen-<?=$i?>"></select>
+                <label style="color: #333333; font-weight: bold;">Grupo estratégicos de negocios</label>
               </div>
             </div>
             <div class="d-flex col s12 m6 l6 xl6">
               <div class="input-field col xl12 l12 m12 s12">
-                <select class="select-creador-gd filter-list" id="select-creador-<?=$i?>">
-                  <option data-id="all" value="all" selected></option>
-                </select>
-                <label style="color: #333333; font-weight: bold;">Creador</label>
+                <select class="select-comp-gd" id="select-company-<?=$i?>"></select>
+                <label style="color: #333333; font-weight: bold;">Empresas</label>
               </div>
             </div>
-          <?php endif;?>
+            <div class="d-flex col s12 m6 l6 xl6">
+              <div class="input-field col xl12 l12 m12 s12">
+                <select class="select-proj-gd" id="select-project-<?=$i?>"></select>
+                <label style="color: #333333; font-weight: bold;">Proyectos</label>
+              </div>
+            </div>
+            <?php if($i != 4 && $i != 5):?>
+              <div class="d-flex col s12 m6 l6 xl6">
+                <div class="input-field col xl12 l12 m12 s12">
+                  <select class="select-bp-gd" id="select-bp-<?=$i?>"></select>
+                  <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
+                </div>
+              </div>
+            <?php elseif($i == 5):?>
+              <div class="d-flex col s12 m6 l6 xl6">
+                <div class="input-field col xl12 l12 m12 s12">
+                  <select class="select-estatus-gd filter-list" id="select-estatus-<?=$i?>">
+                    <option data-id="all" value="all" selected></option>
+                  </select>
+                  <label style="color: #333333; font-weight: bold;">Estatus</label>
+                </div>
+              </div>
+              <div class="d-flex col s12 m6 l6 xl6">
+                <div class="input-field col xl12 l12 m12 s12">
+                  <select class="select-creador-gd filter-list" id="select-creador-<?=$i?>">
+                    <option data-id="all" value="all" selected></option>
+                  </select>
+                  <label style="color: #333333; font-weight: bold;">Creador</label>
+                </div>
+              </div>
+            <?php endif;?>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-close btn btn-depressed error" id="filter_cancel">
+            <i class="large material-icons noselect">cancel</i>
+          </a>
         </div>
       </div>
-      <div class="modal-footer">
-        <a class="modal-close btn btn-depressed error" id="filter_cancel">
-          <i class="large material-icons noselect">cancel</i>
+      <div class="table-container fixed-action-btn">
+        <a class="modal-trigger btn-floating btn-large tertiary Scroll-button" href="#modalFilter5">
+          <i class="large material-icons noselect" id="add">search</i>
         </a>
-        <!-- <a class="modal-close btn btn-depressed tertiary">
-          <i class="large material-icons noselect " id="filter_la">search</i>
-        </a> -->
       </div>
-    </div>
-    <div class="table-container fixed-action-btn">
-      <a class="modal-trigger btn-floating btn-large tertiary Scroll-button" href="#modalFilter5">
-        <i class="large material-icons noselect" id="add">search</i>
-      </a>
-    </div>
-<?php endfor;?>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
-<script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
+    <?php endfor;?>
 <script type="text/javascript">
   const input_identifier = ['1','3','4'],
         user_id = $('#header-user').attr('data-identifier');
@@ -537,17 +524,34 @@
     }
 
     $.ajax(settings).done(function (response) {
-      $.each(response.items, function(){
-        var option = new Option(this.d, this.r);
-            option.setAttribute('id', this.r);
-        if(this.r == '34013'){
-          option.setAttribute('selected', 'selected');
+      if(response.items.length > 0){
+        $.each(response.items, function(){
+          var option = new Option(this.d, this.r);
+              option.setAttribute('id', this.r);
+          if(this.r == '34013'){
+            option.setAttribute('selected', 'selected');
+          }
+          $('.select-comp-gd').append(option);
+          $('.select-comp-gd').formSelect();
+          // append_options('select-company-', option);
+        });
+        filter_project(response.items[1].r, chart_num);
+      } else {
+        var dataprovider = [];
+        // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
+        if(chart_num != '1' && chart_num != '2'){
+          window["updateData"+chart_num](dataprovider,chart_num);
+          window["updateColData"+chart_num](dataprovider,chart_num);
+          window["updateBarData"+chart_num](dataprovider,chart_num);
+        } else {
+          updateData1(dataprovider, '1');
+          updateColData1(dataprovider, '1');
+          updateBarData1(dataprovider, '1');
+          updateData2(dataprovider, '2');
+          updateColData2(dataprovider, '2');
+          updateBarData2(dataprovider, '2');
         }
-        $('.select-comp-gd').append(option);
-        $('.select-comp-gd').formSelect();
-        // append_options('select-company-', option);
-      });
-      filter_project(response.items[1].r, chart_num);
+      }
     });
   }
   // REALIZR CAMBIOS EN ESTA FUNCIÓN DEBE ENVIAR EL CÓDIGO DE UNIFIER A LA FUNCIÓN CHART4 -- NOTA
@@ -577,69 +581,89 @@
         } else if(chart_num == '5'){
           listGD(response.items[0].code_unifier);
         }
+      } else {
+        var dataprovider = [];
+        // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
+        if(chart_num != '1' && chart_num != '2'){
+          window["updateData"+chart_num](dataprovider,chart_num);
+          window["updateColData"+chart_num](dataprovider,chart_num);
+          window["updateBarData"+chart_num](dataprovider,chart_num);
+        } else {
+          updateData1(dataprovider, '1');
+          updateColData1(dataprovider, '1');
+          updateBarData1(dataprovider, '1');
+          updateData2(dataprovider, '2');
+          updateColData2(dataprovider, '2');
+          updateBarData2(dataprovider, '2');
+        }
       }
     });
   }
 
   function filter_bp(unifier_code, chart_num) {
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "http://192.168.0.210:8080/ords/portal/documents/filterbp/"+unifier_code,
-      "method": "GET",
-      "headers": {
-        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
-        "cache-control": "no-cache"
-      }
-    }
-
-    $.ajax(settings).done(function (response) {
-      if(response.items.length > 0){
-        $.each(response.items, function(){
-          var option = new Option(this.name, this.id_p_bp);
-          // if(this.id_p_bp == '181' && chart_num == undefined){
-            option.setAttribute('selected', 'selected');
-            // CONDICIONAL GRÁFICA SELECCIONADA - GRÁFICA 1, 2, 3 GENERAL PRIMERA CARGA -- NOTA
-          // }
-          // append_options('select-bp-', option);
-          $('.select-bp-gd').append(option);
-          $('.select-bp-gd').formSelect();
-        });
-        var obj_length = (response.items.length - 1);
-        if(chart_num == undefined){
-            graph1(response.items[obj_length].id_p_bp);
-            graph2(response.items[obj_length].id_p_bp);
-            graph3(response.items[obj_length].name);
-          } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3' && chart_num != '5') {
-            eval("graph"+chart_num + "("+response.items[obj_length].id_p_bp+")");
-          } else if(chart_num == '3') {
-            graph3(response.items[obj_length].name);
-          }
-          else if(chart_num == '1' || chart_num == '2') {
-            graph1(response.items[obj_length].id_p_bp);
-            graph2(response.items[obj_length].id_p_bp);
-          }
-        
-      } else {
-        console.log("El proyecto seleccionado, no tiene ningún BP asociado. ");
-        var dataprovider = [];
-        // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
-        if(chart_num != '5'){
-          if(chart_num != '1' && chart_num != '2'){
-            eval("updateData"+chart_num + "("+dataprovider+","+chart_number+")");
-            eval("updateColData"+chart_num + "("+dataprovider+","+chart_number+")");
-            eval("updateBarData"+chart_num + "("+dataprovider+","+chart_number+")");
-          } else {
-            updateData1(dataprovider, '1');
-            updateColData1(dataprovider, '1');
-            updateBarData1(dataprovider, '1');
-            updateData2(dataprovider, '2');
-            updateColData2(dataprovider, '2');
-            updateBarData2(dataprovider, '2');
-          }
+    if(chart_num != '4'){
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.0.210:8080/ords/portal/documents/filterbp/"+unifier_code,
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+          "cache-control": "no-cache"
         }
       }
-    });
+
+      $.ajax(settings).done(function (response) {
+        if(response.items.length > 0){
+          $.each(response.items, function(){
+            var option = new Option(this.name, this.id_p_bp);
+            // if(this.id_p_bp == '181' && chart_num == undefined){
+              option.setAttribute('selected', 'selected');
+              // CONDICIONAL GRÁFICA SELECCIONADA - GRÁFICA 1, 2, 3 GENERAL PRIMERA CARGA -- NOTA
+            // }
+            // append_options('select-bp-', option);
+            $('.select-bp-gd').append(option);
+            $('.select-bp-gd').formSelect();
+          });
+          var obj_length = (response.items.length - 1);
+          if(chart_num == undefined){
+              graph1(response.items[obj_length].id_p_bp);
+              graph2(response.items[obj_length].id_p_bp);
+              graph3(response.items[obj_length].name);
+            } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3' && chart_num != '5') {
+              eval("graph"+chart_num + "("+response.items[obj_length].id_p_bp+")");
+            } else if(chart_num == '3') {
+              graph3(response.items[obj_length].name);
+            }
+            else if(chart_num == '1' || chart_num == '2') {
+              graph1(response.items[obj_length].id_p_bp);
+              graph2(response.items[obj_length].id_p_bp);
+            }
+          
+        } else {
+          console.log("El proyecto seleccionado, no tiene ningún BP asociado. ");
+          var dataprovider = [];
+          // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
+          if(chart_num != '5'){
+            if(chart_num != '1' && chart_num != '2'){
+              // eval("updateData"+chart_num + "("+dataprovider+","+chart_num+")");
+              // eval("updateColData"+chart_num + "("+dataprovider+","+chart_num+")");
+              // eval("updateBarData"+chart_num + "("+dataprovider+","+chart_num+")");
+              window["updateData"+chart_num](dataprovider,chart_num);
+              window["updateColData"+chart_num](dataprovider,chart_num);
+              window["updateBarData"+chart_num](dataprovider,chart_num);
+            } else {
+              updateData1(dataprovider, '1');
+              updateColData1(dataprovider, '1');
+              updateBarData1(dataprovider, '1');
+              updateData2(dataprovider, '2');
+              updateColData2(dataprovider, '2');
+              updateBarData2(dataprovider, '2');
+            }
+          }
+        }
+      });
+    }
   }
   function append_options(select_id, option) {
     $('#'+select_id).append(option);
@@ -656,6 +680,7 @@
   }
   // CHARTS WS
   function graph1(id_bp){
+    $('#link-pdf-1').attr('data-id', id_bp);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -675,6 +700,7 @@
     });
   }
   function graph2(id_bp){
+    $('#link-pdf-2').attr('data-id', id_bp);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -693,7 +719,7 @@
     });
   }
   function graph3(bp_name){
-    // alert(bp_name);
+    $('#link-pdf-3').attr('data-id', bp_name);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -714,6 +740,9 @@
     });
   }
   function graph4(unifier_code){
+    $('#link-pdf-4').attr('data-id', unifier_code);
+    var data_attr = $('.carousel-4.white.active').children().attr('data-chart')
+    $('#link-pdf-4').attr('href', '/Portal-Web/documents/index/4/'+unifier_code+'/'+data_attr+'.pdf');
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -731,6 +760,14 @@
       updateColData4(response.items, chart_number);
       updateBarData4(response.items, chart_number);
     });
+  }
+  function disablePdfBtn(id, pdf_text){
+    document.getElementById(id).style.pointerEvents = 'none';
+    $('#'+pdf_text).addClass('error-text');
+  }
+  function enablePdfBtn(id, pdf_text){
+    document.getElementById(id).style.pointerEvents = 'auto';
+    $('#'+pdf_text).removeClass('error-text');
   }
   // ON CHANGE
   var array_select = [
@@ -874,11 +911,17 @@
   });
   $("#select-bp-1").change(function(){
     var value = $(this).children(":selected").attr("value");
+    for(i=1; i<3; i++){
+      var data_attr = $('.carousel-'+i+'.white.active').children().attr('data-chart')
+      $('#link-pdf-'+i).attr('href', '/Portal-Web/documents/index/'+i+'/'+value+'/'+data_attr+'.pdf');
+    }
     graph1(value);
     graph2(value);
   });
   $("#select-bp-3").change(function(){
     var value = $(this).children(":selected").text();
+    var data_attr = $('.carousel-'+i+'.white.active').children().attr('data-chart')
+    $('#link-pdf-3').attr('href', '/Portal-Web/documents/index/3/'+value+'/'+data_attr+'.pdf');
     graph3(value);
   });
   $("#select-bp-5").change(function(){
@@ -939,12 +982,6 @@
       chartDonut3.legend = new am4charts.Legend();
       chartDonut3.legend.labels.template.wrap = true;
       /* Create a separate container to put legend in */
-      if($('#legenddiv').length == 0){
-        $('#container-chart-3').after($('<div>',{id : 'legendMainDiv', class : 'd-flex col s12 m6 l3 xl3'})
-                               .append($('<div>',{class : 'col xl12 l12 m12 s12'})
-                               .append($('<div>',{id : 'legendwrapper', class : 'graph-card', style : 'height: 300px;'})
-                               .append($('<div>',{id : 'legenddiv'}))
-                              )));
         var legendContainer = am4core.create("legenddiv", am4core.Container);
         legendContainer.width = am4core.percent(80);
         legendContainer.height = am4core.percent(100);
@@ -958,9 +995,6 @@
         function resizeLegend(ev) {
           document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
         }
-      } else {
-        $('#legendMainDiv').remove();
-      }
     }
   
     // Create a base filter effect (as if it's not there) for the hover to return to
@@ -986,11 +1020,14 @@
   //   return chart_number;
   // }
   this["updateData"+i] = function(bp_data, chart_number) {
+    console.log(bp_data);
     this['chartDonut'+chart_number].data = generateData(bp_data);
     // chart_id(chart_number);
     if(bp_data.length == 0){
+      disablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
       this["indicatorLabel"+chart_number].text = "No data...";
     } else {
+      enablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
       this["indicatorLabel"+chart_number].text = "";
     }
   }
@@ -1056,9 +1093,11 @@
       // bp_length(bp_data.length);
       this['chartColumn'+chart_number].data = generateData(bp_data);
       if(bp_data.length == 0){
+        disablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
         this['ColindicatorLabel'+chart_number].text = "No data...";
         this['chartColumn'+chart_number].scrollbarX.dispose();
       } else {
+        enablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
         this['chartColumn'+chart_number].scrollbarX = new am4core.Scrollbar();
         this['chartColumn'+chart_number].scrollbarX.parent = this['chartColumn'+chart_number].bottomAxesContainer;
         this['ColindicatorLabel'+chart_number].text = "";
@@ -1105,27 +1144,36 @@
     this["updateBarData"+i] = function(bp_data, chart_number) {
     // function updateBarData1(bp_data, chart_number) {
       this['chart'+chart_number].data = generateData(bp_data);
-      // chart1.data = generateData(bp_data);
-        // alert(bp_data);
+      if(bp_data.length == 0){
+        disablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
+      } else {
+        enablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
       }
+    }
        // FIN BAR CHART
-    }
-    function generateData(bp_data) {
-        return bp_data;
-    }
+  }
+  function generateData(bp_data) {
+    return bp_data;
+  }
     $('html').on("webkitTransitionEnd transitionend", function(e) {
+      for(i = 1; i < 5; i++){
+        var download_obj = $('.carousel-'+i+'.white.active').children();
+        var data_attr = $('.carousel-'+i+'.white.active').children().attr('data-chart'),
+            data_id =  $('#link-pdf-'+i).attr('data-id');
+        $('#link-pdf-'+i).attr('href', '/Portal-Web/documents/index/'+i+'/'+data_id+'/'+data_attr+'.pdf');
+      }
       if($('#projectCarousel').hasClass("active")){
         $("#legendMainDiv").show();
       } else{
-        // $("#legendMainDiv").hide();
+        $("#legendMainDiv").hide();
       }
     });
-    var contInterval = 0;
+    // var contInterval = 0;
     // var timer = setInterval(function(){
     //   var a = contInterval++;
-    //   // if(a == 1){
+    //   if(a == 1){
     //     $("#legendMainDiv").hide();
-    //   // }
+    //   }
     //   clearInterval(timer);
     // }, 4400);
     $('.table-container').hide();
@@ -1144,25 +1192,25 @@ creator();
 status();
 function creator() {
   var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "http://192.168.0.210:8080/ords/portal/documents/filtercreator/",
-      "method": "GET",
-      "headers": {
-        "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
-        "cache-control": "no-cache"
-      }
+    "async": true,
+    "crossDomain": true,
+    "url": "http://192.168.0.210:8080/ords/portal/documents/filtercreator/",
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+      "cache-control": "no-cache"
     }
+  }
 
-    $.ajax(settings).done(function (response) {
-      $.each(response.items, function(){      
-        var option = new Option(this.creator);
-            option.setAttribute('data-id', this.creator);
-            option.setAttribute('data-type' , 'creator');
-        $('.select-creador-gd').append(option);
-        $('.select-creador-gd').formSelect();
-      });
+  $.ajax(settings).done(function (response) {
+    $.each(response.items, function(){      
+      var option = new Option(this.creator);
+          option.setAttribute('data-id', this.creator);
+          option.setAttribute('data-type' , 'creator');
+      $('.select-creador-gd').append(option);
+      $('.select-creador-gd').formSelect();
     });
+  });
 }
 function status() {
   var settings = {

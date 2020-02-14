@@ -1729,6 +1729,7 @@
 });
     // Promesa que contiene la información de Unifier y bd local para alimentar los indicadores de presupuesto
   function Unifier_information(project_id, select_value, unifier_code, spi_value, chart_side) {
+    console.log("http://192.168.0.210:8080/ords/portal/captures/costindicators/?p_project_id="+project_id+"&p_id_capture="+select_value);
     // if (unifier_code != null) {
       if (select_value == 'actual' || select_value == 'all-select') {
         var settings = {
@@ -1768,6 +1769,7 @@
        });
     }
     function new_indicators(response, spi_value, select_value, chart_side){
+      console.log(response.items);
       $.each(response.items, function() {
         if (select_value == 'all-select' && this.fecha_cortecpi != null) {
           var cpi_date = new Date(this.fecha_cortecpi);

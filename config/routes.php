@@ -107,5 +107,6 @@ Router::scope('/portal-projects', function ($routes) {
 Router::scope('/documents', function ($routes) {
     $routes->extensions('pdf');
     $routes->connect('/index/*', ['controller' => 'Documents', 'action' => 'index']);
+    $routes->connect('/image/', ['controller' => 'Documents', 'action' => 'image']);
     $routes->fallbacks('InflectedRoute');
 });
