@@ -50,6 +50,7 @@ $(document).ready(function () {
   setInterval(function () {
   if (!pause) {
     var $this = block.eq(k);
+    console.log($this);
       block.removeClass('active').fadeOut(3000).eq(k).addClass('active').fadeIn(3000);
       $this.addClass('active');
       k++;

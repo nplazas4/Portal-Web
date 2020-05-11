@@ -1701,6 +1701,7 @@
     $('#breadcrumb_ctg').append($('<a>', {text : result[2], class : 'breadcrumb', href : '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[1]))))+'/'+"<?= urlencode(base64_encode($json_project))?>"+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[0]))))}));
   });
   promise.then(function(result) {
+    console.log( result);
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -1785,31 +1786,51 @@
         }
         var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
         if (unifier_ejec_total != null) {
-          $('#ejecutado-new').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#ejecutado-new').text('COP $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#ejecutado-new').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#ejecutado-new').text('');
         }
         var unifier_plan_total = this.planeadousd_total;
         if (unifier_plan_total != null) {
-          $('#planeado-new').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#planeado-new').text('COP $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#planeado-new').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#planeado-new').text('');
         }
         var unifier_presp_total = this.presupuestousd_total;
         if (unifier_presp_total != null) {
-          $('#presupuesto-new').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#presupuesto-new').text('COP $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#presupuesto-new').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#presupuesto-new').text('');
         }
         var unifier_var_total = this.variacionusd_total;
         if (unifier_var_total != null) {
-          $('#variacion-new').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#variacion-new').text('COP $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#variacion-new').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#variacion-new').text('');
         }
         var unifier_proy_total = this.proyeccionusd_total;
         if (unifier_proy_total != null) {
-          $('#proyeccion-new').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#proyeccion-new').text('COP $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#proyeccion-new').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#proyeccion-new').text('');
         }
@@ -1828,31 +1849,51 @@
         }
         var unifier_ejec_anual = this.ejecutadusd_2019;
         if (unifier_ejec_anual != null) {
-          $('#ejec-anual-new').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#ejec-anual-new').text('COP $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#ejec-anual-new').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#ejec-anual-new').text('');
         }
         var unifier_plan_anual = this.planeadousd_2019;
         if (unifier_plan_anual != null) {
-          $('#plan-anual-new').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#plan-anual-new').text('COP $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#plan-anual-new').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#plan-anual-new').text('');
         }
         var unifier_pres_anual = this.presupuestousd_2019;
         if (unifier_pres_anual != null) {
-          $('#pres-anual-new').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#pres-anual-new').text('COP $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#pres-anual-new').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#pres-anual-new').text('');
         }
         var unifier_proy_anual = this.proyeccionusd_2019;
         if (unifier_proy_anual != null) {
-          $('#proyeccion-anual-new').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#proyeccion-anual-new').text('COP $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#proyeccion-anual-new').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#proyeccion-anual-new').text('');
         }
         var unifier_var_anual = this.varacionusd_2019;
         if (unifier_var_anual != null) {
-          $('#variacion-anual-new').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#variacion-anual-new').text('COP $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#variacion-anual-new').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#variacion-anual-new').text('');
         }
@@ -1876,31 +1917,51 @@
         }
         var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
         if (unifier_ejec_total != null) {
-          $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#ejec-total-old').text('COP $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#ejec-total-old').text('');
         }
         var unifier_plan_total = this.planeadousd_total;
         if (unifier_plan_total != null) {
-          $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#plan-total-old').text('COP $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#plan-total-old').text('');
         }
         var unifier_presp_total = this.presupuestousd_total;
         if (unifier_presp_total != null) {
-          $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#pres-total-old').text('COP $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#pres-total-old').text('');
         }
         var unifier_var_total = this.variacionusd_total;
         if (unifier_var_total != null) {
-          $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#variacion-total-old').text('COP $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#variacion-total-old').text('');
         }
         var unifier_proy_total = this.proyeccionusd_total;
         if (unifier_proy_total != null) {
-          $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#proy-total-old').text('COP $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
+          <?php else:?>
+            $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#proy-total-old').text('');
         }
@@ -1919,31 +1980,51 @@
         }
         var unifier_ejec_anual = this.ejecutadusd_2019;
         if (unifier_ejec_anual != null) {
-          $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#ejec-anual-old').text('COP $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#ejec-anual-old').text('');
         }
         var unifier_plan_anual = this.planeadousd_2019;
         if (unifier_plan_anual != null) {
-          $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#plan-anual-old').text('COP $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#plan-anual-old').text('');
         }
         var unifier_pres_anual = this.presupuestousd_2019;
         if (unifier_pres_anual != null) {
-          $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#pres-anual-old').text('COP $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#pres-anual-old').text('');
         }
         var unifier_proy_anual = this.proyeccionusd_2019;
         if (unifier_proy_anual != null) {
-          $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#proy-anual-old').text('COP $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#proy-anual-old').text('');
         }
         var unifier_var_anual = this.varacionusd_2019;
         if (unifier_var_anual != null) {
-          $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
+          <?php if ($array_project['child_eps_id'] == 34012): ?>
+            $('#variacion-anual-old').text('COP $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
+          <?php else:?>
+            $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
+          <?php endif;?>
         } else {
           $('#variacion-anual-old').text('');
         }
@@ -2633,7 +2714,7 @@
                    },
                    {
                      "customBullet": "",
-                     "dashLength": 7,
+                     // "dashLength": 7,
                      "id": "AmGraph-3",
                      "labelPosition": "right",
                      "labelText": "",

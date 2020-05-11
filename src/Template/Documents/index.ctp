@@ -243,7 +243,7 @@
                   <?php foreach($headers_table_1 as $item_header): ?>
                     <th></th>
                   <?php endforeach;?>
-                </tr> 
+                </tr>
                 <tr>
                   <?php foreach($headers_table_1 as $item_header): ?>
                     <th>
@@ -289,7 +289,7 @@
                     <?php foreach($headers_table_2 as $item_header): ?>
                       <th></th>
                     <?php endforeach;?>
-                  </tr> 
+                  </tr>
                   <tr>
                     <?php foreach($headers_table_2 as $item_header): ?>
                       <th>
@@ -335,7 +335,7 @@
                       <?php foreach($headers_table_3 as $item_header): ?>
                         <th></th>
                       <?php endforeach;?>
-                    </tr> 
+                    </tr>
                     <tr>
                       <?php foreach($headers_table_3 as $item_header): ?>
                         <th>
@@ -639,7 +639,7 @@
               graph1(response.items[obj_length].id_p_bp);
               graph2(response.items[obj_length].id_p_bp);
             }
-          
+
         } else {
           console.log("El proyecto seleccionado, no tiene ningún BP asociado. ");
           var dataprovider = [];
@@ -996,7 +996,7 @@
           document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
         }
     }
-  
+
     // Create a base filter effect (as if it's not there) for the hover to return to
     this["shadow"+i] = this["pieSeries"+i].slices.template.filters.push(new am4core.DropShadowFilter);
     this["shadow"+i].opacity = 0;
@@ -1203,7 +1203,7 @@ function creator() {
   }
 
   $.ajax(settings).done(function (response) {
-    $.each(response.items, function(){      
+    $.each(response.items, function(){
       var option = new Option(this.creator);
           option.setAttribute('data-id', this.creator);
           option.setAttribute('data-type' , 'creator');
@@ -1265,7 +1265,7 @@ function bp_reg_contratista(code_unifier){
                                   'data-project' : this.project_projectname,
                                   'data-status' : this.status,
                                   'data-creator' : this.trdocon_001_creador
-                                }) 
+                                })
                                 .append($('<td>', {text: this.record_no}))
                                 .append($('<td>', {text: this.status}))
                                 .append($('<td>', {text: this.drdocon_002_fecharegistro}))
@@ -1301,7 +1301,7 @@ function bp__reg_interno(code_unifier){
                                   'data-project' : this.project_projectname,
                                   'data-status' : this.status,
                                   'data-creator' : this.trdi_01_creador
-                                }) 
+                                })
                                 .append($('<td>', {text: this.record_no}))
                                 .append($('<td>', {text: this.status}))
                                 .append($('<td>', {text: this.drdi_04_fecha_cre_registro}))
@@ -1337,7 +1337,7 @@ function bp_reg_externo(code_unifier){
                               'data-project' : this.project_projectname,
                               'data-status' : this.status,
                               'data-creator' : this.trde_01_creador
-                            }) 
+                            })
                             .append($('<td>', {text: this.record_no}))
                             .append($('<td>', {text: this.status}))
                             .append($('<td>', {text: this.drde_02_fecha_cre_registro}))
@@ -1437,7 +1437,7 @@ function Search() {
   });
     $('.row-range').change(function(){
       var range = $(this).children(":selected");
-      table(range.val());     
+      table(range.val());
     });
     function tableRange(select_obj, table_id, pag_obj){
       var range = $('#'+select_obj).children(":selected");

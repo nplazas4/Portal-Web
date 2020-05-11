@@ -15,9 +15,9 @@
                     array('class'=>'home-item-banner')
                 ).
                 $this->Html->tag('div', '', array('class'=>'home-item-overlay accent')),
-    array('class'=>'home-item'),
-    array('escape' => false)
-);?>
+                array('class'=>'home-item'),
+                array('escape' => false)
+  );?>
 <!--Estructura en lenguaje cakePHP del RYOS-->
 <?php echo $this->Html->tag(
     'section',

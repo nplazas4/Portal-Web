@@ -8,7 +8,7 @@
 
     // Indicadores
     $indicators = [];
-    if ($array_projects['code_1'] != 1921) {
+    if ($array_projects['code_1'] != 1921 && $array_projects['child_eps_id'] != 34012) {
       $indicators = [
           [
               'name' => '﻿SPI',
@@ -47,6 +47,51 @@
           ],
           [
               'name' => 'Ejecutado Anual USD',
+              'id' => 'ejec-anual-indicator',
+              'icon' => 'language',
+              'color' => 'primary',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+      ];
+    } elseif ($array_projects['child_eps_id'] == 34012) {
+      $indicators = [
+          [
+              'name' => '﻿SPI',
+              'id' => 'spi-indicator',
+              'icon' => 'show_chart',
+              'color' => '',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Presupuesto Total COP ',
+              'id' => 'pres-total-indicator',
+              'icon' => 'language',
+              'color' => 'accent',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Ejecutado Total COP',
+              'id' => 'ejec-total-indicator',
+              'icon' => 'language',
+              'color' => 'tertiary',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'CPI',
+              'id' => 'cpi-indicator',
+              'icon' => 'show_chart',
+              'color' => '',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Presupuesto Anual COP',
+              'id' => 'pres-anual-indicator',
+              'icon' => 'language',
+              'color' => 'primary',
+              'class' => 'd-flex col s12 m6 l4 xl4',
+          ],
+          [
+              'name' => 'Ejecutado Anual COP',
               'id' => 'ejec-anual-indicator',
               'icon' => 'language',
               'color' => 'primary',
@@ -282,11 +327,19 @@
                         </div>
                         <div class="divider transparent"></div>
                         <div class="data-chip accent mx-0">
-                            <h3>Presupuesto Planeado (USD)</h3>
+                            <?php if ($array_projects['child_eps_id'] == 34012): ?>
+                              <h3>Presupuesto Planeado (COP)</h3>
+                            <?php else: ?>
+                              <h3>Presupuesto Planeado (USD)</h3>
+                            <?php endif; ?>
                             <h4 id="pres-plan-new"></h4>
                         </div>
                         <div class="data-chip secondary mb-0 mx-0">
+                          <?php if ($array_projects['child_eps_id'] == 34012): ?>
+                            <h3>Presupuesto Ejecutado (COP)</h3>
+                          <?php else: ?>
                             <h3>Presupuesto Ejecutado (USD)</h3>
+                          <?php endif;?>
                             <h4 id="pres-ejec-new"></h4>
                         </div>
                       <?php else:?>
@@ -356,11 +409,19 @@
                         </div>
                         <div class="divider transparent"></div>
                         <div class="data-chip accent mx-0">
-                            <h3>Presupuesto Planeado (USD)</h3>
+                          <?php if ($array_projects['child_eps_id'] == 34012): ?>
+                            <h3>Presupuesto Planeado (COP)</h3>
+                          <?php else:?>
+                            <h3>Presupuesto Ejecutado (USD)</h3>
+                          <?php endif;?>
                             <h4 id="pres-plan-old"></h4>
                         </div>
                         <div class="data-chip secondary mb-0 mx-0">
+                          <?php if ($array_projects['child_eps_id'] == 34012): ?>
+                            <h3>Presupuesto Ejecutado (COP)</h3>
+                          <?php else:?>
                             <h3>Presupuesto Ejecutado (USD)</h3>
+                          <?php endif;?>
                             <h4 id="pres-ejec-old"></h4>
                         </div>
                       <?php else:?>
@@ -495,11 +556,19 @@
               $('#data-igr-'+iteration_num).after($('<div>', {class : 'divider transparent', id : 'divider-div-'+iteration_num}));
               // Presupuesto Planeado
               $('#divider-div-'+iteration_num).after($('<div>', {class : 'data-chip accent tooltipped', id : 'data-planeado-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : 'Presupuesto planeado individual'}));
-              $('#data-planeado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Planeado (USD)'})); // Presupuesto Title value
+              <?php if ($array_projects['child_eps_id'] == 34012): ?>
+                $('#data-planeado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Planeado (COP)'})); // Presupuesto Title value
+              <?php else:?>
+                $('#data-planeado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Planeado (USD)'})); // Presupuesto Title value
+              <?php endif;?>
               $('#data-planeado-'+iteration_num).append($('<h4>', {class : 'presupuesto-plan', id : 'plan-id-'+iteration_num})); // Presupuesto Planeado value
               // Presupuesto Ejecutado
               $('#data-planeado-'+iteration_num).after($('<div>', {class : 'data-chip secondary mb-0 tooltipped', id : 'data-ejecutado-'+iteration_num}).attr({'data-position': 'bottom', 'data-tooltip' : 'Presupuesto ejecutado individual'}));
-              $('#data-ejecutado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Ejecutado (USD)'})); // Presupuesto Title value
+              <?php if ($array_projects['child_eps_id'] == 34012): ?>
+                $('#data-ejecutado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Ejecutado (COP)'})); // Presupuesto Title value
+              <?php else:?>
+                $('#data-ejecutado-'+iteration_num).append($('<h3>', {text : 'Presupuesto Ejecutado (USD)'})); // Presupuesto Title value
+              <?php endif;?>
               $('#data-ejecutado-'+iteration_num).append($('<h4>', {class : 'presupuesto-ejec', id : 'pres-id-'+iteration_num})); // Presupuesto Planeado value
           <?php else:?>
               $('#main-div').append($('<div>', {class : 'Search list d-flex col s12 m6 l4 xl3', id : this.project_id_p6}));
