@@ -34,6 +34,11 @@ class ChartsTable extends Table
         $this->setTable('charts');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+        'EXCEL_CHART' => [
+            'path' => 'webroot{DS}img{DS}maps{DS}{field-value:PROJECT_CODE}'
+        ]
+      ]);
     }
 
     /**
@@ -49,34 +54,15 @@ class ChartsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->integer('PROJ_ID')
-            ->requirePresence('PROJ_ID', 'create')
-            ->notEmpty('PROJ_ID');
+            ->allowEmpty('EXCEL_CHART');
+            // ->maxLength('EXCEL_CHART', 255)
+            // ->requirePresence('EXCEL_CHART', 'create')
+            // ->notEmpty('EXCEL_CHART');
 
         $validator
-            ->date('START_DATE')
-            ->requirePresence('START_DATE', 'create')
-            ->notEmpty('START_DATE');
-
-        $validator
-            ->date('FINISH_DATE')
-            ->requirePresence('FINISH_DATE', 'create')
-            ->notEmpty('FINISH_DATE');
-
-        $validator
-            ->integer('BL_CHART')
-            ->requirePresence('BL_CHART', 'create')
-            ->notEmpty('BL_CHART');
-
-        $validator
-            ->integer('EJEC')
-            ->requirePresence('EJEC', 'create')
-            ->notEmpty('EJEC');
-
-        $validator
-            ->integer('EAC')
-            ->requirePresence('EAC', 'create')
-            ->notEmpty('EAC');
+            ->integer('PROJECT_CODE')
+            ->requirePresence('PROJECT_CODE', 'create')
+            ->notEmpty('PROJECT_CODE');
 
         return $validator;
     }

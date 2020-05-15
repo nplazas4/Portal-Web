@@ -56,7 +56,6 @@
                     <td width="100"><?= h($indicator->CPI) ?></td>
                       <td class="actions">
                           <?= $this->Html->link(__('Editar'),['action' => 'edit', $indicator->id],['class'=>'btn btn-small tooltipped','data-position'=>'left','data-tooltip'=>'Ver o editar indicadores']) ?>
-                          <!-- <?//= $this->Html->link(__('Edit'), ['action' => 'edit', $project->id]) ?> -->
                           <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete',$indicator->id], ['confirm' => __('Seguro desea eliminar los indicadores?'),'class'=>'btn btn-small tooltipped #f44336 red','data-position'=>'down','data-tooltip'=>'Eliminar indicadores']) ?>
                       </td>
                   </tr>
@@ -68,16 +67,13 @@
                 <ul class="pagination">
                   <li class="waves-effect"><?= $this->Paginator->first($this->Html->tag('i','first_page',array('class'=>'material-icons')),
                   array('escape' => false)) ?></li>
-                    <!-- <?//= $this->Paginator->first('<< ' . __('first')) ?> -->
                     <li class="waves-effect"><?= $this->Paginator->prev($this->Html->tag('i','chevron_left',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->numbers(['before'=>'','after'=>'']) ?></li>
-                    <!-- <li class="waves-effect"><?//= $this->Paginator->next(__('next') . ' >') ?></li> -->
                     <li class="waves-effect"><?= $this->Paginator->next($this->Html->tag('i','chevron_right',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
                     <li class="waves-effect"><?= $this->Paginator->last($this->Html->tag('i','last_page',array('class'=>'material-icons')),
                     array('escape' => false)) ?></li>
-                    <!-- <li class="waves-effect"><?//= $this->Paginator->last(__('last') . ' >>') ?></li> -->
                 </ul>
             </div>
         </div>

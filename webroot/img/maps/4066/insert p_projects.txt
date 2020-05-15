@@ -1,0 +1,6 @@
+  insert into p_projects(NAME,DESCRIPTION,PROJECT_ID_P6,PROJECT_ID_UNIFIER,ACTIVITY_DEFAULT_DURATION_TYPE,START_DATE,FINISH_DATE,DATA_DATE,
+   OBS_NAME,PARENT_EPS_OBJECT_ID,PLANNED_START_DATE,STATUS,WBS_OBJECT_ID,SCHEDULED_FINISH_DATE,LABOR_UNITS_PERCENT_COMPLETE,
+    LOCATION_NAME,CREATE_DATE,CREATE_USER) values(r_pr_xmlcontents.Name,r_pr_xmlcontents.Description,cast(r_pr_xmlcontents.ObjectId as number),cast(r_pr_xmlcontents.UnifierProjectNumber as number),r_pr_xmlcontents.ActivityDefaultDurationType,
+    cast(r_pr_xmlcontents.StartDate as date),cast(r_pr_xmlcontents.FinishDate as date),cast(r_pr_xmlcontents.DataDate as date),r_pr_xmlcontents.OBSName,cast(r_pr_xmlcontents.ParentEPSObjectId as number),
+    cast(r_pr_xmlcontents.PlannedStartDate as date),r_pr_xmlcontents.Status,cast(r_pr_xmlcontents.WBSObjectId as number),cast(r_pr_xmlcontents.ScheduledFinishDate as date),to_number(r_pr_xmlcontents.PerformancePercentCompleteByLaborUnits,'99.99'),
+    r_pr_xmlcontents.LocationName,cast(r_pr_xmlcontents.CreateDate as date),r_pr_xmlcontents.CreateUser);

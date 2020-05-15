@@ -40,12 +40,11 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth',[
+        $this->loadComponent('Auth', [
             'authenticate'=>[
               'Form'=>[
                 'fields'=>[
@@ -77,20 +76,112 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
+
     public function beforeFilter(Event $event)
     {
-      $this->set('current_user',$this->Auth->user());
+        try {
+            $this->gzip();
+            //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
+            // $this->Token();
+            $this->set('current_user', $this->Auth->user());
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+    }
+    private function gzip()
+    {
+        try {
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+        if (!in_array('ob_gzhandler', ob_list_handlers())) {
+            ob_start('ob_gzhandler');
+        } else {
+            ob_start();
+        }
+    }
+    private function Token()
+    {
+        try {
+            $ch = curl_init('http://192.168.1.153:7001/ords/projects_portal/oauth/token');
+            curl_setopt($ch, CURLOPT_POST, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+            curl_setopt($ch, CURLOPT_USERPWD, "M-Lw7z5Q3DheSdHUTk1SyQ..:TWVMj5Ch1ke6U2hfxKuQfw..");
+            $result=curl_exec($ch);
+            curl_close($ch);
+            $result_arr = json_decode($result, true);
+            $token = array_values($result_arr)[0];
+            $_SESSION["PortalToken"] = $token;
+            $this->Nav_Portal_Projects($token);
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+    }
+    private function Nav_Portal_Projects($token = null)
+    {
+        try {
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+            CURLOPT_PORT => "8080",
+            CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/list/eps/",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+              "Authorization: Bearer ".$token,
+              "Cache-Control: no-cache"
+            ),
+        ));
+            $responseEps = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            if ($err) {
+                echo "cURL Error #:" . $err;
+            } else {
+                $this->Logic_Nav_Portal_Projects($responseEps);
+            }
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
+    }
+    private function Logic_Nav_Portal_Projects($responseEps = null)
+    {
+        try {
+            $responsesEps = json_decode($responseEps, true);
+            $AllvarEps = array_values($responsesEps)[0];
+            // $this->set('AllEps', $AllvarEps);
+            // Foreach que alimenta el navbar con la EPS de forma dinámica.
+            $eps_level_1 = array();
+            $eps_childrens = array();
+            foreach ($AllvarEps as $rowEps => $valueEps) {
+                if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
+                    $AllEpsId = $valueEps["parent_eps_object_id"];
+                    if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
+                        array_push($eps_childrens, array("name" => $valueEps["name"], "eps_id" => $valueEps["eps_id"], "parent_eps_id" => $valueEps["parent_eps_object_id"]));
+                    }
+                    // $ParentEpsId2 = $valueEps["parent_eps_object_id"];
+                    // if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
+                    //     array_push($eps_level_1, array("name" => $valueEps["name"], "id" => $valueEps["eps_id"]));
+                    // }
+                }
+            }
+            $this->set('eps_childrens', $eps_childrens);
+        } catch (\Exception $e) {
+            exit($e->getMessage() . "\n");
+        }
     }
     //autorizar vistas
     public function isAuthorized($user)
     {
-      if (isset($user['rol']) and $user['rol']===1)
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
+        if (isset($user['rol']) and $user['rol']===1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

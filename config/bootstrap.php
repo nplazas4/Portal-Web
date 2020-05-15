@@ -89,7 +89,16 @@ if (Configure::read('debug')) {
     // disable router cache during development
     Configure::write('Cache._cake_routes_.duration', '+2 seconds');
 }
+//Set date de 19/03/04 a 2019-03-04
+ini_set('intl.default_locale', 'pl_PL');
 
+Cake\I18n\Date::setToStringFormat('yyyy-MM-dd');
+Cake\I18n\FrozenDate::setToStringFormat('yyyy-MM-dd');
+
+\Cake\Database\Type::build('date')
+    ->useImmutable()
+    ->useLocaleParser()
+    ->setLocaleFormat('yyyy-MM-dd');
 /*
  * Set the default server timezone. Using UTC makes time calculations / conversions easier.
  * Check http://php.net/manual/en/timezones.php for list of valid timezone strings.
@@ -197,3 +206,36 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+try {
+  Plugin::load('CakePdf', ['bootstrap' => true]);
+  Configure::write('CakePdf', [
+    'engine' => [
+      // 'user-style-sheet' => 'C:\xampp\htdocs\Portal-Web\webroot\css\materialize.css',
+        'className' => 'CakePdf.WkHtmlToPdf',
+        // 'binary' => '/usr/local/bin/wkhtmltopdf', // Si estas en Mac OS X / Linux
+        'binary' => 'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe',
+        'options' => [
+            'print-media-type' => true,
+            'outline' => true,
+            'dpi' => 200,
+            'debug-javascript' => true,
+            'enable-javascript' => true,
+            'javascript-delay' => 800,
+            'no-stop-slow-scripts' => true,
+            'footer-right' => '[page]',
+            'footer-font-size' => 8,
+            'header-html' => "http://portalgeb.com/Portal-Web/documents/image",
+            'page-size' => 'Letter',
+        ],
+    ],
+    'margin' => [
+            'bottom' => 10,
+            'left' => 10,
+            'right' => 10,
+            'top' => 25,
+    ],
+    'download' => true
+]);
+} catch (\Exception $e) {
+  exit($e->getMessage() . "\n");
+}

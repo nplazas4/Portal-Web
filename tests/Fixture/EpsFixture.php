@@ -22,6 +22,7 @@ class EpsFixture extends TestFixture
         'EPS_NAME' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'EPS_ID' => ['type' => 'unique', 'columns' => ['EPS_ID'], 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',

@@ -34,6 +34,14 @@ class ProjectsTable extends Table
         $this->setTable('projects');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+        'FOTO' => [
+            'path' => 'webroot{DS}img{DS}maps{DS}{field-value:ID_PROJECT}'
+        ],
+        'CHART' => [
+            'path' => 'webroot{DS}files{DS}tg{DS}{field-value:ID_PROJECT}'
+        ]
+        ]);
     }
 
     /**
@@ -52,158 +60,170 @@ class ProjectsTable extends Table
             ->scalar('ID_PROJECT')
             ->maxLength('ID_PROJECT', 100)
             ->requirePresence('ID_PROJECT', 'create')
-            ->notEmpty('ID_PROJECT');
+            ->notEmpty('ID_PROJECT')
+            ->add('ID_PROJECT', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('PROJECT_NAME')
             ->maxLength('PROJECT_NAME', 500)
-            ->requirePresence('PROJECT_NAME', 'create')
-            ->notEmpty('PROJECT_NAME');
+            ->allowEmpty('PROJECT_NAME');
 
         $validator
             ->scalar('Proj_Obj')
-            ->maxLength('Proj_Obj', 200)
-            ->requirePresence('Proj_Obj', 'create')
-            ->notEmpty('Proj_Obj');
+            ->allowEmpty('Proj_Obj');
 
         $validator
             ->scalar('DESCRIPTION')
-            ->maxLength('DESCRIPTION', 500)
-            ->requirePresence('DESCRIPTION', 'create')
-            ->notEmpty('DESCRIPTION');
+            ->allowEmpty('DESCRIPTION');
 
         $validator
             ->numeric('PLANNED')
-            ->requirePresence('PLANNED', 'create')
-            ->notEmpty('PLANNED');
+            ->allowEmpty('PLANNED');
 
         $validator
             ->numeric('EXECUTED')
-            ->requirePresence('EXECUTED', 'create')
-            ->notEmpty('EXECUTED');
+            ->allowEmpty('EXECUTED');
 
         $validator
             ->decimal('AC')
-            ->requirePresence('AC', 'create')
-            ->notEmpty('AC');
+            ->allowEmpty('AC');
 
         $validator
             ->decimal('PV')
-            ->requirePresence('PV', 'create')
-            ->notEmpty('PV');
+            ->allowEmpty('PV');
 
         $validator
             ->decimal('CAPEX_PLANNED')
-            ->requirePresence('CAPEX_PLANNED', 'create')
-            ->notEmpty('CAPEX_PLANNED');
+            ->allowEmpty('CAPEX_PLANNED');
 
         $validator
             ->decimal('CAPEX_EXECUTED')
-            ->requirePresence('CAPEX_EXECUTED', 'create')
-            ->notEmpty('CAPEX_EXECUTED');
+            ->allowEmpty('CAPEX_EXECUTED');
 
         $validator
             ->scalar('FASE')
-            ->requirePresence('FASE', 'create')
-            ->notEmpty('FASE');
+            ->allowEmpty('FASE');
 
         $validator
             ->scalar('REGIONAL')
-            ->requirePresence('REGIONAL', 'create')
-            ->notEmpty('REGIONAL');
+            ->allowEmpty('REGIONAL');
 
         $validator
             ->scalar('ALCANCE')
-            ->maxLength('ALCANCE', 500)
-            ->requirePresence('ALCANCE', 'create')
-            ->notEmpty('ALCANCE');
+            ->allowEmpty('ALCANCE');
 
         $validator
             ->scalar('SOLICITUD')
-            ->maxLength('SOLICITUD', 500)
-            ->requirePresence('SOLICITUD', 'create')
-            ->notEmpty('SOLICITUD');
+            ->allowEmpty('SOLICITUD');
 
         $validator
-            ->integer('DISTANCIA')
-            ->requirePresence('DISTANCIA', 'create')
-            ->notEmpty('DISTANCIA');
+            ->decimal('DISTANCIA')
+            ->allowEmpty('DISTANCIA');
 
         $validator
-            ->integer('LINEA_TRANS')
-            ->requirePresence('LINEA_TRANS', 'create')
-            ->notEmpty('LINEA_TRANS');
+            ->decimal('LINEA_TRANS')
+            ->allowEmpty('LINEA_TRANS');
 
         $validator
             ->date('FOPO')
-            ->requirePresence('FOPO', 'create')
-            ->notEmpty('FOPO');
+            ->allowEmpty('FOPO');
 
         $validator
             ->date('FEPO')
-            ->requirePresence('FEPO', 'create')
-            ->notEmpty('FEPO');
+            ->allowEmpty('FEPO');
 
         $validator
             ->date('ADJUDICACION')
-            ->requirePresence('ADJUDICACION', 'create')
-            ->notEmpty('ADJUDICACION');
+            ->allowEmpty('ADJUDICACION');
 
         $validator
             ->date('APROBACION')
-            ->requirePresence('APROBACION', 'create')
-            ->notEmpty('APROBACION');
+            ->allowEmpty('APROBACION');
 
         $validator
-            ->integer('TORRE')
-            ->requirePresence('TORRE', 'create')
-            ->notEmpty('TORRE');
+            ->decimal('TORRE')
+            ->allowEmpty('TORRE');
 
         $validator
-            ->integer('NUM_SUBESTACION')
-            ->requirePresence('NUM_SUBESTACION', 'create')
-            ->notEmpty('NUM_SUBESTACION');
+            ->decimal('NUM_SUBESTACION')
+            ->allowEmpty('NUM_SUBESTACION');
 
         $validator
             ->numeric('CPI_ANUAL')
-            ->requirePresence('CPI_ANUAL', 'create')
-            ->notEmpty('CPI_ANUAL');
+            ->allowEmpty('CPI_ANUAL');
 
         $validator
-            ->decimal('AC_BAC')
-            ->requirePresence('AC_BAC', 'create')
-            ->notEmpty('AC_BAC');
+            ->decimal('PV_TOTAL')
+            ->allowEmpty('PV_TOTAL');
 
         $validator
             ->decimal('AC_PPTO')
-            ->requirePresence('AC_PPTO', 'create')
-            ->notEmpty('AC_PPTO');
+            ->allowEmpty('AC_PPTO');
 
         $validator
             ->decimal('PROJ_TOTAL_PRES')
-            ->requirePresence('PROJ_TOTAL_PRES', 'create')
-            ->notEmpty('PROJ_TOTAL_PRES');
+            ->allowEmpty('PROJ_TOTAL_PRES');
 
         $validator
             ->decimal('TOTAL_FORECAST')
-            ->requirePresence('TOTAL_FORECAST', 'create')
-            ->notEmpty('TOTAL_FORECAST');
+            ->allowEmpty('TOTAL_FORECAST');
 
         $validator
             ->decimal('PROJ_AC')
-            ->requirePresence('PROJ_AC', 'create')
-            ->notEmpty('PROJ_AC');
+            ->allowEmpty('PROJ_AC');
 
         $validator
             ->decimal('PRES_PROJ')
-            ->requirePresence('PRES_PROJ', 'create')
-            ->notEmpty('PRES_PROJ');
+            ->allowEmpty('PRES_PROJ');
 
         $validator
             ->decimal('FORECAST_PROJ')
-            ->requirePresence('FORECAST_PROJ', 'create')
-            ->notEmpty('FORECAST_PROJ');
+            ->allowEmpty('FORECAST_PROJ');
+
+        $validator
+            ->scalar('CATEGORY')
+            ->allowEmpty('CATEGORY');
+
+        $validator
+            ->integer('STATUS')
+            ->allowEmpty('STATUS');
+
+        $validator
+            ->allowEmpty('FOTO');
+
+        $validator
+            ->integer('EPS_REL')
+            ->allowEmpty('EPS_REL');
+
+        $validator
+            ->allowEmpty('CHART');
+
+        $validator
+            ->decimal('IGR')
+            ->allowEmpty('IGR');
+
+        $validator
+            ->date('IGR_DATE')
+            ->allowEmpty('IGR_DATE');
+
+        $validator
+            ->date('CPI_DATE')
+            ->allowEmpty('CPI_DATE');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['ID_PROJECT']));
+
+        return $rules;
     }
 }

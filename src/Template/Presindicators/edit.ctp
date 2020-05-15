@@ -115,7 +115,6 @@
                </fieldset>
                <div class="btns mb-2">
                    <!-- <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Crear</a> -->
-                   <!-- <?//= $this->Form->button('Crear',['class'=>'btn waves-effect btn-depressed'])?> -->
                    <?= $this->Form->button(__('Editar'),['class'=>'btn waves-effect btn-depressed'])?>
                </div>
                 <?= $this->Form->end() ?>

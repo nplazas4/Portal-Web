@@ -35,19 +35,38 @@
                       <?php echo $this->Form->textarea('RISK_NAME',['label'=>'Nombre','placeholder'=>'Nombre','class'=>'materialize-textarea','required']);?>
                     </div>
                   </div>
+                  <h6 class"centered">Valoración inicial</h6>
                   <div class="row">
                     <div class="input-field col s6">
-                       <?php echo $this->Form->input('PROBABILITY',['label'=>'Probabilidad','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
-                      <!-- <?//php echo $this->Form->input('PROBABILITY',['label'=>'','placeholder'=>'Probabilidad','class'=>'validate','required']);?> -->
+<<<<<<< HEAD
+                      <?php echo $this->Form->input('PROBABILITY',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
                     </div>
                     <div class="input-field col s6">
-                      <?php echo $this->Form->input('IMPACT',['label'=>'Impacto','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto']]);?>
-                      <!-- <?//php echo $this->Form->input('IMPACT',['label'=>'','placeholder'=>'Impacto','class'=>'validate','required']);?> -->
+                      <?php echo $this->Form->input('IMPACT',['label'=>'Impacto','id'=>'impact-risk','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto'], ]);?>
+                    </div>
+                  </div>
+                  <h6 class"centered">Valoración post-control</h6>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <?php echo $this->Form->input('PROBABILITY_POST',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
+                    </div>
+                    <div class="input-field col s6">
+                      <?php echo $this->Form->input('IMPACT_POST',['label'=>'Impacto','id'=>'impact-risk','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto'], ]);?>
+=======
+                       <?php echo $this->Form->input('PROBABILITY',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
+                    </div>
+                    <div class="input-field col s6">
+                      <?php echo $this->Form->input('IMPACT',['label'=>'Impacto','id'=>'impact-risk','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto'], ]);?>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','placeholder'=>'Impacto del riesgo','class'=>'validate','required']);?>
+<<<<<<< HEAD
+                      <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','id'=>'impact-result-risk','placeholder'=>'Impacto del riesgo','class'=>'validate','required']);?>
+=======
+                      <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','placeholder'=>'Impacto del riesgo','class'=>'validate','id'=>'impact-result-risk','required']);?>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     </div>
                   </div>
                   <div class="row">
@@ -77,39 +96,19 @@
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->input('RISK_QUALIFICATION',['label'=>'','placeholder'=>'Calificación del riesgo','class'=>'validate','required']);?>
+                      <?php echo $this->Form->input('ACTION_STATE',['label'=>'Estado de las acciones','options'=>['fase'=>'N/A En esta fase','ejecucion'=>'En ejecución','pendiente'=>'Pendiente','finalizado'=>'Finalizado']]);?>
                     </div>
                   </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_ONE_S',['label'=>'Seguimiento al plan de respuesta 01','placeholder'=>'Seguimiento plan de respuesta 01','class'=>'materialize-textarea','required']);?>
+                      <?php echo $this->Form->input('MATERIALIZACION',['label'=>'Materialización de riesgo','options'=>['abierto'=>'Abierto','cerrado'=>'Cerrado','materializado'=>'Materializado']]);?>
                     </div>
                   </div>
                   <div class="row">
+                    <!-- <div class="input-field col s6">
+                      </?php echo $this->Form->input('TOTAL_RISK',['label'=>'Calificación ponderada','placeholder'=>'Calificación ponderada','class'=>'validate','required']);?>
+                    </div> -->
                     <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_TWO_S',['label'=>'Seguimiento al plan de respuesta 02','placeholder'=>'Seguimiento plan de respuesta 02','class'=>'materialize-textarea','required']);?>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_THREE_S',['label'=>'Seguimiento al plan de respuesta 03','placeholder'=>'Seguimiento plan de respuesta 03','class'=>'materialize-textarea','required']);?>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_FOUR_S',['label'=>'Seguimiento al plan de respuesta 04','placeholder'=>'Seguimiento plan de respuesta 04','class'=>'materialize-textarea','required']);?>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <?php echo $this->Form->textarea('PLAN_FIVE_S',['label'=>'Seguimiento al plan de respuesta 05','placeholder'=>'Seguimiento plan de respuesta 05','class'=>'materialize-textarea','required']);?>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <?php echo $this->Form->input('TOTAL_RISK',['label'=>'Calificación ponderada','placeholder'=>'Calificación ponderada','class'=>'validate','required']);?>
-                    </div>
-                    <div class="input-field col s6">
                       <?php echo $this->Form->input(
                         'PROJECT_CODE',
                         [
@@ -122,6 +121,7 @@
                       );?>
                     </div>
                   </div>
+                  <?php echo $this->Form->input('IGR_DATE',['type'=>'hidden','value'=>date("Y-m-d")]);?>
                   </fieldset>
                <div class="btns mb-2">
                    <?= $this->Form->button(__('Crear'),['class'=>'btn waves-effect btn-depressed'])?>
@@ -132,3 +132,40 @@
              </div>
         </div>
     </div>
+    <script>
+<<<<<<< HEAD
+          $(document).ready(function(){
+            var impact_value = $('#impact-risk').children(":selected").attr("value");;
+            var probability_value = $('#probability-risk').children(":selected").attr("value");;
+            impact_result();
+            $('#impact-risk').change(function() {
+              impact_value = $(this).children(":selected").attr("value");
+              impact_result();
+            });
+            $('#probability-risk').change(function() {
+              probability_value = $(this).children(":selected").attr("value");
+              impact_result();
+            });
+            function impact_result(){
+              $('#impact-result-risk').val(parseInt(impact_value) * parseInt(probability_value));
+            }
+          });
+=======
+      $(document).ready(function(){
+        var impact_value = $('#impact-risk').children(":selected").attr("value");;
+        var probability_value = $('#probability-risk').children(":selected").attr("value");;
+        impact_result();
+        $('#impact-risk').change(function() {
+          impact_value = $(this).children(":selected").attr("value");
+          impact_result();
+        });
+        $('#probability-risk').change(function() {
+          probability_value = $(this).children(":selected").attr("value");
+          impact_result();
+        });
+        function impact_result(){
+          $('#impact-result-risk').val(parseInt(impact_value) * parseInt(probability_value));
+        }
+      });
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+    </script>

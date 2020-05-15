@@ -256,7 +256,7 @@ return [
              */
             //'port' => 'non_standard_port_number',
             'username' => 'root',
-            'password' => 'V3r4n02o19',
+            'password' => 'V3r4n02o2O',
             'database' => 'portalgeb',
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
@@ -382,5 +382,6 @@ return [
      */
     'Session' => [
         'defaults' => 'php',
+        'timeout'=>30*60
     ],
 ];

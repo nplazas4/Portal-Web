@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+
 /**
  * Eps Model
  *
@@ -51,7 +52,8 @@ class EpsTable extends Table
             ->scalar('EPS_ID')
             ->maxLength('EPS_ID', 100)
             ->requirePresence('EPS_ID', 'create')
-            ->notEmpty('EPS_ID');
+            ->notEmpty('EPS_ID')
+            ->add('EPS_ID', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('EPS_NAME')
@@ -60,5 +62,19 @@ class EpsTable extends Table
             ->notEmpty('EPS_NAME');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['EPS_ID']));
+
+        return $rules;
     }
 }
