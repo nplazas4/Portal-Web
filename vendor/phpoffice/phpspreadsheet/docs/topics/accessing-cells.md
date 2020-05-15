@@ -34,6 +34,11 @@ $spreadsheet->getActiveSheet()
     ->setValue('Some value');
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ### Creating a new Cell
 
 If you make a call to `getCell()`, and the cell doesn't already exist, then
@@ -89,6 +94,10 @@ __Note:__ There are some internal methods that will fetch other cells from the
 collection, and this too will detach the link to the collection from any cell
 that you might have assigned to a variable.
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ## Excel DataTypes
 
 MS Excel supports 7 basic datatypes:
@@ -141,6 +150,11 @@ Formats handled by the advanced value binder include:
 You can read more about value binders later in this section of the
 documentation.
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ### Setting a formula in a Cell
 
 As stated above, if you store a string value with the first character an `=`
@@ -168,6 +182,10 @@ Then, even if you ask PHPSpreadsheet to return the calculated value for cell
 as a string, and not try to evaluate the formula.
 
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ### Setting a date and/or time value in a cell
 
 Date or time values are held as timestamp in Excel (a simple floating

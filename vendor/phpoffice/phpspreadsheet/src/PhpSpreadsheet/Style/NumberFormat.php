@@ -49,8 +49,16 @@ class NumberFormat extends Supervisor
     const FORMAT_CURRENCY_USD = '$#,##0_-';
     const FORMAT_CURRENCY_EUR_SIMPLE = '#,##0.00_-"€"';
     const FORMAT_CURRENCY_EUR = '#,##0_-"€"';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
     const FORMAT_ACCOUNTING_USD = '_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)';
     const FORMAT_ACCOUNTING_EUR = '_("€"* #,##0.00_);_("€"* \(#,##0.00\);_("€"* "-"??_);_(@_)';
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+    const FORMAT_ACCOUNTING_USD = '_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)';
+    const FORMAT_ACCOUNTING_EUR = '_("€"* #,##0.00_);_("€"* \(#,##0.00\);_("€"* "-"??_);_(@_)';
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
     /**
      * Excel built-in number formats.
@@ -310,6 +318,11 @@ class NumberFormat extends Supervisor
             self::$builtInFormats[69] = 't# ?/?';
             self::$builtInFormats[70] = 't# ??/??';
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             // JPN
             self::$builtInFormats[28] = '[$-411]ggge"年"m"月"d"日"';
             self::$builtInFormats[29] = '[$-411]ggge"年"m"月"d"日"';
@@ -326,6 +339,10 @@ class NumberFormat extends Supervisor
             self::$builtInFormats[56] = 'm"月"d"日"';
             self::$builtInFormats[58] = '[$-411]ggge"年"m"月"d"日"';
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             // Flip array (for faster lookups)
             self::$flippedBuiltInFormats = array_flip(self::$builtInFormats);
         }
@@ -614,7 +631,15 @@ class NumberFormat extends Supervisor
         }
 
         // Convert any other escaped characters to quoted strings, e.g. (\T to "T")
+<<<<<<< HEAD
+<<<<<<< HEAD
+        $format = preg_replace('/(\\\([^ ]))(?=(?:[^"]|"[^"]*")*$)/u', '"${2}"', $format);
+=======
         $format = preg_replace('/(\\\(((.)(?!((AM\/PM)|(A\/P))))|([^ ])))(?=(?:[^"]|"[^"]*")*$)/u', '"${2}"', $format);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+        $format = preg_replace('/(\\\(((.)(?!((AM\/PM)|(A\/P))))|([^ ])))(?=(?:[^"]|"[^"]*")*$)/u', '"${2}"', $format);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         // Get the sections, there can be up to four sections, separated with a semi-colon (but only if not a quoted literal)
         $sections = preg_split('/(;)(?=(?:[^"]|"[^"]*")*$)/u', $format);

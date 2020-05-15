@@ -12,9 +12,18 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 use PhpOffice\PhpSpreadsheet\Style\Font;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Style\Style;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 /** PhpSpreadsheet root directory */
@@ -99,6 +108,11 @@ class Html extends BaseReader
                 ],
             ],
         ], //    Bottom border
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         'strong' => [
             'font' => [
                 'bold' => true,
@@ -119,6 +133,10 @@ class Html extends BaseReader
                 'italic' => true,
             ],
         ], //    Italic
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     ];
 
     protected $rowspan = [];
@@ -128,7 +146,15 @@ class Html extends BaseReader
      */
     public function __construct()
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        $this->readFilter = new DefaultReadFilter();
+=======
         parent::__construct();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+        parent::__construct();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         $this->securityScanner = XmlScanner::getInstance($this);
     }
 
@@ -318,9 +344,23 @@ class Html extends BaseReader
                 switch ($child->nodeName) {
                     case 'meta':
                         foreach ($attributeArray as $attributeName => $attributeValue) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            switch ($attributeName) {
+                                case 'content':
+                                    //    TODO
+                                    //    Extract character set, so we can convert to UTF-8 if required
+                                    break;
+=======
                             // Extract character set, so we can convert to UTF-8 if required
                             if ($attributeName === 'charset') {
                                 $this->setInputEncoding($attributeValue);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+                            // Extract character set, so we can convert to UTF-8 if required
+                            if ($attributeName === 'charset') {
+                                $this->setInputEncoding($attributeValue);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             }
                         }
                         $this->processDomElement($child, $sheet, $row, $column, $cellContent);
@@ -355,10 +395,19 @@ class Html extends BaseReader
                             $cellContent .= ' ';
                         }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         if (isset($this->formats[$child->nodeName])) {
                             $sheet->getStyle($column . $row)->applyFromArray($this->formats[$child->nodeName]);
                         }
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         break;
                     case 'hr':
                         $this->flushCell($sheet, $column, $row, $cellContent);
@@ -449,10 +498,19 @@ class Html extends BaseReader
                         }
 
                         break;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     case 'img':
                         $this->insertImage($sheet, $column, $row, $attributeArray);
 
                         break;
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     case 'table':
                         $this->flushCell($sheet, $column, $row, $cellContent);
                         $column = $this->setTableStartColumn($column);
@@ -477,11 +535,20 @@ class Html extends BaseReader
                         $column = $this->getTableStartColumn();
                         $cellContent = '';
                         $this->processDomElement($child, $sheet, $row, $column, $cellContent);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                         if (isset($attributeArray['height'])) {
                             $sheet->getRowDimension($row)->setRowHeight($attributeArray['height']);
                         }
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         ++$row;
 
                         break;
@@ -535,6 +602,11 @@ class Html extends BaseReader
                                 ]
                             );
                         }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                         if (isset($attributeArray['width'])) {
                             $sheet->getColumnDimension($column)->setWidth($attributeArray['width']);
@@ -556,6 +628,10 @@ class Html extends BaseReader
                             $sheet->getStyle($column . $row)->getNumberFormat()->setFormatCode($attributeArray['data-format']);
                         }
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         ++$column;
 
                         break;
@@ -663,12 +739,46 @@ class Html extends BaseReader
             return;
         }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+        $supported_styles = ['background-color', 'color'];
+=======
         $cellStyle = $sheet->getStyle($column . $row);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+        $cellStyle = $sheet->getStyle($column . $row);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         // add color styles (background & text) from dom element,currently support : td & th, using ONLY inline css style with RGB color
         $styles = explode(';', $attributeArray['style']);
         foreach ($styles as $st) {
             $value = explode(':', $st);
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+            if (empty(trim($value[0])) || !in_array(trim($value[0]), $supported_styles)) {
+                continue;
+            }
+
+            //check if has #, so we can get clean hex
+            if (substr(trim($value[1]), 0, 1) == '#') {
+                $style_color = substr(trim($value[1]), 1);
+            }
+
+            if (empty($style_color)) {
+                continue;
+            }
+
+            switch (trim($value[0])) {
+                case 'background-color':
+                    $sheet->getStyle($column . $row)->applyFromArray(['fill' => ['fillType' => Fill::FILL_SOLID, 'color' => ['rgb' => "{$style_color}"]]]);
+
+                    break;
+                case 'color':
+                    $sheet->getStyle($column . $row)->applyFromArray(['font' => ['color' => ['rgb' => "{$style_color}"]]]);
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             $styleName = isset($value[0]) ? trim($value[0]) : null;
             $styleValue = isset($value[1]) ? trim($value[1]) : null;
 
@@ -799,11 +909,20 @@ class Html extends BaseReader
                     $cellStyle->getAlignment()->setIndent(
                         (int) str_replace(['px'], '', $styleValue)
                     );
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                     break;
             }
         }
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
     /**
      * Check if has #, so we can get clean hex.
@@ -930,4 +1049,8 @@ class Html extends BaseReader
             ],
         ]);
     }
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 }

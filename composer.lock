@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3d1b892364b8dbb575d4762f70cdd74",
+    "content-hash": "912ffb12383e7c64e4ce30c2b4c566a4",
     "packages": [
         {
             "name": "aura/intl",
@@ -288,52 +288,6 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2017-12-24T21:09:29+00:00"
-        },
-        {
-            "name": "friendsofcake/cakepdf",
-            "version": "3.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfCake/CakePdf.git",
-                "reference": "44451b43896759d3c0f4a8f0bcc178a9410c6a59"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfCake/CakePdf/zipball/44451b43896759d3c0f4a8f0bcc178a9410c6a59",
-                "reference": "44451b43896759d3c0f4a8f0bcc178a9410c6a59",
-                "shasum": ""
-            },
-            "require": {
-                "cakephp/cakephp": "^3.5"
-            },
-            "replace": {
-                "ceeram/cakepdf": "self.version"
-            },
-            "require-dev": {
-                "cakephp/chronos": "^1.1",
-                "dompdf/dompdf": "^0.8",
-                "mpdf/mpdf": "^7.0",
-                "phpunit/phpunit": "^5.7.14|^6.0",
-                "tecnickcom/tcpdf": "^6.2"
-            },
-            "suggest": {
-                "dompdf/dompdf": "If you wish to use the DomPdf engine",
-                "mpdf/mpdf": "If you wish to use the Mpdf engine",
-                "tecnickcom/tcpdf": "If you wish to use the Tcpdf engine"
-            },
-            "type": "cakephp-plugin",
-            "autoload": {
-                "psr-4": {
-                    "CakePdf\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "CakePHP plugin for creating and/or rendering Pdfs, several Pdf engines supported.",
-            "homepage": "http://github.com/friendsofcake/CakePdf",
-            "time": "2018-10-31T07:58:20+00:00"
         },
         {
             "name": "josegonzalez/cakephp-upload",
@@ -803,16 +757,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.8.2",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "0c1346a1956347590b7db09533966307d20cb7cc"
+                "reference": "bf00f0cc5f55c354018f9a9ef15e6e3e1a229051"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/0c1346a1956347590b7db09533966307d20cb7cc",
-                "reference": "0c1346a1956347590b7db09533966307d20cb7cc",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/bf00f0cc5f55c354018f9a9ef15e6e3e1a229051",
+                "reference": "bf00f0cc5f55c354018f9a9ef15e6e3e1a229051",
                 "shasum": ""
             },
             "require": {
@@ -893,7 +847,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2019-07-08T21:21:25+00:00"
+            "time": "2019-01-02T04:42:54+00:00"
         },
         {
             "name": "psr/http-message",

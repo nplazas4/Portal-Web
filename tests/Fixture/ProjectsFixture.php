@@ -51,11 +51,16 @@ class ProjectsFixture extends TestFixture
         'CATEGORY' => ['type' => 'string', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'STATUS' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'FOTO' => ['type' => 'upload.file', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+<<<<<<< HEAD
+        'FOTO_DIR' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'EPS_REL' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+=======
         'EPS_REL' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'CHART' => ['type' => 'upload.file', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'IGR' => ['type' => 'decimal', 'length' => 13, 'precision' => 2, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => ''],
         'IGR_DATE' => ['type' => 'date', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'CPI_DATE' => ['type' => 'date', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'ID_PROJECT' => ['type' => 'unique', 'columns' => ['ID_PROJECT'], 'length' => []],
@@ -93,10 +98,17 @@ class ProjectsFixture extends TestFixture
                 'SOLICITUD' => 'Lorem ipsum dolor sit amet',
                 'DISTANCIA' => 1.5,
                 'LINEA_TRANS' => 1.5,
+<<<<<<< HEAD
+                'FOPO' => '2019-03-11',
+                'FEPO' => '2019-03-11',
+                'ADJUDICACION' => '2019-03-11',
+                'APROBACION' => '2019-03-11',
+=======
                 'FOPO' => '2019-04-01',
                 'FEPO' => '2019-04-01',
                 'ADJUDICACION' => '2019-04-01',
                 'APROBACION' => '2019-04-01',
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 'TORRE' => 1.5,
                 'NUM_SUBESTACION' => 1.5,
                 'CPI_ANUAL' => 1,
@@ -110,11 +122,16 @@ class ProjectsFixture extends TestFixture
                 'CATEGORY' => 'Lorem ipsum dolor sit amet',
                 'STATUS' => 1,
                 'FOTO' => '',
+<<<<<<< HEAD
+                'FOTO_DIR' => 'Lorem ipsum dolor sit amet',
+                'EPS_REL' => 1
+=======
                 'EPS_REL' => 1,
                 'CHART' => '',
                 'IGR' => 1.5,
                 'IGR_DATE' => '2019-04-01',
                 'CPI_DATE' => '2019-04-01'
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             ],
         ];
         parent::init();

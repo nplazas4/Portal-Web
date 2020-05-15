@@ -14,6 +14,11 @@ interface IWriter
     public function __construct(Spreadsheet $spreadsheet);
 
     /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Write charts in workbook?
      *        If this is true, then the Writer will write definitions for any charts that exist in the PhpSpreadsheet object.
      *        If false (the default) it will ignore any charts defined in the PhpSpreadsheet object.
@@ -57,6 +62,10 @@ interface IWriter
     public function setPreCalculateFormulas($pValue);
 
     /**
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Save PhpSpreadsheet to file.
      *
      * @param string $pFilename Name of the file to save
@@ -64,6 +73,11 @@ interface IWriter
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function save($pFilename);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
     /**
      * Get use disk caching where possible?
@@ -90,4 +104,8 @@ interface IWriter
      * @return string
      */
     public function getDiskCachingDirectory();
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 }

@@ -192,7 +192,15 @@ class Date
         $interval = $days . ' days';
 
         return $baseDate->modify($interval)
+<<<<<<< HEAD
+<<<<<<< HEAD
+            ->setTime($hours, $minutes, $seconds);
+=======
             ->setTime((int) $hours, (int) $minutes, (int) $seconds);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+            ->setTime((int) $hours, (int) $minutes, (int) $seconds);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 
     /**
@@ -244,12 +252,27 @@ class Date
     public static function dateTimeToExcel(DateTimeInterface $dateValue)
     {
         return self::formattedPHPToExcel(
+<<<<<<< HEAD
+<<<<<<< HEAD
+            $dateValue->format('Y'),
+            $dateValue->format('m'),
+            $dateValue->format('d'),
+            $dateValue->format('H'),
+            $dateValue->format('i'),
+            $dateValue->format('s')
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             (int) $dateValue->format('Y'),
             (int) $dateValue->format('m'),
             (int) $dateValue->format('d'),
             (int) $dateValue->format('H'),
             (int) $dateValue->format('i'),
             (int) $dateValue->format('s')
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         );
     }
 
@@ -325,12 +348,26 @@ class Date
      */
     public static function isDateTime(Cell $pCell)
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        return self::isDateTimeFormat(
+            $pCell->getWorksheet()->getStyle(
+                $pCell->getCoordinate()
+            )->getNumberFormat()
+        );
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         return is_numeric($pCell->getValue()) &&
             self::isDateTimeFormat(
                 $pCell->getWorksheet()->getStyle(
                     $pCell->getCoordinate()
                 )->getNumberFormat()
             );
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 
     /**

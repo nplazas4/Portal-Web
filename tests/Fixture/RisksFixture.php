@@ -28,8 +28,16 @@ class RisksFixture extends TestFixture
         'PLAN_THREE' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PLAN_FOUR' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'PLAN_FIVE' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+<<<<<<< HEAD
+        'PLAN_ONE_S' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'PLAN_TWO_S' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'PLAN_THREE_S' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'PLAN_FOUR_S' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'PLAN_FIVE_S' => ['type' => 'string', 'length' => 600, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+=======
         'ACTION_STATE' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'MATERIALIZACION' => ['type' => 'string', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8_spanish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         'PROJECT_CODE' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'PROJECT_CODE' => ['type' => 'index', 'columns' => ['PROJECT_CODE'], 'length' => []],
@@ -65,8 +73,16 @@ class RisksFixture extends TestFixture
                 'PLAN_THREE' => 'Lorem ipsum dolor sit amet',
                 'PLAN_FOUR' => 'Lorem ipsum dolor sit amet',
                 'PLAN_FIVE' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
+                'PLAN_ONE_S' => 'Lorem ipsum dolor sit amet',
+                'PLAN_TWO_S' => 'Lorem ipsum dolor sit amet',
+                'PLAN_THREE_S' => 'Lorem ipsum dolor sit amet',
+                'PLAN_FOUR_S' => 'Lorem ipsum dolor sit amet',
+                'PLAN_FIVE_S' => 'Lorem ipsum dolor sit amet',
+=======
                 'ACTION_STATE' => 'Lorem ipsum dolor sit amet',
                 'MATERIALIZACION' => 'Lorem ipsum dolor sit amet',
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 'PROJECT_CODE' => 1
             ],
         ];

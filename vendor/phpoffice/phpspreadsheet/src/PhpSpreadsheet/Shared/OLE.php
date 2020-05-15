@@ -537,6 +537,37 @@ class OLE
     /**
      * Returns a timestamp from an OLE container's date.
      *
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @param int $string A binary string with the encoded date
+     *
+     * @return string The timestamp corresponding to the string
+     */
+    public static function OLE2LocalDate($string)
+    {
+        if (strlen($string) != 8) {
+            throw new ReaderException('Expecting 8 byte string');
+        }
+
+        // factor used for separating numbers into 4 bytes parts
+        $factor = pow(2, 32);
+        list(, $high_part) = unpack('V', substr($string, 4, 4));
+        list(, $low_part) = unpack('V', substr($string, 0, 4));
+
+        $big_date = ($high_part * $factor) + $low_part;
+        // translate to seconds
+        $big_date /= 10000000;
+
+        // days from 1-1-1601 until the beggining of UNIX era
+        $days = 134774;
+
+        // translate to seconds from beggining of UNIX era
+        $big_date -= $days * 24 * 3600;
+
+        return floor($big_date);
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * @param string $oleTimestamp A binary string with the encoded date
      *
      * @throws ReaderException
@@ -569,5 +600,9 @@ class OLE
         }
 
         return $unixTimestamp >= 0.0 ? PHP_INT_MAX : PHP_INT_MIN;
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 }

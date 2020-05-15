@@ -117,7 +117,15 @@ class Calculation
     /**
      * An array of the nested cell references accessed by the calculation engine, used for the debug log.
      *
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @var array of string
+=======
      * @var CyclicReferenceStack
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+     * @var CyclicReferenceStack
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      */
     private $cyclicReferenceStack;
 
@@ -1945,11 +1953,20 @@ class Calculation
             'functionCall' => [MathTrig::class, 'SUMXMY2'],
             'argumentCount' => '2',
         ],
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         'SWITCH' => [
             'category' => Category::CATEGORY_LOGICAL,
             'functionCall' => [Logical::class, 'statementSwitch'],
             'argumentCount' => '3+',
         ],
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         'SYD' => [
             'category' => Category::CATEGORY_FINANCIAL,
             'functionCall' => [Financial::class, 'SYD'],
@@ -2212,8 +2229,18 @@ class Calculation
     private static function loadLocales()
     {
         $localeFileDirectory = __DIR__ . '/locale/';
+<<<<<<< HEAD
+<<<<<<< HEAD
+        foreach (glob($localeFileDirectory . '/*', GLOB_ONLYDIR) as $filename) {
+            $filename = substr($filename, strlen($localeFileDirectory) + 1);
+=======
         foreach (glob($localeFileDirectory . '*', GLOB_ONLYDIR) as $filename) {
             $filename = substr($filename, strlen($localeFileDirectory));
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+        foreach (glob($localeFileDirectory . '*', GLOB_ONLYDIR) as $filename) {
+            $filename = substr($filename, strlen($localeFileDirectory));
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             if ($filename != 'en') {
                 self::$validLocaleLanguages[] = $filename;
             }
@@ -2418,6 +2445,13 @@ class Calculation
         if (strpos($locale, '_') !== false) {
             list($language) = explode('_', $locale);
         }
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         if (count(self::$validLocaleLanguages) == 1) {
             self::loadLocales();
         }
@@ -2708,7 +2742,15 @@ class Calculation
      * @param Cell $pCell Cell to calculate
      * @param bool $resetLog Flag indicating whether the debug log should be reset or not
      *
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @throws Exception
+=======
      * @throws \PhpOffice\PhpSpreadsheet\Exception
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      *
      * @return mixed
      */
@@ -2812,7 +2854,15 @@ class Calculation
      * @param string $cellID Address of the cell to calculate
      * @param Cell $pCell Cell to calculate
      *
+<<<<<<< HEAD
+<<<<<<< HEAD
+     * @throws Exception
+=======
      * @throws \PhpOffice\PhpSpreadsheet\Exception
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      *
      * @return mixed
      */
@@ -2896,6 +2946,11 @@ class Calculation
     {
         $cellValue = null;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         //  Quote-Prefixed cell values cannot be formulae, but are treated as strings
         if ($pCell !== null && $pCell->getStyle()->getQuotePrefix() === true) {
             return self::wrapResult((string) $formula);
@@ -2905,6 +2960,10 @@ class Calculation
             return self::wrapResult($formula);
         }
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         //    Basic validation that this is indeed a formula
         //    We simply return the cell value if not
         $formula = trim($formula);

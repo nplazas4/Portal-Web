@@ -8,11 +8,20 @@ php:
   - 7.2
   - 7.3
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 matrix:
   fast_finish: true
   allow_failures:
     - php: 5.6
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 cache:
   directories:
     - cache

@@ -93,7 +93,15 @@ class Workbook extends WriterPart
     {
         $objWriter->startElement('workbookPr');
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+        if (Date::getExcelCalendar() == Date::CALENDAR_MAC_1904) {
+=======
         if (Date::getExcelCalendar() === Date::CALENDAR_MAC_1904) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+        if (Date::getExcelCalendar() === Date::CALENDAR_MAC_1904) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             $objWriter->writeAttribute('date1904', '1');
         }
 
@@ -225,7 +233,15 @@ class Workbook extends WriterPart
             $objWriter->startElement('sheet');
             $objWriter->writeAttribute('name', $pSheetname);
             $objWriter->writeAttribute('sheetId', $pSheetId);
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if ($sheetState != 'visible' && $sheetState != '') {
+=======
             if ($sheetState !== 'visible' && $sheetState != '') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+            if ($sheetState !== 'visible' && $sheetState != '') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 $objWriter->writeAttribute('state', $sheetState);
             }
             $objWriter->writeAttribute('r:id', 'rId' . $pRelId);

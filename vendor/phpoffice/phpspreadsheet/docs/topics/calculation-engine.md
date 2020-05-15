@@ -43,6 +43,11 @@ inserted 2 new rows), changed to "SUM(E4:E11)". Also, the inserted cells
 duplicate style information of the previous cell, just like Excel's
 behaviour. Note that you can both insert rows and columns.
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ## Calculation Cache
 
 Once the Calculation engine has evaluated the formula in a cell, the result
@@ -67,6 +72,10 @@ If you want only to flush the cache, then you can call
 Calculation::getInstance($spreadsheet)->clearCalculationCache();
 ```
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ## Known limitations
 
 There are some known limitations to the PhpSpreadsheet calculation

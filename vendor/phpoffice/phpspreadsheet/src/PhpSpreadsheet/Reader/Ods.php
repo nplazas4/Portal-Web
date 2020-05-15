@@ -7,7 +7,15 @@ use DateTimeZone;
 use PhpOffice\PhpSpreadsheet\Calculation\Calculation;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
+<<<<<<< HEAD
+<<<<<<< HEAD
+use PhpOffice\PhpSpreadsheet\Document\Properties;
+=======
 use PhpOffice\PhpSpreadsheet\Reader\Ods\Properties as DocumentProperties;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+use PhpOffice\PhpSpreadsheet\Reader\Ods\Properties as DocumentProperties;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Settings;
@@ -25,7 +33,15 @@ class Ods extends BaseReader
      */
     public function __construct()
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        $this->readFilter = new DefaultReadFilter();
+=======
         parent::__construct();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+        parent::__construct();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         $this->securityScanner = XmlScanner::getInstance($this);
     }
 
@@ -52,7 +68,15 @@ class Ods extends BaseReader
             $stat = $zip->statName('mimetype');
             if ($stat && ($stat['size'] <= 255)) {
                 $mimeType = $zip->getFromName($stat['name']);
+<<<<<<< HEAD
+<<<<<<< HEAD
+            } elseif ($stat = $zip->statName('META-INF/manifest.xml')) {
+=======
             } elseif ($zip->statName('META-INF/manifest.xml')) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+            } elseif ($zip->statName('META-INF/manifest.xml')) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 $xml = simplexml_load_string(
                     $this->securityScanner->scan($zip->getFromName('META-INF/manifest.xml')),
                     'SimpleXMLElement',
@@ -265,7 +289,15 @@ class Ods extends BaseReader
 
         $zip = new ZipArchive();
         if (!$zip->open($pFilename)) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+            throw new Exception('Could not open ' . $pFilename . ' for reading! Error opening file.');
+=======
             throw new Exception("Could not open {$pFilename} for reading! Error opening file.");
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+            throw new Exception("Could not open {$pFilename} for reading! Error opening file.");
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         }
 
         // Meta
@@ -275,6 +307,102 @@ class Ods extends BaseReader
             'SimpleXMLElement',
             Settings::getLibXmlLoaderOptions()
         );
+<<<<<<< HEAD
+<<<<<<< HEAD
+        $namespacesMeta = $xml->getNamespaces(true);
+
+        $docProps = $spreadsheet->getProperties();
+        $officeProperty = $xml->children($namespacesMeta['office']);
+        foreach ($officeProperty as $officePropertyData) {
+            $officePropertyDC = [];
+            if (isset($namespacesMeta['dc'])) {
+                $officePropertyDC = $officePropertyData->children($namespacesMeta['dc']);
+            }
+            foreach ($officePropertyDC as $propertyName => $propertyValue) {
+                $propertyValue = (string) $propertyValue;
+                switch ($propertyName) {
+                    case 'title':
+                        $docProps->setTitle($propertyValue);
+
+                        break;
+                    case 'subject':
+                        $docProps->setSubject($propertyValue);
+
+                        break;
+                    case 'creator':
+                        $docProps->setCreator($propertyValue);
+                        $docProps->setLastModifiedBy($propertyValue);
+
+                        break;
+                    case 'date':
+                        $creationDate = strtotime($propertyValue);
+                        $docProps->setCreated($creationDate);
+                        $docProps->setModified($creationDate);
+
+                        break;
+                    case 'description':
+                        $docProps->setDescription($propertyValue);
+
+                        break;
+                }
+            }
+            $officePropertyMeta = [];
+            if (isset($namespacesMeta['dc'])) {
+                $officePropertyMeta = $officePropertyData->children($namespacesMeta['meta']);
+            }
+            foreach ($officePropertyMeta as $propertyName => $propertyValue) {
+                $propertyValueAttributes = $propertyValue->attributes($namespacesMeta['meta']);
+                $propertyValue = (string) $propertyValue;
+                switch ($propertyName) {
+                    case 'initial-creator':
+                        $docProps->setCreator($propertyValue);
+
+                        break;
+                    case 'keyword':
+                        $docProps->setKeywords($propertyValue);
+
+                        break;
+                    case 'creation-date':
+                        $creationDate = strtotime($propertyValue);
+                        $docProps->setCreated($creationDate);
+
+                        break;
+                    case 'user-defined':
+                        $propertyValueType = Properties::PROPERTY_TYPE_STRING;
+                        foreach ($propertyValueAttributes as $key => $value) {
+                            if ($key == 'name') {
+                                $propertyValueName = (string) $value;
+                            } elseif ($key == 'value-type') {
+                                switch ($value) {
+                                    case 'date':
+                                        $propertyValue = Properties::convertProperty($propertyValue, 'date');
+                                        $propertyValueType = Properties::PROPERTY_TYPE_DATE;
+
+                                        break;
+                                    case 'boolean':
+                                        $propertyValue = Properties::convertProperty($propertyValue, 'bool');
+                                        $propertyValueType = Properties::PROPERTY_TYPE_BOOLEAN;
+
+                                        break;
+                                    case 'float':
+                                        $propertyValue = Properties::convertProperty($propertyValue, 'r4');
+                                        $propertyValueType = Properties::PROPERTY_TYPE_FLOAT;
+
+                                        break;
+                                    default:
+                                        $propertyValueType = Properties::PROPERTY_TYPE_STRING;
+                                }
+                            }
+                        }
+                        $docProps->setCustomProperty($propertyValueName, $propertyValue, $propertyValueType);
+
+                        break;
+                }
+            }
+        }
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         if ($xml === false) {
             throw new Exception('Unable to read data from {$pFilename}');
         }
@@ -282,6 +410,10 @@ class Ods extends BaseReader
         $namespacesMeta = $xml->getNamespaces(true);
 
         (new DocumentProperties($spreadsheet))->load($xml, $namespacesMeta);
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         // Content
 
@@ -429,7 +561,15 @@ class Ods extends BaseReader
                                     foreach ($paragraphs as $pData) {
                                         $dataArray[] = $this->scanElementForText($pData);
                                     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                    $allCellDataText = implode($dataArray, "\n");
+=======
                                     $allCellDataText = implode("\n", $dataArray);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+                                    $allCellDataText = implode("\n", $dataArray);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                                     $type = $cellData->getAttributeNS($officeNs, 'value-type');
 
@@ -496,12 +636,27 @@ class Ods extends BaseReader
                                             );
 
                                             $dataValue = Date::formattedPHPToExcel(
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                                $year,
+                                                $month,
+                                                $day,
+                                                $hour,
+                                                $minute,
+                                                $second
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                                 (int) $year,
                                                 (int) $month,
                                                 (int) $day,
                                                 (int) $hour,
                                                 (int) $minute,
                                                 (int) $second
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                             );
 
                                             if ($dataValue != floor($dataValue)) {

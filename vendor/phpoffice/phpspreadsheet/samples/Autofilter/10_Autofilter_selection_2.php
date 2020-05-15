@@ -52,13 +52,38 @@ $row = 2;
 foreach ($years as $year) {
     foreach ($periods as $period) {
         foreach ($countries as $country) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+            $endDays = date('t', mktime(0, 0, 0, $period, 1, $year));
+=======
             $endDays = date('t', mktime(0, 0, 0, $period, 1, (int) $year));
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+            $endDays = date('t', mktime(0, 0, 0, $period, 1, (int) $year));
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             for ($i = 1; $i <= $endDays; ++$i) {
                 $eDate = Date::formattedPHPToExcel(
                     $year,
                     $period,
                     $i
                 );
+<<<<<<< HEAD
+<<<<<<< HEAD
+                $value = rand(500, 1000) * (1 + rand(-0.25, +0.25));
+                $salesValue = $invoiceValue = null;
+                $incomeOrExpenditure = rand(-1, 1);
+                if ($incomeOrExpenditure == -1) {
+                    $expenditure = rand(-500, -1000) * (1 + rand(-0.25, +0.25));
+                    $income = null;
+                } elseif ($incomeOrExpenditure == 1) {
+                    $expenditure = rand(-500, -1000) * (1 + rand(-0.25, +0.25));
+                    $income = rand(500, 1000) * (1 + rand(-0.25, +0.25));
+                } else {
+                    $expenditure = null;
+                    $income = rand(500, 1000) * (1 + rand(-0.25, +0.25));
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 $value = rand(500, 1000) * (1 + (rand(-1, 1) / 4));
                 $salesValue = $invoiceValue = null;
                 $incomeOrExpenditure = rand(-1, 1);
@@ -71,6 +96,10 @@ foreach ($years as $year) {
                 } else {
                     $expenditure = null;
                     $income = rand(500, 1000) * (1 + (rand(-1, 1) / 4));
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 }
                 $dataArray = [$year,
                     $period,
