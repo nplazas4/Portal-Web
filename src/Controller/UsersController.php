@@ -15,6 +15,7 @@ class UsersController extends AppController
     }
     public function beforeFilter($event)
     {
+        $this->token();
         parent::beforeFilter($event);
     }
     //recibe el usuario autentificado REVISAR FUNCIONALIDAD.
@@ -49,29 +50,40 @@ class UsersController extends AppController
                 $User = array_values($PostData)[0];
                 // Contraseña
                 $Password = array_values($PostData)[1];
+
+                $base64 = 'http://192.168.1.153:7001/ords/projects_portal/authentication/users/?V_TEXT_IN='.base64_encode($_SESSION["PortalToken"].":".$User.":".$Password);
+
                 /*Curl que llama el Web Service de login o autenticación mediante la URL y los parametros de usuario y contraseña y
                 un token generado desde la Función Token.*/
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/authentication/users/?V_TEXT_IN='.base64_encode($_SESSION["PortalToken"].":".$User.":".$Password));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                $headers = array();
-                $headers[] = "Authorization: Bearer ".$_SESSION["PortalToken"];
-                $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                $result = curl_exec($ch);
-                if (curl_errno($ch)) {
-                    echo 'Error:' . curl_error($ch);
-                }
-                curl_close($ch);
+
+              $curl = curl_init();
+
+              curl_setopt_array($curl, array(
+                CURLOPT_URL => $base64,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_HTTPHEADER => array(
+                  "V_TEXT_IN: ".base64_encode($_SESSION["PortalToken"].":".$User.":".$Password),
+                  "Authorization: Bearer ".$_SESSION["PortalToken"]
+                ),
+              ));
+
+              $response = curl_exec($curl);
+
+              curl_close($curl);
                 //Decodifica un string de JSON
-                $result_login = json_decode($result, true);
+                $result_login = json_decode($response, true);
                 // Evalua el resultado del web services.
                 if ($result_login != null) {
                     // Convierte el JSON del WS en un array.
                     $var = array_values($result_login);
                     //Evalúa si el usuario se encuentra activo.
-                    if ($var[4] != 0) {
+                    if ($result_login["V_ACTIVE"] != 0) {
                         //User almacena el registro del usuario identificado en el Web Service.
                         $user = $result_login;
                         if ($user) {

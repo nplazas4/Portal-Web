@@ -124,7 +124,7 @@ class AppController extends Controller
         try {
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_PORT => "8080",
+            CURLOPT_PORT => "7001",
             CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/list/eps/",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
