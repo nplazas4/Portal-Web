@@ -1045,57 +1045,25 @@ left: 25%;
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_1" type="checkbox" name="first_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-td" id="b_checkbox_1" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-td" id="b_checkbox_1" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>En la cadena energética de baja emisión</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_2" type="checkbox" name="first_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-td" id="b_checkbox_2" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-td" id="b_checkbox_2" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Empresa top 1 o 2 en cada mercado o potencializa la entrada a nuevas regiones</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_3" type="checkbox" name="first_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-td" id="b_checkbox_3" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-td" id="b_checkbox_3" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Enmarcada bajo las premisas clave de cada GEN (focos, regiones y destrezas)</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_4" type="checkbox" name="first_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-td" id="b_checkbox_4" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-td" id="b_checkbox_4" type="checkbox" name="first_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Perspectiva de rentabilidad de largo plazo</span>
                             </label>
                         </p>
@@ -1117,57 +1085,25 @@ left: 25%;
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_6" type="checkbox" name="second_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ti" id="b_checkbox_6" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ti" id="b_checkbox_6" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Perspectiva de dividendos creciente</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_7" type="checkbox" name="second_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ti" id="b_checkbox_7" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ti" id="b_checkbox_7" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Barreras de entrada vía altas inversiones de capital</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_8" type="checkbox" name="second_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ti" id="b_checkbox_8" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ti" id="b_checkbox_8" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Mercados regulados</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_9" type="checkbox" name="second_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ti" id="b_checkbox_9" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ti" id="b_checkbox_9" type="checkbox" name="second_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Bajo niveles relativos de riesgo</span>
                             </label>
                         </p>
@@ -1189,43 +1125,19 @@ left: 25%;
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_11" type="checkbox" name="third_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-pm" id="b_checkbox_11" type="checkbox" name="third_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-pm" id="b_checkbox_11" type="checkbox" name="third_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Exposición a buenas perspectivas demográficas de largo plazo</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_12" type="checkbox" name="third_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-pm" id="b_checkbox_12" type="checkbox" name="third_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-pm" id="b_checkbox_12" type="checkbox" name="third_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Institucionalidad regulatoria y jurídica confiable</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_13" type="checkbox" name="third_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-pm" id="b_checkbox_13" type="checkbox" name="third_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-pm" id="b_checkbox_13" type="checkbox" name="third_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Geografías en expansión y desarrollo</span>
                             </label>
                         </p>
@@ -1247,43 +1159,19 @@ left: 25%;
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_15" type="checkbox" name="fourth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-mi" id="b_checkbox_15" type="checkbox" name="fourth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-mi" id="b_checkbox_15" type="checkbox" name="fourth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Capacidad de intervenir proactivamente en la agenda de crecimiento</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_16" type="checkbox" name="fourth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-mi" id="b_checkbox_16" type="checkbox" name="fourth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-mi" id="b_checkbox_16" type="checkbox" name="fourth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Compartir estándares de sostenibilidad, inversión social y valor compartido</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_17" type="checkbox" name="fourth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-mi" id="b_checkbox_17" type="checkbox" name="fourth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-mi" id="b_checkbox_17" type="checkbox" name="fourth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Relacionamiento con comunidades y grupos de interés, generando valor compartido</span>
                             </label>
                         </p>
@@ -1305,57 +1193,25 @@ left: 25%;
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_19" type="checkbox" name="fifth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ct" id="b_checkbox_19" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ct" id="b_checkbox_19" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Experiencia en regiones comparables</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_20" type="checkbox" name="fifth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ct" id="b_checkbox_20" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ct" id="b_checkbox_20" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Acceso a tecnología y mejores prácticas gerenciales</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_21" type="checkbox" name="fifth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ct" id="b_checkbox_21" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ct" id="b_checkbox_21" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Capacidad financiera alineada con la inversión y acceso a capital</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_22" type="checkbox" name="fifth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-ct" id="b_checkbox_22" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-ct" id="b_checkbox_22" type="checkbox" name="fifth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Acceso a mercados y reputación superior</span>
                             </label>
                         </p>
@@ -1377,71 +1233,31 @@ left: 25%;
                         <span class="icon-download"><i class="material-icons tooltipped" data-position="right" data-tooltip="Justificación" onclick="return false;">help_outline</i></span>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_24" type="checkbox" name="sixth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-gc" id="b_checkbox_24" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-gc" id="b_checkbox_24" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Socios: Acuerdos de accionistas alineados en intereses de largo plazo del Grupo</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_25" type="checkbox" name="sixth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-gc" id="b_checkbox_25" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-gc" id="b_checkbox_25" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Aliados: Acuerdos de niveles de servicio, aspectos técnicos o de gestión de a través de relaciones contractuales a mediano y largo plazo</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_26" type="checkbox" name="sixth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-gc" id="b_checkbox_26" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-gc" id="b_checkbox_26" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Estándares de transparencia y reputación del más alto nivel</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_27" type="checkbox" name="sixth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-gc" id="b_checkbox_27" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-gc" id="b_checkbox_27" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Identificación y manejo de conflictos de interés con otras compañías del grupo</span>
                             </label>
                         </p>
                         <p style="margin-top: 12px">
                             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                <input class="checkbox-flag" id="b_checkbox_28" type="checkbox" name="sixth_checkbox" />
-=======
                                 <input class="checkbox-flag checkbox-gc" id="b_checkbox_28" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                                <input class="checkbox-flag checkbox-gc" id="b_checkbox_28" type="checkbox" name="sixth_checkbox" />
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 <span>Relación simétrica y colaborativa</span>
                             </label>
                         </p>
@@ -2744,22 +2560,11 @@ $(document).ready(function() {
             return !$(this).val()
         }).length;
         var empty_inputs2 = $('.input100.viabilidad-financiera-inputs.active').filter(function() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            return !$(this).val()
-        }).length;
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           // if ($('.input100.viabilidad-financiera-inputs.active').val() != "0") {
           financialInputs();
           return !$(this).val()
         }).length;
         // console.log('input 2 '+empty_inputs2);
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         var array_select = [], empty_inputs3 = 1;
         for (var i = 1; i <= 6; i++) {
           if ($('#t_tipo_beneficio_'+[i]).children(":selected").val() != 'default') {
@@ -2777,13 +2582,6 @@ $(document).ready(function() {
               } else {
                   alert_notification('Por favor revisar campos vacíos beneficios.');
               }
-<<<<<<< HEAD
-<<<<<<< HEAD
-              console.log(empty_inputs_db+' '+empty_inputs_sa+' '+empty_inputs_sb);
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           } else {
             array_select.push([i]);
             if (array_select.length > 5) {
@@ -3150,11 +2948,6 @@ $(document).ready(function() {
   }
   // CAMPOS DE MEC Y BANDERAS (SOLO CRECIMIENTO)
   function show_mec(project_type, subcategory){
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     $('#t_risk_1').val("");
     $('#t_risk_2').val("");
     $('#t_risk_3').val("");
@@ -3164,10 +2957,6 @@ $(document).ready(function() {
     $('#t_risk_7').val("");
     $('#t_risk_8').val("");
     $('#t_risk_9').val("");
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     $('#div-socio-est').show();
     $('#div-peti').hide();
     $('#div-just-peti').hide();
@@ -3183,11 +2972,6 @@ $(document).ready(function() {
         $('.crec-info-finaciera').show();
         $('.input100.viabilidad-financiera').addClass('active');
         $('.input100.viabilidad-financiera-inputs').addClass('active');
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         // form 5 risks
         $('#t_risk_1').val("Incumplimiento FOPO");
         $('#t_risk_2').val("Técnico: Tramo Subterráneo / Subfluvial; Nueva Tecnología");
@@ -3198,10 +2982,6 @@ $(document).ready(function() {
         $('#t_risk_7').val("Seguridad - Complejo Orden Público");
         $('#t_risk_8').val("Potencial retiro de oferta por parte de la UPME del PIE");
         $('#t_risk_9').val("SST - Potenciales accidentes mortales por entorno de zona");
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       } else {
         $('#div-peti').show();
         $('#div-just-peti').show();
@@ -3342,11 +3122,6 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
       $('.socio-est input').removeClass('active');
     }
   });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   $('input[name="first_checkbox"]').change(function(){
     var checkboxId = $(this).attr('id');
     if($(this).is(':checked')){
@@ -3407,10 +3182,6 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
       }
     }
   });
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   // FIN JQUERY FORM 3
   // INICIO JQUERY FORM 4
   $('.input100.viabilidad-financiera').change(function() {
@@ -3456,12 +3227,6 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
       });
       loop_estimate(Table_Dates.sort());
   };
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   function financialInputs(){
     $('#n_ingresos_anuales').each(function(){
         if ($(this).val() == "0") {
@@ -3482,10 +3247,6 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
         }
     });
   }
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   // REVISAR
   function loop_estimate(Table_Dates) {
       var length_thead = document.getElementById("tr-head").childElementCount;
@@ -3904,24 +3665,11 @@ $('.crec-flags.wrap-input100.rs1-wrap-input100.validate-input.checkbox.gobierno-
           xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         },
         success: function(response){
-<<<<<<< HEAD
-<<<<<<< HEAD
-          console.log(response);
-          if (response.status == '200') {
-              success_text = response.event_1+': '+response.record_no;
-              success_notification(success_text);
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           if (response.status == '200') {
               success_text = response.event_1+': '+response.record_no;
               success_notification(success_text);
           } else {
             alert_notification("Error durante el envío de RYOS.")
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           }
         }
       });

@@ -30,7 +30,7 @@ use Cake\ORM\Entity;
  * @property float $TORRE
  * @property float $NUM_SUBESTACION
  * @property float $CPI_ANUAL
- * @property float $PV_TOTAL
+ * @property float $AC_BAC
  * @property float $AC_PPTO
  * @property float $PROJ_TOTAL_PRES
  * @property float $TOTAL_FORECAST
@@ -82,7 +82,7 @@ class Project extends Entity
         'TORRE' => true,
         'NUM_SUBESTACION' => true,
         'CPI_ANUAL' => true,
-        'PV_TOTAL' => true,
+        'AC_BAC' => true,
         'AC_PPTO' => true,
         'PROJ_TOTAL_PRES' => true,
         'TOTAL_FORECAST' => true,

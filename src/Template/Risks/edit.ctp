@@ -58,11 +58,7 @@
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-<<<<<<< HEAD
-                          <?php echo $this->Form->input('IMPACT_RISK',['label'=>'Impacto del riesgo','id'=>'impact-result-risk','placeholder'=>'Impacto del riesgo','class'=>'validate','required']);?>
-=======
                           <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','placeholder'=>'Impacto del riesgo','class'=>'validate','id'=>'impact-result-risk','required']);?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         </div>
                       </div>
                       <div class="row">

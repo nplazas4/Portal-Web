@@ -50,14 +50,7 @@ $(document).ready(function () {
   setInterval(function () {
   if (!pause) {
     var $this = block.eq(k);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     console.log($this);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-    console.log($this);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       block.removeClass('active').fadeOut(3000).eq(k).addClass('active').fadeIn(3000);
       $this.addClass('active');
       k++;
@@ -119,11 +112,6 @@ $(document).ready(function () {
             $('<span>',{class : 'item-tooltip', text : description})
           ])
         ]).hide().fadeIn(200);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       } else if(this.child_eps_id == 34017){
         div_companies.append([
           $('<a>',{class : 'companies-menu-item', href : '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))}).append([
@@ -134,10 +122,6 @@ $(document).ready(function () {
             $('<span>',{class : 'item-tooltip', text : description})
           ])
         ]).hide().fadeIn(200);
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       }else {
         div_companies.append([
           $('<a>',{class : 'companies-menu-item', href : '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))}).append([

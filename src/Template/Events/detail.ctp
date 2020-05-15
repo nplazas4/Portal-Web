@@ -215,11 +215,7 @@ $(document).ready(function(){
     var settings = {
         "async": true,
         "crossDomain": true,
-<<<<<<< HEAD
-        "url": "http://192.168.1.153:7001/ords/projects_portal/portal/registerevent/listeventbyrecord/"+'<?=$code?>',
-=======
         "url": "http://192.168.0.210:8080/ords/portal/registerevent/listeventbyrecord/"+'<?=$code?>',
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -262,11 +258,7 @@ $(document).ready(function(){
     var settings = {
         "async": true,
         "crossDomain": true,
-<<<<<<< HEAD
-        "url": "http://192.168.1.153:7001/ords/projects_portal/portal/registerevent/listbyrecord/"+'<?=$code?>',
-=======
         "url": "http://192.168.0.210:8080/ords/portal/registerevent/listbyrecord/"+'<?=$code?>',
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -338,8 +330,6 @@ $(document).ready(function(){
   }
 });
 </script>
-<<<<<<< HEAD
-=======
 <!-- CONTADOR DE CARACTERES -->
 <script>
   $(document).ready(function(){
@@ -348,4 +338,3 @@ $('textarea#lapa_001_s_descacont').characterCounter();
 });
   })
 </script>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

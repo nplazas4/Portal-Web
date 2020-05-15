@@ -39,38 +39,16 @@
         </div>
         <div class="switch ml-5">
             <label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <a class="btn-floating btn-depressed white" onclick="return false;">
-                    <i class="mdi material-icons grey-text">person</i>
-=======
                 <a class="mdi black-text" onclick="return false;">
                   person
                     <!-- <i class="mdi primary-text">person</i> -->
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                <a class="mdi black-text" onclick="return false;">
-                  person
-                    <!-- <i class="mdi primary-text">person</i> -->
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 </a>
                 <!-- </div> -->
                 <input class="mdi" id="checkbox-la" type="checkbox">
                 <span class="lever"></span>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <a class="btn-floating btn-depressed white" onclick="return false;">
-                    <i class="mdi material-icons grey-text">group</i>
-=======
                 <a class="mdi black-text" onclick="return false;">
                   group
                     <!-- <i class="mdi black-text">group</i> -->
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                <a class="mdi black-text" onclick="return false;">
-                  group
-                    <!-- <i class="mdi black-text">group</i> -->
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 </a>
             </label>
         </div>
@@ -238,13 +216,6 @@
       if (searchText != null) {
           var targetTable = document.getElementById('myTable');
           var targetTableColCount;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           //Loop through table rows
           for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
               var rowData = '';
@@ -280,15 +251,7 @@
   var settings = {
     "async": true,
     "crossDomain": true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "url": "http://192.168.1.153:7001/ords/projects_portal/portal/registerevent/filtersbycompany/",
-=======
     "url": "http://192.168.0.210:8080/ords/portal/registerevent/filtersbycompany/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-    "url": "http://192.168.0.210:8080/ords/portal/registerevent/filtersbycompany/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -308,15 +271,7 @@
   var settings = {
     "async": true,
     "crossDomain": true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "url": "http://192.168.1.153:7001/ords/projects_portal/portal/registerevent/filtersbyprojectreference/",
-=======
     "url": "http://192.168.0.210:8080/ords/portal/registerevent/filtersbyprojectreference/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-    "url": "http://192.168.0.210:8080/ords/portal/registerevent/filtersbyprojectreference/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -355,15 +310,7 @@
     var settings = {
         "async": true,
         "crossDomain": true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "url": "http://192.168.1.153:7001/ords/projects_portal/portal/registerevent/eventsbyemail/" + email_user,
-=======
         "url": "http://192.168.0.210:8080/ords/portal/registerevent/eventsbyemail/" + email_user,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        "url": "http://192.168.0.210:8080/ords/portal/registerevent/eventsbyemail/" + email_user,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -381,15 +328,7 @@
     var settings = {
         "async": true,
         "crossDomain": true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "url": "http://192.168.1.153:7001/ords/projects_portal/portal/registerevent/totallist/",
-=======
         "url": "http://192.168.0.210:8080/ords/portal/registerevent/totallist/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        "url": "http://192.168.0.210:8080/ords/portal/registerevent/totallist/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -594,15 +533,7 @@
       } else {
         table(range.val());
       }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    })
-=======
     });
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-    });
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     function table(range){
       $('.paginator.center').remove();
       $('#myTable').after('<div id="nav" class="paginator center mt-4"></div>');
@@ -733,14 +664,7 @@
   }
   function Click_Next_Prev(rowsShown){
     $('.Paginate_Next_Prev').bind('click', function(){
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       console.log(document.getElementsByClassName("active"));
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-      console.log(document.getElementsByClassName("active"));
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         var Get_Element = document.getElementsByClassName("active")[0].getElementsByClassName("Paginate_Numbers")[0];
         var Rel_Attribute = Get_Element.getAttribute('rel');
         var Rel_Id = Get_Element.getAttribute('id');
