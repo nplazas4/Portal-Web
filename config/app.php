@@ -256,7 +256,7 @@ return [
              */
             //'port' => 'non_standard_port_number',
             'username' => 'root',
-            'password' => 'V3r4n02o2O',
+            'password' => 'V3r4n02o2o',
             'database' => 'portalgeb',
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
