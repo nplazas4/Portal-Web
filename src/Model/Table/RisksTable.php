@@ -75,8 +75,8 @@ class RisksTable extends Table
             ->requirePresence('PROBABILITY_POST', 'create');
 
         $validator
-            ->scalar('IMPACT_POST')
-            ->requirePresence('IMPACT_POST', 'create');    
+             ->scalar('IMPACT_POST')
+             ->requirePresence('IMPACT_POST', 'create');
 
         $validator
             ->decimal('IMPACT_RISK')

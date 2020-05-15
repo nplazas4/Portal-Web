@@ -39,7 +39,15 @@ var email_user = $('#email-element').text(),
 var settings = {
     "async": true,
     "crossDomain": true,
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "url": "http://192.168.1.153:7001/ords/projects_portal/portal/formryos/list/?v_record=" + ryos_code + "&v_email=" + email_user,
+=======
     "url": "http://192.168.0.210:8080/ords/portal/formryos/list/?v_record=" + ryos_code + "&v_email=" + email_user,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+    "url": "http://192.168.0.210:8080/ords/portal/formryos/list/?v_record=" + ryos_code + "&v_email=" + email_user,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     "method": "GET",
     "headers": {
         "Content-Type": "application/json",

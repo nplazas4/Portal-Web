@@ -37,13 +37,21 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
+<<<<<<< HEAD
+    <?= $this->Html->script(['jquery-3.3.1.min.js','alert.js','leader-line.min.js']) ?>
+=======
     <?= $this->Html->script(['jquery-3.3.1.min.js','alert.js', 'leader-line.min.js']) ?>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     <?= $this->Html->script('amcharts4/core.js') ?>
     <?= $this->Html->script('amcharts4/charts.js') ?>
     <?= $this->Html->script('amcharts4/material.js') ?>
     <?= $this->Html->script('amcharts4/animated.js') ?>
+<<<<<<< HEAD
+    <?= $this->Html->css('materialize.min.css') ?>
+=======
     <!-- </?= $this->Html->script('jquery-3.3.1.min.js',['async']) ?> -->
     <?= $this->Html->css('materialize.css') ?>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
     <?= $this->fetch('meta') ?>
@@ -52,9 +60,12 @@
 </head>
 <body>
     <header class="header">
+<<<<<<< HEAD
+=======
         <!--
         </?= $this->Html->css('placeholder.css') ?>
         </?= $this->Html->css('error')?> -->
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         <div class="header-wrapper">
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <?php echo $this->Html->link(
@@ -83,6 +94,8 @@
                                             ['escape'=>false]
                                           );?>
                                         </li>
+<<<<<<< HEAD
+=======
                                         <li style="display : flex !important">
                                           <?php echo $this->Html->link('Crear proyecto',
                                             ['controller'=>'Projects','action'=>'add'],
@@ -101,6 +114,7 @@
                                             ['escape'=>false]
                                           );?>
                                         </li>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                     </ul>
                                 </div>
                                 <div class="sub-menu-column">
@@ -145,7 +159,11 @@
                                 <div class="sub-menu-content">
                                     <h2>Grupos estratégicos de negocios</h2>
                                      <div class="sub-menu-column">
+<<<<<<< HEAD
+                                       <h3 id="h3-corp"><a class="a-corp no-hover" style="background-color: #fff;" id="nav-a-corp">Corporativo</a></h3>
+=======
                                         <h3 id="h3-corp"><a class="a-corp no-hover" style="background-color: #fff;" id="nav-a-corp">Corporativo</a></h3>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                     </div>
                                     <div class="sub-menu-column">
                                         <h3 id="h3-dist">Distribución</h3>
@@ -229,12 +247,12 @@
                               ['escape'=>false]
                             );?>
                           </li>
-                          <li>
-                            <?php echo $this->Html->link('Crear proyecto',
+                          <!-- <li>
+                            </?php echo $this->Html->link('Crear proyecto',
                               ['controller'=>'Projects','action'=>'add'],
                               ['escape'=>false]
                             );?>
-                          </li>
+                          </li> -->
                           <li>
                             <?php echo $this->Html->link('Lista de riesgos',
                               ['controller'=>'Risks','action'=>'index'],
@@ -247,37 +265,37 @@
                               ['escape'=>false]
                             );?>
                           </li>
-                          <li>
-                            <?php echo $this->Html->link('Lista de indicadores de proyectos',
+                          <!-- <li>
+                            </?php echo $this->Html->link('Lista de indicadores de proyectos',
                               ['controller'=>'Indicators','action'=>'index'],
                               ['escape'=>false]
                             );?>
                           </li>
                           <li>
-                            <?php echo $this->Html->link('Crear indicadores de proyectos',
+                            </?php echo $this->Html->link('Crear indicadores de proyectos',
                               ['controller'=>'Indicators','action'=>'add'],
                               ['escape'=>false]
                             );?>
-                          </li>
+                          </li> -->
                       </ul>
                   </div>
-                  <div class="submenu-row">
+                  <!-- <div class="submenu-row">
                      <h3>Códigos</h3>
                      <ul>
                        <li>
-                         <?php echo $this->Html->link('Lista de códigos de proyectos',
+                         </?php echo $this->Html->link('Lista de códigos de proyectos',
                            ['controller'=>'Projectcodes','action'=>'index'],
                            ['escape'=>false]
                          );?>
                        </li>
                        <li>
-                         <?php echo $this->Html->link('Crear código de proyecto',
+                         </?php echo $this->Html->link('Crear código de proyecto',
                            ['controller'=>'Projectcodes','action'=>'add'],
                            ['escape'=>false]
                          );?>
                        </li>
                      </ul>
-                 </div>
+                 </div> -->
                  <div class="submenu-row">
                     <h3>EPS</h3>
                     <ul>
@@ -287,12 +305,12 @@
                           ['escape'=>false]
                         );?>
                       </li>
-                      <li>
-                        <?php echo $this->Html->link('Crear EPS',
+                      <!-- <li>
+                        </?php echo $this->Html->link('Crear EPS',
                           ['controller'=>'Eps','action'=>'add'],
                           ['escape'=>false]
                         );?>
-                      </li>
+                      </li> -->
                     </ul>
                 </div>
           </li>
@@ -358,6 +376,8 @@
               indicators: true
             });
         });
+<<<<<<< HEAD
+=======
 //         (function($) {
 //     var element = $('#filter-div'),
 //         originalY = element.offset().top;
@@ -378,6 +398,7 @@
 //     });
 // })(jQuery);
 
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     </script>
 </body>
 </html>
