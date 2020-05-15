@@ -81,11 +81,21 @@
   <?php else: ?>
     <div class="company-content">
         <figure class="company-content-logo">
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <?= $this->Html->image('logos/'.$child_eps_id.'.svg') ?>
+=======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           <?php if($child_eps_id == 34017):?>
             <?= $this->Html->image('logos/'.$child_eps_id.'.jpg') ?>
           <?php else:?>
             <?= $this->Html->image('logos/'.$child_eps_id.'.svg') ?>
           <?php endif;?>
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         </figure>
         <div class="company-content-data">
             <figure class="company-content-data-station">

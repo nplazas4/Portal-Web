@@ -44,8 +44,16 @@
     </div>
 </div>
 <script>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
     //Ajax que se encarga de cargar portal projects (EPS LVL 1)
     // $(document).ready(function(){
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+    //Ajax que se encarga de cargar portal projects (EPS LVL 1)
+    // $(document).ready(function(){
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
       var xhr2 = $.ajax({
         headers:{
@@ -74,5 +82,12 @@
           }
         });
       });
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
     // });
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+    // });
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 </script>

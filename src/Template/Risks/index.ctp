@@ -6,7 +6,11 @@
     ];
 ?>
 <?= $this->Html->css('textlength')?>
+<<<<<<< HEAD
+<?= $this->Html->script(['search.min.js']) ?>
+=======
 <?= $this->Html->script(['search.js']) ?>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 <div class="section portal-projects">
     <div class="breadcrumb-container">
         <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>

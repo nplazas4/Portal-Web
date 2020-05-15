@@ -16,6 +16,14 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/list/eps/');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+                $headers = array();
+                $headers[] = 'Accept-Encoding: gzip, deflate';
+                $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/list/eps/');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -25,6 +33,7 @@ class NavbarController extends AppController
                 $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
                 // $headers[] = 'Cache-Control: no-cache';
                 // $headers[] = 'Connection: keep-alive';
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 $result = curl_exec($ch);
                 if (curl_errno($ch)) {
@@ -77,7 +86,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/list/eps/');
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/list/eps/');
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -127,7 +140,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/list/epsid/'.$_GET["eps_id"]);
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/list/epsid/'.$_GET["eps_id"]);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -174,7 +191,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=870&V_PROJCODE2=8996&V_ID_USER='.$_GET["user_id"]);
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=870&V_PROJCODE2=8996&V_ID_USER='.$_GET["user_id"]);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -220,7 +241,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=871&V_PROJCODE2=8997&V_ID_USER='.$_GET["user_id"]);
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=871&V_PROJCODE2=8997&V_ID_USER='.$_GET["user_id"]);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -265,7 +290,11 @@ class NavbarController extends AppController
         $this->layout = false;
         try {
             $ch = curl_init();
+<<<<<<< HEAD
+            curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=1921&V_ID_USER='.$_GET["user_id"]);
+=======
             curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=1921&V_ID_USER='.$_GET["user_id"]);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
             $headers = array();
@@ -310,7 +339,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projects/list/?V_EPS='.$_GET["eps_id"].'&V_PROJCODE1='.$_GET["code_1"].'&V_PROJCODE2='.$_GET["code_2"].'&V_ID_USER='.$_GET["user_id"]);
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projects/list/?V_EPS='.$_GET["eps_id"].'&V_PROJCODE1='.$_GET["code_1"].'&V_PROJCODE2='.$_GET["code_2"].'&V_ID_USER='.$_GET["user_id"]);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -370,7 +403,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/captures/list/');
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/captures/list/');
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -414,12 +451,24 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/captures/projects/?project_id='.$_GET["project_id"].'&capture_id='.$_GET["date"]);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+                $headers = array();
+                // $headers[] = 'Accept: */*';
+                $headers[] = 'Accept-Encoding: gzip, deflate';
+                $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+                // $headers[] = 'Cache-Control: no-cache';
+                // $headers[] = 'Connection: keep-alive';
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/captures/projects/?project_id='.$_GET["project_id"].'&capture_id='.$_GET["date"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
                 $headers[] = 'Accept-Encoding: gzip, deflate';
                 $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 $result = curl_exec($ch);
                 if (curl_errno($ch)) {
@@ -456,7 +505,11 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
+<<<<<<< HEAD
+                  CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+=======
                   CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/range/list/",
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,
@@ -495,6 +548,18 @@ class NavbarController extends AppController
         $cpi_total = '#888888';
         $igr_total = '#888888';
         foreach ($color_array as $color_indicator => $color_value) {
+<<<<<<< HEAD
+            if ($_GET['spi'] != null && $_GET['spi'] != '' && $_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
+                $spi = $color_value["hexa_color"];
+            }
+            if ($_GET['cpi'] != null && $_GET['cpi'] != '' && $_GET['cpi'] > $color_value['minimun'] && $_GET['cpi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+                $cpi = $color_value['hexa_color'];
+            }
+            if ($_GET['cpi_total'] != null && $_GET['cpi_total'] != '' && $_GET['cpi_total'] > $color_value['minimun'] && $_GET['cpi_total'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+                $cpi_total = $color_value['hexa_color'];
+            }
+            if ($_GET['igr'] != null && $_GET['igr'] != '' && ($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100) <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
+=======
             if ($_GET['spi'] != null && $_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
                 $spi = $color_value["hexa_color"];
             }
@@ -505,6 +570,7 @@ class NavbarController extends AppController
                 $cpi_total = $color_value['hexa_color'];
             }
             if ($_GET['igr'] != null && ($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100) <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 $igr_total = $color_value['hexa_color'];
             }
         }
@@ -521,7 +587,11 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
+<<<<<<< HEAD
+                  CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+=======
                   CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/range/list/",
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,
@@ -578,7 +648,11 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
+<<<<<<< HEAD
+                  CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+=======
                   CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/range/list/",
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,
@@ -620,6 +694,36 @@ class NavbarController extends AppController
         $proyeccion_anual =  '#888888';
         $igr =  '#888888';
         foreach ($color_array as $color_indicator => $color_value) {
+<<<<<<< HEAD
+            if ($_GET['spi'] != null && $_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
+                $spi = $color_value["hexa_color"];
+            }
+            if ($_GET['cpi'] != null && $_GET['cpi'] > $color_value['minimun'] && $_GET['cpi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+                $cpi = $color_value['hexa_color'];
+            }
+            // PORCENTAJE PROYECTADO
+            if ($_GET['porcentaje'] != null && $_GET['porcentaje'] < $color_value['maximo'] && $color_value['name_threshold'] == 'PI Baja') {
+                $porcentaje = $color_value["hexa_color"];
+            } elseif ($_GET['porcentaje'] != null && $_GET['porcentaje'] == $color_value['maximo'] && $color_value['name_threshold'] == 'PI Media') {
+                $porcentaje = $color_value["hexa_color"];
+            } elseif ($_GET['porcentaje'] != null && $_GET['porcentaje'] < $color_value['maximo'] && $_GET['porcentaje'] > $color_value['minimun'] && $color_value['name_threshold'] == 'PI Alta') {
+                $porcentaje = $color_value["hexa_color"];
+            }
+            // CPI ANUAL
+            if ($_GET['cpi_anual'] != null && $_GET['cpi_anual'] > $color_value['minimun'] && $_GET['cpi_anual'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+                $cpi_anual = $color_value['hexa_color'];
+            }
+            // PROYECCIÓN ANUAL
+            if ($_GET['proyeccion_anual'] != null && $_GET['proyeccion_anual'] < $color_value['maximo'] && $color_value['name_threshold'] == 'PI Baja') {
+                $proyeccion_anual = $color_value["hexa_color"];
+            } elseif ($_GET['proyeccion_anual'] != null && $_GET['proyeccion_anual'] == $color_value['maximo'] && $color_value['name_threshold'] == 'PI Media') {
+                $proyeccion_anual = $color_value["hexa_color"];
+            } elseif ($_GET['proyeccion_anual'] != null && $_GET['proyeccion_anual'] < $color_value['maximo'] && $_GET['proyeccion_anual'] > $color_value['minimun'] && $color_value['name_threshold'] == 'PI Alta') {
+                $proyeccion_anual = $color_value["hexa_color"];
+            }
+            // IGR
+            if ($_GET['igr'] != null && ($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100)  <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
+=======
             if ($_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
                 $spi = $color_value["hexa_color"];
             }
@@ -648,6 +752,7 @@ class NavbarController extends AppController
             }
             // IGR
             if (($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100)  <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 $igr = $color_value["hexa_color"];
             }
         }
@@ -662,7 +767,11 @@ class NavbarController extends AppController
         $this->layout = false;
         try {
             $ch = curl_init();
+<<<<<<< HEAD
+            curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projects/projectid/'.$_GET["project_id"]);
+=======
             curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projects/projectid/'.$_GET["project_id"]);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
             $headers = array();
@@ -722,7 +831,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projectpercent//percents/?V_PROJECT='.$_GET["id_p6"]);
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projectpercent/percents/?V_PROJECT='.$_GET["id_p6"]);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -754,7 +867,11 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period']);
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period']);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -786,6 +903,9 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
+<<<<<<< HEAD
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period'].'&p_capture_id=7');
+=======
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period'].'&p_capture_id=7');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -852,6 +972,7 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/indicatorscosts/curve3g/?p_project_id='.$_GET['id_p6']);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
