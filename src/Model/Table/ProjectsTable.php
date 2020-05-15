@@ -70,6 +70,7 @@ class ProjectsTable extends Table
 
         $validator
             ->scalar('Proj_Obj')
+            ->maxLength('Proj_Obj', 200)
             ->allowEmpty('Proj_Obj');
 
         $validator
@@ -110,10 +111,12 @@ class ProjectsTable extends Table
 
         $validator
             ->scalar('ALCANCE')
+            // ->maxLength('ALCANCE', 500)
             ->allowEmpty('ALCANCE');
 
         $validator
             ->scalar('SOLICITUD')
+            ->maxLength('SOLICITUD', 500)
             ->allowEmpty('SOLICITUD');
 
         $validator
@@ -153,8 +156,8 @@ class ProjectsTable extends Table
             ->allowEmpty('CPI_ANUAL');
 
         $validator
-            ->decimal('PV_TOTAL')
-            ->allowEmpty('PV_TOTAL');
+            ->decimal('AC_BAC')
+            ->allowEmpty('AC_BAC');
 
         $validator
             ->decimal('AC_PPTO')

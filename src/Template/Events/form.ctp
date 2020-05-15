@@ -711,15 +711,7 @@ left: 25%;
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Qué sucedio? *</span>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Ingrese el líder/cargo funcional"></textarea>
-=======
                             <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder=""></textarea>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder=""></textarea>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Cúando ocurrio? *</span>
@@ -915,15 +907,7 @@ $(document).ready(function(){
   var settings = {
       "async": true,
       "crossDomain": true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "url": "http://192.168.1.153:7001/ords/projects_portal/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
-=======
       "url": "http://192.168.0.210:8080/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-      "url": "http://192.168.0.210:8080/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
           "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -941,24 +925,11 @@ $(document).ready(function(){
   $('#lapa_019_s_NombreUsuario').val($('#name-element').text());
   $('#lapa_021_s_Correo').val($('#email-element').text());
   $("#main-btn").click(function() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      validate();
-      // $(this).attr('disabled', true);
-  });
-  function validate(){
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     validate();
     // $(this).attr('disabled', true);
   });
 
   function validate() {
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     // INPUTS EMPTY
     var empty_inputs = $('.la-input').filter(function() {
         return !$(this).val()
@@ -971,167 +942,6 @@ $(document).ready(function(){
         }).length;
     }
     if (empty_modal != undefined) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      var num = (empty_inputs + empty_modal);
-      if (num == 0) {
-        json_form();
-      }
-      else {
-        alert_notification('Por favor revisar, campos vacíos.')
-      }
-    }
-    else {
-      alert_notification('Debe existir al menos una causa.')
-    }
-    // Llmar función que crea el json del fromulario de lecciones aprendidas
-  }
-  function json_form() {
-      var array_form = {};
-      $('.la-input').each(function() {
-          array_form[$(this).attr('id')] = normalize($(this).val());
-      });
-      $('select[name="la-select"]').each(function() {
-          array_form[$(this).attr('id')] = $(this).children(":selected").val();
-      });
-      array_form['_bp_lineitems'] = [];
-      for (var i = 1; i <= $('#li-ul').children().length; i++) {
-          var array_form_li = {};
-          $('.la-input-li-' + [i]).each(function() {
-              array_form_li[$(this).attr('name')] = normalize($(this).val());
-          });
-          array_form._bp_lineitems.push(array_form_li);
-      }
-      console.log(array_form);
-      console.log(JSON.stringify({"data" : [array_form]}));
-      json_format = JSON.stringify({
-          "data": [array_form]
-      });
-      send_json(json_format);
-  }
-  var normalize = (function() {
-      var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
-          to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
-          mapping = {};
-
-      for (var i = 0, j = from.length; i < j; i++)
-          mapping[from.charAt(i)] = to.charAt(i);
-
-      return function(str) {
-          var ret = [];
-          for (var i = 0, j = str.length; i < j; i++) {
-              var c = str.charAt(i);
-              if (mapping.hasOwnProperty(str.charAt(i)))
-                  ret.push(mapping[c]);
-              else
-                  ret.push(c);
-          }
-          return ret.join('');
-      }
-
-  })();
-  $('#add').click(function() {
-      var position = $('#li-ul').children().length;
-      LineItems(position + 1);
-      ModalLineItems(position + 1);
-  });
-
-  function LineItems(num) {
-      $('#li-ul').append($('<li>', {
-              class: 'd-flex col s12 m6 l4 xl3'
-          })
-          .append($('<a>', {
-              id: num,
-              href: '#detailEvents' + num,
-              class: 'modal-trigger',
-              text: 'Causa '+num
-          })));
-  }
-
-  function ModalLineItems(num) {
-      $('#num-' + num).val(num);
-  }
-  var csrfToken = <?= json_encode($this->request->getParam('_csrfToken'))?>;
-
-  function send_json(json_data) {
-      var project_id = $('#select-project').children(":selected").val()
-      xhr_form = $.ajax({
-          headers: {
-              'X-CSRF-Token': csrfToken
-          },
-          method: "POST",
-          dataType: "json",
-          url: "<?php echo $this->Url->build(['controller'=>'Events','action'=>'send_event']);?>",
-          data: {
-              la_form: json_data,
-              id_project: project_id
-          },
-          cache: true,
-          beforeSend: function(xhr) {
-              xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              $('#load-gif').show();
-          },
-          success: function(response) {
-              console.log(response);
-              $('#load-gif').hide();
-              $('#add').hide();
-              if (response != null) {
-                  if (response.status == '200') {
-                      $('#load-gif').hide();
-                      $('#add').show();
-                      success_text = response.event + ': ' + response.record_no;
-                      success_notification(success_text);
-                      $('#main-btn').attr('disabled', false);
-                  } else {
-                      alert_notification('La lección aprendida no ha sido enviada.')
-                      $('#main-btn').attr('disabled', false);
-                  }
-              } else {
-                  validate();
-              }
-          }
-      });
-  }
-  // ALERTA
-  function alert_notification(error_text) {
-      if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
-          $('#btn-error').click();
-          $('#div-notify').text("");
-          if ($('#div-notify').children().length == 0) {
-              $('#div-notify').append($('<i>', {
-                      id: 'icon-notify',
-                      class: 'material-icons mr-2',
-                      text: 'cancel'
-                  }))
-                  .append(error_text);
-          }
-          setTimeout(function() {
-              $('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')
-          }, 4000);
-      }
-  }
-  function success_notification(success_text) {
-      if (!$('#div-notify').hasClass('bottom-right notify do-show')) {
-          $('#btn-success').click();
-          $('#div-notify').text("");
-          if ($('#div-notify').children().length == 0) {
-              $('#div-notify').append($('<i>', {
-                      id: 'icon-notify',
-                      class: 'material-icons mr-2',
-                      text: 'check_circle'
-                  }))
-                  .append(success_text);
-          } else {
-              alert_notification('Error al enviar la lección aprendida.');
-          }
-          setTimeout(function() {
-              $('#div-notify').removeClass('bottom-right do-show').addClass('bar-top')
-          }, 4000);
-      }
-  }
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         var num = (empty_inputs + empty_modal);
         if (num == 0) {
             json_form();
@@ -1290,9 +1100,5 @@ function success_notification(success_text) {
         }, 4000);
     }
 }
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 });
 </script>

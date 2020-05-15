@@ -9,10 +9,6 @@
 <script>
     function compare(){
         var compare = document.querySelector(".compare"), notebook = $('#notebook-main');
-<<<<<<< HEAD
-        var compare = document.querySelector(".compare");
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         compare.classList.toggle("compare-show");
         <?php if ($array_project['code_1'] != 1921):?>
           var compareRisk = document.querySelector(".compare-risk");
@@ -21,60 +17,16 @@
           var chartRisk = document.querySelector(".box-risk");
           chartRisk.classList.toggle("compare-show");
         <?php endif;?>
-<<<<<<< HEAD
-=======
         if (notebook.is(":visible")) {
             notebook.hide();
         } else {
             notebook.show();
         }
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 </script>
 
 <div class="section bcrumb project">
   <div class="breadcrumb-container" id="breadcrumb_ctg">
-<<<<<<< HEAD
-    <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
-      <?php foreach ($breadcrumb as $item): ?>
-        <?php echo $this->Html->link($item[0],
-          ['controller'=>$item[2], 'action'=>$item[1]],
-          ['escape' => false,'class'=>'breadcrumb']
-        );?>
-      <?php endforeach; ?>
-      <!--Breadcrumb para las EPS provenientes de la pestaña companies, diferentes a la EPS de grupo de energía de Bogotá.
-Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_encode($var)) para codificar los parametro a enviar.-->
-<?php if ($array_project["child_eps_id"] != 23305): ?>
-  <?php echo $this->Html->link(
-        $array_project["name"],
-        ['controller'=>'Projects', 'action'=>'companies',urlencode(base64_encode($json_project))],
-        ['escape' => false,'class'=>'breadcrumb']
-  );?>
-  <?php echo $this->Html->link(
-          $array_project["child_name"],
-          ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_project))],
-          ['escape' => false,'class'=>'breadcrumb']
-    );?>
-<?php else:?>
-  <?php echo $this->Html->link(
-          $array_project["name"],
-          ['controller'=>'Projects', 'action'=>'company',urlencode(base64_encode($json_project))],
-          ['escape' => false,'class'=>'breadcrumb']
-    );?>
-<?php endif;?>
-  <?php echo $this->Html->link(
-    $array_project["category_name"],
-    ['controller'=>'Projects', 'action'=>'projects',urlencode(base64_encode($json_project))],
-    ['escape' => false,'class'=>'breadcrumb']
-  );?>
-</div>
-
-    <sidebar class="project-sidebar">
-        <h1 id="project-name"></h1>
-        <div class="project-sidebar-phase">
-            <h2 id="project-phase"></h2>
-        </div>
-=======
       <a href="javascript:history.back()" class="breadcrumb-back"><i class="material-icons">keyboard_arrow_left</i></a>
         <?php foreach ($breadcrumb as $item): ?>
           <?php echo $this->Html->link($item[0],
@@ -116,7 +68,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
               <h2 id="project-phase"></h2>
             <?php endif;?>
           </div>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         <div class="project-sidebar-percentages">
             <div class="chart" id="advance"></div>
             <div class="legend">
@@ -195,21 +146,13 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                             <h3 class="ml-auto" id="spi-indicator-new"></h3>
                         </a>
                     </div>
-<<<<<<< HEAD
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance planeado del proyecto">
-=======
                     <div class="d-flex col s12 m6 l4 xl3">
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
                             <h3 class="ml-auto" id="avance-plan-new"></h3>
                         </div>
                     </div>
-<<<<<<< HEAD
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance ejecutado del proyecto">
-=======
                     <div class="d-flex col s12 m6 l4 xl3">
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         <div class="indicator type-1 light-blue darken-2">
                             <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
                             <h3 class="ml-auto" id="avance-ejec-new"></h3>
@@ -240,114 +183,13 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                         </div>
                     </div>
                     <div class="d-flex col s12 m6 l4 xl3">
-<<<<<<< HEAD
-                      <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#Hitos-new">
-                          <h4 class="mr-2">HITOS</h4>
-                      </a>
-=======
                         <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#Hitos-new">
                             <h4 class="mr-2">HITOS</h4>
                         </a>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     </div>
                 </div>
 
                 <?php if ($array_project['code_1'] != 1921):?>
-<<<<<<< HEAD
-                <div class="indicators row wrap mb-4">
-                    <h2 class="mb-2">Indicadores de presupuesto</h2>
-                    <h3>Total proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="AC  / Ejecutado a la fecha">
-                        <a class="indicator type-1 modal-trigger" id="cpi-indicator-new" href="#detailValueExecuted">
-                            <h4 class="fw-600 mr-2">CPI</h4>
-                            <h4 class="fw-600 ml-auto right-align" id="cpi-new"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor causado real acumulado del proyecto">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">EJECUTADO</h5>
-                            <h5 class="fw-600 ml-auto right-align" id="ejecutado-new"></h5>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">PLANEADO</h5>
-                            <h5 class="fw-600 ml-auto right-align" id="planeado-new"></h5>
-                        </a>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Total presupuesto aprobado al proyecto">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600">PRESUPUESTO</h5>
-                            <h5 class="ml-auto" id="presupuesto-new"></h5>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Proyección del presupuesto anual para invertir en el proyecto">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
-                            <h5 class="ml-auto" id="proyeccion-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
-                            <h5 class="ml-auto" id="variacion-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="(Desviación presupuestal / presupuesto) * 100">
-                        <div class="indicator type-1" id="porcentaje-proy-new">
-                            <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
-                            <h4 class="ml-auto" id="porcentaje-var-new"></h4>
-                        </div>
-                    </div>
-                    <h3 class="mt-3">Anual proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="AC anual  / Presupuesto anual">
-                        <a class="indicator type-1 modal-trigger" id="cpi-anual-indicator-new" href="#detailValueExecuted">
-                            <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
-                            <h4 class="fw-600 ml-auto right-align" id="cpi-anual-new"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor causado real acumulado del año">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="ejec-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="plan-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Presupuesto planeado para ejecutar en el año">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="pres-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Proyección del presupuesto anual para invertir en el proyecto">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="proyeccion-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
-                        <div class="indicator type-1 secondary darken-2" id="var-proy-anual-new">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="variacion-anual-new"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="(Desviación presupuestal / presupuesto) * 100">
-                        <div class="indicator type-1" id="porcentaje-pr-anual-new">
-                            <h5 class="mr-2">PORCENTAJE VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="porcentaje-anual-new"></h5>
-                        </div>
-                    </div>
-                </div>
-              <?php endif;?>
-              <!-- NOTEBOOKS -->
-=======
                   <div class="indicators row wrap mb-4">
                       <h2 class="mb-2">Indicadores de presupuesto</h2>
                       <h3>Total proyecto</h3>
@@ -441,7 +283,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                   </div>
                 <?php endif;?>
                 <!-- NOTEBOOKS -->
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 <div class="box" id="notebook-main">
                     <div class="box-content">
                         <div class="row wrap align-center">
@@ -465,11 +306,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                             <div class="col flex-300">
                                 <div class="input-field">
                                     <select id="actual-select" class="period-select">
-<<<<<<< HEAD
-                                      <option value="" disabled selected>Cambiar periodo</option>
-=======
                                       <option value="default" disabled selected>Cambiar periodo</option>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                       <option class="work-option" value="1">Día</option>
                                       <option class="work-option" value="2">Semana</option>
                                       <option class="work-option" value="3">Mes</option>
@@ -488,328 +325,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                     </div>
                 </div>
 
-<<<<<<< HEAD
-                <div class="chart" id="div-caf-new">
-                    <h2>Curva de Avance Físico</h2>
-                    <div class="chart-content" id="caf"></div>
-                </div>
-                <?php if ($array_project['code_1'] != 1921):?>
-                  <div class="chart" id="tg-div">
-                      <h2>Tres Generaciones</h2>
-                      <div class="chart-content" id="tg" style="min-height: 475px;"></div>
-                  </div>
-                <?php endif;?>
-            </div>
-
-            <!-- Otras versiones -->
-            <div class="compare-item compare-item-version">
-                <div class="compare-item-title col s12">
-                    <div class="input-field">
-                      <form id="form-select-old" class="input-field">
-                        <select id="compare-select-old" class="select-compare-old">
-                          <option value="actual" id="actual-old">Actual</option>
-                        </select>
-                        <label>Versión</label>
-                      </form>
-                    </div>
-                </div>
-
-                <div class="indicators row wrap">
-                    <h2>Indicadores de cronograma</h2>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 modal-trigger tooltipped" data-position="bottom" data-tooltip="% Avance ejecutado / % Avance planeado" id="spi-old-color" href="#wbs-main-old">
-                            <h3 class="mr-2">SPI</h3>
-                            <h3 class="ml-auto" id="spi-old"></h3>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance planeado del proyecto">
-                            <h5 class="mr-2">PORCENTAJE <small>AVANCE PLANEADO</small></h5>
-                            <h3 class="ml-auto" id="avance-plan-old"></h3>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2 tooltipped" data-position="bottom" data-tooltip="Porcentaje de avance ejecutado del proyecto">
-                            <h5 class="mr-2">PORCENTAJE <small>AVANCE EJECUTADO</small></h5>
-                            <h3 class="ml-auto" id="avance-ejec-old"></h3>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">FEPO</h5>
-                            <h5 class="ml-auto right-align" id="fepo-old"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">DURACIÓN TOTAL</h5>
-                            <h4 class="ml-auto right-align" id="duracion-total-old"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small>ESTIMADA DURACIÓN</small></h5>
-                            <h4 class="ml-auto" id="variacion-est-old"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <div class="indicator type-1 light-blue darken-2">
-                            <h5 class="mr-2">PORCENTAJE <small>DE IMPACTO</small></h5>
-                            <h4 class="ml-auto" id="pi-old"></h4>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3">
-                        <a class="indicator type-1 light-blue darken-2 modal-trigger" href="#Hitos-old">
-                            <h4 class="mr-2">HITOS</h4>
-                        </a>
-                    </div>
-                </div>
-              <?php if ($array_project['code_1'] != 1921):?>
-                <div class="indicators row wrap mb-4">
-                    <h2 class="mb-2">Indicadores de presupuesto</h2>
-                    <h3>Total proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="AC  / Ejecutado a la fecha">
-                        <a class="indicator type-1 modal-trigger" id="cpi-indicator-old" href="#detailValueExecuted">
-                            <h4 class="fw-600 mr-2">CPI</h4>
-                            <h4 class="fw-600 ml-auto right-align"  id="cpi-old"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor causado real acumulado del proyecto">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">EJECUTADO</h5>
-                            <h5 class="fw-600 ml-auto right-align" id="ejec-total-old"></h5>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600 mr-2">PLANEADO</h5>
-                            <h5 class="fw-600 ml-auto right-align" id="plan-total-old"></h5>
-                        </a>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Total presupuesto aprobado al proyecto">
-                        <a class="indicator type-1 secondary darken-2 modal-trigger" href="#detailValueExecuted">
-                            <h5 class="fw-600">PRESUPUESTO</h5>
-                            <h5 class="ml-auto" id="pres-total-old"></h5>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Proyección del presupuesto anual para invertir en el proyecto">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO</small></h5>
-                            <h5 class="ml-auto" id="proy-total-old"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA</small></h5>
-                            <h5 class="ml-auto" id="variacion-total-old"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="(Desviación presupuestal / presupuesto) * 100">
-                        <div class="indicator type-1" id="porcentaje-proy-old">
-                            <h5 class="mr-2">PORCENTAJE<small class="small-indicator">VARIACIÓN PROYECTADA</small></h5>
-                            <h4 class="ml-auto" id="porcentaje-total-old"></h4>
-                        </div>
-                    </div>
-                    <h3 class="mt-3">Anual proyecto</h3>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="AC anual  / Presupuesto anual">
-                        <a class="indicator type-1 modal-trigger" href="#detailValueExecuted" id="cpi-anual-indicator-old">
-                            <h4 class="fw-600 mr-2">CPI <small class="small-indicator">ANUAL <?=date("Y")?></small></h4>
-                            <h4 class="fw-600 ml-auto right-align" id="cpi-anual-old"></h4>
-                        </a>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor causado real acumulado del año">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">EJECUTADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="ejec-anual-old"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Valor planeado en un periodo.">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PLANEADO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="plan-anual-old"></h5>
-                        </div>
-                    </div>
-                    <div class="divider transparent"></div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Presupuesto planeado para ejecutar en el año">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PRESUPUESTO <small class="small-indicator"><?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="pres-anual-old"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Proyección del presupuesto anual para invertir en el proyecto">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">PROYECCIÓN <small class="small-indicator">PROYECTO <?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="proy-anual-old"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="Diferencia entre el presupuesto y Proyección del proyecto">
-                        <div class="indicator type-1 secondary darken-2">
-                            <h5 class="mr-2">VARIACIÓN <small class="small-indicator">PROYECTADA <?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="variacion-anual-old"></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex col s12 m6 l4 xl3 tooltipped" data-position="bottom" data-tooltip="(Desviación presupuestal / presupuesto) * 100">
-                        <div class="indicator type-1" id="porcentaje-anual-old">
-                            <h5 class="mr-2">PORCENTAJE <small class="small-indicator">VARIACIÓN PROYECTADA <?=date("Y")?></small></h5>
-                            <h5 class="ml-auto" id="porc-variacion-anual-old"></h5>
-                        </div>
-                    </div>
-                </div>
-              <?php endif;?>
-                <div class="box" id="div-caf-old-box">
-                    <div class="box-content">
-                        <div class="row wrap align-center">
-                            <div class="col flex-300">
-                                <div class="input-field">
-                                    <select id="old-select" class="period-select">
-                                      <option value="" disabled selected>Cambiar periodo</option>
-                                      <option class="work-option" value="1">Día</option>
-                                      <option class="work-option" value="2">Semana</option>
-                                      <option class="work-option" value="3">Mes</option>
-                                      <option class="work-option" value="4">Trimestre</option>
-                                      <option class="work-option" value="5">Año</option>
-                                    </select>
-                                    <label>Periodo</label>
-                                </div>
-                            </div>
-                            <div class="col flex-0">
-                                <a href="#" class="btn-floating btn-depressed" onclick="return false;" id="Caf_Button_Excel_old">
-                                    <i class="mdi mdi-download"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chart" id="div-caf-old">
-                    <h2>Curva de Avance Físico</h2>
-                    <div class="chart-content" id="caf-old"></div>
-                </div>
-                <?php if ($array_project['code_1'] != 1921):?>
-                  <div class="chart" id="div-tg-old">
-                      <h2>Tres Generaciones</h2>
-                      <div class="chart-content" id="tg-old" style="min-height: 475px;"></div>
-                  </div>
-                <?php endif;?>
-            </div>
-        </div>
-      <?php if ($array_project['code_1'] != 1921):?>
-        <div class="compare compare-risk">
-            <div class="compare-item">
-                <div class="chart">
-                    <h2>Riesgos</h2>
-                    <div class="chart-risk">
-                        <div class="chart-risk-list">
-                            <ul class="pa-0 mb-3">
-                                <li>
-                                    <a class="lighten-1 white-text" id="igr-value-3"></a>
-                                </li>
-                            </ul>
-                            <ul class="py-1 ul-risk">
-                              <li class="li-risks">
-                                  <div class="box-content">
-                                      <div class="row wrap align-center">
-                                        <form id="form-rks-new" class="row flex-300">
-                                          <div class="col s6 input-field">
-                                            <select class="new-rks-filter" id="estado_new">
-                                                <option data-id="all" value="all" selected>Filtrar estado</option>
-                                                <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
-                                                <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
-                                                <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
-                                                <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
-                                            </select>
-                                            <label>Estado de las acciones</label>
-                                          </div>
-                                          <div class="col s6 input-field">
-                                            <select class="new-rks-filter" id="materializado_new">
-                                                <option data-id="all" value="all" selected>Filtrar por materialización</option>
-                                                <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
-                                                <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
-                                                <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
-                                            </select>
-                                              <label>Materialización de riesgo</label>
-                                          </div>
-                                          <div class="col flex-0 mt-3" id="clean-new-rks-filters" style="display:none">
-                                              <div href="#" class="btn-floating btn-depressed">
-                                                  <i class="mdi mdi-window-close"></i>
-                                              </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                  </div>
-                              </li>
-                            </ul>
-                            <ul class="ul-risk">
-                                <?php foreach ($rks as $rk): ?>
-                                <li class="li-risks info-new" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                                    <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-code="<?=$rk->RISK_NUMBER?>" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
-                                </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="compare-item compare-item-version">
-                <div class="chart">
-                    <h2>Riesgos</h2>
-                    <div class="chart-risk">
-                        <div class="chart-risk-list">
-                            <ul class="pa-0 mb-3">
-                                <li>
-                                    <a class="lighten-1 white-text" id="igr-value-1"></a>
-                                </li>
-                            </ul>
-                            <ul class="py-1 ul-risk">
-                              <li class="li-risks">
-                                  <div class="box-content">
-                                      <div class="row wrap align-center">
-                                        <form id="form-rks-old" class="row flex-300">
-                                          <div class="col s6 input-field">
-                                            <select class="old-rks-filter" id="estado_old">
-                                                <option data-id="all" value="all" selected>Filtrar estado</option>
-                                                <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
-                                                <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
-                                                <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
-                                                <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
-                                            </select>
-                                            <label>Estado de las acciones</label>
-                                          </div>
-                                          <div class="col s6 input-field">
-                                            <select class="old-rks-filter"id="materializado_old">
-                                                <option data-id="all" value="all" selected>Filtrar por materialización</option>
-                                                <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
-                                                <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
-                                                <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
-                                            </select>
-                                              <label>Materialización de riesgo</label>
-                                          </div>
-                                          <div class="col flex-0 mt-3" id="clean-old-rks-filters" style="display:none">
-                                              <div href="#" class="btn-floating btn-depressed">
-                                                  <i class="mdi mdi-window-close"></i>
-                                              </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                  </div>
-                              </li>
-                            </ul>
-                            <ul class="ul-risk">
-                                <?php foreach ($rks as $rk): ?>
-                                <li class="li-risks info-old" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                                    <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-code="<?=$rk->RISK_NUMBER?>" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
-                                </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="chart box-risk">
-            <h2>Riesgos</h2>
-=======
               <div class="chart" id="div-caf-new">
                 <h2>Curva de Avance Físico</h2>
                 <div class="chart-content" id="caf"></div>
@@ -1131,7 +646,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
           </div>
           <div class="chart box-risk">
             <h2>Riesgos <span class="icon-download"><i class="material-icons">info_outline</i></span></h2>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             <div class="chart-risk">
                 <div class="chart-risk-list">
                     <ul class="py-0 ul-risk mb-6">
@@ -1144,34 +658,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                           <div class="box-content">
                               <div class="row wrap align-center">
                                   <!-- <div class="row flex-300"> -->
-<<<<<<< HEAD
-                                  <form id="form-select-actual" class="row flex-300">
-                                    <div class="col s6 input-field">
-                                        <select class="actual-rks-filter" id="estado_act">
-                                            <option data-id="all" value="all" selected>Filtrar estado</option>
-                                            <option data-id="fase" data-type="estado" value="fase" class="estado-filtro">N/A En esta fase</option>
-                                            <option data-id="ejecucion" data-type="estado" value="ejecucion" class="estado-filtro">En ejecución</option>
-                                            <option data-id="pendiente" data-type="estado" value="pendiente" class="estado-filtro">Pendiente</option>
-                                            <option data-id="finalizado" data-type="estado" value="finalizado" class="estado-filtro">Finalizado</option>
-                                        </select>
-                                        <label>Estado de las acciones</label>
-                                      </div>
-                                      <div class="col s6 input-field">
-                                        <select class="actual-rks-filter" id="materializado_act">
-                                            <option data-id="all" value="all" selected>Filtrar por materialización</option>
-                                            <option data-id="abierto" data-type="materializacion" value="abierto">Abierto</option>
-                                            <option data-id="cerrado" data-type="materializacion" value="cerrado">Cerrado</option>
-                                            <option data-id="materializado" data-type="materializacion" value="materializado">Materializado</option>
-                                        </select>
-                                        <label>Materialización de riesgo</label>
-                                    </div>
-                                    <div class="col flex-0 mt-3" id="clean-rks-filters" style="display:none">
-                                        <div href="#" class="btn-floating btn-depressed">
-                                            <i class="mdi mdi-window-close"></i>
-                                        </div>
-                                    </div>
-                                  </form>
-=======
                                     <form id="form-select-actual" class="row flex-300">
                                       <div class="col s6 input-field">
                                           <select class="actual-rks-filter" id="estado_act">
@@ -1198,7 +684,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                                           </div>
                                       </div>
                                     </form>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                   <!-- </div> -->
                               </div>
                           </div>
@@ -1206,491 +691,14 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                     </ul>
                     <ul class="ul-risk">
                         <?php foreach ($rks as $rk): ?>
-<<<<<<< HEAD
-                        <li class="li-risks info-actual" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
-                            <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-code="<?=$rk->RISK_NUMBER?>" data-position="bottom" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
-=======
                         <li class="li-risks info-actual" id="<?=$rk->RISK_NUMBER?>" data-estado="<?=$rk->ACTION_STATE?>" data-materializacion="<?=$rk->MATERIALIZACION?>">
                             <a href=<?='#'.$rk->id?> class="modal-trigger tooltipped" data-position="bottom" data-code="<?=$rk->RISK_NUMBER?>" data-tooltip="<?=$rk->RISK_NAME?>">Riesgo <?=$rk->RISK_NUMBER?></a>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
                 <div class="heatmap">
                   <table id="risk-tr">
-<<<<<<< HEAD
-                      <tr>
-                          <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
-                          <th>MA</th>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 1 && $rk->PROBABILITY == 5) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 5) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 2 && $rk->PROBABILITY == 5) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 5) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach;?>
-                          </td>
-                          <td class="orange">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 3 && $rk->PROBABILITY == 5) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 5) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach;?>
-                          </td>
-                          <td class="red">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 4 && $rk->PROBABILITY == 5) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 5) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach;?>
-                          </td>
-                          <td class="red">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 5 && $rk->PROBABILITY == 5) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 5) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                        </tr>
-                       <tr>
-                        <th>A</th>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 1 &&  $rk->PROBABILITY == 4) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 1 &&  $rk->PROBABILITY_POST == 4) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 2 && $rk->PROBABILITY == 4) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 4) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="orange">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 3 && $rk->PROBABILITY == 4) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 4) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="orange">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 4 && $rk->PROBABILITY == 4) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 4) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="red">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 5 && $rk->PROBABILITY == 4) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 4) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                      </tr>
-                      <tr>
-                          <th>M</th>
-                          <td class="lime accent-4">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 1 && $rk->PROBABILITY == 3) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 3) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 2 && $rk->PROBABILITY == 3) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 3) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 3 && $rk->PROBABILITY == 3) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 3) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="orange">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 4 && $rk->PROBABILITY == 3) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 3) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="orange">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 5 && $rk->PROBABILITY == 3) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 3) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                      </tr>
-                      <tr>
-                          <th>B</th>
-                          <td class="lime accent-4">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 1 && $rk->PROBABILITY == 2) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 2) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="lime accent-4">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 2 && $rk->PROBABILITY == 2) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 2) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 3 && $rk->PROBABILITY == 2) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 2) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 4 && $rk->PROBABILITY == 2) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 2) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 5 && $rk->PROBABILITY == 2) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 2) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                      </tr>
-                      <tr>
-                        <th>MB</th>
-                          <td class="lime accent-4">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 1 && $rk->PROBABILITY == 1) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 1 && $rk->PROBABILITY_POST == 1) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="lime accent-4">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 2 && $rk->PROBABILITY == 1) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 2 && $rk->PROBABILITY_POST == 1) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="lime accent-4">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 3 && $rk->PROBABILITY == 1) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 3 && $rk->PROBABILITY_POST == 1) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                          <td class="lime accent-4">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 4 && $rk->PROBABILITY == 1) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 4 && $rk->PROBABILITY_POST == 1) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                          </td>
-                         <td class="yellow">
-                            <?php foreach ($rks as $rk):
-                              $color_rks;
-                              if ($rk->IMPACT == 5 && $rk->PROBABILITY == 1) {
-                                if ($rk->MATERIALIZACION == "materializado") {
-                                  $color_rks = "dark lighten-1";
-                                } else {
-                                  $color_rks = "warning";
-                                }
-                                echo '<span class="'.$color_rks.'" id="'.$rk->RISK_NUMBER.'_risk'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                              if ($rk->IMPACT_POST == 5 && $rk->PROBABILITY_POST == 1) {
-                                echo '<span class="dark lighten-1 rks-post" id="'.$rk->RISK_NUMBER.'_post'.'">' .$rk->RISK_NUMBER. '</span>';
-                              };
-                            endforeach; ?>
-                         </td>
-                      </tr>
-                      <tr>
-                          <th class="title" colspan="2"></th>
-                          <th>MB</th>
-                          <th>B</th>
-                          <th>M</th>
-                          <th>A</th>
-                          <th>MA</th>
-                      </tr>
-                      <tr>
-                          <th class="title" colspan="2"></th>
-                          <th class="title" colspan="5">
-                              <h3>Impacto</h3>
-                          </th>
-                      </tr>
-                  </table>
-                </div>
-            </div>
-        </div>
-        <?php if($array_project["child_eps_id"] != 34013 && $array_project["child_eps_id"] != 34021 && $array_project["child_eps_id"] != 34015 && $array_project["child_eps_id"] != 34017):?>
-          <div class="data-distance2">
-              <?= $this->Html->image('icons/torre-blanca.svg') ?>
-              <div class="data-distance2-content">
-                  <h2>Longitud</h2>
-                  <h3 class="long-distance"></h3>
-                  <div class="line-distance"></div>
-                  <h4>de líneas de transmisión de</h4>
-                  <h5 id="lines-distance"></h5>
-                  <div class="divider white mt-3 mb-1"></div>
-                  <h6 id="towers-distance"></h6>
-              </div>
-              <?= $this->Html->image('icons/torre-blanca.svg') ?>
-          </div>
-        <?php else:?>
-          <div class="data">
-              <div class="data-distance">
-                  <figure class="data-distance-valve start">
-                      <?= $this->Html->image('icons/valvula-izq.svg') ?>
-                  </figure>
-                  <div class="data-distance-content">
-                      <h2>Longitud</h2>
-                      <h3 class="long-distance"></h3>
-                      <div class="line-distance"></div>
-                      <h4>ECG</h4>
-                      <h5 id="ecg-value"></h5>
-                      <div class="divider white mt-3 mb-1"></div>
-                      <h6 id="facilidades"></h6>
-                  </div>
-                  <figure class="data-distance-valve end">
-                      <?= $this->Html->image('icons/valvula-der.svg') ?>
-                  </figure>
-              </div>
-          </div>
-        <?php endif;?>
-      <?php endif;?>
-=======
                           <tr>
                               <th class="title" rowspan="5"><h3 class="vert">Probabilidad</h3></th>
                               <th>MA</th>
@@ -2161,7 +1169,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
             </div>
           <?php endif;?>
         <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       <div class="map" id="mapa-img"></div>
    </div>
 </div>
@@ -2471,38 +1478,6 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
     </div>
 </div>
 <!-- HITOS NEW -->
-<<<<<<< HEAD
-<!-- <div id="Hitos-new" class="modal" style="max-weight: 100% !important">
-    <div class="modal-content">
-      <div class="modal-content">
-          <a class="modal-close close">
-              <i class="material-icons">close</i>
-          </a>
-          <h2 id="hitos-title-new">Hitos</h2>
-          <table>
-            <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Avance % Planeado</th>
-                  <th>Avance % Real</th>
-                  <th>BL Inicio</th>
-                  <th>BL Fin</th>
-                  <th>Inicio</th>
-                  <th>Fin</th>
-              </tr>
-            </thead>
-            <tbody class="hitos-body" id="hitos-body-new"></tbody>
-          </table>
-        </div>
-      <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
-      </div>
-    </div>
-</div> -->
-<!-- HITOS NEW -->
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 <div id="Hitos-new" class="modal" style="max-weight: 100% !important">
     <div class="modal-content">
       <div class="modal-content">
@@ -2726,18 +1701,11 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
     $('#breadcrumb_ctg').append($('<a>', {text : result[2], class : 'breadcrumb', href : '/Portal-Web/projects/project/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[1]))))+'/'+"<?= urlencode(base64_encode($json_project))?>"+'/'+btoa(unescape(encodeURIComponent(JSON.stringify(result[0]))))}));
   });
   promise.then(function(result) {
-<<<<<<< HEAD
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://192.168.1.153:7001/ords/projects_portal/portal/notebook/list/" + result[1],
-=======
     console.log( result);
     var settings = {
         "async": true,
         "crossDomain": true,
         "url": "http://192.168.0.210:8080/ords/portal/notebook/list/" + result[1],
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -2762,20 +1730,13 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
 });
     // Promesa que contiene la información de Unifier y bd local para alimentar los indicadores de presupuesto
   function Unifier_information(project_id, select_value, unifier_code, spi_value, chart_side) {
-<<<<<<< HEAD
-=======
     console.log("http://192.168.0.210:8080/ords/portal/captures/costindicators/?p_project_id="+project_id+"&p_id_capture="+select_value);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     // if (unifier_code != null) {
       if (select_value == 'actual' || select_value == 'all-select') {
         var settings = {
             "async": true,
             "crossDomain": true,
-<<<<<<< HEAD
-            "url": "http://192.168.1.153:7001/ords/projects_portal/portal/indicatorscosts/list?p_projet_id="+project_id,
-=======
             "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+project_id,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2785,11 +1746,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-<<<<<<< HEAD
-            "url": "http://192.168.1.153:7001/ords/projects_portal/portal/captures/costindicators/?p_project_id="+project_id+"&p_id_capture="+select_value,
-=======
             "url": "http://192.168.0.210:8080/ords/portal/captures/costindicators/?p_project_id="+project_id+"&p_id_capture="+select_value,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2813,10 +1770,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
        });
     }
     function new_indicators(response, spi_value, select_value, chart_side){
-<<<<<<< HEAD
-=======
       console.log(response.items);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       $.each(response.items, function() {
         if (select_value == 'all-select' && this.fecha_cortecpi != null) {
           var cpi_date = new Date(this.fecha_cortecpi);
@@ -2963,71 +1917,51 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         }
         var unifier_ejec_total = this.ejecutadousd_total; //Variable que contiene el ejecutado total proveniente de Unifier
         if (unifier_ejec_total != null) {
-<<<<<<< HEAD
-          $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#ejec-total-old').text('COP $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
           <?php else:?>
             $('#ejec-total-old').text('USD $ '+parseFloat(unifier_ejec_total).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#ejec-total-old').text('');
         }
         var unifier_plan_total = this.planeadousd_total;
         if (unifier_plan_total != null) {
-<<<<<<< HEAD
-          $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#plan-total-old').text('COP $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
           <?php else:?>
             $('#plan-total-old').text('USD $ '+parseFloat(unifier_plan_total).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#plan-total-old').text('');
         }
         var unifier_presp_total = this.presupuestousd_total;
         if (unifier_presp_total != null) {
-<<<<<<< HEAD
-          $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#pres-total-old').text('COP $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
           <?php else:?>
             $('#pres-total-old').text('USD $ '+parseFloat(unifier_presp_total).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#pres-total-old').text('');
         }
         var unifier_var_total = this.variacionusd_total;
         if (unifier_var_total != null) {
-<<<<<<< HEAD
-          $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#variacion-total-old').text('COP $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
           <?php else:?>
             $('#variacion-total-old').text('USD $ '+parseFloat(unifier_var_total).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#variacion-total-old').text('');
         }
         var unifier_proy_total = this.proyeccionusd_total;
         if (unifier_proy_total != null) {
-<<<<<<< HEAD
-          $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#proy-total-old').text('COP $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
           <?php else:?>
             $('#proy-total-old').text('USD $ '+parseFloat(unifier_proy_total).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#proy-total-old').text('');
         }
@@ -3046,71 +1980,51 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         }
         var unifier_ejec_anual = this.ejecutadusd_2019;
         if (unifier_ejec_anual != null) {
-<<<<<<< HEAD
-          $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#ejec-anual-old').text('COP $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
           <?php else:?>
             $('#ejec-anual-old').text('USD $ '+parseFloat(unifier_ejec_anual).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#ejec-anual-old').text('');
         }
         var unifier_plan_anual = this.planeadousd_2019;
         if (unifier_plan_anual != null) {
-<<<<<<< HEAD
-          $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#plan-anual-old').text('COP $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
           <?php else:?>
             $('#plan-anual-old').text('USD $ '+parseFloat(unifier_plan_anual).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#plan-anual-old').text('');
         }
         var unifier_pres_anual = this.presupuestousd_2019;
         if (unifier_pres_anual != null) {
-<<<<<<< HEAD
-          $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#pres-anual-old').text('COP $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
           <?php else:?>
             $('#pres-anual-old').text('USD $ '+parseFloat(unifier_pres_anual).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#pres-anual-old').text('');
         }
         var unifier_proy_anual = this.proyeccionusd_2019;
         if (unifier_proy_anual != null) {
-<<<<<<< HEAD
-          $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#proy-anual-old').text('COP $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
           <?php else:?>
             $('#proy-anual-old').text('USD $ '+parseFloat(unifier_proy_anual).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#proy-anual-old').text('');
         }
         var unifier_var_anual = this.varacionusd_2019;
         if (unifier_var_anual != null) {
-<<<<<<< HEAD
-          $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
-=======
           <?php if ($array_project['child_eps_id'] == 34012): ?>
             $('#variacion-anual-old').text('COP $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
           <?php else:?>
             $('#variacion-anual-old').text('USD $ '+parseFloat(unifier_var_anual).toFixed(2)+' MM');
           <?php endif;?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           $('#variacion-anual-old').text('');
         }
@@ -3207,18 +2121,11 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
     });
   }
   function ws_colors_new(indicators_col_val){
-<<<<<<< HEAD
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://192.168.1.153:7001/ords/projects_portal/portal/range/list/",
-=======
     // console.log(indicators_col_val);
     var settings = {
         "async": true,
         "crossDomain": true,
         "url": "http://192.168.0.210:8080/ords/portal/range/list/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -3286,11 +2193,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
     var settings = {
         "async": true,
         "crossDomain": true,
-<<<<<<< HEAD
-        "url": "http://192.168.1.153:7001/ords/projects_portal/portal/range/list/",
-=======
         "url": "http://192.168.0.210:8080/ords/portal/range/list/",
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -3442,11 +2345,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-<<<<<<< HEAD
-            "url": "http://192.168.1.153:7001/ords/projects_portal/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
-=======
             "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -3484,11 +2383,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
       var settings = {
           "async": true,
           "crossDomain": true,
-<<<<<<< HEAD
-          "url": "http://192.168.1.153:7001/ords/projects_portal/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
-=======
           "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           "method": "GET",
           "headers": {
               "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -3526,11 +2421,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
           var settings = {
               "async": true,
               "crossDomain": true,
-<<<<<<< HEAD
-              "url": "http://192.168.1.153:7001/ords/projects_portal/portal/captures/indicatorsbyproject/?project_id="+result[1]+"&capture_id="+selected_date,
-=======
               "url": "http://192.168.0.210:8080/ords/portal/captures/indicatorsbyproject/?project_id="+result[1]+"&capture_id="+selected_date,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
               "method": "GET",
               "headers": {
                   "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3684,11 +2575,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-<<<<<<< HEAD
-            "url": "http://192.168.1.153:7001/ords/projects_portal/portal/graph/data/?P_PROJECT_ID="+result+"&P_PERIOD_TYPE="+period_value,
-=======
             "url": "http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID="+result+"&P_PERIOD_TYPE="+period_value,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -3827,11 +2714,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
                    },
                    {
                      "customBullet": "",
-<<<<<<< HEAD
-                     "dashLength": 7,
-=======
                      // "dashLength": 7,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                      "id": "AmGraph-3",
                      "labelPosition": "right",
                      "labelText": "",
@@ -3978,11 +2861,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-<<<<<<< HEAD
-            "url": "http://192.168.1.153:7001/ords/projects_portal/portal/indicatorscosts/curve3g/?p_project_id="+project_id,
-=======
             "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/curve3g/?p_project_id="+project_id,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -4320,22 +3199,14 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
       );
     }
     $(document).ready(function(){
-<<<<<<< HEAD
-    var clean_rks = $('#clean-rks-filters'),e = $(".li-risks.info-actual"), estado_act = $('#estado_new'), materializado_act = $('#materializado_new'), estado_act = $('#estado_act'), materializado_act = $('#materializado_act') ,select_actual = $('.actual-rks-filter'), select_input = $('.form-select-actual input');
-=======
     var clean_rks = $('#clean-rks-filters'),e = $(".li-risks.info-actual"), estado_act = $('#estado_new'),
         materializado_act = $('#materializado_new'), estado_act = $('#estado_act'), materializado_act = $('#materializado_act'),
         select_actual = $('.actual-rks-filter'), select_input = $('.form-select-actual input');
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     select_actual.change(function() {
         var a = select_actual.children(":selected");
         if (e.show(), 0 != a.length) {
             var i = $.map(a, function(a) {
-<<<<<<< HEAD
-                return $(a).data("id")
-=======
                 return $(a).data("id");
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             });
             if (estado_act.val() == 'all' && materializado_act.val() == 'all') {
               clean_rks.hide();
@@ -4494,11 +3365,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
           var settings = {
               "async": true,
               "crossDomain": true,
-<<<<<<< HEAD
-              "url": "http://192.168.1.153:7001/ords/projects_portal/portal/indicators/indicatorsbyproject/"+result[1],
-=======
               "url": "http://192.168.0.210:8080/ords/portal/indicators/indicatorsbyproject/"+result[1],
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
               "method": "GET",
               "headers": {
                   "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -4524,11 +3391,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-<<<<<<< HEAD
-          "url": "http://192.168.1.153:7001/ords/projects_portal/activity/list/?v_project_id="+id_project,
-=======
           "url": "http://primavera.eeb.com.co:8080/ords/portal/activity/list/?v_project_id="+id_project,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -4587,11 +3450,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-<<<<<<< HEAD
-          "url": "http://192.168.1.153:7001/ords/projects_portal/wbs/list/?v_project="+id_project,
-=======
           "url": "http://primavera.eeb.com.co:8080/ords/portal/wbs/list/?v_project="+id_project,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -4600,10 +3459,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         }
 
         $.ajax(settings).done(function (response) {
-<<<<<<< HEAD
-=======
           // console.log(response);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           $.each(response.items, function(i) {
             if (this.level == 1) {
               $('#wbs-'+compare_side).append($('<li>', {id : 'li-'+compare_side+'-'+this.wbs_id}));
@@ -4754,11 +3610,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-<<<<<<< HEAD
-          "url": "http://192.168.1.153:7001/ords/projects_portal/captures/wbs/?id_project="+id_project+"&id_capture="+capture_id,
-=======
           "url": "http://primavera.eeb.com.co:8080/ords/portal/captures/wbs/?id_project="+id_project+"&id_capture="+capture_id,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -4767,10 +3619,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         }
 
         $.ajax(settings).done(function (response) {
-<<<<<<< HEAD
-=======
           // console.log(response);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           $.each(response.items, function() {
             if (this.level == 1) {
               main_div.append($('<li>', {id : 'li-'+compare_side+'-'+this.wbs_id}));
@@ -4917,11 +3766,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-<<<<<<< HEAD
-          "url": "http://192.168.1.153:7001/ords/projects_portal/portal/captures/projectpercent/?v_project_id="+id_project+"&v_historyc_id="+capture_id,
-=======
           "url": "http://192.168.0.210:8080/ords/portal/captures/projectpercent/?v_project_id="+id_project+"&v_historyc_id="+capture_id,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -4966,20 +3811,12 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
           });
         });
       }
-<<<<<<< HEAD
-      // HITOS COMAPARE
-=======
       // HITOS COMPARE
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       function hitos_compare(id_project, selected_date, hitos_body, select_compare){
         var settings = {
           "async": true,
           "crossDomain": true,
-<<<<<<< HEAD
-          "url": "http://192.168.1.153:7001/ords/projects_portal/portal/captures/milestone/?v_project_id="+id_project+"&v_capture_id="+selected_date,
-=======
           "url": "http://192.168.0.210:8080/ords/portal/captures/milestone/?v_project_id="+id_project+"&v_capture_id="+selected_date,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -5037,11 +3874,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-<<<<<<< HEAD
-          "url": "http://192.168.1.153:7001/ords/projects_portal/captures/graph/?p_project_id="+id_project+"&p_period_type="+period_type+"&p_capture_id="+selected_date,
-=======
           "url": "http://primavera.eeb.com.co:8080/ords/portal/captures/graph/?p_project_id="+id_project+"&p_period_type="+period_type+"&p_capture_id="+selected_date,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -5086,11 +3919,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
             var settings = {
                 "async": true,
                 "crossDomain": true,
-<<<<<<< HEAD
-                "url": "http://192.168.1.153:7001/ords/projects_portal/portal/captures/curve3g/?p_project_id="+id_project+"&p_id_capture="+capture_id,
-=======
                 "url": "http://192.168.0.210:8080/ords/portal/captures/curve3g/?p_project_id="+id_project+"&p_id_capture="+capture_id,
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 "method": "GET",
                 "headers": {
                     "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -5148,26 +3977,14 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
               });
             }
           }
-<<<<<<< HEAD
-          $( document ).ready(function() {
-            var isMobile = window.matchMedia("(max-width: 760px)").matches;
-
-            if (isMobile) {
-              //Conditional script here
-=======
           // $('#risk-tr span').hide();
           $( document ).ready(function() {
             var isMobile = window.matchMedia("(max-width: 760px)").matches;
             if (isMobile) {
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
               $('#btn-compare').hide();
             } else {
               $('#btn-compare').show();
             }
-<<<<<<< HEAD
-            // Ocultar riesgos post
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             $('.rks-post').hide();
             $('.modal-trigger.tooltipped').hover(function() {
                 var rks_position = $(this).attr('data-code');
