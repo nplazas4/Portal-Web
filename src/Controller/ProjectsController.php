@@ -24,7 +24,7 @@ class ProjectsController extends AppController
         // CURL  que obtiene todos los proyectos publicados en el portal administrativo.
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/publicprojects/list/",
+        CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/publicprojects/list/",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -61,20 +61,8 @@ class ProjectsController extends AppController
                 $log->PROJECT_NAME  = $ProjectCodName.' ('.$ProjectIdP6.')';
                 $log->STATUS  = $ProjectCodStatus;
                 $logsTable->save($log);
-                // $this->set('ProjectCodId', $ArrayProjectCodId);//RV
+                $this->set('ProjectCodId', $ArrayProjectCodId);
             }
-            $ArrayProjDelete = array();
-            $AllProjForDelete = $this->Projects->find('all');
-            // Foreach que obtiene todos los projectos que provienen de Web services y se encuentra deshabilitados o eliminados.
-            // foreach ($AllProjForDelete as $ProjDelete) {
-            //     if (!in_array($ProjDelete->ID_PROJECT, $ArrayProjectCodId) && $ProjDelete->STATUS == 1) {
-            //         array_push($ArrayProjDelete, $ProjDelete->id);
-            //     }
-            // }
-            // Foreach que elimina que no existen en el WS de la base de datos local.
-            // foreach ($ArrayProjDelete as $ProjxDelete) {
-            //     $this->delete($ProjxDelete);
-            // }
         }
     }
     public function index()
@@ -84,7 +72,7 @@ class ProjectsController extends AppController
         }
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/usersxprojects/list/?v_id_user=".$UserId,
+        CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/usersxprojects/list/?v_id_user=".$UserId,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -180,7 +168,7 @@ class ProjectsController extends AppController
     }
     private function ProjectWbs($graph = null){
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/wbs/list/?v_project='.$graph);
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/wbs/list/?v_project='.$graph);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       $headers = array();
@@ -203,7 +191,7 @@ class ProjectsController extends AppController
     }
     private function ProjectsFase(){
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projectcodefase/list/');
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodefase/list/');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       $headers = array();
@@ -226,7 +214,7 @@ class ProjectsController extends AppController
     }
     Private function ProjectProfile($id_project = null){
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projects/projectid/'.$id_project);
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projects/projectid/'.$id_project);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       $headers = array();
@@ -251,7 +239,7 @@ class ProjectsController extends AppController
     }
     Private function ProjectHitos($id_project = null){
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/activity/list/?v_project_id='.$id_project);
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/activity/list/?v_project_id='.$id_project);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       $headers = array();
@@ -286,10 +274,7 @@ class ProjectsController extends AppController
       $this->set('array_project', $project_json_decode);
       $this->set('project_id', $project_id_decode);
       $this->set('project_id_p6', $proj_id_decode);
-      // DONA CHART TEMPORAL
-      // $this->Donut($project_id_decode);
-      $this->ProjectWbs($project_id_decode);
-      $this->ProjectHitos($project_id_decode);
+      // $this->ProjectHitos($project_id_decode);
       $this->loadModel('Projects');
         $local_id_project = $this->Projects->find(
               'all',
@@ -297,7 +282,7 @@ class ProjectsController extends AppController
           )->select(['Projects.id', 'Projects.CHART']);
         foreach ($local_id_project as $local_db) {
           $this->Risks($local_db->id);
-          $this->importExcelfile($proj_id_decode, $local_db->CHART);
+          // $this->importExcelfile($proj_id_decode, $local_db->CHART);
         }
     }
     public function ImportExcelCaf()
@@ -564,7 +549,7 @@ class ProjectsController extends AppController
     }
     private function ProjectCodeCategory(){
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projectcodecategory/list/');
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodecategory/list/');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       $headers = array();
@@ -587,7 +572,7 @@ class ProjectsController extends AppController
     }
     private function ProjectCodeMec(){
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projectcodemec/list/');
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodemec/list/');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       $headers = array();
@@ -610,7 +595,7 @@ class ProjectsController extends AppController
     }
     private function ProjectCodeArea(){
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/projectcodearea/list/');
+      curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectcodearea/list/');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
       $headers = array();
@@ -681,7 +666,7 @@ class ProjectsController extends AppController
         $data = $graph;
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/graph/data/?P_PROJECT_ID=".$data."&P_PERIOD_TYPE=3",
+        CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID=".$data."&P_PERIOD_TYPE=3",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 30,
@@ -766,7 +751,7 @@ class ProjectsController extends AppController
         }
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/projectpercent//percents/?V_PROJECT=".$data,
+          CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/projectpercent//percents/?V_PROJECT=".$data,
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_MAXREDIRS => 10,
           CURLOPT_TIMEOUT => 30,
@@ -855,7 +840,25 @@ class ProjectsController extends AppController
     public function portalProjects()
     {
       try {
-
+        // $curl = curl_init();
+        // curl_setopt_array($curl, array(
+        //   CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
+        //   CURLOPT_RETURNTRANSFER => true,
+        //   CURLOPT_ENCODING => "",
+        //   CURLOPT_MAXREDIRS => 10,
+        //   CURLOPT_TIMEOUT => 30,
+        //   CURLOPT_CUSTOMREQUEST => "GET",
+        //   CURLOPT_HTTPHEADER => array(
+        //     "Authorization: Bearer ".$_SESSION["PortalToken"],
+        //     "Cache-Control: no-cache")));
+        //   $responseEps = curl_exec($curl);
+        //   $err = curl_error($curl);
+        //   curl_close($curl);
+        //   if ($err) {
+        //       echo "cURL Error #:" . $err;
+        //   } else {
+        //     $this->PortalProjectsLogic($responseEps);
+        //   }
       } catch (\Exception $e) {
           exit($e->getMessage() . "\n");
       }
@@ -863,7 +866,17 @@ class ProjectsController extends AppController
     //Función que se encarga
     private function PortalProjectsLogic($responseEps = null){
       try {
-
+        // $responsesEps = json_decode($responseEps, true);
+        // $ArrayEps = array_values($responsesEps)[0];
+        // foreach ($ArrayEps as $rowEps => $valueEps) {
+        //     if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
+        //         $EpsIdNumber = $valueEps["eps_id"];
+        //         // $ParentEpsIdNumber = $valueEps["parent_eps_object_id"]; RV
+        //         $NameEPS = $valueEps["name"];
+        //         $LevelEPS = $valueEps["level"];
+        //         $this->Save_WS_Info_Eps_Table($EpsIdNumber, $NameEPS);
+        //     }
+        //  }
       } catch (\Exception $e) {
         exit($e->getMessage() . "\n");
       }
@@ -885,7 +898,7 @@ class ProjectsController extends AppController
         if ($this->request->is('Ajax')) { //Ajax Detection
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/graph/data/?P_PROJECT_ID=".$_POST['work']."&P_PERIOD_TYPE=".$_POST['workselected1'],
+            CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID=".$_POST['work']."&P_PERIOD_TYPE=".$_POST['workselected1'],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_POSTFIELDS => "",
@@ -974,7 +987,7 @@ class ProjectsController extends AppController
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+        CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/range/list/",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -1002,13 +1015,13 @@ class ProjectsController extends AppController
     }
     public function token(){
       //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
-      $ch = curl_init('http://192.168.1.153:7001/ords/projects_portal/oauth/token');
+      $ch = curl_init('http://192.168.0.210:8080/ords/portal/oauth/token');
       // curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_POST, false);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-      curl_setopt($ch, CURLOPT_USERPWD, "M-Lw7z5Q3DheSdHUTk1SyQ..:TWVMj5Ch1ke6U2hfxKuQfw..");
+      curl_setopt($ch, CURLOPT_USERPWD, "eMA2D5DqyNSsgxc_tPYqTg..:i4LginH4m_75qMbN7rAsjQ..");
       $result=curl_exec($ch);
       curl_close($ch);
       $result_arr = json_decode($result, true);

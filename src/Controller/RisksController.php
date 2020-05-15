@@ -27,7 +27,7 @@ class RisksController extends AppController
     // Función que se encarga de agregar riesgos.
     public function Add()
     {
-        $this->index();
+        $this->Projects();
         // Instrucción propia de CakePhp que contiene el elemento nuevo que va a ser registrado.
         $risks = $this->Risks->newEntity();
         // Condicional que valida si el nuevo registrop es enviado mediante un método POST.
@@ -64,7 +64,7 @@ class RisksController extends AppController
     }
     public function edit($id = null)
     {
-        $this->index();
+        $this->Projects();
         // Obtiene el registro completo del elemento que desea editar.
         $risks = $this->Risks->get($id);
         // Condicional que comprueba si la solicitud es PATCH,POST O PUT.

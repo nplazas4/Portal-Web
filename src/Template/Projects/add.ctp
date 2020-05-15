@@ -25,12 +25,8 @@
   $(document).ready(function() {
       $('.work-select').change(function() {
         var id = $(this).children(":selected").attr("id");
-<<<<<<< HEAD
-        var idString = id; /* Almacena la id del option select*/
-=======
         var idString = id; /* STORE THAT TO A DATA STRING */
         event.preventDefault();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
           var xhr = $.ajax({
               headers:{
                 'X-CSRF-Token':csrfToken
@@ -218,11 +214,7 @@
                      <?php echo $this->Form->input('CPI_ANUAL',['label'=>'CPI anual','placeholder'=>'CPI anual','class'=>'validate','value' => '0','required']);?>
                    </div>
                    <div class="input-field col s6">
-<<<<<<< HEAD
-                     <?php echo $this->Form->input('PV_TOTAL',['label'=>'PV Total','placeholder'=>'PV Total','class'=>'validate','value' => '0','required']);?>
-=======
                      <?php echo $this->Form->input('AC_BAC',['label'=>'AC/BAC','placeholder'=>'AC/BAC','class'=>'validate','value' => '0','required']);?>
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                    </div>
                  </div>
                  <div class="row">
@@ -399,19 +391,4 @@
       weekdaysAbbrev:['D','L','M','M','J','V','S']
     }
   });
-<<<<<<< HEAD
- </script>
- <script>
- var close = document.getElementsByClassName("closebtn");
- var i;
-
- for (i = 0; i < close.length; i++) {
-   close[i].onclick = function(){
-     var div = this.parentElement;
-     div.style.opacity = "0";
-     setTimeout(function(){ div.style.display = "none"; }, 600);
-   }
- }
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
  </script>
