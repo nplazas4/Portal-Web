@@ -5,11 +5,14 @@ namespace PhpOffice\PhpSpreadsheet\Reader;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Document\Properties;
 use PhpOffice\PhpSpreadsheet\NamedRange;
 use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Chart;
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 use PhpOffice\PhpSpreadsheet\NamedRange;
 use PhpOffice\PhpSpreadsheet\Reader\Security\XmlScanner;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\AutoFilter;
@@ -23,6 +26,9 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Properties as PropertyReader;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\SheetViewOptions;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\SheetViews;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Styles;
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 use PhpOffice\PhpSpreadsheet\ReferenceHelper;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
@@ -37,11 +43,17 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Borders;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Protection;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Worksheet\AutoFilter\Column;
+=======
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
+use PhpOffice\PhpSpreadsheet\Style\Style;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Protection;
@@ -75,7 +87,11 @@ class Xlsx extends BaseReader
     public function __construct()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->readFilter = new DefaultReadFilter();
+=======
+        parent::__construct();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         parent::__construct();
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -351,6 +367,7 @@ class Xlsx extends BaseReader
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Set Worksheet column attributes by attributes array passed.
      *
      * @param Worksheet $docSheet
@@ -405,6 +422,8 @@ class Xlsx extends BaseReader
     }
 
     /**
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Loads Spreadsheet from file.
@@ -486,6 +505,7 @@ class Xlsx extends BaseReader
             Settings::getLibXmlLoaderOptions()
         );
 <<<<<<< HEAD
+<<<<<<< HEAD
         foreach ($rels->Relationship as $rel) {
             switch ($rel['Type']) {
                 case 'http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties':
@@ -551,6 +571,8 @@ class Xlsx extends BaseReader
                         }
                     }
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         $propertyReader = new PropertyReader($this->securityScanner, $excel->getProperties());
         foreach ($rels->Relationship as $rel) {
@@ -565,6 +587,9 @@ class Xlsx extends BaseReader
                     break;
                 case 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties':
                     $propertyReader->readCustomProperties($this->getFromZipArchive($zip, "{$rel['Target']}"));
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                     break;
@@ -633,8 +658,12 @@ class Xlsx extends BaseReader
                         }
                     }
 <<<<<<< HEAD
+<<<<<<< HEAD
                     $styles = [];
                     $cellStyles = [];
+=======
+
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -646,6 +675,12 @@ class Xlsx extends BaseReader
                         Settings::getLibXmlLoaderOptions()
                     );
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+                    $styles = [];
+                    $cellStyles = [];
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 
                     $styles = [];
@@ -731,6 +766,7 @@ class Xlsx extends BaseReader
                     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     $dxfs = [];
                     if (!$this->readDataOnly && $xmlStyles) {
                         //    Conditional Styles
@@ -757,10 +793,15 @@ class Xlsx extends BaseReader
                         }
                     }
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     $styleReader = new Styles($xmlStyles);
                     $styleReader->setStyleBaseData(self::$theme, $styles, $cellStyles);
                     $dxfs = $styleReader->dxfs($this->readDataOnly);
                     $styles = $styleReader->styles();
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                     //~ http://schemas.openxmlformats.org/spreadsheetml/2006/main"
@@ -828,6 +869,7 @@ class Xlsx extends BaseReader
                                 $docSheet->setSheetState((string) $eleSheet['state']);
                             }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
                             if (isset($xmlSheet->sheetViews, $xmlSheet->sheetViews->sheetView)) {
                                 if (isset($xmlSheet->sheetViews->sheetView['zoomScale'])) {
@@ -958,6 +1000,8 @@ class Xlsx extends BaseReader
                             $this->readColumnsAndRowsAttributes($xmlSheet, $docSheet);
 
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             if ($xmlSheet) {
                                 if (isset($xmlSheet->sheetViews, $xmlSheet->sheetViews->sheetView)) {
                                     $sheetViews = new SheetViews($xmlSheet->sheetViews->sheetView, $docSheet);
@@ -971,6 +1015,9 @@ class Xlsx extends BaseReader
                                     ->load($this->getReadFilter(), $this->getReadDataOnly());
                             }
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             if ($xmlSheet && $xmlSheet->sheetData && $xmlSheet->sheetData->row) {
                                 $cIndex = 1; // Cell Start from 1
@@ -1052,6 +1099,7 @@ class Xlsx extends BaseReader
                                         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         // Check for numeric values
                                         if (is_numeric($value) && $cellDataType != 's') {
                                             if ($value == (int) $value) {
@@ -1085,6 +1133,8 @@ class Xlsx extends BaseReader
                                             $cell->setXfIndex(isset($styles[(int) ($c['s'])]) ?
                                                 (int) ($c['s']) : 0);
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                         // read empty cells or the cells are not empty
                                         if ($this->readEmptyCells || ($value !== null && $value !== '')) {
                                             // Check for numeric values
@@ -1118,6 +1168,9 @@ class Xlsx extends BaseReader
                                                 $cell->setXfIndex(isset($styles[(int) ($c['s'])]) ?
                                                     (int) ($c['s']) : 0);
                                             }
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                         }
                                         $rowIndex += 1;
@@ -1126,6 +1179,7 @@ class Xlsx extends BaseReader
                                 }
                             }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
                             $conditionals = [];
                             if (!$this->readDataOnly && $xmlSheet && $xmlSheet->conditionalFormatting) {
@@ -1174,6 +1228,10 @@ class Xlsx extends BaseReader
                             if (!$this->readDataOnly && $xmlSheet && $xmlSheet->conditionalFormatting) {
                                 (new ConditionalStyles($docSheet, $xmlSheet, $dxfs))->load();
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+                            if (!$this->readDataOnly && $xmlSheet && $xmlSheet->conditionalFormatting) {
+                                (new ConditionalStyles($docSheet, $xmlSheet, $dxfs))->load();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             }
 
                             $aKeys = ['sheet', 'objects', 'scenarios', 'formatCells', 'formatColumns', 'formatRows', 'insertColumns', 'insertRows', 'insertHyperlinks', 'deleteColumns', 'deleteRows', 'selectLockedCells', 'sort', 'autoFilter', 'pivotTables', 'selectUnlockedCells'];
@@ -1194,6 +1252,7 @@ class Xlsx extends BaseReader
                             }
 
                             if ($xmlSheet && $xmlSheet->autoFilter && !$this->readDataOnly) {
+<<<<<<< HEAD
 <<<<<<< HEAD
                                 $autoFilterRange = (string) $xmlSheet->autoFilter['ref'];
                                 if (strpos($autoFilterRange, ':') !== false) {
@@ -1295,6 +1354,9 @@ class Xlsx extends BaseReader
 =======
                                 (new AutoFilter($docSheet, $xmlSheet))->load();
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+                                (new AutoFilter($docSheet, $xmlSheet))->load();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             }
 
                             if ($xmlSheet && $xmlSheet->mergeCells && $xmlSheet->mergeCells->mergeCell && !$this->readDataOnly) {
@@ -1306,6 +1368,7 @@ class Xlsx extends BaseReader
                                 }
                             }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
                             if ($xmlSheet && $xmlSheet->pageMargins && !$this->readDataOnly) {
                                 $docPageMargins = $docSheet->getPageMargins();
@@ -1426,12 +1489,17 @@ class Xlsx extends BaseReader
                                     }
                                 }
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             if ($xmlSheet && !$this->readDataOnly) {
                                 $unparsedLoadedData = (new PageSetup($docSheet, $xmlSheet))->load($unparsedLoadedData);
                             }
 
                             if ($xmlSheet && $xmlSheet->dataValidations && !$this->readDataOnly) {
                                 (new DataValidations($docSheet, $xmlSheet))->load();
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             }
 
@@ -1447,6 +1515,7 @@ class Xlsx extends BaseReader
 
                             // Add hyperlinks
 <<<<<<< HEAD
+<<<<<<< HEAD
                             $hyperlinks = [];
                             if (!$this->readDataOnly) {
                                 // Locate hyperlink relations
@@ -1456,6 +1525,8 @@ class Xlsx extends BaseReader
                                         $this->securityScanner->scan(
                                             $this->getFromZipArchive($zip, dirname("$dir/$fileWorksheet") . '/_rels/' . basename($fileWorksheet) . '.rels')
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             if (!$this->readDataOnly) {
                                 $hyperlinkReader = new Hyperlinks($docSheet);
                                 // Locate hyperlink relations
@@ -1465,11 +1536,15 @@ class Xlsx extends BaseReader
                                     $relsWorksheet = simplexml_load_string(
                                         $this->securityScanner->scan(
                                             $this->getFromZipArchive($zip, $relationsFileName)
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                         ),
                                         'SimpleXMLElement',
                                         Settings::getLibXmlLoaderOptions()
                                     );
+<<<<<<< HEAD
 <<<<<<< HEAD
                                     foreach ($relsWorksheet->Relationship as $ele) {
                                         if ($ele['Type'] == 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink') {
@@ -1479,10 +1554,14 @@ class Xlsx extends BaseReader
 =======
                                     $hyperlinkReader->readHyperlinks($relsWorksheet);
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
+                                    $hyperlinkReader->readHyperlinks($relsWorksheet);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                 }
 
                                 // Loop through hyperlinks
                                 if ($xmlSheet && $xmlSheet->hyperlinks) {
+<<<<<<< HEAD
 <<<<<<< HEAD
                                     /** @var SimpleXMLElement $hyperlink */
                                     foreach ($xmlSheet->hyperlinks->hyperlink as $hyperlink) {
@@ -1507,6 +1586,9 @@ class Xlsx extends BaseReader
                                             }
                                         }
                                     }
+=======
+                                    $hyperlinkReader->setHyperlinks($xmlSheet->hyperlinks);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                                     $hyperlinkReader->setHyperlinks($xmlSheet->hyperlinks);
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1572,6 +1654,7 @@ class Xlsx extends BaseReader
                                     // Load VML comments file
                                     $relPath = File::realpath(dirname("$dir/$fileWorksheet") . '/' . $relPath);
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     $vmlCommentsFile = simplexml_load_string(
                                         $this->securityScanner->scan($this->getFromZipArchive($zip, $relPath)),
                                         'SimpleXMLElement',
@@ -1579,6 +1662,8 @@ class Xlsx extends BaseReader
                                     );
                                     $vmlCommentsFile->registerXPathNamespace('v', 'urn:schemas-microsoft-com:vml');
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                                     try {
                                         $vmlCommentsFile = simplexml_load_string(
@@ -1591,6 +1676,9 @@ class Xlsx extends BaseReader
                                         //Ignore unparsable vmlDrawings. Later they will be moved from $unparsedVmlDrawings to $unparsedLoadedData
                                         continue;
                                     }
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                                     $shapes = $vmlCommentsFile->xpath('//v:shape');
@@ -1766,13 +1854,19 @@ class Xlsx extends BaseReader
                                 }
                                 if ($xmlSheet->drawing && !$this->readDataOnly) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     foreach ($xmlSheet->drawing as $drawing) {
                                         $fileDrawing = $drawings[(string) self::getArrayItem($drawing->attributes('http://schemas.openxmlformats.org/officeDocument/2006/relationships'), 'id')];
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                     $unparsedDrawings = [];
                                     foreach ($xmlSheet->drawing as $drawing) {
                                         $drawingRelId = (string) self::getArrayItem($drawing->attributes('http://schemas.openxmlformats.org/officeDocument/2006/relationships'), 'id');
                                         $fileDrawing = $drawings[$drawingRelId];
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                         //~ http://schemas.openxmlformats.org/package/2006/relationships"
                                         $relsDrawing = simplexml_load_string(
@@ -1806,16 +1900,22 @@ class Xlsx extends BaseReader
                                             'SimpleXMLElement',
                                             Settings::getLibXmlLoaderOptions()
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         )->children('http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing');
 
                                         if ($xmlDrawing->oneCellAnchor) {
                                             foreach ($xmlDrawing->oneCellAnchor as $oneCellAnchor) {
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                         );
                                         $xmlDrawingChildren = $xmlDrawing->children('http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing');
 
                                         if ($xmlDrawingChildren->oneCellAnchor) {
                                             foreach ($xmlDrawingChildren->oneCellAnchor as $oneCellAnchor) {
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                                 if ($oneCellAnchor->pic->blipFill) {
                                                     /** @var SimpleXMLElement $blip */
@@ -1851,6 +1951,7 @@ class Xlsx extends BaseReader
                                                         $shadow = $objDrawing->getShadow();
                                                         $shadow->setVisible(true);
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                         $shadow->setBlurRadius(Drawing::EMUTopixels(self::getArrayItem($outerShdw->attributes(), 'blurRad')));
                                                         $shadow->setDistance(Drawing::EMUTopixels(self::getArrayItem($outerShdw->attributes(), 'dist')));
                                                         $shadow->setDirection(Drawing::angleToDegrees(self::getArrayItem($outerShdw->attributes(), 'dir')));
@@ -1858,6 +1959,8 @@ class Xlsx extends BaseReader
                                                         $shadow->getColor()->setRGB(self::getArrayItem($outerShdw->srgbClr->attributes(), 'val'));
                                                         $shadow->setAlpha(self::getArrayItem($outerShdw->srgbClr->alpha->attributes(), 'val') / 1000);
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                                         $shadow->setBlurRadius(Drawing::EMUToPixels(self::getArrayItem($outerShdw->attributes(), 'blurRad')));
                                                         $shadow->setDistance(Drawing::EMUToPixels(self::getArrayItem($outerShdw->attributes(), 'dist')));
                                                         $shadow->setDirection(Drawing::angleToDegrees(self::getArrayItem($outerShdw->attributes(), 'dir')));
@@ -1865,6 +1968,9 @@ class Xlsx extends BaseReader
                                                         $clr = isset($outerShdw->srgbClr) ? $outerShdw->srgbClr : $outerShdw->prstClr;
                                                         $shadow->getColor()->setRGB(self::getArrayItem($clr->attributes(), 'val'));
                                                         $shadow->setAlpha(self::getArrayItem($clr->alpha->attributes(), 'val') / 1000);
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                                     }
 
@@ -1882,8 +1988,13 @@ class Xlsx extends BaseReader
                                             }
                                         }
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         if ($xmlDrawing->twoCellAnchor) {
                                             foreach ($xmlDrawing->twoCellAnchor as $twoCellAnchor) {
+=======
+                                        if ($xmlDrawingChildren->twoCellAnchor) {
+                                            foreach ($xmlDrawingChildren->twoCellAnchor as $twoCellAnchor) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                                         if ($xmlDrawingChildren->twoCellAnchor) {
                                             foreach ($xmlDrawingChildren->twoCellAnchor as $twoCellAnchor) {
@@ -1918,6 +2029,7 @@ class Xlsx extends BaseReader
                                                         $shadow = $objDrawing->getShadow();
                                                         $shadow->setVisible(true);
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                         $shadow->setBlurRadius(Drawing::EMUTopixels(self::getArrayItem($outerShdw->attributes(), 'blurRad')));
                                                         $shadow->setDistance(Drawing::EMUTopixels(self::getArrayItem($outerShdw->attributes(), 'dist')));
                                                         $shadow->setDirection(Drawing::angleToDegrees(self::getArrayItem($outerShdw->attributes(), 'dir')));
@@ -1925,6 +2037,8 @@ class Xlsx extends BaseReader
                                                         $shadow->getColor()->setRGB(self::getArrayItem($outerShdw->srgbClr->attributes(), 'val'));
                                                         $shadow->setAlpha(self::getArrayItem($outerShdw->srgbClr->alpha->attributes(), 'val') / 1000);
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                                         $shadow->setBlurRadius(Drawing::EMUToPixels(self::getArrayItem($outerShdw->attributes(), 'blurRad')));
                                                         $shadow->setDistance(Drawing::EMUToPixels(self::getArrayItem($outerShdw->attributes(), 'dist')));
                                                         $shadow->setDirection(Drawing::angleToDegrees(self::getArrayItem($outerShdw->attributes(), 'dir')));
@@ -1932,6 +2046,9 @@ class Xlsx extends BaseReader
                                                         $clr = isset($outerShdw->srgbClr) ? $outerShdw->srgbClr : $outerShdw->prstClr;
                                                         $shadow->getColor()->setRGB(self::getArrayItem($clr->attributes(), 'val'));
                                                         $shadow->setAlpha(self::getArrayItem($clr->alpha->attributes(), 'val') / 1000);
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                                     }
 
@@ -1963,11 +2080,17 @@ class Xlsx extends BaseReader
                                             }
                                         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                         if ($relsDrawing === false && $xmlDrawing->count() == 0) {
                                             // Save Drawing without rels and children as unparsed
                                             $unparsedDrawings[$drawingRelId] = $xmlDrawing->asXML();
                                         }
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                     }
 
@@ -1976,13 +2099,19 @@ class Xlsx extends BaseReader
                                     foreach ($relsWorksheet->Relationship as $ele) {
                                         if ($ele['Type'] == 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing') {
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             $unparsedLoadedData['sheets'][$docSheet->getCodeName()]['drawingOriginalIds'][(string) $ele['Target']] = (string) $ele['Id'];
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                             $drawingRelId = (string) $ele['Id'];
                                             $unparsedLoadedData['sheets'][$docSheet->getCodeName()]['drawingOriginalIds'][(string) $ele['Target']] = $drawingRelId;
                                             if (isset($unparsedDrawings[$drawingRelId])) {
                                                 $unparsedLoadedData['sheets'][$docSheet->getCodeName()]['Drawings'][$drawingRelId] = $unparsedDrawings[$drawingRelId];
                                             }
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                                         }
                                     }
@@ -2129,7 +2258,11 @@ class Xlsx extends BaseReader
                                         // Extract sheet name
                                         $extractedSheetName = Worksheet::extractSheetTitle((string) $definedName, true);
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         $extractedSheetName = $extractedSheetName[0];
+=======
+                                        $extractedSheetName = trim($extractedSheetName[0], "'");
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                                         $extractedSheetName = trim($extractedSheetName[0], "'");
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -2739,6 +2872,7 @@ class Xlsx extends BaseReader
         return (bool) $xsdBoolean;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     /**
      * Read columns and rows attributes from XML and set them on the worksheet.
@@ -2829,6 +2963,8 @@ class Xlsx extends BaseReader
             }
         }
     }
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 }

@@ -268,9 +268,13 @@ class Workbook extends BIFFwriter
         $this->xfWriters[] = $xfWriter;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $xfIndex = count($this->xfWriters) - 1;
 
         return $xfIndex;
+=======
+        return count($this->xfWriters) - 1;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         return count($this->xfWriters) - 1;
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -324,7 +328,11 @@ class Workbook extends BIFFwriter
                 $this->colors[$rgb] = $colorIndex;
             } else {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (count($this->colors) == 0) {
+=======
+                if (count($this->colors) === 0) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if (count($this->colors) === 0) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -446,7 +454,11 @@ class Workbook extends BIFFwriter
         // Prepare part 3 of the workbook global stream, what goes after the SHEET records
         $part3 = '';
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ($this->countryCode != -1) {
+=======
+        if ($this->countryCode !== -1) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         if ($this->countryCode !== -1) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -931,7 +943,11 @@ class Workbook extends BIFFwriter
         $length = 0x0002; // Bytes to follow
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $f1904 = (Date::getExcelCalendar() == Date::CALENDAR_MAC_1904)
+=======
+        $f1904 = (Date::getExcelCalendar() === Date::CALENDAR_MAC_1904)
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         $f1904 = (Date::getExcelCalendar() === Date::CALENDAR_MAC_1904)
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

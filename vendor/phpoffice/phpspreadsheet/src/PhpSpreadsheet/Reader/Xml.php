@@ -42,7 +42,11 @@ class Xml extends BaseReader
     public function __construct()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->readFilter = new DefaultReadFilter();
+=======
+        parent::__construct();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         parent::__construct();
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

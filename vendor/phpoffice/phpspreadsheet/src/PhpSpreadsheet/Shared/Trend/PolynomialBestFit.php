@@ -183,7 +183,13 @@ class PolynomialBestFit extends BestFit
     public function __construct($order, $yValues, $xValues = [], $const = true)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (parent::__construct($yValues, $xValues) !== false) {
+=======
+        parent::__construct($yValues, $xValues);
+
+        if (!$this->error) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         parent::__construct($yValues, $xValues);
 

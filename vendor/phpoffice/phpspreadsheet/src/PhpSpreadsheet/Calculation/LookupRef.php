@@ -5,6 +5,10 @@ namespace PhpOffice\PhpSpreadsheet\Calculation;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 use PhpOffice\PhpSpreadsheet\Shared\StringHelper;
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -478,8 +482,14 @@ class LookupRef
         $matchType = ($matchType === null) ? 1 : (int) Functions::flattenSingleValue($matchType);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         // MATCH is not case sensitive
         $lookupValue = strtolower($lookupValue);
+=======
+        $initialLookupValue = $lookupValue;
+        // MATCH is not case sensitive
+        $lookupValue = StringHelper::strToLower($lookupValue);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         $initialLookupValue = $lookupValue;
         // MATCH is not case sensitive
@@ -513,7 +523,11 @@ class LookupRef
             // Convert strings to lowercase for case-insensitive testing
             if (is_string($lookupArrayValue)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 $lookupArray[$i] = strtolower($lookupArrayValue);
+=======
+                $lookupArray[$i] = StringHelper::strToLower($lookupArrayValue);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 $lookupArray[$i] = StringHelper::strToLower($lookupArrayValue);
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -537,10 +551,13 @@ class LookupRef
         if ($matchType == 0 || $matchType == 1) {
             foreach ($lookupArray as $i => $lookupArrayValue) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (($matchType == 0) && ($lookupArrayValue == $lookupValue)) {
                     //    exact match
                     return ++$i;
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 $onlyNumeric = is_numeric($lookupArrayValue) && is_numeric($lookupValue);
                 $onlyNumericExactMatch = $onlyNumeric && $lookupArrayValue == $lookupValue;
                 $nonOnlyNumericExactMatch = !$onlyNumeric && $lookupArrayValue === $lookupValue;
@@ -548,6 +565,9 @@ class LookupRef
                 if (($matchType == 0) && $exactMatch) {
                     //    exact match
                     return $i + 1;
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 } elseif (($matchType == 1) && ($lookupArrayValue <= $lookupValue)) {
                     $i = array_search($i, $keySet);
@@ -686,7 +706,13 @@ class LookupRef
         reset($a);
         $firstColumn = key($a);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (($aLower = strtolower($a[$firstColumn])) == ($bLower = strtolower($b[$firstColumn]))) {
+=======
+        $aLower = StringHelper::strToLower($a[$firstColumn]);
+        $bLower = StringHelper::strToLower($b[$firstColumn]);
+        if ($aLower == $bLower) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         $aLower = StringHelper::strToLower($a[$firstColumn]);
         $bLower = StringHelper::strToLower($b[$firstColumn]);
@@ -738,12 +764,15 @@ class LookupRef
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         $rowNumber = $rowValue = false;
         foreach ($lookup_array as $rowKey => $rowData) {
             // break if we have passed possible keys
             if ((is_numeric($lookup_value) && is_numeric($rowData[$firstColumn]) && ($rowData[$firstColumn] > $lookup_value)) ||
                 (!is_numeric($lookup_value) && !is_numeric($rowData[$firstColumn]) && (strtolower($rowData[$firstColumn]) > strtolower($lookup_value)))) {
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         $lookupLower = StringHelper::strToLower($lookup_value);
         $rowNumber = $rowValue = false;
         foreach ($lookup_array as $rowKey => $rowData) {
@@ -752,6 +781,9 @@ class LookupRef
             // break if we have passed possible keys
             if ((is_numeric($lookup_value) && is_numeric($rowData[$firstColumn]) && ($rowData[$firstColumn] > $lookup_value)) ||
                 (!is_numeric($lookup_value) && !is_numeric($rowData[$firstColumn]) && ($firstLower > $lookupLower))) {
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 break;
             }
@@ -761,10 +793,16 @@ class LookupRef
                 if ($not_exact_match) {
                     $rowNumber = $rowKey;
 <<<<<<< HEAD
+<<<<<<< HEAD
                     $rowValue = $rowData[$firstColumn];
 
                     continue;
                 } elseif ((strtolower($rowData[$firstColumn]) == strtolower($lookup_value))
+=======
+
+                    continue;
+                } elseif (($firstLower == $lookupLower)
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 
                     continue;
@@ -777,7 +815,10 @@ class LookupRef
                 ) {
                     $rowNumber = $rowKey;
 <<<<<<< HEAD
+<<<<<<< HEAD
                     $rowValue = $rowData[$firstColumn];
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 }
@@ -833,14 +874,20 @@ class LookupRef
             $bothNumeric = is_numeric($lookup_value) && is_numeric($rowData);
             $bothNotNumeric = !is_numeric($lookup_value) && !is_numeric($rowData);
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (($bothNumeric && $rowData > $lookup_value) ||
                 ($bothNotNumeric && strtolower($rowData) > strtolower($lookup_value))) {
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             $lookupLower = StringHelper::strToLower($lookup_value);
             $rowDataLower = StringHelper::strToLower($rowData);
 
             if (($bothNumeric && $rowData > $lookup_value) ||
                 ($bothNotNumeric && $rowDataLower > $lookupLower)) {
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 break;
             }
@@ -852,7 +899,11 @@ class LookupRef
 
                     continue;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 } elseif (strtolower($rowData) === strtolower($lookup_value)
+=======
+                } elseif ($rowDataLower === $lookupLower
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 } elseif ($rowDataLower === $lookupLower
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

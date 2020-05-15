@@ -142,7 +142,11 @@ class Worksheet extends WriterPart
         if ($pSheet->getParent()->hasMacros()) {
             //if the workbook have macros, we need to have codeName for the sheet
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ($pSheet->hasCodeName() == false) {
+=======
+            if (!$pSheet->hasCodeName()) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
             if (!$pSheet->hasCodeName()) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -327,7 +331,11 @@ class Worksheet extends WriterPart
 
         // Set Zero Height row
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ((string) $pSheet->getDefaultRowDimension()->getZeroHeight() == '1' ||
+=======
+        if ((string) $pSheet->getDefaultRowDimension()->getZeroHeight() === '1' ||
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         if ((string) $pSheet->getDefaultRowDimension()->getZeroHeight() === '1' ||
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -392,7 +400,11 @@ class Worksheet extends WriterPart
 
                 // Column visibility
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if ($colDimension->getVisible() == false) {
+=======
+                if ($colDimension->getVisible() === false) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if ($colDimension->getVisible() === false) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -411,7 +423,11 @@ class Worksheet extends WriterPart
 
                 // Collapsed
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if ($colDimension->getCollapsed() == true) {
+=======
+                if ($colDimension->getCollapsed() === true) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if ($colDimension->getCollapsed() === true) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -445,7 +461,11 @@ class Worksheet extends WriterPart
         $objWriter->startElement('sheetProtection');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ($pSheet->getProtection()->getPassword() != '') {
+=======
+        if ($pSheet->getProtection()->getPassword() !== '') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         if ($pSheet->getProtection()->getPassword() !== '') {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -540,6 +560,12 @@ class Worksheet extends WriterPart
                             $objWriter->writeElement('formula', $formula);
                         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                    } elseif ($conditional->getConditionType() == Conditional::CONDITION_CONTAINSBLANKS) {
+                        // formula copied from ms xlsx xml source file
+                        $objWriter->writeElement('formula', 'LEN(TRIM(' . $cellCoordinate . '))=0');
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                     } elseif ($conditional->getConditionType() == Conditional::CONDITION_CONTAINSBLANKS) {
                         // formula copied from ms xlsx xml source file
@@ -651,8 +677,14 @@ class Worksheet extends WriterPart
                 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if ($hyperlink->getTooltip() != '') {
                     $objWriter->writeAttribute('tooltip', $hyperlink->getTooltip());
+=======
+                if ($hyperlink->getTooltip() !== '') {
+                    $objWriter->writeAttribute('tooltip', $hyperlink->getTooltip());
+                    $objWriter->writeAttribute('display', $hyperlink->getTooltip());
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if ($hyperlink->getTooltip() !== '') {
                     $objWriter->writeAttribute('tooltip', $hyperlink->getTooltip());
@@ -1024,7 +1056,11 @@ class Worksheet extends WriterPart
 
                 // Row visibility
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if ($rowDimension->getVisible() == false) {
+=======
+                if (!$rowDimension->getVisible() === true) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if (!$rowDimension->getVisible() === true) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1033,7 +1069,11 @@ class Worksheet extends WriterPart
 
                 // Collapsed
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if ($rowDimension->getCollapsed() == true) {
+=======
+                if ($rowDimension->getCollapsed() === true) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if ($rowDimension->getCollapsed() === true) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1142,7 +1182,11 @@ class Worksheet extends WriterPart
                 case 'f':            // Formula
                     $attributes = $pCell->getFormulaAttributes();
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if ($attributes['t'] == 'array') {
+=======
+                    if ($attributes['t'] === 'array') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                     if ($attributes['t'] === 'array') {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1159,7 +1203,11 @@ class Worksheet extends WriterPart
                     if ($this->getParentWriter()->getOffice2003Compatibility() === false) {
                         if ($this->getParentWriter()->getPreCalculateFormulas()) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                             if (!is_array($calculatedValue) && substr($calculatedValue, 0, 1) != '#') {
+=======
+                            if (!is_array($calculatedValue) && substr($calculatedValue, 0, 1) !== '#') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                             if (!is_array($calculatedValue) && substr($calculatedValue, 0, 1) !== '#') {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1184,7 +1232,11 @@ class Worksheet extends WriterPart
                     break;
                 case 'e':            // Error
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if (substr($cellValue, 0, 1) == '=') {
+=======
+                    if (substr($cellValue, 0, 1) === '=') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                     if (substr($cellValue, 0, 1) === '=') {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

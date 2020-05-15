@@ -1010,7 +1010,11 @@ class Parser
                 break;
             case '>':
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if ($this->lookAhead == '=') { // it's a GE token
+=======
+                if ($this->lookAhead === '=') { // it's a GE token
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if ($this->lookAhead === '=') { // it's a GE token
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1023,7 +1027,11 @@ class Parser
             case '<':
                 // it's a LE or a NE token
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (($this->lookAhead == '=') or ($this->lookAhead == '>')) {
+=======
+                if (($this->lookAhead === '=') or ($this->lookAhead === '>')) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if (($this->lookAhead === '=') or ($this->lookAhead === '>')) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1036,6 +1044,7 @@ class Parser
             default:
                 // if it's a reference A1 or $A$1 or $A1 or A$1
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (preg_match('/^\$?[A-Ia-i]?[A-Za-z]\$?\d+$/', $token) and !preg_match('/\d/', $this->lookAhead) and ($this->lookAhead != ':') and ($this->lookAhead != '.') and ($this->lookAhead != '!')) {
                     return $token;
                 } elseif (preg_match('/^' . self::REGEX_SHEET_TITLE_UNQUOTED . '(\\:' . self::REGEX_SHEET_TITLE_UNQUOTED . ')?\\!\$?[A-Ia-i]?[A-Za-z]\$?\\d+$/u', $token) and !preg_match('/\d/', $this->lookAhead) and ($this->lookAhead != ':') and ($this->lookAhead != '.')) {
@@ -1043,12 +1052,17 @@ class Parser
                     return $token;
                 } elseif (preg_match("/^'" . self::REGEX_SHEET_TITLE_QUOTED . '(\\:' . self::REGEX_SHEET_TITLE_QUOTED . ")?'\\!\\$?[A-Ia-i]?[A-Za-z]\\$?\\d+$/u", $token) and !preg_match('/\d/', $this->lookAhead) and ($this->lookAhead != ':') and ($this->lookAhead != '.')) {
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 if (preg_match('/^\$?[A-Ia-i]?[A-Za-z]\$?\d+$/', $token) and !preg_match('/\d/', $this->lookAhead) and ($this->lookAhead !== ':') and ($this->lookAhead !== '.') and ($this->lookAhead !== '!')) {
                     return $token;
                 } elseif (preg_match('/^' . self::REGEX_SHEET_TITLE_UNQUOTED . '(\\:' . self::REGEX_SHEET_TITLE_UNQUOTED . ')?\\!\$?[A-Ia-i]?[A-Za-z]\$?\\d+$/u', $token) and !preg_match('/\d/', $this->lookAhead) and ($this->lookAhead !== ':') and ($this->lookAhead !== '.')) {
                     // If it's an external reference (Sheet1!A1 or Sheet1:Sheet2!A1 or Sheet1!$A$1 or Sheet1:Sheet2!$A$1)
                     return $token;
                 } elseif (preg_match("/^'" . self::REGEX_SHEET_TITLE_QUOTED . '(\\:' . self::REGEX_SHEET_TITLE_QUOTED . ")?'\\!\\$?[A-Ia-i]?[A-Za-z]\\$?\\d+$/u", $token) and !preg_match('/\d/', $this->lookAhead) and ($this->lookAhead !== ':') and ($this->lookAhead !== '.')) {
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     // If it's an external reference ('Sheet1'!A1 or 'Sheet1:Sheet2'!A1 or 'Sheet1'!$A$1 or 'Sheet1:Sheet2'!$A$1)
                     return $token;
@@ -1061,6 +1075,7 @@ class Parser
                 } elseif (preg_match("/^'" . self::REGEX_SHEET_TITLE_QUOTED . '(\\:' . self::REGEX_SHEET_TITLE_QUOTED . ")?'\\!\\$?([A-Ia-i]?[A-Za-z])?\\$?\\d+:\\$?([A-Ia-i]?[A-Za-z])?\\$?\\d+$/u", $token) and !preg_match('/\d/', $this->lookAhead)) {
                     // If it's an external range like 'Sheet1'!A1:B2 or 'Sheet1:Sheet2'!A1:B2 or 'Sheet1'!$A$1:$B$2 or 'Sheet1:Sheet2'!$A$1:$B$2
                     return $token;
+<<<<<<< HEAD
 <<<<<<< HEAD
                 } elseif (is_numeric($token) and (!is_numeric($token . $this->lookAhead) or ($this->lookAhead == '')) and ($this->lookAhead != '!') and ($this->lookAhead != ':')) {
                     // If it's a number (check that it's not a sheet name or range)
@@ -1076,6 +1091,8 @@ class Parser
                     return $token;
                 } elseif (substr($token, -1) == ')') {
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 } elseif (is_numeric($token) and (!is_numeric($token . $this->lookAhead) or ($this->lookAhead == '')) and ($this->lookAhead !== '!') and ($this->lookAhead !== ':')) {
                     // If it's a number (check that it's not a sheet name or range)
                     return $token;
@@ -1089,6 +1106,9 @@ class Parser
                     // if it's a function call
                     return $token;
                 } elseif (substr($token, -1) === ')') {
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     //    It's an argument of some description (e.g. a named range),
                     //        precise nature yet to be determined
@@ -1112,8 +1132,12 @@ class Parser
         $this->currentCharacter = 0;
         $this->formula = $formula;
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->lookAhead = isset($formula[1]) ? $formula[1]
         : '';
+=======
+        $this->lookAhead = isset($formula[1]) ? $formula[1] : '';
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         $this->lookAhead = isset($formula[1]) ? $formula[1] : '';
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1286,15 +1310,21 @@ class Parser
     private function fact()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ($this->currentToken == '(') {
             $this->advance(); // eat the "("
             $result = $this->parenthesizedExpression();
             if ($this->currentToken != ')') {
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         if ($this->currentToken === '(') {
             $this->advance(); // eat the "("
             $result = $this->parenthesizedExpression();
             if ($this->currentToken !== ')') {
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 throw new WriterException("')' token expected.");
             }
@@ -1344,7 +1374,11 @@ class Parser
         } elseif (is_numeric($this->currentToken)) {
             // If it's a number or a percent
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ($this->lookAhead == '%') {
+=======
+            if ($this->lookAhead === '%') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
             if ($this->lookAhead === '%') {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -1380,9 +1414,15 @@ class Parser
         $this->advance();
         $this->advance(); // eat the "("
 <<<<<<< HEAD
+<<<<<<< HEAD
         while ($this->currentToken != ')') {
             if ($num_args > 0) {
                 if ($this->currentToken == ',' || $this->currentToken == ';') {
+=======
+        while ($this->currentToken !== ')') {
+            if ($num_args > 0) {
+                if ($this->currentToken === ',' || $this->currentToken === ';') {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         while ($this->currentToken !== ')') {
             if ($num_args > 0) {

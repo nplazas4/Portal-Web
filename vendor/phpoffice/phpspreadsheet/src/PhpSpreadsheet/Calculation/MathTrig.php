@@ -1225,18 +1225,24 @@ class MathTrig
 
             $testCondition = '=' . $arg . $condition;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             if (is_numeric($sumArgs[$key]) &&
                 Calculation::getInstance()->_calculateFormulaValue($testCondition)) {
                 // Is it a value within our criteria and only numeric can be added to the result
                 $returnValue += $sumArgs[$key];
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             $sumValue = array_key_exists($key, $sumArgs) ? $sumArgs[$key] : 0;
 
             if (is_numeric($sumValue) &&
                 Calculation::getInstance()->_calculateFormulaValue($testCondition)) {
                 // Is it a value within our criteria and only numeric can be added to the result
                 $returnValue += $sumValue;
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             }
         }

@@ -986,7 +986,11 @@ $validation->setFormula2(20);
 
 The following piece of code only allows an item picked from a list of
 <<<<<<< HEAD
+<<<<<<< HEAD
 data to be entered in cell B3:
+=======
+data to be entered in cell B5:
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 data to be entered in cell B5:
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

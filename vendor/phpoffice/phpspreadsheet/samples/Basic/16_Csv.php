@@ -7,6 +7,10 @@ $spreadsheet = require __DIR__ . '/../templates/sampleSpreadsheet.php';
 
 $helper->log('Write to CSV format');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/** @var \PhpOffice\PhpSpreadsheet\Writer\Csv $writer */
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 /** @var \PhpOffice\PhpSpreadsheet\Writer\Csv $writer */
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -22,6 +26,10 @@ $helper->logWrite($writer, $filename, $callStartTime);
 $helper->log('Read from CSV format');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/** @var \PhpOffice\PhpSpreadsheet\Reader\Csv $reader */
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 /** @var \PhpOffice\PhpSpreadsheet\Reader\Csv $reader */
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -39,6 +47,10 @@ $helper->write($spreadsheetFromCSV, __FILE__, ['Xlsx']);
 // Write CSV
 $filenameCSV = $helper->getFilename(__FILE__, 'csv');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/** @var \PhpOffice\PhpSpreadsheet\Writer\Csv $writerCSV */
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 /** @var \PhpOffice\PhpSpreadsheet\Writer\Csv $writerCSV */
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

@@ -158,7 +158,10 @@ abstract class Coordinate
 
         // Build range
 <<<<<<< HEAD
+<<<<<<< HEAD
         $imploded = [];
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         $counter = count($pRange);
@@ -166,9 +169,14 @@ abstract class Coordinate
             $pRange[$i] = implode(':', $pRange[$i]);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         $imploded = implode(',', $pRange);
 
         return $imploded;
+=======
+
+        return implode(',', $pRange);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 
         return implode(',', $pRange);

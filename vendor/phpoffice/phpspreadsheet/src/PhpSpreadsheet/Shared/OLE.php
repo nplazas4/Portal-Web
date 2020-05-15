@@ -538,6 +538,7 @@ class OLE
      * Returns a timestamp from an OLE container's date.
      *
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @param int $string A binary string with the encoded date
      *
      * @return string The timestamp corresponding to the string
@@ -565,6 +566,8 @@ class OLE
 
         return floor($big_date);
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * @param string $oleTimestamp A binary string with the encoded date
      *
      * @throws ReaderException
@@ -597,6 +600,9 @@ class OLE
         }
 
         return $unixTimestamp >= 0.0 ? PHP_INT_MAX : PHP_INT_MIN;
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 }

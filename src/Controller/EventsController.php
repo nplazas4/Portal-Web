@@ -36,7 +36,11 @@ class EventsController extends AppController
             if ($this->request->is('Ajax')) {
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
+<<<<<<< HEAD
                   CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/registerevent/event/".$_POST['id_project'],
+=======
+                  CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/registerevent/event/".$_POST['id_project'],
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,

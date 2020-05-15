@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com)
 and this project adheres to [Semantic Versioning](https://semver.org).
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ## [Unreleased]
 
 
@@ -60,6 +63,9 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - Fix VLOOKUP 
 - Fix return type hint
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 ## [1.6.0] - 2019-01-02
 
@@ -73,6 +79,10 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - Improve XLSX parsing speed if no readFilter is applied - [#772](https://github.com/PHPOffice/PhpSpreadsheet/issues/772)
 - Fix column names if read filter calls in XLSX reader skip columns - [#777](https://github.com/PHPOffice/PhpSpreadsheet/pull/777)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+- XLSX reader can now ignore blank cells, using the setReadEmptyCells(false) method. - [#810](https://github.com/PHPOffice/PhpSpreadsheet/issues/810)
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 - XLSX reader can now ignore blank cells, using the setReadEmptyCells(false) method. - [#810](https://github.com/PHPOffice/PhpSpreadsheet/issues/810)
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

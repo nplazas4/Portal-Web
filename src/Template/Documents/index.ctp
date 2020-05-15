@@ -120,8 +120,13 @@
                 </a>
                 <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
                   <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
+<<<<<<< HEAD
                   <li>
                     <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+=======
+                  <li id="li-chart-<?=$chart['id']?>">
+                    <a id="link-pdf-<?=$chart['id']?>"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                       <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
                     </svg></i>Descargar pdf</a>
                   </li>
@@ -137,6 +142,7 @@
                 </div>
               </div>
               <div class="carousel carousel-slider center">
+<<<<<<< HEAD
                 <div class="carousel-item white" href="#one!">
                   <div id="advance<?=$loop?>" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
                 </div>
@@ -145,12 +151,23 @@
                 </div>
                 <div class="carousel-item white white-text" href="#three!">
                   <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+=======
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white" href="#one!">
+                  <div id="advance<?=$loop?>" data-chart="pie" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                </div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#two!">
+                  <div id="column<?=$loop?>" data-chart="column" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                </div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#three!">
+                  <div id="bar<?=$loop?>" data-chart="bar" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 </div>
               </div>
             </div>
           </div>
         </div>
         <?php elseif($loop == 3):?>
+<<<<<<< HEAD
           <div class="d-flex col s12 m12 l8 xl8">
           <div class="col xl12 l12 m12 s12">
             <div class="graph-card" style="overflow: auto;">
@@ -182,10 +199,44 @@
                 </div>
                 <div class="carousel-item white white-text" href="#three!">
                   <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+=======
+          <div id="container-chart-3" class="d-flex col s12 m12 l8 xl8">
+            <div class="col xl12 l12 m12 s12">
+              <div class="graph-card" style="overflow: auto;">
+                <div class="sheet-options">
+                  <a class='dropdown-trigger btn-flat mt-3 ' href='' data-target='dropdown<?= $chart['id'] ?>'>
+                    <i class="material-icons" style="font-size: 2rem">more_vert</i>
+                  </a>
+                  <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
+                    <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
+                    <li id="li-chart-<?=$chart['id']?>">
+                      <a id="link-pdf-3"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
+                      </svg></i>Descargar pdf</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="head-dropdown-filter">
+                  <div class="cont-title">
+                    <div class="title-graph p1 tc" style="font-weight: bold;">Número de registros por proyecto</div>
+                  </div>
+                </div>
+                <div class="carousel carousel-slider center">
+                  <div class="carousel-item carousel-<?= $chart['id'] ?> white" href="#one!">
+                    <div id="column<?=$loop?>" data-chart="column" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                  </div>
+                  <div id="projectCarousel" class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#two!">
+                    <div id="advance<?=$loop?>" data-chart="pie" class="pb-6" style="width: 90%; height: 400px; margin-left: 5%;"></div>
+                  </div>
+                  <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#three!">
+                    <div id="bar<?=$loop?>" data-chart="bar" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+                  </div>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 </div>
               </div>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
         <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">
           <div class="col xl12 l12 m12 s12">
@@ -194,6 +245,15 @@
             </div>
           </div>
         </div>
+=======
+          <div id="legendMainDiv" class="d-flex col s12 m6 l3 xl3">
+            <div class="col xl12 l12 m12 s12">
+              <div id="legendwrapper" class="graph-card" style="height: 300px;">
+                <div id="legenddiv"></div>
+              </div>
+            </div>
+          </div>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         <?php else:?>
           <div class="d-flex col s12 m6 l4 xl4">
           <div class="col xl12 l12 m12 s12">
@@ -204,8 +264,13 @@
                 </a>
                 <ul id='dropdown<?= $chart['id'] ?>' class='dropdown-content'>
                   <li><a class="modal-trigger" href="#modalFilter<?=$cont?>"><i class="mdi material-icons">insert_chart</i>Filtrar gráfica</a></li>
+<<<<<<< HEAD
                   <li>
                     <a href="#!"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+=======
+                  <li id="li-chart-<?=$chart['id']?>">
+                    <a id="link-pdf-4"><i class="mdi"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                       <path fill="currentColor" d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19M10.59,10.08C10.57,10.13 10.3,11.84 8.5,14.77C8.5,14.77 5,16.58 5.83,17.94C6.5,19 8.15,17.9 9.56,15.27C9.56,15.27 11.38,14.63 13.79,14.45C13.79,14.45 17.65,16.19 18.17,14.34C18.69,12.5 15.12,12.9 14.5,13.09C14.5,13.09 12.46,11.75 12,9.89C12,9.89 13.13,5.95 11.38,6C9.63,6.05 10.29,9.12 10.59,10.08M11.4,11.13C11.43,11.13 11.87,12.33 13.29,13.58C13.29,13.58 10.96,14.04 9.9,14.5C9.9,14.5 10.9,12.75 11.4,11.13M15.32,13.84C15.9,13.69 17.64,14 17.58,14.32C17.5,14.65 15.32,13.84 15.32,13.84M8.26,15.7C7.73,16.91 6.83,17.68 6.6,17.67C6.37,17.66 7.3,16.07 8.26,15.7M11.4,8.76C11.39,8.71 11.03,6.57 11.4,6.61C11.94,6.67 11.4,8.71 11.4,8.76Z" />
                     </svg></i>Descargar pdf</a>
                   </li>
@@ -217,6 +282,7 @@
                 </div>
               </div>
               <div class="carousel carousel-slider center">
+<<<<<<< HEAD
                 <div class="carousel-item white" href="#one!">
                   <div id="advance<?=$loop?>" class="" style="width: 90%; height: 300px; margin-left: 5%;"></div>
                 </div>
@@ -225,6 +291,16 @@
                 </div>
                 <div class="carousel-item white white-text" href="#three!">
                   <div id="bar<?=$loop?>" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+=======
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white" href="#one!">
+                  <div id="advance<?=$loop?>" data-chart="pie" class="" style="width: 90%; height: 300px; margin-left: 5%;"></div>
+                </div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#two!">
+                  <div id="column<?=$loop?>" data-chart="column" class="pb-6" style="width: 100%; height: 370px; margin-top: 25px; padding-right: 5%;"></div>
+                </div>
+                <div class="carousel-item carousel-<?= $chart['id'] ?> white white-text" href="#three!">
+                  <div id="bar<?=$loop?>" data-chart="bar" style="width: 90%; height: 370px; margin-left: 2%;"></div>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 </div>
               </div>
             </div>
@@ -312,7 +388,11 @@
                       <div class="label">Filas por pág:</div>
                       <div class="cont-select">
                         <select id="row-range-interno" class="row-range">
+<<<<<<< HEAD
                           <option value="5">25</option>
+=======
+                          <option value="2">25</option>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                           <option value="50">50</option>
                           <option value="100">100</option>
                           <option value="250">250</option>
@@ -342,7 +422,10 @@
                         <th>
                           <?= $item_header ?>
                           <i class="xed fas fa-arrow-up"></i>
+<<<<<<< HEAD
                           <!-- <i class="xed fas fa-arrow-down"></i> -->
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         </th>
                       <?php endforeach;?>
                     </tr>
@@ -366,11 +449,14 @@
                           </select>
                         </div>
                       </div>
+<<<<<<< HEAD
                       <!-- <div class="conter-rows">1-8 de 200</div>
                       <div>
                         <a class="btn-floating btn-small waves-effect primary mr-1"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_left</i></a>
                         <a class="btn-floating btn-small waves-effect primary"><i class="material-icons" style="font-size: 9pt">keyboard_arrow_right</i></a>
                       </div> -->
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     </div>
                   </div>
                 </div>
@@ -386,6 +472,7 @@
           $a = $i;
         }
       ?>
+<<<<<<< HEAD
     <div id="modalFilter<?=$a?>" class="modal w-600" style="overflow-y:visible;">
       <div class="modal-content">
         <a class="modal-close close">
@@ -425,10 +512,30 @@
                   <option data-id="all" value="all" selected></option>
                 </select>
                 <label style="color: #333333; font-weight: bold;">Estatus</label>
+=======
+      <div id="modalFilter<?=$a?>" class="modal w-600" style="overflow-y:visible;">
+        <div class="modal-content">
+          <a class="modal-close close">
+            <i class="material-icons">close</i>
+          </a>
+          <h2>Filtrar gráfica <?=$i?></h2>
+          <div class="row wrap ma-0">
+            <div class="d-flex col s12 m6 l6 xl6">
+              <div class="input-field col xl12 l12 m12 s12">
+                <select class="select-gen-gd" id="select-gen-<?=$i?>"></select>
+                <label style="color: #333333; font-weight: bold;">Grupo estratégicos de negocios</label>
               </div>
             </div>
             <div class="d-flex col s12 m6 l6 xl6">
               <div class="input-field col xl12 l12 m12 s12">
+                <select class="select-comp-gd" id="select-company-<?=$i?>"></select>
+                <label style="color: #333333; font-weight: bold;">Empresas</label>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+              </div>
+            </div>
+            <div class="d-flex col s12 m6 l6 xl6">
+              <div class="input-field col xl12 l12 m12 s12">
+<<<<<<< HEAD
                 <select class="select-creador-gd filter-list" id="select-creador-<?=$i?>">
                   <option data-id="all" value="all" selected></option>
                 </select>
@@ -458,6 +565,51 @@
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
 <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
+=======
+                <select class="select-proj-gd" id="select-project-<?=$i?>"></select>
+                <label style="color: #333333; font-weight: bold;">Proyectos</label>
+              </div>
+            </div>
+            <?php if($i != 4 && $i != 5):?>
+              <div class="d-flex col s12 m6 l6 xl6">
+                <div class="input-field col xl12 l12 m12 s12">
+                  <select class="select-bp-gd" id="select-bp-<?=$i?>"></select>
+                  <label style="color: #333333; font-weight: bold;">Proceso de negocio</label>
+                </div>
+              </div>
+            <?php elseif($i == 5):?>
+              <div class="d-flex col s12 m6 l6 xl6">
+                <div class="input-field col xl12 l12 m12 s12">
+                  <select class="select-estatus-gd filter-list" id="select-estatus-<?=$i?>">
+                    <option data-id="all" value="all" selected></option>
+                  </select>
+                  <label style="color: #333333; font-weight: bold;">Estatus</label>
+                </div>
+              </div>
+              <div class="d-flex col s12 m6 l6 xl6">
+                <div class="input-field col xl12 l12 m12 s12">
+                  <select class="select-creador-gd filter-list" id="select-creador-<?=$i?>">
+                    <option data-id="all" value="all" selected></option>
+                  </select>
+                  <label style="color: #333333; font-weight: bold;">Creador</label>
+                </div>
+              </div>
+            <?php endif;?>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-close btn btn-depressed error" id="filter_cancel">
+            <i class="large material-icons noselect">cancel</i>
+          </a>
+        </div>
+      </div>
+      <div class="table-container fixed-action-btn">
+        <a class="modal-trigger btn-floating btn-large tertiary Scroll-button" href="#modalFilter5">
+          <i class="large material-icons noselect" id="add">search</i>
+        </a>
+      </div>
+    <?php endfor;?>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 <script type="text/javascript">
   const input_identifier = ['1','3','4'],
         user_id = $('#header-user').attr('data-identifier');
@@ -483,7 +635,11 @@
     var settings = {
       "async": true,
       "crossDomain": true,
+<<<<<<< HEAD
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/"+this.link,
+=======
+      "url": "http://192.168.0.210:8080/ords/portal/documents/"+this.link,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -503,7 +659,11 @@
     var settings = {
       "async": true,
       "crossDomain": true,
+<<<<<<< HEAD
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/filtergen/",
+=======
+      "url": "http://192.168.0.210:8080/ords/portal/documents/filtergen/",
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -530,7 +690,11 @@
       var settings = {
       "async": true,
       "crossDomain": true,
+<<<<<<< HEAD
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/filtercompany/"+company_id,
+=======
+      "url": "http://192.168.0.210:8080/ords/portal/documents/filtercompany/"+company_id,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -539,6 +703,7 @@
     }
 
     $.ajax(settings).done(function (response) {
+<<<<<<< HEAD
       $.each(response.items, function(){
         var option = new Option(this.d, this.r);
             option.setAttribute('id', this.r);
@@ -550,6 +715,36 @@
         // append_options('select-company-', option);
       });
       filter_project(response.items[1].r, chart_num);
+=======
+      if(response.items.length > 0){
+        $.each(response.items, function(){
+          var option = new Option(this.d, this.r);
+              option.setAttribute('id', this.r);
+          if(this.r == '34013'){
+            option.setAttribute('selected', 'selected');
+          }
+          $('.select-comp-gd').append(option);
+          $('.select-comp-gd').formSelect();
+          // append_options('select-company-', option);
+        });
+        filter_project(response.items[1].r, chart_num);
+      } else {
+        var dataprovider = [];
+        // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
+        if(chart_num != '1' && chart_num != '2'){
+          window["updateData"+chart_num](dataprovider,chart_num);
+          window["updateColData"+chart_num](dataprovider,chart_num);
+          window["updateBarData"+chart_num](dataprovider,chart_num);
+        } else {
+          updateData1(dataprovider, '1');
+          updateColData1(dataprovider, '1');
+          updateBarData1(dataprovider, '1');
+          updateData2(dataprovider, '2');
+          updateColData2(dataprovider, '2');
+          updateBarData2(dataprovider, '2');
+        }
+      }
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     });
   }
   // REALIZR CAMBIOS EN ESTA FUNCIÓN DEBE ENVIAR EL CÓDIGO DE UNIFIER A LA FUNCIÓN CHART4 -- NOTA
@@ -557,7 +752,11 @@
     var settings = {
       "async": true,
       "crossDomain": true,
+<<<<<<< HEAD
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/filterproject/?v_eps="+eps_id+"&v_id_user="+user_id,
+=======
+      "url": "http://192.168.0.210:8080/ords/portal/documents/filterproject/?v_eps="+eps_id+"&v_id_user="+user_id,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -579,6 +778,7 @@
         } else if(chart_num == '5'){
           listGD(response.items[0].code_unifier);
         }
+<<<<<<< HEAD
       }
     });
   }
@@ -630,6 +830,15 @@
           eval("updateData"+chart_num + "("+dataprovider+","+chart_number+")");
           eval("updateColData"+chart_num + "("+dataprovider+","+chart_number+")");
           eval("updateBarData"+chart_num + "("+dataprovider+","+chart_number+")");
+=======
+      } else {
+        var dataprovider = [];
+        // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
+        if(chart_num != '1' && chart_num != '2'){
+          window["updateData"+chart_num](dataprovider,chart_num);
+          window["updateColData"+chart_num](dataprovider,chart_num);
+          window["updateBarData"+chart_num](dataprovider,chart_num);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         } else {
           updateData1(dataprovider, '1');
           updateColData1(dataprovider, '1');
@@ -641,6 +850,75 @@
       }
     });
   }
+<<<<<<< HEAD
+=======
+
+  function filter_bp(unifier_code, chart_num) {
+    if(chart_num != '4'){
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://192.168.0.210:8080/ords/portal/documents/filterbp/"+unifier_code,
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+          "cache-control": "no-cache"
+        }
+      }
+
+      $.ajax(settings).done(function (response) {
+        if(response.items.length > 0){
+          $.each(response.items, function(){
+            var option = new Option(this.name, this.id_p_bp);
+            // if(this.id_p_bp == '181' && chart_num == undefined){
+              option.setAttribute('selected', 'selected');
+              // CONDICIONAL GRÁFICA SELECCIONADA - GRÁFICA 1, 2, 3 GENERAL PRIMERA CARGA -- NOTA
+            // }
+            // append_options('select-bp-', option);
+            $('.select-bp-gd').append(option);
+            $('.select-bp-gd').formSelect();
+          });
+          var obj_length = (response.items.length - 1);
+          if(chart_num == undefined){
+              graph1(response.items[obj_length].id_p_bp);
+              graph2(response.items[obj_length].id_p_bp);
+              graph3(response.items[obj_length].name);
+            } else if(chart_num != undefined && chart_num != '1' && chart_num != '2' && chart_num != '3' && chart_num != '5') {
+              eval("graph"+chart_num + "("+response.items[obj_length].id_p_bp+")");
+            } else if(chart_num == '3') {
+              graph3(response.items[obj_length].name);
+            }
+            else if(chart_num == '1' || chart_num == '2') {
+              graph1(response.items[obj_length].id_p_bp);
+              graph2(response.items[obj_length].id_p_bp);
+            }
+
+        } else {
+          console.log("El proyecto seleccionado, no tiene ningún BP asociado. ");
+          var dataprovider = [];
+          // ACTUALIZAR A LA GRÁFICA SELECCIONADAD --  NOTA
+          if(chart_num != '5'){
+            if(chart_num != '1' && chart_num != '2'){
+              // eval("updateData"+chart_num + "("+dataprovider+","+chart_num+")");
+              // eval("updateColData"+chart_num + "("+dataprovider+","+chart_num+")");
+              // eval("updateBarData"+chart_num + "("+dataprovider+","+chart_num+")");
+              window["updateData"+chart_num](dataprovider,chart_num);
+              window["updateColData"+chart_num](dataprovider,chart_num);
+              window["updateBarData"+chart_num](dataprovider,chart_num);
+            } else {
+              updateData1(dataprovider, '1');
+              updateColData1(dataprovider, '1');
+              updateBarData1(dataprovider, '1');
+              updateData2(dataprovider, '2');
+              updateColData2(dataprovider, '2');
+              updateBarData2(dataprovider, '2');
+            }
+          }
+        }
+      });
+    }
+  }
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   function append_options(select_id, option) {
     $('#'+select_id).append(option);
     $('#'+select_id).formSelect();
@@ -656,10 +934,18 @@
   }
   // CHARTS WS
   function graph1(id_bp){
+<<<<<<< HEAD
     var settings = {
       "async": true,
       "crossDomain": true,
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/graph1/"+id_bp,
+=======
+    $('#link-pdf-1').attr('data-id', id_bp);
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://192.168.0.210:8080/ords/portal/documents/graph1/"+id_bp,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -675,10 +961,18 @@
     });
   }
   function graph2(id_bp){
+<<<<<<< HEAD
     var settings = {
       "async": true,
       "crossDomain": true,
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/graph2/"+id_bp,
+=======
+    $('#link-pdf-2').attr('data-id', id_bp);
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://192.168.0.210:8080/ords/portal/documents/graph2/"+id_bp,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -693,11 +987,19 @@
     });
   }
   function graph3(bp_name){
+<<<<<<< HEAD
     // alert(bp_name);
     var settings = {
       "async": true,
       "crossDomain": true,
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/graph3/"+bp_name,
+=======
+    $('#link-pdf-3').attr('data-id', bp_name);
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://192.168.0.210:8080/ords/portal/documents/graph3/"+bp_name,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -714,10 +1016,20 @@
     });
   }
   function graph4(unifier_code){
+<<<<<<< HEAD
     var settings = {
       "async": true,
       "crossDomain": true,
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/graph4/"+unifier_code,
+=======
+    $('#link-pdf-4').attr('data-id', unifier_code);
+    var data_attr = $('.carousel-4.white.active').children().attr('data-chart')
+    $('#link-pdf-4').attr('href', '/Portal-Web/documents/index/4/'+unifier_code+'/'+data_attr+'.pdf');
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://192.168.0.210:8080/ords/portal/documents/graph4/"+unifier_code,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -732,6 +1044,17 @@
       updateBarData4(response.items, chart_number);
     });
   }
+<<<<<<< HEAD
+=======
+  function disablePdfBtn(id, pdf_text){
+    document.getElementById(id).style.pointerEvents = 'none';
+    $('#'+pdf_text).addClass('error-text');
+  }
+  function enablePdfBtn(id, pdf_text){
+    document.getElementById(id).style.pointerEvents = 'auto';
+    $('#'+pdf_text).removeClass('error-text');
+  }
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   // ON CHANGE
   var array_select = [
     {
@@ -874,11 +1197,23 @@
   });
   $("#select-bp-1").change(function(){
     var value = $(this).children(":selected").attr("value");
+<<<<<<< HEAD
+=======
+    for(i=1; i<3; i++){
+      var data_attr = $('.carousel-'+i+'.white.active').children().attr('data-chart')
+      $('#link-pdf-'+i).attr('href', '/Portal-Web/documents/index/'+i+'/'+value+'/'+data_attr+'.pdf');
+    }
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     graph1(value);
     graph2(value);
   });
   $("#select-bp-3").change(function(){
     var value = $(this).children(":selected").text();
+<<<<<<< HEAD
+=======
+    var data_attr = $('.carousel-'+i+'.white.active').children().attr('data-chart')
+    $('#link-pdf-3').attr('href', '/Portal-Web/documents/index/3/'+value+'/'+data_attr+'.pdf');
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     graph3(value);
   });
   $("#select-bp-5").change(function(){
@@ -939,6 +1274,7 @@
       chartDonut3.legend = new am4charts.Legend();
       chartDonut3.legend.labels.template.wrap = true;
       /* Create a separate container to put legend in */
+<<<<<<< HEAD
       var legendContainer = am4core.create("legenddiv", am4core.Container);
       legendContainer.width = am4core.percent(80);
       legendContainer.height = am4core.percent(100);
@@ -952,6 +1288,21 @@
       function resizeLegend(ev) {
         document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
       }
+=======
+        var legendContainer = am4core.create("legenddiv", am4core.Container);
+        legendContainer.width = am4core.percent(80);
+        legendContainer.height = am4core.percent(100);
+        chartDonut3.legend.parent = legendContainer;
+
+        chartDonut3.events.on("datavalidated", resizeLegend);
+        chartDonut3.events.on("maxsizechanged", resizeLegend);
+        // chartDonut3.legend.labels.template.truncate = true;
+        // chartDonut3.legend.labels.template.wrap = true;
+
+        function resizeLegend(ev) {
+          document.getElementById("legenddiv").style.height = chartDonut3.legend.contentHeight + "px";
+        }
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 
     // Create a base filter effect (as if it's not there) for the hover to return to
@@ -977,11 +1328,22 @@
   //   return chart_number;
   // }
   this["updateData"+i] = function(bp_data, chart_number) {
+<<<<<<< HEAD
     this['chartDonut'+chart_number].data = generateData(bp_data);
     // chart_id(chart_number);
     if(bp_data.length == 0){
       this["indicatorLabel"+chart_number].text = "No data...";
     } else {
+=======
+    console.log(bp_data);
+    this['chartDonut'+chart_number].data = generateData(bp_data);
+    // chart_id(chart_number);
+    if(bp_data.length == 0){
+      disablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
+      this["indicatorLabel"+chart_number].text = "No data...";
+    } else {
+      enablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       this["indicatorLabel"+chart_number].text = "";
     }
   }
@@ -1047,9 +1409,17 @@
       // bp_length(bp_data.length);
       this['chartColumn'+chart_number].data = generateData(bp_data);
       if(bp_data.length == 0){
+<<<<<<< HEAD
         this['ColindicatorLabel'+chart_number].text = "No data...";
         this['chartColumn'+chart_number].scrollbarX.dispose();
       } else {
+=======
+        disablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
+        this['ColindicatorLabel'+chart_number].text = "No data...";
+        this['chartColumn'+chart_number].scrollbarX.dispose();
+      } else {
+        enablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         this['chartColumn'+chart_number].scrollbarX = new am4core.Scrollbar();
         this['chartColumn'+chart_number].scrollbarX.parent = this['chartColumn'+chart_number].bottomAxesContainer;
         this['ColindicatorLabel'+chart_number].text = "";
@@ -1096,6 +1466,7 @@
     this["updateBarData"+i] = function(bp_data, chart_number) {
     // function updateBarData1(bp_data, chart_number) {
       this['chart'+chart_number].data = generateData(bp_data);
+<<<<<<< HEAD
       // chart1.data = generateData(bp_data);
         // alert(bp_data);
       }
@@ -1105,12 +1476,33 @@
         return bp_data;
     }
     $('html').on("webkitTransitionEnd transitionend", function(e) {
+=======
+      if(bp_data.length == 0){
+        disablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
+      } else {
+        enablePdfBtn('li-chart-'+chart_number, 'link-pdf-'+chart_number);
+      }
+    }
+       // FIN BAR CHART
+  }
+  function generateData(bp_data) {
+    return bp_data;
+  }
+    $('html').on("webkitTransitionEnd transitionend", function(e) {
+      for(i = 1; i < 5; i++){
+        var download_obj = $('.carousel-'+i+'.white.active').children();
+        var data_attr = $('.carousel-'+i+'.white.active').children().attr('data-chart'),
+            data_id =  $('#link-pdf-'+i).attr('data-id');
+        $('#link-pdf-'+i).attr('href', '/Portal-Web/documents/index/'+i+'/'+data_id+'/'+data_attr+'.pdf');
+      }
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       if($('#projectCarousel').hasClass("active")){
         $("#legendMainDiv").show();
       } else{
         $("#legendMainDiv").hide();
       }
     });
+<<<<<<< HEAD
     var contInterval = 0;
     var timer = setInterval(function(){
       var a = contInterval++;
@@ -1119,6 +1511,16 @@
       // }
       clearInterval(timer);
     }, 4400);
+=======
+    // var contInterval = 0;
+    // var timer = setInterval(function(){
+    //   var a = contInterval++;
+    //   if(a == 1){
+    //     $("#legendMainDiv").hide();
+    //   }
+    //   clearInterval(timer);
+    // }, 4400);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     $('.table-container').hide();
     $('#graph_link').click(function(e){
       e.preventDefault();
@@ -1135,6 +1537,7 @@ creator();
 status();
 function creator() {
   var settings = {
+<<<<<<< HEAD
       "async": true,
       "crossDomain": true,
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/filtercreator/",
@@ -1154,12 +1557,37 @@ function creator() {
         $('.select-creador-gd').formSelect();
       });
     });
+=======
+    "async": true,
+    "crossDomain": true,
+    "url": "http://192.168.0.210:8080/ords/portal/documents/filtercreator/",
+    "method": "GET",
+    "headers": {
+      "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
+      "cache-control": "no-cache"
+    }
+  }
+
+  $.ajax(settings).done(function (response) {
+    $.each(response.items, function(){
+      var option = new Option(this.creator);
+          option.setAttribute('data-id', this.creator);
+          option.setAttribute('data-type' , 'creator');
+      $('.select-creador-gd').append(option);
+      $('.select-creador-gd').formSelect();
+    });
+  });
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 }
 function status() {
   var settings = {
       "async": true,
       "crossDomain": true,
+<<<<<<< HEAD
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/filterstatus/",
+=======
+      "url": "http://192.168.0.210:8080/ords/portal/documents/filterstatus/",
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1191,7 +1619,11 @@ function bp_reg_contratista(code_unifier){
   var settings1 = {
     "async": true,
     "crossDomain": true,
+<<<<<<< HEAD
     "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/bprdc/"+code_unifier,
+=======
+    "url": "http://192.168.0.210:8080/ords/portal/documents/bprdc/"+code_unifier,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1220,14 +1652,22 @@ function bp_reg_contratista(code_unifier){
                                 .append($('<td>', {text: this.trdocon_033_carpeta_geb}))
                                 );
     });
+<<<<<<< HEAD
     tableRange('row-range-cont', 'myTable1');
+=======
+    // tableRange('row-range-cont', 'myTable1');
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   });
 }
 function bp__reg_interno(code_unifier){
   var settings2 = {
     "async": true,
     "crossDomain": true,
+<<<<<<< HEAD
     "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/bprdi/"+code_unifier,
+=======
+    "url": "http://192.168.0.210:8080/ords/portal/documents/bprdi/"+code_unifier,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1256,14 +1696,22 @@ function bp__reg_interno(code_unifier){
                                 .append($('<td>', {text: this.trdi_05_requiere_apro}))
                                 );
     });
+<<<<<<< HEAD
     tableRange('row-range-interno', 'myTable2');
+=======
+    tableRange('row-range-interno', '2', 'rd-interno');
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   });
 }
 function bp_reg_externo(code_unifier){
   var settings3 = {
     "async": true,
     "crossDomain": true,
+<<<<<<< HEAD
     "url": "http://192.168.1.153:7001/ords/projects_portal/portal/documents/bprde/"+code_unifier,
+=======
+    "url": "http://192.168.0.210:8080/ords/portal/documents/bprde/"+code_unifier,
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1292,6 +1740,7 @@ function bp_reg_externo(code_unifier){
                             .append($('<td>', {text: this.uuu_user_email}))
                           );
     });
+<<<<<<< HEAD
     tableRange('row-range-externo', 'myTable3');
   });
 }
@@ -1349,6 +1798,63 @@ function logicSearch(targetTable, searchText){
     }
   }
 }
+=======
+    tableRange('row-range-externo', '3', 'rd-externo');
+  });
+}
+// $(document).ready(function(){
+// var targetTable = document.getElementById('tbody-bp-contratista');
+var targetTable2 = document.getElementById('tbody-bp-interno');
+// var targetTable3 = document.getElementById('tbody-bp-externo');
+// REMOVE SEARCH
+// $('#remove-search').click(function(){
+//   $('#Search_Input').val("");
+//   logicSearch(targetTable, '');
+//   logicSearch(targetTable2, '');
+//   logicSearch(targetTable3, '');
+// })
+// SEARCH FUNCTION
+
+function Search() {
+      var searchText = document.getElementById('Search_Input').value.toUpperCase();
+      if (searchText != null) {
+          var targetTable = document.getElementById('tbody-bp-interno');
+          console.log(targetTable);
+          var targetTableColCount;
+          //Loop through table rows
+          for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+              var rowData = '';
+
+              //Get column count from header row
+              if (rowIndex == 0) {
+                  targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+                  continue; //do not execute further code for header row.
+              }
+
+              //Process data rows. (rowIndex >= 1)
+              for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+                  rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).textContent.toUpperCase();
+              }
+              console.log(rowData);
+              //If search term is not found in row data
+              //then hide the row, else show
+              if (rowData.indexOf(searchText) == -1) {
+                  $('.paginator.center').hide();
+                  targetTable.rows.item(rowIndex).style.display = 'none';
+              } else {
+                  if (searchText != "") {
+                      $('.paginator.center').hide();
+                      targetTable.rows.item(rowIndex).style.display = 'table-row';
+                  } else {
+                      var Get_Element_Button_Number = document.getElementsByClassName('active')[9].getElementsByClassName("Paginate_Numbers2")[0];
+                      $(Get_Element_Button_Number).click();
+                      $('.paginator.center').show();
+                  }
+              }
+          }
+      }
+  }
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
   // $('#filter_cancel').hide();
   // SELECT LIST FILTERS (CREATOR AND STATUS)
   select_actual = $('.filter-list');
@@ -1384,6 +1890,7 @@ function logicSearch(targetTable, searchText){
       var range = $(this).children(":selected");
       table(range.val());
     });
+<<<<<<< HEAD
     function tableRange(select_obj, table_id){
       var range = $('#'+select_obj).children(":selected");
       table(range.val(),table_id);
@@ -1432,10 +1939,60 @@ function logicSearch(targetTable, searchText){
           $(this).closest('li').addClass('active');
           var Id_li = $(this).attr('id');
           Hide_Prev_Next_Button(Id_li);
+=======
+    function tableRange(select_obj, table_id, pag_obj){
+      var range = $('#'+select_obj).children(":selected");
+      table(range.val(), table_id, pag_obj);
+    }
+    function table(range, table_id, pag_obj){
+      $('#'+pag_obj).empty();
+      // $('#myTable2').after('<div id="nav" class="paginator center mt-4"></div>');
+      $('#'+pag_obj).append('<ul class="pagination" id="myPager'+table_id+'"></ul>');
+      var rowsShown = range;
+      var rowsTotal = $('#myTable'+table_id+' tbody tr').length;
+      if (rowsTotal > 0) {
+        var numPages = rowsTotal/rowsShown;
+        for(i = 0; i < numPages; i++) {
+            var pageNum = i + 1;
+            $('#myPager'+table_id).append('<li><a href="#!" id="'+table_id+'-'+pageNum+'" data-ref="'+pageNum+'" class="Paginate_Numbers'+table_id+'" rel="'+i+'">'+pageNum+'</a></li>');
+        }
+        var LastPage = i-1;
+        $('#myTable'+table_id+' tbody tr').hide();
+        $('#myTable'+table_id+' tbody tr').slice(0, rowsShown).show();
+        $('#'+pag_obj+' li:first').addClass('active pagination-item-'+table_id);
+        $('<li class="first-'+table_id+'" style="display:none"><a href="#!" rel="0" class="Paginate_Numbers'+table_id+'"><i class="material-icons">first_page</i></a></li>').insertBefore(".active.pagination-item-"+table_id);
+        $('<li class="prev-'+table_id+'" style="display:none"><a href="#!" class="Paginate_Next_Prev'+table_id+'"><i class="material-icons">chevron_left</i></a></li>').insertBefore(".active.pagination-item-"+table_id);
+        $('#myPager'+table_id).append('<li class="next-'+table_id+'"><a href="#!" class="Paginate_Next_Prev'+table_id+'"><i class="material-icons">chevron_right</i></a></li>');
+        $('#myPager'+table_id).append('<li class="last-'+table_id+'"><a href="#!" rel="'+LastPage+'" class="Paginate_Numbers'+table_id+'"><i class="material-icons">last_page</i></a></li>');
+        Click_Pagination(rowsShown,table_id,pag_obj,Math.round(numPages));
+        Click_Next_Prev(rowsShown,table_id,pag_obj,Math.round(numPages));
+      } else {
+        $('#'+pag_obj).empty();
+      }
+  }
+  function Remove_Class(pag_obj, table_id){
+    $('#'+pag_obj+' li').removeClass('active pagination-item-'+table_id);
+  }
+  function Click_Pagination(rowsShown,table_id, pag_obj, numPages){
+    $('.Paginate_Numbers'+table_id).bind('click', function(){
+        Remove_Class(pag_obj, table_id);
+        var Class_li = $(this).parent().attr('class');
+        if(Class_li == "first-"+table_id){
+          document.getElementById(table_id+'-1').closest('li').classList.add("active", "pagination-item-"+table_id);
+          Hide_Prev_Next_Button(1, table_id);
+        }else if(Class_li == "last-"+table_id){
+          document.getElementById(table_id+'-'+numPages).closest('li').classList.add("active", "pagination-item-"+table_id);
+          Hide_Prev_Next_Button(numPages, table_id,numPages);
+        }else{
+          $(this).closest('li').addClass('active pagination-item-'+table_id);
+          var Id_li = $(this).attr('data-ref');
+          Hide_Prev_Next_Button(Id_li,table_id,numPages);
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         }
         // $(this).closest('li').removeClass('disabled');
         var currPage = $(this).attr('rel');
         var startItem = currPage * rowsShown;
+<<<<<<< HEAD
         var endItem = startItem + rowsShown;
         console.log(startItem+' - '+endItem);
         console.log(startItem+' - '+endItem);
@@ -1464,10 +2021,39 @@ function logicSearch(targetTable, searchText){
         var startItem = currPage * rowsShown;
         var endItem = startItem + rowsShown;
         $('#myTable1 tbody tr').css('opacity','1').hide().slice(startItem, endItem).
+=======
+        var endItem = parseFloat(startItem) + parseFloat(rowsShown);
+        $('#myTable'+table_id+' tbody tr').css('opacity','1').hide().slice(startItem, endItem).
+        css('display','table-row').animate({opacity:1}, 300);
+    });
+  }
+  function Click_Next_Prev(rowsShown,table_id, pag_obj,numPages){
+    $('.Paginate_Next_Prev'+table_id).bind('click', function(){
+        var Get_Element = document.getElementsByClassName("pagination-item-"+table_id)[0].getElementsByClassName("Paginate_Numbers"+table_id)[0];
+        var Rel_Attribute = Get_Element.getAttribute('rel');
+        var Rel_Id = Get_Element.getAttribute('data-ref');
+        var Class_li = $(this).parent().attr('class');
+        if (Class_li == "next-"+table_id) {
+          var currPage = parseInt(Rel_Attribute) + 1;
+          var next_Id = parseInt(Rel_Id) + 1;
+          Hide_Prev_Next_Button(next_Id, table_id, numPages);
+        }else{
+          var currPage = parseInt(Rel_Attribute) - 1;
+          var next_Id = parseInt(Rel_Id) - 1;
+          Hide_Prev_Next_Button(next_Id,table_id,numPages);
+        }
+        if(next_Id <= i && next_Id > 0){
+        Remove_Class(pag_obj, table_id);
+        document.getElementById(table_id+'-'+next_Id).closest('li').classList.add("active", "pagination-item-"+table_id);
+        var startItem = currPage * rowsShown;
+         var endItem = parseFloat(startItem) + parseFloat(rowsShown);
+        $('#myTable'+table_id+' tbody tr').css('opacity','1').hide().slice(startItem, endItem).
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         css('display','table-row').animate({opacity:1}, 300);
       }
     });
   }
+<<<<<<< HEAD
   function Hide_Prev_Next_Button(next_Id){
     if (next_Id <= 1) {
       $('.prev').hide();
@@ -1484,6 +2070,24 @@ function logicSearch(targetTable, searchText){
       $('.last').show();
       $('.prev').show();
       $('.first').show();
+=======
+  function Hide_Prev_Next_Button(next_Id,table_id,numPages){
+    if (next_Id <= 1) {
+      $('.prev-'+table_id).hide();
+      $('.first-'+table_id).hide();
+      $('.next-'+table_id).show();
+      $('.last-'+table_id).show();
+    } else if (next_Id >= numPages) {
+      $('.next-'+table_id).hide();
+      $('.last-'+table_id).hide();
+      $('.prev-'+table_id).show();
+      $('.first-'+table_id).show();
+    }else{
+      $('.next-'+table_id).show();
+      $('.last-'+table_id).show();
+      $('.prev-'+table_id).show();
+      $('.first-'+table_id).show();
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
   }
 // });

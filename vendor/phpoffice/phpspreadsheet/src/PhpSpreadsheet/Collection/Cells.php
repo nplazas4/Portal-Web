@@ -242,7 +242,11 @@ class Cells
     public function getHighestColumn($row = null)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ($row == null) {
+=======
+        if ($row === null) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         if ($row === null) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -264,7 +268,11 @@ class Cells
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         return Coordinate::stringFromColumnIndex(max($columnList) + 1);
+=======
+        return Coordinate::stringFromColumnIndex(max($columnList));
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         return Coordinate::stringFromColumnIndex(max($columnList));
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -281,7 +289,11 @@ class Cells
     public function getHighestRow($column = null)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ($column == null) {
+=======
+        if ($column === null) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         if ($column === null) {
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

@@ -172,7 +172,10 @@ class RowCellIterator extends CellIterator
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Return the current iterator position.
      *
      * @return int
@@ -183,6 +186,9 @@ class RowCellIterator extends CellIterator
     }
 
     /**
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Validate start/end values for "IterateOnlyExistingCells" mode, and adjust if necessary.
      *

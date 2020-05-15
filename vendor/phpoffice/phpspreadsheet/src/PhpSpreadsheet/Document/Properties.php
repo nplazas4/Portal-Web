@@ -419,7 +419,11 @@ class Properties
      * @param string $propertyName
      *
 <<<<<<< HEAD
+<<<<<<< HEAD
      * @return string
+=======
+     * @return mixed
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
      * @return mixed
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

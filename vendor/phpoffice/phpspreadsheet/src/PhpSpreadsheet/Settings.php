@@ -26,7 +26,10 @@ class Settings
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Allow/disallow libxml_disable_entity_loader() call when not thread safe.
      * Default behaviour is to do the check, but if you're running PHP versions
      *      7.2 < 7.2.1
@@ -41,6 +44,9 @@ class Settings
     private static $libXmlDisableEntityLoader = true;
 
     /**
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * The cache implementation to be used for cell collection.
      *
@@ -120,7 +126,10 @@ class Settings
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Enable/Disable the entity loader for libxml loader.
      * Allow/disallow libxml_disable_entity_loader() call when not thread safe.
      * Default behaviour is to do the check, but if you're running PHP versions
@@ -149,6 +158,9 @@ class Settings
     }
 
     /**
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Sets the implementation of cache that should be used for cell collection.
      *

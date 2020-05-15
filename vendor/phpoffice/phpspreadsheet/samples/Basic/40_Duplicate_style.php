@@ -31,7 +31,11 @@ for ($col = 1; $col <= 50; ++$col) {
 }
 $d = microtime(true) - $t;
 <<<<<<< HEAD
+<<<<<<< HEAD
 $helper->log('Add data (end) . time: ' . round($d . 2) . ' s');
+=======
+$helper->log('Add data (end) . time: ' . round((string) ($d . 2)) . ' s');
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 $helper->log('Add data (end) . time: ' . round((string) ($d . 2)) . ' s');
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

@@ -712,7 +712,11 @@ left: 25%;
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Qué sucedio? *</span>
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Ingrese el líder/cargo funcional"></textarea>
+=======
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder=""></textarea>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                             <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder=""></textarea>
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -912,7 +916,11 @@ $(document).ready(function(){
       "async": true,
       "crossDomain": true,
 <<<<<<< HEAD
+<<<<<<< HEAD
       "url": "http://192.168.1.153:7001/ords/projects_portal/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
+=======
+      "url": "http://192.168.0.210:8080/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
       "url": "http://192.168.0.210:8080/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -934,16 +942,22 @@ $(document).ready(function(){
   $('#lapa_021_s_Correo').val($('#email-element').text());
   $("#main-btn").click(function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
       validate();
       // $(this).attr('disabled', true);
   });
   function validate(){
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     validate();
     // $(this).attr('disabled', true);
   });
 
   function validate() {
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     // INPUTS EMPTY
     var empty_inputs = $('.la-input').filter(function() {
@@ -957,6 +971,7 @@ $(document).ready(function(){
         }).length;
     }
     if (empty_modal != undefined) {
+<<<<<<< HEAD
 <<<<<<< HEAD
       var num = (empty_inputs + empty_modal);
       if (num == 0) {
@@ -1115,6 +1130,8 @@ $(document).ready(function(){
       }
   }
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         var num = (empty_inputs + empty_modal);
         if (num == 0) {
             json_form();
@@ -1273,6 +1290,9 @@ function success_notification(success_text) {
         }, 4000);
     }
 }
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 });
 </script>

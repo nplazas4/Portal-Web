@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script type="text/javascript">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -149,8 +153,14 @@
     );
 </script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <h2>Curva de Avance Físico</h2>
 <div class="chart-content" id="caf2"></div>
+=======
+
+    <h2>Curva de Avance Físico</h2>
+    <div class="chart-content" id="caf2"></div>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 
     <h2>Curva de Avance Físico</h2>

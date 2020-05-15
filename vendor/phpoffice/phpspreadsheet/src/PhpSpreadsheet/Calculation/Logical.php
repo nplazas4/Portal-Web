@@ -275,7 +275,10 @@ class Logical
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * STATEMENT_SWITCH.
      *
      * Returns corresponding with first match (any data type such as a string, numeric, date, etc).
@@ -330,6 +333,9 @@ class Logical
     }
 
     /**
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * IFERROR.
      *

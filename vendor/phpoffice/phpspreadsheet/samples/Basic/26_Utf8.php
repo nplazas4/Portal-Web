@@ -25,6 +25,10 @@ $worksheet->removeRow(1, 2);
 // Export to CSV (.csv)
 $helper->log('Write to CSV format');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+/** @var \PhpOffice\PhpSpreadsheet\Writer\Csv $writer */
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
 /** @var \PhpOffice\PhpSpreadsheet\Writer\Csv $writer */
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

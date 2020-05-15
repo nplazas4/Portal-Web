@@ -65,7 +65,11 @@ abstract class Dimension
     public function setVisible($pValue)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->visible = $pValue;
+=======
+        $this->visible = (bool) $pValue;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         $this->visible = (bool) $pValue;
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
@@ -124,7 +128,11 @@ abstract class Dimension
     public function setCollapsed($pValue)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         $this->collapsed = $pValue;
+=======
+        $this->collapsed = (bool) $pValue;
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
         $this->collapsed = (bool) $pValue;
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a

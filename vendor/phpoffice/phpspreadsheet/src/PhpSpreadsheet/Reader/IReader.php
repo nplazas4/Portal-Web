@@ -20,7 +20,10 @@ interface IReader
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Read data only?
      *        If this is true, then the Reader will only read data values for cells, it will not read any formatting information.
      *        If false (the default) it will read data and formatting.
@@ -127,6 +130,9 @@ interface IReader
     public function setReadFilter(IReadFilter $pValue);
 
     /**
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * Loads PhpSpreadsheet from file.
      *

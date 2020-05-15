@@ -17,6 +17,11 @@ class AdvancedValueBinder extends DefaultValueBinder implements IValueBinder
      * @param mixed $value Value to bind in cell
      *
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     *
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      *

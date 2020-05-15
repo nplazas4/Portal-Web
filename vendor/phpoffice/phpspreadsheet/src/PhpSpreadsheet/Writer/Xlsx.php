@@ -329,7 +329,10 @@ class Xlsx extends BaseWriter
                 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 // Add unparsed drawings
                 if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['Drawings'])) {
                     foreach ($unparsedLoadedData['sheets'][$sheetCodeName]['Drawings'] as $relId => $drawingXml) {
@@ -341,6 +344,9 @@ class Xlsx extends BaseWriter
                     }
                 }
 
+<<<<<<< HEAD
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
+=======
 >>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 // Add comment relationship parts
                 if (count($this->spreadSheet->getSheet($i)->getComments()) > 0) {
@@ -353,8 +359,13 @@ class Xlsx extends BaseWriter
 
                 // Add unparsed relationship parts
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (isset($unparsedLoadedData['sheets'][$this->spreadSheet->getSheet($i)->getCodeName()]['vmlDrawings'])) {
                     foreach ($unparsedLoadedData['sheets'][$this->spreadSheet->getSheet($i)->getCodeName()]['vmlDrawings'] as $vmlDrawing) {
+=======
+                if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'])) {
+                    foreach ($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'] as $vmlDrawing) {
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 =======
                 if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'])) {
                     foreach ($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'] as $vmlDrawing) {
