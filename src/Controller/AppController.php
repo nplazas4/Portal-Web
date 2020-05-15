@@ -103,12 +103,12 @@ class AppController extends Controller
     private function Token()
     {
         try {
-            $ch = curl_init('http://192.168.0.210:8080/ords/portal/oauth/token');
+            $ch = curl_init('http://192.168.1.153:7001/ords/projects_portal/oauth/token');
             curl_setopt($ch, CURLOPT_POST, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-            curl_setopt($ch, CURLOPT_USERPWD, "eMA2D5DqyNSsgxc_tPYqTg..:i4LginH4m_75qMbN7rAsjQ..");
+            curl_setopt($ch, CURLOPT_USERPWD, "M-Lw7z5Q3DheSdHUTk1SyQ..:TWVMj5Ch1ke6U2hfxKuQfw..");
             $result=curl_exec($ch);
             curl_close($ch);
             $result_arr = json_decode($result, true);
@@ -125,7 +125,7 @@ class AppController extends Controller
             $curl = curl_init();
             curl_setopt_array($curl, array(
             CURLOPT_PORT => "8080",
-            CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
+            CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/list/eps/",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

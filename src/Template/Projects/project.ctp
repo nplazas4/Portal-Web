@@ -1726,7 +1726,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.0.210:8080/ords/portal/notebook/list/" + result[1],
+        "url": "http://192.168.1.153:7001/ords/projects_portal/notebook/list/" + result[1],
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1756,7 +1756,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id="+project_id,
+            "url": "http://192.168.1.153:7001/ords/projects_portal/indicatorscosts/list?p_projet_id="+project_id,
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -1766,7 +1766,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.0.210:8080/ords/portal/captures/costindicators/?p_project_id="+project_id+"&p_id_capture="+select_value,
+            "url": "http://192.168.1.153:7001/ords/projects_portal/captures/costindicators/?p_project_id="+project_id+"&p_id_capture="+select_value,
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2103,7 +2103,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+        "url": "http://192.168.1.153:7001/ords/projects_portal/range/list/",
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2171,7 +2171,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.0.210:8080/ords/portal/range/list/",
+        "url": "http://192.168.1.153:7001/ords/projects_portal/range/list/",
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2323,7 +2323,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
+            "url": "http://192.168.1.153:7001/ords/projects_portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2361,7 +2361,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
       var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://192.168.0.210:8080/ords/portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
+          "url": "http://192.168.1.153:7001/ords/projects_portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date,
           "method": "GET",
           "headers": {
               "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2399,7 +2399,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
           var settings = {
               "async": true,
               "crossDomain": true,
-              "url": "http://192.168.0.210:8080/ords/portal/captures/indicatorsbyproject/?project_id="+result[1]+"&capture_id="+selected_date,
+              "url": "http://192.168.1.153:7001/ords/projects_portal/captures/indicatorsbyproject/?project_id="+result[1]+"&capture_id="+selected_date,
               "method": "GET",
               "headers": {
                   "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -2553,7 +2553,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID="+result+"&P_PERIOD_TYPE="+period_value,
+            "url": "http://192.168.1.153:7001/ords/projects_portal/graph/data/?P_PROJECT_ID="+result+"&P_PERIOD_TYPE="+period_value,
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -2839,7 +2839,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.0.210:8080/ords/portal/indicatorscosts/curve3g/?p_project_id="+project_id,
+            "url": "http://192.168.1.153:7001/ords/projects_portal/indicatorscosts/curve3g/?p_project_id="+project_id,
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -3341,7 +3341,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
           var settings = {
               "async": true,
               "crossDomain": true,
-              "url": "http://192.168.0.210:8080/ords/portal/indicators/indicatorsbyproject/"+result[1],
+              "url": "http://192.168.1.153:7001/ords/projects_portal/indicators/indicatorsbyproject/"+result[1],
               "method": "GET",
               "headers": {
                   "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3367,7 +3367,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://primavera.eeb.com.co:8080/ords/portal/activity/list/?v_project_id="+id_project,
+          "url": "http://192.168.1.153:7001/ords/projects_portal/activity/list/?v_project_id="+id_project,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3426,7 +3426,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://primavera.eeb.com.co:8080/ords/portal/wbs/list/?v_project="+id_project,
+          "url": "http://192.168.1.153:7001/ords/projects_portal/wbs/list/?v_project="+id_project,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3585,7 +3585,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://primavera.eeb.com.co:8080/ords/portal/captures/wbs/?id_project="+id_project+"&id_capture="+capture_id,
+          "url": "http://192.168.1.153:7001/ords/projects_portal/captures/wbs/?id_project="+id_project+"&id_capture="+capture_id,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3740,7 +3740,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://192.168.0.210:8080/ords/portal/captures/projectpercent/?v_project_id="+id_project+"&v_historyc_id="+capture_id,
+          "url": "http://192.168.1.153:7001/ords/projects_portal/captures/projectpercent/?v_project_id="+id_project+"&v_historyc_id="+capture_id,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3790,7 +3790,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://192.168.0.210:8080/ords/portal/captures/milestone/?v_project_id="+id_project+"&v_capture_id="+selected_date,
+          "url": "http://192.168.1.153:7001/ords/projects_portal/captures/milestone/?v_project_id="+id_project+"&v_capture_id="+selected_date,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3848,7 +3848,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://primavera.eeb.com.co:8080/ords/portal/captures/graph/?p_project_id="+id_project+"&p_period_type="+period_type+"&p_capture_id="+selected_date,
+          "url": "http://192.168.1.153:7001/ords/projects_portal/captures/graph/?p_project_id="+id_project+"&p_period_type="+period_type+"&p_capture_id="+selected_date,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -3893,7 +3893,7 @@ Dentro de los breadcrumb se utiliza para enviar parametro el urlencode(base64_en
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "http://192.168.0.210:8080/ords/portal/captures/curve3g/?p_project_id="+id_project+"&p_id_capture="+capture_id,
+                "url": "http://192.168.1.153:7001/ords/projects_portal/captures/curve3g/?p_project_id="+id_project+"&p_id_capture="+capture_id,
                 "method": "GET",
                 "headers": {
                     "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"

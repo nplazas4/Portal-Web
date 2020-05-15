@@ -907,7 +907,7 @@ $(document).ready(function(){
   var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.0.210:8080/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
+      "url": "http://192.168.1.153:7001/ords/projects_portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
       "method": "GET",
       "headers": {
           "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",

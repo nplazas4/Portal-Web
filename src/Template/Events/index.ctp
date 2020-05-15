@@ -250,7 +250,7 @@
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://192.168.0.210:8080/ords/portal/registerevent/filtersbycompany/",
+    "url": "http://192.168.1.153:7001/ords/projects_portal/registerevent/filtersbycompany/",
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -270,7 +270,7 @@
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://192.168.0.210:8080/ords/portal/registerevent/filtersbyprojectreference/",
+    "url": "http://192.168.1.153:7001/ords/projects_portal/registerevent/filtersbyprojectreference/",
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -309,7 +309,7 @@
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.0.210:8080/ords/portal/registerevent/eventsbyemail/" + email_user,
+        "url": "http://192.168.1.153:7001/ords/projects_portal/registerevent/eventsbyemail/" + email_user,
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -327,7 +327,7 @@
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.0.210:8080/ords/portal/registerevent/totallist/",
+        "url": "http://192.168.1.153:7001/ords/projects_portal/registerevent/totallist/",
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",

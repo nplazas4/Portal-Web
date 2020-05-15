@@ -50,7 +50,7 @@ class UsersController extends AppController
       $Us = array_values($data)[0];
       $Ps = array_values($data)[1];
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://23.99.203.76:7001/ords/portal/authentication/users/');
+      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/authentication/users/');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_POSTFIELDS, "V_EMAIL=".$Us."&V_PASS=".$Ps);
       curl_setopt($ch, CURLOPT_POST, 1);
@@ -163,13 +163,13 @@ class UsersController extends AppController
      //   }
        public function Token()
        {
-         $ch = curl_init('http://23.99.203.76:7001/ords/portal/oauth/token');
+         $ch = curl_init('http://192.168.1.153:7001/ords/projects_portal/oauth/token');
          // curl_setopt($ch, CURLOPT_HEADER, TRUE);
          curl_setopt($ch,CURLOPT_POST,false);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);//array
          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
          curl_setopt($ch,CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-         curl_setopt($ch,CURLOPT_USERPWD, "PnMUD8Lo0WdeVt9pebBGBg..:RBZMhgD0M3gFlj3v5UJchQ..");
+         curl_setopt($ch,CURLOPT_USERPWD, "M-Lw7z5Q3DheSdHUTk1SyQ..:TWVMj5Ch1ke6U2hfxKuQfw..");
          $result=curl_exec ($ch);
          curl_close ($ch);
          $result_arr = json_decode($result, true);
