@@ -56,15 +56,7 @@ foreach ($customProperties as $customProperty) {
     $propertyValue = $spreadsheet->getProperties()->getCustomPropertyValue($customProperty);
     $propertyType = $spreadsheet->getProperties()->getCustomPropertyType($customProperty);
     if ($propertyType == Properties::PROPERTY_TYPE_DATE) {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $formattedValue = date('d-M-Y H:i:s', $propertyValue);
-=======
-        $formattedValue = date('d-M-Y H:i:s', (int) $propertyValue);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $formattedValue = date('d-M-Y H:i:s', (int) $propertyValue);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     } elseif ($propertyType == Properties::PROPERTY_TYPE_BOOLEAN) {
         $formattedValue = $propertyValue ? 'TRUE' : 'FALSE';
     } else {

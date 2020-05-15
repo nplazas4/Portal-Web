@@ -328,26 +328,6 @@ class Xlsx extends BaseWriter
                     $zip->addFromString('xl/drawings/drawing' . ($i + 1) . '.xml', $this->getWriterPart('Drawing')->writeDrawings($this->spreadSheet->getSheet($i), $this->includeCharts));
                 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-                // Add unparsed drawings
-                if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['Drawings'])) {
-                    foreach ($unparsedLoadedData['sheets'][$sheetCodeName]['Drawings'] as $relId => $drawingXml) {
-                        $drawingFile = array_search($relId, $unparsedLoadedData['sheets'][$sheetCodeName]['drawingOriginalIds']);
-                        if ($drawingFile !== false) {
-                            $drawingFile = ltrim($drawingFile, '.');
-                            $zip->addFromString('xl' . $drawingFile, $drawingXml);
-                        }
-                    }
-                }
-
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                 // Add comment relationship parts
                 if (count($this->spreadSheet->getSheet($i)->getComments()) > 0) {
                     // VML Comments
@@ -358,18 +338,8 @@ class Xlsx extends BaseWriter
                 }
 
                 // Add unparsed relationship parts
-<<<<<<< HEAD
-<<<<<<< HEAD
                 if (isset($unparsedLoadedData['sheets'][$this->spreadSheet->getSheet($i)->getCodeName()]['vmlDrawings'])) {
                     foreach ($unparsedLoadedData['sheets'][$this->spreadSheet->getSheet($i)->getCodeName()]['vmlDrawings'] as $vmlDrawing) {
-=======
-                if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'])) {
-                    foreach ($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'] as $vmlDrawing) {
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                if (isset($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'])) {
-                    foreach ($unparsedLoadedData['sheets'][$sheetCodeName]['vmlDrawings'] as $vmlDrawing) {
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         $zip->addFromString($vmlDrawing['filePath'], $vmlDrawing['content']);
                     }
                 }

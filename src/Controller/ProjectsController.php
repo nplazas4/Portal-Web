@@ -61,8 +61,20 @@ class ProjectsController extends AppController
                 $log->PROJECT_NAME  = $ProjectCodName.' ('.$ProjectIdP6.')';
                 $log->STATUS  = $ProjectCodStatus;
                 $logsTable->save($log);
-                $this->set('ProjectCodId', $ArrayProjectCodId);
+                // $this->set('ProjectCodId', $ArrayProjectCodId);//RV
             }
+            $ArrayProjDelete = array();
+            $AllProjForDelete = $this->Projects->find('all');
+            // Foreach que obtiene todos los projectos que provienen de Web services y se encuentra deshabilitados o eliminados.
+            // foreach ($AllProjForDelete as $ProjDelete) {
+            //     if (!in_array($ProjDelete->ID_PROJECT, $ArrayProjectCodId) && $ProjDelete->STATUS == 1) {
+            //         array_push($ArrayProjDelete, $ProjDelete->id);
+            //     }
+            // }
+            // Foreach que elimina que no existen en el WS de la base de datos local.
+            // foreach ($ArrayProjDelete as $ProjxDelete) {
+            //     $this->delete($ProjxDelete);
+            // }
         }
     }
     public function index()
@@ -274,7 +286,10 @@ class ProjectsController extends AppController
       $this->set('array_project', $project_json_decode);
       $this->set('project_id', $project_id_decode);
       $this->set('project_id_p6', $proj_id_decode);
-      // $this->ProjectHitos($project_id_decode);
+      // DONA CHART TEMPORAL
+      // $this->Donut($project_id_decode);
+      $this->ProjectWbs($project_id_decode);
+      $this->ProjectHitos($project_id_decode);
       $this->loadModel('Projects');
         $local_id_project = $this->Projects->find(
               'all',
@@ -282,7 +297,7 @@ class ProjectsController extends AppController
           )->select(['Projects.id', 'Projects.CHART']);
         foreach ($local_id_project as $local_db) {
           $this->Risks($local_db->id);
-          // $this->importExcelfile($proj_id_decode, $local_db->CHART);
+          $this->importExcelfile($proj_id_decode, $local_db->CHART);
         }
     }
     public function ImportExcelCaf()
@@ -840,25 +855,7 @@ class ProjectsController extends AppController
     public function portalProjects()
     {
       try {
-        // $curl = curl_init();
-        // curl_setopt_array($curl, array(
-        //   CURLOPT_URL => "http://192.168.0.210:8080/ords/portal/list/eps/",
-        //   CURLOPT_RETURNTRANSFER => true,
-        //   CURLOPT_ENCODING => "",
-        //   CURLOPT_MAXREDIRS => 10,
-        //   CURLOPT_TIMEOUT => 30,
-        //   CURLOPT_CUSTOMREQUEST => "GET",
-        //   CURLOPT_HTTPHEADER => array(
-        //     "Authorization: Bearer ".$_SESSION["PortalToken"],
-        //     "Cache-Control: no-cache")));
-        //   $responseEps = curl_exec($curl);
-        //   $err = curl_error($curl);
-        //   curl_close($curl);
-        //   if ($err) {
-        //       echo "cURL Error #:" . $err;
-        //   } else {
-        //     $this->PortalProjectsLogic($responseEps);
-        //   }
+
       } catch (\Exception $e) {
           exit($e->getMessage() . "\n");
       }
@@ -866,17 +863,7 @@ class ProjectsController extends AppController
     //Función que se encarga
     private function PortalProjectsLogic($responseEps = null){
       try {
-        // $responsesEps = json_decode($responseEps, true);
-        // $ArrayEps = array_values($responsesEps)[0];
-        // foreach ($ArrayEps as $rowEps => $valueEps) {
-        //     if ($valueEps["parent_eps_object_id"] != null && $valueEps["parent_eps_object_id"]!=23305) {
-        //         $EpsIdNumber = $valueEps["eps_id"];
-        //         // $ParentEpsIdNumber = $valueEps["parent_eps_object_id"]; RV
-        //         $NameEPS = $valueEps["name"];
-        //         $LevelEPS = $valueEps["level"];
-        //         $this->Save_WS_Info_Eps_Table($EpsIdNumber, $NameEPS);
-        //     }
-        //  }
+
       } catch (\Exception $e) {
         exit($e->getMessage() . "\n");
       }

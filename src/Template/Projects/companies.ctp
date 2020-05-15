@@ -50,7 +50,6 @@ $(document).ready(function () {
   setInterval(function () {
   if (!pause) {
     var $this = block.eq(k);
-    console.log($this);
       block.removeClass('active').fadeOut(3000).eq(k).addClass('active').fadeIn(3000);
       $this.addClass('active');
       k++;
@@ -106,16 +105,6 @@ $(document).ready(function () {
         div_companies.append([
           $('<a>',{class : 'companies-menu-item', href : '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))}).append([
             $('<img>',{src : '/Portal-Web/img/logos/'+this.child_eps_id+'.png'}).append([
-              $('<i>',{class : 'material-icons', text : 'keyboard_arrow_right'})
-            ])
-          ]).append([
-            $('<span>',{class : 'item-tooltip', text : description})
-          ])
-        ]).hide().fadeIn(200);
-      } else if(this.child_eps_id == 34017){
-        div_companies.append([
-          $('<a>',{class : 'companies-menu-item', href : '/Portal-Web/projects/company/'+btoa(unescape(encodeURIComponent(JSON.stringify(this))))}).append([
-            $('<img>',{src : '/Portal-Web/img/logos/'+this.child_eps_id+'.jpg'}).append([
               $('<i>',{class : 'material-icons', text : 'keyboard_arrow_right'})
             ])
           ]).append([

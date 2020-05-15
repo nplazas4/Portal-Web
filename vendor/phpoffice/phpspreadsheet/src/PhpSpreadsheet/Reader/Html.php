@@ -12,18 +12,6 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-use PhpOffice\PhpSpreadsheet\Style\Font;
-use PhpOffice\PhpSpreadsheet\Style\Style;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-use PhpOffice\PhpSpreadsheet\Style\Font;
-use PhpOffice\PhpSpreadsheet\Style\Style;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 /** PhpSpreadsheet root directory */
@@ -108,35 +96,6 @@ class Html extends BaseReader
                 ],
             ],
         ], //    Bottom border
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-        'strong' => [
-            'font' => [
-                'bold' => true,
-            ],
-        ], //    Bold
-        'b' => [
-            'font' => [
-                'bold' => true,
-            ],
-        ], //    Bold
-        'i' => [
-            'font' => [
-                'italic' => true,
-            ],
-        ], //    Italic
-        'em' => [
-            'font' => [
-                'italic' => true,
-            ],
-        ], //    Italic
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     ];
 
     protected $rowspan = [];
@@ -146,15 +105,7 @@ class Html extends BaseReader
      */
     public function __construct()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->readFilter = new DefaultReadFilter();
-=======
-        parent::__construct();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        parent::__construct();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         $this->securityScanner = XmlScanner::getInstance($this);
     }
 
@@ -344,23 +295,11 @@ class Html extends BaseReader
                 switch ($child->nodeName) {
                     case 'meta':
                         foreach ($attributeArray as $attributeName => $attributeValue) {
-<<<<<<< HEAD
-<<<<<<< HEAD
                             switch ($attributeName) {
                                 case 'content':
                                     //    TODO
                                     //    Extract character set, so we can convert to UTF-8 if required
                                     break;
-=======
-                            // Extract character set, so we can convert to UTF-8 if required
-                            if ($attributeName === 'charset') {
-                                $this->setInputEncoding($attributeValue);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-                            // Extract character set, so we can convert to UTF-8 if required
-                            if ($attributeName === 'charset') {
-                                $this->setInputEncoding($attributeValue);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             }
                         }
                         $this->processDomElement($child, $sheet, $row, $column, $cellContent);
@@ -395,19 +334,6 @@ class Html extends BaseReader
                             $cellContent .= ' ';
                         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-                        if (isset($this->formats[$child->nodeName])) {
-                            $sheet->getStyle($column . $row)->applyFromArray($this->formats[$child->nodeName]);
-                        }
-
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         break;
                     case 'hr':
                         $this->flushCell($sheet, $column, $row, $cellContent);
@@ -498,19 +424,6 @@ class Html extends BaseReader
                         }
 
                         break;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-                    case 'img':
-                        $this->insertImage($sheet, $column, $row, $attributeArray);
-
-                        break;
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                     case 'table':
                         $this->flushCell($sheet, $column, $row, $cellContent);
                         $column = $this->setTableStartColumn($column);
@@ -535,20 +448,6 @@ class Html extends BaseReader
                         $column = $this->getTableStartColumn();
                         $cellContent = '';
                         $this->processDomElement($child, $sheet, $row, $column, $cellContent);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-
-                        if (isset($attributeArray['height'])) {
-                            $sheet->getRowDimension($row)->setRowHeight($attributeArray['height']);
-                        }
-
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         ++$row;
 
                         break;
@@ -602,36 +501,6 @@ class Html extends BaseReader
                                 ]
                             );
                         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-
-                        if (isset($attributeArray['width'])) {
-                            $sheet->getColumnDimension($column)->setWidth($attributeArray['width']);
-                        }
-
-                        if (isset($attributeArray['height'])) {
-                            $sheet->getRowDimension($row)->setRowHeight($attributeArray['height']);
-                        }
-
-                        if (isset($attributeArray['align'])) {
-                            $sheet->getStyle($column . $row)->getAlignment()->setHorizontal($attributeArray['align']);
-                        }
-
-                        if (isset($attributeArray['valign'])) {
-                            $sheet->getStyle($column . $row)->getAlignment()->setVertical($attributeArray['valign']);
-                        }
-
-                        if (isset($attributeArray['data-format'])) {
-                            $sheet->getStyle($column . $row)->getNumberFormat()->setFormatCode($attributeArray['data-format']);
-                        }
-
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                         ++$column;
 
                         break;
@@ -739,22 +608,12 @@ class Html extends BaseReader
             return;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         $supported_styles = ['background-color', 'color'];
-=======
-        $cellStyle = $sheet->getStyle($column . $row);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $cellStyle = $sheet->getStyle($column . $row);
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         // add color styles (background & text) from dom element,currently support : td & th, using ONLY inline css style with RGB color
         $styles = explode(';', $attributeArray['style']);
         foreach ($styles as $st) {
             $value = explode(':', $st);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             if (empty(trim($value[0])) || !in_array(trim($value[0]), $supported_styles)) {
                 continue;
@@ -776,281 +635,9 @@ class Html extends BaseReader
                     break;
                 case 'color':
                     $sheet->getStyle($column . $row)->applyFromArray(['font' => ['color' => ['rgb' => "{$style_color}"]]]);
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-            $styleName = isset($value[0]) ? trim($value[0]) : null;
-            $styleValue = isset($value[1]) ? trim($value[1]) : null;
-
-            if (!$styleName) {
-                continue;
-            }
-
-            switch ($styleName) {
-                case 'background':
-                case 'background-color':
-                    $styleColor = $this->getStyleColor($styleValue);
-
-                    if (!$styleColor) {
-                        continue 2;
-                    }
-
-                    $cellStyle->applyFromArray(['fill' => ['fillType' => Fill::FILL_SOLID, 'color' => ['rgb' => $styleColor]]]);
-
-                    break;
-                case 'color':
-                    $styleColor = $this->getStyleColor($styleValue);
-
-                    if (!$styleColor) {
-                        continue 2;
-                    }
-
-                    $cellStyle->applyFromArray(['font' => ['color' => ['rgb' => $styleColor]]]);
-
-                    break;
-
-                case 'border':
-                    $this->setBorderStyle($cellStyle, $styleValue, 'allBorders');
-
-                    break;
-
-                case 'border-top':
-                    $this->setBorderStyle($cellStyle, $styleValue, 'top');
-
-                    break;
-
-                case 'border-bottom':
-                    $this->setBorderStyle($cellStyle, $styleValue, 'bottom');
-
-                    break;
-
-                case 'border-left':
-                    $this->setBorderStyle($cellStyle, $styleValue, 'left');
-
-                    break;
-
-                case 'border-right':
-                    $this->setBorderStyle($cellStyle, $styleValue, 'right');
-
-                    break;
-
-                case 'font-size':
-                    $cellStyle->getFont()->setSize(
-                        (float) $styleValue
-                    );
-
-                    break;
-
-                case 'font-weight':
-                    if ($styleValue === 'bold' || $styleValue >= 500) {
-                        $cellStyle->getFont()->setBold(true);
-                    }
-
-                    break;
-
-                case 'font-style':
-                    if ($styleValue === 'italic') {
-                        $cellStyle->getFont()->setItalic(true);
-                    }
-
-                    break;
-
-                case 'font-family':
-                    $cellStyle->getFont()->setName(str_replace('\'', '', $styleValue));
-
-                    break;
-
-                case 'text-decoration':
-                    switch ($styleValue) {
-                        case 'underline':
-                            $cellStyle->getFont()->setUnderline(Font::UNDERLINE_SINGLE);
-
-                            break;
-                        case 'line-through':
-                            $cellStyle->getFont()->setStrikethrough(true);
-
-                            break;
-                    }
-
-                    break;
-
-                case 'text-align':
-                    $cellStyle->getAlignment()->setHorizontal($styleValue);
-
-                    break;
-
-                case 'vertical-align':
-                    $cellStyle->getAlignment()->setVertical($styleValue);
-
-                    break;
-
-                case 'width':
-                    $sheet->getColumnDimension($column)->setWidth(
-                        str_replace('px', '', $styleValue)
-                    );
-
-                    break;
-
-                case 'height':
-                    $sheet->getRowDimension($row)->setRowHeight(
-                        str_replace('px', '', $styleValue)
-                    );
-
-                    break;
-
-                case 'word-wrap':
-                    $cellStyle->getAlignment()->setWrapText(
-                        $styleValue === 'break-word'
-                    );
-
-                    break;
-
-                case 'text-indent':
-                    $cellStyle->getAlignment()->setIndent(
-                        (int) str_replace(['px'], '', $styleValue)
-                    );
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
                     break;
             }
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-
-    /**
-     * Check if has #, so we can get clean hex.
-     *
-     * @param $value
-     *
-     * @return null|string
-     */
-    public function getStyleColor($value)
-    {
-        if (strpos($value, '#') === 0) {
-            return substr($value, 1);
-        }
-
-        return null;
-    }
-
-    /**
-     * @param Worksheet $sheet
-     * @param string    $column
-     * @param int       $row
-     * @param array     $attributes
-     *
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
-     */
-    private function insertImage(Worksheet $sheet, $column, $row, array $attributes)
-    {
-        if (!isset($attributes['src'])) {
-            return;
-        }
-
-        $src = urldecode($attributes['src']);
-        $width = isset($attributes['width']) ? (float) $attributes['width'] : null;
-        $height = isset($attributes['height']) ? (float) $attributes['height'] : null;
-        $name = isset($attributes['alt']) ? (float) $attributes['alt'] : null;
-
-        $drawing = new Drawing();
-        $drawing->setPath($src);
-        $drawing->setWorksheet($sheet);
-        $drawing->setCoordinates($column . $row);
-        $drawing->setOffsetX(0);
-        $drawing->setOffsetY(10);
-        $drawing->setResizeProportional(true);
-
-        if ($name) {
-            $drawing->setName($name);
-        }
-
-        if ($width) {
-            $drawing->setWidth((int) $width);
-        }
-
-        if ($height) {
-            $drawing->setHeight((int) $height);
-        }
-
-        $sheet->getColumnDimension($column)->setWidth(
-            $drawing->getWidth() / 6
-        );
-
-        $sheet->getRowDimension($row)->setRowHeight(
-            $drawing->getHeight() * 0.9
-        );
-    }
-
-    /**
-     * Map html border style to PhpSpreadsheet border style.
-     *
-     * @param  string $style
-     *
-     * @return null|string
-     */
-    public function getBorderStyle($style)
-    {
-        switch ($style) {
-            case 'solid':
-                return Border::BORDER_THIN;
-            case 'dashed':
-                return Border::BORDER_DASHED;
-            case 'dotted':
-                return Border::BORDER_DOTTED;
-            case 'medium':
-                return Border::BORDER_MEDIUM;
-            case 'thick':
-                return Border::BORDER_THICK;
-            case 'none':
-                return Border::BORDER_NONE;
-            case 'dash-dot':
-                return Border::BORDER_DASHDOT;
-            case 'dash-dot-dot':
-                return Border::BORDER_DASHDOTDOT;
-            case 'double':
-                return Border::BORDER_DOUBLE;
-            case 'hair':
-                return Border::BORDER_HAIR;
-            case 'medium-dash-dot':
-                return Border::BORDER_MEDIUMDASHDOT;
-            case 'medium-dash-dot-dot':
-                return Border::BORDER_MEDIUMDASHDOTDOT;
-            case 'medium-dashed':
-                return Border::BORDER_MEDIUMDASHED;
-            case 'slant-dash-dot':
-                return Border::BORDER_SLANTDASHDOT;
-        }
-
-        return null;
-    }
-
-    /**
-     * @param Style  $cellStyle
-     * @param string $styleValue
-     * @param string $type
-     */
-    private function setBorderStyle(Style $cellStyle, $styleValue, $type)
-    {
-        list(, $borderStyle, $color) = explode(' ', $styleValue);
-
-        $cellStyle->applyFromArray([
-            'borders' => [
-                $type => [
-                    'borderStyle' => $this->getBorderStyle($borderStyle),
-                    'color' => ['rgb' => $this->getStyleColor($color)],
-                ],
-            ],
-        ]);
-    }
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 }

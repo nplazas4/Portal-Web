@@ -44,8 +44,6 @@
     </div>
 </div>
 <script>
-    //Ajax que se encarga de cargar portal projects (EPS LVL 1)
-    // $(document).ready(function(){
       var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
       var xhr2 = $.ajax({
         headers:{
@@ -74,5 +72,4 @@
           }
         });
       });
-    // });
 </script>

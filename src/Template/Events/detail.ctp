@@ -330,11 +330,3 @@ $(document).ready(function(){
   }
 });
 </script>
-<!-- CONTADOR DE CARACTERES -->
-<script>
-  $(document).ready(function(){
-    $(document).ready(function() {
-$('textarea#lapa_001_s_descacont').characterCounter();
-});
-  })
-</script>

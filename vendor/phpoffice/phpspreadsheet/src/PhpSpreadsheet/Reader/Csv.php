@@ -62,15 +62,7 @@ class Csv extends BaseReader
      */
     public function __construct()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->readFilter = new DefaultReadFilter();
-=======
-        parent::__construct();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        parent::__construct();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 
     /**
@@ -151,15 +143,7 @@ class Csv extends BaseReader
             return;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         return $this->skipBOM();
-=======
-        $this->skipBOM();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $this->skipBOM();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 
     /**
@@ -171,15 +155,7 @@ class Csv extends BaseReader
             return;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         $potentialDelimiters = [',', ';', "\t", '|', ':', ' '];
-=======
-        $potentialDelimiters = [',', ';', "\t", '|', ':', ' ', '~'];
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $potentialDelimiters = [',', ';', "\t", '|', ':', ' ', '~'];
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         $counts = [];
         foreach ($potentialDelimiters as $delimiter) {
             $counts[$delimiter] = [];
@@ -208,20 +184,8 @@ class Csv extends BaseReader
         // If number of lines is 0, nothing to infer : fall back to the default
         if ($numberLines === 0) {
             $this->delimiter = reset($potentialDelimiters);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             return $this->skipBOM();
-=======
-            $this->skipBOM();
-
-            return;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-            $this->skipBOM();
-
-            return;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
         }
 
         // Calculate the mean square deviations for each delimiter (ignoring delimiters that haven't been found consistently)
@@ -266,15 +230,7 @@ class Csv extends BaseReader
             $this->delimiter = reset($potentialDelimiters);
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         return $this->skipBOM();
-=======
-        $this->skipBOM();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $this->skipBOM();
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 
     /**
@@ -298,8 +254,6 @@ class Csv extends BaseReader
         $line = $line . $newLine;
 
         // Drop everything that is enclosed to avoid counting false positives in enclosures
-<<<<<<< HEAD
-<<<<<<< HEAD
         $enclosure = preg_quote($this->enclosure, '/');
         $line = preg_replace('/(' . $enclosure . '.*' . $enclosure . ')/U', '', $line);
 
@@ -309,20 +263,6 @@ class Csv extends BaseReader
 
         // if we still have an enclosure then we need to read the next line aswell
         if (count($matches) > 0) {
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-        $enclosure = '(?<!' . preg_quote($this->escapeCharacter, '/') . ')'
-            . preg_quote($this->enclosure, '/');
-        $line = preg_replace('/(' . $enclosure . '.*' . $enclosure . ')/Us', '', $line);
-
-        // See if we have any enclosures left in the line
-        // if we still have an enclosure then we need to read the next line as well
-        if (preg_match('/(' . $enclosure . ')/', $line) > 0) {
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             $line = $this->getNextLine($line);
         }
 
@@ -607,17 +547,7 @@ class Csv extends BaseReader
         fclose($this->fileHandle);
 
         // Trust file extension if any
-<<<<<<< HEAD
-<<<<<<< HEAD
         if (strtolower(pathinfo($pFilename, PATHINFO_EXTENSION)) === 'csv') {
-=======
-        $extension = strtolower(pathinfo($pFilename, PATHINFO_EXTENSION));
-        if (in_array($extension, ['csv', 'tsv'])) {
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $extension = strtolower(pathinfo($pFilename, PATHINFO_EXTENSION));
-        if (in_array($extension, ['csv', 'tsv'])) {
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
             return true;
         }
 

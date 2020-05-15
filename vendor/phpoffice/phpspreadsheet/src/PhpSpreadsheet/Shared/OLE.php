@@ -537,8 +537,6 @@ class OLE
     /**
      * Returns a timestamp from an OLE container's date.
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @param int $string A binary string with the encoded date
      *
      * @return string The timestamp corresponding to the string
@@ -565,44 +563,5 @@ class OLE
         $big_date -= $days * 24 * 3600;
 
         return floor($big_date);
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-     * @param string $oleTimestamp A binary string with the encoded date
-     *
-     * @throws ReaderException
-     *
-     * @return int The Unix timestamp corresponding to the string
-     */
-    public static function OLE2LocalDate($oleTimestamp)
-    {
-        if (strlen($oleTimestamp) != 8) {
-            throw new ReaderException('Expecting 8 byte string');
-        }
-
-        // convert to units of 100 ns since 1601:
-        $unpackedTimestamp = unpack('v4', $oleTimestamp);
-        $timestampHigh = (float) $unpackedTimestamp[4] * 65536 + (float) $unpackedTimestamp[3];
-        $timestampLow = (float) $unpackedTimestamp[2] * 65536 + (float) $unpackedTimestamp[1];
-
-        // translate to seconds since 1601:
-        $timestampHigh /= 10000000;
-        $timestampLow /= 10000000;
-
-        // days from 1601 to 1970:
-        $days = 134774;
-
-        // translate to seconds since 1970:
-        $unixTimestamp = floor(65536.0 * 65536.0 * $timestampHigh + $timestampLow - $days * 24 * 3600 + 0.5);
-
-        if ((int) $unixTimestamp == $unixTimestamp) {
-            return (int) $unixTimestamp;
-        }
-
-        return $unixTimestamp >= 0.0 ? PHP_INT_MAX : PHP_INT_MIN;
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     }
 }

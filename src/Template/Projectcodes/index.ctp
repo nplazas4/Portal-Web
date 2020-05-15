@@ -26,6 +26,14 @@
                   <i class="material-icons prefix">search</i>
                   <input id="myInput" onkeyup="myFunction()" type="text"></input>
                   <label for="myInput">Buscar</label>
+                  <div class="alert" style=<?=$error?>>
+                    <span class="closebtn">&times;</span>
+                    No se ha podido eliminar el código proyecto.
+                  </div>
+                  <div class="alert success" style=<?=$success?>>
+                    <span class="closebtn">&times;</span>
+                    Se ha eliminado el código de proyecto correctamente.
+                  </div>
               </div>
             </form>
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">

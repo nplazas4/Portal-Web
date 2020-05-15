@@ -1096,15 +1096,7 @@ class Worksheet implements IComparable
      * @param string $column Return the highest data row for the specified column,
      *                                     or the highest data row of any column if no column letter is passed
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @return string Highest row number that contains data
-=======
-     * @return int Highest row number that contains data
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-     * @return int Highest row number that contains data
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      */
     public function getHighestDataRow($column = null)
     {
@@ -2072,15 +2064,7 @@ class Worksheet implements IComparable
     /**
      * Insert a new column, updating all possible related data.
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @param int $pBefore Insert before this one, eg: 'A'
-=======
-     * @param string $pBefore Insert before this one, eg: 'A'
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-     * @param string $pBefore Insert before this one, eg: 'A'
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      * @param int $pNumCols Number of columns to insert
      *
      * @throws Exception

@@ -7,7 +7,6 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script type="text/javascript">
-
     // Curva de avance físico
   var chart = AmCharts.makeChart("caf2",{
             "type": "serial",
@@ -145,6 +144,5 @@
         }
     );
 </script>
-
-    <h2>Curva de Avance Físico</h2>
-    <div class="chart-content" id="caf2"></div>
+<h2>Curva de Avance Físico</h2>
+<div class="chart-content" id="caf2"></div>

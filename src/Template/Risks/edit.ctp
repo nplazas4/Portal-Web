@@ -58,7 +58,7 @@
                       </div>
                       <div class="row">
                         <div class="input-field col s12">
-                          <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','placeholder'=>'Impacto del riesgo','class'=>'validate','id'=>'impact-result-risk','required']);?>
+                          <?php echo $this->Form->input('IMPACT_RISK',['label'=>'Impacto del riesgo','id'=>'impact-result-risk','placeholder'=>'Impacto del riesgo','class'=>'validate','required']);?>
                         </div>
                       </div>
                       <div class="row">
@@ -113,7 +113,6 @@
                           );?>
                         </div>
                       </div>
-                      <?php echo $this->Form->input('IGR_DATE',['type'=>'hidden','value'=>date("Y-m-d")]);?>
                       </fieldset>
                    <div class="btns mb-2">
                        <?= $this->Form->button(__('Editar'),['class'=>'btn waves-effect btn-depressed'])?>

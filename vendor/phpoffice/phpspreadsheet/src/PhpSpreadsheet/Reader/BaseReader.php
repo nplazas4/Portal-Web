@@ -55,8 +55,6 @@ abstract class BaseReader implements IReader
      */
     protected $securityScanner;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Read data only?
      *        If this is true, then the Reader will only read data values for cells, it will not read any formatting information.
@@ -64,25 +62,11 @@ abstract class BaseReader implements IReader
      *
      * @return bool
      */
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-    public function __construct()
-    {
-        $this->readFilter = new DefaultReadFilter();
-    }
-
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function getReadDataOnly()
     {
         return $this->readDataOnly;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Set read data only
      *        Set to true, to advise the Reader only to read data values for cells, and to ignore any formatting information.
@@ -92,10 +76,6 @@ abstract class BaseReader implements IReader
      *
      * @return IReader
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function setReadDataOnly($pValue)
     {
         $this->readDataOnly = (bool) $pValue;
@@ -103,8 +83,6 @@ abstract class BaseReader implements IReader
         return $this;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Read empty cells?
      *        If this is true (the default), then the Reader will read data values for all cells, irrespective of value.
@@ -112,17 +90,11 @@ abstract class BaseReader implements IReader
      *
      * @return bool
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function getReadEmptyCells()
     {
         return $this->readEmptyCells;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Set read empty cells
      *        Set to true (the default) to advise the Reader read data values for all cells, irrespective of value.
@@ -132,10 +104,6 @@ abstract class BaseReader implements IReader
      *
      * @return IReader
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function setReadEmptyCells($pValue)
     {
         $this->readEmptyCells = (bool) $pValue;
@@ -143,8 +111,6 @@ abstract class BaseReader implements IReader
         return $this;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Read charts in workbook?
      *        If this is true, then the Reader will include any charts that exist in the workbook.
@@ -153,17 +119,11 @@ abstract class BaseReader implements IReader
      *
      * @return bool
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function getIncludeCharts()
     {
         return $this->includeCharts;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Set read charts in workbook
      *        Set to true, to advise the Reader to include any charts that exist in the workbook.
@@ -174,10 +134,6 @@ abstract class BaseReader implements IReader
      *
      * @return IReader
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function setIncludeCharts($pValue)
     {
         $this->includeCharts = (bool) $pValue;
@@ -185,8 +141,6 @@ abstract class BaseReader implements IReader
         return $this;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Get which sheets to load
      * Returns either an array of worksheet names (the list of worksheets that should be loaded), or a null
@@ -194,17 +148,11 @@ abstract class BaseReader implements IReader
      *
      * @return mixed
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function getLoadSheetsOnly()
     {
         return $this->loadSheetsOnly;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Set which sheets to load.
      *
@@ -214,10 +162,6 @@ abstract class BaseReader implements IReader
      *
      * @return IReader
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function setLoadSheetsOnly($value)
     {
         if ($value === null) {
@@ -229,18 +173,12 @@ abstract class BaseReader implements IReader
         return $this;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Set all sheets to load
      *        Tells the Reader to load all worksheets from the workbook.
      *
      * @return IReader
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function setLoadAllSheets()
     {
         $this->loadSheetsOnly = null;
@@ -248,24 +186,16 @@ abstract class BaseReader implements IReader
         return $this;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Read filter.
      *
      * @return IReadFilter
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function getReadFilter()
     {
         return $this->readFilter;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Set read filter.
      *
@@ -273,10 +203,6 @@ abstract class BaseReader implements IReader
      *
      * @return IReader
      */
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     public function setReadFilter(IReadFilter $pValue)
     {
         $this->readFilter = $pValue;
@@ -284,15 +210,7 @@ abstract class BaseReader implements IReader
         return $this;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     public function getSecuritySCanner()
-=======
-    public function getSecurityScanner()
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-    public function getSecurityScanner()
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
     {
         if (property_exists($this, 'securityScanner')) {
             return $this->securityScanner;

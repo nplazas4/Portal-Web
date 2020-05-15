@@ -715,15 +715,7 @@ class Spreadsheet
      *
      * @param string $pName Sheet name
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @return Worksheet
-=======
-     * @return null|Worksheet
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-     * @return null|Worksheet
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      */
     public function getSheetByName($pName)
     {

@@ -175,29 +175,13 @@ class Layout
     /**
      * Set X-Mode.
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @param X-Mode $value
-=======
-     * @param string $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-     * @param string $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      *
      * @return Layout
      */
     public function setXMode($value)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->xMode = $value;
-=======
-        $this->xMode = (string) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $this->xMode = (string) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         return $this;
     }
@@ -215,29 +199,13 @@ class Layout
     /**
      * Set Y-Mode.
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @param Y-Mode $value
-=======
-     * @param string $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-     * @param string $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      *
      * @return Layout
      */
     public function setYMode($value)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->yMode = $value;
-=======
-        $this->yMode = (string) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $this->yMode = (string) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         return $this;
     }
@@ -255,29 +223,13 @@ class Layout
     /**
      * Set X-Position.
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @param X-Position $value
-=======
-     * @param float $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-     * @param float $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      *
      * @return Layout
      */
     public function setXPosition($value)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->xPos = $value;
-=======
-        $this->xPos = (float) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $this->xPos = (float) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         return $this;
     }
@@ -295,29 +247,13 @@ class Layout
     /**
      * Set Y-Position.
      *
-<<<<<<< HEAD
-<<<<<<< HEAD
      * @param Y-Position $value
-=======
-     * @param float $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-     * @param float $value
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      *
      * @return Layout
      */
     public function setYPosition($value)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
         $this->yPos = $value;
-=======
-        $this->yPos = (float) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
-        $this->yPos = (float) $value;
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
 
         return $this;
     }

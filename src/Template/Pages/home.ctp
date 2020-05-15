@@ -15,9 +15,9 @@
                     array('class'=>'home-item-banner')
                 ).
                 $this->Html->tag('div', '', array('class'=>'home-item-overlay accent')),
-                array('class'=>'home-item'),
-                array('escape' => false)
-  );?>
+    array('class'=>'home-item'),
+    array('escape' => false)
+);?>
 <!--Estructura en lenguaje cakePHP del RYOS-->
 <?php echo $this->Html->tag(
     'section',
@@ -43,7 +43,7 @@
                   $this->Html->link(
                   '',
                   array('controller'=>'Events','action'=>'index'),
-                  array('class'=>'tooltipped','data-position'=>'right','data-tooltip'=>'Información del Portafolio de GEB y sus filiales.')
+                  array('class'=>'tooltipped','data-position'=>'right','data-tooltip'=>'Creación y visualización de las Lecciones Aprendidas del GEB.')
               ).
               $this->Html->tag(
                   'div',
@@ -65,7 +65,7 @@
               'section',
               $this->Html->link(
                       '',
-                      array('controller'=>'Projects','action'=>'PortalProjects'),
+                      array('controller'=>'Documents','action'=>'index'),
                       array('class'=>'tooltipped','data-position'=>'left','data-tooltip'=>'Información a la mano de Programas y Proyectos en GEB.')
                   ).
               $this->Html->tag(

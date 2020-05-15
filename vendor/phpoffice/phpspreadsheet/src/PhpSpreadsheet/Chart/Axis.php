@@ -365,23 +365,10 @@ class Axis extends Properties
     }
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
      * Set Shadow Properties from Maped Values.
      *
      * @param array $properties_map
      * @param * $reference
-=======
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-     * Set Shadow Properties from Mapped Values.
-     *
-     * @param array $properties_map
-     * @param mixed &$reference
-<<<<<<< HEAD
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
-=======
->>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
      *
      * @return Axis
      */

@@ -35,17 +35,27 @@
                       <?php echo $this->Form->textarea('RISK_NAME',['label'=>'Nombre','placeholder'=>'Nombre','class'=>'materialize-textarea','required']);?>
                     </div>
                   </div>
+                  <h6 class"centered">Valoración inicial</h6>
                   <div class="row">
                     <div class="input-field col s6">
-                       <?php echo $this->Form->input('PROBABILITY',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
+                      <?php echo $this->Form->input('PROBABILITY',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
                     </div>
                     <div class="input-field col s6">
                       <?php echo $this->Form->input('IMPACT',['label'=>'Impacto','id'=>'impact-risk','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto'], ]);?>
                     </div>
                   </div>
+                  <h6 class"centered">Valoración post-control</h6>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <?php echo $this->Form->input('PROBABILITY_POST',['label'=>'Probabilidad','id'=>'probability-risk','options'=>['1'=>'Muy baja','2'=>'Baja','3'=>'Media','4'=>'Alta','5'=>'Muy alta']]);?>
+                    </div>
+                    <div class="input-field col s6">
+                      <?php echo $this->Form->input('IMPACT_POST',['label'=>'Impacto','id'=>'impact-risk','options'=>['1'=>'Muy bajo','2'=>'Bajo','3'=>'Medio','4'=>'Alto','5'=>'Muy alto'], ]);?>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="input-field col s12">
-                      <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','placeholder'=>'Impacto del riesgo','class'=>'validate','id'=>'impact-result-risk','required']);?>
+                      <?php echo $this->Form->input('IMPACT_RISK',['label'=>'','id'=>'impact-result-risk','placeholder'=>'Impacto del riesgo','class'=>'validate','required']);?>
                     </div>
                   </div>
                   <div class="row">
@@ -100,7 +110,6 @@
                       );?>
                     </div>
                   </div>
-                  <?php echo $this->Form->input('IGR_DATE',['type'=>'hidden','value'=>date("Y-m-d")]);?>
                   </fieldset>
                <div class="btns mb-2">
                    <?= $this->Form->button(__('Crear'),['class'=>'btn waves-effect btn-depressed'])?>
@@ -112,20 +121,20 @@
         </div>
     </div>
     <script>
-      $(document).ready(function(){
-        var impact_value = $('#impact-risk').children(":selected").attr("value");;
-        var probability_value = $('#probability-risk').children(":selected").attr("value");;
-        impact_result();
-        $('#impact-risk').change(function() {
-          impact_value = $(this).children(":selected").attr("value");
-          impact_result();
-        });
-        $('#probability-risk').change(function() {
-          probability_value = $(this).children(":selected").attr("value");
-          impact_result();
-        });
-        function impact_result(){
-          $('#impact-result-risk').val(parseInt(impact_value) * parseInt(probability_value));
-        }
-      });
+          $(document).ready(function(){
+            var impact_value = $('#impact-risk').children(":selected").attr("value");;
+            var probability_value = $('#probability-risk').children(":selected").attr("value");;
+            impact_result();
+            $('#impact-risk').change(function() {
+              impact_value = $(this).children(":selected").attr("value");
+              impact_result();
+            });
+            $('#probability-risk').change(function() {
+              probability_value = $(this).children(":selected").attr("value");
+              impact_result();
+            });
+            function impact_result(){
+              $('#impact-result-risk').val(parseInt(impact_value) * parseInt(probability_value));
+            }
+          });
     </script>

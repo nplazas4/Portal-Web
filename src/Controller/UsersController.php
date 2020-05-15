@@ -15,7 +15,6 @@ class UsersController extends AppController
     }
     public function beforeFilter($event)
     {
-        $this->token();
         parent::beforeFilter($event);
     }
     //recibe el usuario autentificado REVISAR FUNCIONALIDAD.
@@ -31,6 +30,8 @@ class UsersController extends AppController
     // Función que controla el inicio de sesión.
     public function login()
     {
+
+        $this->token();
         // Condicional que comprueba si el usuario ha sido identificado.
         if ($this->Auth->user()) {
             // Redirecciona al usuario a la pestaña de home.
@@ -48,7 +49,6 @@ class UsersController extends AppController
                 $User = array_values($PostData)[0];
                 // Contraseña
                 $Password = array_values($PostData)[1];
-                // $_SESSION["base64"] = base64_encode($_SESSION["PortalToken"].":".$User.":".$Password);
                 /*Curl que llama el Web Service de login o autenticación mediante la URL y los parametros de usuario y contraseña y
                 un token generado desde la Función Token.*/
                 $ch = curl_init();
@@ -70,7 +70,6 @@ class UsersController extends AppController
                 if ($result_login != null) {
                     // Convierte el JSON del WS en un array.
                     $var = array_values($result_login);
-                    var_dump($var);
                     //Evalúa si el usuario se encuentra activo.
                     if ($var[4] != 0) {
                         //User almacena el registro del usuario identificado en el Web Service.
@@ -100,6 +99,7 @@ class UsersController extends AppController
     public function token(){
       //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
       $ch = curl_init('http://192.168.0.210:8080/ords/portal/oauth/token');
+      // curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_POST, false);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -109,14 +109,11 @@ class UsersController extends AppController
       curl_close($ch);
       $result_arr = json_decode($result, true);
       $token = array_values($result_arr)[0];
-      $this->request->session()->write('PortalToken', $token);
-      // $_SESSION["PortalToken"] = $token;
+      $_SESSION["PortalToken"] = $token;
     }
     // Función que cierra la sesión actual.
     public function logout()
     {
-      $this->layout = false;
-      return $this->redirect($this->Auth->logout());
-      $this->autoRender = false;
+        $this->redirect($this->Auth->logout());
     }
 }

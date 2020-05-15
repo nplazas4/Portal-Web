@@ -39,16 +39,14 @@
         </div>
         <div class="switch ml-5">
             <label>
-                <a class="mdi black-text" onclick="return false;">
-                  person
-                    <!-- <i class="mdi primary-text">person</i> -->
+                <a class="btn-floating btn-depressed white" onclick="return false;">
+                    <i class="mdi material-icons grey-text">person</i>
                 </a>
                 <!-- </div> -->
                 <input class="mdi" id="checkbox-la" type="checkbox">
                 <span class="lever"></span>
-                <a class="mdi black-text" onclick="return false;">
-                  group
-                    <!-- <i class="mdi black-text">group</i> -->
+                <a class="btn-floating btn-depressed white" onclick="return false;">
+                    <i class="mdi material-icons grey-text">group</i>
                 </a>
             </label>
         </div>
@@ -216,6 +214,7 @@
       if (searchText != null) {
           var targetTable = document.getElementById('myTable');
           var targetTableColCount;
+
           //Loop through table rows
           for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
               var rowData = '';
@@ -533,7 +532,7 @@
       } else {
         table(range.val());
       }
-    });
+    })
     function table(range){
       $('.paginator.center').remove();
       $('#myTable').after('<div id="nav" class="paginator center mt-4"></div>');
@@ -664,7 +663,6 @@
   }
   function Click_Next_Prev(rowsShown){
     $('.Paginate_Next_Prev').bind('click', function(){
-      console.log(document.getElementsByClassName("active"));
         var Get_Element = document.getElementsByClassName("active")[0].getElementsByClassName("Paginate_Numbers")[0];
         var Rel_Attribute = Get_Element.getAttribute('rel');
         var Rel_Id = Get_Element.getAttribute('id');

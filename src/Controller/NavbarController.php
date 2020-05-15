@@ -20,11 +20,8 @@ class NavbarController extends AppController
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
-                // $headers[] = 'Accept: */*';
                 $headers[] = 'Accept-Encoding: gzip, deflate';
                 $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
-                // $headers[] = 'Cache-Control: no-cache';
-                // $headers[] = 'Connection: keep-alive';
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 $result = curl_exec($ch);
                 if (curl_errno($ch)) {
@@ -418,8 +415,11 @@ class NavbarController extends AppController
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
+                // $headers[] = 'Accept: */*';
                 $headers[] = 'Accept-Encoding: gzip, deflate';
                 $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
+                // $headers[] = 'Cache-Control: no-cache';
+                // $headers[] = 'Connection: keep-alive';
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 $result = curl_exec($ch);
                 if (curl_errno($ch)) {
@@ -495,16 +495,16 @@ class NavbarController extends AppController
         $cpi_total = '#888888';
         $igr_total = '#888888';
         foreach ($color_array as $color_indicator => $color_value) {
-            if ($_GET['spi'] != null && $_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
+            if ($_GET['spi'] != null && $_GET['spi'] != '' && $_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
                 $spi = $color_value["hexa_color"];
             }
-            if ($_GET['cpi'] != null && $_GET['cpi'] > $color_value['minimun'] && $_GET['cpi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+            if ($_GET['cpi'] != null && $_GET['cpi'] != '' && $_GET['cpi'] > $color_value['minimun'] && $_GET['cpi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
                 $cpi = $color_value['hexa_color'];
             }
-            if ($_GET['cpi_total'] != null && $_GET['cpi_total'] > $color_value['minimun'] && $_GET['cpi_total'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+            if ($_GET['cpi_total'] != null && $_GET['cpi_total'] != '' && $_GET['cpi_total'] > $color_value['minimun'] && $_GET['cpi_total'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
                 $cpi_total = $color_value['hexa_color'];
             }
-            if ($_GET['igr'] != null && ($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100) <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
+            if ($_GET['igr'] != null && $_GET['igr'] != '' && ($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100) <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
                 $igr_total = $color_value['hexa_color'];
             }
         }
@@ -620,34 +620,34 @@ class NavbarController extends AppController
         $proyeccion_anual =  '#888888';
         $igr =  '#888888';
         foreach ($color_array as $color_indicator => $color_value) {
-            if ($_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
+            if ($_GET['spi'] != null && $_GET['spi'] > $color_value['minimun'] && $_GET['spi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'SPI') {
                 $spi = $color_value["hexa_color"];
             }
-            if ($_GET['cpi'] > $color_value['minimun'] && $_GET['cpi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+            if ($_GET['cpi'] != null && $_GET['cpi'] > $color_value['minimun'] && $_GET['cpi'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
                 $cpi = $color_value['hexa_color'];
             }
             // PORCENTAJE PROYECTADO
-            if ($_GET['porcentaje'] < $color_value['maximo'] && $color_value['name_threshold'] == 'PI Baja') {
+            if ($_GET['porcentaje'] != null && $_GET['porcentaje'] < $color_value['maximo'] && $color_value['name_threshold'] == 'PI Baja') {
                 $porcentaje = $color_value["hexa_color"];
-            } elseif ($_GET['porcentaje'] == $color_value['maximo'] && $color_value['name_threshold'] == 'PI Media') {
+            } elseif ($_GET['porcentaje'] != null && $_GET['porcentaje'] == $color_value['maximo'] && $color_value['name_threshold'] == 'PI Media') {
                 $porcentaje = $color_value["hexa_color"];
-            } elseif ($_GET['porcentaje'] < $color_value['maximo'] && $_GET['porcentaje'] > $color_value['minimun'] && $color_value['name_threshold'] == 'PI Alta') {
+            } elseif ($_GET['porcentaje'] != null && $_GET['porcentaje'] < $color_value['maximo'] && $_GET['porcentaje'] > $color_value['minimun'] && $color_value['name_threshold'] == 'PI Alta') {
                 $porcentaje = $color_value["hexa_color"];
             }
             // CPI ANUAL
-            if ($_GET['cpi_anual'] > $color_value['minimun'] && $_GET['cpi_anual'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
+            if ($_GET['cpi_anual'] != null && $_GET['cpi_anual'] > $color_value['minimun'] && $_GET['cpi_anual'] <= $color_value['maximo'] && $color_value['indicator_name'] == 'CPI') {
                 $cpi_anual = $color_value['hexa_color'];
             }
             // PROYECCIÓN ANUAL
-            if ($_GET['proyeccion_anual'] < $color_value['maximo'] && $color_value['name_threshold'] == 'PI Baja') {
+            if ($_GET['proyeccion_anual'] != null && $_GET['proyeccion_anual'] < $color_value['maximo'] && $color_value['name_threshold'] == 'PI Baja') {
                 $proyeccion_anual = $color_value["hexa_color"];
-            } elseif ($_GET['proyeccion_anual'] == $color_value['maximo'] && $color_value['name_threshold'] == 'PI Media') {
+            } elseif ($_GET['proyeccion_anual'] != null && $_GET['proyeccion_anual'] == $color_value['maximo'] && $color_value['name_threshold'] == 'PI Media') {
                 $proyeccion_anual = $color_value["hexa_color"];
-            } elseif ($_GET['proyeccion_anual'] < $color_value['maximo'] && $_GET['proyeccion_anual'] > $color_value['minimun'] && $color_value['name_threshold'] == 'PI Alta') {
+            } elseif ($_GET['proyeccion_anual'] != null && $_GET['proyeccion_anual'] < $color_value['maximo'] && $_GET['proyeccion_anual'] > $color_value['minimun'] && $color_value['name_threshold'] == 'PI Alta') {
                 $proyeccion_anual = $color_value["hexa_color"];
             }
             // IGR
-            if (($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100)  <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
+            if ($_GET['igr'] != null && ($_GET['igr'] / 100) > $color_value['minimun'] && ($_GET['igr'] / 100)  <= $color_value['maximo'] && $color_value['indicator_name'] == 'IGR') {
                 $igr = $color_value["hexa_color"];
             }
         }
@@ -722,7 +722,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projectpercent/percents/?V_PROJECT='.$_GET["id_p6"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/projectpercent//percents/?V_PROJECT='.$_GET["id_p6"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -787,71 +787,6 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period'].'&p_capture_id=7');
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-                $headers = array();
-                // $headers[] = 'Accept: */*';
-                $headers[] = 'Accept-Encoding: gzip, deflate';
-                $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
-                $headers[] = 'Cache-Control: no-cache';
-                $headers[] = 'Connection: keep-alive';
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                $result = curl_exec($ch);
-                if (curl_errno($ch)) {
-                    echo 'Error:' . curl_error($ch);
-                } else {
-                    $result_json = json_decode($result, true);
-                    $var1 = array_values($result_json)[0];
-                    $this->response->type('json');
-                    $this->response->body(json_encode($var1));
-                    return $this->response;
-                }
-            }
-        } catch (\Exception $e) {
-            exit($e->getMessage() . "\n");
-        }
-        $this->autoRender = false;
-    }
-    // CAMBIAR DE POSICIÓn
-    public function UnifierInformation()
-    {
-        $this->layout = false;
-        try {
-            if ($this->request->is('Ajax')) { //Ajax Detectio
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/indicatorscosts/list?p_projet_id='.$_GET['id_p6']);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-                $headers = array();
-                // $headers[] = 'Accept: */*';
-                $headers[] = 'Accept-Encoding: gzip, deflate';
-                $headers[] = 'Authorization: Bearer '.$_SESSION["PortalToken"];
-                $headers[] = 'Cache-Control: no-cache';
-                $headers[] = 'Connection: keep-alive';
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                $result = curl_exec($ch);
-                if (curl_errno($ch)) {
-                    echo 'Error:' . curl_error($ch);
-                } else {
-                    $result_json = json_decode($result, true);
-                    $var1 = array_values($result_json)[0];
-                    $this->response->type('json');
-                    $this->response->body(json_encode($var1));
-                    return $this->response;
-                }
-            }
-        } catch (\Exception $e) {
-            exit($e->getMessage() . "\n");
-        }
-        $this->autoRender = false;
-    }
-    public function UnifierChartTg()
-    {
-        $this->layout = false;
-        try {
-            if ($this->request->is('Ajax')) { //Ajax Detectio
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://192.168.0.210:8080/ords/portal/indicatorscosts/curve3g/?p_project_id='.$_GET['id_p6']);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();

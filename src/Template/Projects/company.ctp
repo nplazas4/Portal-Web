@@ -81,11 +81,7 @@
   <?php else: ?>
     <div class="company-content">
         <figure class="company-content-logo">
-          <?php if($child_eps_id == 34017):?>
-            <?= $this->Html->image('logos/'.$child_eps_id.'.jpg') ?>
-          <?php else:?>
             <?= $this->Html->image('logos/'.$child_eps_id.'.svg') ?>
-          <?php endif;?>
         </figure>
         <div class="company-content-data">
             <figure class="company-content-data-station">
