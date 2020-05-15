@@ -86,11 +86,11 @@ Router::scope('/login', function ($routes) {
 
 // Rutas Portal Proyectos
 Router::scope('/portal-projects', function ($routes) {
-    $routes->connect('/', ['controller' => 'Projects', 'action' => 'PortalProjects']);
+    $routes->connect('/index', ['controller' => 'Projects', 'action' => 'PortalProjects']);
     $routes->connect('/companies/', ['controller' => 'PortalProjects', 'action' => 'companies']);
     $routes->connect('/company/', ['controller' => 'Projects', 'action' => 'company']);
-    // $routes->connect('/projects/', ['controller' => 'Projects', 'action' => 'projects']);
-    // $routes->connect('/project/', ['controller' => 'Projects', 'action' => 'project']);
+    $routes->connect('/projects/', ['controller' => 'Projects', 'action' => 'projects']);
+    $routes->connect('/project/', ['controller' => 'Projects', 'action' => 'project']);
 });
 //RUTAS PORTAL ALTERNO
 Router::scope('/Portal-Alterno', function ($routes) {

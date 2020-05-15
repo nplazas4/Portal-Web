@@ -27,8 +27,6 @@
           <table id="myTable" class="display highlight centered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                      <th scope="col" width="10%"><?php echo $this->Html->link($this->Html->tag('i','add', array('class' => 'material-icons tooltipped','data-position'=>'dropdown','data-tooltip'=>'Agregar Proyecto')),
-                      array('action' => 'add'), array('escape'=>false));?></th>
                       <th scope="col" width="10%"><?= $this->Paginator->sort('id',['No.']) ?></th>
                       <th scope="col" width="20%"><?= $this->Paginator->sort('ID_PROJECT',['ID']) ?></th>
                       <th scope="col"><?= $this->Paginator->sort('PROJECT_NAME',['NOMBRE']) ?></th>
@@ -41,7 +39,11 @@
                     <?php foreach ($ProjxUser as $Project_User): ?> <!--foreach recorre las id de los proyectos del usuario loggeado-->
                       <?php if($project->ID_PROJECT == $Project_User):?><!--Comparación de los proyectos registrados y asignados al usuario-->
                         <tr>
+<<<<<<< HEAD
+                            <!-- <td></td> -->
+=======
                             <td></td>
+>>>>>>> 6ef522a45028eb85a251d70cde1c99a26315901a
                             <td><?= $this->Number->format($project->id);?></td>
                             <td><?= h($project->ID_PROJECT);?></td>
                             <td><?= h($project->PROJECT_NAME);?></td>
