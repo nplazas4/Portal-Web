@@ -215,7 +215,7 @@ $(document).ready(function(){
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.1.153:7001/ords/projects_portal/registerevent/listeventbyrecord/"+'<?=$code?>',
+        "url": "http://192.168.1.153:7001/ords/portal/registerevent/listeventbyrecord/"+'<?=$code?>',
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -258,7 +258,7 @@ $(document).ready(function(){
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.1.153:7001/ords/projects_portal/registerevent/listbyrecord/"+'<?=$code?>',
+        "url": "http://192.168.1.153:7001/ords/portal/registerevent/listbyrecord/"+'<?=$code?>',
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",

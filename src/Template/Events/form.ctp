@@ -711,11 +711,11 @@ left: 25%;
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Qué sucedio? *</span>
-                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Ingrese el líder/cargo funcional"></textarea>
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Redacte la situación más relevante orientada a generar conocimiento"></textarea>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Cúando ocurrio? *</span>
-                            <input class="input100 la-input datepicker1" autocomplete="off" type="text" name="la-input" id="lare_007_t_CuandoOcurrio" placeholder="Seleccione la fecha del evento">
+                            <input class="input100 la-input-dateTime datepicker1" autocomplete="off" type="text" name="la-input" id="lare_007_t_CuandoOcurrio" placeholder="Seleccione la fecha del evento">
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Durante que gestión o categoría? *</span>
@@ -796,7 +796,7 @@ left: 25%;
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Que puede mejorar o potenciar?</span>
-                            <textarea class="materialize-textarea la-input-optl" autocomplete="off" type="text" name="la-input" id="lare_014_s_MejorarPotenciar" placeholder=""></textarea>
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_014_s_MejorarPotenciar" placeholder=""></textarea>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100" style="display:none">
                             <span class="label-input100">Tipo de registro *</span>
@@ -877,6 +877,7 @@ left: 25%;
       M.Datepicker.init(Calendar, {
           format: 'mm-dd-yyyy',
           showClearBtn: true,
+          maxDate: new Date(),
           i18n: {
               clear: 'borrar',
               done: 'Aceptar',
@@ -907,7 +908,7 @@ $(document).ready(function(){
   var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
+      "url": "http://192.168.1.153:7001/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
       "method": "GET",
       "headers": {
           "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -934,6 +935,10 @@ $(document).ready(function(){
         return !$(this).val()
     }).length;
 
+    var empty_inputs_date = $('.la-input-dateTime').filter(function() {
+        return !$(this).val()
+    }).length;
+
     // MODAL EMPTY
     for (var i = 1; i <= $('#li-ul').children().length; i++) {
         var empty_modal = $('.la-input-li-' + [i]).filter(function() {
@@ -941,7 +946,7 @@ $(document).ready(function(){
         }).length;
     }
     if (empty_modal != undefined) {
-      var num = (empty_inputs + empty_modal);
+      var num = (empty_inputs + empty_modal + empty_inputs_date);
       if (num == 0) {
         json_form();
       }
@@ -959,6 +964,9 @@ $(document).ready(function(){
       $('.la-input').each(function() {
           array_form[$(this).attr('id')] = normalize($(this).val());
       });
+      $('.la-input-dateTime').each(function() {
+          array_form[$(this).attr('id')] = normalize($(this).val()+' '+new Date().toLocaleTimeString());
+      });
       $('select[name="la-select"]').each(function() {
           array_form[$(this).attr('id')] = $(this).children(":selected").val();
       });
@@ -970,8 +978,6 @@ $(document).ready(function(){
           });
           array_form._bp_lineitems.push(array_form_li);
       }
-      console.log(array_form);
-      console.log(JSON.stringify({"data" : [array_form]}));
       json_format = JSON.stringify({
           "data": [array_form]
       });
@@ -1023,6 +1029,8 @@ $(document).ready(function(){
 
   function send_json(json_data) {
       var project_id = $('#select-project').children(":selected").val()
+      console.log(project_id);
+      console.log(json_data)
       xhr_form = $.ajax({
           headers: {
               'X-CSRF-Token': csrfToken
@@ -1040,7 +1048,7 @@ $(document).ready(function(){
               $('#load-gif').show();
           },
           success: function(response) {
-              console.log(response);
+              // console.log(response);
               $('#load-gif').hide();
               $('#add').hide();
               if (response != null) {

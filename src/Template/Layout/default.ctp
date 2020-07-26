@@ -43,8 +43,8 @@
     <?= $this->Html->script('amcharts4/material.js') ?>
     <?= $this->Html->script('amcharts4/animated.js') ?>
     <?= $this->Html->css('materialize.min.css') ?>
-    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
+    <link href="Content-Security-Policy: default-src 'self' https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="Content-Security-Policy: default-src 'self' https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -317,8 +317,8 @@
         </div>
     </footer>
     <!-- Compiled and minified JavaScript -->
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script defer src="Content-Security-Policy: default-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="Content-Security-Policy: default-src 'self' https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script async>
         $(document).ready(function(){
             $('.sidenav').sidenav();
