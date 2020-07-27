@@ -32,7 +32,7 @@
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; style-src 'self' *.materialdesignicons.com 'unsafe-inline'; font-src 'self' *.gstatic.com *.materialdesignicons.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' style-src 'self' 'unsafe-inline'; style-src 'self' *.materialdesignicons.com 'unsafe-inline'; font-src 'self' data: *.gstatic.com *.materialdesignicons.com;">
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
