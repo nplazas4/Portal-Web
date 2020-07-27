@@ -30,9 +30,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' *.materialdesignicons.com; font-src 'self' 'unsafe-inline' data: *.gstatic.com fonts.gstatic.com *.materialdesignicons.com;">
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' *.materialdesignicons.com; font-src 'self' 'unsafe-inline' data: *.gstatic.com *.materialdesignicons.com;">
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
