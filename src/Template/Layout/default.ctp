@@ -32,7 +32,8 @@
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' *.googleapis.com; script-src 'self' 'unsafe-inline' *.cloudflare.com">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src * data: blob: 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src * data: blob: ; style-src * data: blob: 'unsafe-inline'; font-src * data: blob: 'unsafe-inline';"> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';"> -->
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
@@ -44,8 +45,8 @@
     <?= $this->Html->script('amcharts4/material.js') ?>
     <?= $this->Html->script('amcharts4/animated.js') ?>
     <?= $this->Html->css('materialize.min.css') ?>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
+    <?= $this->Html->css('icon.css') ?>
+    <?= $this->Html->css('fonts.css') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -318,8 +319,7 @@
         </div>
     </footer>
     <!-- Compiled and minified JavaScript -->
-    <script defer src="Content-Security-Policy: default-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script defer src="Content-Security-Policy: default-src 'self' https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <?= $this->Html->script(['materialize.min.js']) ?>
     <script async>
         $(document).ready(function(){
             $('.sidenav').sidenav();
