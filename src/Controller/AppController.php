@@ -103,7 +103,7 @@ class AppController extends Controller
     private function Token()
     {
         try {
-            $ch = curl_init('http://192.168.1.153:7001/ords/projects_portal/oauth/token');
+            $ch = curl_init('https://apex.veranocloud.com.co/ords/projects_portal/oauth/token');
             curl_setopt($ch, CURLOPT_POST, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -124,8 +124,7 @@ class AppController extends Controller
         try {
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_PORT => "7001",
-            CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/list/eps/",
+            CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/list/eps/",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

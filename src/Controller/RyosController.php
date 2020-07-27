@@ -47,7 +47,7 @@ class RyosController extends AppController
             if ($this->request->is('Ajax')) {
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                  CURLOPT_URL => "http://192.168.1.153:7001/ords/projects_portal/formryos/register/",
+                  CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/formryos/register/",
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,

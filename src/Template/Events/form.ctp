@@ -908,7 +908,7 @@ $(document).ready(function(){
   var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
+      "url": "https://apex.veranocloud.com.co/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
       "method": "GET",
       "headers": {
           "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",

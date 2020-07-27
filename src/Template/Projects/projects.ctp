@@ -630,7 +630,7 @@
         var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://192.168.1.153:7001/ords/projects_portal/indicatorscosts/list?p_projet_id="+id_p_project_p6,
+          "url": "https://apex.veranocloud.com.co/ords/projects_portal/indicatorscosts/list?p_projet_id="+id_p_project_p6,
           "method": "GET",
           "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -806,7 +806,7 @@
       var settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+          "url": "https://apex.veranocloud.com.co/ords/projects_portal/range/list/",
           "method": "GET",
           "headers": {
               "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -840,7 +840,7 @@
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+            "url": "https://apex.veranocloud.com.co/ords/projects_portal/range/list/",
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -869,7 +869,7 @@
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+            "url": "https://apex.veranocloud.com.co/ords/projects_portal/range/list/",
             "method": "GET",
             "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -937,7 +937,7 @@
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.1.153:7001/ords/projects_portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date_new,
+        "url": "https://apex.veranocloud.com.co/ords/projects_portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date_new,
         "method": "GET",
         "headers": {
           "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -988,7 +988,7 @@
             var unifier_capture = {
               "async": true,
               "crossDomain": true,
-              "url": "http://192.168.1.153:7001/ords/projects_portal/captures/costindicators/?p_project_id="+id_project+"&p_id_capture="+selected_date_new,
+              "url": "https://apex.veranocloud.com.co/ords/projects_portal/captures/costindicators/?p_project_id="+id_project+"&p_id_capture="+selected_date_new,
               "method": "GET",
               "headers": {
                 "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -1055,7 +1055,7 @@
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://192.168.1.153:7001/ords/projects_portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date_old,
+        "url": "https://apex.veranocloud.com.co/ords/projects_portal/captures/projects/?project_id="+id_project+"&capture_id="+selected_date_old,
         "method": "GET",
         "headers": {
           "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -1105,7 +1105,7 @@
           var unifier_capture = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.1.153:7001/ords/projects_portal/captures/costindicators/?p_project_id="+id_project+"&p_id_capture="+selected_date_old,
+            "url": "https://apex.veranocloud.com.co/ords/projects_portal/captures/costindicators/?p_project_id="+id_project+"&p_id_capture="+selected_date_old,
             "method": "GET",
             "headers": {
               "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"
@@ -1171,7 +1171,7 @@
       var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://192.168.1.153:7001/ords/projects_portal/range/list/",
+            "url": "https://apex.veranocloud.com.co/ords/projects_portal/range/list/",
             "method": "GET",
             "headers": {
               "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>"

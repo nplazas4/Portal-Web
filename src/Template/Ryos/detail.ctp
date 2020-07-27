@@ -39,7 +39,7 @@ var email_user = $('#email-element').text(),
 var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://192.168.1.153:7001/ords/projects_portal/formryos/list/?v_record=" + ryos_code + "&v_email=" + email_user,
+    "url": "https://apex.veranocloud.com.co/ords/projects_portal/formryos/list/?v_record=" + ryos_code + "&v_email=" + email_user,
     "method": "GET",
     "headers": {
         "Content-Type": "application/json",

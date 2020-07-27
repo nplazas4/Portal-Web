@@ -483,7 +483,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/"+this.link,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/"+this.link,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -503,7 +503,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/filtergen/",
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/filtergen/",
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -530,7 +530,7 @@
       var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/filtercompany/"+company_id,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/filtercompany/"+company_id,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -557,7 +557,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/filterproject/?v_eps="+eps_id+"&v_id_user="+user_id,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/filterproject/?v_eps="+eps_id+"&v_id_user="+user_id,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -587,7 +587,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/filterbp/"+unifier_code,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/filterbp/"+unifier_code,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -659,7 +659,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/graph1/"+id_bp,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/graph1/"+id_bp,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -678,7 +678,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/graph2/"+id_bp,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/graph2/"+id_bp,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -697,7 +697,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/graph3/"+bp_name,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/graph3/"+bp_name,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -717,7 +717,7 @@
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/graph4/"+unifier_code,
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/graph4/"+unifier_code,
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1137,7 +1137,7 @@ function creator() {
   var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/filtercreator/",
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/filtercreator/",
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1159,7 +1159,7 @@ function status() {
   var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://192.168.1.153:7001/ords/projects_portal/documents/filterstatus/",
+      "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/filterstatus/",
       "method": "GET",
       "headers": {
         "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1191,7 +1191,7 @@ function bp_reg_contratista(code_unifier){
   var settings1 = {
     "async": true,
     "crossDomain": true,
-    "url": "http://192.168.1.153:7001/ords/projects_portal/documents/bprdc/"+code_unifier,
+    "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/bprdc/"+code_unifier,
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1227,7 +1227,7 @@ function bp__reg_interno(code_unifier){
   var settings2 = {
     "async": true,
     "crossDomain": true,
-    "url": "http://192.168.1.153:7001/ords/projects_portal/documents/bprdi/"+code_unifier,
+    "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/bprdi/"+code_unifier,
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -1263,7 +1263,7 @@ function bp_reg_externo(code_unifier){
   var settings3 = {
     "async": true,
     "crossDomain": true,
-    "url": "http://192.168.1.153:7001/ords/projects_portal/documents/bprde/"+code_unifier,
+    "url": "https://apex.veranocloud.com.co/ords/projects_portal/documents/bprde/"+code_unifier,
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",

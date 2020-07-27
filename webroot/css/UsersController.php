@@ -50,7 +50,7 @@ class UsersController extends AppController
       $Us = array_values($data)[0];
       $Ps = array_values($data)[1];
       $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.153:7001/ords/projects_portal/authentication/users/');
+      curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/authentication/users/');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       curl_setopt($ch, CURLOPT_POSTFIELDS, "V_EMAIL=".$Us."&V_PASS=".$Ps);
       curl_setopt($ch, CURLOPT_POST, 1);
@@ -163,7 +163,7 @@ class UsersController extends AppController
      //   }
        public function Token()
        {
-         $ch = curl_init('http://192.168.1.153:7001/ords/projects_portal/oauth/token');
+         $ch = curl_init('https://apex.veranocloud.com.co/ords/projects_portal/oauth/token');
          // curl_setopt($ch, CURLOPT_HEADER, TRUE);
          curl_setopt($ch,CURLOPT_POST,false);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);//array

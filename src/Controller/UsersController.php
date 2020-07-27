@@ -51,7 +51,7 @@ class UsersController extends AppController
                 // Contraseña
                 $Password = array_values($PostData)[1];
 
-                $base64 = 'http://192.168.1.153:7001/ords/projects_portal/authentication/users/?V_TEXT_IN='.base64_encode($_SESSION["PortalToken"].":".$User.":".$Password);
+                $base64 = 'https://apex.veranocloud.com.co/ords/projects_portal/authentication/users/?V_TEXT_IN='.base64_encode($_SESSION["PortalToken"].":".$User.":".$Password);
 
                 /*Curl que llama el Web Service de login o autenticación mediante la URL y los parametros de usuario y contraseña y
                 un token generado desde la Función Token.*/
@@ -110,7 +110,7 @@ class UsersController extends AppController
     }
     public function token(){
       //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
-      $ch = curl_init('http://192.168.1.153:7001/ords/projects_portal/oauth/token');
+      $ch = curl_init('https://apex.veranocloud.com.co/ords/projects_portal/oauth/token');
       // curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_POST, false);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
