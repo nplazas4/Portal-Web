@@ -1,7 +1,7 @@
 # Uncomment the following to prevent the httpoxy vulnerability
 # See: https://httpoxy.org/
 <IfModule mod_headers.c>
-   Header set Content-Security-Policy "default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' *.googleapis.com; script-src 'self 'unsafe-inline' *.cloudflare.com"
+   Header set Content-Security-Policy "default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' *.googleapis.com; script-src 'self' 'unsafe-inline' *.cloudflare.com"
 </IfModule>
 
 <IfModule mod_rewrite.c>

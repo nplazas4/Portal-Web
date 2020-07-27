@@ -32,7 +32,7 @@
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' *.googleapis.com; script-src 'self 'unsafe-inline' *.cloudflare.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' *.googleapis.com; script-src 'self' 'unsafe-inline' *.cloudflare.com">
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
