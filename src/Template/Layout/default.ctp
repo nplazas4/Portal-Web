@@ -32,6 +32,7 @@
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com/; style-src 'self' https://fonts.googleapis.com/ 'unsafe-inline';">
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
@@ -43,8 +44,8 @@
     <?= $this->Html->script('amcharts4/material.js') ?>
     <?= $this->Html->script('amcharts4/animated.js') ?>
     <?= $this->Html->css('materialize.min.css') ?>
-    <link href="Content-Security-Policy: default-src 'self';font-src fonts.gstatic.com;style-src 'self' https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="Content-Security-Policy: default-src 'self';font-src fonts.gstatic.com;style-src 'self' https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900" rel="stylesheet">
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
