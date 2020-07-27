@@ -1,8 +1,8 @@
 # Uncomment the following to prevent the httpoxy vulnerability
 # See: https://httpoxy.org/
-#<IfModule mod_headers.c>
-   #Header set Content-Security-Policy "default-src 'self'; img-src 'self'; style-src 'self' *.googleapis.com;"
-#</IfModule>
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self' 'unsafe-inline'; style-src 'self' *.materialdesignicons.com 'unsafe-inline'; font-src 'self' *.gstatic.com *.materialdesignicons.com;"
+</IfModule>
 
 <IfModule mod_rewrite.c>
     RewriteEngine on
