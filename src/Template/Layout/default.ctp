@@ -32,16 +32,7 @@
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <meta http-equiv="Content-Security-Policy"
-    content="
-    default-src 'self'  data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval' 'unsafe-dynamic'; 
-    script-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval'; 
-    connect-src 'self' data: blob: 'unsafe-inline'; 
-    img-src 'self' data: blob: 'unsafe-inline'; 
-    frame-src 'self' data: blob: ; 
-    style-src 'self' data: blob: 'unsafe-inline';
-    font-src 'self' data: blob: 'unsafe-inline';"
-    />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline' *.googleapis.com *;">
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
