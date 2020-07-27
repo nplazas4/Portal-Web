@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "https://cdn.materialdesignicons.com/4.4.95/css/materialdesignicons.min.css";
+@import "./icon.css";
 .primary {
   background-color: #00A34B !important;
 }
