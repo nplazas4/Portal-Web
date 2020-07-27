@@ -7,7 +7,7 @@
     img-src 'self' data: blob: 'unsafe-inline'; 
     frame-src 'self' data: blob: ; 
     style-src 'self' data: blob: 'unsafe-inline';
-    font-src 'self' data: blob: 'unsafe-inline';""
+    font-src 'self' data: blob: 'unsafe-inline';"
 </IfModule>
 
 <IfModule mod_rewrite.c>
