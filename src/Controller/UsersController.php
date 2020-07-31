@@ -51,7 +51,7 @@ class UsersController extends AppController
                 // Contraseña
                 $Password = array_values($PostData)[1];
 
-                $base64 = 'https://apex.veranocloud.com.co/ords/projects_portal/authentication/users/?V_TEXT_IN='.base64_encode($_SESSION["PortalToken"].":".$User.":".$Password);
+                $base64 = 'http://primavera.eeb.com.co:8080/ords/portal/authentication/users/?V_TEXT_IN='.base64_encode($_SESSION["PortalToken"].":".$User.":".$Password);
 
                 /*Curl que llama el Web Service de login o autenticación mediante la URL y los parametros de usuario y contraseña y
                 un token generado desde la Función Token.*/
@@ -110,13 +110,13 @@ class UsersController extends AppController
     }
     public function token(){
       //CURL que genera un token necesario para solicitar un web service mediante una Url, un Client ID y Client Secret.
-      $ch = curl_init('https://apex.veranocloud.com.co/ords/projects_portal/oauth/token');
+      $ch = curl_init('http://primavera.eeb.com.co:8080/ords/portal/oauth/token');
       // curl_setopt($ch, CURLOPT_HEADER, TRUE);
       curl_setopt($ch, CURLOPT_POST, false);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-      curl_setopt($ch, CURLOPT_USERPWD, "M-Lw7z5Q3DheSdHUTk1SyQ..:TWVMj5Ch1ke6U2hfxKuQfw..");
+      curl_setopt($ch, CURLOPT_USERPWD, "eMA2D5DqyNSsgxc_tPYqTg..:i4LginH4m_75qMbN7rAsjQ..");
       $result=curl_exec($ch);
       curl_close($ch);
       $result_arr = json_decode($result, true);

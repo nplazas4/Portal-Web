@@ -36,7 +36,7 @@ class DocumentsController extends AppController
             if ($this->request->is('Ajax')) {
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/registerevent/event/".$_POST['id_project'],
+                  CURLOPT_URL => "http://primavera.eeb.com.co:8080/ords/portal/registerevent/event/".$_POST['id_project'],
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,

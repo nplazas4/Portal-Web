@@ -20,11 +20,12 @@ class EventsController extends AppController
             exit($e->getMessage() . "\n");
         }
     }
-		public function detail($user = null, $code)
+		public function detail($user = null, $code, $idP6 = null)
     {
 			try {
 				$this->set('user', $user);
         $this->set('code', $code);
+        $this->set('idP6', $idP6);
 			} catch (\Exception $e) {
 					exit($e->getMessage() . "\n");
 			}
@@ -36,7 +37,7 @@ class EventsController extends AppController
             if ($this->request->is('Ajax')) {
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/registerevent/event/".$_POST['id_project'],
+                  CURLOPT_URL => "http://primavera.eeb.com.co:8080/ords/portal/registerevent/event/".$_POST['id_project'],
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,

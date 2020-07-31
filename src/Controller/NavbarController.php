@@ -16,7 +16,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/list/eps/');
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/list/eps/');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -74,7 +74,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/list/eps/');
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/list/eps/');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -124,7 +124,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/list/epsid/'.$_GET["eps_id"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/list/epsid/'.$_GET["eps_id"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -171,7 +171,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=870&V_PROJCODE2=8996&V_ID_USER='.$_GET["user_id"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=870&V_PROJCODE2=8996&V_ID_USER='.$_GET["user_id"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -217,7 +217,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=871&V_PROJCODE2=8997&V_ID_USER='.$_GET["user_id"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=871&V_PROJCODE2=8997&V_ID_USER='.$_GET["user_id"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -262,7 +262,7 @@ class NavbarController extends AppController
         $this->layout = false;
         try {
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=1921&V_ID_USER='.$_GET["user_id"]);
+            curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projects/list/?V_EPS='.$_GET["child_eps_id"].'&V_PROJCODE1=1921&V_ID_USER='.$_GET["user_id"]);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
             $headers = array();
@@ -307,7 +307,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/projects/list/?V_EPS='.$_GET["eps_id"].'&V_PROJCODE1='.$_GET["code_1"].'&V_PROJCODE2='.$_GET["code_2"].'&V_ID_USER='.$_GET["user_id"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projects/list/?V_EPS='.$_GET["eps_id"].'&V_PROJCODE1='.$_GET["code_1"].'&V_PROJCODE2='.$_GET["code_2"].'&V_ID_USER='.$_GET["user_id"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -367,7 +367,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/captures/list/');
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/captures/list/');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -411,7 +411,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/captures/projects/?project_id='.$_GET["project_id"].'&capture_id='.$_GET["date"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/captures/projects/?project_id='.$_GET["project_id"].'&capture_id='.$_GET["date"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -456,7 +456,7 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/range/list/",
+                  CURLOPT_URL => "http://primavera.eeb.com.co:8080/ords/portal/range/list/",
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,
@@ -521,7 +521,7 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/range/list/",
+                  CURLOPT_URL => "http://primavera.eeb.com.co:8080/ords/portal/range/list/",
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,
@@ -578,7 +578,7 @@ class NavbarController extends AppController
             if ($this->request->is('Ajax')) { //Ajax Detection
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/range/list/",
+                  CURLOPT_URL => "http://primavera.eeb.com.co:8080/ords/portal/range/list/",
                   CURLOPT_RETURNTRANSFER => true,
                   CURLOPT_ENCODING => "",
                   CURLOPT_MAXREDIRS => 10,
@@ -662,7 +662,7 @@ class NavbarController extends AppController
         $this->layout = false;
         try {
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/projects/projectid/'.$_GET["project_id"]);
+            curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projects/projectid/'.$_GET["project_id"]);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
             $headers = array();
@@ -722,7 +722,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/projectpercent//percents/?V_PROJECT='.$_GET["id_p6"]);
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/projectpercent//percents/?V_PROJECT='.$_GET["id_p6"]);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -754,7 +754,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period']);
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period']);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();
@@ -786,7 +786,7 @@ class NavbarController extends AppController
         try {
             if ($this->request->is('Ajax')) { //Ajax Detectio
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://apex.veranocloud.com.co/ords/projects_portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period'].'&p_capture_id=7');
+                curl_setopt($ch, CURLOPT_URL, 'http://primavera.eeb.com.co:8080/ords/portal/graph/data/?P_PROJECT_ID='.$_GET["id_p6"].'&P_PERIOD_TYPE='.$_GET['period'].'&p_capture_id=7');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
                 $headers = array();

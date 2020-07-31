@@ -676,7 +676,7 @@ left: 25%;
     <div class="section home">
         <div class="home-menu">
             <div class="container-contact100">
-              <div class="notify bar-top" id="div-notify" data-notification-status="success"></div>
+              <div class="notify bottom-right do-show" id="div-notify" data-notification-status="success"></div>
                 <main style="display:none">
                     <div class="wrapper">
                         <nav>
@@ -695,23 +695,23 @@ left: 25%;
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Nombre del usuario *</span>
-                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_019_s_NombreUsuario" placeholder="Ingrese el nombre de usuario" readonly>
+                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_019_s_NombreUsuario" placeholder="Ingrese el nombre de usuario" readonly maxlength="50">
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Cargo *</span>
-                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_020_s_Cargo" placeholder="Ingrese el cargo">
+                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_020_s_Cargo" placeholder="Ingrese el cargo" maxlength="50">
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Correo electrónico *</span>
-                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_021_s_Correo" placeholder="Ingrese el correo" readonly>
+                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_021_s_Correo" placeholder="Ingrese el correo" readonly maxlength="50">
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Líder/Cargo funcional para consulta *</span>
-                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_022_s_Lider" placeholder="Ingrese el líder/cargo funcional">
+                            <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_022_s_Lider" placeholder="Ingrese el líder/cargo funcional" maxlength="50">
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Qué sucedio? *</span>
-                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Redacte la situación más relevante orientada a generar conocimiento"></textarea>
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Redacte la situación más relevante orientada a generar conocimiento" maxlength="200"></textarea>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">Cúando ocurrio? *</span>
@@ -792,11 +792,11 @@ left: 25%;
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Que cree que puede aprender? *</span>
-                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_013_s_PuedeAprender" placeholder=""></textarea>
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_013_s_PuedeAprender" placeholder="" maxlength="200"></textarea>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100">
                             <span class="label-input100">¿Que puede mejorar o potenciar?</span>
-                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_014_s_MejorarPotenciar" placeholder=""></textarea>
+                            <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_014_s_MejorarPotenciar" placeholder="" maxlength="200"></textarea>
                         </div>
                         <div class="wrap-input100 rs1-wrap-input100" style="display:none">
                             <span class="label-input100">Tipo de registro *</span>
@@ -853,19 +853,19 @@ left: 25%;
        </div>
        <div class="wrap-input100 mt-6 pt-6">
            <span class="label-input100">Breve descripción *</span>
-           <input class="la-input-li-<?=$i?> li-item" autocomplete="off" type="text" name="short_desc" placeholder="" value="Procesos de Calidad">
+           <input class="la-input-li-<?=$i?> li-item" autocomplete="off" type="text" name="short_desc" placeholder="" value="Procesos de Calidad" maxlength="50">
        </div>
-       <div class="wrap-input100" style="display:none">
+       <div class="wrap-input100">
            <span class="label-input100">Número *</span>
            <input class="la-input-li-<?=$i?> li-item" id="num-<?=$i?>" autocomplete="off" type="text" name="li_num" placeholder="" readonly>
        </div>
        <div class="wrap-input100">
            <span class="label-input100">¿Por qué sucedio? *</span>
-           <textarea class="materialize-textarea la-input-li-<?=$i?> li-item" autocomplete="off" type="text" name="lare_016_s_PorQueSucedio" placeholder=""></textarea>
+           <textarea class="materialize-textarea la-input-li-<?=$i?> li-item" autocomplete="off" type="text" name="lare_016_s_PorQueSucedio" placeholder="" maxlength="200"></textarea>
        </div>
       </div>
       <div class="modal-footer">
-          <a class="modal-close waves-effect error btn btn-depressed">Cancelar</a>
+          <a data-id="<?=$i?>" class="delete-event modal-close waves-effect error btn btn-depressed">Eliminar</a>
           <a class="modal-close waves-effect waves-green btn btn-depressed">Aceptar</a>
       </div>
      </div>
@@ -908,7 +908,7 @@ $(document).ready(function(){
   var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://apex.veranocloud.com.co/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
+      "url": "http://primavera.eeb.com.co:8080/ords/portal/projects/unifier/"+"<?=$current_user["V_ID_P_USER"]?>",
       "method": "GET",
       "headers": {
           "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -965,7 +965,7 @@ $(document).ready(function(){
           array_form[$(this).attr('id')] = normalize($(this).val());
       });
       $('.la-input-dateTime').each(function() {
-          array_form[$(this).attr('id')] = normalize($(this).val()+' '+new Date().toLocaleTimeString());
+          array_form[$(this).attr('id')] = normalize($(this).val());
       });
       $('select[name="la-select"]').each(function() {
           array_form[$(this).attr('id')] = $(this).children(":selected").val();
@@ -981,7 +981,9 @@ $(document).ready(function(){
       json_format = JSON.stringify({
           "data": [array_form]
       });
-      send_json(json_format);
+
+      console.log(json_format);
+      // send_json(json_format);
   }
   var normalize = (function() {
       var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
@@ -1004,14 +1006,44 @@ $(document).ready(function(){
       }
 
   })();
+
   $('#add').click(function() {
       var position = $('#li-ul').children().length;
       LineItems(position + 1);
       ModalLineItems(position + 1);
   });
 
+  $('.delete-event').click(function(e) {
+    var lineItemId = e.target.getAttribute("data-id");
+    parseLineItem = parseInt(lineItemId);
+    var nextBp = parseLineItem;
+    var modalBp = document.querySelector(`[data-modal="${lineItemId}"]`);
+    $("#id-modal-"+nextBp).remove();
+    $("#"+modalBp.id).remove();
+    var allLineItems = $('#li-ul').children();
+    allLineItems.each(function (i) {
+      $(this).attr("id", "id-modal-"+(i + 1));
+      var linkModal = $(this).children()[0].id;
+      $("#"+linkModal).attr("href", "#detailEvents"+(i + 1));
+      $("#"+linkModal).text("Causa "+(i + 1));
+      $("#"+linkModal).attr("id", (i + 1));
+    });
+
+    $("[data-modal]").each(function (i) {
+      $(this).attr("id", "detailEvents"+(i + 1));
+      $(this).attr("data-modal", (i + 1));
+      $(this).find("input").attr("class", `la-input-li-${i + 1} li-item`);
+      $(this).find("textarea").attr("class", `materialize-textarea la-input-li-${i + 1} li-item`);
+      $(this).find(".delete-event").attr("data-id", i + 1);
+      $(this).find('input[name="li_num"]').attr("id", "num-"+(i + 1));
+      $(this).find('input[name="li_num"]').val(i + 1);
+      console.log($(this).find('input[name="li_num"]').attr("id", "num-"+(i + 1)));
+    });
+  });
+
   function LineItems(num) {
       $('#li-ul').append($('<li>', {
+              id: 'id-modal-' + num,
               class: 'd-flex col s12 m6 l4 xl3'
           })
           .append($('<a>', {
@@ -1058,8 +1090,9 @@ $(document).ready(function(){
                       success_text = response.event + ': ' + response.record_no;
                       success_notification(success_text);
                       $('#main-btn').attr('disabled', false);
+                      location.href = "http://localhost/Portal-Web/events";
                   } else {
-                      alert_notification('La lección aprendida no ha sido enviada.')
+                      alert_notification('La lección aprendida no ha sido enviada.');
                       $('#main-btn').attr('disabled', false);
                   }
               } else {

@@ -103,12 +103,12 @@ class AppController extends Controller
     private function Token()
     {
         try {
-            $ch = curl_init('https://apex.veranocloud.com.co/ords/projects_portal/oauth/token');
+            $ch = curl_init('http://primavera.eeb.com.co:8080/ords/portal/oauth/token');
             curl_setopt($ch, CURLOPT_POST, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);//array
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-            curl_setopt($ch, CURLOPT_USERPWD, "M-Lw7z5Q3DheSdHUTk1SyQ..:TWVMj5Ch1ke6U2hfxKuQfw..");
+            curl_setopt($ch, CURLOPT_USERPWD, "eMA2D5DqyNSsgxc_tPYqTg..:i4LginH4m_75qMbN7rAsjQ..");
             $result=curl_exec($ch);
             curl_close($ch);
             $result_arr = json_decode($result, true);
@@ -124,7 +124,7 @@ class AppController extends Controller
         try {
             $curl = curl_init();
             curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://apex.veranocloud.com.co/ords/projects_portal/list/eps/",
+            CURLOPT_URL => "http://primavera.eeb.com.co:8080/ords/portal/list/eps/",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -153,7 +153,6 @@ class AppController extends Controller
         try {
             $responsesEps = json_decode($responseEps, true);
             $AllvarEps = array_values($responsesEps)[0];
-            // $this->set('AllEps', $AllvarEps);
             // Foreach que alimenta el navbar con la EPS de forma dinámica.
             $eps_level_1 = array();
             $eps_childrens = array();
@@ -163,10 +162,6 @@ class AppController extends Controller
                     if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
                         array_push($eps_childrens, array("name" => $valueEps["name"], "eps_id" => $valueEps["eps_id"], "parent_eps_id" => $valueEps["parent_eps_object_id"]));
                     }
-                    // $ParentEpsId2 = $valueEps["parent_eps_object_id"];
-                    // if ($AllEpsId == 23305 || $AllEpsId == 23306 || $AllEpsId == 23307 || $AllEpsId == 23308) {
-                    //     array_push($eps_level_1, array("name" => $valueEps["name"], "id" => $valueEps["eps_id"]));
-                    // }
                 }
             }
             $this->set('eps_childrens', $eps_childrens);

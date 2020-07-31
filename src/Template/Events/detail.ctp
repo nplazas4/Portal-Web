@@ -34,27 +34,27 @@
                         <?php if($user == "person"):?>
                           <div class="wrap-input100 rs1-wrap-input100">
                               <span class="label-input100">Nombre del usuario</span>
-                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_019_s_NombreUsuario" placeholder="Ingrese el nombre de usuario" readonly>
+                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_019_s_NombreUsuario" placeholder="" readonly>
                           </div>
                           <div class="wrap-input100 rs1-wrap-input100">
                               <span class="label-input100">Cargo</span>
-                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_020_s_Cargo" placeholder="Ingrese el cargo" readonly>
+                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_020_s_Cargo" placeholder="" readonly>
                           </div>
                           <div class="wrap-input100 rs1-wrap-input100">
                               <span class="label-input100">Correo electrónico</span>
-                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_021_s_Correo" placeholder="Ingrese el correo" readonly>
+                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_021_s_Correo" placeholder="" readonly>
                           </div>
                           <div class="wrap-input100 rs1-wrap-input100">
                               <span class="label-input100">Líder/Cargo funcional para consulta</span>
-                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_022_s_Lider" placeholder="Ingrese el líder/cargo funcional" readonly>
+                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lapa_022_s_Lider" placeholder="" readonly>
                           </div>
                           <div class="wrap-input100 rs1-wrap-input100">
                               <span class="label-input100">¿Qué sucedio?</span>
-                              <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="Ingrese el líder/cargo funcional" readonly></textarea>
+                              <textarea class="materialize-textarea la-input" autocomplete="off" type="text" name="la-input" id="lare_006_s_QueSucedio" placeholder="" readonly></textarea>
                           </div>
                           <div class="wrap-input100 rs1-wrap-input100">
                               <span class="label-input100">Cúando ocurrio?</span>
-                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lare_007_t_CuandoOcurrio" placeholder="Seleccione la fecha del evento" readonly>
+                              <input class="input100 la-input" autocomplete="off" type="text" name="la-input" id="lare_007_t_CuandoOcurrio" placeholder="" readonly>
                           </div>
                           <div class="wrap-input100 rs1-wrap-input100">
                               <span class="label-input100">¿Durante que gestión o categoría?</span>
@@ -209,15 +209,19 @@
 <?php endfor;?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script type="text/javascript">
+const email = $('#email-element').text();
 $(document).ready(function(){
   var user = $('form').attr('id');
+  console.log(user);
   if (user == 'person') {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://apex.veranocloud.com.co/ords/portal/registerevent/listeventbyrecord/"+'<?=$code?>',
+        "url": "http://primavera.eeb.com.co:8080/ords/portal/registerevent/listeventbyrecord/"+'<?=$code?>',
         "method": "GET",
         "headers": {
+            "p_email": email,
+            "p_project_id_p6": <?=$idP6?>,
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
             "cache-control": "no-cache"
         }
@@ -229,7 +233,7 @@ $(document).ready(function(){
             $('#breadcrumb_la').append($('<a>', {
                 text: this.record_no,
                 class: 'breadcrumb',
-                href: '/Portal-Web/events/detail/'+user+'/'+this.record_no
+                href: '/Portal-Web/events/detail/'+user+'/'+this.record_no+'/'+<?=$idP6?>
             }));
             $('#select-project').val(this.empresa);
             $('#lapa_019_s_NombreUsuario').val(this.lapa_019_s_nombreusuario);
@@ -258,7 +262,7 @@ $(document).ready(function(){
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://apex.veranocloud.com.co/ords/portal/registerevent/listbyrecord/"+'<?=$code?>',
+        "url": "http://primavera.eeb.com.co:8080/ords/portal/registerevent/listbyrecord/"+'<?=$code?>',
         "method": "GET",
         "headers": {
             "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -272,7 +276,7 @@ $(document).ready(function(){
             $('#breadcrumb_la').append($('<a>', {
                 "text": "<?=$code?>",
                 class: 'breadcrumb',
-                href: '/Portal-Web/events/detail/'+user+'/'+"<?=$code?>"
+                href: '/Portal-Web/events/detail/'+user+'/'+"<?=$code?>/null"
             }));
             $('#status').val(this.status);
             $('#lapa_045_proyectoreferecia').val(this.lapa_045_proyectoreferecia);

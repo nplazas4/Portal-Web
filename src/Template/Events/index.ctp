@@ -250,7 +250,7 @@
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "https://apex.veranocloud.com.co/ords/projects_portal/registerevent/filtersbycompany/",
+    "url": "http://primavera.eeb.com.co:8080/ords/portal/registerevent/filtersbycompany/",
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -270,7 +270,7 @@
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "https://apex.veranocloud.com.co/ords/projects_portal/registerevent/filtersbyprojectreference/",
+    "url": "http://primavera.eeb.com.co:8080/ords/portal/registerevent/filtersbyprojectreference/",
     "method": "GET",
     "headers": {
       "Authorization": "Bearer <?=$_SESSION["PortalToken"]?>",
@@ -309,7 +309,7 @@
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://apex.veranocloud.com.co/ords/projects_portal/registerevent/eventsbyemail/" + email_user,
+        "url": "http://primavera.eeb.com.co:8080/ords/portal/registerevent/eventsbyemail/" + email_user,
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -327,7 +327,7 @@
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://apex.veranocloud.com.co/ords/projects_portal/registerevent/totallist/",
+        "url": "http://primavera.eeb.com.co:8080/ords/portal/registerevent/totallist/",
         "method": "GET",
         "headers": {
             "Content-Type": "application/json",
@@ -349,11 +349,12 @@
         $('<th>',{scope : 'col', text : 'Área Core'}),
         $('<th>',{scope : 'col', text : 'Gestión o categoría'}),
         $('<th>',{scope : 'col', text : 'Tipo de evento'}),
+        $('<th>',{scope : 'col', text : 'Proyecto'}),
         $('<th>',{scope : 'col', text : 'Acciones'})
       );
       $.each(response.items, function(i) {
           $('#tbody-la').append($('<tr>', {
-              id: 'tr_' + this.record_no,
+              id: 'tr_' + this.record_no + '-' + this.code_p6,
               class : 'public-table'
           }).attr({
             'data-fase' : this.lare_010_t_fase,
@@ -362,7 +363,7 @@
             'data-eventype' : this.lare_012_tipoevento,
             'data-status' : this.status
           }));
-          $('#tr_' + this.record_no)
+          $('#tr_' + this.record_no + '-' + this.code_p6)
               .append($('<td>', {
                   text: this.record_no
               }))
@@ -379,6 +380,9 @@
                   text: this.lare_012_tipoevento
               }))
               .append($('<td>', {
+                  text: this.code_p6
+              }))
+              .append($('<td>', {
                   class: 'actions'
               }).append(
                   $('<a>', {
@@ -386,7 +390,7 @@
                       name: 'btn-ver',
                       class: 'btn btn-small',
                       text: 'Ver'
-                  }).attr('data-user','person')
+                  }).attr({ 'data-user': 'person', 'data-idp6': this.project_id_p6 })
               ));
       });
       click_detail();
@@ -463,7 +467,7 @@
                       name: 'btn-ver',
                       class: 'btn btn-small',
                       text: 'Ver'
-                  }).attr('data-user','group')
+                  }).attr({ 'data-user': 'group', 'data-idp6': null })
               ));
       });
       click_detail();
@@ -472,7 +476,7 @@
   function click_detail() {
       var range = $('#row-range').children(":selected");
       $('a[name="btn-ver"]').on('click', function() {
-          window.location.href = "/Portal-Web/events/detail/" + $(this).attr('data-user') + '/' + this.id;
+          window.location.href = "/Portal-Web/events/detail/" + $(this).attr('data-user') + '/' + this.id + '/' + $(this).attr('data-idp6');
       });
       table(range.val());
   }
@@ -566,7 +570,6 @@
     $('#nav').append('<ul class="pagination" id="myPager"></ul>');
     var rowsShown = $('#row-range').children(":selected").val();
     var rowsTotal = $('.public-table.active-item').length;
-    console.log(rowsTotal);
     if (rowsTotal > 0) {
       var numPages = rowsTotal/rowsShown;
       for(i = 0; i < numPages; i++) {
